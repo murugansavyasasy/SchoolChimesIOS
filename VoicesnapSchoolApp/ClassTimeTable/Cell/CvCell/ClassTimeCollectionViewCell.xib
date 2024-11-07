@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ClassTimeCollectionViewCell" customModule="VoicesnapSchoolApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="75" height="77"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="75" height="77"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IKk-vI-Sw6">
+                        <rect key="frame" x="0.0" y="0.0" width="75" height="77"/>
+                        <subviews>
+                            <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uhr-sg-58m" customClass="UIViewX" customModule="VoicesnapSchoolApp" customModuleProvider="target">
+                                <rect key="frame" x="10" y="10" width="55" height="57"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nT8-pX-h9g">
+                                        <rect key="frame" x="7" y="18.333333333333336" width="41.333333333333336" height="20.333333333333336"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" name="serach_color"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="nT8-pX-h9g" firstAttribute="centerY" secondItem="Uhr-sg-58m" secondAttribute="centerY" id="8W5-ed-YEJ"/>
+                                    <constraint firstItem="nT8-pX-h9g" firstAttribute="centerX" secondItem="Uhr-sg-58m" secondAttribute="centerX" id="ClJ-rJ-6Wc"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Uhr-sg-58m" firstAttribute="leading" secondItem="IKk-vI-Sw6" secondAttribute="leading" constant="10" id="Q9T-lw-Re3"/>
+                            <constraint firstAttribute="trailing" secondItem="Uhr-sg-58m" secondAttribute="trailing" constant="10" id="V13-U2-w1G"/>
+                            <constraint firstAttribute="bottom" secondItem="Uhr-sg-58m" secondAttribute="bottom" constant="10" id="loq-hu-xai"/>
+                            <constraint firstItem="Uhr-sg-58m" firstAttribute="top" secondItem="IKk-vI-Sw6" secondAttribute="top" constant="10" id="n8A-ef-gpo"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="IKk-vI-Sw6" secondAttribute="trailing" id="68A-pO-kvk"/>
+                <constraint firstItem="IKk-vI-Sw6" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Pv6-Uw-d1N"/>
+                <constraint firstItem="IKk-vI-Sw6" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="gZJ-NG-iwu"/>
+                <constraint firstAttribute="bottom" secondItem="IKk-vI-Sw6" secondAttribute="bottom" id="sbc-r4-CcB"/>
+            </constraints>
+            <size key="customSize" width="75" height="77"/>
+            <connections>
+                <outlet property="DaysLbl" destination="nT8-pX-h9g" id="uxF-P6-c9h"/>
+                <outlet property="clickView" destination="Uhr-sg-58m" id="rtU-pr-BBA"/>
+            </connections>
+            <point key="canvasLocation" x="55.725190839694655" y="-27.816901408450704"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <namedColor name="serach_color">
+            <color red="0.0" green="0.37599998712539673" blue="0.3919999897480011" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

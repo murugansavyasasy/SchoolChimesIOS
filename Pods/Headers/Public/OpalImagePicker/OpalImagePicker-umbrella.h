@@ -1,0 +1,1 @@
+../../../Target Support Files/OpalImagePicker/OpalImagePicker-umbrella.h

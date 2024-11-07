@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>School Chimes.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>arm64</string>
+			</array>
+			<key>buildNumber</key>
+			<string>8.1</string>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>626FF4AFBF12B3EE5F9509F365390B5E819BBD8A</string>
+				<key>dateExpires</key>
+				<string>15/02/24</string>
+				<key>type</key>
+				<string>Cloud Managed Apple Distribution</string>
+			</dict>
+			<key>embeddedBinaries</key>
+			<array>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>buildNumber</key>
+					<string>1</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>626FF4AFBF12B3EE5F9509F365390B5E819BBD8A</string>
+						<key>dateExpires</key>
+						<string>15/02/24</string>
+						<key>type</key>
+						<string>Cloud Managed Apple Distribution</string>
+					</dict>
+					<key>name</key>
+					<string>Razorpay.framework</string>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>6Z355RG34N</string>
+						<key>name</key>
+						<string>Voice Snap Software Private Limited</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>1.2.5</string>
+				</dict>
+			</array>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>6Z355RG34N.com.voicesnap.schoolmessenger</string>
+				<key>aps-environment</key>
+				<string>production</string>
+				<key>com.apple.developer.icloud-container-environment</key>
+				<string>Production</string>
+				<key>com.apple.developer.icloud-container-identifiers</key>
+				<array>
+					<string>iCloud.com.voicesnap.schoolmessenger</string>
+				</array>
+				<key>com.apple.developer.icloud-services</key>
+				<array>
+					<string>CloudDocuments</string>
+				</array>
+				<key>com.apple.developer.team-identifier</key>
+				<string>6Z355RG34N</string>
+				<key>com.apple.developer.ubiquity-container-identifiers</key>
+				<array>
+					<string>iCloud.com.voicesnap.schoolmessenger</string>
+				</array>
+				<key>com.apple.developer.ubiquity-kvstore-identifier</key>
+				<string>6Z355RG34N.com.voicesnap.schoolmessenger</string>
+				<key>get-task-allow</key>
+				<false/>
+				<key>keychain-access-groups</key>
+				<array>
+					<string>6Z355RG34N.com.voicesnap.schoolmessenger</string>
+				</array>
+			</dict>
+			<key>name</key>
+			<string>VoicesnapSchoolApp.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>5d509e91-e771-406c-9303-4f4f409be1ef</string>
+				<key>dateExpires</key>
+				<string>15/02/24</string>
+				<key>name</key>
+				<string>iOS Team Ad Hoc Provisioning Profile: com.voicesnap.schoolmessenger</string>
+			</dict>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>6Z355RG34N</string>
+				<key>name</key>
+				<string>Voice Snap Software Private Limited</string>
+			</dict>
+			<key>versionNumber</key>
+			<string>7.6</string>
+		</dict>
+	</array>
+</dict>
+</plist>

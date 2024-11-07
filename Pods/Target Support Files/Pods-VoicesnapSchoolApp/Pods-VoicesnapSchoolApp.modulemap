@@ -1,0 +1,6 @@
+module Pods_VoicesnapSchoolApp {
+  umbrella header "Pods-VoicesnapSchoolApp-umbrella.h"
+
+  export *
+  module * { export * }
+}

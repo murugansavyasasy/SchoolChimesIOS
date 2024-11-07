@@ -1,0 +1,1 @@
+Both School and parents app upto version 3.3

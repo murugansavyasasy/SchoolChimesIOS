@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ScheduleCallCollectionViewCell" customModule="VoicesnapSchoolApp" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="311" height="63"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="311" height="63"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ec1-eO-Xx4">
+                        <rect key="frame" x="0.0" y="0.0" width="311" height="63"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P6x-UG-PeS">
+                                <rect key="frame" x="0.0" y="0.0" width="311" height="63"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G1T-oZ-kJf">
+                                        <rect key="frame" x="271" y="16.666666666666668" width="40" height="30.000000000000004"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DeleteSchoolBtnIcon" translatesAutoresizingMaskIntoConstraints="NO" id="JJ1-na-gnB">
+                                                <rect key="frame" x="10" y="5" width="20" height="20"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="20" id="lvL-Y7-Vby"/>
+                                                    <constraint firstAttribute="height" constant="20" id="rya-eu-7tW"/>
+                                                </constraints>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="30" id="8Gz-sd-x0F"/>
+                                            <constraint firstItem="JJ1-na-gnB" firstAttribute="centerX" secondItem="G1T-oZ-kJf" secondAttribute="centerX" id="dcg-gp-Lw3"/>
+                                            <constraint firstAttribute="width" constant="40" id="hdd-D6-xTd"/>
+                                            <constraint firstItem="JJ1-na-gnB" firstAttribute="centerY" secondItem="G1T-oZ-kJf" secondAttribute="centerY" id="kTi-Ce-0Jf"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rbE-eu-aU5">
+                                        <rect key="frame" x="10" y="1" width="251" height="61"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="G1T-oZ-kJf" secondAttribute="trailing" id="8Dg-aC-ETn"/>
+                                    <constraint firstAttribute="bottom" secondItem="rbE-eu-aU5" secondAttribute="bottom" constant="1" id="9RW-Qc-csU"/>
+                                    <constraint firstItem="G1T-oZ-kJf" firstAttribute="leading" secondItem="rbE-eu-aU5" secondAttribute="trailing" constant="10" id="BO3-Gz-ygG"/>
+                                    <constraint firstItem="rbE-eu-aU5" firstAttribute="leading" secondItem="P6x-UG-PeS" secondAttribute="leading" constant="10" id="PKh-zs-cpi"/>
+                                    <constraint firstItem="G1T-oZ-kJf" firstAttribute="centerY" secondItem="P6x-UG-PeS" secondAttribute="centerY" id="hAs-GQ-Hc8"/>
+                                    <constraint firstItem="rbE-eu-aU5" firstAttribute="top" secondItem="P6x-UG-PeS" secondAttribute="top" constant="1" id="vDz-f4-Y3e"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="P6x-UG-PeS" secondAttribute="bottom" id="RI7-NK-5m6"/>
+                            <constraint firstItem="P6x-UG-PeS" firstAttribute="top" secondItem="ec1-eO-Xx4" secondAttribute="top" id="hFZ-6s-UWs"/>
+                            <constraint firstAttribute="trailing" secondItem="P6x-UG-PeS" secondAttribute="trailing" id="sTo-b2-BVX"/>
+                            <constraint firstItem="P6x-UG-PeS" firstAttribute="leading" secondItem="ec1-eO-Xx4" secondAttribute="leading" id="tDr-bP-smR"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="ec1-eO-Xx4" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="41l-t5-NIa"/>
+                <constraint firstAttribute="trailing" secondItem="ec1-eO-Xx4" secondAttribute="trailing" id="5JX-Ma-0VK"/>
+                <constraint firstItem="ec1-eO-Xx4" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="sRd-ii-3Tt"/>
+                <constraint firstAttribute="bottom" secondItem="ec1-eO-Xx4" secondAttribute="bottom" id="uOf-RX-WtC"/>
+            </constraints>
+            <size key="customSize" width="311" height="63"/>
+            <connections>
+                <outlet property="dateLbl" destination="rbE-eu-aU5" id="V8b-am-1hy"/>
+                <outlet property="deleteView" destination="G1T-oZ-kJf" id="mxY-Te-Wh9"/>
+            </connections>
+            <point key="canvasLocation" x="296.94656488549617" y="5.2816901408450709"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <image name="DeleteSchoolBtnIcon" width="15" height="22.666666030883789"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
