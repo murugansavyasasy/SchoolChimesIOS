@@ -28,7 +28,7 @@ class ManagementVideoViewController: UIViewController,UITableViewDataSource,UITa
     var chilId : String!
     var strSenderType : String!
     var videoSelectedDict = [String: Any]() as NSDictionary
-
+    var getTag : Int!
     var bIsArchive = Bool()
     var getDate : String!
     var getArchive : String!
@@ -44,6 +44,7 @@ class ManagementVideoViewController: UIViewController,UITableViewDataSource,UITa
             let defaults = UserDefaults.standard
             print("SchoolId11",chilId)
 
+          
         }else{
             let defaults = UserDefaults.standard
             chilId = defaults.string(forKey:DefaultsKeys.chilId)
@@ -57,8 +58,7 @@ class ManagementVideoViewController: UIViewController,UITableViewDataSource,UITa
         print("getArchive",getArchive)
         
         getFiles() 
-        tv.dataSource = self
-        tv.delegate = self
+       
         
         let rowNib  = UINib(nibName: rowIdentifier, bundle: nil)
         tv.register(rowNib, forCellReuseIdentifier: rowIdentifier)
@@ -74,6 +74,7 @@ class ManagementVideoViewController: UIViewController,UITableViewDataSource,UITa
     
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("msgFromListcount\(msgFromList.count)")
         return msgFromList.count
     }
     
@@ -143,6 +144,7 @@ class ManagementVideoViewController: UIViewController,UITableViewDataSource,UITa
             
             vc.strVideoUrl = messgae.URL
             vc.videoId = messgae.VimeoId
+            vc.downloadId = messgae.ID
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)
         }else{

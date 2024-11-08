@@ -36,6 +36,7 @@ class ParentVideoVc: UIViewController,UITableViewDataSource,UITableViewDelegate,
     var SenderType = NSString ()
     var Screenheight = CFloat()
     
+    var getVideoId : String!
     var MainDetailTextArray: NSMutableArray = NSMutableArray()
     var SelectedSectionArray : NSMutableArray = NSMutableArray()
    
@@ -89,7 +90,7 @@ class ParentVideoVc: UIViewController,UITableViewDataSource,UITableViewDelegate,
         
         self.view.backgroundColor = UIColor(named: "serach_color")
         if getMsgFromMgnt == 1 {
-            
+            CallStaffVideoApi()
         }else{
             let defaults = UserDefaults.standard
             print("SchoolId",SchoolId)
@@ -325,6 +326,7 @@ class ParentVideoVc: UIViewController,UITableViewDataSource,UITableViewDelegate,
         strSelectedVideoUrl = String(describing: detailsDictionary["VimeoUrl"]!)
          iframeURL = String(describing: detailsDictionary["Iframe"]!)
             strSelectedVideoId = String(describing: detailsDictionary["VimeoId"]!)
+         getVideoId =    String(describing:detailsDictionary["VideoId"]!)
         DispatchQueue.main.async() {
             self.performSegue(withIdentifier: "VdieoDetailSegue", sender: self)
         }
@@ -361,6 +363,64 @@ class ParentVideoVc: UIViewController,UITableViewDataSource,UITableViewDelegate,
         let myString = Util.convertNSDictionary(toString: myDict)
         
         apiCall.nsurlConnectionFunction(requestString, myString, "UpdateReadStatus")
+    }
+    
+    
+    
+    
+    func CallStaffVideoApi() {
+        showLoading()
+        strApiFrom = "CallStaffVideoApi"
+        let apiCall = API_call.init()
+        apiCall.delegate = self;
+        
+        let baseUrlString = UserDefaults.standard.object(forKey:BASEURL) as? String
+        var requestStringer = baseUrlString! + GET_FILES_STAFF
+        let baseReportUrlString = UserDefaults.standard.object(forKey:NEWLINKREPORTBASEURL) as? String
+
+                if(appDelegate.isPasswordBind == "1"){
+                    requestStringer = baseReportUrlString! + GET_FILES_STAFF
+                }
+        
+        let requestString = requestStringer.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
+        //{"SchoolId":"1235","MemberId":"112712","CircularDate":"20-05-2018","Type":"VOICE"}
+        print("SCHOOL",SchoolId)
+        print("MEMEBER",ChildId)
+        let myDict:NSMutableDictionary = ["SchoolId": SchoolId,"MemberId" : ChildId,"CircularDate" : TextDateLabel.text!,"Type" : "VIDEO", COUNTRY_CODE: strCountryCode]
+        utilObj.printLogKey(printKey: "myDict", printingValue: myDict)
+        let myString = Util.convertNSDictionary(toString: myDict)
+        utilObj.printLogKey(printKey: "myString", printingValue: myString!)
+        
+        apiCall.nsurlConnectionFunction(requestString, myString, "CallStaffVideoApi")
+        
+        
+    }
+    
+    func CallSeeMoreStaffVideoApi() {
+        showLoading()
+        strApiFrom = "CallSeeMoreStaffVideoApi"
+        let apiCall = API_call.init()
+        apiCall.delegate = self;
+        
+        let baseUrlString = UserDefaults.standard.object(forKey:BASEURL) as? String
+        var requestStringer = baseUrlString! + GET_FILES_STAFF_ARCHIVE
+        let baseReportUrlString = UserDefaults.standard.object(forKey:NEWLINKREPORTBASEURL) as? String
+
+                       if(appDelegate.isPasswordBind == "1"){
+                           requestStringer = baseReportUrlString! + GET_FILES_STAFF_ARCHIVE
+                       }
+        let requestString = requestStringer.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
+        
+        print("requestString",requestString)
+        //{"SchoolId":"1235","MemberId":"112712","CircularDate":"20-05-2018","Type":"VOICE"}
+        let myDict:NSMutableDictionary = ["SchoolId": SchoolId,"MemberId" : ChildId,"CircularDate" : TextDateLabel.text!,"Type" : "VIDEO", COUNTRY_CODE: strCountryCode]
+        utilObj.printLogKey(printKey: "myDict", printingValue: myDict)
+        let myString = Util.convertNSDictionary(toString: myDict)
+        utilObj.printLogKey(printKey: "myString", printingValue: myString!)
+        
+        apiCall.nsurlConnectionFunction(requestString, myString, "CallSeeMoreStaffVideoApi")
+        
+     
     }
     
     func CallVideoDetailApi() {
@@ -481,6 +541,68 @@ class ParentVideoVc: UIViewController,UITableViewDataSource,UITableViewDelegate,
                 else{
                     Util.showAlert("", msg: strSomething)
                 }
+            }else if(strApiFrom == "CallStaffVideoApi")
+            {
+                typesArray.removeAllObjects()
+                MainDetailTextArray.removeAllObjects()
+                if let CheckedArray = csData as? NSArray
+                {
+                    let arrayData = CheckedArray
+                    for i in 0..<arrayData.count
+                    {
+                        let dict = CheckedArray[i] as! NSDictionary
+                        let Status = String(describing: dict["result"]!)
+                        let Message =  dict["Message"] as? String ?? ""
+                        altSting = Message
+                        if(Status == "1"){
+                            typesArray.add(dict)
+                            MainDetailTextArray.add(dict)
+                        }else{
+                            if(appDelegate.isPasswordBind == "0"){
+                                    //emptyView()
+                                AlerMessage()
+
+                            }
+                        }
+                    }
+                    utilObj.printLogKey(printKey: "typesArray", printingValue: typesArray)
+                    TextDetailstableview.reloadData()
+                    
+                }
+                else{
+                    Util.showAlert("", msg: strSomething)
+                }
+            }else if(strApiFrom == "CallSeeMoreStaffVideoApi")
+            {
+                typesArray.removeAllObjects()
+                MainDetailTextArray.removeAllObjects()
+                if let CheckedArray = csData as? NSArray
+                {
+                    let arrayData = CheckedArray
+                    for i in 0..<arrayData.count
+                    {
+                        let dict = CheckedArray[i] as! NSDictionary
+                        let Status = String(describing: dict["result"]!)
+                        let Message =  dict["Message"] as? String ?? ""
+                        altSting = Message
+                        if(Status == "1"){
+                            typesArray.add(dict)
+                            MainDetailTextArray.add(dict)
+                        }else{
+                            if(appDelegate.isPasswordBind == "0"){
+                                    //emptyView()
+                                AlerMessage()
+
+                            }
+                        }
+                    }
+                    utilObj.printLogKey(printKey: "typesArray", printingValue: typesArray)
+                    TextDetailstableview.reloadData()
+                    
+                }
+                else{
+                    Util.showAlert("", msg: strSomething)
+                }
             }
             
         }
@@ -507,6 +629,7 @@ class ParentVideoVc: UIViewController,UITableViewDataSource,UITableViewDelegate,
             let segueid = segue.destination as! VimeoVideoDetailVC
             segueid.strVideoUrl = strSelectedVideoUrl
             segueid.videoId = strSelectedVideoId
+            segueid.downloadVideoID = getVideoId
         }
     }
     

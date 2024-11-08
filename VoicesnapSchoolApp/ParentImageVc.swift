@@ -88,7 +88,7 @@ class ParentImageVc: UIViewController,UITableViewDataSource,Apidelegate,UITableV
         if getMsgFromMgnt == 1 {
             let defaults = UserDefaults.standard
             print("SchoolId",SchoolId)
-            
+            bIsSeeMore = true
 //
 
         }else{
@@ -1172,10 +1172,10 @@ class ParentImageVc: UIViewController,UITableViewDataSource,Apidelegate,UITableV
         
         if(SenderType == "FromStaff"){
             CallSeeMoreStaffImageMessageApi()
-            
+          
         }
         else{
-            
+            bIsSeeMore = true
             CallSeeMoreImageDetailApi()
         }
        

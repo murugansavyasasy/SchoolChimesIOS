@@ -182,7 +182,7 @@ class MsgFromMgmtVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             cell.DateLbl.text = String(describing: dict["Date"]!)
             cell.DayLbl.text = String(describing: dict["Day"]!)
             
-            passDate = String(describing: dict["Date"]!)
+          
             let TextCount : String = String(describing: dict["TotalSMS"]!)
             let VoiceCount : String = String(describing: dict["TotalVOICE"]!)
             let PdfCount : String = String(describing: dict["TotalPDF"]!)
@@ -348,14 +348,19 @@ class MsgFromMgmtVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     @objc func actionVideoButton(sender: UIButton)
     {
         SelectedDict = arrMgmtData[sender.tag] as! NSDictionary
-        let vc = ManagementVideoViewController(nibName: nil, bundle: nil)
+//        performSegue(withIdentifier: "StaffMgmtVideoSegue", sender: self)
         
+        
+        let vc = ManagementVideoViewController(nibName: nil, bundle: nil)
+        vc.videoSelectedDict = SelectedDict
         vc.modalPresentationStyle = .fullScreen
         vc.SchoolID = strSchoolID
-        print("passpassDate",passDate)
-        vc.getDate = passDate
+        let dict : NSDictionary = arrMgmtData[sender.tag] as! NSDictionary
+        vc.getDate = dict["Date"] as! String
+        print("passpas1sDate",passDate)
+     
         vc.chilId = strStaffID
-        vc.getDate = passDate
+        vc.getTag = sender.tag
         vc.getMsgFromMgnt = 1
         vc.getArchive = isArchieveGet
         vc.countryCode = strCountryCode
@@ -613,6 +618,23 @@ print("SelectedDict34",SelectedDict)
         
         else if (segue.identifier == "StaffMgmtVideoSegue")
         {
+            
+            
+            
+//            let segueid = segue.destination as! ParentVideoVc
+////            segueid.PDFSelectedDict = SelectedDict
+//            
+////            segueid.getArchive = isArchieveGet
+//            segueid.getMsgFromMgnt = 1
+//            segueid.SchoolId = strSchoolID
+//            segueid.ChildId = strStaffID
+////            segueid.bIsArchive = true
+////            segueid.strSenderType = "FromStaff"
+            
+            
+            
+            
+            
             let vc = ManagementVideoViewController(nibName: nil, bundle: nil)
             vc.modalPresentationStyle = .fullScreen
             vc.videoSelectedDict = SelectedDict

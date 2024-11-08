@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ManagementVimeoViewController" customModule="VoicesnapSchoolApp" customModuleProvider="target">
             <connections>
+                <outlet property="videoView" destination="7mW-dc-rWF" id="TcT-7q-wLc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="viewBack" destination="cwT-2I-OWw" id="CkG-cB-VTQ"/>
                 <outlet property="webKitView" destination="30O-lt-cG0" id="xQS-ZU-1P8"/>
@@ -21,13 +22,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NSH-mc-emc">
-                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <rect key="frame" x="0.0" y="48" width="414" height="814"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TfN-sC-2ds">
-                            <rect key="frame" x="0.0" y="0.0" width="414" height="818"/>
+                            <rect key="frame" x="0.0" y="0.0" width="414" height="814"/>
                             <subviews>
                                 <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="30O-lt-cG0">
-                                    <rect key="frame" x="0.0" y="50" width="414" height="768"/>
+                                    <rect key="frame" x="0.0" y="50" width="414" height="764"/>
                                     <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <wkWebViewConfiguration key="configuration">
                                         <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
@@ -56,13 +57,34 @@
                                                 <constraint firstAttribute="width" constant="50" id="Ybg-Vr-6uM"/>
                                             </constraints>
                                         </view>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7mW-dc-rWF">
+                                            <rect key="frame" x="364" y="0.0" width="50" height="50"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="VideoDownload" translatesAutoresizingMaskIntoConstraints="NO" id="FGx-k7-gmB">
+                                                    <rect key="frame" x="15" y="15" width="20" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="20" id="0RV-MD-bfp"/>
+                                                        <constraint firstAttribute="width" constant="20" id="T1c-0t-dHP"/>
+                                                    </constraints>
+                                                </imageView>
+                                            </subviews>
+                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="50" id="FV3-J4-I9H"/>
+                                                <constraint firstItem="FGx-k7-gmB" firstAttribute="centerY" secondItem="7mW-dc-rWF" secondAttribute="centerY" id="PP1-nA-gTJ"/>
+                                                <constraint firstItem="FGx-k7-gmB" firstAttribute="centerX" secondItem="7mW-dc-rWF" secondAttribute="centerX" id="Si8-nY-na0"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
+                                        <constraint firstAttribute="bottom" secondItem="7mW-dc-rWF" secondAttribute="bottom" id="4OM-IR-7hq"/>
                                         <constraint firstItem="cwT-2I-OWw" firstAttribute="top" secondItem="hPc-iS-NTf" secondAttribute="top" id="6oC-Te-AbZ"/>
+                                        <constraint firstAttribute="trailing" secondItem="7mW-dc-rWF" secondAttribute="trailing" id="ZwQ-Ea-atb"/>
                                         <constraint firstAttribute="height" constant="50" id="b0r-Cx-CxR"/>
                                         <constraint firstAttribute="bottom" secondItem="cwT-2I-OWw" secondAttribute="bottom" id="kPQ-jv-7ZA"/>
                                         <constraint firstItem="cwT-2I-OWw" firstAttribute="leading" secondItem="hPc-iS-NTf" secondAttribute="leading" id="mhh-u4-PGb"/>
+                                        <constraint firstItem="7mW-dc-rWF" firstAttribute="top" secondItem="hPc-iS-NTf" secondAttribute="top" id="tl9-Le-lUa"/>
                                     </constraints>
                                 </view>
                             </subviews>
@@ -99,6 +121,7 @@
         </view>
     </objects>
     <resources>
+        <image name="VideoDownload" width="512" height="512"/>
         <image name="backarrow" width="30" height="30"/>
     </resources>
 </document>

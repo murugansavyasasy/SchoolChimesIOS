@@ -45,7 +45,7 @@ class VideoMenuVC: UITableViewController ,Apidelegate,UISearchBarDelegate {
     var firstImage : Int  = 0
     
     var ArrayData = NSMutableArray()
-    
+    var getVideoId : Int!
     weak var timer: Timer?
     
     
@@ -229,8 +229,13 @@ class VideoMenuVC: UITableViewController ,Apidelegate,UISearchBarDelegate {
         
         bIsArchive = detailsDictionary["is_Archive"] as? Bool ?? false
         self.CallReadStatusUpdateApi(String(describing: detailsDictionary["DetailID"]!), "VIDEO")
+        getVideoId =   detailsDictionary["VideoId"] as! Int
+        print("GETVIDEOID1\(detailsDictionary["VideoId"])")
+      
+        print("GEVimeoUrl1\(detailsDictionary["VimeoUrl"])")
         strSelectedVideoUrl = String(describing: detailsDictionary["VimeoUrl"]!)
         strSelectedVideoId = String(describing: detailsDictionary["VimeoId"]!)
+       
         DispatchQueue.main.async() {
             self.performSegue(withIdentifier: "VdieoDetailSegue", sender: self)
         }
@@ -410,6 +415,7 @@ class VideoMenuVC: UITableViewController ,Apidelegate,UISearchBarDelegate {
             let segueid = segue.destination as! VimeoVideoDetailVC
             segueid.strVideoUrl = strSelectedVideoUrl
             segueid.videoId = strSelectedVideoId
+           
         }
     }
     
@@ -703,6 +709,9 @@ class VideoMenuVC: UITableViewController ,Apidelegate,UISearchBarDelegate {
         
         CallSeeMoreVideoDetailApi()
     }
+    
+    
+   
     
     
     
