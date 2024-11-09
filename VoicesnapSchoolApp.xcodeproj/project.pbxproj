@@ -197,6 +197,8 @@
 		18D832A929A5E4330058B79F /* QuizQuestionCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D832A729A5E4330058B79F /* QuizQuestionCollectionViewCell.xib */; };
 		18D832AD29A6138A0058B79F /* NumberTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D832AB29A6138A0058B79F /* NumberTableViewCell.swift */; };
 		18D832AE29A6138A0058B79F /* NumberTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18D832AC29A6138A0058B79F /* NumberTableViewCell.xib */; };
+		18DCEBBF2CDF442500733860 /* DownloadResponseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DCEBBE2CDF442500733860 /* DownloadResponseData.swift */; };
+		18DCEBC12CDF4B2000733860 /* UIImageViewX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18DCEBC02CDF4B2000733860 /* UIImageViewX.swift */; };
 		18E0C8282A2860CB0088A258 /* AdViewerModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E0C8272A2860CB0088A258 /* AdViewerModal.swift */; };
 		18E0C82A2A286A170088A258 /* AdViewerRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E0C8292A286A170088A258 /* AdViewerRequest.swift */; };
 		18EC6D742A00EF6200ACD29E /* getLessonPlanStaffReportResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18EC6D732A00EF6200ACD29E /* getLessonPlanStaffReportResponse.swift */; };
@@ -794,6 +796,8 @@
 		18D832A729A5E4330058B79F /* QuizQuestionCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuizQuestionCollectionViewCell.xib; sourceTree = "<group>"; };
 		18D832AB29A6138A0058B79F /* NumberTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberTableViewCell.swift; sourceTree = "<group>"; };
 		18D832AC29A6138A0058B79F /* NumberTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NumberTableViewCell.xib; sourceTree = "<group>"; };
+		18DCEBBE2CDF442500733860 /* DownloadResponseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadResponseData.swift; sourceTree = "<group>"; };
+		18DCEBC02CDF4B2000733860 /* UIImageViewX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewX.swift; sourceTree = "<group>"; };
 		18E0C8272A2860CB0088A258 /* AdViewerModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdViewerModal.swift; sourceTree = "<group>"; };
 		18E0C8292A286A170088A258 /* AdViewerRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdViewerRequest.swift; sourceTree = "<group>"; };
 		18EC6D732A00EF6200ACD29E /* getLessonPlanStaffReportResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getLessonPlanStaffReportResponse.swift; sourceTree = "<group>"; };
@@ -1806,6 +1810,7 @@
 		1873EBA12983E537008E30AA /* DesignUtils */ = {
 			isa = PBXGroup;
 			children = (
+				18DCEBC02CDF4B2000733860 /* UIImageViewX.swift */,
 				186E4E632A0D18CB00D7C3F2 /* Clamp.swift */,
 				1873EBA22983E54C008E30AA /* UIViewX.swift */,
 				18D37B7329C2FD6100A61132 /* RPicker.swift */,
@@ -1919,6 +1924,7 @@
 			children = (
 				189E36F1296D959B0032A8CA /* ManagementVimeoViewController.swift */,
 				189E36F2296D959B0032A8CA /* ManagementVimeoViewController.xib */,
+				18DCEBBE2CDF442500733860 /* DownloadResponseData.swift */,
 			);
 			path = Vimeo;
 			sourceTree = "<group>";
@@ -4178,6 +4184,7 @@
 				841ED6C72C8F509700A65EEA /* DateWiseModal.swift in Sources */,
 				D68B9CA420D3E61000FDA753 /* ParentLibraryVC.swift in Sources */,
 				18D37B7029C2DE7200A61132 /* DataCollectionTvHeaderView.swift in Sources */,
+				18DCEBC12CDF4B2000733860 /* UIImageViewX.swift in Sources */,
 				84F981A32BD648C00077A77E /* PendingFeeReportViewController.swift in Sources */,
 				8453C0D62CB513620026F182 /* CountResp.swift in Sources */,
 				10F69A2A2282E6420033AC70 /* HolidayTVCell.swift in Sources */,
@@ -4282,6 +4289,7 @@
 				18D37B8929C44FCE00A61132 /* GetAllStandardsAndGroupsRequest.swift in Sources */,
 				849420902BD778980061B269 /* ScheduleCallTableViewCell.swift in Sources */,
 				D64EF0B120C7AC0E0051AA89 /* ParentNoticeBoardVC.swift in Sources */,
+				18DCEBBF2CDF442500733860 /* DownloadResponseData.swift in Sources */,
 				D621000D20ECEFF800BF4058 /* PrincipalGroupSelectionVC.swift in Sources */,
 				84E217AC2BEA368E0006829B /* SectionwiesReq.swift in Sources */,
 				189E36E8296D66C10032A8CA /* ManagementVideoTableViewCell.swift in Sources */,

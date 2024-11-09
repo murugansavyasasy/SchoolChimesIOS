@@ -13,6 +13,14 @@ import PlayerKit
 import WebKit
 
 class VimeoVideoDetailVC: UIViewController,UIWebViewDelegate {
+   
+    
+    @IBOutlet weak var gifImg: UIImageView!
+    @IBOutlet weak var progressCountLbl: UILabel!
+    
+    @IBOutlet weak var progressShowView: UIView!
+    
+    @IBOutlet weak var progressView: UIProgressView!
     
     @IBOutlet weak var videoDownloadView: UIView!
     @IBOutlet var downloadView: UIView!
@@ -22,15 +30,26 @@ class VimeoVideoDetailVC: UIViewController,UIWebViewDelegate {
     let player = RegularPlayer()
     var hud : MBProgressHUD = MBProgressHUD()
     var bsaeUrl = "https://api.vimeo.com/videos/"
-  
+    var progressBarTimer: Timer!
+    var isRunning = false
     
     var vimeoToken = "Bearer 8d74d8bf6b5742d39971cc7d3ffbb51a"
-    
+    var getVideoPath : String!
     var downloadVideoID : String!
     override func viewDidLoad(){
         
         super.viewDidLoad()
         //
+        
+        
+        
+        progressView.isHidden = true
+      
+        progressShowView.isHidden = true
+
+        progressCountLbl.isHidden = true
+        gifImg.isHidden = true
+        
         print("ManageVideo")
         print("Video4",downloadVideoID)
         print("videoId",videoId)
@@ -122,73 +141,189 @@ class VimeoVideoDetailVC: UIViewController,UIWebViewDelegate {
     
     
     @objc func getVideoDownload () {
-       
-            
-         let urlString = bsaeUrl + downloadVideoID
-         print("Download\(urlString)")
-            guard let url = URL(string: urlString) else {
-                print("Invalid URL")
-                return
+        btnStart()
+        
+        let jsonData = """
+        {
+            "app": {
+                "name": "Voicesnap for schools",
+                "uri": "/apps/177030"
+            },
+            "categories": [],
+            "content_rating": ["unrated"],
+            "content_rating_class": "unrated",
+            "created_time": "2024-11-06T10:56:07+00:00",
+            "description": "test",
+            "download": [
+                {
+                    "created_time": "2024-11-06T10:56:53+00:00",
+                    "expires": "2024-11-10T07:02:21+00:00",
+                    "fps": 20,
+                    "height": 320,
+                    "link": "https://player.vimeo.com/progressive_redirect/download/1026844236/container/cc3c9cca-d29d-4051-9ed4-270ae5d3c2bf/f858b363/test_for_download%20%28360p%29.mp4?expires=1731222141&loc=external&oauth2_token_id=1346973768&signature=b2588e9344c656225dd7c506ccd1c6d81f56825ad3ec43505b37a46972fe4c73",
+                    "md5": "<null>",
+                    "public_name": "360p",
+                    "quality": "sd",
+                    "rendition": "360p",
+                    "size": 38034,
+                    "size_short": "37.14KB",
+                    "type": "video/mp4",
+                    "width": 320
+                }
+            ]
+        }
+        """.data(using: .utf8)!
+           
+        let urlString = bsaeUrl +  "1026844236"
+        
+//        fetchDownloadURLs(from: urlString)
+//        downloadId
+        print("Download\(urlString)")
+           guard let url = URL(string: urlString) else {
+               print("Invalid URL")
+               return
+           }
+
+           // Set up the URL request
+           var request = URLRequest(url: url)
+           request.httpMethod = "GET"
+
+          
+        request.setValue(vimeoToken, forHTTPHeaderField: "Authorization")
+
+           // Initialize a URLSession
+           let session = URLSession.shared
+
+           // Start the data task
+        let task = session.dataTask(with: request) { [self] data, response, error in
+               // Handle the response
+               if let error = error {
+                   print("Error:", error.localizedDescription)
+                   return
+               }
+
+               guard let httpResponse = response as? HTTPURLResponse,
+                     (200...299).contains(httpResponse.statusCode) else {
+                   print("Server error")
+                   return
+               }
+
+               if let data = data {
+                   do {
+                       // Parse the JSON data
+                       let jsonObject = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any]
+                       
+                       // Access the "download" node
+                       if let downloadArray = jsonObject?["download"] as? [[String: Any]], let firstDownload = downloadArray.first {
+                           print("Download node: \(firstDownload)")
+                           
+                           // Access individual values in the download node
+                           if let link = firstDownload["link"] as? String {
+                               print("Download link: \(link)")
+                               
+                               if let url = URL(string: link) {
+                                   downloadVideo(from: url) { savedURL in
+                                       if let savedURL = savedURL {
+                                           
+                                           
+                                           getVideoPath = savedURL.absoluteString
+                                           
+                                           
+                                           
+                                           
+                                           
+                                           
+                                           
+                                           print("Downloaded video saved at: \(savedURL)")
+                                           // Use the saved URL as needed
+                                       } else {
+                                           print("Failed to download video.")
+                                       }
+                                   }
+                               }
+                               
+                               
+                           }
+                           
+                           if let size = firstDownload["size"] as? Int {
+                               print("Size: \(size) bytes")
+                           }
+                       }
+                   } catch {
+                       print("Error parsing JSON: \(error)")
+                   }
+               }
+           }
+
+           // Start the request
+           task.resume()
+   }
+   
+    
+    
+    
+    
+    func btnStart() {
+                
+                if(isRunning){
+                    progressBarTimer.invalidate()
+                }
+                else{
+                progressView.progress = 0.0
+                self.progressBarTimer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(updateProgressView), userInfo: nil, repeats: true)
+              
+                }
+                isRunning = !isRunning
             }
 
-            // Set up the URL request
-            var request = URLRequest(url: url)
-            request.httpMethod = "GET"
+        @objc func updateProgressView(){
+               progressView.progress += 0.1
+            progressView.isHidden = false
+          
+            progressShowView.isHidden = false
 
-           
-         request.setValue(vimeoToken, forHTTPHeaderField: "Authorization")
-
-            // Initialize a URLSession
-            let session = URLSession.shared
-
-            // Start the data task
-         let task = session.dataTask(with: request) { [self] data, response, error in
-                // Handle the response
-                if let error = error {
-                    print("Error:", error.localizedDescription)
-                    return
-                }
-
-                guard let httpResponse = response as? HTTPURLResponse,
-                      (200...299).contains(httpResponse.statusCode) else {
-                    print("Server error")
-                    return
-                }
-
-                if let data = data {
-                    do {
-                        // Try to decode the JSON or handle the data as needed
-                        let json = try JSONSerialization.jsonObject(with: data, options: [])
-                        print("Response JSON:", json)
-                        if let url = URL(string: "https://player.vimeo.com/progressive_redirect/download/1026844236/container/cc3c9cca-d29d-4051-9ed4-270ae5d3c2bf/f858b363/test_for_download%20%28360p%29.mp4?expires=1731051047&loc=external&oauth2_token_id=1346973768&signature=65b883e59a04e61156286392b5bec0b8969417fbeacd0ff8bd97e1f229392710") {
-                            downloadVideo(from: url) { savedURL in
-                                if let savedURL = savedURL {
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    
-                                    print("Downloaded video saved at: \(savedURL)")
-                                    // Use the saved URL as needed
-                                } else {
-                                    print("Failed to download video.")
-                                }
-                            }
-                        }
-                    } catch {
-                        print("Error parsing JSON:", error.localizedDescription)
+            progressCountLbl.isHidden = false
+            gifImg.isHidden = false
+            
+            var number = Int(progressView.progress*100)
+            progressCountLbl.text = "Downloading" + " " + String(number) + " % "
+            print("pr1234567", progressView.progress*100)
+            if progressView.progress*100 == 100 {
+                progressShowView.isHidden = true
+                
+                
+                progressCountLbl.isHidden = true
+                gifImg.isHidden = true
+                
+                
+                _ = SweetAlert().showAlert("", subTitle: getVideoPath, style: .none, buttonTitle: "Ok", buttonColor: .black){
+                    (okClick) in
+                    if okClick{
+                        self.dismiss(animated: true)
+                    }else{
+                        
                     }
                 }
             }
+//            let gifURL = UIImage.gif(name: "video_uploaded")
+//                      // Use SDWebImage to load and display the GIF image
+//            gifImg.image = gifURL
+//            self.gifImg.image = UIImage.gif(name: "video_uploaded")
 
-            // Start the request
-            task.resume()
-    }
+            print("progressView progressView", progressView.progress)
+               progressView.setProgress(progressView.progress, animated: true)
+               if(progressView.progress == 1.0)
+               {
+                   
+                   print(" progressView progressView 34444444", progressView.progress)
+                   progressBarTimer.invalidate()
+                   isRunning = false
+                   
+    //               btn.setTitle("Start", for: .normal)
+               }
+           }
+    
+    
     
     
     func downloadVideo(from url: URL, completion: @escaping (URL?) -> Void) {

@@ -4,12 +4,17 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ManagementVimeoViewController" customModule="VoicesnapSchoolApp" customModuleProvider="target">
             <connections>
+                <outlet property="gifImg" destination="5UQ-yY-n3k" id="YEm-9r-3s7"/>
+                <outlet property="progressCountLbl" destination="Oz8-jN-4r8" id="zrW-cD-eQH"/>
+                <outlet property="progressShowView" destination="XMS-yb-1l1" id="nog-CZ-IfF"/>
+                <outlet property="progressView" destination="asZ-ZO-krL" id="23e-op-OJ5"/>
                 <outlet property="videoView" destination="7mW-dc-rWF" id="TcT-7q-wLc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="viewBack" destination="cwT-2I-OWw" id="CkG-cB-VTQ"/>
@@ -35,6 +40,46 @@
                                         <wkPreferences key="preferences"/>
                                     </wkWebViewConfiguration>
                                 </wkWebView>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XMS-yb-1l1">
+                                    <rect key="frame" x="57" y="382" width="300" height="50"/>
+                                    <subviews>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5UQ-yY-n3k">
+                                            <rect key="frame" x="10" y="10" width="280" height="0.0"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" id="UGH-aq-5Eq"/>
+                                            </constraints>
+                                        </imageView>
+                                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="asZ-ZO-krL">
+                                            <rect key="frame" x="10" y="10" width="280" height="35"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="35" id="x1Y-84-Wxq"/>
+                                            </constraints>
+                                            <color key="progressTintColor" name="CustomOrange"/>
+                                        </progressView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oz8-jN-4r8">
+                                            <rect key="frame" x="20" y="15" width="260" height="20.5"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="asZ-ZO-krL" secondAttribute="trailing" constant="10" id="4DZ-wq-fTs"/>
+                                        <constraint firstAttribute="height" constant="50" id="7pn-Ma-aNi"/>
+                                        <constraint firstItem="asZ-ZO-krL" firstAttribute="leading" secondItem="XMS-yb-1l1" secondAttribute="leading" constant="10" id="9oa-PD-qAy"/>
+                                        <constraint firstAttribute="width" constant="300" id="B4Z-ic-bhS"/>
+                                        <constraint firstAttribute="trailing" secondItem="Oz8-jN-4r8" secondAttribute="trailing" constant="20" symbolic="YES" id="MDM-MZ-QEr"/>
+                                        <constraint firstItem="5UQ-yY-n3k" firstAttribute="leading" secondItem="XMS-yb-1l1" secondAttribute="leading" constant="10" id="V9d-O4-fuS"/>
+                                        <constraint firstItem="5UQ-yY-n3k" firstAttribute="top" secondItem="XMS-yb-1l1" secondAttribute="top" constant="10" id="ic9-AK-tBs"/>
+                                        <constraint firstAttribute="trailing" secondItem="5UQ-yY-n3k" secondAttribute="trailing" constant="10" id="kq2-u9-Yh6"/>
+                                        <constraint firstItem="asZ-ZO-krL" firstAttribute="top" secondItem="5UQ-yY-n3k" secondAttribute="bottom" id="nAb-F9-lzf"/>
+                                        <constraint firstItem="Oz8-jN-4r8" firstAttribute="top" secondItem="5UQ-yY-n3k" secondAttribute="bottom" constant="5" id="r7c-Yn-fot"/>
+                                        <constraint firstAttribute="trailing" secondItem="5UQ-yY-n3k" secondAttribute="trailing" constant="10" id="rWu-kZ-yvD"/>
+                                        <constraint firstAttribute="bottom" secondItem="Oz8-jN-4r8" secondAttribute="bottom" constant="14.5" id="tJj-dD-XHj"/>
+                                        <constraint firstItem="Oz8-jN-4r8" firstAttribute="leading" secondItem="XMS-yb-1l1" secondAttribute="leading" constant="20" symbolic="YES" id="v3b-mR-7cC"/>
+                                    </constraints>
+                                </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hPc-iS-NTf">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="50"/>
                                     <subviews>
@@ -92,9 +137,11 @@
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="30O-lt-cG0" secondAttribute="trailing" id="3FG-vN-a12"/>
                                 <constraint firstItem="30O-lt-cG0" firstAttribute="leading" secondItem="TfN-sC-2ds" secondAttribute="leading" id="AgY-74-M3w"/>
+                                <constraint firstItem="XMS-yb-1l1" firstAttribute="centerY" secondItem="TfN-sC-2ds" secondAttribute="centerY" id="Bny-Zz-mLo"/>
                                 <constraint firstItem="hPc-iS-NTf" firstAttribute="top" secondItem="TfN-sC-2ds" secondAttribute="top" id="Oa7-dY-5Cz"/>
                                 <constraint firstItem="30O-lt-cG0" firstAttribute="top" secondItem="hPc-iS-NTf" secondAttribute="bottom" id="Vnp-gQ-2ia"/>
                                 <constraint firstAttribute="trailing" secondItem="hPc-iS-NTf" secondAttribute="trailing" id="gMa-TX-hfc"/>
+                                <constraint firstItem="XMS-yb-1l1" firstAttribute="centerX" secondItem="TfN-sC-2ds" secondAttribute="centerX" id="hij-U4-aVV"/>
                                 <constraint firstAttribute="bottom" secondItem="30O-lt-cG0" secondAttribute="bottom" id="ncO-s8-EZU"/>
                                 <constraint firstItem="hPc-iS-NTf" firstAttribute="leading" secondItem="TfN-sC-2ds" secondAttribute="leading" id="uUy-sd-Tco"/>
                             </constraints>
@@ -123,5 +170,8 @@
     <resources>
         <image name="VideoDownload" width="512" height="512"/>
         <image name="backarrow" width="30" height="30"/>
+        <namedColor name="CustomOrange">
+            <color red="0.94099998474121094" green="0.60399997234344482" blue="0.21600000560283661" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+        </namedColor>
     </resources>
 </document>
