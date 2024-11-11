@@ -265,6 +265,11 @@
 		842C31462C01C8E100E98F85 /* AcidmicYrRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842C31452C01C8E100E98F85 /* AcidmicYrRequest.swift */; };
 		842C314A2C01CF4600E98F85 /* ScheduleCallCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842C31492C01CF4600E98F85 /* ScheduleCallCollectionViewCell.xib */; };
 		842C314B2C01CF4600E98F85 /* ScheduleCallCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842C31482C01CF4600E98F85 /* ScheduleCallCollectionViewCell.swift */; };
+		8442AA7A2CDF86C80006068E /* NotificationCallingscreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8442AA772CDF86C80006068E /* NotificationCallingscreen.swift */; };
+		8442AA7B2CDF86C80006068E /* NotificationcallVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8442AA752CDF86C80006068E /* NotificationcallVC.swift */; };
+		8442AA7C2CDF86C80006068E /* NotificationCallingscreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8442AA782CDF86C80006068E /* NotificationCallingscreen.xib */; };
+		8442AA7D2CDF86C80006068E /* isnotification.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8442AA742CDF86C80006068E /* isnotification.wav */; };
+		8442AA7E2CDF86C80006068E /* NotificationcallVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8442AA762CDF86C80006068E /* NotificationcallVC.xib */; };
 		8453C0D62CB513620026F182 /* CountResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453C0D52CB513620026F182 /* CountResp.swift */; };
 		8453C0D82CB513750026F182 /* CountResq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453C0D72CB513750026F182 /* CountResq.swift */; };
 		845B1BC42CAFCD8200D6E6F5 /* homeWorkResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845B1BC32CAFCD8200D6E6F5 /* homeWorkResp.swift */; };
@@ -865,6 +870,11 @@
 		842C31452C01C8E100E98F85 /* AcidmicYrRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcidmicYrRequest.swift; sourceTree = "<group>"; };
 		842C31482C01CF4600E98F85 /* ScheduleCallCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCallCollectionViewCell.swift; sourceTree = "<group>"; };
 		842C31492C01CF4600E98F85 /* ScheduleCallCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScheduleCallCollectionViewCell.xib; sourceTree = "<group>"; };
+		8442AA742CDF86C80006068E /* isnotification.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = isnotification.wav; sourceTree = "<group>"; };
+		8442AA752CDF86C80006068E /* NotificationcallVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationcallVC.swift; sourceTree = "<group>"; };
+		8442AA762CDF86C80006068E /* NotificationcallVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationcallVC.xib; sourceTree = "<group>"; };
+		8442AA772CDF86C80006068E /* NotificationCallingscreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCallingscreen.swift; sourceTree = "<group>"; };
+		8442AA782CDF86C80006068E /* NotificationCallingscreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationCallingscreen.xib; sourceTree = "<group>"; };
 		8453C0D52CB513620026F182 /* CountResp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountResp.swift; sourceTree = "<group>"; };
 		8453C0D72CB513750026F182 /* CountResq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountResq.swift; sourceTree = "<group>"; };
 		845B1BC32CAFCD8200D6E6F5 /* homeWorkResp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = homeWorkResp.swift; sourceTree = "<group>"; };
@@ -2395,6 +2405,18 @@
 			path = CvCell;
 			sourceTree = "<group>";
 		};
+		8442AA792CDF86C80006068E /* NotificationCallVC */ = {
+			isa = PBXGroup;
+			children = (
+				8442AA742CDF86C80006068E /* isnotification.wav */,
+				8442AA752CDF86C80006068E /* NotificationcallVC.swift */,
+				8442AA762CDF86C80006068E /* NotificationcallVC.xib */,
+				8442AA772CDF86C80006068E /* NotificationCallingscreen.swift */,
+				8442AA782CDF86C80006068E /* NotificationCallingscreen.xib */,
+			);
+			path = NotificationCallVC;
+			sourceTree = "<group>";
+		};
 		8453C0D42CB5134C0026F182 /* CountApi */ = {
 			isa = PBXGroup;
 			children = (
@@ -3207,6 +3229,7 @@
 		B5E499071F0CB99D00A503AB /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
+				8442AA792CDF86C80006068E /* NotificationCallVC */,
 				847E22A02B0E01B100C0C42D /* Ripple1.gif */,
 				B5E499081F0CB99D00A503AB /* AppDelegate.swift */,
 			);
@@ -3906,6 +3929,9 @@
 				B5414A562009F0460099F2BC /* SectionHeader.xib in Resources */,
 				B5D8CF5A1F13B0140096D699 /* Launch Screen.storyboard in Resources */,
 				848E5D5F2BFE285700DBBBB5 /* ClassTableViewCell.xib in Resources */,
+				8442AA7C2CDF86C80006068E /* NotificationCallingscreen.xib in Resources */,
+				8442AA7D2CDF86C80006068E /* isnotification.wav in Resources */,
+				8442AA7E2CDF86C80006068E /* NotificationcallVC.xib in Resources */,
 				84B066222AFB6B3700CEB417 /* ParentHWImagePdfVoiceTableViewCell.xib in Resources */,
 				1829528029951F780003B9D6 /* ExamUpcomingTableViewCell.xib in Resources */,
 				845B1BD82CB01CAB00D6E6F5 /* StaffnoticeBoardVcViewController.xib in Resources */,
@@ -4252,6 +4278,8 @@
 				840743112C0D876000797A86 /* NewPendingResp.swift in Sources */,
 				18D37B6629C1F87000A61132 /* DailyCollectionFeeModal.swift in Sources */,
 				1865D8EE2A0B615800CD43F3 /* LessonPlanDeleteRequest.swift in Sources */,
+				8442AA7A2CDF86C80006068E /* NotificationCallingscreen.swift in Sources */,
+				8442AA7B2CDF86C80006068E /* NotificationcallVC.swift in Sources */,
 				84C49A7C2C381A0D00BA6EF4 /* holidayCelsTableViewCell.swift in Sources */,
 				186E4E532A0CD15B00D7C3F2 /* ParticularDataEditRsponse.swift in Sources */,
 				841ED6C12C8F503300A65EEA /* SlotDetailsForStaffResponse.swift in Sources */,

@@ -216,6 +216,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate,UNUserNo
         print("Recived: \(userInfo)")
         completionHandler(.newData)
         self.playSound(userInfo: userInfo)
+        
+        
+        if let types = userInfo["type"] as? String {
+            print("WAV File URL: \(types)")
+            
+            // Navigate to the specific view controller
+            
+            
+            if types == "call"{
+                if let wavURLString = userInfo["wav_url"] as? String, let wavURL = URL(string: wavURLString) {
+                    print("WAV File URL: \(wavURL)")
+                    
+                    // Navigate to the specific view controller
+                    navigateToViewController(with: wavURL)
+                }
+            }
+        }
         application.applicationIconBadgeNumber = 1
         application.applicationIconBadgeNumber = 0
         if(isPopupOpened == 0){
@@ -397,6 +414,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate,UNUserNo
         let configuration = AWSServiceConfiguration(region: .APSouth1, credentialsProvider: credentialsProvider)
         AWSServiceManager.default().defaultServiceConfiguration = configuration
         
+        
+    }
+    
+    
+    func navigateToViewController(with wavURL: URL) {
+           
+                print("URL: \(wavURL)")
+                // Do something with the URL, such as opening it in a web view or playing the audio
+
+        
+        
+        
+        
+        
+        let vc = getCurrentViewController()
+       
+                                 let vcc = NotificationCallingscreen(nibName: nil, bundle: nil)
+       
+                       vcc.urlss = wavURL.absoluteString
+                                 vcc.modalPresentationStyle = .fullScreen
+       
+                                 vc?.present(vcc, animated: true)
+
+            }
+//
+       
+    func getCurrentViewController() -> UIViewController? {
+        
+        if let rootController = UIApplication.shared.keyWindow?.rootViewController {
+            var currentController: UIViewController! = rootController
+            while( currentController.presentedViewController != nil ) {
+                currentController = currentController.presentedViewController
+            }
+            return currentController
+        }
+        return nil
         
     }
     

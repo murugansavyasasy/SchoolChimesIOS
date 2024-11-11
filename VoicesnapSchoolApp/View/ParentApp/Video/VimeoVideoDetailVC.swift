@@ -59,9 +59,7 @@ class VimeoVideoDetailVC: UIViewController,UIWebViewDelegate {
         let downloadGesture = UITapGestureRecognizer(target: self, action: #selector(getVideoDownload))
         videoDownloadView.addGestureRecognizer(downloadGesture)
                     
-        
-//        downloadView.backgroundColor = .blue
-        
+      
       
       
         
@@ -80,8 +78,7 @@ class VimeoVideoDetailVC: UIViewController,UIWebViewDelegate {
             webKitView.load(URLRequest(url:yourVimeoLink))
             webKitView.contentMode = UIView.ContentMode.scaleToFill
             
-//            let downloadGesture = UITapGestureRecognizer(target: self, action: #selector(getVideoDownload))
-//            downloadView.addGestureRecognizer(downloadGesture)
+//
             
            
         }
@@ -176,8 +173,7 @@ class VimeoVideoDetailVC: UIViewController,UIWebViewDelegate {
            
         let urlString = bsaeUrl +  "1026844236"
         
-//        fetchDownloadURLs(from: urlString)
-//        downloadId
+
         print("Download\(urlString)")
            guard let url = URL(string: urlString) else {
                print("Invalid URL")
@@ -305,10 +301,7 @@ class VimeoVideoDetailVC: UIViewController,UIWebViewDelegate {
                     }
                 }
             }
-//            let gifURL = UIImage.gif(name: "video_uploaded")
-//                      // Use SDWebImage to load and display the GIF image
-//            gifImg.image = gifURL
-//            self.gifImg.image = UIImage.gif(name: "video_uploaded")
+
 
             print("progressView progressView", progressView.progress)
                progressView.setProgress(progressView.progress, animated: true)
@@ -319,7 +312,7 @@ class VimeoVideoDetailVC: UIViewController,UIWebViewDelegate {
                    progressBarTimer.invalidate()
                    isRunning = false
                    
-    //               btn.setTitle("Start", for: .normal)
+    
                }
            }
     

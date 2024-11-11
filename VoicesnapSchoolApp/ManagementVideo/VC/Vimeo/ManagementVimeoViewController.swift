@@ -115,51 +115,10 @@ class ManagementVimeoViewController: UIViewController,UIWebViewDelegate {
         }
         return false
     }
-//    func downloadVideo(from url: URL, completion: @escaping (URL?) -> Void) {
-//        let session = URLSession(configuration: .default)
-//        let downloadTask = session.downloadTask(with: url) { (tempLocalUrl, response, error) in
-//            if let error = error {
-//                print("Download error: \(error.localizedDescription)")
-//                completion(nil)
-//                return
-//            }
-//            
-//            guard let tempLocalUrl = tempLocalUrl else {
-//                print("Temporary file URL is nil.")
-//                completion(nil)
-//                return
-//            }
-//            
-//            do {
-//                // Get the destination path
-//                let fileManager = FileManager.default
-//                let documentsDirectory = try fileManager.url(
-//                    for: .documentDirectory,
-//                    in: .userDomainMask,
-//                    appropriateFor: nil,
-//                    create: false
-//                )
-//                let savedURL = documentsDirectory.appendingPathComponent(url.lastPathComponent)
-//                
-//                // Move downloaded file to the destination path
-//                if fileManager.fileExists(atPath: savedURL.path) {
-//                    try fileManager.removeItem(at: savedURL)
-//                }
-//                try fileManager.moveItem(at: tempLocalUrl, to: savedURL)
-//                print("File saved to: \(savedURL)")
-//                completion(savedURL)
-//            } catch {
-//                print("File error: \(error.localizedDescription)")
-//                completion(nil)
-//            }
-//        }
-//        
-//        downloadTask.resume()
-//    }
     
     
     @objc func getVideoDownload () {
-//        btnStart()
+        btnStart()
         
         let jsonData = """
         {
@@ -194,27 +153,26 @@ class ManagementVimeoViewController: UIViewController,UIWebViewDelegate {
            
         let urlString = bsaeUrl +  "1026844236"
         
-//        fetchDownloadURLs(from: urlString)
-//        downloadId
+
         print("Download\(urlString)")
            guard let url = URL(string: urlString) else {
                print("Invalid URL")
                return
            }
 
-           // Set up the URL request
+           
            var request = URLRequest(url: url)
            request.httpMethod = "GET"
 
           
         request.setValue(vimeoToken, forHTTPHeaderField: "Authorization")
 
-           // Initialize a URLSession
+          
            let session = URLSession.shared
 
-           // Start the data task
+          
         let task = session.dataTask(with: request) { [self] data, response, error in
-               // Handle the response
+               
                if let error = error {
                    print("Error:", error.localizedDescription)
                    return
@@ -228,51 +186,39 @@ class ManagementVimeoViewController: UIViewController,UIWebViewDelegate {
 
                if let data = data {
                    do {
-                       // Parse the JSON data
+                       
                        let jsonObject = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any]
                        
-                       // Access the "download" node
+                       
                        if let downloadArray = jsonObject?["download"] as? [[String: Any]], let firstDownload = downloadArray.first {
                            print("Download node: \(firstDownload)")
                            
-                           // Access individual values in the download node
+                         
                            if let link = firstDownload["link"] as? String {
                                print("Download link: \(link)")
-                               let userDefaults = UserDefaults.standard
-//                               getVideoPath = userDefaults.string(forKey: link)!
                                
-                               downloadVideo(downloadUrl : link )
-                             
-                               let filePath = getVideoPath
-                               if isVideoFile(at: filePath) {
-                                   print("This is a video file.")
-                               } else {
-                                   print("This is not a video file.")
-                                   
-                                   
-//                                   if let url = URL(string: link) {
-//                                       downloadVideo(downloadUrl : link ){ savedURL in
-//                                           if let savedURL = savedURL {
-//                                               
-//                                               
-//                                               
-//                                               
-////                                               getVideoPath = savedURL.absoluteString
-//                                               
-//                                               
-//                                               
-//                                               
-//                                               
-//                                               print("Downloaded video saved at: \(savedURL)")
-//                                               // Use the saved URL as needed
-//                                           } else {
-//                                               print("Failed to download video.")
-//                                           }
-//                                       }
-//                                   }
-                                   
-                                   
+                               if let url = URL(string: link) {
+                                   downloadVideo(from: url) { savedURL in
+                                       if let savedURL = savedURL {
+                                           
+                                           
+                                           getVideoPath = savedURL.absoluteString
+                                           
+                                           
+                                           
+                                           
+                                           
+                                           
+                                           
+                                           print("Downloaded video saved at: \(savedURL)")
+                                           
+                                       } else {
+                                           print("Failed to download video.")
+                                       }
+                                   }
                                }
+                               
+                               
                            }
                            
                            if let size = firstDownload["size"] as? Int {
@@ -285,13 +231,12 @@ class ManagementVimeoViewController: UIViewController,UIWebViewDelegate {
                }
            }
 
-           // Start the request
+           
            task.resume()
    }
    
     
-    
-    
+
     
     func btnStart() {
                 
@@ -316,12 +261,12 @@ class ManagementVimeoViewController: UIViewController,UIWebViewDelegate {
             gifImg.isHidden = false
             
             var number = Int(progressView.progress*100)
-            progressCountLbl.text = String(number) + " % "
+            progressCountLbl.text = "Downloading" + " " + String(number) + " % "
             print("pr1234567", progressView.progress*100)
             if progressView.progress*100 == 100 {
                 progressShowView.isHidden = true
                 
-
+                
                 progressCountLbl.isHidden = true
                 gifImg.isHidden = true
                 
@@ -335,10 +280,6 @@ class ManagementVimeoViewController: UIViewController,UIWebViewDelegate {
                     }
                 }
             }
-//            let gifURL = UIImage.gif(name: "video_uploaded")
-//                      // Use SDWebImage to load and display the GIF image
-//            gifImg.image = gifURL
-//            self.gifImg.image = UIImage.gif(name: "video_uploaded")
 
             print("progressView progressView", progressView.progress)
                progressView.setProgress(progressView.progress, animated: true)
@@ -349,123 +290,70 @@ class ManagementVimeoViewController: UIViewController,UIWebViewDelegate {
                    progressBarTimer.invalidate()
                    isRunning = false
                    
-    //               btn.setTitle("Start", for: .normal)
+    
                }
            }
     
     
-    func isVideoFile(at path: String) -> Bool {
-        let fileManager = FileManager.default
-        
-        // Check if the file exists
-        guard fileManager.fileExists(atPath: path) else {
-            print("File does not exist at path: \(path)")
-            return false
-        }
-        
-        // Get the file URL
-        let fileURL = URL(fileURLWithPath: path)
-        
-        // Verify the file is a video using AVURLAsset
-        let asset = AVURLAsset(url: fileURL)
-        let videoTracks = asset.tracks(withMediaType: .video)
-        
-        return !videoTracks.isEmpty
-    }
     
     
-    
-    
-    
-    
-    func downloadVideo(downloadUrl: String) {
-        DispatchQueue.main.async { [self] in
-            // Inflate the custom layout for the dialog
-            let alert = UIAlertController(title: nil, message: "Downloading...", preferredStyle: .alert)
-            
-            let progressView = UIProgressView(progressViewStyle: .default)
-            progressView.frame = CGRect(x: 10, y: 70, width: 250, height: 0)
-            alert.view.addSubview(progressView)
-            
-            let progressLabel = UILabel(frame: CGRect(x: 10, y: 90, width: 250, height: 20))
-            progressLabel.text = "0%"
-            alert.view.addSubview(progressLabel)
-            
-            // Show the AlertDialog
-            present(alert, animated: true)
-            
-            // Start the download
-            startDownload(downloadUrl: downloadUrl, progressView: progressView, progressLabel: progressLabel, alert: alert)
-        }
-    }
-    func startDownload(downloadUrl: String, progressView: UIProgressView, progressLabel: UILabel, alert: UIAlertController) {
-        let downloadDirectory = FileManager.default.urls(for: .downloadsDirectory, in: .userDomainMask).first!
-        let videoFolder = downloadDirectory.appendingPathComponent("VIDEO_FOLDER")
-        let videoFile = videoFolder.appendingPathComponent("video_for_your_school.mp4")
-        if !FileManager.default.fileExists(atPath: videoFolder.path) {
-            do {
-                try FileManager.default.createDirectory(at: videoFolder, withIntermediateDirectories: true, attributes: nil)
-            } catch {
-                print("Failed to create directory: \(error.localizedDescription)")
+    func downloadVideo(from url: URL, completion: @escaping (URL?) -> Void) {
+        let session = URLSession(configuration: .default)
+        let downloadTask = session.downloadTask(with: url) { (tempLocalUrl, response, error) in
+            if let error = error {
+                print("Download error: \(error.localizedDescription)")
+                completion(nil)
                 return
             }
-        }
-        guard let url = URL(string: downloadUrl) else { return }
-        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: .main)
-        
-        let downloadTask = session.downloadTask(with: url) { [self] (tempUrl, response, error) in
-            if let tempUrl = tempUrl {
-                do {
-                    try FileManager.default.moveItem(at: tempUrl, to: videoFile)
-                    DispatchQueue.main.async {
-                        alert.dismiss(animated: true) { [self] in
-                            showAlert(title: "Downloaded successfully", message: "File stored in: \(videoFile.path)")
-                        }
-                    }
-                } catch {
+            
+            guard let tempLocalUrl = tempLocalUrl else {
+                print("Temporary file URL is nil.")
+                completion(nil)
+                return
+            }
+            
+            do {
+                // Get the destination path
+                let fileManager = FileManager.default
+                let documentsDirectory = try fileManager.url(
+                    for: .documentDirectory,
+                    in: .userDomainMask,
+                    appropriateFor: nil,
+                    create: false
+                )
+                let savedURL = documentsDirectory.appendingPathComponent(url.lastPathComponent)
+                
+                // Move downloaded file to the destination path
+                if fileManager.fileExists(atPath: savedURL.path) {
+                    try fileManager.removeItem(at: savedURL)
+                }
+                try fileManager.moveItem(at: tempLocalUrl, to: savedURL)
+                print("File saved to: \(savedURL)")
+                var urlConvert = savedURL.absoluteString
+                var refreshAlert = UIAlertController(title: "", message: urlConvert, preferredStyle: UIAlertController.Style.alert)
+
+                refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { [self] (action: UIAlertAction!) in
+                  
+//                    UserDefaults.standard.removeObject(forKey: Constant.DefaultsKeys.token)
                    
-                    print("Error saving video: \(error)")
-                    showAlert(title: "", message: "item with the same name already exists")
-                }
-            } else {
-                DispatchQueue.main.async {
-                    alert.dismiss(animated: true) { [self] in
-                        showAlert(title: "Download failed", message: "")
-                    }
-                }
+
+                
+                                                     }))
+                
+                
+                
+               
+            
+                
+                
+                completion(savedURL)
+            } catch {
+                print("File error: \(error.localizedDescription)")
+                completion(nil)
             }
         }
-        downloadTask.resume()
         
-        // Progress tracking using URLSessionTaskDelegate
-        let observation = downloadTask.progress.observe(\.fractionCompleted) { progress, _ in
-            DispatchQueue.main.async {
-                let percent = Int(progress.fractionCompleted * 100)
-                progressView.progress = Float(progress.fractionCompleted)
-                progressLabel.text = "\(percent)%"
-            }
-        }
-    }
-    func showAlert( title: String, message: String) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
+        downloadTask.resume()
     }
     
-    
-    func checkAndDownload() {
-        if isDownload {
-            isDownload = false
-            if !isVideoDownloaded() {
-                downloadVideo(downloadUrl: downloadUrl)
-            } else {
-                DispatchQueue.main.async {
-                    // Show a toast message (similar to Toast in Android)
-                    let alert = UIAlertController(title: "Info", message: "Video is already downloaded!", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "OK", style: .default))
-                    self.present(alert, animated: true, completion: nil)
-                }
-            }
-        }
-    }
 }
