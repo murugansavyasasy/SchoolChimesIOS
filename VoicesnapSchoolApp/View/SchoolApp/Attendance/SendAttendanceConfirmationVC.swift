@@ -194,6 +194,8 @@ class SendAttendanceConfirmationVC: UIViewController,UITableViewDataSource,UITab
         UtilObj.printLogKey(printKey: "myDict", printingValue: myDict)
         
         
+        print("MarkAllSelectStudAttendanceDict",requestString)
+        print("MarkAllSelectAttendanceDict",myDict)
         print("Absentees",myDict)
         let myString = Util.convertDictionary(toString: myDict)
         apiCall.nsurlConnectionFunction(requestString, myString, "SendAttendancetoSelecedStudent")

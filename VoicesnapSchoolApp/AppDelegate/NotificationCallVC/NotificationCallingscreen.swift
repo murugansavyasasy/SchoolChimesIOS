@@ -72,6 +72,7 @@ class NotificationCallingscreen: UIViewController {
     @IBAction func DeclineClcik(){
         callStatus = "NO"
         
+        exit(0)
 //        NotiApi()
         
         
@@ -168,6 +169,7 @@ class NotificationCallingscreen: UIViewController {
                 
              
                 if callStatus == "NO"{
+                    
                     
                     exit(0)
                     

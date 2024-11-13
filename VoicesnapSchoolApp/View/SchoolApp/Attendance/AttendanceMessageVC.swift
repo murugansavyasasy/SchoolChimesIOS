@@ -765,7 +765,10 @@ class AttendanceMessageVC: UIViewController,Apidelegate,UIPickerViewDelegate ,UI
         let requestStringer = baseUrlString! + MARK_ATTENDANCE
         
         let requestString = requestStringer.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
+        
+        print("MarkAllAttendance",requestString)
         let myDict:NSMutableDictionary = ["SchoolID" : SchoolId,"StaffID" : StaffId ,"ClassId":SelectedClassIDString ,"SectionID": SelectedSectionIDString,"AllPresent" : "T","StudentID": [], COUNTRY_CODE: strCountryCode, "AttendanceType" : AttendanceType, "SessionType": sessionType,"AttendanceDate" : DefaultsKeys.SelectedDAte]
+        print("MarkAllAttendanceDict",myDict)
         UtilObj.printLogKey(printKey: "myDict", printingValue: myDict)
         //        
         

@@ -180,6 +180,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate,UNUserNo
         return true
     }
     
+    
+    func registerNotificationCategories() {
+        let callCategory = UNNotificationCategory(
+            identifier: "CALL_CATEGORY",
+            actions: [], // Add any custom actions here if needed
+            intentIdentifiers: [],
+            options: .customDismissAction
+        )
+        UNUserNotificationCenter.current().setNotificationCategories([callCategory])
+    }
     func clearNotification(){
         if #available(iOS 10.0, *) {
             let center = UNUserNotificationCenter.current()
@@ -296,6 +306,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate,UNUserNo
             nc.post(name: NSNotification.Name(rawValue: "PushNotification"), object: nil)
         }
     }
+    
     
     
     

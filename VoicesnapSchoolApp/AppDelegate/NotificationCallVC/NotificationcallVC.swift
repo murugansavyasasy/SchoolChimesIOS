@@ -51,7 +51,7 @@ class NotificationcallVC: UIViewController {
         
         
         setupAudioPlayer()
-        addPeriodicTimeObserver()
+       
         
         
         let declineClick = UITapGestureRecognizer(target: self, action: #selector(DeclineClcik))
@@ -79,93 +79,90 @@ class NotificationcallVC: UIViewController {
 
     
     func setupAudioPlayer() {
-          guard let url = URL(string: audioURL) else {
-              print("Invalid URL")
-              return
-          }
-          
-          // Initialize player item and player
-          playerItem = AVPlayerItem(url: url)
-          player = AVPlayer(playerItem: playerItem)
-          
-          // Observe when audio finishes playing
-          NotificationCenter.default.addObserver(self,
-                                                 selector: #selector(audioDidFinishPlaying),
-                                                 name: .AVPlayerItemDidPlayToEndTime,
-                                                 object: playerItem)
-          
-          // Start playback
-          player?.play()
-      }
-      
-      func addPeriodicTimeObserver() {
-          let interval = CMTime(seconds: 1.0, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
-          
-          timeObserverToken = player?.addPeriodicTimeObserver(forInterval: interval, queue: .main) { [weak self] time in
-              guard let self = self else { return }
-              
-              // Get current playback time
-              let currentTime = CMTimeGetSeconds(time)
-              let formattedCurrentTime = self.formatTime(seconds: currentTime)
-              
-              // Get total duration
-              let totalDurationSeconds = CMTimeGetSeconds(self.playerItem?.duration ?? CMTime.zero)
-              guard totalDurationSeconds.isFinite && !totalDurationSeconds.isNaN else {
-                  print("Total duration is invalid.")
-                  return
-              }
-              let formattedTotalDuration = self.formatTime(seconds: totalDurationSeconds)
-              
-              // Update duration label
-              self.durationLbl.text = "\(formattedCurrentTime) / \(formattedTotalDuration)"
-              print("Playback time: \(formattedCurrentTime) / \(formattedTotalDuration)")
-          }
-      }
-      
-      func formatTime(seconds: Double) -> String {
-          guard seconds.isFinite && !seconds.isNaN else {
-              return "00:00"
-          }
-          
-          let minutes = Int(seconds) / 60
-          let seconds = Int(seconds) % 60
-          return String(format: "%02d:%02d", minutes, seconds)
-      }
-      
-      @objc func audioDidFinishPlaying(notification: NSNotification) {
-          print("Audio file played fully: \(audioURL)")
-          
-          callStatus = "OC"
-          
-          stopPlayer()
-      }
-      
-      func stopPlayer() {
-          player?.pause()
-          player?.seek(to: .zero)
-          
-          if let token = timeObserverToken {
-              player?.removeTimeObserver(token)
-              timeObserverToken = nil
-          }
-          
-          player = nil
-          playerItem = nil
-          
-          // Optionally call an API or perform an action after stopping
-          // NotiApi() // Uncomment if needed
-          
-          print("Player stopped and resources released.")
-          
-          
-      }
-      
-      deinit {
-          NotificationCenter.default.removeObserver(self)
-      }
-    
-    
-   
+           guard let url = URL(string: audioURL) else {
+               print("Invalid URL")
+               return
+           }
+           
+           playerItem = AVPlayerItem(url: url)
+           player = AVPlayer(playerItem: playerItem)
+           
+           // Observe player item status to ensure it is ready to play
+           playerItem?.addObserver(self, forKeyPath: "status", options: [.new, .initial], context: nil)
+           
+           // Listen for when the audio finishes
+           NotificationCenter.default.addObserver(self,
+                                                  selector: #selector(audioDidFinishPlaying),
+                                                  name: .AVPlayerItemDidPlayToEndTime,
+                                                  object: playerItem)
+       }
+       
+       // Observe AVPlayerItem status
+       override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+           if keyPath == "status" {
+               if playerItem?.status == .readyToPlay {
+                   player?.play()
+                   addPeriodicTimeObserver()
+               } else if playerItem?.status == .failed {
+                   print("Failed to load audio.")
+               }
+           }
+       }
+       
+       func addPeriodicTimeObserver() {
+           let interval = CMTime(seconds: 1.0, preferredTimescale: CMTimeScale(NSEC_PER_SEC))
+           
+           timeObserverToken = player?.addPeriodicTimeObserver(forInterval: interval, queue: .main) { [weak self] time in
+               guard let self = self else { return }
+               
+               let currentTime = CMTimeGetSeconds(time)
+               let formattedCurrentTime = self.formatTime(seconds: currentTime)
+               
+               let totalDurationSeconds = CMTimeGetSeconds(self.playerItem?.duration ?? CMTime.zero)
+               guard totalDurationSeconds.isFinite && !totalDurationSeconds.isNaN else {
+                   print("Total duration is invalid.")
+                   return
+               }
+               let formattedTotalDuration = self.formatTime(seconds: totalDurationSeconds)
+               
+               self.durationLbl.text = "\(formattedCurrentTime) / \(formattedTotalDuration)"
+               print("Playback time: \(formattedCurrentTime) / \(formattedTotalDuration)")
+           }
+       }
+       
+       func formatTime(seconds: Double) -> String {
+           guard seconds.isFinite && !seconds.isNaN else {
+               return "00:00"
+           }
+           
+           let minutes = Int(seconds) / 60
+           let seconds = Int(seconds) % 60
+           return String(format: "%02d:%02d", minutes, seconds)
+       }
+       
+       @objc func audioDidFinishPlaying(notification: NSNotification) {
+           print("Audio file played fully: \(audioURL)")
+           stopPlayer()
+       }
+       
+       func stopPlayer() {
+           player?.pause()
+           player?.seek(to: .zero)
+           
+           if let token = timeObserverToken {
+               player?.removeTimeObserver(token)
+               timeObserverToken = nil
+           }
+           
+           player = nil
+           playerItem = nil
+           print("Player stopped and resources released.")
+       }
+       
+       deinit {
+           NotificationCenter.default.removeObserver(self)
+           playerItem?.removeObserver(self, forKeyPath: "status")
+       }
     
     func createGradientLayer(view: UIView) {
         let gradientLayer = CAGradientLayer()

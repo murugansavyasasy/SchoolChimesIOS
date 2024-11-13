@@ -1047,6 +1047,8 @@
 		84E485D82CE37ED00064CB25 /* NotificationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationService.h; sourceTree = "<group>"; };
 		84E485D92CE37F010064CB25 /* NotificationServiceExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NotificationServiceExtension-Bridging-Header.h"; sourceTree = "<group>"; };
 		84E485DA2CE37F010064CB25 /* NotificationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationService.m; sourceTree = "<group>"; };
+		84E485E32CE46C290064CB25 /* UserNotifications.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UserNotifications.framework; path = System/Library/Frameworks/UserNotifications.framework; sourceTree = SDKROOT; };
+		84E485F52CE46D690064CB25 /* Notification Content Extension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Notification Content Extension-Bridging-Header.h"; sourceTree = "<group>"; };
 		84E842182C0DF26A00C32FD8 /* classWisePendingReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = classWisePendingReq.swift; sourceTree = "<group>"; };
 		84EF47C92BECCA1D000EBFFD /* ClassTimeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassTimeCollectionViewCell.swift; sourceTree = "<group>"; };
 		84EF47CA2BECCA1D000EBFFD /* ClassTimeCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClassTimeCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -3021,6 +3023,7 @@
 				CA93FD5B263A3D817BC8DE37 /* Frameworks */,
 				EE127559239AFB3C4AB172EC /* Pods */,
 				84E485D92CE37F010064CB25 /* NotificationServiceExtension-Bridging-Header.h */,
+				84E485F52CE46D690064CB25 /* Notification Content Extension-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -3476,6 +3479,7 @@
 				B51224951F0E11190052B0E7 /* UserNotificationsUI.framework */,
 				B51224931F0E11040052B0E7 /* AVFoundation.framework */,
 				C88AF2771AD4B62AFC298CFC /* libPods-VoicesnapSchoolApp.a */,
+				84E485E32CE46C290064CB25 /* UserNotifications.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

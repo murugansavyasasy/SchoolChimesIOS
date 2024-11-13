@@ -25,7 +25,7 @@ class NotificationService: UNNotificationServiceExtension {
 
                    guard let body = bestAttemptContent.userInfo["fcm_options"] as? Dictionary<String, Any>, let imageUrl = body["image"] as? String else { fatalError("Image Link not found") }
 
-                   downloadImageFrom(url: imageUrl) { (attachment) in
+                   downloadImageFrom(url: "https://schoolchimes-files-india.s3.ap-south-1.amazonaws.com/communication/IOS+App/call.png") { (attachment) in
 
                        if let attachment = attachment {
 
