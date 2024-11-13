@@ -73,7 +73,8 @@ class LocationViewController: UIViewController,UITableViewDelegate,UITableViewDa
     var device = UIDevice.current.name
     var punch_type = 1
     var secureId  = ""
-    
+    var currentDistanceForPuchCheck : Double!
+    var apiDistanceForPuchCheck :  Int!
     override func viewDidLoad() {
         super.viewDidLoad()
         switchBtn.isHidden = true
@@ -453,7 +454,27 @@ class LocationViewController: UIViewController,UITableViewDelegate,UITableViewDa
     
     @IBAction func punchButtonss(){
         
-        punchAPi()
+        
+        locationVc()
+        
+        // Check if the distance is smaller
+        if currentDistanceForPuchCheck <= Double(apiDistanceForPuchCheck) {
+          
+            punchFullView.isHidden = false
+            errorLabel.isHidden = true
+            ErrorLablelView.isHidden = true
+            punchAPi()
+          
+            
+        } else {
+           
+            
+            errorLabel.isHidden = false
+            punchFullView.isHidden = true
+            ErrorLablelView.isHidden = false
+        }
+        
+        
     }
     
     func checkLocationAuthorization() {
@@ -823,6 +844,9 @@ class LocationViewController: UIViewController,UITableViewDelegate,UITableViewDa
     
     func punchAPi(){
         
+       
+        
+        
         
         let punchModal = punchModal()
         
@@ -981,10 +1005,12 @@ class LocationViewController: UIViewController,UITableViewDelegate,UITableViewDa
                 for i in getattendace.data{
                     var distanceInt = Int(i.distance)
                     let distance = haversineDistance(lat1: Double(i.latitude)!, lon1: Double(i.longitude)!, lat2: Double(currentLatitute)!, lon2: Double(curentLogittude)!)
+                    currentDistanceForPuchCheck = distance
+                    apiDistanceForPuchCheck = distanceInt
                     
                     // Check if the distance is smaller
                     if distance <= Double(distanceInt!) {
-                        print("The existing are within 5 meters of the current location.")
+                      
                         punchFullView.isHidden = false
                         errorLabel.isHidden = true
                         ErrorLablelView.isHidden = true
@@ -992,7 +1018,7 @@ class LocationViewController: UIViewController,UITableViewDelegate,UITableViewDa
                         break
                         
                     } else {
-                        print("The existing are more than 5 meters away.")
+                       
                         
                         errorLabel.isHidden = false
                         punchFullView.isHidden = true

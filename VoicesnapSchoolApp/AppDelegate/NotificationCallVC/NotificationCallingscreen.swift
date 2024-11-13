@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import ObjectMapper
 class NotificationCallingscreen: UIViewController {
     
     @IBOutlet weak var acceptView: UIView!
@@ -17,6 +17,13 @@ class NotificationCallingscreen: UIViewController {
     
     
     var urlss = ""
+    var callStatus = ""
+    
+   
+    var currentTimes : String! = nil
+    
+   
+    var userInfo = [AnyHashable : Any]()
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,8 +32,17 @@ class NotificationCallingscreen: UIViewController {
         //        view = GradientView()
         
         
+        let dateFormatter = DateFormatter()
+        dateFormatter.timeStyle = .short // Automatically uses 12-hour or 24-hour based on device settings
+        let currentTime = dateFormatter.string(from: Date())
+        
+        print("Current time is: \(currentTime)")
+        
+        currentTimes = currentTime
         
         
+        
+        createGradientLayer(view: self.view)
         
         
         let  accept = UITapGestureRecognizer(target: self , action: #selector(appectClcik))
@@ -38,9 +54,11 @@ class NotificationCallingscreen: UIViewController {
     
     @IBAction func appectClcik(){
         
-        
+        callStatus = "OC"
         let vcc = NotificationcallVC(nibName: nil, bundle: nil)
-        
+        vcc.userInfo = userInfo
+        vcc.callStatus = callStatus
+        vcc.StartcurrentTimes = currentTimes
         vcc.urlss = urlss
         vcc.modalPresentationStyle = .fullScreen
         
@@ -52,49 +70,132 @@ class NotificationCallingscreen: UIViewController {
     
     
     @IBAction func DeclineClcik(){
+        callStatus = "NO"
+        
+//        NotiApi()
         
         
-//        UIApplication.shared.perform(#selector(NSXPCConnection.suspend))
-                exit(0)
+              
         
     }
     
     
     
-    class GradientView: UIView {
+    func createGradientLayer(view: UIView) {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = view.bounds
+        gradientLayer.colors = [
+            UIColor.black.cgColor,          // start color (#000)
+            UIColor(red: 0.463, green: 0.502, blue: 0.529, alpha: 1.0).cgColor, // center color (#768087)
+            UIColor(red: 0.529, green: 0.808, blue: 0.922, alpha: 1.0).cgColor  // end color (#87CEEB)
+        ]
         
-        override init(frame: CGRect) {
-            super.init(frame: frame)
-            applyGradient()
+        // Set gradient angle (45 degrees)
+        gradientLayer.startPoint = CGPoint(x: 0, y: 0)
+        gradientLayer.endPoint = CGPoint(x: 1, y: 1)
+        
+        view.layer.insertSublayer(gradientLayer, at: 0)
+    }
+    
+    
+    func NotiApi(){
+        
+        
+       
+        let noti = Notimodal()
+        
+        noti.url = urlss
+        noti.call_status = callStatus
+        noti.duration = 0
+        noti.start_time = currentTimes
+        noti.end_time = "00:00"
+        
+        if let ei1 = userInfo[AnyHashable("ei1")] as? String {
+            print("ei1: \(ei1)")
+            noti.ei1 = ei1
+        }
+
+        if let ei2 = userInfo[AnyHashable("ei2")] as? String {
+            print("ei2: \(ei2)")
+            
+            noti.ei2 = ei2
+        }
+
+        if let ei3 = userInfo[AnyHashable("ei3")] as? String {
+            noti.ei3 = ei3
+        }
+
+        if let ei4 = userInfo[AnyHashable("ei4")] as? String {
+            noti.ei4 = ei4
+        }
+
+        if let ei5 = userInfo[AnyHashable("ei5")] as? String {
+            print("ei5: \(ei5)")
+            noti.ei5 = ei5
+        }
+
+        if let retryCount = userInfo[AnyHashable("retrycount")] as? Int {
+            print("retrycount: \(retryCount)")
+            noti.retry_count = retryCount
+        }
+
+        if let circularId = userInfo[AnyHashable("circular_id")] as? Int {
+            print("circular_id: \(circularId)")
+            noti.circular_id = circularId
+        }
+
+        if let receiverId = userInfo[AnyHashable("receiver_id")] as? Int {
+            print("receiver_id: \(receiverId)")
+            
+            noti.receiver_id = receiverId
+        }
+
+        
+        
+        var  notiModalStr = noti.toJSONString()
+        print("punchModalStr",noti.toJSON())
+
+
+        NotiRequst.call_request(param: notiModalStr!) {
+            
+            [self] (res) in
+            
+            let notiresponces : notiRes = Mapper<notiRes>().map(JSONString: res)!
+            
+            
+            
+            if notiresponces.Status == 1{
+                
+             
+                if callStatus == "NO"{
+                    
+                    exit(0)
+                    
+                }else{
+                    
+                    
+                    
+                }
+                
+                
+                
+            }else{
+                
+                
+                
+            }
+            
+            
+            
         }
         
-        required init?(coder: NSCoder) {
-            super.init(coder: coder)
-            applyGradient()
-        }
         
-        private func applyGradient() {
-            let gradientLayer = CAGradientLayer()
-            
-            // Set the frame to be the same as the view's bounds
-            gradientLayer.frame = self.bounds
-            
-            // Define top, middle, and bottom colors
-            gradientLayer.colors = [
-                UIColor.red.cgColor,      // Top color
-                UIColor.blue.cgColor,     // Middle color
-                UIColor.green.cgColor     // Bottom color
-            ]
-            
-            // Define the locations of the colors (0.0 = top, 1.0 = bottom)
-            gradientLayer.locations = [0.0, 0.5, 1.0]
-            
-            // Set the gradient direction (top to bottom)
-            gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0) // Top center
-            gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)   // Bottom center
-            
-            // Add the gradient layer to the view
-            self.layer.insertSublayer(gradientLayer, at: 0)
-        }
+        
+       
+         
     }
 }
+
+
+
+

@@ -4,7 +4,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
-        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -26,7 +25,7 @@
                     <subviews>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xe2-5W-kf4">
                             <rect key="frame" x="0.0" y="0.0" width="393" height="759"/>
-                            <color key="backgroundColor" name="attendanceColor"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </imageView>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="navicon" translatesAutoresizingMaskIntoConstraints="NO" id="Eqf-yq-E6n">
                             <rect key="frame" x="113" y="81" width="166" height="128"/>
@@ -79,7 +78,7 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" name="attendanceColor"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="xe2-5W-kf4" firstAttribute="top" secondItem="l7T-vq-7oR" secondAttribute="top" id="1UR-D5-HJS"/>
                         <constraint firstItem="n8Z-je-p1Z" firstAttribute="leading" secondItem="l7T-vq-7oR" secondAttribute="leading" constant="30" id="2dy-EI-WZH"/>
@@ -100,7 +99,7 @@
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" name="attendanceColor"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="l7T-vq-7oR" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="5Gt-ol-6hh"/>
                 <constraint firstAttribute="trailing" secondItem="l7T-vq-7oR" secondAttribute="trailing" id="RHW-sA-DR2"/>
@@ -113,8 +112,5 @@
     <resources>
         <image name="disconnect" width="128" height="128"/>
         <image name="navicon" width="170.66667175292969" height="170.66667175292969"/>
-        <namedColor name="attendanceColor">
-            <color red="0.68999999761581421" green="0.81199997663497925" blue="0.99199998378753662" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-        </namedColor>
     </resources>
 </document>

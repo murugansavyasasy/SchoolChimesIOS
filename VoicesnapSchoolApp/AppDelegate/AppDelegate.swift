@@ -134,7 +134,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate,UNUserNo
     
     var mainSchoolStaffSegueArray : [String] = []
     
-    
+   
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
@@ -218,21 +218,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate,UNUserNo
         self.playSound(userInfo: userInfo)
         
         
-        if let types = userInfo["type"] as? String {
-            print("WAV File URL: \(types)")
+        if let type = userInfo[AnyHashable("type")] as? String {
+            print("Type: \(type)")
             
-            // Navigate to the specific view controller
-            
-            
-            if types == "call"{
-                if let wavURLString = userInfo["wav_url"] as? String, let wavURL = URL(string: wavURLString) {
-                    print("WAV File URL: \(wavURL)")
+            if type == "isCall"{
+                if let url = userInfo[AnyHashable("url")] as? String {
+                    print("URL: \(url)")
                     
-                    // Navigate to the specific view controller
-                    navigateToViewController(with: wavURL)
+                    navigateToViewController(with: URL(string: url)!, userInfo: userInfo)
                 }
             }
         }
+
+        
+        
         application.applicationIconBadgeNumber = 1
         application.applicationIconBadgeNumber = 0
         if(isPopupOpened == 0){
@@ -261,7 +260,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate,UNUserNo
         }else{
             msgsound = "emergencyvoice"
             ext = ".mp3"
-            
+//            
         }
         
         guard let url = Bundle.main.url(forResource: msgsound, withExtension: "wav") else { return }
@@ -287,6 +286,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate,UNUserNo
     
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter,willPresent notification: UNNotification,withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void){
+        
+        
+        
         completionHandler([.alert, .badge,.sound])
         
         if(isPopupOpened == 0){
@@ -294,6 +296,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate,UNUserNo
             nc.post(name: NSNotification.Name(rawValue: "PushNotification"), object: nil)
         }
     }
+    
+    
+    
+    
     
     func applicationDidEnterBackground(_ application: UIApplication) {
         isPasswordBind = "1"
@@ -418,25 +424,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate,UNUserNo
     }
     
     
-    func navigateToViewController(with wavURL: URL) {
+    func navigateToViewController(with wavURL: URL,userInfo:[AnyHashable : Any]) {
            
-                print("URL: \(wavURL)")
-                // Do something with the URL, such as opening it in a web view or playing the audio
-
-        
-        
-        
-        
-        
         let vc = getCurrentViewController()
-       
-                                 let vcc = NotificationCallingscreen(nibName: nil, bundle: nil)
-       
-                       vcc.urlss = wavURL.absoluteString
-                                 vcc.modalPresentationStyle = .fullScreen
-       
-                                 vc?.present(vcc, animated: true)
 
+        let vcc = NotificationCallingscreen(nibName: nil, bundle: nil)
+        vcc.userInfo = userInfo
+        vcc.urlss = wavURL.absoluteString
+        vcc.modalPresentationStyle = .fullScreen
+
+        vc?.present(vcc, animated: true)
+                          
+        
             }
 //
        
@@ -452,6 +451,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate,UNUserNo
         return nil
         
     }
+    
+    
+    
     
     
 }

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -270,6 +270,9 @@
 		8442AA7C2CDF86C80006068E /* NotificationCallingscreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8442AA782CDF86C80006068E /* NotificationCallingscreen.xib */; };
 		8442AA7D2CDF86C80006068E /* isnotification.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8442AA742CDF86C80006068E /* isnotification.wav */; };
 		8442AA7E2CDF86C80006068E /* NotificationcallVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8442AA762CDF86C80006068E /* NotificationcallVC.xib */; };
+		8442AA802CE204A80006068E /* schoolchimes_tone.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8442AA7F2CE204A80006068E /* schoolchimes_tone.wav */; };
+		8442AA832CE219210006068E /* NotiResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8442AA822CE219210006068E /* NotiResp.swift */; };
+		8442AA852CE219B40006068E /* NotiReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8442AA842CE219B40006068E /* NotiReq.swift */; };
 		8453C0D62CB513620026F182 /* CountResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453C0D52CB513620026F182 /* CountResp.swift */; };
 		8453C0D82CB513750026F182 /* CountResq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453C0D72CB513750026F182 /* CountResq.swift */; };
 		845B1BC42CAFCD8200D6E6F5 /* homeWorkResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845B1BC32CAFCD8200D6E6F5 /* homeWorkResp.swift */; };
@@ -406,6 +409,9 @@
 		84E415692CA28421006B4F86 /* PunchHistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E415662CA28421006B4F86 /* PunchHistTableViewCell.swift */; };
 		84E416472CA42114006B4F86 /* EditLocReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E416462CA42114006B4F86 /* EditLocReq.swift */; };
 		84E416492CA4215A006B4F86 /* EditLocResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E416482CA4215A006B4F86 /* EditLocResp.swift */; };
+		84E485D32CE37DBB0064CB25 /* NotificationServiceExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 84E485CC2CE37DBB0064CB25 /* NotificationServiceExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		84E485DC2CE37F010064CB25 /* NotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E485DA2CE37F010064CB25 /* NotificationService.m */; };
+		84E485DD2CE37FC10064CB25 /* NotificationService.m in Sources */ = {isa = PBXBuildFile; fileRef = 84E485DA2CE37F010064CB25 /* NotificationService.m */; };
 		84E842192C0DF26A00C32FD8 /* classWisePendingReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84E842182C0DF26A00C32FD8 /* classWisePendingReq.swift */; };
 		84EF47D52BECCA1D000EBFFD /* ClassTimeCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84EF47C92BECCA1D000EBFFD /* ClassTimeCollectionViewCell.swift */; };
 		84EF47D62BECCA1D000EBFFD /* ClassTimeCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84EF47CA2BECCA1D000EBFFD /* ClassTimeCollectionViewCell.xib */; };
@@ -606,6 +612,30 @@
 		D6F992D0210318AB00E05B6D /* NewParentExamTestTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F992CF210318AB00E05B6D /* NewParentExamTestTVCell.swift */; };
 		EB799225C321DF2BE8EAFCE2 /* libPods-VoicesnapSchoolApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C88AF2771AD4B62AFC298CFC /* libPods-VoicesnapSchoolApp.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		84E485D12CE37DBB0064CB25 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B51702B01F0A2F2B00879602 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 84E485CB2CE37DBB0064CB25;
+			remoteInfo = NotificationServiceExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		8442AA982CE3640A0006068E /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				84E485D32CE37DBB0064CB25 /* NotificationServiceExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		04063022248273AB008FD0BB /* Vimeo_uploader.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Vimeo_uploader.m; sourceTree = "<group>"; };
@@ -875,6 +905,9 @@
 		8442AA762CDF86C80006068E /* NotificationcallVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationcallVC.xib; sourceTree = "<group>"; };
 		8442AA772CDF86C80006068E /* NotificationCallingscreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCallingscreen.swift; sourceTree = "<group>"; };
 		8442AA782CDF86C80006068E /* NotificationCallingscreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationCallingscreen.xib; sourceTree = "<group>"; };
+		8442AA7F2CE204A80006068E /* schoolchimes_tone.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = schoolchimes_tone.wav; sourceTree = "<group>"; };
+		8442AA822CE219210006068E /* NotiResp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiResp.swift; sourceTree = "<group>"; };
+		8442AA842CE219B40006068E /* NotiReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiReq.swift; sourceTree = "<group>"; };
 		8453C0D52CB513620026F182 /* CountResp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountResp.swift; sourceTree = "<group>"; };
 		8453C0D72CB513750026F182 /* CountResq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountResq.swift; sourceTree = "<group>"; };
 		845B1BC32CAFCD8200D6E6F5 /* homeWorkResp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = homeWorkResp.swift; sourceTree = "<group>"; };
@@ -1010,6 +1043,10 @@
 		84E415672CA28421006B4F86 /* PunchHistTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PunchHistTableViewCell.xib; sourceTree = "<group>"; };
 		84E416462CA42114006B4F86 /* EditLocReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLocReq.swift; sourceTree = "<group>"; };
 		84E416482CA4215A006B4F86 /* EditLocResp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditLocResp.swift; sourceTree = "<group>"; };
+		84E485CC2CE37DBB0064CB25 /* NotificationServiceExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = NotificationServiceExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		84E485D82CE37ED00064CB25 /* NotificationService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = NotificationService.h; sourceTree = "<group>"; };
+		84E485D92CE37F010064CB25 /* NotificationServiceExtension-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NotificationServiceExtension-Bridging-Header.h"; sourceTree = "<group>"; };
+		84E485DA2CE37F010064CB25 /* NotificationService.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NotificationService.m; sourceTree = "<group>"; };
 		84E842182C0DF26A00C32FD8 /* classWisePendingReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = classWisePendingReq.swift; sourceTree = "<group>"; };
 		84EF47C92BECCA1D000EBFFD /* ClassTimeCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClassTimeCollectionViewCell.swift; sourceTree = "<group>"; };
 		84EF47CA2BECCA1D000EBFFD /* ClassTimeCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ClassTimeCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -1224,7 +1261,28 @@
 		D6F992CF210318AB00E05B6D /* NewParentExamTestTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewParentExamTestTVCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		84E485D62CE37DBB0064CB25 /* PBXFileSystemSynchronizedBuildFileExceptionSet */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 84E485CB2CE37DBB0064CB25 /* NotificationServiceExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		84E485CD2CE37DBB0064CB25 /* NotificationServiceExtension */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (84E485D62CE37DBB0064CB25 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = NotificationServiceExtension; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
+		84E485C92CE37DBB0064CB25 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B51702B51F0A2F2B00879602 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -2408,13 +2466,24 @@
 		8442AA792CDF86C80006068E /* NotificationCallVC */ = {
 			isa = PBXGroup;
 			children = (
+				8442AA812CE218F40006068E /* NotiApi */,
 				8442AA742CDF86C80006068E /* isnotification.wav */,
 				8442AA752CDF86C80006068E /* NotificationcallVC.swift */,
 				8442AA762CDF86C80006068E /* NotificationcallVC.xib */,
 				8442AA772CDF86C80006068E /* NotificationCallingscreen.swift */,
 				8442AA782CDF86C80006068E /* NotificationCallingscreen.xib */,
+				8442AA7F2CE204A80006068E /* schoolchimes_tone.wav */,
 			);
 			path = NotificationCallVC;
+			sourceTree = "<group>";
+		};
+		8442AA812CE218F40006068E /* NotiApi */ = {
+			isa = PBXGroup;
+			children = (
+				8442AA822CE219210006068E /* NotiResp.swift */,
+				8442AA842CE219B40006068E /* NotiReq.swift */,
+			);
+			path = NotiApi;
 			sourceTree = "<group>";
 		};
 		8453C0D42CB5134C0026F182 /* CountApi */ = {
@@ -2939,15 +3008,19 @@
 		B51702AF1F0A2F2B00879602 = {
 			isa = PBXGroup;
 			children = (
+				84E485DA2CE37F010064CB25 /* NotificationService.m */,
+				84E485D82CE37ED00064CB25 /* NotificationService.h */,
 				10FFBA0F22FED1840002CE52 /* TEST_MESSAGE.wav */,
 				B80A23D228BA5BDF00147B89 /* emergencyvoice.mp3 */,
 				B80A23D328BA5BE000147B89 /* message.mp3 */,
 				1800459D22A000C800C5F819 /* GoogleService-Info.plist */,
 				B590E4D81F0E282C009EFDF8 /* VoicesnapSchoolApp-Bridging-Header.h */,
 				B51702BA1F0A2F2B00879602 /* VoicesnapSchoolApp */,
+				84E485CD2CE37DBB0064CB25 /* NotificationServiceExtension */,
 				B51702B91F0A2F2B00879602 /* Products */,
 				CA93FD5B263A3D817BC8DE37 /* Frameworks */,
 				EE127559239AFB3C4AB172EC /* Pods */,
+				84E485D92CE37F010064CB25 /* NotificationServiceExtension-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -2955,6 +3028,7 @@
 			isa = PBXGroup;
 			children = (
 				B51702B81F0A2F2B00879602 /* VoicesnapSchoolApp.app */,
+				84E485CC2CE37DBB0064CB25 /* NotificationServiceExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3771,6 +3845,28 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		84E485CB2CE37DBB0064CB25 /* NotificationServiceExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 84E485D72CE37DBB0064CB25 /* Build configuration list for PBXNativeTarget "NotificationServiceExtension" */;
+			buildPhases = (
+				84E485C82CE37DBB0064CB25 /* Sources */,
+				84E485C92CE37DBB0064CB25 /* Frameworks */,
+				84E485CA2CE37DBB0064CB25 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				84E485CD2CE37DBB0064CB25 /* NotificationServiceExtension */,
+			);
+			name = NotificationServiceExtension;
+			packageProductDependencies = (
+			);
+			productName = NotificationServiceExtension;
+			productReference = 84E485CC2CE37DBB0064CB25 /* NotificationServiceExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 		B51702B71F0A2F2B00879602 /* VoicesnapSchoolApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B51702CA1F0A2F2C00879602 /* Build configuration list for PBXNativeTarget "VoicesnapSchoolApp" */;
@@ -3782,10 +3878,12 @@
 				4EF1B123228AF91600F7B359 /* ShellScript */,
 				DEBF81822C1BE3B34E425B5A /* [CP] Embed Pods Frameworks */,
 				6A24A3EEE6888D7726009AE7 /* [CP] Copy Pods Resources */,
+				8442AA982CE3640A0006068E /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				84E485D22CE37DBB0064CB25 /* PBXTargetDependency */,
 			);
 			name = VoicesnapSchoolApp;
 			packageProductDependencies = (
@@ -3805,10 +3903,14 @@
 				KnownAssetTags = (
 					"com.apple.gamecenter.Dashboard Image",
 				);
-				LastSwiftUpdateCheck = 0820;
+				LastSwiftUpdateCheck = 1600;
 				LastUpgradeCheck = 1340;
 				ORGANIZATIONNAME = Gayathri;
 				TargetAttributes = {
+					84E485CB2CE37DBB0064CB25 = {
+						CreatedOnToolsVersion = 16.0;
+						LastSwiftMigration = 1600;
+					};
 					B51702B71F0A2F2B00879602 = {
 						CreatedOnToolsVersion = 8.2.1;
 						SystemCapabilities = {
@@ -3849,11 +3951,19 @@
 			projectRoot = "";
 			targets = (
 				B51702B71F0A2F2B00879602 /* VoicesnapSchoolApp */,
+				84E485CB2CE37DBB0064CB25 /* NotificationServiceExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		84E485CA2CE37DBB0064CB25 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B51702B61F0A2F2B00879602 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3906,6 +4016,7 @@
 				18C4376C2295881D008A7559 /* de.json in Resources */,
 				1829525629951C710003B9D6 /* QuizExamSelectionViewController.xib in Resources */,
 				840B2BE02C78AB330027071D /* CalendarCollectionViewCell.xib in Resources */,
+				8442AA802CE204A80006068E /* schoolchimes_tone.wav in Resources */,
 				84CD56FF2C9C03350068800A /* PreviousCvcell.xib in Resources */,
 				84CD56FA2C9C03350068800A /* LocationTableViewCell.xib in Resources */,
 				841ED6372C8F4AB100A65EEA /* CheckAviableViewController.xib in Resources */,
@@ -4060,6 +4171,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		84E485C82CE37DBB0064CB25 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				84E485DC2CE37F010064CB25 /* NotificationService.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		B51702B41F0A2F2B00879602 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -4315,10 +4434,12 @@
 				B5D4D8FD1F3B01C1000A3876 /* StaffSectionTVCell.swift in Sources */,
 				8453C0D82CB513750026F182 /* CountResq.swift in Sources */,
 				18D37B8929C44FCE00A61132 /* GetAllStandardsAndGroupsRequest.swift in Sources */,
+				8442AA852CE219B40006068E /* NotiReq.swift in Sources */,
 				849420902BD778980061B269 /* ScheduleCallTableViewCell.swift in Sources */,
 				D64EF0B120C7AC0E0051AA89 /* ParentNoticeBoardVC.swift in Sources */,
 				18DCEBBF2CDF442500733860 /* DownloadResponseData.swift in Sources */,
 				D621000D20ECEFF800BF4058 /* PrincipalGroupSelectionVC.swift in Sources */,
+				8442AA832CE219210006068E /* NotiResp.swift in Sources */,
 				84E217AC2BEA368E0006829B /* SectionwiesReq.swift in Sources */,
 				189E36E8296D66C10032A8CA /* ManagementVideoTableViewCell.swift in Sources */,
 				B590E5651F0E3782009EFDF8 /* MainVC.swift in Sources */,
@@ -4454,6 +4575,7 @@
 				841ED6CF2C8F512200A65EEA /* CreateSlotsByStaffModal.swift in Sources */,
 				C297DC4E28B5EE6200AE4DD8 /* OtpConstant.swift in Sources */,
 				D6979DC4228AA32B00511906 /* StaffDetailsVC.swift in Sources */,
+				84E485DD2CE37FC10064CB25 /* NotificationService.m in Sources */,
 				842C31462C01C8E100E98F85 /* AcidmicYrRequest.swift in Sources */,
 				849CD2E62CB0D530006BAA25 /* getStdAndSecReq.swift in Sources */,
 				1800A1BA228D7759003F39CA /* StaffLeaveRequestPopupVC.swift in Sources */,
@@ -4546,7 +4668,97 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		84E485D22CE37DBB0064CB25 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 84E485CB2CE37DBB0064CB25 /* NotificationServiceExtension */;
+			targetProxy = 84E485D12CE37DBB0064CB25 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		84E485D42CE37DBB0064CB25 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 6Z355RG34N;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Gayathri. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.voicesnap.schoolmessenger.NotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "NotificationServiceExtension-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		84E485D52CE37DBB0064CB25 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 6Z355RG34N;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = NotificationServiceExtension/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = NotificationServiceExtension;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Gayathri. All rights reserved.";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.voicesnap.schoolmessenger.NotificationServiceExtension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "NotificationServiceExtension-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		B51702C81F0A2F2C00879602 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -4742,6 +4954,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		84E485D72CE37DBB0064CB25 /* Build configuration list for PBXNativeTarget "NotificationServiceExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				84E485D42CE37DBB0064CB25 /* Debug */,
+				84E485D52CE37DBB0064CB25 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		B51702B31F0A2F2B00879602 /* Build configuration list for PBXProject "VoicesnapSchoolApp" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
