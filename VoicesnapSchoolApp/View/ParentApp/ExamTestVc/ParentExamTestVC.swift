@@ -70,6 +70,8 @@ class ParentExamTestVC: UIViewController, UITableViewDataSource,UITableViewDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("ParentExamTestVC")
+        
         ChildId = String(describing: appDelegate.SchoolDetailDictionary["ChildID"]!)
         SchoolId = String(describing: appDelegate.SchoolDetailDictionary["SchoolID"]!)
         ExamTestTable.reloadData()
@@ -587,7 +589,9 @@ class ParentExamTestVC: UIViewController, UITableViewDataSource,UITableViewDeleg
         
         if(SelectedSectionArray.contains(Sectiondict))
         {
-            Height = 125
+            
+            print("ifif")
+            Height = CFloat(UITableView.automaticDimension)
         }else{
             Height = 0
         }

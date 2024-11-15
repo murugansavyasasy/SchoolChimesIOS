@@ -52,7 +52,7 @@
                         <constraint firstItem="hrB-WU-BFI" firstAttribute="leading" secondItem="WDf-ag-eV0" secondAttribute="leading" constant="5" id="yZf-ZU-TSl"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Emergency voice note Call from  School chimes" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dwf-XV-tXx">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dwf-XV-tXx">
                     <rect key="frame" x="8" y="350" width="377" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="vaF-jJ-9Tm"/>
