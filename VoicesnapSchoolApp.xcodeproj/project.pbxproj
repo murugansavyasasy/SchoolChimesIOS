@@ -51,6 +51,8 @@
 		180045A422A013CE00C5F819 /* FullPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180045A322A013CE00C5F819 /* FullPopupVC.swift */; };
 		1800A1B8228D3580003F39CA /* StaffLeaveRequestVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1800A1B7228D357F003F39CA /* StaffLeaveRequestVC.swift */; };
 		1800A1BA228D7759003F39CA /* StaffLeaveRequestPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1800A1B9228D7759003F39CA /* StaffLeaveRequestPopupVC.swift */; };
+		1801B3D32CEF54EB00611771 /* FileAttachmentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1801B3D22CEF54EB00611771 /* FileAttachmentTableViewCell.xib */; };
+		1801B3D42CEF54EB00611771 /* FileAttachmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1801B3D12CEF54EB00611771 /* FileAttachmentTableViewCell.swift */; };
 		1805FE622297F5E000A3872E /* MoreImagesTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1805FE602297F5DF00A3872E /* MoreImagesTVCell.swift */; };
 		1805FE632297F5E000A3872E /* MoreImagesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1805FE612297F5E000A3872E /* MoreImagesVC.swift */; };
 		1820D0EF228ADB9D005EE79E /* LeaveHistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1820D0EE228ADB9D005EE79E /* LeaveHistoryVC.swift */; };
@@ -95,6 +97,12 @@
 		182DF6CE29A8782C00E2D992 /* ExamUpcomingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182DF6CC29A8782C00E2D992 /* ExamUpcomingViewController.swift */; };
 		182DF6CF29A8782C00E2D992 /* ExamUpcomingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 182DF6CD29A8782C00E2D992 /* ExamUpcomingViewController.xib */; };
 		184EC611228C137A0011EF2B /* FAQVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184EC610228C137A0011EF2B /* FAQVC.swift */; };
+		1851AE092CEF0289005EC490 /* GetAttachmentForSkill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1851AE082CEF0289005EC490 /* GetAttachmentForSkill.swift */; };
+		1851AE0B2CEF0DD2005EC490 /* GetAttachmentForSkillRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1851AE0A2CEF0DD2005EC490 /* GetAttachmentForSkillRequest.swift */; };
+		1851AE0F2CEF124A005EC490 /* PreviewLsrwViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1851AE0E2CEF124A005EC490 /* PreviewLsrwViewController.xib */; };
+		1851AE102CEF124A005EC490 /* PreviewLsrwViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1851AE0D2CEF124A005EC490 /* PreviewLsrwViewController.swift */; };
+		1851AE142CEF2F8C005EC490 /* TakeReadingSkillTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1851AE132CEF2F8C005EC490 /* TakeReadingSkillTableViewCell.xib */; };
+		1851AE152CEF2F8C005EC490 /* TakeReadingSkillTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1851AE122CEF2F8C005EC490 /* TakeReadingSkillTableViewCell.swift */; };
 		1865D8DC2A0A716400CD43F3 /* LessonPlanViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1865D8DA2A0A716400CD43F3 /* LessonPlanViewController.swift */; };
 		1865D8DD2A0A716400CD43F3 /* LessonPlanViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1865D8DB2A0A716400CD43F3 /* LessonPlanViewController.xib */; };
 		1865D8E12A0A73B000CD43F3 /* StaffLessonTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1865D8DF2A0A73B000CD43F3 /* StaffLessonTableViewCell.swift */; };
@@ -127,6 +135,16 @@
 		1873EB8A2983AD74008E30AA /* FeeReceiptPdfDownloadModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1873EB892983AD74008E30AA /* FeeReceiptPdfDownloadModal.swift */; };
 		1873EB8C2983AD83008E30AA /* FeeReceiptPdfDownloadRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1873EB8B2983AD83008E30AA /* FeeReceiptPdfDownloadRequest.swift */; };
 		1873EBA32983E54C008E30AA /* UIViewX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1873EBA22983E54C008E30AA /* UIViewX.swift */; };
+		1873FC1D2CEDAB26000B8F56 /* LsrwListShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1873FC1B2CEDAB26000B8F56 /* LsrwListShowViewController.swift */; };
+		1873FC1E2CEDAB26000B8F56 /* LsrwListShowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1873FC1C2CEDAB26000B8F56 /* LsrwListShowViewController.xib */; };
+		1873FC222CEDB27F000B8F56 /* LsrwListShowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1873FC212CEDB27F000B8F56 /* LsrwListShowTableViewCell.xib */; };
+		1873FC232CEDB27F000B8F56 /* LsrwListShowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1873FC202CEDB27F000B8F56 /* LsrwListShowTableViewCell.swift */; };
+		1873FC452CEDE2F0000B8F56 /* LSRWTakingSkillViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1873FC442CEDE2F0000B8F56 /* LSRWTakingSkillViewController.xib */; };
+		1873FC462CEDE2F0000B8F56 /* LSRWTakingSkillViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1873FC432CEDE2F0000B8F56 /* LSRWTakingSkillViewController.swift */; };
+		1873FC872CEDEC2C000B8F56 /* SubmitLsrwViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1873FC852CEDEC2C000B8F56 /* SubmitLsrwViewController.swift */; };
+		1873FC882CEDEC2C000B8F56 /* SubmitLsrwViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1873FC862CEDEC2C000B8F56 /* SubmitLsrwViewController.xib */; };
+		1873FC8A2CEE06BB000B8F56 /* ViewAllSkillByStudentModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1873FC892CEE06BB000B8F56 /* ViewAllSkillByStudentModal.swift */; };
+		1873FC8C2CEE0749000B8F56 /* ViewAllSkillByStudentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1873FC8B2CEE0749000B8F56 /* ViewAllSkillByStudentRequest.swift */; };
 		188ADB0B28FBDB3400A36569 /* ForgetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188ADB0A28FBDB3400A36569 /* ForgetVC.swift */; };
 		189246AC293F46A90062B7D1 /* AdRedirectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189246AA293F46A90062B7D1 /* AdRedirectViewController.swift */; };
 		189246AD293F46A90062B7D1 /* AdRedirectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189246AB293F46A90062B7D1 /* AdRedirectViewController.xib */; };
@@ -684,6 +702,8 @@
 		180045A322A013CE00C5F819 /* FullPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullPopupVC.swift; sourceTree = "<group>"; };
 		1800A1B7228D357F003F39CA /* StaffLeaveRequestVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffLeaveRequestVC.swift; sourceTree = "<group>"; };
 		1800A1B9228D7759003F39CA /* StaffLeaveRequestPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffLeaveRequestPopupVC.swift; sourceTree = "<group>"; };
+		1801B3D12CEF54EB00611771 /* FileAttachmentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileAttachmentTableViewCell.swift; sourceTree = "<group>"; };
+		1801B3D22CEF54EB00611771 /* FileAttachmentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FileAttachmentTableViewCell.xib; sourceTree = "<group>"; };
 		1805FE602297F5DF00A3872E /* MoreImagesTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreImagesTVCell.swift; sourceTree = "<group>"; };
 		1805FE612297F5E000A3872E /* MoreImagesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreImagesVC.swift; sourceTree = "<group>"; };
 		1820D0EE228ADB9D005EE79E /* LeaveHistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveHistoryVC.swift; sourceTree = "<group>"; };
@@ -728,6 +748,12 @@
 		182DF6CC29A8782C00E2D992 /* ExamUpcomingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamUpcomingViewController.swift; sourceTree = "<group>"; };
 		182DF6CD29A8782C00E2D992 /* ExamUpcomingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExamUpcomingViewController.xib; sourceTree = "<group>"; };
 		184EC610228C137A0011EF2B /* FAQVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQVC.swift; sourceTree = "<group>"; };
+		1851AE082CEF0289005EC490 /* GetAttachmentForSkill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAttachmentForSkill.swift; sourceTree = "<group>"; };
+		1851AE0A2CEF0DD2005EC490 /* GetAttachmentForSkillRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAttachmentForSkillRequest.swift; sourceTree = "<group>"; };
+		1851AE0D2CEF124A005EC490 /* PreviewLsrwViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewLsrwViewController.swift; sourceTree = "<group>"; };
+		1851AE0E2CEF124A005EC490 /* PreviewLsrwViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PreviewLsrwViewController.xib; sourceTree = "<group>"; };
+		1851AE122CEF2F8C005EC490 /* TakeReadingSkillTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TakeReadingSkillTableViewCell.swift; sourceTree = "<group>"; };
+		1851AE132CEF2F8C005EC490 /* TakeReadingSkillTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TakeReadingSkillTableViewCell.xib; sourceTree = "<group>"; };
 		1865D8DA2A0A716400CD43F3 /* LessonPlanViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonPlanViewController.swift; sourceTree = "<group>"; };
 		1865D8DB2A0A716400CD43F3 /* LessonPlanViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LessonPlanViewController.xib; sourceTree = "<group>"; };
 		1865D8DF2A0A73B000CD43F3 /* StaffLessonTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffLessonTableViewCell.swift; sourceTree = "<group>"; };
@@ -760,6 +786,16 @@
 		1873EB892983AD74008E30AA /* FeeReceiptPdfDownloadModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeeReceiptPdfDownloadModal.swift; sourceTree = "<group>"; };
 		1873EB8B2983AD83008E30AA /* FeeReceiptPdfDownloadRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeeReceiptPdfDownloadRequest.swift; sourceTree = "<group>"; };
 		1873EBA22983E54C008E30AA /* UIViewX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewX.swift; sourceTree = "<group>"; };
+		1873FC1B2CEDAB26000B8F56 /* LsrwListShowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LsrwListShowViewController.swift; sourceTree = "<group>"; };
+		1873FC1C2CEDAB26000B8F56 /* LsrwListShowViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LsrwListShowViewController.xib; sourceTree = "<group>"; };
+		1873FC202CEDB27F000B8F56 /* LsrwListShowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LsrwListShowTableViewCell.swift; sourceTree = "<group>"; };
+		1873FC212CEDB27F000B8F56 /* LsrwListShowTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LsrwListShowTableViewCell.xib; sourceTree = "<group>"; };
+		1873FC432CEDE2F0000B8F56 /* LSRWTakingSkillViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LSRWTakingSkillViewController.swift; sourceTree = "<group>"; };
+		1873FC442CEDE2F0000B8F56 /* LSRWTakingSkillViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LSRWTakingSkillViewController.xib; sourceTree = "<group>"; };
+		1873FC852CEDEC2C000B8F56 /* SubmitLsrwViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitLsrwViewController.swift; sourceTree = "<group>"; };
+		1873FC862CEDEC2C000B8F56 /* SubmitLsrwViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubmitLsrwViewController.xib; sourceTree = "<group>"; };
+		1873FC892CEE06BB000B8F56 /* ViewAllSkillByStudentModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllSkillByStudentModal.swift; sourceTree = "<group>"; };
+		1873FC8B2CEE0749000B8F56 /* ViewAllSkillByStudentRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllSkillByStudentRequest.swift; sourceTree = "<group>"; };
 		188ADB0A28FBDB3400A36569 /* ForgetVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetVC.swift; sourceTree = "<group>"; };
 		189246AA293F46A90062B7D1 /* AdRedirectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdRedirectViewController.swift; sourceTree = "<group>"; };
 		189246AB293F46A90062B7D1 /* AdRedirectViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdRedirectViewController.xib; sourceTree = "<group>"; };
@@ -1505,6 +1541,15 @@
 			path = "Staff Leave Request";
 			sourceTree = "<group>";
 		};
+		1801B3D02CEF545F00611771 /* FilesAttach */ = {
+			isa = PBXGroup;
+			children = (
+				1801B3D12CEF54EB00611771 /* FileAttachmentTableViewCell.swift */,
+				1801B3D22CEF54EB00611771 /* FileAttachmentTableViewCell.xib */,
+			);
+			path = FilesAttach;
+			sourceTree = "<group>";
+		};
 		1805FE5F2297F5C300A3872E /* More Image */ = {
 			isa = PBXGroup;
 			children = (
@@ -1779,6 +1824,24 @@
 			path = FAQ;
 			sourceTree = "<group>";
 		};
+		1851AE0C2CEF122A005EC490 /* Preview */ = {
+			isa = PBXGroup;
+			children = (
+				1851AE0D2CEF124A005EC490 /* PreviewLsrwViewController.swift */,
+				1851AE0E2CEF124A005EC490 /* PreviewLsrwViewController.xib */,
+			);
+			path = Preview;
+			sourceTree = "<group>";
+		};
+		1851AE112CEF2F5E005EC490 /* Tv */ = {
+			isa = PBXGroup;
+			children = (
+				1851AE122CEF2F8C005EC490 /* TakeReadingSkillTableViewCell.swift */,
+				1851AE132CEF2F8C005EC490 /* TakeReadingSkillTableViewCell.xib */,
+			);
+			path = Tv;
+			sourceTree = "<group>";
+		};
 		1865D8D92A0A714600CD43F3 /* Vc */ = {
 			isa = PBXGroup;
 			children = (
@@ -1889,6 +1952,52 @@
 				84ACB6192AF37EA0003E2D02 /* AWSS3Manager.swift */,
 			);
 			path = DesignUtils;
+			sourceTree = "<group>";
+		};
+		1873FC1A2CEDAA21000B8F56 /* LSRW */ = {
+			isa = PBXGroup;
+			children = (
+				1801B3D02CEF545F00611771 /* FilesAttach */,
+				1851AE0C2CEF122A005EC490 /* Preview */,
+				1873FC842CEDEC13000B8F56 /* Submit */,
+				1873FC422CEDE1DA000B8F56 /* TakeReadingSkill */,
+				1873FC1F2CEDB21C000B8F56 /* Tv */,
+				1873FC1B2CEDAB26000B8F56 /* LsrwListShowViewController.swift */,
+				1873FC1C2CEDAB26000B8F56 /* LsrwListShowViewController.xib */,
+				1873FC892CEE06BB000B8F56 /* ViewAllSkillByStudentModal.swift */,
+				1873FC8B2CEE0749000B8F56 /* ViewAllSkillByStudentRequest.swift */,
+				1851AE082CEF0289005EC490 /* GetAttachmentForSkill.swift */,
+				1851AE0A2CEF0DD2005EC490 /* GetAttachmentForSkillRequest.swift */,
+			);
+			path = LSRW;
+			sourceTree = "<group>";
+		};
+		1873FC1F2CEDB21C000B8F56 /* Tv */ = {
+			isa = PBXGroup;
+			children = (
+				1873FC202CEDB27F000B8F56 /* LsrwListShowTableViewCell.swift */,
+				1873FC212CEDB27F000B8F56 /* LsrwListShowTableViewCell.xib */,
+			);
+			path = Tv;
+			sourceTree = "<group>";
+		};
+		1873FC422CEDE1DA000B8F56 /* TakeReadingSkill */ = {
+			isa = PBXGroup;
+			children = (
+				1851AE112CEF2F5E005EC490 /* Tv */,
+				1873FC432CEDE2F0000B8F56 /* LSRWTakingSkillViewController.swift */,
+				1873FC442CEDE2F0000B8F56 /* LSRWTakingSkillViewController.xib */,
+			);
+			path = TakeReadingSkill;
+			sourceTree = "<group>";
+		};
+		1873FC842CEDEC13000B8F56 /* Submit */ = {
+			isa = PBXGroup;
+			children = (
+				1873FC852CEDEC2C000B8F56 /* SubmitLsrwViewController.swift */,
+				1873FC862CEDEC2C000B8F56 /* SubmitLsrwViewController.xib */,
+			);
+			path = Submit;
 			sourceTree = "<group>";
 		};
 		189246A8293F46680062B7D1 /* AdVertisment */ = {
@@ -3039,6 +3148,7 @@
 		B51702BA1F0A2F2B00879602 /* VoicesnapSchoolApp */ = {
 			isa = PBXGroup;
 			children = (
+				1873FC1A2CEDAA21000B8F56 /* LSRW */,
 				845B1BD52CB01C7900D6E6F5 /* NoticeBoardVc */,
 				84CD56E22C9C03350068800A /* LocationVc */,
 				84C499D62C33DE2100BA6EF4 /* PTMVc */,
@@ -3977,6 +4087,7 @@
 				84F981AB2BD64C560077A77E /* PendingFeeReportTableViewHeaderFooterViewTableViewCell.xib in Resources */,
 				845B1BD32CB00E4800D6E6F5 /* ReportTVCell.xib in Resources */,
 				1829526829951E200003B9D6 /* QuizViewReportViewController.xib in Resources */,
+				1851AE0F2CEF124A005EC490 /* PreviewLsrwViewController.xib in Resources */,
 				84B066192AFB584A00CEB417 /* ParentHomeWorkCollectionViewCell.xib in Resources */,
 				182952CC299763C30003B9D6 /* ExamExpiredTableViewCell.xib in Resources */,
 				1800459E22A000C900C5F819 /* GoogleService-Info.plist in Resources */,
@@ -4039,6 +4150,7 @@
 				849DBF142CDA3706002479DF /* PdfViewVc.xib in Resources */,
 				84EF47DC2BECCA1D000EBFFD /* ClassTimeTableViewController.xib in Resources */,
 				18A816BD2A13964500E7FDF7 /* PrincipalLessonPlanViewController.xib in Resources */,
+				1801B3D32CEF54EB00611771 /* FileAttachmentTableViewCell.xib in Resources */,
 				B80A23D428BA5BE000147B89 /* emergencyvoice.mp3 in Resources */,
 				18C4376A2295881D008A7559 /* fr.json in Resources */,
 				B5414A562009F0460099F2BC /* SectionHeader.xib in Resources */,
@@ -4046,6 +4158,7 @@
 				848E5D5F2BFE285700DBBBB5 /* ClassTableViewCell.xib in Resources */,
 				8442AA7C2CDF86C80006068E /* NotificationCallingscreen.xib in Resources */,
 				8442AA7D2CDF86C80006068E /* isnotification.wav in Resources */,
+				1873FC452CEDE2F0000B8F56 /* LSRWTakingSkillViewController.xib in Resources */,
 				8442AA7E2CDF86C80006068E /* NotificationcallVC.xib in Resources */,
 				84B066222AFB6B3700CEB417 /* ParentHWImagePdfVoiceTableViewCell.xib in Resources */,
 				1829528029951F780003B9D6 /* ExamUpcomingTableViewCell.xib in Resources */,
@@ -4056,11 +4169,13 @@
 				182952D12999F48D0003B9D6 /* QuizUpcomingGetQuestionViewController.xib in Resources */,
 				84EF47D82BECCA1D000EBFFD /* ClassTimeTableViewCell.xib in Resources */,
 				84CD56E82C9C03350068800A /* deleteVc.xib in Resources */,
+				1873FC222CEDB27F000B8F56 /* LsrwListShowTableViewCell.xib in Resources */,
 				C1EB24B723EE9F1200F9B997 /* si.json in Resources */,
 				84C49A7D2C381A0D00BA6EF4 /* holidayCelsTableViewCell.xib in Resources */,
 				848E5D672BFE293300DBBBB5 /* SectionCollectionViewCell.xib in Resources */,
 				848E5D552BFE283300DBBBB5 /* CVIconCollectionViewCell.xib in Resources */,
 				84CCA2C52C708DEC009303CD /* TimeCollectionViewCell.xib in Resources */,
+				1873FC882CEDEC2C000B8F56 /* SubmitLsrwViewController.xib in Resources */,
 				C1EB24B523EE914100F9B997 /* es.json in Resources */,
 				84CD56E62C9C03350068800A /* deleteTV.xib in Resources */,
 				18FD3FBB22928F4300970B2B /* ar.json in Resources */,
@@ -4068,6 +4183,7 @@
 				B52F3C2A2015B1EB00B55F21 /* Main.storyboard in Resources */,
 				18D37B6329C1F3B800A61132 /* DaliyCollectionFeeViewController.xib in Resources */,
 				189E36E3296D4E7B0032A8CA /* ManagementVideoViewController.xib in Resources */,
+				1851AE142CEF2F8C005EC490 /* TakeReadingSkillTableViewCell.xib in Resources */,
 				849736942B0440A60012C139 /* UpdateDetailViewController.xib in Resources */,
 				1829527B29951F4B0003B9D6 /* ExamCompletedTableViewCell.xib in Resources */,
 				1865D8E62A0A794800CD43F3 /* StaffLessonPlanViewViewController.xib in Resources */,
@@ -4083,6 +4199,7 @@
 				846666612C77466C008E7F24 /* TimeHeader.xib in Resources */,
 				1865D8DD2A0A716400CD43F3 /* LessonPlanViewController.xib in Resources */,
 				18F119A62965A01E002C0A0A /* StaffGroupVoiceViewController.xib in Resources */,
+				1873FC1E2CEDAB26000B8F56 /* LsrwListShowViewController.xib in Resources */,
 				B51702C31F0A2F2C00879602 /* Assets.xcassets in Resources */,
 				B80A23D528BA5BE000147B89 /* message.mp3 in Resources */,
 				84CD56F22C9C03350068800A /* CreateLocationViewController.xib in Resources */,
@@ -4218,6 +4335,7 @@
 				B51CCCBF1F1504F000AAE733 /* Constants.m in Sources */,
 				D64EF0C120C7AC3C0051AA89 /* ParentExamTestVC.swift in Sources */,
 				0446C54F25164A7000AF13AD /* FeeDetailVC.swift in Sources */,
+				1801B3D42CEF54EB00611771 /* FileAttachmentTableViewCell.swift in Sources */,
 				840B2BDF2C78AB330027071D /* CalendarCollectionViewCell.swift in Sources */,
 				046E6D25245C42FA00BA5E0D /* AssignmentImageDetailVC.swift in Sources */,
 				84F981B02BD64DE20077A77E /* PendingFeeReportTableViewCell.swift in Sources */,
@@ -4240,6 +4358,7 @@
 				B56D6E91200F6D060058F2A5 /* TextHomeWorkSchoolSelectVC.swift in Sources */,
 				84E4155E2CA274CA006B4F86 /* PunchHistryReq.swift in Sources */,
 				04EDB7D22497417F0062164B /* StudentChatVC.swift in Sources */,
+				1873FC1D2CEDAB26000B8F56 /* LsrwListShowViewController.swift in Sources */,
 				B5A0911D200885600052AB21 /* SendMessageTVC.swift in Sources */,
 				D60EFBE120D8C9EC00AB940F /* CheckOTPVC.swift in Sources */,
 				B565389F20170F9800CD3740 /* UtilFile.swift in Sources */,
@@ -4342,6 +4461,7 @@
 				04F829FD245C29F2003DA04D /* ViewAssignmentTVCell.swift in Sources */,
 				84A9E6D92C6A0D6700BC2D6B /* TeacherWiseSlotAvailabilityResponse.swift in Sources */,
 				18D37B8429C33B8300A61132 /* StudentReportTableViewCell.swift in Sources */,
+				1873FC8C2CEE0749000B8F56 /* ViewAllSkillByStudentRequest.swift in Sources */,
 				B5A091332008B3C20052AB21 /* EmergencyVoiceVC.swift in Sources */,
 				186E4E5C2A0D004F00D7C3F2 /* LessonUpdateModal.swift in Sources */,
 				84B2EC762B199DC5005815AA /* UpdateDetailRequest.swift in Sources */,
@@ -4356,6 +4476,7 @@
 				18D37B7929C307B500A61132 /* StudentReportViewController.swift in Sources */,
 				8491E4482B072F5B00CF858F /* InsertHomeWorkModal.swift in Sources */,
 				84CD57002C9C03350068800A /* PunchReq.swift in Sources */,
+				1851AE092CEF0289005EC490 /* GetAttachmentForSkill.swift in Sources */,
 				04063023248273AB008FD0BB /* Vimeo_uploader.m in Sources */,
 				84B39EE92BEB38F300D56819 /* StanderReq.swift in Sources */,
 				845B1BCE2CAFD86200D6E6F5 /* AttendReportResp.swift in Sources */,
@@ -4373,6 +4494,7 @@
 				84CD56F62C9C03350068800A /* HistoryResp.swift in Sources */,
 				04BE4FAC247E40DD00B8E4DD /* VimeoVideoDetailVC.swift in Sources */,
 				D65A531320EDE5CF0084D885 /* PrincipalNewStandardGroupVC1.swift in Sources */,
+				1873FC462CEDE2F0000B8F56 /* LSRWTakingSkillViewController.swift in Sources */,
 				84978E492C09D08400B4083E /* HolidaysModal.swift in Sources */,
 				D64EF0A920C7ABD20051AA89 /* TestMessageVC.swift in Sources */,
 				D64EF0A620C7ABC10051AA89 /* VocieMessageTVCell.swift in Sources */,
@@ -4393,6 +4515,7 @@
 				0446C55025164A7000AF13AD /* FeeDueTVCell.swift in Sources */,
 				18A816D82A15E8C300E7FDF7 /* ParentListRequest.swift in Sources */,
 				1820D0F3228AF13E005EE79E /* LeaveHistoryPopupVC.swift in Sources */,
+				1851AE152CEF2F8C005EC490 /* TakeReadingSkillTableViewCell.swift in Sources */,
 				C12C42EF272B0A130086EA13 /* SelectableLabel.swift in Sources */,
 				84CD56E32C9C03350068800A /* DeleteReq.swift in Sources */,
 				D64EF0CF20C7AC8B0051AA89 /* ParentTableVC.swift in Sources */,
@@ -4416,6 +4539,7 @@
 				84AC5BE32CA7DE6C007649F9 /* verifyReq.swift in Sources */,
 				D6DDBD2F20FF337500367B8E /* PrincipalAddSubjectTVCell.swift in Sources */,
 				B5A0911B200885410052AB21 /* GridCVCell.swift in Sources */,
+				1851AE102CEF124A005EC490 /* PreviewLsrwViewController.swift in Sources */,
 				D68B9C9E20D3E3D200FDA753 /* ExamMarkTVCell.swift in Sources */,
 				84B2EC742B199DAD005815AA /* UpdateDetailsModal.swift in Sources */,
 				04EDB7DB249741CB0062164B /* StaffChatDetailTVCell.swift in Sources */,
@@ -4425,6 +4549,7 @@
 				10F0851A22C4C95D00A43BC7 /* PlayYouTubeVideoVC.swift in Sources */,
 				1829528629951FFF0003B9D6 /* QuizViewRequest.swift in Sources */,
 				B50294B51F1E28BC00AAAFFC /* SendAttendanceConfirmationVC.swift in Sources */,
+				1851AE0B2CEF0DD2005EC490 /* GetAttachmentForSkillRequest.swift in Sources */,
 				B5A091352008B3E10052AB21 /* ExamTestVC.swift in Sources */,
 				18A744A02935E61D009A0D38 /* AdvertismentRequest.swift in Sources */,
 				D63AE10E20D92EE400B97BE4 /* FeeInvoiceTVCell.swift in Sources */,
@@ -4502,6 +4627,7 @@
 				4E2FB196200F904E0066EC29 /* StandardGroupCVCell.swift in Sources */,
 				D64EF0BC20C7AC2D0051AA89 /* HomeworkTextTVCell.swift in Sources */,
 				18F119A82965A57D002C0A0A /* SendSMSAsStaffToGroupsModal.swift in Sources */,
+				1873FC872CEDEC2C000B8F56 /* SubmitLsrwViewController.swift in Sources */,
 				84CCA2C22C708DEC009303CD /* cancelTableViewCell.swift in Sources */,
 				84B066152AFB53F900CEB417 /* ParentHomeWorkNewResponse.swift in Sources */,
 				D64EF0D020C7AC8B0051AA89 /* CustomParentTableViewCell.swift in Sources */,
@@ -4623,6 +4749,7 @@
 				849736972B048B6B0012C139 /* UpdateDetailWebviewLoadViewController.swift in Sources */,
 				1805FE632297F5E000A3872E /* MoreImagesVC.swift in Sources */,
 				B5EE9FC61F3076B2009C9BF9 /* SelectSchoolTVC.swift in Sources */,
+				1873FC8A2CEE06BB000B8F56 /* ViewAllSkillByStudentModal.swift in Sources */,
 				B502949C1F1E09AB00AAAFFC /* SendTextMessageVC.swift in Sources */,
 				B5414A542009F03E0099F2BC /* SectionHeader.swift in Sources */,
 				1095CF8B2281A39800687291 /* ChooseLanguageTVCell.swift in Sources */,
@@ -4649,6 +4776,7 @@
 				D64EF0A720C7ABC10051AA89 /* ParentVoiceMessageVC.swift in Sources */,
 				84CD56F12C9C03350068800A /* CreateLocationViewController.swift in Sources */,
 				046E6D2C245FF81B00BA5E0D /* CreateAssignmentVC.swift in Sources */,
+				1873FC232CEDB27F000B8F56 /* LsrwListShowTableViewCell.swift in Sources */,
 				D64EF0FA20C7AD1A0051AA89 /* ImageDetailVC.swift in Sources */,
 				841ED6BD2C8F4FD100A65EEA /* StandardSectionDetailsForStaffResponse.swift in Sources */,
 				1829531F299B51510003B9D6 /* QuizGetQues.swift in Sources */,

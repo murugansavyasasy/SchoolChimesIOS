@@ -352,10 +352,10 @@ class SchoolSelectionVC: UIViewController ,UITableViewDelegate,UITableViewDataSo
                 print("getSchoolID",getSchoolID)
                 
                 
-                let vc = StaffPtmViewController(nibName: nil, bundle: nil)
-                vc.type = 1
-                vc.instituteId = Int(getSchoolID)!
-                vc.staffId = Int(getStaffID)!
+                let vc = LsrwListShowViewController(nibName: nil, bundle: nil)
+//                vc.type = 1
+//                vc.instituteId = Int(getSchoolID)!
+//                vc.staffId = Int(getStaffID)!
                 vc.modalPresentationStyle = .fullScreen
                 present(vc, animated: true)
             }

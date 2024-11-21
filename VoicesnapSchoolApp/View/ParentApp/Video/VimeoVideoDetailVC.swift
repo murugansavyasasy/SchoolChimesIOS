@@ -48,6 +48,7 @@ class VimeoVideoDetailVC: UIViewController,UIWebViewDelegate {
         progressShowView.isHidden = true
 
         progressCountLbl.isHidden = true
+        
         gifImg.isHidden = true
         
         print("ManageVideo")

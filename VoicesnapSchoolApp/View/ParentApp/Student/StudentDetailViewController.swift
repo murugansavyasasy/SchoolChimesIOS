@@ -662,7 +662,7 @@ print("schoolNameReg",schoolNameReg)
                 }
 //
                 else if(self.CellIndexIdsArray[indexPath.row] as! String == "26"){
-                    let vc = PTMViewController(nibName: nil, bundle: nil)
+                    let vc = LsrwListShowViewController(nibName: nil, bundle: nil)
 //                    vc.studentId =
                     vc.modalPresentationStyle = .fullScreen
                     present(vc, animated: true)
