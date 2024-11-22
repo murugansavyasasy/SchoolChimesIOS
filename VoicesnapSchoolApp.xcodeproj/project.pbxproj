@@ -58,6 +58,7 @@
 		1820D0EF228ADB9D005EE79E /* LeaveHistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1820D0EE228ADB9D005EE79E /* LeaveHistoryVC.swift */; };
 		1820D0F1228ADBB3005EE79E /* LeaveHistoryTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1820D0F0228ADBB3005EE79E /* LeaveHistoryTVCell.swift */; };
 		1820D0F3228AF13E005EE79E /* LeaveHistoryPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1820D0F2228AF13E005EE79E /* LeaveHistoryPopupVC.swift */; };
+		182866062CF067E7005F9F9B /* SubmitResponseForSkillModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182866052CF067E7005F9F9B /* SubmitResponseForSkillModal.swift */; };
 		18294E20295335810019849F /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18294E1F295335800019849F /* UITextField.swift */; };
 		18294E622959F8150019849F /* ParentImageVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18294E612959F8150019849F /* ParentImageVc.swift */; };
 		18294E64295AF03D0019849F /* ParentVideoVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18294E63295AF03D0019849F /* ParentVideoVc.swift */; };
@@ -709,6 +710,7 @@
 		1820D0EE228ADB9D005EE79E /* LeaveHistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveHistoryVC.swift; sourceTree = "<group>"; };
 		1820D0F0228ADBB3005EE79E /* LeaveHistoryTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveHistoryTVCell.swift; sourceTree = "<group>"; };
 		1820D0F2228AF13E005EE79E /* LeaveHistoryPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveHistoryPopupVC.swift; sourceTree = "<group>"; };
+		182866052CF067E7005F9F9B /* SubmitResponseForSkillModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitResponseForSkillModal.swift; sourceTree = "<group>"; };
 		18294E1F295335800019849F /* UITextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
 		18294E612959F8150019849F /* ParentImageVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentImageVc.swift; sourceTree = "<group>"; };
 		18294E63295AF03D0019849F /* ParentVideoVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentVideoVc.swift; sourceTree = "<group>"; };
@@ -1996,6 +1998,7 @@
 			children = (
 				1873FC852CEDEC2C000B8F56 /* SubmitLsrwViewController.swift */,
 				1873FC862CEDEC2C000B8F56 /* SubmitLsrwViewController.xib */,
+				182866052CF067E7005F9F9B /* SubmitResponseForSkillModal.swift */,
 			);
 			path = Submit;
 			sourceTree = "<group>";
@@ -4611,6 +4614,7 @@
 				D650466120D4E15E0097FCAF /* CheckPasswordVC.swift in Sources */,
 				D688D7B220CE89EE001D1582 /* FeedbackQuesVC.swift in Sources */,
 				D6979DC2228AA22D00511906 /* StaffDetailsTVCell.swift in Sources */,
+				182866062CF067E7005F9F9B /* SubmitResponseForSkillModal.swift in Sources */,
 				B5A0912D2008B3560052AB21 /* SchoolStrengthVC.swift in Sources */,
 				045144A22464552E00436FE4 /* SendImagePDFAssignmentVC.swift in Sources */,
 				D616411F20D12ABA00773A9B /* ConferenceSchoolSelectionVC.swift in Sources */,

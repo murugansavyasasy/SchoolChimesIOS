@@ -14,8 +14,9 @@ class FileAttachmentTableViewCell: UITableViewCell {
     @IBOutlet weak var img: UIImageView!
     
     @IBOutlet weak var contentFilePathLbl: UILabel!
-    
-    
+    var indexPath: IndexPath?
+
+    var deleteAction: ((IndexPath) -> Void)?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -27,4 +28,12 @@ class FileAttachmentTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    
+    
+    @IBAction func vardeleteActionIndexPathVoid(_ sender: UIButton) {
+        
+        if let indexPath = indexPath {
+            deleteAction?(indexPath)
+        }
+    }
 }

@@ -58,7 +58,7 @@ class ViewAllSkillByData                   : Mappable {
     var Title                              : String!
     var Description                        : String!
     var ActivityType                       : String!
-    var Subject                            : String!
+    var subject                            : String!
     var detailId                           : Int!
     var SubmittedCount                     : Int!
     var SubmittedOn                        : String!
@@ -81,13 +81,13 @@ func mapping(map: ObjectMapper.Map)              {
     Title                                  <- map["Title"]
     Description                            <- map["Description"]
     ActivityType                           <- map["ActivityType"]
-    Subject                                <- map["Subject"]
+    subject                                <- map["Subject"]
     detailId                               <- map["detailId"]
     SubmittedCount                         <- map["SubmittedCount"]
     SubmittedOn                            <- map["SubmittedOn"]
     Issubmitted                            <- map["Issubmitted"]
-    isAppRead                              <- map["SentBy"]
-    SentBy                                 <- map["Message"]
+    isAppRead                              <- map["isAppRead"]
+    SentBy                                 <- map["SentBy"]
    
    
 

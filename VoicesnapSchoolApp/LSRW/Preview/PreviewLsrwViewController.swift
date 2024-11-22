@@ -30,6 +30,7 @@ class PreviewLsrwViewController: UIViewController {
     @IBOutlet weak var backView: UIView!
     var attactType : String!
     var attactText : String!
+//    var attactText : String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +55,7 @@ class PreviewLsrwViewController: UIViewController {
             imgView.isHidden = false
 //            img.isHidden = false
             
-            
+            self.img.sd_setImage(with: URL(string: attactText)!, placeholderImage: UIImage(named: "placeHolder.png"), options: SDWebImageOptions.refreshCached)
             voiceHoleView.isHidden = true
             textView.isHidden = true
             
