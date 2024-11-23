@@ -12,20 +12,20 @@ import PhotosUI
 import Alamofire
 import AVFoundation
 
-class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UIDocumentPickerDelegate, PHPickerViewControllerDelegate,AVAudioRecorderDelegate, AVAudioPlayerDelegate {
+class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UIDocumentPickerDelegate, PHPickerViewControllerDelegate,AVAudioRecorderDelegate, AVAudioPlayerDelegate,UITextViewDelegate {
     
     
     
+    
+    
+    @IBOutlet weak var playVoiceHeight: NSLayoutConstraint!
+    @IBOutlet weak var voiceOverAllHeight: NSLayoutConstraint!
     @IBOutlet weak var addAttachTop: NSLayoutConstraint!
-    
     @IBOutlet weak var timeCountingLbl: UILabel!
     @IBOutlet weak var PlayVocieButton: UIButton!
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var submitView: UIView!
-    
     @IBOutlet weak var overallTimeLbl: UILabel!
-    var dropDown  = DropDown()
-  
     @IBOutlet weak var uploadFileImg: UIImageView!
     @IBOutlet weak var uploadFileLbl: UILabel!
     @IBOutlet weak var tv: UITableView!
@@ -47,7 +47,6 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
     @IBOutlet weak var dropDownView: UIViewX!
     @IBOutlet weak var dropDownTextLbl: UILabel!
     
-    
     var items = ["Text", "Voice", "Image","Pdf","Video"]
     var rowId = "FileAttachmentTableViewCell"
     var currentImageCount = 0
@@ -56,7 +55,6 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
     var  getImagePdfType : String!
     var convertedImagesUrlArray = NSMutableArray()
     var pdfData : Data? = nil
-    
     var selectedImages: [UIImage] = []
     var authToken = "8d74d8bf6b5742d39971cc7d3ffbb51a"
     var videoEmbdUrl : String!
@@ -64,7 +62,6 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
     var videoSucessId = 0
     var time : Float64 = 0;
     var settings         = [String : Int]()
-  
     var imageStr : [String] = []
     var totalImageCount = 0
     var onImagesPicked: (([UIImage]) -> Void)?
@@ -73,6 +70,7 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
     var onImagePicked: (([UIImage]) -> Void)?
     var pathArr : [String] = []
     var overAllPathArr : [String] = []
+    var overAllFileArr : [String] = []
     var typeArr : [String] = []
     var fileArr : [String] = []
     var timer = Timer()
@@ -86,17 +84,21 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
     var meterTimer:Timer!
     var audioRecorder    : AVAudioRecorder!
     var strPlayStatus : NSString = ""
-
+    var dropDown  = DropDown()
+    
+ 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-      
+        
+        contentTextViw.delegate = self
+        addBtn.backgroundColor = .lightGray
         voiceOverAllVie.isHidden = true
         imgPdfPathShowView.isHidden = true
         imageOverAllView.isHidden = true
         dropDownView.isHidden = false
         overAllTextView.isHidden = false
         contentTextViw.isHidden = false
+        timerLbl.text = "00:00"
         addBtn.setTitle("Add Content", for: .normal)
         let backGesture = UITapGestureRecognizer(target: self, action: #selector(backVc))
         backView.addGestureRecognizer(backGesture)
@@ -107,7 +109,10 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
         let selectMonth = UITapGestureRecognizer(target: self, action: #selector(selectMonthViewClick))
         dropDownView.addGestureRecognizer(selectMonth)
         
-        
+        pdfData?.removeAll()
+        pathArr.removeAll()
+        fileArr.removeAll()
+        overAllPathArr.removeAll()
         addAttachTop.constant = -100
         
         let imgGesture = UITapGestureRecognizer(target: self, action: #selector(selectImages))
@@ -151,7 +156,7 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
            
             
             if item == "Text" {
-                
+                addBtn.backgroundColor = .lightGray
                 overAllTextView.isHidden = false
                 contentTextViw.isHidden = false
                 voiceOverAllVie.isHidden = true
@@ -161,7 +166,8 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
                 addBtn.setTitle("Add Content", for: .normal)
 
             } else if item == "Image" {
-                
+                addBtn.backgroundColor = .lightGray
+
                 overAllTextView.isHidden = true
                 contentTextViw.isHidden = true
                 voiceOverAllVie.isHidden = true
@@ -175,32 +181,37 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
                 
                 
             } else if item == "Pdf" {
-                
+                addBtn.backgroundColor = .lightGray
+
                 overAllTextView.isHidden = true
                 contentTextViw.isHidden = true
                 voiceOverAllVie.isHidden = true
                 uploadFileLbl.text = "Browse File"
                 imgPdfPathShowView.isHidden = true
                 imageOverAllView.isHidden = false
-                addAttachTop.constant = -150
+                addAttachTop.constant = -180
                 addBtn.setTitle("Add File Attachments", for: .normal)
                 uploadFileImg.image = UIImage(named: "pdfImage")
                 changeImgView.isHidden = false
 
                 
             } else if item == "Voice" {
-                
+                addBtn.backgroundColor = .lightGray
+
+                playVoiceHeight.constant = 0
+                voiceOverAllHeight.constant = 100
                 overAllTextView.isHidden = true
                 contentTextViw.isHidden = true
                 voiceOverAllVie.isHidden = false
                 imgPdfPathShowView.isHidden = true
                 imageOverAllView.isHidden = true
-                addAttachTop.constant = 20
+                addAttachTop.constant = -80
                 voicePlayView.isHidden = true
                 addBtn.setTitle("Add File Attachments", for: .normal)
                 
             } else if item == "Video" {
-                
+                addBtn.backgroundColor = .lightGray
+
                 overAllTextView.isHidden = true
                 contentTextViw.isHidden = true
                 voiceOverAllVie.isHidden = true
@@ -224,61 +235,73 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
     }
 
     @IBAction func addFileAttachmentBtnAction(_ sender: UIButton) {
-        
-        
-        if dropDownTextLbl.text == "Text" {
-            pathArr.append(contentTextViw.text)
-            print("pathArrpathArr",pathArr.count)
-            contentTextViw.text = ""
-            fileArr.append("")
-            typeArr.append("TEXT")
-            overAllPathArr.append(contentsOf: pathArr)
-            tv.delegate = self
-            tv.dataSource = self
-            tv.reloadData()
+        if addBtn.backgroundColor != .lightGray {
             
-        }else  if dropDownTextLbl.text == "Image" {
-            pathArr.append(contentsOf: aswImg)
-            overAllPathArr.append(contentsOf: pathArr)
-
-            fileArr.append("ImageIcon")
-            typeArr.append("IMAGE")
-            aswImg.removeAll()
-            tv.delegate = self
-            tv.dataSource = self
-            tv.reloadData()
             
-        }else  if dropDownTextLbl.text == "Pdf" {
-            pathArr.append(contentTextViw.text)
             
-            pathArr.append(contentsOf: aswImg)
-            overAllPathArr.append(contentsOf: pathArr)
-
-            fileArr.append("ImageIcon")
-            typeArr.append("IMAGE")
-            aswImg.removeAll()
-            tv.delegate = self
-            tv.dataSource = self
-            tv.reloadData()
+            if dropDownTextLbl.text == "Text" {
+                pathArr.append(contentTextViw.text)
+                print("pathArrpathArr",pathArr.count)
+                contentTextViw.text = ""
+                fileArr.append("")
+                typeArr.append("TEXT")
+                overAllPathArr.append(contentsOf: pathArr)
+                tv.delegate = self
+                tv.dataSource = self
+                tv.reloadData()
+                
+            }else  if dropDownTextLbl.text == "Image" {
+                //            pathArr.removeAll()
+                pathArr.append(contentsOf: aswImg)
+                overAllPathArr.append(contentsOf: pathArr)
+                
+                for i in pathArr {
+                    typeArr.append("IMAGE")
+                }
+                
+                
+                
+                
+                fileArr.append("ImageIcon")
+                overAllFileArr.append(contentsOf: typeArr)
+                aswImg.removeAll()
+                tv.delegate = self
+                tv.dataSource = self
+                tv.reloadData()
+                
+            }else  if dropDownTextLbl.text == "Pdf" {
+                
+                
+                pathArr.append(contentsOf: aswImg)
+                overAllPathArr.append(contentsOf: pathArr)
+                
+                fileArr.append("ImageIcon")
+                typeArr.append("PDF")
+                aswImg.removeAll()
+                tv.delegate = self
+                tv.dataSource = self
+                tv.reloadData()
+                
+            }else  if dropDownTextLbl.text == "Voice" {
+                pathArr.append(contentTextViw.text)
+            }else  if dropDownTextLbl.text == "Video" {
+             
+                
+                pathArr.append(contentsOf: aswImg)
+                overAllPathArr.append(contentsOf: pathArr)
+                
+                fileArr.append("p23")
+                typeArr.append("VIDEO")
+                aswImg.removeAll()
+                tv.delegate = self
+                tv.dataSource = self
+                tv.reloadData()
+                
+            }
             
-        }else  if dropDownTextLbl.text == "Voice" {
-            pathArr.append(contentTextViw.text)
-        }else  if dropDownTextLbl.text == "Video" {
-            pathArr.append(contentTextViw.text)
-            
-            pathArr.append(contentsOf: aswImg)
-            overAllPathArr.append(contentsOf: pathArr)
-
-            fileArr.append("p23")
-            typeArr.append("Video")
-            aswImg.removeAll()
-            tv.delegate = self
-            tv.dataSource = self
-            tv.reloadData()
-            
+        }else{
+            print("Backgroud light")
         }
-        
-        
        
 
     }
@@ -290,23 +313,248 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
         
         self.playerDidFinishPlaying()
         
+        
+        
+        
+        
+        
+        
+        
+        
+//        pathImg.isHidden = true
+//        pathLbl.isHidden = true
+//        disableButtonAction()
         if audioRecorder == nil {
-            
+//            self.disableButtonAction()
 //            self.TitleForStopRecord()
             self.voiceRecordBtn.setBackgroundImage(UIImage(named:"VoiceRecordSelect"), for: UIControl.State.normal)
-            voicePlayView.isHidden = true
-            //            PlayVoiceMsgViewHeight.constant = 0
+        
             self.startRecording()
-            self.meterTimer = Timer.scheduledTimer(timeInterval: 0.1,
-                                                   target:self,
-                                                   selector:#selector(self.updateAudioMeter(_:)),
-                                                   userInfo:nil,
-                                                   repeats:true)
+            self.meterTimer = Timer.scheduledTimer(timeInterval: 0.1, target:self, selector:#selector(self.updateAudioMeter(_:)), userInfo:nil, repeats:true)
         }else{
             self.funcStopRecording()
         }
         
     }
+    
+    func directoryURL() -> NSURL? {
+        
+        let fileManager = FileManager.default
+        let urls = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
+        let documentDirectory = urls[0] as NSURL
+        let soundURL = documentDirectory.appendingPathComponent("sample.mp4")
+        
+        return soundURL as NSURL?
+    }
+    
+    func startRecording() {
+        let audioSession = AVAudioSession.sharedInstance()
+        do{
+            audioRecorder = try AVAudioRecorder(url: self.directoryURL()! as URL, settings: settings)
+            urlData = audioRecorder.url
+            audioRecorder.delegate = self
+            audioRecorder.prepareToRecord()
+            
+        }catch{
+            finishRecording(success: false)
+        }
+        do{
+            try audioSession.setActive(true)
+            audioRecorder.record()
+        }catch{
+        }
+    }
+    
+    func finishRecording(success: Bool) {
+        audioRecorder.stop()
+        if success {
+            audioRecorder = nil
+           
+        } else {
+            audioRecorder = nil
+        }
+    }
+    
+    
+    
+    
+    func funcStopRecording(){
+//        self.TitleForStartRecord()
+        self.voiceRecordBtn.setBackgroundImage(UIImage(named:"VocieRecord"), for: UIControl.State.normal)
+        self.finishRecording(success: true)
+//        playVoiceMessageView.isHidden = false
+        calucalteDuration()
+        if(UIDevice.current.userInterfaceIdiom == .pad){
+            
+//            PlayVoiceMsgViewHeight.constant = 180
+            
+            self.overallTimeLbl.text = TotaldurationFormat
+            self.timeCountingLbl.text = "00.00"
+        }else{
+//            PlayVoiceMsgViewHeight.constant = 120
+            
+            self.overallTimeLbl.text = TotaldurationFormat
+            self.timeCountingLbl.text = "00.00"
+        }
+        
+        
+    }
+    
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+        if !flag {
+            finishRecording(success: false)
+        }
+    }
+    
+    @objc func updateSlider(){
+        if self.player!.currentItem?.status == .readyToPlay{
+            time = CMTimeGetSeconds(self.player!.currentTime())
+        }
+        
+        let duration : CMTime = playerItem!.asset.duration
+        let seconds : Float64 = CMTimeGetSeconds(duration)
+        
+        slider.maximumValue = Float(seconds)
+        slider.minimumValue = 0.0
+        
+        slider.value = Float(time)
+        
+        if(time > 0){
+            let minutes = Int(time) / 60 % 60
+            let secondss = Int(time) % 60
+            MaxSeconds = secondss
+            let durationFormat = String(format:"%02i:%02i", minutes, secondss)
+            timeCountingLbl.text = durationFormat
+            
+        }
+        
+        if(time == seconds){
+            
+            timer.invalidate()
+            PlayVocieButton.isSelected = false
+            slider.value = 0.0
+        }
+    }
+    
+    func actionPlayButton(){
+        
+        playerItem = AVPlayerItem(url: urlData!)
+        player = AVPlayer(playerItem: playerItem!)
+        
+        if(strPlayStatus.isEqual(to: "close")){
+            slider.value = 0.0
+        }
+        
+        if(PlayVocieButton.isSelected){
+            
+            PlayVocieButton.isSelected = false
+            let seconds1 : Int64 = Int64(slider.value)
+            let targetTime : CMTime = CMTimeMake(value: seconds1, timescale: 1)
+            
+            player!.seek(to: targetTime)
+            strPlayStatus = "play"
+            player?.pause()
+        }else{
+            PlayVocieButton.isSelected = true
+            let seconds1 : Int64 = Int64(slider.value)
+            let targetTime : CMTime = CMTimeMake(value: seconds1, timescale: 1)
+            player!.seek(to: targetTime)
+            
+            strPlayStatus = "play"
+            player?.volume = 1
+            player?.play()
+        }
+        
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateSlider), userInfo: nil, repeats: true)
+        
+        
+    }
+    
+    @objc func updateAudioMeter(_ timer:Timer) {
+        if let audioRecorder1 = self.audioRecorder {
+            if audioRecorder1.isRecording {
+                let min = Int(audioRecorder1.currentTime / 60)
+                let sec = Int(audioRecorder1.currentTime.truncatingRemainder(dividingBy: 60))
+                let s = String(format: "%02d:%02d", min, sec)
+                let SecString = sec
+                timerLbl.text = s
+                audioRecorder1.updateMeters()
+//                if(HomeWorkSecondStr < 60){
+//                    if(sec == ApiHomeWorkSecondInt){
+//                        self.funcStopRecording()
+//                    }
+//                }else{
+//                    if(min == ApiHomeWorkSecondInt){
+//                        self.funcStopRecording()
+//                    }
+//                }
+            }
+        }
+    }
+    
+    func playbackSliderValueChanged(playbackSlider:UISlider){
+        let seconds : Int64 = Int64(playbackSlider.value)
+        let targetTime : CMTime = CMTimeMake(value: seconds, timescale: 1)
+        
+        if(player != nil){
+            player!.seek(to: targetTime)
+        }else{
+            
+            slider.value = playbackSlider.value
+        }
+        
+    }
+    
+    func calucalteDuration() -> Void{
+        playerItem = AVPlayerItem(url: urlData!)
+        let duration : CMTime = playerItem!.asset.duration
+        let seconds : Float64 = CMTimeGetSeconds(duration)
+        
+        
+        slider.maximumValue = Float(seconds)
+        //let hours = Int(seconds) / 3600
+        let minutes = Int(seconds) / 60 % 60
+        let secondss = Int(seconds) % 60
+        durationString = String(format:"%i",Int(seconds))
+        
+        TotaldurationFormat = String(format:"/ %02i:%02i", minutes, secondss)
+        overallTimeLbl.text = TotaldurationFormat
+        
+    }
+    
+    // MARK: Player close
+    func playerDidFinishPlaying() {
+        
+        if(player != nil){
+            timer.invalidate()
+            player?.pause()
+            
+            slider.value = 0.0
+            player?.rate = 0.0
+            timerLbl.text = "00.00"
+            
+            PlayVocieButton.isSelected = false
+            strPlayStatus = "close"
+            player = nil
+            player =  AVPlayer.init()
+            
+            playerItem?.seek(to: CMTime.zero, completionHandler: nil)
+                 time = CMTimeGetSeconds(self.player!.currentTime())
+        }
+    }
+    
+    //MARK:Play Audio BUTTON ACTION
+    @IBAction func actionPlayVoiceMessage(_ sender: UIButton){
+        calucalteDuration()
+        
+        actionPlayButton()
+        audioRecorder = nil
+    }
+    
+    @IBAction func actionSliderButton(_ sender: UISlider) {
+        playbackSliderValueChanged(playbackSlider: slider)
+    }
+    
     
     
     
@@ -323,24 +571,44 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
         
 //     img   cell.contentFilePathLbl.text = fileArr[indexPath.row]
         cell.selectionStyle = .none
+//        for i in typeArr {
+//            
+//            print("getTypeArr",typeArr)
+//            if i == "IMAGE" {
+//                
+//                cell.img.image = UIImage(named: "ImageIcon")
+//            }else if  i == "TEXT" {
+//                
+//                cell.img.image = UIImage(named: "TextIcon")
+//            }else if  i == "VIDEO" {
+//                
+//                cell.img.image = UIImage(named: "p23")
+//            }else if i == "PDF" {
+//                
+//                cell.img.image = UIImage(named: "pdfImage")
+//            }else if  i == "VOICE" {
+//                
+//                cell.img.image = UIImage(named: "TextIcon")
+//            }
+//        }
         
-        if dropDownTextLbl.text == "Image" {
-           
-            cell.img.image = UIImage(named: "ImageIcon")
-        }else if  dropDownTextLbl.text == "Text" {
-            
-            cell.img.image = UIImage(named: "TextIcon")
-        }else if  dropDownTextLbl.text == "Video" {
-            
-            cell.img.image = UIImage(named: "p23")
-        }else if  dropDownTextLbl.text == "Pdf" {
-            
-            cell.img.image = UIImage(named: "pdfImage")
-        }else if  dropDownTextLbl.text == "Voice" {
-            
-            cell.img.image = UIImage(named: "TextIcon")
-        }
-        
+        let currentType = typeArr[indexPath.row]
+                
+                // Update the cell's image based on type
+                switch currentType {
+                case "IMAGE":
+                    cell.img.image = UIImage(named: "ImageIcon")
+                case "TEXT":
+                    cell.img.image = UIImage(named: "TextIcon")
+                case "VIDEO":
+                    cell.img.image = UIImage(named: "p23")
+                case "PDF":
+                    cell.img.image = UIImage(named: "pdfImage")
+                case "VOICE":
+                    cell.img.image = UIImage(named: "TextIcon")
+                default:
+                    cell.img.image = nil // Fallback image or nil
+                }
         
         cell.indexPath = indexPath
                
@@ -394,7 +662,17 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
     }
     
     
-    
+    func textViewDidChange(_ textView: UITextView) {
+          print("Text changed to: \(textView.text ?? "")")
+        if textView.text.count > 0 {
+                // Change the button color to blue when text exists
+                addBtn.backgroundColor = .blue
+            } else {
+                // Change the button color to gray when no text exists
+                addBtn.backgroundColor = .lightGray
+            }
+         
+      }
     
     
     
@@ -429,6 +707,15 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
         
         do {
             pdfData = try Data(contentsOf: urls, options: NSData.ReadingOptions())
+            
+            
+            if pdfData!.count > 0 {
+                    // Change the button color to blue when text exists
+                self.addBtn.backgroundColor = .blue
+                } else {
+                    // Change the button color to gray when no text exists
+                    self.addBtn.backgroundColor = .lightGray
+                }
             uploadPDFFileToAWS(pdfData: pdfData!)
             
         } catch {
@@ -513,7 +800,9 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
                 let publicURL = url?.appendingPathComponent((uploadRequest?.bucket!)!).appendingPathComponent((uploadRequest?.key!)!)
                 if let absoluteString = publicURL?.absoluteString {
                     print("Uploaded to:\(absoluteString)")
+                    aswImg.removeAll()
                     aswImg.append(absoluteString)
+                    addBtn.backgroundColor = .blue
                     
                     let imageDict = NSMutableDictionary()
                     imageDict["FileName"] = absoluteString
@@ -561,6 +850,14 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
                 result.itemProvider.loadObject(ofClass: UIImage.self) { [weak self] object, error in
                     if let image = object as? UIImage {
                         images.append(image)
+                        
+                        if images.count > 0 {
+                                // Change the button color to blue when text exists
+                            self!.addBtn.backgroundColor = .blue
+                            } else {
+                                // Change the button color to gray when no text exists
+                                self!.addBtn.backgroundColor = .lightGray
+                            }
                         self!.uploadAWS(image:image)
                     }
                     
@@ -576,6 +873,7 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
     
     func uploadAWS(image : UIImage){
     
+        aswImg.removeAll()
         let S3BucketName =  DefaultsKeys.bucketNameIndia
            
         let CognitoPoolID = DefaultsKeys.CognitoPoolID
@@ -633,7 +931,7 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
                 let publicURL = url?.appendingPathComponent((uploadRequest?.bucket!)!).appendingPathComponent((uploadRequest?.key!)!)
                 if let absoluteString = publicURL?.absoluteString {
                     print("Uploaded to:\(absoluteString)")
-                    
+                    addBtn.backgroundColor = .blue
                   
                     aswImg.append(absoluteString)
                     
@@ -868,7 +1166,7 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
                 case .success:
                     print("Video uploaded successfully!")
                    
-                   
+                    addBtn.backgroundColor = .blue
                 case .failure(let error):
                     print("Failed to upload video: \(error)")
    
@@ -910,257 +1208,15 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
 
   
     
+
     
     
-    func calucalteDuration() -> Void
-    {
-        
-        print("urlData \(urlData!)")
-     
-        Awws3Voice(URLPath: urlData!)
-        playerItem = AVPlayerItem(url: urlData!)
-        let duration : CMTime = playerItem!.asset.duration
-        let seconds : Float64 = CMTimeGetSeconds(duration)
-        
-        
-        slider.maximumValue = Float(seconds)
-        let minutes = Int(seconds) / 60 % 60
-        let secondss = Int(seconds) % 60
-        durationString = String(format:"%i",Int(seconds))
-//        if(strLanguage == "ar"){
-//            TotaldurationFormat = String(format:" %02i:%02i/", minutes, secondss)
-//        }else{
-            TotaldurationFormat = String(format:"/ %02i:%02i", minutes, secondss)
-//        }
-        overallTimeLbl.text = TotaldurationFormat
-        
-    }
+  
+  
     
-    @IBAction func playAudioAction(_ sender: Any) {
-        
-        calucalteDuration()
-        
-        actionPlayButton()
-        audioRecorder = nil
-    }
+   
     
-    func actionPlayButton()
-    {
-        
-        playerItem = AVPlayerItem(url: urlData!)
-        
-        player = AVPlayer(playerItem: playerItem!)
-        
-        if(strPlayStatus.isEqual(to: "close"))
-        {
-            slider.value = 0.0
-        }
-        
-        
-        if(PlayVocieButton.isSelected)
-        {
-            
-            PlayVocieButton.isSelected = false
-            
-            let seconds1 : Int64 = Int64(slider.value)
-            let targetTime : CMTime = CMTimeMake(value: seconds1, timescale: 1)
-            
-            player!.seek(to: targetTime)
-            strPlayStatus = "play"
-            player?.pause()
-        }else{
-            
-            PlayVocieButton.isSelected = true
-            
-            let seconds1 : Int64 = Int64(slider.value)
-            let targetTime : CMTime = CMTimeMake(value: seconds1, timescale: 1)
-            player!.seek(to: targetTime)
-            
-            strPlayStatus = "play"
-            player?.volume = 1
-            player?.play()
-            
-        }
-        
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateSlider), userInfo: nil, repeats: true)
-        
-        
-    }
-    
-    
-    
-    
-    @IBAction func recordAction(_ sender: UIButton) {
-        
-        
-        self.playerDidFinishPlaying()
-        
-        if audioRecorder == nil {
-            
-//            self.TitleForStopRecord()
-            self.voiceRecordBtn.setBackgroundImage(UIImage(named:"VoiceRecordSelect"), for: UIControl.State.normal)
-            voicePlayView.isHidden = true
-            //            PlayVoiceMsgViewHeight.constant = 0
-            self.startRecording()
-            self.meterTimer = Timer.scheduledTimer(timeInterval: 0.1,
-                                                   target:self,
-                                                   selector:#selector(self.updateAudioMeter(_:)),
-                                                   userInfo:nil,
-                                                   repeats:true)
-        }else{
-            self.funcStopRecording()
-        }
-    }
-    
-    
-    @objc func updateAudioMeter(_ timer:Timer) {
-        
-        if let audioRecorder1 = self.audioRecorder {
-            if audioRecorder1.isRecording {
-                let min = Int(audioRecorder1.currentTime / 60)
-                let sec = Int(audioRecorder1.currentTime.truncatingRemainder(dividingBy: 60))
-                let s = String(format: "%02d:%02d", min, sec)
-                let SecString = sec
-                timerLbl.text = s
-                audioRecorder1.updateMeters()
-                
-//                if(HomeWorkSecondStr < 60)
-//                {
-//                    if(sec == ApiHomeWorkSecondInt)
-//                    {
-//                        self.funcStopRecording()
-//                    }
-//                }else{
-//                    if(min == ApiHomeWorkSecondInt)
-//                    {
-//                        self.funcStopRecording()
-//                    }
-//                }
-                
-                
-            }
-        }
-    }
-    
-    
-    func funcStopRecording()
-    {
-        
-        self.voiceRecordBtn.setBackgroundImage(UIImage(named:"VocieRecord"), for: UIControl.State.normal)
-        
-        self.finishRecording(success: true)
-        voicePlayView.isHidden = false
-       
-        calucalteDuration()
-        if(UIDevice.current.userInterfaceIdiom == .pad)
-        {
-            
-            self.overallTimeLbl.text = TotaldurationFormat
-            self.timeCountingLbl.text = "00.00"
-        }
-        else
-        {
-            
-            self.overallTimeLbl.text = TotaldurationFormat
-            self.timeCountingLbl.text = "00.00"
-        }
-        
-        
-    }
-    
-    
-    func playerDidFinishPlaying() {
-        
-        if(player != nil)
-        {
-            timer.invalidate()
-            player?.pause()
-            
-            slider.value = 0.0
-            player?.rate = 0.0
-            timeCountingLbl.text = "00.00"
-            
-            PlayVocieButton.isSelected = false
-            strPlayStatus = "close"
-            player = nil
-            player =  AVPlayer.init()
-            playerItem?.seek(to: CMTime.zero)
-            time = CMTimeGetSeconds(self.player!.currentTime())
-            
-            
-        }
-    }
-    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
-        if !flag {
-            finishRecording(success: false)
-        }
-    }
-    
-    
-    func startRecording() {
-        let audioSession = AVAudioSession.sharedInstance()
-        do {
-            audioRecorder = try AVAudioRecorder(url: self.directoryURL() as! URL,
-                                                settings: settings)
-            urlData = audioRecorder.url
-            audioRecorder.delegate = self
-            audioRecorder.prepareToRecord()
-            
-        } catch {
-            finishRecording(success: false)
-        }
-        do {
-            try audioSession.setActive(true)
-            audioRecorder.record()
-        } catch {
-        }
-    }
-    
-    func finishRecording(success: Bool) {
-        audioRecorder.stop()
-        if success {
-            audioRecorder = nil
-            
-        } else {
-            audioRecorder = nil
-        }
-    }
-    @objc func updateSlider()
-    {
-        if self.player!.currentItem?.status == .readyToPlay {
-            
-            time = CMTimeGetSeconds(self.player!.currentTime())
-        }
-        
-        
-        let duration : CMTime = playerItem!.asset.duration
-        let seconds : Float64 = CMTimeGetSeconds(duration)
-        
-        slider.maximumValue = Float(seconds)
-        slider.minimumValue = 0.0
-        
-        slider.value = Float(time)
-        
-        if(time > 0){
-            let minutes = Int(time) / 60 % 60
-            let secondss = Int(time) % 60
-            MaxSeconds = secondss
-            let durationFormat = String(format:"%02i:%02i", minutes, secondss)
-            timeCountingLbl.text = durationFormat
-            
-        }
-        
-        if(time == seconds)
-        {
-            
-            timer.invalidate()
-            PlayVocieButton.isSelected = false
-            slider.value = 0.0
-        }
-        
-        
-    }
-    
+   
     func Awws3Voice(URLPath : URL) {
         
         
@@ -1202,18 +1258,18 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
         
         
     }
-    func directoryURL() -> NSURL? {
-        print("urlData12",urlData)
-        let fileManager = FileManager.default
-        let urls = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
-        let documentDirectory = urls[0] as NSURL
-        let soundURL = documentDirectory.appendingPathComponent("sample.mp4")
-//        UtilObj.printLogKey(printKey: "Recorded Audio", printingValue: soundURL!)
-        
-        
-        
-        return soundURL as NSURL?
-    }
+//    func directoryURL() -> NSURL? {
+//        print("urlData12",urlData)
+//        let fileManager = FileManager.default
+//        let urls = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
+//        let documentDirectory = urls[0] as NSURL
+//        let soundURL = documentDirectory.appendingPathComponent("sample.mp4")
+////        UtilObj.printLogKey(printKey: "Recorded Audio", printingValue: soundURL!)
+//        
+//        
+//        
+//        return soundURL as NSURL?
+//    }
     
     @IBAction func takeReadingSkill() {
         let vc = LSRWTakingSkillViewController(nibName: nil, bundle: nil)
@@ -1254,19 +1310,53 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
         let attachModal = AttachmentData()
        
         
-        for (type, content) in zip(typeArr, pathArr) {
-            print("Number: \(type), Letter: \(content)")
-            attachModal.type = type
-            attachModal.content = content
-            imageAryy.append(attachModal)
-        }
+//        for (type, content) in zip(typeArr, pathArr) {
+//            print("Number: \(type), Letter: \(content)")
+//            attachModal.type = type
+//            attachModal.content = content
+//            imageAryy.append(attachModal)
+//        }
       
-        print("attachModal",attachModal)
+        
+        for path in pathArr {
+            attachModal.content = path
+            print("pathArr",path)
+//
+        }
+        
+        for path in typeArr {
+            attachModal.type = path
+            print("typeArr",path)
+//
+        }
+        
+        
+        
+        var attachments: [AttachmentData] = []
+
+        // Ensure pathArr and typeArr are of the same length
+        guard pathArr.count == typeArr.count else {
+            print("Error: pathArr and typeArr must have the same number of elements")
+            return
+        }
+        
+        
+        for (index, path) in pathArr.enumerated() {
+            let attachModal = AttachmentData()
+            attachModal.content = path
+            attachModal.type = typeArr[index]
+            attachments.append(attachModal)
+        }
+
+        for attachment in attachments {
+            print("Content: \(attachment.content ?? ""), Type: \(attachment.type ?? "")")
+        }
+        print("attacattachmentsl",attachments)
         
         let submitModal = SubmitResponseForSkillModal()
         submitModal.StudentID = "10391374"
         submitModal.SkillId = "7050"
-        submitModal.attachment = imageAryy
+        submitModal.attachment = attachments
         
         
         var  submitModalStr = submitModal.toJSONString()

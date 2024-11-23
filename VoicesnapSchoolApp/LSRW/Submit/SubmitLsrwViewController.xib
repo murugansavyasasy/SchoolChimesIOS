@@ -26,6 +26,7 @@
                 <outlet property="imgPdfPathShowView" destination="SHQ-Q6-8gh" id="sn5-2a-Iw1"/>
                 <outlet property="overAllTextView" destination="yPK-1h-K8j" id="6w3-f2-xJs"/>
                 <outlet property="overallTimeLbl" destination="3J8-zQ-qTZ" id="Bee-Qa-ZOx"/>
+                <outlet property="playVoiceHeight" destination="6zU-ih-4Qd" id="oZT-Xw-q5b"/>
                 <outlet property="recordlbl" destination="dfg-Yd-wyg" id="k4n-v3-b5G"/>
                 <outlet property="slider" destination="yrB-w1-Sok" id="k0n-Eu-TUV"/>
                 <outlet property="submitView" destination="Tl8-iQ-BTz" id="uJw-0e-3gK"/>
@@ -35,6 +36,7 @@
                 <outlet property="uploadFileImg" destination="xgE-yJ-H1D" id="1D7-CC-Mn5"/>
                 <outlet property="uploadFileLbl" destination="2bU-04-icV" id="NPa-tj-B3y"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="voiceOverAllHeight" destination="wjZ-cv-iuv" id="1fA-FK-J9l"/>
                 <outlet property="voiceOverAllVie" destination="fYI-Lo-A5U" id="rVz-7j-Ssi"/>
                 <outlet property="voicePlayView" destination="NGW-G8-Rn6" id="EQa-3B-WcG"/>
                 <outlet property="voiceRecordBtn" destination="6Kg-Dz-gpM" id="XM3-sR-5zr"/>
@@ -251,6 +253,7 @@
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
+                                                <constraint firstAttribute="height" constant="109.67" id="6zU-ih-4Qd"/>
                                                 <constraint firstItem="iqN-Rj-lk3" firstAttribute="leading" secondItem="NGW-G8-Rn6" secondAttribute="leading" constant="5" id="8om-TE-npm"/>
                                                 <constraint firstItem="ib7-Pa-PCz" firstAttribute="top" secondItem="yrB-w1-Sok" secondAttribute="bottom" constant="10" id="Q0h-UF-XuP"/>
                                                 <constraint firstItem="iqN-Rj-lk3" firstAttribute="top" secondItem="NGW-G8-Rn6" secondAttribute="top" constant="5" id="S0j-Ml-r6o"/>
@@ -272,7 +275,6 @@
                                         <constraint firstItem="NGW-G8-Rn6" firstAttribute="leading" secondItem="fYI-Lo-A5U" secondAttribute="leading" constant="20" id="5Xc-37-A61"/>
                                         <constraint firstItem="dfg-Yd-wyg" firstAttribute="leading" secondItem="fYI-Lo-A5U" secondAttribute="leading" constant="10" id="8QY-gD-zGb"/>
                                         <constraint firstItem="cf6-1g-qcy" firstAttribute="top" secondItem="fYI-Lo-A5U" secondAttribute="top" constant="10" id="O0f-gq-apD"/>
-                                        <constraint firstAttribute="bottom" secondItem="NGW-G8-Rn6" secondAttribute="bottom" constant="10" id="OOU-10-MOd"/>
                                         <constraint firstItem="BBw-Pk-dp3" firstAttribute="centerX" secondItem="fYI-Lo-A5U" secondAttribute="centerX" id="QaI-nE-aes"/>
                                         <constraint firstAttribute="trailing" secondItem="NGW-G8-Rn6" secondAttribute="trailing" constant="20" id="W8a-Uf-tbR"/>
                                         <constraint firstItem="dfg-Yd-wyg" firstAttribute="top" secondItem="cf6-1g-qcy" secondAttribute="bottom" constant="10" id="aXP-VH-uyv"/>
@@ -281,6 +283,7 @@
                                         <constraint firstItem="cf6-1g-qcy" firstAttribute="leading" secondItem="fYI-Lo-A5U" secondAttribute="leading" constant="10" id="ioH-Z1-hye"/>
                                         <constraint firstItem="6Kg-Dz-gpM" firstAttribute="centerX" secondItem="fYI-Lo-A5U" secondAttribute="centerX" id="oQ9-hJ-CI4"/>
                                         <constraint firstAttribute="trailing" secondItem="dfg-Yd-wyg" secondAttribute="trailing" constant="10" id="wCJ-tz-4b6"/>
+                                        <constraint firstAttribute="height" constant="290" id="wjZ-cv-iuv"/>
                                         <constraint firstItem="6Kg-Dz-gpM" firstAttribute="top" secondItem="dfg-Yd-wyg" secondAttribute="bottom" constant="10" id="zFN-Vl-5kV"/>
                                     </constraints>
                                 </view>
