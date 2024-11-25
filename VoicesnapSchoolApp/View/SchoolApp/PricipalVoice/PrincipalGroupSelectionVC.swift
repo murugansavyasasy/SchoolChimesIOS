@@ -115,8 +115,9 @@ class PrincipalGroupSelectionVC: UIViewController,Apidelegate {
         StaffVC.imagesArray = imagesArray
         StaffVC.strFrom = strFrom
         StaffVC.VideoData = self.VideoData
+        print("vistrFroml222",strFrom)
         print("vimeoUrlvimeoUrl222",vimeoVideoURL)
-        
+        print("vimeoUPrincipal",imagesArray)
         StaffVC.vimeoVideoURL = vimeoVideoURL
         print("vimeoUrlvimeoUrl222u",StaffVC.vimeoVideoURL)
         StaffVC.pdfData = self.pdfData

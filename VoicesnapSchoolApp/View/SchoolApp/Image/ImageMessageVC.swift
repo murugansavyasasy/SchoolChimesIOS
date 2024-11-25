@@ -9,6 +9,7 @@
 import UIKit
 import ImagePicker
 import MobileCoreServices
+import PhotosUI
 
 extension ImageMessageVC: UIDocumentPickerDelegate{
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
@@ -17,7 +18,7 @@ extension ImageMessageVC: UIDocumentPickerDelegate{
     }
 }
 
-class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, ImagePickerDelegate {
+class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, ImagePickerDelegate, PHPickerViewControllerDelegate {
     
     @IBOutlet weak var ClickHereButton: UIButton!
     @IBOutlet weak var MyImageView: UIImageView!
@@ -29,6 +30,8 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var headerViewHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var imgCountLbl: UILabel!
+    @IBOutlet weak var imgCountShowView: UIViewX!
     @IBOutlet weak var MyImageView2: UIImageView!
     @IBOutlet weak var MyImageView3: UIImageView!
     @IBOutlet weak var MyImageView4: UIImageView!
@@ -47,19 +50,26 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
     var selectedSchoolDictionary = NSMutableDictionary()
     var selectedSchoolID = NSString()
     var selectedStaffID = NSString()
+    var imagesArray = NSMutableArray()
     
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     
     var getStaff : String!
     var getScl : String!
-    
+    var changeImgClick = 0
+    var selectedImages: [UIImage] = []
+    var imgArr : [Int] = []
     
     override func viewDidLoad(){
         super.viewDidLoad()
         imagePicker.delegate = self
         
         
-        
+        imgCountLbl.isHidden = true
+        imgCountShowView.isHidden = true
+        let strImageLimit : NSString = UserDefaults.standard.object(forKey: IMAGE_COUNT) as! NSString
+        imageLimit = 6
+        print("imageLimit",imageLimit)
         
         let defaults = UserDefaults.standard
         strStaffID = defaults.string(forKey: DefaultsKeys.StaffID)!
@@ -150,7 +160,7 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
         
         let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
-            self.openGallary()
+            self.ImagePickerGallery()
         }))
         
         alert.addAction(UIAlertAction(title: "Pdf", style: .default, handler: { _ in
@@ -214,14 +224,17 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
         print("opalImg")
         descriptionTextField.resignFirstResponder()
         
-        
+       
         
         self.ClickHereButton.setTitleColor(UIColor.white, for: .normal)
         self.ClickHereButton.isUserInteractionEnabled = true
         
         let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
-        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
-            self.openGallary()
+        alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { [self] _ in
+//            self.openGallary()
+            
+            changeImgClick  = 1
+            self.ImagePickerGallery()
         }))
         
         alert.addAction(UIAlertAction(title: "Pdf", style: .default, handler: { _ in
@@ -265,7 +278,7 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
                 dismiss(animated: true, completion: nil)
             }
         case 1:
-            openGallary()
+            ImagePickerGallery()
         case 2:
             self.FromPDF()
         default: break
@@ -320,18 +333,120 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
         }
     }
     
+//    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+//        ClickImageCaptureButton.isEnabled = true
+//        let chosenImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+//        MyImageView.contentMode = .scaleToFill
+//        MyImageView.image = chosenImage
+//        self.moreImagesArray.add(chosenImage)
+//        if(self.MyImageView.image != nil){
+//            dismiss(animated: true, completion: nil)
+//            ClickImageCaptureButton.backgroundColor = UIColor(red: 230.0/255.0, green: 126.0/255.0, blue: 34.0/255.0, alpha: 1)
+//            
+//        }
+//    }
+    
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        ClickImageCaptureButton.isEnabled = true
+        
+        
+        imagePicker.dismiss(animated: true, completion: nil)
+        
         let chosenImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
-        MyImageView.contentMode = .scaleToFill
-        MyImageView.image = chosenImage
+        //
+        print("chosenImage",  chosenImage)
+//        imgShowView.isHidden = false
+//        imgShowTop.constant = 5
+//        
+//        imgPdfAttachBtn.isHidden = false
+//        attachmentSelectType = "Image"
+//        HomeWorkType = "Image"
+//        textviewEnableorDisable()
         self.moreImagesArray.add(chosenImage)
-        if(self.MyImageView.image != nil){
-            dismiss(animated: true, completion: nil)
-            ClickImageCaptureButton.backgroundColor = UIColor(red: 230.0/255.0, green: 126.0/255.0, blue: 34.0/255.0, alpha: 1)
+        print("moreImagesArray",  moreImagesArray.count)
+        imgCountLbl.text = "+" + String(moreImagesArray.count)
+        imgCountLbl.isHidden = false
+        imgCountShowView.isHidden = false
+        if moreImagesArray.count == 1 {
+            MyImageView.image = moreImagesArray[0] as! UIImage
+//            MyImageView.isUserInteractionEnabled = true
             
+            MyImageView2.isHidden = true
+            
+//            let img1Ges = Img1Ges(target: self, action: #selector(imgPdfClick))
+//            img1Ges.url = moreImagesArray[0] as! UIImage
+//            ImageView.addGestureRecognizer(img1Ges)
+//            closeView1.isHidden = false
+//            closeView2.isHidden = true
+            
+        }else   if moreImagesArray.count == 2 {
+            MyImageView2.isHidden = false
+            MyImageView.image = moreImagesArray[0] as! UIImage
+            MyImageView2.image = moreImagesArray[1] as! UIImage
+//            closeView1.isHidden = false
+//            closeView2.isHidden = false
+            
+//            MyImageView.isUserInteractionEnabled = true
+//            MyImageView2.isUserInteractionEnabled = true
+            
+//            let img1Ges = Img1Ges(target: self, action: #selector(imgPdfClick))
+//            img1Ges.url = moreImagesArray[0] as! UIImage
+//            MyImageView.addGestureRecognizer(img1Ges)
+//            
+//            
+//            let img2Ges = Img2Ges(target: self, action: #selector(imgPdfClick2))
+//            img2Ges.url = moreImagesArray[1] as! UIImage
+//            MyImageView2.addGestureRecognizer(img2Ges)
+//            
+        }else   if moreImagesArray.count == 3 {
+            MyImageView.image = moreImagesArray[0] as! UIImage
+            MyImageView2.image = moreImagesArray[1] as! UIImage
+            MyImageView3.image = moreImagesArray[2] as! UIImage
+           
+//            closeView1.isHidden = false
+//            closeView2.isHidden = false
+//            
+            
+            MyImageView.isUserInteractionEnabled = true
+            MyImageView2.isUserInteractionEnabled = true
+            
+//            let img1Ges = Img1Ges(target: self, action: #selector(imgPdfClick))
+//            img1Ges.url = moreImagesArray[0] as! UIImage
+//            MyImageView.addGestureRecognizer(img1Ges)
+//
+//            
+//            let img2Ges = Img2Ges(target: self, action: #selector(imgPdfClick2))
+//            img2Ges.url = moreImagesArray[1] as! UIImage
+//            MyImageView2.addGestureRecognizer(img2Ges)
+            
+            
+            
+        }else  {
+            print("moreImagesArracount",moreImagesArray.count)
+            MyImageView.image = moreImagesArray[0] as! UIImage
+            MyImageView2.image = moreImagesArray[1] as! UIImage
+            MyImageView3.image = moreImagesArray[2] as! UIImage
+            MyImageView4.image = moreImagesArray[3] as! UIImage
+            
+            
+            if moreImagesArray.count < 4 {
+                imgCountShowView.isHidden = false
+                imgCountLbl.isHidden = false
+                imgCountLbl.text = String(moreImagesArray.count - 4)
+                
+            }else{
+                print("moreImagesArr")
+                imgCountShowView.isHidden = false
+                imgCountLbl.isHidden = false
+                imgCountLbl.text = String(moreImagesArray.count - 4)
+            }
         }
+        
+        
+        
     }
+    
+    
     
     
     //MARK: NEXT BUTTON ACTION
@@ -441,28 +556,122 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
             segueid.SchoolID = getScl as! NSString
             segueid.StaffID = getStaff as! NSString
             segueid.selectedSchoolDictionary = selectedSchoolDictionary
-            segueid.imagesArray = moreImagesArray
+           
+            segueid.imagesArray = imagesArray
             segueid.strFrom = strFrom
             segueid.pdfData = self.pdfData
             
             print("strStaffID1234",getStaff)
             print("strSchoolID1234",getScl)
+            print("strSimagesArray234",imagesArray.count)
+            print("strSselectedImages4",imgArr.count)
         }
     }
     
     func ImagePickerGallery() {
-        var config = ImagePickerConfiguration()
-        config.doneButtonTitle = "Finish"
-        config.noImagesTitle = "Sorry! There are no images here!"
-        config.recordLocation = false
-        config.allowVideoSelection = false
+//        var config = ImagePickerConfiguration()
+//        config.doneButtonTitle = "Finish"
+//        config.noImagesTitle = "Sorry! There are no images here!"
+//        config.recordLocation = false
+//        config.allowVideoSelection = false
+//        
+//        let imagePicker = ImagePickerController(configuration: config)
+//        imagePicker.delegate = self
+//        imagePicker.imageLimit = imageLimit
+//        present(imagePicker, animated: true, completion: nil)
+        strFrom = "Image"
+        pickImages()
         
-        let imagePicker = ImagePickerController(configuration: config)
-        imagePicker.delegate = self
-        imagePicker.imageLimit = imageLimit
-        present(imagePicker, animated: true, completion: nil)
+
+//        let config = ImagePickerConfiguration()
+//        config.doneButtonTitle = "Finish"
+//        config.noImagesTitle = "Sorry! There are no images here!"
+//        config.recordLocation = false
+//        config.allowVideoSelection = false
+//        
+//        let imagePicker = ImagePickerController(configuration: config)
+//        imagePicker.delegate = self
+//        imagePicker.imageLimit = 6
+//        present(imagePicker, animated: true, completion: {
+//            imagePicker.navigationController?.navigationBar.topItem?.title = ""
+//            imagePicker.navigationController?.navigationBar.topItem?.rightBarButtonItem?.tintColor = .black
+//        })
     }
     
+    
+    
+    @IBAction func pickImages() {
+        if   changeImgClick == 1 {
+            selectedImages.removeAll()
+            imagesArray.removeAllObjects()
+        }
+           var config = PHPickerConfiguration()
+        config.selectionLimit = 6 // Limit the selection to 4 images
+           config.filter = .images  // Only allow image selection
+           
+           let picker = PHPickerViewController(configuration: config)
+           picker.delegate = self
+           present(picker, animated: true, completion: nil)
+       }
+       
+       func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+           picker.dismiss(animated: true, completion: nil)
+           
+        
+           
+           if   changeImgClick == 1 {
+               selectedImages.removeAll()
+               imagesArray.removeAllObjects()
+           }
+           let group = DispatchGroup()
+           
+           for result in results {
+               group.enter()
+               result.itemProvider.loadObject(ofClass: UIImage.self) { [self] (object, error) in
+                   if let image = object as? UIImage {
+                       self.selectedImages.append(image)
+                       
+                   
+                       
+                       
+                    
+//                       print("Selected images: \(selectedImages)")
+                       print("IMGARRCOUNT",imgArr.count)
+                       print("IMGAimagesArrayNT",imagesArray.count)
+                   }
+                   group.leave()
+               }
+           }
+           
+           group.notify(queue: .main) { [self] in
+               
+               for item in selectedImages {
+                   if let image = item as? UIImage {
+                       imagesArray.add(image)
+                       print("Seles: \(image)")
+                   }
+               }
+               // Process the selected images
+               print("pickerselectedIcount",selectedImages.count)
+               self.SetImagesFromPicker(imageCount: (selectedImages.count as NSNumber))
+                     self.SetImagesIntoPath(images: selectedImages)
+//               imgArr.append(selectedImages.count)
+               print("Selected images: \(selectedImages)")
+//               print("IMGARRCOUNT",imgArr.count)
+               
+               if(selectedImages.count > 0){
+                   ClickHereButton.isHidden = true
+                   ClickImageCaptureButton.isEnabled = true
+                   ClickImageCaptureButton.backgroundColor = UIColor(red: 230.0/255.0, green: 126.0/255.0, blue: 34.0/255.0, alpha: 1)
+                   
+               }else{
+                   MoreImagesButton.isHidden = true
+                   ClickHereButton.isHidden = false
+                   ClickImageCaptureButton.isEnabled = false
+                   ClickImageCaptureButton.backgroundColor = UIColor.lightGray
+               }
+           }
+       }
     // MARK: - ImagePickerDelegate
     
     func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
@@ -488,29 +697,56 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
             ClickImageCaptureButton.isEnabled = false
             ClickImageCaptureButton.backgroundColor = UIColor.lightGray
         }
-        self.SetImagesFromPicker(imageCount: (images.count as NSNumber))
-        self.SetImagesIntoPath(images: images)
+//        self.SetImagesFromPicker(imageCount: (images.count as NSNumber))
+//        self.SetImagesIntoPath(images: images)
         imagePicker.dismiss(animated: true, completion: nil)
     }
     
     func SetImagesIntoPath(images : [UIImage]){
+        let countGest = UITapGestureRecognizer(target: self, action: #selector(imgListNavigate))
+        imgCountShowView.addGestureRecognizer(countGest)
+        print("SetImagesIntoPathCount",images.count)
         if(images.count == 1){
             self.MyImageView.image = images[0]
+            imgCountShowView.isHidden = true
+            imgCountLbl.isHidden = true
         }else if(images.count == 2){
             self.MyImageView.image = images[0]
             self.MyImageView2.image = images[1]
+            imgCountShowView.isHidden = true
+            imgCountLbl.isHidden = true
         }else if(images.count == 3){
             self.MyImageView.image = images[0]
             self.MyImageView2.image = images[1]
             self.MyImageView3.image = images[2]
-        }else if(images.count >= 4){
+            imgCountShowView.isHidden = true
+            imgCountLbl.isHidden = true
+        }else {
             self.MyImageView.image = images[0]
             self.MyImageView2.image = images[1]
             self.MyImageView3.image = images[2]
             self.MyImageView4.image = images[3]
+            if images.count > 4 {
+                imgCountShowView.isHidden = false
+                imgCountLbl.isHidden = false
+                var getCount =  images.count - 4
+                if getCount != 0 {
+                    imgCountLbl.text = String(images.count - 4)
+                }
+                
+            }
         }
     }
     
+    
+    
+    @IBAction func imgListNavigate() {
+        let vc = SenderSideImageShowViewController(nibName: nil, bundle: nil)
+        vc.selectedImages = selectedImages
+        
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
+    }
     func SetImagesFromPicker(imageCount : NSNumber){
         self.MyPDFImage.isHidden = true
         if(imageCount.intValue >= 4){

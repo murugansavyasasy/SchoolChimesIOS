@@ -351,6 +351,8 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
                 }else if(self.SendedScreenNameStr .isEqual("StaffMultipleImage"))
                 {
                     if(self.strFrom == "Image"){
+                        print("imagesArrayimagesArray",imagesArray)
+                        print("igesArray",self.imagesArray as! [UIImage])
                         self.getImageURL(images: self.imagesArray as! [UIImage])
                     }else{
                         self.uploadPDFFileToAWS(pdfData: pdfData!)
@@ -373,6 +375,8 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
                     }
                 }else if(self.SendedScreenNameStr .isEqual("MultipleImage"))
                 {
+                    print("strFromstrFrom2333",strFrom)
+                    print("strFromsimagesArray",imagesArray as! [UIImage])
                     if(self.strFrom == "Image"){
                         self.getImageURL(images: self.imagesArray as! [UIImage])
                     }else{
@@ -1442,6 +1446,8 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
         showLoading()
         self.originalImagesArray = images
         self.totalImageCount = images.count
+        print("imagesimages",images)
+        print("imagcountes",images.count)
         if currentImageCount < images.count{
             self.uploadAWS(image: images[currentImageCount])
         }

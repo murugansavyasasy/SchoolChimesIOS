@@ -55,6 +55,10 @@
 		1801B3D42CEF54EB00611771 /* FileAttachmentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1801B3D12CEF54EB00611771 /* FileAttachmentTableViewCell.swift */; };
 		1805FE622297F5E000A3872E /* MoreImagesTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1805FE602297F5DF00A3872E /* MoreImagesTVCell.swift */; };
 		1805FE632297F5E000A3872E /* MoreImagesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1805FE612297F5E000A3872E /* MoreImagesVC.swift */; };
+		18067F6E2CF450DF008A22B9 /* SenderSideImageShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18067F6C2CF450DF008A22B9 /* SenderSideImageShowViewController.swift */; };
+		18067F6F2CF450DF008A22B9 /* SenderSideImageShowViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18067F6D2CF450DF008A22B9 /* SenderSideImageShowViewController.xib */; };
+		18067F722CF45293008A22B9 /* selectedImageShowTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18067F702CF45293008A22B9 /* selectedImageShowTableViewCell.swift */; };
+		18067F732CF45293008A22B9 /* selectedImageShowTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18067F712CF45293008A22B9 /* selectedImageShowTableViewCell.xib */; };
 		1820D0EF228ADB9D005EE79E /* LeaveHistoryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1820D0EE228ADB9D005EE79E /* LeaveHistoryVC.swift */; };
 		1820D0F1228ADBB3005EE79E /* LeaveHistoryTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1820D0F0228ADBB3005EE79E /* LeaveHistoryTVCell.swift */; };
 		1820D0F3228AF13E005EE79E /* LeaveHistoryPopupVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1820D0F2228AF13E005EE79E /* LeaveHistoryPopupVC.swift */; };
@@ -707,6 +711,10 @@
 		1801B3D22CEF54EB00611771 /* FileAttachmentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FileAttachmentTableViewCell.xib; sourceTree = "<group>"; };
 		1805FE602297F5DF00A3872E /* MoreImagesTVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreImagesTVCell.swift; sourceTree = "<group>"; };
 		1805FE612297F5E000A3872E /* MoreImagesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreImagesVC.swift; sourceTree = "<group>"; };
+		18067F6C2CF450DF008A22B9 /* SenderSideImageShowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderSideImageShowViewController.swift; sourceTree = "<group>"; };
+		18067F6D2CF450DF008A22B9 /* SenderSideImageShowViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SenderSideImageShowViewController.xib; sourceTree = "<group>"; };
+		18067F702CF45293008A22B9 /* selectedImageShowTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = selectedImageShowTableViewCell.swift; sourceTree = "<group>"; };
+		18067F712CF45293008A22B9 /* selectedImageShowTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = selectedImageShowTableViewCell.xib; sourceTree = "<group>"; };
 		1820D0EE228ADB9D005EE79E /* LeaveHistoryVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveHistoryVC.swift; sourceTree = "<group>"; };
 		1820D0F0228ADBB3005EE79E /* LeaveHistoryTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveHistoryTVCell.swift; sourceTree = "<group>"; };
 		1820D0F2228AF13E005EE79E /* LeaveHistoryPopupVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaveHistoryPopupVC.swift; sourceTree = "<group>"; };
@@ -1559,6 +1567,17 @@
 				1805FE612297F5E000A3872E /* MoreImagesVC.swift */,
 			);
 			path = "More Image";
+			sourceTree = "<group>";
+		};
+		18067F6B2CF450B6008A22B9 /* SenderSideImgShow */ = {
+			isa = PBXGroup;
+			children = (
+				18067F6C2CF450DF008A22B9 /* SenderSideImageShowViewController.swift */,
+				18067F6D2CF450DF008A22B9 /* SenderSideImageShowViewController.xib */,
+				18067F702CF45293008A22B9 /* selectedImageShowTableViewCell.swift */,
+				18067F712CF45293008A22B9 /* selectedImageShowTableViewCell.xib */,
+			);
+			path = SenderSideImgShow;
 			sourceTree = "<group>";
 		};
 		1820D0ED228ADB3E005EE79E /* Leave History */ = {
@@ -3151,6 +3170,7 @@
 		B51702BA1F0A2F2B00879602 /* VoicesnapSchoolApp */ = {
 			isa = PBXGroup;
 			children = (
+				18067F6B2CF450B6008A22B9 /* SenderSideImgShow */,
 				1873FC1A2CEDAA21000B8F56 /* LSRW */,
 				845B1BD52CB01C7900D6E6F5 /* NoticeBoardVc */,
 				84CD56E22C9C03350068800A /* LocationVc */,
@@ -4151,6 +4171,7 @@
 				84CD56FC2C9C03350068800A /* LocationViewController.xib in Resources */,
 				1829525E29951D5C0003B9D6 /* ExamViewController.xib in Resources */,
 				849DBF142CDA3706002479DF /* PdfViewVc.xib in Resources */,
+				18067F6F2CF450DF008A22B9 /* SenderSideImageShowViewController.xib in Resources */,
 				84EF47DC2BECCA1D000EBFFD /* ClassTimeTableViewController.xib in Resources */,
 				18A816BD2A13964500E7FDF7 /* PrincipalLessonPlanViewController.xib in Resources */,
 				1801B3D32CEF54EB00611771 /* FileAttachmentTableViewCell.xib in Resources */,
@@ -4167,6 +4188,7 @@
 				1829528029951F780003B9D6 /* ExamUpcomingTableViewCell.xib in Resources */,
 				845B1BD82CB01CAB00D6E6F5 /* StaffnoticeBoardVcViewController.xib in Resources */,
 				189246AD293F46A90062B7D1 /* AdRedirectViewController.xib in Resources */,
+				18067F732CF45293008A22B9 /* selectedImageShowTableViewCell.xib in Resources */,
 				18FD3FC32292A02C00970B2B /* en.json in Resources */,
 				84F981A42BD648C00077A77E /* PendingFeeReportViewController.xib in Resources */,
 				182952D12999F48D0003B9D6 /* QuizUpcomingGetQuestionViewController.xib in Resources */,
@@ -4604,6 +4626,7 @@
 				1873EB7C2983963E008E30AA /* FeeDetailReceiptModal.swift in Sources */,
 				189E36E2296D4E7B0032A8CA /* ManagementVideoViewController.swift in Sources */,
 				18F1199F29658890002C0A0A /* SendStaffGroupsVoiceTableViewCell.swift in Sources */,
+				18067F6E2CF450DF008A22B9 /* SenderSideImageShowViewController.swift in Sources */,
 				1829525B29951D2E0003B9D6 /* QuizExamMenuViewController.swift in Sources */,
 				84B066262AFB88CE00CEB417 /* HomeWorkPdfImageShomViewController.swift in Sources */,
 				18A744A62935E6BC009A0D38 /* AdBaseRequest.swift in Sources */,
@@ -4686,6 +4709,7 @@
 				D64EF0BE20C7AC2D0051AA89 /* HomeWorkTVCell.swift in Sources */,
 				D63232A220CF9AB50091F66C /* MsgFromMgmtTVCell.swift in Sources */,
 				84B066292AFB9F8900CEB417 /* ParentHomeWorkArchiveRequest.swift in Sources */,
+				18067F722CF45293008A22B9 /* selectedImageShowTableViewCell.swift in Sources */,
 				B5A091292008B3170052AB21 /* VoiceHomeWorkVC.swift in Sources */,
 				B51CCCC21F1504F000AAE733 /* SSKeychain.m in Sources */,
 				18A816D12A13B22A00E7FDF7 /* ParentRequestListModal.swift in Sources */,

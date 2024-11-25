@@ -1318,7 +1318,7 @@ class TextHomeWorkVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UI
         
         imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
         imagePicker.allowsEditing = false
-        
+//        imagePicker.
         self.present(imagePicker, animated: true, completion: nil)
         
         
