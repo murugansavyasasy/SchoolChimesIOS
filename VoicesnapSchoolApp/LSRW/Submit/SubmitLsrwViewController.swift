@@ -86,7 +86,7 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
     var strPlayStatus : NSString = ""
     var dropDown  = DropDown()
     
- 
+    var cameraSelect : Int!
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -651,6 +651,7 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
             imagePicker.sourceType = .camera
+            cameraSelect = 1
             imagePicker.allowsEditing = true // Allows editing of the captured image
             present(imagePicker, animated: true, completion: nil)
         } else {
@@ -993,7 +994,24 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
         }
         
         // MARK: This method is called when the user has picked a video
-        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        
+        if cameraSelect == 1 {
+//            ClickImageCaptureButton.isEnabled = true
+//            let chosenImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+//            MyImageView.contentMode = .scaleToFill
+//            MyImageView.image = chosenImage
+//            self.moreImagesArray.add(chosenImage)
+//            imagesArray.add(chosenImage)
+//            img1Width.constant = 353
+//            img1Height.constant = 160
+//            if(self.MyImageView.image != nil){
+//                dismiss(animated: true, completion: nil)
+//                ClickImageCaptureButton.backgroundColor = UIColor(red: 230.0/255.0, green: 126.0/255.0, blue: 34.0/255.0, alpha: 1)
+                
+//            }
+        }else {
             if let videoURL = info[.mediaURL] as? URL {
                 print("Selected video URL: \(videoURL)")
                 uploadVideo(authToken: authToken, videoFilePath: videoURL)
@@ -1002,6 +1020,7 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
             
             picker.dismiss(animated: true, completion: nil)
         }
+    }
         
         //MARK: This method is called when the user cancels the picker
         func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
@@ -1038,11 +1057,16 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
         "Content-Type": "application/json",
         "Accept": "application/vnd.vimeo.*+json;version=3.4"
     ]
-
+        let userDefaults = UserDefaults.standard
+        var getDownload =  userDefaults.value(forKey: DefaultsKeys.allowVideoDownload)
     let parameters: [String: Any] = [
         "upload": [
             "approach": "tus",
             "size": "\(fileSize)"
+        ],
+        "privacy":[
+            "view":"unlisted",
+            "download": getDownload
         ],
         "name": "TestTitle",
         "description": "descTxtFld.text"

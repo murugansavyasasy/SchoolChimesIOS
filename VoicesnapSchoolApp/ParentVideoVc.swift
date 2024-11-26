@@ -37,6 +37,7 @@ class ParentVideoVc: UIViewController,UITableViewDataSource,UITableViewDelegate,
     var Screenheight = CFloat()
     
     var getVideoId : String!
+    var downloadShowID : Int!
     var MainDetailTextArray: NSMutableArray = NSMutableArray()
     var SelectedSectionArray : NSMutableArray = NSMutableArray()
    
@@ -327,6 +328,7 @@ class ParentVideoVc: UIViewController,UITableViewDataSource,UITableViewDelegate,
          iframeURL = String(describing: detailsDictionary["Iframe"]!)
             strSelectedVideoId = String(describing: detailsDictionary["VimeoId"]!)
          getVideoId =    String(describing:detailsDictionary["VideoId"]!)
+         downloadShowID = Int(String(describing:detailsDictionary["isDownload"]!))
         DispatchQueue.main.async() {
             self.performSegue(withIdentifier: "VdieoDetailSegue", sender: self)
         }
@@ -630,6 +632,8 @@ class ParentVideoVc: UIViewController,UITableViewDataSource,UITableViewDelegate,
             segueid.strVideoUrl = strSelectedVideoUrl
             segueid.videoId = strSelectedVideoId
             segueid.downloadVideoID = getVideoId
+            segueid.getDownloadShowID = downloadShowID
+            
         }
     }
     

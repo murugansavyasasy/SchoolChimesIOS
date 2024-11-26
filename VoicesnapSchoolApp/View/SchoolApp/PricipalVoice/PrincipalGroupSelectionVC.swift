@@ -228,7 +228,8 @@ class PrincipalGroupSelectionVC: UIViewController,Apidelegate {
         }else{
             TitleDescriotion =  "Test Description"
         }
-        
+        let userDefaults = UserDefaults.standard
+        let getDownload = UserDefaults.standard.value(forKey: DefaultsKeys.allowVideoDownload) as? Bool ?? false
         
         let parameters: [String: Any] = [
             "upload": [
@@ -236,7 +237,8 @@ class PrincipalGroupSelectionVC: UIViewController,Apidelegate {
                 "size": "\(fileSize)"
             ],
             "privacy":[
-                "view":"unlisted"
+                "view":"unlisted",
+                "download": getDownload
             ],
             "embed":[
                 "buttons":[

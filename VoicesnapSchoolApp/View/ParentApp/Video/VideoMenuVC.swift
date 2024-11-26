@@ -415,6 +415,7 @@ class VideoMenuVC: UITableViewController ,Apidelegate,UISearchBarDelegate {
             let segueid = segue.destination as! VimeoVideoDetailVC
             segueid.strVideoUrl = strSelectedVideoUrl
             segueid.videoId = strSelectedVideoId
+//            segueid.getDownloadShowID = downloadShowID
            
         }
     }

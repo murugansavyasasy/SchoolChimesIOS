@@ -554,7 +554,7 @@ print("schoolNameReg",schoolNameReg)
             }
             else {
 //
-
+             
             }
         }
         
@@ -581,7 +581,9 @@ print("schoolNameReg",schoolNameReg)
             }
         } else{
 
-           
+            cell.iconHeight.constant = 35
+            cell.iconWidth.constant = 35
+            cell.cellIconTop1.constant = 10
 
         }
         print("UnreadCountArrayCountCell",UnreadCountArray)

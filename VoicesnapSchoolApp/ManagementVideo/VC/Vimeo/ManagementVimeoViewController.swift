@@ -37,7 +37,8 @@ class ManagementVimeoViewController: UIViewController,UIWebViewDelegate {
     var vimeoToken = "Bearer 8d74d8bf6b5742d39971cc7d3ffbb51a"
     var downloadId = ""
     var downloadUrl = "http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4"
-    var isDownload = true
+  
+    var getDownloadShowID : Int!
     override func viewDidLoad() {
         super.viewDidLoad()
         progressView.isHidden = true
@@ -54,6 +55,13 @@ class ManagementVimeoViewController: UIViewController,UIWebViewDelegate {
         
         let backGesture = UITapGestureRecognizer(target: self, action: #selector(back))
         viewBack.addGestureRecognizer(backGesture)
+        
+        print("managementDownloadShowID",getDownloadShowID)
+        if getDownloadShowID == 0 {
+            videoView.isHidden = false
+        }else{
+            videoView.isHidden = true
+        }
         
         let videoGest = UITapGestureRecognizer(target: self, action: #selector(getVideoDownload))
         videoView.addGestureRecognizer(videoGest)

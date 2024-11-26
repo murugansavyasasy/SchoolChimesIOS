@@ -480,6 +480,11 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
             }
         }else{
 //
+            
+            cell.iconHeight.constant = 35
+            cell.iconWidth.constant = 35
+            cell.cellIconTopCnstraints.constant = 10
+            
         }
         
         if(self.CellIndexIdsArray[indexPath.row] as! String == "13"){
@@ -2151,7 +2156,17 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
             print("DefaultsKeys.Dict[SchoolID]",Dict["SchoolID"])
             print("DefaultsKeys.Dict[StaffID]",Dict["StaffID"])
             print("DefaultsKeys.biometricEnable",Dict["biometricEnable"])
+            print("DefaultallowVideoDownload",Dict["allowVideoDownload"])
             userDefaults.set(biometricEnable, forKey: DefaultsKeys.biometricEnable)
+            
+            
+           
+                                            var getvalue = Dict["allowVideoDownload"]
+                                           
+            userDefaults.set(getvalue, forKey: DefaultsKeys.allowVideoDownload)
+                                            
+//                                            print("downloadNodeRole", DefaultsKeys.biometricEnable)
+            //                                }
             let dicMembers = ["type" : "staff",
                               "id" : String(describing: Dict["StaffID"]!),
                               "schoolid" : String(describing: Dict["SchoolID"]!)

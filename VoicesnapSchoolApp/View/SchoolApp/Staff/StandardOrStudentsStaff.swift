@@ -490,14 +490,16 @@ class StandardOrStudentsStaff : UIViewController,Apidelegate,UIPickerViewDelegat
             "Content-Type": "application/json",
             "Accept": "application/vnd.vimeo.*+json;version=3.4"
         ]
-        
+        let userDefaults = UserDefaults.standard
+        let getDownload = UserDefaults.standard.value(forKey: DefaultsKeys.allowVideoDownload) as? Bool ?? false
         let parameters: [String: Any] = [
             "upload": [
                 "approach": "tus",
                 "size": "\(fileSize)"
             ],
             "privacy":[
-                "view":"unlisted"
+                "view":"unlisted",
+                "download": getDownload
             ],
             "embed":[
                 "buttons":[

@@ -145,6 +145,7 @@ class ManagementVideoViewController: UIViewController,UITableViewDataSource,UITa
             vc.strVideoUrl = messgae.URL
             vc.videoId = messgae.VimeoId
             vc.downloadId = messgae.ID
+            vc.getDownloadShowID = messgae.isDownload
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)
         }else{

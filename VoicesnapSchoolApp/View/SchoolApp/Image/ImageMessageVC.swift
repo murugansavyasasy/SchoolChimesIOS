@@ -30,6 +30,9 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var headerViewHeight: NSLayoutConstraint!
     
+    
+    @IBOutlet weak var img1Height: NSLayoutConstraint!
+    @IBOutlet weak var img1Width: NSLayoutConstraint!
     @IBOutlet weak var imgCountLbl: UILabel!
     @IBOutlet weak var imgCountShowView: UIViewX!
     @IBOutlet weak var MyImageView2: UIImageView!
@@ -59,7 +62,7 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
     var changeImgClick = 0
     var selectedImages: [UIImage] = []
     var imgArr : [Int] = []
-    
+    var cameraSelect : Int!
     override func viewDidLoad(){
         super.viewDidLoad()
         imagePicker.delegate = self
@@ -163,9 +166,14 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
             self.ImagePickerGallery()
         }))
         
+        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
+            self.openCamera()
+        }))
+        
         alert.addAction(UIAlertAction(title: "Pdf", style: .default, handler: { _ in
             self.FromPDF()
         }))
+        
         
         alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
         
@@ -190,22 +198,22 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
     }
     
     
-    func openCamera()
-    {
-        if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerController.SourceType.camera))
-        {
-            imagePicker.sourceType = UIImagePickerController.SourceType.camera
-            imagePicker.allowsEditing = true
-            self.present(imagePicker, animated: true, completion: nil)
-        }
-        else
-        {
-            
-            let alert  = UIAlertController(title: "Warning", message: "You don't have camera", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-        }
-    }
+//    func openCamera()
+//    {
+//        if(UIImagePickerController .isSourceTypeAvailable(UIImagePickerController.SourceType.camera))
+//        {
+//            imagePicker.sourceType = UIImagePickerController.SourceType.camera
+//            imagePicker.allowsEditing = true
+//            self.present(imagePicker, animated: true, completion: nil)
+//        }
+//        else
+//        {
+//            
+//            let alert  = UIAlertController(title: "Warning", message: "You don't have camera", preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+//            self.present(alert, animated: true, completion: nil)
+//        }
+//    }
     
     func openGallary()
     {
@@ -239,6 +247,10 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
         
         alert.addAction(UIAlertAction(title: "Pdf", style: .default, handler: { _ in
             self.FromPDF()
+        }))
+        
+        alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
+            self.openCamera()
         }))
         
         alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
@@ -280,6 +292,8 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
         case 1:
             ImagePickerGallery()
         case 2:
+            self.openCamera()
+        case 3:
             self.FromPDF()
         default: break
         }
@@ -332,7 +346,7 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
             noCamera()
         }
     }
-    
+//
 //    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
 //        ClickImageCaptureButton.isEnabled = true
 //        let chosenImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
@@ -350,99 +364,125 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
         
-        imagePicker.dismiss(animated: true, completion: nil)
         
-        let chosenImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
-        //
-        print("chosenImage",  chosenImage)
-//        imgShowView.isHidden = false
-//        imgShowTop.constant = 5
-//        
-//        imgPdfAttachBtn.isHidden = false
-//        attachmentSelectType = "Image"
-//        HomeWorkType = "Image"
-//        textviewEnableorDisable()
-        self.moreImagesArray.add(chosenImage)
-        print("moreImagesArray",  moreImagesArray.count)
-        imgCountLbl.text = "+" + String(moreImagesArray.count)
-        imgCountLbl.isHidden = false
-        imgCountShowView.isHidden = false
-        if moreImagesArray.count == 1 {
-            MyImageView.image = moreImagesArray[0] as! UIImage
-//            MyImageView.isUserInteractionEnabled = true
-            
-            MyImageView2.isHidden = true
-            
-//            let img1Ges = Img1Ges(target: self, action: #selector(imgPdfClick))
-//            img1Ges.url = moreImagesArray[0] as! UIImage
-//            ImageView.addGestureRecognizer(img1Ges)
-//            closeView1.isHidden = false
-//            closeView2.isHidden = true
-            
-        }else   if moreImagesArray.count == 2 {
-            MyImageView2.isHidden = false
-            MyImageView.image = moreImagesArray[0] as! UIImage
-            MyImageView2.image = moreImagesArray[1] as! UIImage
-//            closeView1.isHidden = false
-//            closeView2.isHidden = false
-            
-//            MyImageView.isUserInteractionEnabled = true
-//            MyImageView2.isUserInteractionEnabled = true
-            
-//            let img1Ges = Img1Ges(target: self, action: #selector(imgPdfClick))
-//            img1Ges.url = moreImagesArray[0] as! UIImage
-//            MyImageView.addGestureRecognizer(img1Ges)
-//            
-//            
-//            let img2Ges = Img2Ges(target: self, action: #selector(imgPdfClick2))
-//            img2Ges.url = moreImagesArray[1] as! UIImage
-//            MyImageView2.addGestureRecognizer(img2Ges)
-//            
-        }else   if moreImagesArray.count == 3 {
-            MyImageView.image = moreImagesArray[0] as! UIImage
-            MyImageView2.image = moreImagesArray[1] as! UIImage
-            MyImageView3.image = moreImagesArray[2] as! UIImage
+        
+        
+        if cameraSelect == 1 {
+            ClickImageCaptureButton.isEnabled = true
+                   let chosenImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+                   MyImageView.contentMode = .scaleToFill
+                   MyImageView.image = chosenImage
+                   self.moreImagesArray.add(chosenImage)
+            imagesArray.add(chosenImage)
+            img1Width.constant = 353
+            img1Height.constant = 160
+                   if(self.MyImageView.image != nil){
+                       dismiss(animated: true, completion: nil)
+                       ClickImageCaptureButton.backgroundColor = UIColor(red: 230.0/255.0, green: 126.0/255.0, blue: 34.0/255.0, alpha: 1)
            
-//            closeView1.isHidden = false
-//            closeView2.isHidden = false
-//            
+                   }
+        }else{
+            imagePicker.dismiss(animated: true, completion: nil)
             
-            MyImageView.isUserInteractionEnabled = true
-            MyImageView2.isUserInteractionEnabled = true
-            
-//            let img1Ges = Img1Ges(target: self, action: #selector(imgPdfClick))
-//            img1Ges.url = moreImagesArray[0] as! UIImage
-//            MyImageView.addGestureRecognizer(img1Ges)
-//
-//            
-//            let img2Ges = Img2Ges(target: self, action: #selector(imgPdfClick2))
-//            img2Ges.url = moreImagesArray[1] as! UIImage
-//            MyImageView2.addGestureRecognizer(img2Ges)
-            
-            
-            
-        }else  {
-            print("moreImagesArracount",moreImagesArray.count)
-            MyImageView.image = moreImagesArray[0] as! UIImage
-            MyImageView2.image = moreImagesArray[1] as! UIImage
-            MyImageView3.image = moreImagesArray[2] as! UIImage
-            MyImageView4.image = moreImagesArray[3] as! UIImage
-            
-            
-            if moreImagesArray.count < 4 {
-                imgCountShowView.isHidden = false
-                imgCountLbl.isHidden = false
-                imgCountLbl.text = String(moreImagesArray.count - 4)
+            let chosenImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+            //
+            print("chosenImage12345",  chosenImage)
+            //        imgShowView.isHidden = false
+            //        imgShowTop.constant = 5
+            //
+            //        imgPdfAttachBtn.isHidden = false
+            //        attachmentSelectType = "Image"
+            //        HomeWorkType = "Image"
+            //        textviewEnableorDisable()
+            self.moreImagesArray.add(chosenImage)
+            print("moreImagesArray",  moreImagesArray.count)
+            imgCountLbl.text = "+" + String(moreImagesArray.count)
+            imgCountLbl.isHidden = false
+            imgCountShowView.isHidden = false
+            if moreImagesArray.count == 1 {
+                img1Width.constant = 353
+                img1Height.constant = 160
+                MyImageView.image = moreImagesArray[0] as! UIImage
+                //            MyImageView.isUserInteractionEnabled = true
                 
-            }else{
-                print("moreImagesArr")
-                imgCountShowView.isHidden = false
-                imgCountLbl.isHidden = false
-                imgCountLbl.text = String(moreImagesArray.count - 4)
+                MyImageView2.isHidden = true
+                
+                //            let img1Ges = Img1Ges(target: self, action: #selector(imgPdfClick))
+                //            img1Ges.url = moreImagesArray[0] as! UIImage
+                //            ImageView.addGestureRecognizer(img1Ges)
+                //            closeView1.isHidden = false
+                //            closeView2.isHidden = true
+                
+            }else   if moreImagesArray.count == 2 {
+                MyImageView2.isHidden = false
+                img1Width.constant = 176
+                img1Height.constant = 80
+                MyImageView.image = moreImagesArray[0] as! UIImage
+                MyImageView2.image = moreImagesArray[1] as! UIImage
+                //            closeView1.isHidden = false
+                //            closeView2.isHidden = false
+                
+                //            MyImageView.isUserInteractionEnabled = true
+                //            MyImageView2.isUserInteractionEnabled = true
+                
+                //            let img1Ges = Img1Ges(target: self, action: #selector(imgPdfClick))
+                //            img1Ges.url = moreImagesArray[0] as! UIImage
+                //            MyImageView.addGestureRecognizer(img1Ges)
+                //
+                //
+                //            let img2Ges = Img2Ges(target: self, action: #selector(imgPdfClick2))
+                //            img2Ges.url = moreImagesArray[1] as! UIImage
+                //            MyImageView2.addGestureRecognizer(img2Ges)
+                //
+            }else   if moreImagesArray.count == 3 {
+                img1Width.constant = 176
+                img1Height.constant = 80
+                MyImageView.image = moreImagesArray[0] as! UIImage
+                MyImageView2.image = moreImagesArray[1] as! UIImage
+                MyImageView3.image = moreImagesArray[2] as! UIImage
+                
+                //            closeView1.isHidden = false
+                //            closeView2.isHidden = false
+                //
+                
+                MyImageView.isUserInteractionEnabled = true
+                MyImageView2.isUserInteractionEnabled = true
+                
+                //            let img1Ges = Img1Ges(target: self, action: #selector(imgPdfClick))
+                //            img1Ges.url = moreImagesArray[0] as! UIImage
+                //            MyImageView.addGestureRecognizer(img1Ges)
+                //
+                //
+                //            let img2Ges = Img2Ges(target: self, action: #selector(imgPdfClick2))
+                //            img2Ges.url = moreImagesArray[1] as! UIImage
+                //            MyImageView2.addGestureRecognizer(img2Ges)
+                
+                
+                
+            }else  {
+                img1Width.constant = 176
+                img1Height.constant = 80
+                print("moreImagesArracount",moreImagesArray.count)
+                MyImageView.image = moreImagesArray[0] as! UIImage
+                MyImageView2.image = moreImagesArray[1] as! UIImage
+                MyImageView3.image = moreImagesArray[2] as! UIImage
+                MyImageView4.image = moreImagesArray[3] as! UIImage
+                
+                
+                if moreImagesArray.count < 4 {
+                    imgCountShowView.isHidden = false
+                    imgCountLbl.isHidden = false
+                    imgCountLbl.text = String(moreImagesArray.count - 4)
+                    
+                }else{
+                    print("moreImagesArr")
+                    imgCountShowView.isHidden = false
+                    imgCountLbl.isHidden = false
+                    imgCountLbl.text = String(moreImagesArray.count - 4)
+                }
             }
+            
         }
-        
-        
         
     }
     
@@ -701,6 +741,26 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
 //        self.SetImagesIntoPath(images: images)
         imagePicker.dismiss(animated: true, completion: nil)
     }
+    
+    
+    @IBAction func openCamera() {
+        // Check if the camera is available
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            strFrom = "Image"
+            cameraSelect = 1
+            imagePicker.sourceType = .camera
+            imagePicker.allowsEditing = true // Allows editing of the captured image
+            present(imagePicker, animated: true, completion: nil)
+        } else {
+            // Camera is not available, show an alert
+            let alert = UIAlertController(title: "Camera Not Available", message: "This device has no camera.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
+        }
+    }
+    
     
     func SetImagesIntoPath(images : [UIImage]){
         let countGest = UITapGestureRecognizer(target: self, action: #selector(imgListNavigate))

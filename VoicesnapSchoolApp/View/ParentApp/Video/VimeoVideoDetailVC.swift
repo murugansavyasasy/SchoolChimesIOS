@@ -23,7 +23,6 @@ class VimeoVideoDetailVC: UIViewController,UIWebViewDelegate {
     @IBOutlet weak var progressView: UIProgressView!
     
     @IBOutlet weak var videoDownloadView: UIView!
-    @IBOutlet var downloadView: UIView!
     @IBOutlet weak var webKitView: WKWebView!
     var strVideoUrl = String()
     var videoId = String()
@@ -36,6 +35,7 @@ class VimeoVideoDetailVC: UIViewController,UIWebViewDelegate {
     var vimeoToken = "Bearer 8d74d8bf6b5742d39971cc7d3ffbb51a"
     var getVideoPath : String!
     var downloadVideoID : String!
+    var getDownloadShowID : Int!
     override func viewDidLoad(){
         
         super.viewDidLoad()
@@ -53,10 +53,16 @@ class VimeoVideoDetailVC: UIViewController,UIWebViewDelegate {
         
         print("ManageVideo")
         print("Video4",downloadVideoID)
-        print("videoId",videoId)
+        print("getDownloadShowID",getDownloadShowID)
         
         videoPlayer()
         
+        
+        if getDownloadShowID == 1 {
+            videoDownloadView.isHidden = false
+        }else{
+            videoDownloadView.isHidden = true
+        }
         let downloadGesture = UITapGestureRecognizer(target: self, action: #selector(getVideoDownload))
         videoDownloadView.addGestureRecognizer(downloadGesture)
                     

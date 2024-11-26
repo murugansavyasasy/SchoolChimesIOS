@@ -682,14 +682,16 @@ class UploadViemoVideoVC: UIViewController, UIActionSheetDelegate, UIImagePicker
             TitleDescriotion =  "Test Description"
         }
         
-        
+        let userDefaults = UserDefaults.standard
+        let getDownload = UserDefaults.standard.value(forKey: DefaultsKeys.allowVideoDownload) as? Bool ?? false
         let parameters: [String: Any] = [
             "upload": [
                 "approach": "tus",
                 "size": "\(fileSize)" // Use the actual video file size
             ],
             "privacy":[
-                "view":"unlisted"
+                "view":"unlisted",
+                "download": getDownload
             ],
             "embed":[
                 "buttons":[

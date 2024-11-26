@@ -68,7 +68,7 @@ class MessageFromManagentVideoResponse: Mappable {
     var Description : String!
     var VimeoUrl : String!
     var VimeoId : String!
-    
+    var isDownload : Int!
     
     
     required init?(map: Map) {
@@ -92,6 +92,7 @@ class MessageFromManagentVideoResponse: Mappable {
         Description <- map["Description"]
         VimeoUrl <- map["VimeoUrl"]
         VimeoId <- map["VimeoId"]
+        isDownload <- map["isDownload"]
         
         
     }

@@ -66,7 +66,7 @@ struct DefaultsKeys {
     static var SchoolNameRegional = "SchoolNameRegional"
     static var biometricEnable = "biometricEnable"
     static var SelectedDAte = ""
-    
+    static var allowVideoDownload = "allowVideoDownload"
     static var bucketNameIndia = "schoolchimes-files-india"
     
     static var bucketNameBangkok = "schoolchimes-files-bangkok"
