@@ -996,21 +996,14 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
         // MARK: This method is called when the user has picked a video
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-        
+        var images : [Int] = []
         if cameraSelect == 1 {
-//            ClickImageCaptureButton.isEnabled = true
-//            let chosenImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
-//            MyImageView.contentMode = .scaleToFill
-//            MyImageView.image = chosenImage
-//            self.moreImagesArray.add(chosenImage)
-//            imagesArray.add(chosenImage)
-//            img1Width.constant = 353
-//            img1Height.constant = 160
-//            if(self.MyImageView.image != nil){
-//                dismiss(animated: true, completion: nil)
-//                ClickImageCaptureButton.backgroundColor = UIColor(red: 230.0/255.0, green: 126.0/255.0, blue: 34.0/255.0, alpha: 1)
-                
-//            }
+                        let chosenImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
+
+            self.addBtn.backgroundColor = .blue
+
+            self.uploadAWS(image:chosenImage)
+
         }else {
             if let videoURL = info[.mediaURL] as? URL {
                 print("Selected video URL: \(videoURL)")
