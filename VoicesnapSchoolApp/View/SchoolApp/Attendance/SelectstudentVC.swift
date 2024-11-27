@@ -426,7 +426,7 @@ class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableV
             ],
             "privacy":[
                 "view":"unlisted",
-                "download": getDownload
+                "download": true
             ],
             "embed":[
                 "buttons":[

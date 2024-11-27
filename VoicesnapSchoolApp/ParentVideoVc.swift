@@ -327,7 +327,27 @@ class ParentVideoVc: UIViewController,UITableViewDataSource,UITableViewDelegate,
         strSelectedVideoUrl = String(describing: detailsDictionary["VimeoUrl"]!)
          iframeURL = String(describing: detailsDictionary["Iframe"]!)
             strSelectedVideoId = String(describing: detailsDictionary["VimeoId"]!)
-         getVideoId =    String(describing:detailsDictionary["VideoId"]!)
+         
+         
+         
+         if let questionMarkIndex = strSelectedVideoId.firstIndex(of: "?") {
+             let result = String(strSelectedVideoId[..<questionMarkIndex]) // Extract substring before "?"
+             print("Digits before '?': \(result)")
+             getVideoId = String(result)
+         } else {
+             print("No '?' found in the string.")
+         }
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+      
          downloadShowID = Int(String(describing:detailsDictionary["isDownload"]!))
         DispatchQueue.main.async() {
             self.performSegue(withIdentifier: "VdieoDetailSegue", sender: self)

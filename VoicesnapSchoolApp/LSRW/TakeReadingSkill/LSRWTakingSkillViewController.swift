@@ -22,17 +22,21 @@ class LSRWTakingSkillViewController: UIViewController,UITableViewDataSource,UITa
     var skillId : String!
     var attachData : [GetAttachmentForSkillData] = []
     let rowId = "TakeReadingSkillTableViewCell"
+    
+    var studentId = String()
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewAllSkillByStudent()
+      
         
-        
+        let userDefaults = UserDefaults.standard
+       
+        studentId = userDefaults.string(forKey: DefaultsKeys.chilId)!
         
         let backGesture = UITapGestureRecognizer(target: self, action: #selector(backVc))
         backView.addGestureRecognizer(backGesture)
         
-        
+        viewAllSkillByStudent()
         
         
         tv.register(UINib(nibName: rowId, bundle: nil), forCellReuseIdentifier: rowId)
@@ -50,6 +54,7 @@ class LSRWTakingSkillViewController: UIViewController,UITableViewDataSource,UITa
     @IBAction func nextBtnAction(_ sender: UIButton) {
         let vc = SubmitLsrwViewController(nibName: nil, bundle: nil)
         vc.modalPresentationStyle = .fullScreen
+        vc.skillId = skillId
         present(vc, animated:   true)
     }
     
@@ -62,7 +67,14 @@ class LSRWTakingSkillViewController: UIViewController,UITableViewDataSource,UITa
         let cell = tableView.dequeueReusableCell(withIdentifier: rowId, for: indexPath) as! TakeReadingSkillTableViewCell
         let getAttach : GetAttachmentForSkillData = attachData[indexPath.row]
         cell.typeLbl.text = ": " + getAttach.ActivityType
-        cell.attachmentLbl.text = ": " + getAttach.Attachment
+        
+        
+        
+        if getAttach.ActivityType == "TEXT" {
+            cell.attachmentLbl.text = ": " + getAttach.Attachment
+        }else{
+            cell.attachmentLbl.text = ": " + String(getAttach.Order)
+        }
         
         let attachGes = AttachGesture(target: self, action: #selector(AttachmentRedirect))
         attachGes.attachment = getAttach.Attachment
@@ -80,13 +92,13 @@ class LSRWTakingSkillViewController: UIViewController,UITableViewDataSource,UITa
         
         
         let getAttchStudentModal = GetAttachmentForSkillModal()
-        getAttchStudentModal.StudentID = "10391374"
+        getAttchStudentModal.StudentID =  studentId
         getAttchStudentModal.SkillId = skillId
         
         
         var  getAttchStudentModalStr = getAttchStudentModal.toJSONString()
         
-        
+        print("getAttchStudentModalStr",getAttchStudentModalStr)
         GetAttachmentForSkillRequest.call_request(param: getAttchStudentModalStr!) {
             
             [self] (res) in
@@ -112,6 +124,7 @@ class LSRWTakingSkillViewController: UIViewController,UITableViewDataSource,UITa
             let vc = PreviewLsrwViewController(nibName: nil, bundle: nil)
         vc.attactText = ges.attachment
         vc.attactType = ges.getType
+        
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true)
             

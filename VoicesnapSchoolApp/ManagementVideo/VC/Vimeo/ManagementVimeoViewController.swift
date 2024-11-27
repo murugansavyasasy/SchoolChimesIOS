@@ -55,9 +55,9 @@ class ManagementVimeoViewController: UIViewController,UIWebViewDelegate {
         
         let backGesture = UITapGestureRecognizer(target: self, action: #selector(back))
         viewBack.addGestureRecognizer(backGesture)
-        
+        print("managemenvideoIdideoId",videoId)
         print("managementDownloadShowID",getDownloadShowID)
-        if getDownloadShowID == 0 {
+        if getDownloadShowID == 1 {
             videoView.isHidden = false
         }else{
             videoView.isHidden = true
@@ -128,38 +128,9 @@ class ManagementVimeoViewController: UIViewController,UIWebViewDelegate {
     @objc func getVideoDownload () {
         btnStart()
         
-        let jsonData = """
-        {
-            "app": {
-                "name": "Voicesnap for schools",
-                "uri": "/apps/177030"
-            },
-            "categories": [],
-            "content_rating": ["unrated"],
-            "content_rating_class": "unrated",
-            "created_time": "2024-11-06T10:56:07+00:00",
-            "description": "test",
-            "download": [
-                {
-                    "created_time": "2024-11-06T10:56:53+00:00",
-                    "expires": "2024-11-10T07:02:21+00:00",
-                    "fps": 20,
-                    "height": 320,
-                    "link": "https://player.vimeo.com/progressive_redirect/download/1026844236/container/cc3c9cca-d29d-4051-9ed4-270ae5d3c2bf/f858b363/test_for_download%20%28360p%29.mp4?expires=1731222141&loc=external&oauth2_token_id=1346973768&signature=b2588e9344c656225dd7c506ccd1c6d81f56825ad3ec43505b37a46972fe4c73",
-                    "md5": "<null>",
-                    "public_name": "360p",
-                    "quality": "sd",
-                    "rendition": "360p",
-                    "size": 38034,
-                    "size_short": "37.14KB",
-                    "type": "video/mp4",
-                    "width": 320
-                }
-            ]
-        }
-        """.data(using: .utf8)!
+       
            
-        let urlString = bsaeUrl +  "1026844236"
+        let urlString = bsaeUrl +  videoId
         
 
         print("Download\(urlString)")
@@ -195,8 +166,8 @@ class ManagementVimeoViewController: UIViewController,UIWebViewDelegate {
                if let data = data {
                    do {
                        
-                       let jsonObject = try JSONSerialization.jsonObject(with: jsonData, options: []) as? [String: Any]
-                       
+                       let jsonObject = try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
+                       print("jsonObject",jsonObject)
                        
                        if let downloadArray = jsonObject?["download"] as? [[String: Any]], let firstDownload = downloadArray.first {
                            print("Download node: \(firstDownload)")
@@ -303,8 +274,6 @@ class ManagementVimeoViewController: UIViewController,UIWebViewDelegate {
            }
     
     
-    
-    
     func downloadVideo(from url: URL, completion: @escaping (URL?) -> Void) {
         let session = URLSession(configuration: .default)
         let downloadTask = session.downloadTask(with: url) { (tempLocalUrl, response, error) in
@@ -336,18 +305,27 @@ class ManagementVimeoViewController: UIViewController,UIWebViewDelegate {
                     try fileManager.removeItem(at: savedURL)
                 }
                 try fileManager.moveItem(at: tempLocalUrl, to: savedURL)
+                
                 print("File saved to: \(savedURL)")
+                
+                // Return the saved URL to the completion handler
+                DispatchQueue.main.async {
+                    completion(savedURL)
+                }
+                
                 var urlConvert = savedURL.absoluteString
-                var refreshAlert = UIAlertController(title: "", message: urlConvert, preferredStyle: UIAlertController.Style.alert)
+                let refreshAlert = UIAlertController(title: "Alert Title", message: urlConvert, preferredStyle: .alert)
 
-                refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { [self] (action: UIAlertAction!) in
-                  
-//                    UserDefaults.standard.removeObject(forKey: Constant.DefaultsKeys.token)
-                   
+                   // Add the "Ok" action
+                   refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+                       // Perform any action you need here
+                       print("Ok button tapped")
+                   }))
 
-                
-                                                     }))
-                
+                   // Present the alert
+                   if let topController = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController {
+                       topController.present(refreshAlert, animated: true, completion: nil)
+                   }
                 
                 
                
@@ -357,11 +335,14 @@ class ManagementVimeoViewController: UIViewController,UIWebViewDelegate {
                 completion(savedURL)
             } catch {
                 print("File error: \(error.localizedDescription)")
-                completion(nil)
+                DispatchQueue.main.async {
+                    completion(nil)
+                }
             }
         }
         
         downloadTask.resume()
     }
     
+   
 }

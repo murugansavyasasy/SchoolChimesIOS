@@ -54,6 +54,25 @@ func mapping(map: ObjectMapper.Map)              {
 }
 }
 
+
+class SubmitResponse          : Mappable {
+    var Message                           : String!
+    var Status                             : Int!
+   
+
+required init?(map: ObjectMapper.Map)            {
+mapping(map: map)
+}
+
+func mapping(map: ObjectMapper.Map)              {
+    
+    Message                               <- map["Message"]
+    Status                                 <- map["Status"]
+   
+   
+}
+}
+
 //
 //class ViewAllSkillByData                   : Mappable {
 //    var SkillId                            : Int!

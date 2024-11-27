@@ -11,11 +11,15 @@ import DropDown
 import PhotosUI
 import Alamofire
 import AVFoundation
+import ObjectMapper
+import KRProgressHUD
 
 class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UIDocumentPickerDelegate, PHPickerViewControllerDelegate,AVAudioRecorderDelegate, AVAudioPlayerDelegate,UITextViewDelegate {
     
     
+    @IBOutlet weak var restrictionTv: UITableView!
     
+    @IBOutlet weak var restrictionView: UIView!
     
     
     @IBOutlet weak var playVoiceHeight: NSLayoutConstraint!
@@ -33,7 +37,8 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
     @IBOutlet weak var addBtn: UIButton!
     @IBOutlet weak var imgPdfPathShowView: UIView!
     @IBOutlet weak var overAllTextView: UIView!
-    @IBOutlet weak var slider: UISlider!
+  
+    @IBOutlet weak var Slider: UISlider!
     @IBOutlet weak var voiceeTapView: UIView!
     @IBOutlet weak var timerLbl: UILabel!
     @IBOutlet weak var recordlbl: UILabel!
@@ -47,6 +52,7 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
     @IBOutlet weak var dropDownView: UIViewX!
     @IBOutlet weak var dropDownTextLbl: UILabel!
     
+    @IBOutlet weak var agreeView: UIView!
     var items = ["Text", "Voice", "Image","Pdf","Video"]
     var rowId = "FileAttachmentTableViewCell"
     var currentImageCount = 0
@@ -66,6 +72,8 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
     var totalImageCount = 0
     var onImagesPicked: (([UIImage]) -> Void)?
     var aswImg : [String] = []
+    var aswPdf : [String] = []
+    var aswVoice : [String] = []
     var onPdfPicked: ((Data) -> Void)?
     var onImagePicked: (([UIImage]) -> Void)?
     var pathArr : [String] = []
@@ -73,7 +81,7 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
     var overAllFileArr : [String] = []
     var typeArr : [String] = []
     var fileArr : [String] = []
-    var timer = Timer()
+  
     var urlData: URL?
     var TotaldurationFormat = String()
     var MaxMinutes = Int()
@@ -85,10 +93,33 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
     var audioRecorder    : AVAudioRecorder!
     var strPlayStatus : NSString = ""
     var dropDown  = DropDown()
+    var imagePicker = UIImagePickerController()
+    var AudioPlayUrl : String!
+        var Audiopath  : URL!
+    var timer = Timer()
+    var timeLabelForPlayVoice : String!
+    var audioPlayer : AVAudioPlayer!
+        
+    var isAudioRecordingGranted: Bool!
+    var isRecording = false
+    var isPlaying = false
+       
+        var url: URL!
+    var studentId = String()
+    var skillId : String!
     
     var cameraSelect : Int!
+    var restrictionData : [RestrictionResponse] = []
+    var imageLimit : Int!
+     var restrictionRowNib = "RestrictionTableViewCell"
+    var strTextViewPlaceholder = String()
     override func viewDidLoad() {
         super.viewDidLoad()
+        imagePicker.delegate = self
+        
+        let userDefaults = UserDefaults.standard
+       
+        studentId = userDefaults.string(forKey: DefaultsKeys.chilId)!
         
         contentTextViw.delegate = self
         addBtn.backgroundColor = .lightGray
@@ -103,9 +134,20 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
         let backGesture = UITapGestureRecognizer(target: self, action: #selector(backVc))
         backView.addGestureRecognizer(backGesture)
         
+        let strImageLimit : NSString = UserDefaults.standard.object(forKey: IMAGE_COUNT) as! NSString
+        imageLimit = strImageLimit.integerValue
+        print("imageLimit",imageLimit)
+    
+        
+        
+        let agreeGesture = UITapGestureRecognizer(target: self, action: #selector(pickVideoFromGallery))
+     agreeView.addGestureRecognizer(agreeGesture)
+        
         
         tv.register(UINib(nibName: rowId, bundle: nil), forCellReuseIdentifier: rowId)
         
+        restrictionTv.register(UINib(nibName: restrictionRowNib, bundle: nil), forCellReuseIdentifier: restrictionRowNib)
+
         let selectMonth = UITapGestureRecognizer(target: self, action: #selector(selectMonthViewClick))
         dropDownView.addGestureRecognizer(selectMonth)
         
@@ -115,12 +157,16 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
         overAllPathArr.removeAll()
         addAttachTop.constant = -100
         
+        check_record_permission()
+        
+        strTextViewPlaceholder = "Content"
+        
         let imgGesture = UITapGestureRecognizer(target: self, action: #selector(selectImages))
         changeImgView.addGestureRecognizer(imgGesture)
         
-        let submitGesture = UITapGestureRecognizer(target: self, action: #selector(submitAct))
-        submitView.addGestureRecognizer(submitGesture)
-        
+        restrictionTv.isHidden = true
+        restrictionView.isHidden = true
+      
         
         
     }
@@ -237,27 +283,29 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
     @IBAction func addFileAttachmentBtnAction(_ sender: UIButton) {
         if addBtn.backgroundColor != .lightGray {
             
-            
+          
             
             if dropDownTextLbl.text == "Text" {
                 pathArr.append(contentTextViw.text)
                 print("pathArrpathArr",pathArr.count)
                 contentTextViw.text = ""
+                addBtn.backgroundColor = .lightGray
                 fileArr.append("")
                 typeArr.append("TEXT")
-                overAllPathArr.append(contentsOf: pathArr)
+               
                 tv.delegate = self
                 tv.dataSource = self
                 tv.reloadData()
+                submitView.backgroundColor = UIColor(named: "serach_color")
                 
             }else  if dropDownTextLbl.text == "Image" {
                 //            pathArr.removeAll()
                 pathArr.append(contentsOf: aswImg)
                 overAllPathArr.append(contentsOf: pathArr)
-                
-                for i in pathArr {
+               
+              
                     typeArr.append("IMAGE")
-                }
+                
                 
                 
                 
@@ -268,22 +316,37 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
                 tv.delegate = self
                 tv.dataSource = self
                 tv.reloadData()
-                
+                addBtn.backgroundColor = .lightGray
+                submitView.backgroundColor = UIColor(named: "serach_color")
+
             }else  if dropDownTextLbl.text == "Pdf" {
                 
                 
-                pathArr.append(contentsOf: aswImg)
+                pathArr.append(contentsOf: aswPdf)
                 overAllPathArr.append(contentsOf: pathArr)
                 
-                fileArr.append("ImageIcon")
+                fileArr.append("pdfImage")
                 typeArr.append("PDF")
                 aswImg.removeAll()
                 tv.delegate = self
                 tv.dataSource = self
+                addBtn.backgroundColor = .lightGray
                 tv.reloadData()
+                submitView.backgroundColor = UIColor(named: "serach_color")
+
                 
             }else  if dropDownTextLbl.text == "Voice" {
-                pathArr.append(contentTextViw.text)
+//                pathArr.append(contentTextViw.text)
+                pathArr.append(contentsOf: aswVoice)
+                addBtn.backgroundColor = .lightGray
+                
+                typeArr.append("VOICE")
+                
+                tv.delegate = self
+                tv.dataSource = self
+                tv.reloadData()
+                submitView.backgroundColor = UIColor(named: "serach_color")
+
             }else  if dropDownTextLbl.text == "Video" {
              
                 
@@ -291,15 +354,20 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
                 overAllPathArr.append(contentsOf: pathArr)
                 
                 fileArr.append("p23")
+                addBtn.backgroundColor = .lightGray
                 typeArr.append("VIDEO")
                 aswImg.removeAll()
                 tv.delegate = self
                 tv.dataSource = self
                 tv.reloadData()
+                submitView.backgroundColor = UIColor(named: "serach_color")
+
                 
             }
             
         }else{
+           
+            
             print("Backgroud light")
         }
        
@@ -311,324 +379,96 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
     
     @IBAction func voiceRecordBtnAction(_ sender: UIButton) {
         
-        self.playerDidFinishPlaying()
-        
-        
-        
-        
-        
-        
-        
-        
-        
-//        pathImg.isHidden = true
-//        pathLbl.isHidden = true
-//        disableButtonAction()
-        if audioRecorder == nil {
-//            self.disableButtonAction()
-//            self.TitleForStopRecord()
-            self.voiceRecordBtn.setBackgroundImage(UIImage(named:"VoiceRecordSelect"), for: UIControl.State.normal)
-        
-            self.startRecording()
-            self.meterTimer = Timer.scheduledTimer(timeInterval: 0.1, target:self, selector:#selector(self.updateAudioMeter(_:)), userInfo:nil, repeats:true)
-        }else{
-            self.funcStopRecording()
-        }
+        recodeVc()
         
     }
     
-    func directoryURL() -> NSURL? {
-        
-        let fileManager = FileManager.default
-        let urls = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
-        let documentDirectory = urls[0] as NSURL
-        let soundURL = documentDirectory.appendingPathComponent("sample.mp4")
-        
-        return soundURL as NSURL?
-    }
     
-    func startRecording() {
-        let audioSession = AVAudioSession.sharedInstance()
-        do{
-            audioRecorder = try AVAudioRecorder(url: self.directoryURL()! as URL, settings: settings)
-            urlData = audioRecorder.url
-            audioRecorder.delegate = self
-            audioRecorder.prepareToRecord()
-            
-        }catch{
-            finishRecording(success: false)
-        }
-        do{
-            try audioSession.setActive(true)
-            audioRecorder.record()
-        }catch{
-        }
-    }
     
-    func finishRecording(success: Bool) {
-        audioRecorder.stop()
-        if success {
-            audioRecorder = nil
-           
-        } else {
-            audioRecorder = nil
-        }
-    }
+   
     
     
     
-    
-    func funcStopRecording(){
-//        self.TitleForStartRecord()
-        self.voiceRecordBtn.setBackgroundImage(UIImage(named:"VocieRecord"), for: UIControl.State.normal)
-        self.finishRecording(success: true)
-//        playVoiceMessageView.isHidden = false
-        calucalteDuration()
-        if(UIDevice.current.userInterfaceIdiom == .pad){
-            
-//            PlayVoiceMsgViewHeight.constant = 180
-            
-            self.overallTimeLbl.text = TotaldurationFormat
-            self.timeCountingLbl.text = "00.00"
-        }else{
-//            PlayVoiceMsgViewHeight.constant = 120
-            
-            self.overallTimeLbl.text = TotaldurationFormat
-            self.timeCountingLbl.text = "00.00"
-        }
-        
-        
-    }
-    
-    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
-        if !flag {
-            finishRecording(success: false)
-        }
-    }
-    
-    @objc func updateSlider(){
-        if self.player!.currentItem?.status == .readyToPlay{
-            time = CMTimeGetSeconds(self.player!.currentTime())
-        }
-        
-        let duration : CMTime = playerItem!.asset.duration
-        let seconds : Float64 = CMTimeGetSeconds(duration)
-        
-        slider.maximumValue = Float(seconds)
-        slider.minimumValue = 0.0
-        
-        slider.value = Float(time)
-        
-        if(time > 0){
-            let minutes = Int(time) / 60 % 60
-            let secondss = Int(time) % 60
-            MaxSeconds = secondss
-            let durationFormat = String(format:"%02i:%02i", minutes, secondss)
-            timeCountingLbl.text = durationFormat
-            
-        }
-        
-        if(time == seconds){
-            
-            timer.invalidate()
-            PlayVocieButton.isSelected = false
-            slider.value = 0.0
-        }
-    }
-    
-    func actionPlayButton(){
-        
-        playerItem = AVPlayerItem(url: urlData!)
-        player = AVPlayer(playerItem: playerItem!)
-        
-        if(strPlayStatus.isEqual(to: "close")){
-            slider.value = 0.0
-        }
-        
-        if(PlayVocieButton.isSelected){
-            
-            PlayVocieButton.isSelected = false
-            let seconds1 : Int64 = Int64(slider.value)
-            let targetTime : CMTime = CMTimeMake(value: seconds1, timescale: 1)
-            
-            player!.seek(to: targetTime)
-            strPlayStatus = "play"
-            player?.pause()
-        }else{
-            PlayVocieButton.isSelected = true
-            let seconds1 : Int64 = Int64(slider.value)
-            let targetTime : CMTime = CMTimeMake(value: seconds1, timescale: 1)
-            player!.seek(to: targetTime)
-            
-            strPlayStatus = "play"
-            player?.volume = 1
-            player?.play()
-        }
-        
-        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateSlider), userInfo: nil, repeats: true)
-        
-        
-    }
-    
-    @objc func updateAudioMeter(_ timer:Timer) {
-        if let audioRecorder1 = self.audioRecorder {
-            if audioRecorder1.isRecording {
-                let min = Int(audioRecorder1.currentTime / 60)
-                let sec = Int(audioRecorder1.currentTime.truncatingRemainder(dividingBy: 60))
-                let s = String(format: "%02d:%02d", min, sec)
-                let SecString = sec
-                timerLbl.text = s
-                audioRecorder1.updateMeters()
-//                if(HomeWorkSecondStr < 60){
-//                    if(sec == ApiHomeWorkSecondInt){
-//                        self.funcStopRecording()
-//                    }
-//                }else{
-//                    if(min == ApiHomeWorkSecondInt){
-//                        self.funcStopRecording()
-//                    }
-//                }
-            }
-        }
-    }
-    
-    func playbackSliderValueChanged(playbackSlider:UISlider){
-        let seconds : Int64 = Int64(playbackSlider.value)
-        let targetTime : CMTime = CMTimeMake(value: seconds, timescale: 1)
-        
-        if(player != nil){
-            player!.seek(to: targetTime)
-        }else{
-            
-            slider.value = playbackSlider.value
-        }
-        
-    }
-    
-    func calucalteDuration() -> Void{
-        playerItem = AVPlayerItem(url: urlData!)
-        let duration : CMTime = playerItem!.asset.duration
-        let seconds : Float64 = CMTimeGetSeconds(duration)
-        
-        
-        slider.maximumValue = Float(seconds)
-        //let hours = Int(seconds) / 3600
-        let minutes = Int(seconds) / 60 % 60
-        let secondss = Int(seconds) % 60
-        durationString = String(format:"%i",Int(seconds))
-        
-        TotaldurationFormat = String(format:"/ %02i:%02i", minutes, secondss)
-        overallTimeLbl.text = TotaldurationFormat
-        
-    }
-    
-    // MARK: Player close
-    func playerDidFinishPlaying() {
-        
-        if(player != nil){
-            timer.invalidate()
-            player?.pause()
-            
-            slider.value = 0.0
-            player?.rate = 0.0
-            timerLbl.text = "00.00"
-            
-            PlayVocieButton.isSelected = false
-            strPlayStatus = "close"
-            player = nil
-            player =  AVPlayer.init()
-            
-            playerItem?.seek(to: CMTime.zero, completionHandler: nil)
-                 time = CMTimeGetSeconds(self.player!.currentTime())
-        }
-    }
-    
-    //MARK:Play Audio BUTTON ACTION
-    @IBAction func actionPlayVoiceMessage(_ sender: UIButton){
-        calucalteDuration()
-        
-        actionPlayButton()
-        audioRecorder = nil
-    }
-    
-    @IBAction func actionSliderButton(_ sender: UISlider) {
-        playbackSliderValueChanged(playbackSlider: slider)
-    }
-    
-    
-    
-    
+   
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print("pathArrcount",pathArr.count)
-        return pathArr.count
+        if tableView == restrictionTv {
+            return restrictionData.count
+        }else{
+            return pathArr.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: rowId, for: indexPath) as! FileAttachmentTableViewCell
         
-        cell.contentFilePathLbl.text = pathArr[indexPath.row]
-        
-//     img   cell.contentFilePathLbl.text = fileArr[indexPath.row]
-        cell.selectionStyle = .none
-//        for i in typeArr {
-//            
-//            print("getTypeArr",typeArr)
-//            if i == "IMAGE" {
-//                
-//                cell.img.image = UIImage(named: "ImageIcon")
-//            }else if  i == "TEXT" {
-//                
-//                cell.img.image = UIImage(named: "TextIcon")
-//            }else if  i == "VIDEO" {
-//                
-//                cell.img.image = UIImage(named: "p23")
-//            }else if i == "PDF" {
-//                
-//                cell.img.image = UIImage(named: "pdfImage")
-//            }else if  i == "VOICE" {
-//                
-//                cell.img.image = UIImage(named: "TextIcon")
-//            }
-//        }
-        
-        let currentType = typeArr[indexPath.row]
+        if tableView == restrictionTv {
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: restrictionRowNib, for: indexPath) as! RestrictionTableViewCell
+            
+            let restriction : RestrictionResponse = restrictionData[indexPath.row]
+            cell.contentLbl.text = restriction.Content
+            
+         
+            return cell
+           
+        }else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: rowId, for: indexPath) as! FileAttachmentTableViewCell
+            
+            cell.contentFilePathLbl.text = pathArr[indexPath.row]
+            
+            //     img   cell.contentFilePathLbl.text = fileArr[indexPath.row]
+            cell.selectionStyle = .none
+            
+            
+            let currentType = typeArr[indexPath.row]
+            print("CellcurrentType",currentType)
+            
+            // Update the cell's image based on type
+            switch currentType {
+            case "IMAGE":
+                cell.img.image = UIImage(named: "ImageIcon")
+            case "TEXT":
+                cell.img.image = UIImage(named: "TextIcon")
+            case "VIDEO":
+                cell.img.image = UIImage(named: "p23")
+            case "PDF":
+                cell.img.image = UIImage(named: "pdfImage")
+            case "VOICE":
+                cell.img.image = UIImage(named: "p1")
+            default:
+                cell.img.image = nil // Fallback image or nil
+            }
+            
+            cell.indexPath = indexPath
+            
+            // Set the delete action closure
+            cell.deleteAction = { [weak self] indexPath in
+                self?.deleteSelectdItem(at: indexPath)
+            }
+            
+            
+            let closeGesture = UITapGestureRecognizer(target: self, action: #selector(selectMonthViewClick))
+            dropDownView.addGestureRecognizer(closeGesture)
+            
+            
+            if submitView.backgroundColor != .lightGray {
                 
-                // Update the cell's image based on type
-                switch currentType {
-                case "IMAGE":
-                    cell.img.image = UIImage(named: "ImageIcon")
-                case "TEXT":
-                    cell.img.image = UIImage(named: "TextIcon")
-                case "VIDEO":
-                    cell.img.image = UIImage(named: "p23")
-                case "PDF":
-                    cell.img.image = UIImage(named: "pdfImage")
-                case "VOICE":
-                    cell.img.image = UIImage(named: "TextIcon")
-                default:
-                    cell.img.image = nil // Fallback image or nil
-                }
-        
-        cell.indexPath = indexPath
-               
-               // Set the delete action closure
-               cell.deleteAction = { [weak self] indexPath in
-                   self?.deleteSelectdItem(at: indexPath)
-               }
-               
-        
-        let closeGesture = UITapGestureRecognizer(target: self, action: #selector(selectMonthViewClick))
-        dropDownView.addGestureRecognizer(closeGesture)
+                let submitGesture = UITapGestureRecognizer(target: self, action: #selector(submitAct))
+                submitView.addGestureRecognizer(submitGesture)
+                
+            }
+            
+            
+            return  cell
+        }
         
         
         
-        
-        return  cell
-        
-        
+//
     }
     
+  
     
     func deleteSelectdItem(at indexPath: IndexPath) {
         print("indexPath",indexPath.row)
@@ -636,7 +476,7 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
            
            // Remove the time slot at the given row
            pathArr.remove(at: indexPath.row)
-           
+        typeArr.remove(at: indexPath.row)
            // Perform batch updates to delete the row from the table view
            tv.performBatchUpdates({
                tv.deleteRows(at: [indexPath], with: .automatic)
@@ -645,29 +485,13 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
 //
        
     
-    @IBAction func openCamera() {
-        // Check if the camera is available
-        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-            let imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
-            imagePicker.sourceType = .camera
-            cameraSelect = 1
-            imagePicker.allowsEditing = true // Allows editing of the captured image
-            present(imagePicker, animated: true, completion: nil)
-        } else {
-            // Camera is not available, show an alert
-            let alert = UIAlertController(title: "Camera Not Available", message: "This device has no camera.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            present(alert, animated: true, completion: nil)
-        }
-    }
-    
+   
     
     func textViewDidChange(_ textView: UITextView) {
           print("Text changed to: \(textView.text ?? "")")
         if textView.text.count > 0 {
                 // Change the button color to blue when text exists
-                addBtn.backgroundColor = .blue
+            addBtn.backgroundColor = UIColor(named: "AddContent")
             } else {
                 // Change the button color to gray when no text exists
                 addBtn.backgroundColor = .lightGray
@@ -712,7 +536,9 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
             
             if pdfData!.count > 0 {
                     // Change the button color to blue when text exists
-                self.addBtn.backgroundColor = .blue
+               
+                      addBtn.backgroundColor = UIColor(named: "AddContent")
+
                 } else {
                     // Change the button color to gray when no text exists
                     self.addBtn.backgroundColor = .lightGray
@@ -731,21 +557,72 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
         controller.dismiss(animated: true, completion: nil)
     }
     
+    func openCamera() {
+        
+        
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+           
+            cameraSelect = 1
+            imagePicker.sourceType = .camera
+            imagePicker.allowsEditing = true // Allows editing of the captured image
+            present(imagePicker, animated: true, completion: nil)
+        } else {
+            // Camera is not available, show an alert
+            let alert = UIAlertController(title: "Camera Not Available", message: "This device has no camera.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
+        }
+        
+    }
+    func ImagePickerGallery() {
+        
+        
+        var config = PHPickerConfiguration()
+                  config.selectionLimit = imageLimit // Limit selection to 5 images
+                  config.filter = .images    // Only allow images
+                  let picker = PHPickerViewController(configuration: config)
+                  picker.delegate = self
+     
+                  present(picker, animated: true, completion: nil)
+                  
+                  
+                  
+        
+    }
+    
     
     @IBAction func selectImages() {
         
         
         if dropDownTextLbl.text == "Image" {
-            var config = PHPickerConfiguration()
-            config.selectionLimit = 5  // Limit selection to 5 images
-            config.filter = .images    // Only allow images
-            let picker = PHPickerViewController(configuration: config)
-            picker.delegate = self
-            present(picker, animated: true, completion: nil)
+//
+            
+            let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
+            alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
+                self.ImagePickerGallery()
+            }))
+            
+            alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { _ in
+                self.openCamera()
+            }))
+            
+            alert.addAction(UIAlertAction.init(title: "Cancel", style: .cancel, handler: nil))
+            
+            self.present(alert, animated: true, completion: nil)
+            
+            
+            
         }else if dropDownTextLbl.text == "Pdf"{
             selectPDF()
         }else if dropDownTextLbl.text == "Video"{
-            pickVideoFromGallery()
+            restrictionTv.isHidden = false
+            restrictionView.isHidden = false
+            
+            restrictionList()
+            
+            
         }
        }
     
@@ -801,9 +678,10 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
                 let publicURL = url?.appendingPathComponent((uploadRequest?.bucket!)!).appendingPathComponent((uploadRequest?.key!)!)
                 if let absoluteString = publicURL?.absoluteString {
                     print("Uploaded to:\(absoluteString)")
-                    aswImg.removeAll()
-                    aswImg.append(absoluteString)
-                    addBtn.backgroundColor = .blue
+                    aswPdf.removeAll()
+                    aswPdf.append(absoluteString)
+               
+                    addBtn.backgroundColor = UIColor(named: "AddContent")
                     
                     let imageDict = NSMutableDictionary()
                     imageDict["FileName"] = absoluteString
@@ -854,11 +732,14 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
                         
                         if images.count > 0 {
                                 // Change the button color to blue when text exists
-                            self!.addBtn.backgroundColor = .blue
+                            DispatchQueue.main.async {
+                                self?.addBtn.backgroundColor = UIColor(named: "AddContent")
+                            }
                             } else {
                                 // Change the button color to gray when no text exists
                                 self!.addBtn.backgroundColor = .lightGray
                             }
+                        KRProgressHUD.show()
                         self!.uploadAWS(image:image)
                     }
                     
@@ -932,7 +813,7 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
                 let publicURL = url?.appendingPathComponent((uploadRequest?.bucket!)!).appendingPathComponent((uploadRequest?.key!)!)
                 if let absoluteString = publicURL?.absoluteString {
                     print("Uploaded to:\(absoluteString)")
-                    addBtn.backgroundColor = .blue
+                   
                   
                     aswImg.append(absoluteString)
                     
@@ -947,14 +828,15 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
                     
                     imageFilePath.add(imageDicthome)
                     
-                    
-                    
+                    KRProgressHUD.dismiss()
+                    addBtn.backgroundColor = UIColor(named: "AddContent")
                 
                     
                     self.currentImageCount = self.currentImageCount + 1
                     if self.currentImageCount < self.totalImageCount{
                         DispatchQueue.main.async {
                             self.getImageURL(images: self.originalImagesArray)
+                       
                         }
                     }else{
                         self.convertedImagesUrlArray = self.imageUrlArray
@@ -979,7 +861,21 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
         }
     }
     
+    func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
+        contentTextViw.resignFirstResponder() // Dismiss keyboard
+           return true
+       }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+           if text == "\n" { // Detect 'Return' key press
+               contentTextViw.resignFirstResponder() // Dismiss keyboard
+               return false
+           }
+           return true
+       }
+    
     @IBAction   func pickVideoFromGallery() {
+        restrictionView.isHidden = true
             if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
                 let imagePickerController = UIImagePickerController()
                 imagePickerController.delegate = self
@@ -996,11 +892,12 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
         // MARK: This method is called when the user has picked a video
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-        var images : [Int] = []
+//        var images : [Int] = []
         if cameraSelect == 1 {
                         let chosenImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
 
-            self.addBtn.backgroundColor = .blue
+            picker.dismiss(animated: true, completion: nil)
+            self.addBtn.backgroundColor = UIColor(named: "AddContent")
 
             self.uploadAWS(image:chosenImage)
 
@@ -1082,6 +979,8 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
                     print("videoEmbdUrl",videoEmbdUrl)
                     aswImg.append(videoEmbdUrl)
                     videoSucessId = 1
+                    addBtn.backgroundColor = UIColor(named: "AddContent")
+
                     
                     VideoStatus()
                     completion(.success(uploadLink))
@@ -1183,7 +1082,7 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
                 case .success:
                     print("Video uploaded successfully!")
                    
-                    addBtn.backgroundColor = .blue
+                    addBtn.backgroundColor = UIColor(named: "AddContent")
                 case .failure(let error):
                     print("Failed to upload video: \(error)")
    
@@ -1236,43 +1135,53 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
    
     func Awws3Voice(URLPath : URL) {
         
+  
         
         
-        let audioUrl = URL(fileURLWithPath: URLPath.path)
         
-        AWSS3Manager.shared.uploadAudio(audioUrl: audioUrl, progress: { [weak self] (progress) in
-            
-            
-            
-            
-            
-            
-            
-            print("audioUrl!",audioUrl)
-            
-            guard let strongSelf = self else { return }
-            
-            
-            
-        }) { [weak self] (uploadedFileUrl, error) in
-            
-            
-            guard let strongSelf = self else { return }
-            
-            if let finalPath = uploadedFileUrl as? String {
+        if let remoteUrl = URL(string: URLPath.absoluteString) {
+            let task = URLSession.shared.downloadTask(with: remoteUrl) { localUrl, response, error in
+                if let error = error {
+                    print("Error downloading file: \(error.localizedDescription)")
+                    return
+                }
                 
-                self!.urlData = URL(string: finalPath)
-                print("finalPath123!",finalPath)
+                guard let localUrl = localUrl else {
+                    print("No local file URL available.")
+                    return
+                }
                 
+                // Log the local URL
+                print("Local file URL: \(localUrl)")
                 
-            } else {
-                
-                print("\(String(describing: error?.localizedDescription))")
-                
+                // Upload the downloaded file to S3
+                AWSS3TransferUtility.default().uploadFile(
+                    localUrl,
+                    bucket: DefaultsKeys.bucketNameIndia,
+                    key: URLPath.absoluteString,
+                    contentType: "audio/mpeg",
+                    expression: nil
+                ) { [self] task, error in
+                    if let error = error {
+                        print("Error uploading file: \(error.localizedDescription)")
+                    } else {
+                        print("task",task)
+                        let s3Url = "https://\(DefaultsKeys.bucketNameIndia).s3.amazonaws.com/\(URLPath.absoluteString)"
+                        
+                              print("File successfully uploaded to S3. URL: \(s3Url)")
+                        DispatchQueue.main.async {
+                            self.addBtn.backgroundColor = UIColor(named: "AddContent")
+                        }
+                        aswVoice.append(s3Url)
+                      
+                       
+                        print("File successfully uploaded to S3.")
+                    }
+                }
             }
-            
+            task.resume()
         }
-        
+       
         
     }
 //    func directoryURL() -> NSURL? {
@@ -1371,33 +1280,1127 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
         print("attacattachmentsl",attachments)
         
         let submitModal = SubmitResponseForSkillModal()
-        submitModal.StudentID = "10391374"
-        submitModal.SkillId = "7050"
+        submitModal.StudentID = studentId
+        submitModal.SkillId = skillId
         submitModal.attachment = attachments
         
         
+        print("submitModal",submitModal)
         var  submitModalStr = submitModal.toJSONString()
         print("submitModalStr",submitModalStr)
       
         
-        ViewAllSkillByStudentRequest.call_request(param: submitModalStr!) {
+        SubmitSkillStudentRequest.call_request(param: submitModalStr!) {
             
             [self] (res) in
             
-//            let submitModalResp : ViewAllSkillByStudentResponse = Mapper<ViewAllSkillByStudentResponse>().map(JSONString: res)!
-//            
-//            if submitModalResp.Status == 1 {
-//                viewSkillDatas = submitModalResp.viewAllSkillByData
-//                tv.dataSource = self
-//                tv.delegate = self
-//                tv.reloadData()
+            let submitModalResp : [SubmitResponse] = Mapper<SubmitResponse>().mapArray(JSONString: res)!
+            
+            if submitModalResp[0].Status == 1 {
                 
-//            }
+                let alert = UIAlertController(title: "Alert",
+                                              message: submitModalResp[0].Message,
+                                                      preferredStyle: .alert)
+                        
+                        // Add an action (button)
+                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                            dismiss(animated: true)
+                        }))
+                        
+                        // Present the alert
+                        self.present(alert, animated: true, completion: nil)
+                
+//         
+                
+            }
             
             
         }
         
     }
+    
+    
+    
+//    MARK: Audio
+    
+    func check_record_permission()
+
+        {
+
+            switch AVAudioSession.sharedInstance().recordPermission {
+
+            case AVAudioSession.RecordPermission.granted:
+
+                isAudioRecordingGranted = true
+
+                break
+
+            case AVAudioSession.RecordPermission.denied:
+
+                isAudioRecordingGranted = false
+
+                break
+
+            case AVAudioSession.RecordPermission.undetermined:
+
+                AVAudioSession.sharedInstance().requestRecordPermission({ (allowed) in
+
+                    if allowed {
+
+                        self.isAudioRecordingGranted = true
+
+                    } else {
+
+                        self.isAudioRecordingGranted = false
+
+                    }
+
+                })
+
+                break
+
+            default:
+
+                break
+
+            }
+
+        }
+
+        
+
+        func startSlider() {
+
+            Slider.value = 0
+
+            Slider.maximumValue = 10
+
+            
+
+            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] (timer) in
+
+                print("Slider at: \(self?.Slider.value)")
+
+                guard self?.Slider.isTracking == false else { return }
+
+                self?.updateSlider(to: self!.Slider.value + 0.1)
+
+            }
+
+        }
+
+        
+
+        @objc private func updateSlider(to value: Float) {
+
+            Slider.value = value
+
+        }
+
+        
+
+        
+
+        @IBAction func recodeVc(){
+
+            
+
+    //        clickHereLabel.text = "Click here,Stop Recording"
+
+            if(isRecording)
+
+            {
+
+                finishAudioRecording(success: true)
+
+                
+
+                
+
+                self.voiceRecordBtn.setImage(UIImage(named:"VocieRecord"), for: UIControl.State.normal)
+
+                isRecording = false
+
+                
+
+                
+
+                
+
+                
+
+                
+
+    //            if  durationLable.text == "00:00" + " / " + "00:00"{
+
+    //
+
+    //
+
+    //
+
+    //
+
+    //
+
+    //
+
+    //            }
+
+                
+
+                
+
+            }
+
+            else
+
+            {
+
+                
+
+                
+
+                
+
+                
+
+                if isAudioRecordingGranted == false{
+
+                    //                check_record_permission()
+
+                    let alert = UIAlertController(title: "Error", message: "Please allow microphone usage from settings", preferredStyle: .alert)
+
+                    alert.addAction(UIAlertAction(title: "Open settings", style: .default, handler: { action in
+
+                        UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+
+                    }))
+
+                    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+
+                    present(alert, animated: true, completion: nil)
+
+                    
+
+                }else{
+
+                    
+
+                    
+
+                    setup_recorder()
+
+                    
+
+                    audioRecorder.record()
+
+                    meterTimer = Timer.scheduledTimer(timeInterval: 0.1, target:self, selector:#selector(self.updateAudioMeter(timer:)), userInfo:nil, repeats:true)
+
+                    self.voiceRecordBtn.setImage(UIImage(named:"VoiceRecordSelect"), for: UIControl.State.normal)
+
+                 
+
+                   
+
+                    isRecording = true
+
+                }
+
+                
+
+                
+
+                
+
+                
+
+            }
+
+            
+
+        }
+
+        
+
+        func getDocumentsDirectory() -> URL
+
+        {
+
+            let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+
+            let documentsDirectory = paths[0]
+
+            
+
+            
+
+            
+
+            print("asds",paths)
+
+            
+
+            
+
+            
+
+            return documentsDirectory
+
+        }
+
+        
+
+        func getFileUrl() -> URL
+
+        {
+
+            let filename = "myRecording.m4a"
+
+            
+
+            let filePath = getDocumentsDirectory().appendingPathComponent(filename)
+
+            
+
+            print("filee",filePath)
+
+            
+
+            var myurl = filePath
+
+            
+
+            var urlString: String = myurl.absoluteString
+
+            
+
+            
+
+            url = filePath
+
+            
+
+            
+
+            overallTimeLbl.text = ""
+
+            
+
+            
+
+            Audiopath = filePath
+
+            AudioPlayUrl = filePath.absoluteString
+
+            
+
+            
+
+            
+
+    //        let VoicePalyRecord = UITapGestureRecognizer(target: self, action: #selector(OrderplayAudio))
+
+    //
+
+    //        voicePlayView.addGestureRecognizer(VoicePalyRecord)
+
+    //
+
+            
+
+            
+
+            return filePath
+
+        }
+
+        
+
+        
+
+        func setup_recorder()
+
+        {
+
+            if isAudioRecordingGranted
+
+            {
+
+                let session = AVAudioSession.sharedInstance()
+
+                do
+
+                {
+
+                    try session.setCategory(AVAudioSession.Category.playAndRecord, options: .defaultToSpeaker)
+
+                    try session.setActive(true)
+
+                    let settings = [
+
+                        AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+
+                        AVSampleRateKey: 44100,
+
+                        AVNumberOfChannelsKey: 2,
+
+                        AVEncoderAudioQualityKey:AVAudioQuality.high.rawValue
+
+                    ]
+
+                    audioRecorder = try AVAudioRecorder(url: getFileUrl(), settings: settings)
+
+                    audioRecorder.delegate = self
+
+                    audioRecorder.isMeteringEnabled = true
+
+                    audioRecorder.record(forDuration: 180.00)// record for 3 minutes
+
+                    
+
+                    audioRecorder.prepareToRecord()
+
+                }
+
+                catch let error {
+
+                    display_alert(msg_title: "Error", msg_desc: error.localizedDescription, action_title: "OK")
+
+                }
+
+            }
+
+            else
+
+            {
+
+                display_alert(msg_title: "Error", msg_desc: "Don't have access to use your microphone.", action_title: "OK")
+
+            }
+
+            
+
+        }
+
+        
+
+        
+
+        
+
+      
+
+        
+
+          
+
+        
+
+        func display_alert(msg_title : String , msg_desc : String ,action_title : String)
+
+        {
+
+            let ac = UIAlertController(title: msg_title, message: msg_desc, preferredStyle: .alert)
+
+            ac.addAction(UIAlertAction(title: action_title, style: .default)
+
+                         {
+
+                (result : UIAlertAction) -> Void in
+
+                _ = self.navigationController?.popViewController(animated: true)
+
+            })
+
+            present(ac, animated: true)
+
+        }
+
+        
+
+        
+
+        func finishAudioRecording(success: Bool)
+
+        {
+
+            if success
+
+                
+
+            {
+
+                
+
+                audioRecorder.stop()
+
+                
+
+                audioRecorder = nil
+
+                
+
+                meterTimer.invalidate()
+
+                
+
+                
+
+                
+
+                playVoiceHeight.constant = 110
+
+                voicePlayView.isHidden = false
+                addAttachTop.constant = 90
+             
+                addBtn.isHidden = false
+
+               
+
+                Awws3Voice(URLPath:  Audiopath)
+
+                self.voiceRecordBtn.setImage(UIImage(named:"VocieRecord"), for: UIControl.State.normal)
+
+         
+
+                
+
+                
+
+                
+
+                if  overallTimeLbl.text == "00:00" + " / " + "00:00"{
+
+                    
+
+                    
+
+                    let refreshAlert = UIAlertController(title: "", message: "Voice file is Empty ", preferredStyle: UIAlertController.Style.alert)
+
+                    
+
+                    refreshAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { (action: UIAlertAction!) in
+
+                        
+
+                    }))
+
+                    
+
+                    
+
+                    
+
+                    present(refreshAlert, animated: true, completion: nil)
+
+                    
+
+                    
+
+                    
+
+                    
+
+               
+
+                }
+
+                
+
+                
+
+                else{
+
+                  
+
+                    
+
+                    overallTimeLbl.isHidden = false
+
+                    
+
+                    
+
+                    if timeLabelForPlayVoice == ""  || timeLabelForPlayVoice == nil {
+
+                        
+
+                        overallTimeLbl.text = "00:00" + " / " +  "00:00"
+
+                        
+
+                    }
+
+                    
+
+                    //
+
+                    else{
+
+                        
+
+                        
+
+                        overallTimeLbl.text = "00:00" + " / " + timeLabelForPlayVoice
+
+                        
+
+                      
+
+                    }
+
+                    
+
+                    
+
+                }
+
+                
+
+                
+
+                
+
+                
+
+                
+
+           
+
+                
+
+                
+
+            }
+
+            
+
+            else
+
+            
+
+            {
+
+                
+
+                display_alert(msg_title: "Error", msg_desc: "Recording failed.", action_title: "OK")
+
+                
+
+            }
+
+        }
+
+        
+
+        
+
+        func prepare_play()
+
+        {
+
+            do
+
+            {
+
+                audioPlayer = try AVAudioPlayer(contentsOf: getFileUrl())
+
+                audioPlayer.delegate = self
+
+                audioPlayer.prepareToPlay()
+
+            }
+
+            catch{
+
+                print("Error")
+
+            }
+
+        }
+
+        
+
+        
+
+        @objc func updateAudioMeter(timer: Timer)
+
+        {
+
+            if audioRecorder.isRecording
+
+            {
+
+                let hr = Int((audioRecorder.currentTime / 60) / 60)
+
+                let min = Int(audioRecorder.currentTime / 60)
+
+                let sec = Int(audioRecorder.currentTime.truncatingRemainder(dividingBy: 60))
+
+                let totalTimeString = String(format: "%02d:%02d", min, sec)
+
+                let time  = String(format: "%02d",sec)
+
+                
+
+    //            audioSeconds = time
+
+                print("klllllllfedsaz",time,sec)
+
+                
+
+                timeLabelForPlayVoice = totalTimeString
+
+                timerLbl.text = totalTimeString + " / " + "03:00"
+
+                
+
+                audioRecorder.updateMeters()
+
+                
+
+                
+
+                
+
+            }
+
+        }
+
+        
+
+        
+
+        
+
+        
+
+        func secondsToHoursMinutesSeconds(_ seconds: Int) -> (Int, Int, Int) {
+
+            return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
+
+        }
+
+        
+
+        func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool)
+
+        {
+
+            if !flag
+
+            {
+
+                finishAudioRecording(success: false)
+
+            }
+
+            
+
+        }
+
+        
+
+       
+    
+    func directoryURL() -> NSURL? {
+
+            
+
+            let fileManager = FileManager.default
+
+            let urls = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
+
+            let documentDirectory = urls[0] as NSURL
+
+            let soundURL = documentDirectory.appendingPathComponent("sample.mp4")
+
+            
+
+            return soundURL as NSURL?
+
+        }
+
+        
+
+        func startRecording() {
+
+            let audioSession = AVAudioSession.sharedInstance()
+
+            do{
+
+                audioRecorder = try AVAudioRecorder(url: self.directoryURL()! as URL, settings: settings)
+
+                urlData = audioRecorder.url
+
+                audioRecorder.delegate = self
+
+                audioRecorder.prepareToRecord()
+
+                
+
+            }catch{
+
+                finishRecording(success: false)
+
+            }
+
+            do{
+
+                try audioSession.setActive(true)
+
+                audioRecorder.record()
+
+            }catch{
+
+            }
+
+        }
+
+        
+
+        func finishRecording(success: Bool) {
+
+            audioRecorder.stop()
+
+            if success {
+
+                audioRecorder = nil
+
+               
+
+            } else {
+
+                audioRecorder = nil
+
+            }
+
+        }
+
+        
+
+        
+
+        
+
+        
+
+        func funcStopRecording(){
+
+    //        self.TitleForStartRecord()
+
+            
+            self.voiceRecordBtn.setImage(UIImage(named:"VocieRecord"), for: UIControl.State.normal)
+
+            self.finishRecording(success: true)
+
+    //        playVoiceMessageView.isHidden = false
+
+         
+
+            if(UIDevice.current.userInterfaceIdiom == .pad){
+
+                
+
+    //            PlayVoiceMsgViewHeight.constant = 180
+
+                
+
+                self.overallTimeLbl.text = TotaldurationFormat
+
+//                self.timeCountingLbl.text = "00.00"
+
+            }else{
+
+    //            PlayVoiceMsgViewHeight.constant = 120
+
+                
+
+                self.overallTimeLbl.text = TotaldurationFormat
+
+//                self.timeCountingLbl.text = "00.00"
+
+            }
+
+            
+
+            
+
+        }
+
+        
+
+      
+
+
+
+    //
+
+        //MARK:Play Audio BUTTON ACTION
+
+        @IBAction func actionPlayVoiceMessage(_ sender: UIButton){
+
+           
+
+            audioRecorder = nil
+
+            
+
+            
+
+            
+
+            var urls = URL(string: AudioPlayUrl)
+
+            
+
+            playerItem = AVPlayerItem(url: urls!)
+
+            player = AVPlayer(playerItem: playerItem!)
+
+            
+
+            if self.player!.currentItem?.status == .readyToPlay{
+
+            }
+
+            NotificationCenter.default.addObserver(self, selector: #selector(self.playerDidFinishPlaying(sender:)),
+
+                                                   name: NSNotification.Name.AVPlayerItemDidPlayToEndTime,
+
+                                                   object: player!.currentItem)
+
+            if(PlayVocieButton.isSelected)
+
+            {
+
+                PlayVocieButton.isSelected = false
+
+                let seconds1 : Int64 = Int64(Slider.value)
+
+                let targetTime : CMTime = CMTimeMake(value: seconds1, timescale: 1)
+
+                
+
+                player!.seek(to: targetTime)
+
+                strPlayStatus = "PlayIcon"
+
+                player?.pause()
+
+                
+
+                PlayVocieButton.setImage(UIImage(named: "PlayIcon"), for: .normal)
+
+                
+
+                
+
+                
+
+            }else{
+
+                PlayVocieButton.isSelected = true
+
+                let seconds1 : Int64 = Int64(Slider.value)
+
+                let targetTime : CMTime = CMTimeMake(value: seconds1, timescale: 1)
+
+                player!.seek(to: targetTime)
+
+                
+
+                strPlayStatus = "play"
+
+                player?.volume = 1
+
+                player?.play()
+
+                PlayVocieButton.setImage(UIImage(named: "PauseIcon"), for: .normal)
+
+                
+
+                print("enddddd")
+
+            }
+
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(updateSlidersss), userInfo: nil, repeats: true)
+
+        }
+
+        
+
+        
+
+        @objc func updateSlidersss(){
+
+            if self.player!.currentItem?.status == .readyToPlay {
+
+                
+
+                time = CMTimeGetSeconds(self.player!.currentTime())
+
+            }
+
+            let duration : CMTime = playerItem!.asset.duration
+
+            let seconds : Float64 = CMTimeGetSeconds(duration)
+
+            Slider.maximumValue = Float(seconds)
+
+            Slider.minimumValue = 0.0
+
+            Slider.value = Float(time)
+
+            
+
+            if(time > 0){
+
+                let minutes = Int(time) / 60 % 60
+
+                let secondss = Int(time) % 60
+
+                
+
+                let durationFormat = String(format:"%02i:%02i", minutes, secondss)
+
+                overallTimeLbl.text = durationFormat + " / " + timeLabelForPlayVoice
+
+            }
+
+            if(time == seconds){
+
+                timer.invalidate()
+
+                PlayVocieButton.isSelected = false
+
+                Slider.value = 0.0
+
+            }
+
+        }
+
+        
+
+        @objc func playerDidFinishPlaying(sender: Notification) {
+
+            timer.invalidate()
+
+            Slider.value = 0.0
+
+            player?.pause()
+
+            PlayVocieButton.isSelected = false
+
+            playerItem?.seek(to: CMTime.zero)
+
+//            timeCountingLbl.text = "00:00" + " / " + timeLabelForPlayVoice
+
+            PlayVocieButton.setImage(UIImage(named: "PlayIcon"), for: .normal)
+
+        }
+    
+    
+    func restrictionList() {
+        
+        
+        
+        RestrictionRequest.call_request(param: ""){ [self]
+            
+            (res) in
+            
+            
+            let restrictionResp : [RestrictionResponse] =
+            Mapper<RestrictionResponse>().mapArray(JSONString: res)!
+            
+          
+            
+            restrictionData = restrictionResp
+            
+            restrictionTv.delegate = self
+            restrictionTv.dataSource = self
+            restrictionTv.reloadData()
+            
+        }
+        
+        
+        
+        
+    }
+    func textViewDidEndEditing(_ textView: UITextView) {
+        print("false")
+
+
+
+        //
+        if contentTextViw.text == "" {
+            contentTextViw.text = strTextViewPlaceholder
+            contentTextViw.textColor = UIColor.black
+           
+        }
+         
+      
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+
+       
+        if contentTextViw.text == strTextViewPlaceholder{
+            contentTextViw.text = ""
+            contentTextViw.textColor = UIColor.black
+            contentTextViw.font = .boldSystemFont(ofSize: 14)
+
+//            eventNameTextField.font = UIFont(name: "verdana", size: 14.0)
+        }
+        
+        
+
+    }
+    
+    @objc func didPressDoneButton(button: UIButton) {
+        if( contentTextViw.text == "" ||  contentTextViw.text!.count == 0 || ( contentTextViw.text!.trimmingCharacters(in: .whitespaces).count) == 0){
+            contentTextViw.text = strTextViewPlaceholder
+            contentTextViw.textColor = UIColor.black
+        }
+        contentTextViw.resignFirstResponder()
+//        textviewEnableorDisable()
+    }
+    
+    
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        setupTextViewAccessoryView()
+        
+        if(contentTextViw.text == strTextViewPlaceholder)
+        {
+            contentTextViw.text = ""
+            contentTextViw.textColor = UIColor.black
+            contentTextViw.font = .boldSystemFont(ofSize: 14)
+            
+        }
+        
+        return true
+        
+    }
+    
+    func setupTextViewAccessoryView() {
+        let toolBar: UIToolbar = UIToolbar(frame:CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 44))
+        toolBar.barStyle = UIBarStyle.default
+        toolBar.isTranslucent = false
+        let flexsibleSpace: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.flexibleSpace, target: nil, action: nil)
+        let doneButton: UIBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.done, target: self, action: #selector(didPressDoneButton))
+        doneButton.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .normal)
+        toolBar.items = [flexsibleSpace, doneButton]
+        contentTextViw.inputAccessoryView = toolBar
+        
+        
+       
+        
+       
+        
+    }
+    
+   
     
 }
 

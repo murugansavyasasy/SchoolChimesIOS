@@ -45,7 +45,7 @@ class VideoMenuVC: UITableViewController ,Apidelegate,UISearchBarDelegate {
     var firstImage : Int  = 0
     
     var ArrayData = NSMutableArray()
-    var getVideoId : Int!
+    var getVideoId : String!
     weak var timer: Timer?
     
     
@@ -61,6 +61,7 @@ class VideoMenuVC: UITableViewController ,Apidelegate,UISearchBarDelegate {
     var getadID : Int!
     var menuId : String!
     var popupLoading : KLCPopup = KLCPopup()
+    var getDownloadShowID : Int!
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Video3")
@@ -229,13 +230,23 @@ class VideoMenuVC: UITableViewController ,Apidelegate,UISearchBarDelegate {
         
         bIsArchive = detailsDictionary["is_Archive"] as? Bool ?? false
         self.CallReadStatusUpdateApi(String(describing: detailsDictionary["DetailID"]!), "VIDEO")
-        getVideoId =   detailsDictionary["VideoId"] as! Int
+     
         print("GETVIDEOID1\(detailsDictionary["VideoId"])")
       
         print("GEVimeoUrl1\(detailsDictionary["VimeoUrl"])")
         strSelectedVideoUrl = String(describing: detailsDictionary["VimeoUrl"]!)
         strSelectedVideoId = String(describing: detailsDictionary["VimeoId"]!)
-       
+        getDownloadShowID = Int(String(describing:detailsDictionary["isDownload"]!))
+        
+        if let questionMarkIndex = strSelectedVideoId.firstIndex(of: "?") {
+            let result = String(strSelectedVideoId[..<questionMarkIndex]) // Extract substring before "?"
+            print("Digits before '?': \(result)")
+            getVideoId = String(result)
+        } else {
+            print("No '?' found in the string.")
+        }
+        
+        
         DispatchQueue.main.async() {
             self.performSegue(withIdentifier: "VdieoDetailSegue", sender: self)
         }
@@ -415,7 +426,8 @@ class VideoMenuVC: UITableViewController ,Apidelegate,UISearchBarDelegate {
             let segueid = segue.destination as! VimeoVideoDetailVC
             segueid.strVideoUrl = strSelectedVideoUrl
             segueid.videoId = strSelectedVideoId
-//            segueid.getDownloadShowID = downloadShowID
+            segueid.downloadVideoID = getVideoId
+            segueid.getDownloadShowID = getDownloadShowID
            
         }
     }

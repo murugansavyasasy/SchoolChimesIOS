@@ -549,7 +549,7 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
             ],
             "privacy":[
                 "view":"unlisted",
-                "download": getDownload
+                "download": true
                
             ],
             

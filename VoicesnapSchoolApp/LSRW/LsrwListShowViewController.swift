@@ -19,6 +19,8 @@ case failure(Error)
 class LsrwListShowViewController: UIViewController ,UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate {
   
     
+    @IBOutlet weak var nodataLbl: UILabel!
+    @IBOutlet weak var nodataView: UIView!
     
     
     @IBOutlet weak var searchBar: UISearchBar!
@@ -48,15 +50,25 @@ class LsrwListShowViewController: UIViewController ,UITableViewDelegate,UITableV
     var viewSkillDatas : [ViewAllSkillByData] = []
     var clone_list : [ViewAllSkillByData] = []
     var rowIdentifier = "LsrwListShowTableViewCell"
+    var instituteId  = Int()
+    var studentId = String()
+  
     override func viewDidLoad() {
         super.viewDidLoad()
         
         searchBar.delegate = self
         
+        
+        let userDefaults = UserDefaults.standard
+        instituteId = userDefaults.integer(forKey: DefaultsKeys.SchoolD)
+        studentId = userDefaults.string(forKey: DefaultsKeys.chilId)!
+
+        
         let backGesture = UITapGestureRecognizer(target: self, action: #selector(backVc))
         backView.addGestureRecognizer(backGesture)
         
-        
+        nodataView.isHidden = true
+        nodataLbl.isHidden = true
         
         tv.register(UINib(nibName: rowIdentifier, bundle: nil), forCellReuseIdentifier: rowIdentifier)
         
@@ -71,7 +83,12 @@ class LsrwListShowViewController: UIViewController ,UITableViewDelegate,UITableV
     }
     
 
-    
+    override func viewWillAppear(_ animated: Bool) {
+        print("dismiss")
+        
+        viewAllSkillByStudent()
+        
+    }
     
     
 
@@ -104,13 +121,13 @@ class LsrwListShowViewController: UIViewController ,UITableViewDelegate,UITableV
         
         
         let viewAllSkillByStudentModal = ViewAllSkillByStudentModal()
-        viewAllSkillByStudentModal.StudentID = "10391374"
-        viewAllSkillByStudentModal.SchoolID = "7050"
+        viewAllSkillByStudentModal.StudentID = studentId
+        viewAllSkillByStudentModal.SchoolID = String(instituteId)
         
         
         var  viewAllSkillByStudentModalStr = viewAllSkillByStudentModal.toJSONString()
       
-        
+        print("viewAllSkillByStudentModalStr",viewAllSkillByStudentModalStr)
         ViewAllSkillByStudentRequest.call_request(param: viewAllSkillByStudentModalStr!) {
             
             [self] (res) in
@@ -124,6 +141,10 @@ class LsrwListShowViewController: UIViewController ,UITableViewDelegate,UITableV
                 tv.delegate = self
                 tv.reloadData()
                 
+            }else{
+                nodataView.isHidden = false
+                nodataLbl.isHidden = false
+                nodataLbl.text = viewAllSkillByStudentResp.Message
             }
             
             
@@ -156,12 +177,14 @@ class LsrwListShowViewController: UIViewController ,UITableViewDelegate,UITableV
             cell.takingSkillView.isHidden = true
             cell.submittedOnLbl.isHidden = false
             cell.submittedHeadingLbl.isHidden = false
+            cell.takingSkillHeight.constant = 0
             
         }else{
             cell.takingSkillView.isHidden = false
             cell.typeLbl.text = skillData.ActivityType
             cell.submittedOnLbl.isHidden = true
             cell.submittedHeadingLbl.isHidden = true
+            cell.takingSkillHeight.constant = 40
 //            cell.takingSkillBtn.setTitle(skillData.ActivityType, for: .normal)
         }
         
@@ -195,10 +218,14 @@ class LsrwListShowViewController: UIViewController ,UITableViewDelegate,UITableV
     
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        nodataView.isHidden = true
+        nodataLbl.isHidden = true
         searchBar.endEditing(true)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        nodataView.isHidden = true
+        nodataLbl.isHidden = true
         searchBar.resignFirstResponder()
     }
     
@@ -216,15 +243,26 @@ class LsrwListShowViewController: UIViewController ,UITableViewDelegate,UITableV
             
             
         }else{
+          
+          
             viewSkillDatas = filtered_list
             print("pendingOrder")
         }
         
         if viewSkillDatas.count > 0{
-            print ("searchListPendigCount",viewSkillDatas.count)
             
+            nodataView.isHidden = true
+            nodataLbl.isHidden = true
+          
+            print ("seCount",viewSkillDatas.count)
         }else{
             
+            nodataView.isHidden = false
+            nodataLbl.isHidden = false
+            nodataLbl.text = "No Data Found"
+            print ("searchListPendigCount",viewSkillDatas.count)
+            
+           
         }
         
         tv.reloadData()

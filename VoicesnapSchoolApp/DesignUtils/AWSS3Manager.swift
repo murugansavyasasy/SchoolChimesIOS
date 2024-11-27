@@ -17,9 +17,13 @@ typealias completionBlock = (_ response: Any?, _ error: Error?) -> Void //3
 
 class AWSS3Manager {
     
+//    let S3BucketName =  DefaultsKeys.bucketNameIndia
+//       
+//    let CognitoPoolID = DefaultsKeys.CognitoPoolID
+    
     static let shared = AWSS3Manager() // 4
     private init () { }
-    let bucketName = "schoolchimes-india" //5
+    let bucketName = DefaultsKeys.bucketNameIndia //5
     
     // Upload image using UIImage object
     func uploadImage(image: UIImage, progress: progressBlock?, completion: completionBlock?) {
@@ -53,7 +57,7 @@ class AWSS3Manager {
     // Upload auido from local path url
     func uploadAudio(audioUrl: URL, progress: progressBlock?, completion: completionBlock?) {
         let fileName = self.getUniqueFileName(fileUrl: audioUrl)
-        self.uploadfile(fileUrl: audioUrl, fileName: fileName, contenType: "audio", progress: progress, completion: completion)
+        self.uploadfile(fileUrl: audioUrl, fileName: fileName, contenType: "audio/mpeg", progress: progress, completion: completion)
     }
     
     // Upload files like Text, Zip, etc from local path url

@@ -661,7 +661,7 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
                 else  if(self.CellIndexIdsArray[indexPath.row] as! String == "34"){
 
 
-                    let vc = LsrwListShowViewController(nibName: nil, bundle: nil)
+                    let vc = StaffPtmViewController(nibName: nil, bundle: nil)
 
                     vc.modalPresentationStyle = .fullScreen
                     present(vc, animated: true)

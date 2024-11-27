@@ -238,7 +238,7 @@ class PrincipalGroupSelectionVC: UIViewController,Apidelegate {
             ],
             "privacy":[
                 "view":"unlisted",
-                "download": getDownload
+                "download": true
             ],
             "embed":[
                 "buttons":[

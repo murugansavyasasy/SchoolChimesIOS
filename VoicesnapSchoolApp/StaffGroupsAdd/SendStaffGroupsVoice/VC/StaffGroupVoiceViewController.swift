@@ -214,7 +214,7 @@ class StaffGroupVoiceViewController: UIViewController,UITableViewDelegate,UITabl
             ],
             "privacy":[
                 "view":"unlisted",
-                "download": getDownload
+                "download": true
             ],
             "embed":[
                 "buttons":[

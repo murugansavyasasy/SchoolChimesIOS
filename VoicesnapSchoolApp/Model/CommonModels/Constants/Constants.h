@@ -169,13 +169,14 @@
 #define TERMS_AND_CONDITION @"https://schoolchimes.com/vs_web/terms_conditions/"
 //#define TERMS_AND_CONDITION@"https://gradit.voicesnap.com/School/SchoolTermsConditions" Old
 
-#define LIVE_DOMAIN @"https://vss.voicesnapforschools.com/nodejs/api/MergedApi/"
-#define LIVE_COUNTRY_LIST @"https://vss.voicesnapforschools.com/nodejs/api/MergedApi/GetCountryList"
+//(https://api.schoolchimes.com/nodejs/api/MergedApi/` Nov 27 Change this domain name
+#define LIVE_DOMAIN @"https://api.schoolchimes.com/nodejs/api/MergedApi/"
+#define LIVE_COUNTRY_LIST @"https://api.schoolchimes.com/nodejs/api/MergedApi/GetCountryList"
 
 //#define LIVE_DOMAIN @"https://vstest3.voicesnapforschools.com/nodejs/api/MergedApi/"
 //#define LIVE_COUNTRY_LIST @"https://vstest3.voicesnapforschools.com/nodejs/api/MergedApi/GetCountryListV4"
 
-#define ACCEPT_TERMS_AND_CONDITION @"https://vss.voicesnapforschools.com/nodejs/api/MergedApi/AgreeTermsAndConditions"
+#define ACCEPT_TERMS_AND_CONDITION @"https://api.schoolchimes.com/nodejs/api/MergedApi/AgreeTermsAndConditions"
 
 
 //#define LIVE_COUNTRY_LIST @"http://202.21.35.54/nodejs/api/MergedApi/GetCountryListV4"
@@ -455,7 +456,7 @@
 #define COMBINATION @"Combination"
 #define SELECT_FEEDBACK @"Please select the feedback"
 #define SAVE_ERROR @"Save Error"
-#define SAVE_SUCCESS @"Your image has been saved to your photos"
+#define SAVE_SUCCESS @"Your image has been download to your photos"
 #define SERVER_ERROR @"Something went wrong!"
 #define SERVER_CONNECTION_FAILED @"Something went wrong!"
 #define MOBILE_NOT_EXIST @"Mobile number does not exists"

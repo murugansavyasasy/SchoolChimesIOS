@@ -143,9 +143,21 @@ class ManagementVideoViewController: UIViewController,UITableViewDataSource,UITa
             cell.newLblHight.constant = 0
             
             vc.strVideoUrl = messgae.URL
-            vc.videoId = messgae.VimeoId
+           
             vc.downloadId = messgae.ID
             vc.getDownloadShowID = messgae.isDownload
+            
+            var  strSelectedVideoId = messgae.VimeoId
+         
+         
+         
+            if let questionMarkIndex = strSelectedVideoId?.firstIndex(of: "?") {
+                let result = String(strSelectedVideoId![..<questionMarkIndex]) // Extract substring before "?"
+             print("Digits before '?': \(result)")
+                vc.videoId = String(result)
+         } else {
+             print("No '?' found in the string.")
+         }
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)
         }else{

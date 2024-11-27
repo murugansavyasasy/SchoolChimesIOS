@@ -691,7 +691,7 @@ class UploadViemoVideoVC: UIViewController, UIActionSheetDelegate, UIImagePicker
             ],
             "privacy":[
                 "view":"unlisted",
-                "download": getDownload
+                "download": true
             ],
             "embed":[
                 "buttons":[

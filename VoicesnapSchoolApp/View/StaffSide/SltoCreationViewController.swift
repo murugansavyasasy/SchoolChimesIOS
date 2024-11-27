@@ -1087,7 +1087,18 @@ class SltoCreationViewController: UIViewController,UICollectionViewDelegate,UICo
 
             }else{
                 norecord.isHidden = false
+                
+                let refreshAlert = UIAlertController(title: "", message: slotHistoryResponse.Message, preferredStyle: UIAlertController.Style.alert)
+
+                refreshAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [self] (action: UIAlertAction!) in
+
+                    dismiss(animated: true)
+                }))
+            present(refreshAlert, animated: true, completion: nil)
                 norecord.text = slotHistoryResponse.Message
+                
+                
+                
                 cv.isHidden = true
             }
         }

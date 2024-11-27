@@ -101,6 +101,10 @@
 		1829532C299B6F130003B9D6 /* QuizCompletedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1829532A299B6F130003B9D6 /* QuizCompletedTableViewCell.xib */; };
 		182DF6CE29A8782C00E2D992 /* ExamUpcomingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 182DF6CC29A8782C00E2D992 /* ExamUpcomingViewController.swift */; };
 		182DF6CF29A8782C00E2D992 /* ExamUpcomingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 182DF6CD29A8782C00E2D992 /* ExamUpcomingViewController.xib */; };
+		184834102CF6D9320098AE3C /* RestrictionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1848340E2CF6D9320098AE3C /* RestrictionTableViewCell.swift */; };
+		184834112CF6D9320098AE3C /* RestrictionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1848340F2CF6D9320098AE3C /* RestrictionTableViewCell.xib */; };
+		184834132CF6DAB10098AE3C /* RestrictionModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184834122CF6DAB10098AE3C /* RestrictionModal.swift */; };
+		184834152CF6DAC00098AE3C /* RestrictionRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184834142CF6DAC00098AE3C /* RestrictionRequest.swift */; };
 		184EC611228C137A0011EF2B /* FAQVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184EC610228C137A0011EF2B /* FAQVC.swift */; };
 		1851AE092CEF0289005EC490 /* GetAttachmentForSkill.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1851AE082CEF0289005EC490 /* GetAttachmentForSkill.swift */; };
 		1851AE0B2CEF0DD2005EC490 /* GetAttachmentForSkillRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1851AE0A2CEF0DD2005EC490 /* GetAttachmentForSkillRequest.swift */; };
@@ -192,6 +196,7 @@
 		18AE9AB729C85BA10056D867 /* DailyCollectionFeePaymentTypeTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18AE9AB529C85BA10056D867 /* DailyCollectionFeePaymentTypeTableViewCell.xib */; };
 		18AE9ABB29C85C310056D867 /* DailyCollectionFeeCurrentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18AE9AB929C85C310056D867 /* DailyCollectionFeeCurrentTableViewCell.swift */; };
 		18AE9ABC29C85C310056D867 /* DailyCollectionFeeCurrentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18AE9ABA29C85C310056D867 /* DailyCollectionFeeCurrentTableViewCell.xib */; };
+		18BA0CD82CF721F300709E68 /* SubmitLsrwRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18BA0CD72CF721F300709E68 /* SubmitLsrwRequest.swift */; };
 		18C437682295881D008A7559 /* ms.json in Resources */ = {isa = PBXBuildFile; fileRef = 18C437632295881C008A7559 /* ms.json */; };
 		18C4376A2295881D008A7559 /* fr.json in Resources */ = {isa = PBXBuildFile; fileRef = 18C437652295881D008A7559 /* fr.json */; };
 		18C4376B2295881D008A7559 /* it.json in Resources */ = {isa = PBXBuildFile; fileRef = 18C437662295881D008A7559 /* it.json */; };
@@ -757,6 +762,10 @@
 		1829532A299B6F130003B9D6 /* QuizCompletedTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QuizCompletedTableViewCell.xib; sourceTree = "<group>"; };
 		182DF6CC29A8782C00E2D992 /* ExamUpcomingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExamUpcomingViewController.swift; sourceTree = "<group>"; };
 		182DF6CD29A8782C00E2D992 /* ExamUpcomingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExamUpcomingViewController.xib; sourceTree = "<group>"; };
+		1848340E2CF6D9320098AE3C /* RestrictionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestrictionTableViewCell.swift; sourceTree = "<group>"; };
+		1848340F2CF6D9320098AE3C /* RestrictionTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RestrictionTableViewCell.xib; sourceTree = "<group>"; };
+		184834122CF6DAB10098AE3C /* RestrictionModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestrictionModal.swift; sourceTree = "<group>"; };
+		184834142CF6DAC00098AE3C /* RestrictionRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestrictionRequest.swift; sourceTree = "<group>"; };
 		184EC610228C137A0011EF2B /* FAQVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FAQVC.swift; sourceTree = "<group>"; };
 		1851AE082CEF0289005EC490 /* GetAttachmentForSkill.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAttachmentForSkill.swift; sourceTree = "<group>"; };
 		1851AE0A2CEF0DD2005EC490 /* GetAttachmentForSkillRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetAttachmentForSkillRequest.swift; sourceTree = "<group>"; };
@@ -848,6 +857,7 @@
 		18AE9AB529C85BA10056D867 /* DailyCollectionFeePaymentTypeTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DailyCollectionFeePaymentTypeTableViewCell.xib; sourceTree = "<group>"; };
 		18AE9AB929C85C310056D867 /* DailyCollectionFeeCurrentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCollectionFeeCurrentTableViewCell.swift; sourceTree = "<group>"; };
 		18AE9ABA29C85C310056D867 /* DailyCollectionFeeCurrentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DailyCollectionFeeCurrentTableViewCell.xib; sourceTree = "<group>"; };
+		18BA0CD72CF721F300709E68 /* SubmitLsrwRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitLsrwRequest.swift; sourceTree = "<group>"; };
 		18C11C2828EABB7000218F05 /* VoicesnapSchoolAppRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = VoicesnapSchoolAppRelease.entitlements; sourceTree = "<group>"; };
 		18C437632295881C008A7559 /* ms.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ms.json; sourceTree = "<group>"; };
 		18C437652295881D008A7559 /* fr.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fr.json; sourceTree = "<group>"; };
@@ -1837,6 +1847,17 @@
 			path = ExamUpcoming;
 			sourceTree = "<group>";
 		};
+		1848340D2CF6D9150098AE3C /* RestrictionVc */ = {
+			isa = PBXGroup;
+			children = (
+				1848340E2CF6D9320098AE3C /* RestrictionTableViewCell.swift */,
+				1848340F2CF6D9320098AE3C /* RestrictionTableViewCell.xib */,
+				184834122CF6DAB10098AE3C /* RestrictionModal.swift */,
+				184834142CF6DAC00098AE3C /* RestrictionRequest.swift */,
+			);
+			path = RestrictionVc;
+			sourceTree = "<group>";
+		};
 		184EC60F228C13340011EF2B /* FAQ */ = {
 			isa = PBXGroup;
 			children = (
@@ -1978,6 +1999,7 @@
 		1873FC1A2CEDAA21000B8F56 /* LSRW */ = {
 			isa = PBXGroup;
 			children = (
+				1848340D2CF6D9150098AE3C /* RestrictionVc */,
 				1801B3D02CEF545F00611771 /* FilesAttach */,
 				1851AE0C2CEF122A005EC490 /* Preview */,
 				1873FC842CEDEC13000B8F56 /* Submit */,
@@ -2018,6 +2040,7 @@
 				1873FC852CEDEC2C000B8F56 /* SubmitLsrwViewController.swift */,
 				1873FC862CEDEC2C000B8F56 /* SubmitLsrwViewController.xib */,
 				182866052CF067E7005F9F9B /* SubmitResponseForSkillModal.swift */,
+				18BA0CD72CF721F300709E68 /* SubmitLsrwRequest.swift */,
 			);
 			path = Submit;
 			sourceTree = "<group>";
@@ -4170,6 +4193,7 @@
 				84CCA2C42C708DEC009303CD /* cancelTableViewCell.xib in Resources */,
 				84CD56FC2C9C03350068800A /* LocationViewController.xib in Resources */,
 				1829525E29951D5C0003B9D6 /* ExamViewController.xib in Resources */,
+				184834112CF6D9320098AE3C /* RestrictionTableViewCell.xib in Resources */,
 				849DBF142CDA3706002479DF /* PdfViewVc.xib in Resources */,
 				18067F6F2CF450DF008A22B9 /* SenderSideImageShowViewController.xib in Resources */,
 				84EF47DC2BECCA1D000EBFFD /* ClassTimeTableViewController.xib in Resources */,
@@ -4465,6 +4489,7 @@
 				8414F7C62BD6862C0066F206 /* ScheduleCallViewController.swift in Sources */,
 				046E6D31245FF98A00BA5E0D /* StaffViewAssignmentTVCell.swift in Sources */,
 				C17887192727242F0041FFF0 /* OnlineDetailVC.swift in Sources */,
+				18BA0CD82CF721F300709E68 /* SubmitLsrwRequest.swift in Sources */,
 				1873EB8C2983AD83008E30AA /* FeeReceiptPdfDownloadRequest.swift in Sources */,
 				84EF47DB2BECCA1D000EBFFD /* ClassTimeTableViewController.swift in Sources */,
 				848E5D592BFE284200DBBBB5 /* CVIconCollectionViewCell.swift in Sources */,
@@ -4718,6 +4743,7 @@
 				18EC6D782A00F38200ACD29E /* UpdateStatusForLessonPlanAppModal.swift in Sources */,
 				D64EF0BD20C7AC2D0051AA89 /* HomeWorkTextVC.swift in Sources */,
 				84D278CA2C88636000914E61 /* CheckBox.swift in Sources */,
+				184834132CF6DAB10098AE3C /* RestrictionModal.swift in Sources */,
 				C19DB623272401ED00D9D1AF /* MeetingTVCell.swift in Sources */,
 				84B39EEE2BEB483B00D56819 /* PaymentListTableViewCell.swift in Sources */,
 				D60DA65620CBE34700983C45 /* PaidFeesTVCell.swift in Sources */,
@@ -4797,7 +4823,9 @@
 				04EDB7DC249741CB0062164B /* StaffChatDetailVC.swift in Sources */,
 				84C499DB2C33DE6100BA6EF4 /* PTMViewController.swift in Sources */,
 				105A726D22CB88F800916523 /* NewProductOfferVC.swift in Sources */,
+				184834102CF6D9320098AE3C /* RestrictionTableViewCell.swift in Sources */,
 				C19DB6212723AC0900D9D1AF /* OnlineMeetingVC.swift in Sources */,
+				184834152CF6DAC00098AE3C /* RestrictionRequest.swift in Sources */,
 				B5EE9FCC1F30A62D009C9BF9 /* SelectSectionVC.swift in Sources */,
 				B5EE9FC81F3076B2009C9BF9 /* SelectSectionTVCell.swift in Sources */,
 				D64EF0AF20C7AC010051AA89 /* PayFeeVC.swift in Sources */,

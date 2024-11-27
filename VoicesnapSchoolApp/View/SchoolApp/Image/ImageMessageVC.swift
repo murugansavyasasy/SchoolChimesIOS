@@ -71,7 +71,7 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
         imgCountLbl.isHidden = true
         imgCountShowView.isHidden = true
         let strImageLimit : NSString = UserDefaults.standard.object(forKey: IMAGE_COUNT) as! NSString
-        imageLimit = 6
+        imageLimit = strImageLimit.integerValue
         print("imageLimit",imageLimit)
         
         let defaults = UserDefaults.standard
@@ -371,11 +371,17 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
             ClickImageCaptureButton.isEnabled = true
                    let chosenImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
                    MyImageView.contentMode = .scaleToFill
+            selectedImages.removeAll()
+            imagesArray.removeAllObjects()
+            moreImagesArray.removeAllObjects()
                    MyImageView.image = chosenImage
                    self.moreImagesArray.add(chosenImage)
             imagesArray.add(chosenImage)
             img1Width.constant = 353
             img1Height.constant = 160
+           
+            self.SetImagesFromPicker(imageCount: (moreImagesArray.count as NSNumber))
+            self.SetImagesIntoPath(images: [chosenImage])
                    if(self.MyImageView.image != nil){
                        dismiss(animated: true, completion: nil)
                        ClickImageCaptureButton.backgroundColor = UIColor(red: 230.0/255.0, green: 126.0/255.0, blue: 34.0/255.0, alpha: 1)
@@ -646,7 +652,7 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
             imagesArray.removeAllObjects()
         }
            var config = PHPickerConfiguration()
-        config.selectionLimit = 6 // Limit the selection to 4 images
+        config.selectionLimit = imageLimit // Limit the selection to 4 images
            config.filter = .images  // Only allow image selection
            
            let picker = PHPickerViewController(configuration: config)
@@ -658,8 +664,10 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
            picker.dismiss(animated: true, completion: nil)
            
         
-           
+           print("changeImgClick",changeImgClick)
            if   changeImgClick == 1 {
+               imgCountShowView.isHidden = true
+               imgCountLbl.isHidden = true
                selectedImages.removeAll()
                imagesArray.removeAllObjects()
            }
@@ -715,6 +723,8 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
     // MARK: - ImagePickerDelegate
     
     func cancelButtonDidPress(_ imagePicker: ImagePickerController) {
+        selectedImages.removeAll()
+        imagesArray.removeAllObjects()
         imagePicker.dismiss(animated: true, completion: nil)
     }
     
@@ -770,22 +780,33 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
             self.MyImageView.image = images[0]
             imgCountShowView.isHidden = true
             imgCountLbl.isHidden = true
+            img1Width.constant = 353
+            img1Height.constant = 160
         }else if(images.count == 2){
             self.MyImageView.image = images[0]
             self.MyImageView2.image = images[1]
             imgCountShowView.isHidden = true
+            img1Width.constant = 176
+            img1Height.constant = 80
+           
             imgCountLbl.isHidden = true
         }else if(images.count == 3){
             self.MyImageView.image = images[0]
             self.MyImageView2.image = images[1]
             self.MyImageView3.image = images[2]
+            img1Width.constant = 176
+            img1Height.constant = 80
+           
             imgCountShowView.isHidden = true
             imgCountLbl.isHidden = true
-        }else {
+        }else if(images.count > 4) || images.count == 4{
             self.MyImageView.image = images[0]
             self.MyImageView2.image = images[1]
             self.MyImageView3.image = images[2]
             self.MyImageView4.image = images[3]
+            img1Width.constant = 176
+            img1Height.constant = 80
+           
             if images.count > 4 {
                 imgCountShowView.isHidden = false
                 imgCountLbl.isHidden = false
@@ -809,36 +830,64 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
     }
     func SetImagesFromPicker(imageCount : NSNumber){
         self.MyPDFImage.isHidden = true
-        if(imageCount.intValue >= 4){
-            self.MyImageView.isHidden = false
-            
-            if(imageCount.intValue > 4){
-                self.MoreImagesButton.isHidden = false
-                let moreImagesCount = imageCount.intValue - 3
-                self.MoreImagesButton.setTitle("+\(moreImagesCount)", for: .normal)
-            }else{
-                self.MoreImagesButton.isHidden = true
-            }
-        }else if(imageCount.intValue == 3){
+//        if(imageCount.intValue >= 4){
+//            self.MyImageView.isHidden = false
+//            
+//            if(imageCount.intValue > 4){
+//                self.MoreImagesButton.isHidden = false
+//                let moreImagesCount = imageCount.intValue - 3
+//                self.MoreImagesButton.setTitle("+\(moreImagesCount)", for: .normal)
+//            }else{
+//                self.MoreImagesButton.isHidden = true
+//            }
+//        }else
+        
+        if(imageCount.intValue == 3){
+            img1Width.constant = 176
+            img1Height.constant = 80
+            imgCountShowView.isHidden = true
+            imgCountLbl.isHidden = true
             self.MyImageView.isHidden = false
             self.MyImageView2.isHidden = false
             self.MyImageView3.isHidden = false
             self.MyImageView4.isHidden = true
         }else if(imageCount.intValue == 2){
+            img1Width.constant = 176
+            img1Height.constant = 80
+            imgCountShowView.isHidden = true
+            imgCountLbl.isHidden = true
             self.MyImageView.isHidden = false
             self.MyImageView2.isHidden = false
             self.MyImageView3.isHidden = true
             self.MyImageView4.isHidden = true
         }else if(imageCount.intValue == 1){
+            img1Width.constant = 353
+            img1Height.constant = 160
+            imgCountShowView.isHidden = true
+            imgCountLbl.isHidden = true
             self.MyImageView.isHidden = false
             self.MyImageView2.isHidden = true
             self.MyImageView3.isHidden = true
             self.MyImageView4.isHidden = true
-        }else{
-            self.MyImageView.isHidden = true
-            self.MyImageView2.isHidden = true
-            self.MyImageView3.isHidden = true
-            self.MyImageView4.isHidden = true
+        }else if imageCount.intValue > 4 || imageCount.intValue == 4{
+            img1Width.constant = 176
+            img1Height.constant = 80
+           
+            self.MyImageView.isHidden = false
+            self.MyImageView2.isHidden = false
+            self.MyImageView3.isHidden = false
+            self.MyImageView4.isHidden = false
+            
+            
+            if imageCount.intValue > 4 {
+                imgCountShowView.isHidden = false
+                imgCountLbl.isHidden = false
+                var getCount =  imageCount.intValue - 4
+                if getCount != 0 {
+                    imgCountLbl.text = String(imageCount.intValue - 4)
+                }
+                
+            }
         }
     }
     

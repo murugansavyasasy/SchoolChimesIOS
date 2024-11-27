@@ -20,19 +20,19 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c90-8f-k3H" customClass="UIViewX" customModule="VoicesnapSchoolApp" customModuleProvider="target">
-                        <rect key="frame" x="10" y="10" width="416" height="258"/>
+                        <rect key="frame" x="10" y="5" width="416" height="268"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="fillEqually" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="0bX-TE-CcZ">
-                                <rect key="frame" x="10" y="10" width="396" height="32"/>
+                                <rect key="frame" x="10" y="10" width="396" height="42"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QDF-xM-r5L">
-                                        <rect key="frame" x="0.0" y="0.0" width="188" height="32"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="188" height="42"/>
                                         <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="20"/>
                                         <color key="textColor" systemColor="systemIndigoColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lts-u6-OsJ">
-                                        <rect key="frame" x="208" y="0.0" width="188" height="32"/>
+                                        <rect key="frame" x="208" y="0.0" width="188" height="42"/>
                                         <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -108,7 +108,7 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b80-Cn-kUv" customClass="UIViewX" customModule="VoicesnapSchoolApp" customModuleProvider="target">
-                                <rect key="frame" x="123" y="198" width="170" height="40"/>
+                                <rect key="frame" x="123" y="208" width="170" height="40"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L7i-9P-1Jd">
                                         <rect key="frame" x="65" y="9.9999999999999982" width="40" height="20.333333333333329"/>
@@ -154,7 +154,7 @@
                         </constraints>
                         <userDefinedRuntimeAttributes>
                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                <real key="value" value="15"/>
+                                <real key="value" value="10"/>
                             </userDefinedRuntimeAttribute>
                             <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
                                 <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -168,14 +168,20 @@
                             <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
                                 <color key="value" systemColor="systemGray5Color"/>
                             </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
+                            <userDefinedRuntimeAttribute type="number" keyPath="shadowOffsetY">
+                                <real key="value" value="5"/>
+                            </userDefinedRuntimeAttribute>
                         </userDefinedRuntimeAttributes>
                     </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
-                    <constraint firstAttribute="bottom" secondItem="c90-8f-k3H" secondAttribute="bottom" constant="10" id="4xU-Vn-kzy"/>
+                    <constraint firstAttribute="bottom" secondItem="c90-8f-k3H" secondAttribute="bottom" constant="5" id="4xU-Vn-kzy"/>
                     <constraint firstItem="c90-8f-k3H" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="Hay-xE-42q"/>
-                    <constraint firstItem="c90-8f-k3H" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="L44-zK-C9m"/>
+                    <constraint firstItem="c90-8f-k3H" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="L44-zK-C9m"/>
                     <constraint firstAttribute="trailing" secondItem="c90-8f-k3H" secondAttribute="trailing" constant="10" id="bWN-VP-u3D"/>
                 </constraints>
             </tableViewCellContentView>
@@ -187,6 +193,7 @@
                 <outlet property="subLbl" destination="uEH-pt-UMQ" id="Rja-db-xgc"/>
                 <outlet property="submittedHeadingLbl" destination="fdm-SW-0eU" id="Qkc-6U-Djb"/>
                 <outlet property="submittedOnLbl" destination="wkI-Ub-cUa" id="YZa-RK-8Rb"/>
+                <outlet property="takingSkillHeight" destination="KQt-1t-Geo" id="qsI-fo-cjY"/>
                 <outlet property="takingSkillView" destination="b80-Cn-kUv" id="mDL-Fk-mjp"/>
                 <outlet property="titleLbl" destination="Lts-u6-OsJ" id="aWP-xg-sPl"/>
                 <outlet property="typeLbl" destination="L7i-9P-1Jd" id="Rkx-a5-ITB"/>

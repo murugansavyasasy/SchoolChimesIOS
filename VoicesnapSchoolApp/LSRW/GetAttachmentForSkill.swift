@@ -63,7 +63,7 @@ class GetAttachmentForSkillData            : Mappable {
     var ContentId                          : Int!
     var Attachment                         : String!
     var ActivityType                       : String!
-    var Order                              : String!
+    var Order                              : Int!
  
  
    

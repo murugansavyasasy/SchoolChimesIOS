@@ -12,6 +12,7 @@ class LsrwListShowTableViewCell: UITableViewCell {
 
     @IBOutlet weak var typeLbl: UILabel!
     
+    @IBOutlet weak var takingSkillHeight: NSLayoutConstraint!
     @IBOutlet weak var submittedHeadingLbl: UILabel!
     @IBOutlet weak var takingSkillView: UIView!
     @IBOutlet weak var takingSkillBtn: UIButton!
