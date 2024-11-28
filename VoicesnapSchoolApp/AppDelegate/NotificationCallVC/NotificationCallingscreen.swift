@@ -55,6 +55,7 @@ class NotificationCallingscreen: UIViewController {
     @IBAction func appectClcik(){
         
         callStatus = "OC"
+        
         let vcc = NotificationcallVC(nibName: nil, bundle: nil)
         vcc.userInfo = userInfo
         vcc.callStatus = callStatus
@@ -63,8 +64,8 @@ class NotificationCallingscreen: UIViewController {
         vcc.modalPresentationStyle = .fullScreen
         
         present(vcc, animated: true)
-        
-        
+//        NotiApi()
+//        exit(0)
         
     }
     
@@ -73,10 +74,10 @@ class NotificationCallingscreen: UIViewController {
         callStatus = "NO"
         
         exit(0)
+       
+        
+        
 //        NotiApi()
-        
-        
-              
         
     }
     
@@ -103,11 +104,11 @@ class NotificationCallingscreen: UIViewController {
         
         
        
-        let noti = Notimodal()
+       let noti = Notimodal()
         
         noti.url = urlss
         noti.call_status = callStatus
-        noti.duration = 0
+        noti.duration = "00:00"
         noti.start_time = currentTimes
         noti.end_time = "00:00"
         
@@ -135,17 +136,17 @@ class NotificationCallingscreen: UIViewController {
             noti.ei5 = ei5
         }
 
-        if let retryCount = userInfo[AnyHashable("retrycount")] as? Int {
+        if let retryCount = userInfo[AnyHashable("retrycount")] as? String{
             print("retrycount: \(retryCount)")
             noti.retry_count = retryCount
         }
 
-        if let circularId = userInfo[AnyHashable("circular_id")] as? Int {
+        if let circularId = userInfo[AnyHashable("circular_id")] as? String {
             print("circular_id: \(circularId)")
             noti.circular_id = circularId
         }
 
-        if let receiverId = userInfo[AnyHashable("receiver_id")] as? Int {
+        if let receiverId = userInfo[AnyHashable("receiver_id")] as? String {
             print("receiver_id: \(receiverId)")
             
             noti.receiver_id = receiverId
@@ -175,7 +176,14 @@ class NotificationCallingscreen: UIViewController {
                     
                 }else{
                     
-                    
+//                    let vcc = NotificationcallVC(nibName: nil, bundle: nil)
+//                    vcc.userInfo = userInfo
+//                    vcc.callStatus = callStatus
+//                    vcc.StartcurrentTimes = currentTimes
+//                    vcc.urlss = urlss
+//                    vcc.modalPresentationStyle = .fullScreen
+//                    
+//                    present(vcc, animated: true)
                     
                 }
                 

@@ -40,6 +40,7 @@ class NotificationcallVC: UIViewController {
       var playerItem: AVPlayerItem?
       var timeObserverToken: Any?
     var audioURL:  String!
+    var totalDuraion:  String!
       
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,13 +73,14 @@ class NotificationcallVC: UIViewController {
         
         stopPlayer()
 
-             exit(0)
+            
         
     }
 
 
     
     func setupAudioPlayer() {
+        callStatus = "OC"
            guard let url = URL(string: audioURL) else {
                print("Invalid URL")
                return
@@ -127,6 +129,7 @@ class NotificationcallVC: UIViewController {
                
                self.durationLbl.text = "\(formattedCurrentTime) / \(formattedTotalDuration)"
                print("Playback time: \(formattedCurrentTime) / \(formattedTotalDuration)")
+               totalDuraion = formattedTotalDuration
            }
        }
        
@@ -157,6 +160,10 @@ class NotificationcallVC: UIViewController {
            player = nil
            playerItem = nil
            print("Player stopped and resources released.")
+           
+//           NotiApi()
+           
+           exit(0)
        }
        
        deinit {
@@ -191,7 +198,7 @@ class NotificationcallVC: UIViewController {
         
         noti.url = urlss
         noti.call_status = callStatus
-        noti.duration = 0
+        noti.duration = totalDuraion
         noti.start_time = StartcurrentTimes
         noti.end_time = Endtime
         
@@ -219,17 +226,17 @@ class NotificationcallVC: UIViewController {
             noti.ei5 = ei5
         }
         
-        if let retryCount = userInfo[AnyHashable("retrycount")] as? Int {
+        if let retryCount = userInfo[AnyHashable("retrycount")] as? String {
             print("retrycount: \(retryCount)")
             noti.retry_count = retryCount
         }
         
-        if let circularId = userInfo[AnyHashable("circular_id")] as? Int {
+        if let circularId = userInfo[AnyHashable("circular_id")] as? String {
             print("circular_id: \(circularId)")
             noti.circular_id = circularId
         }
         
-        if let receiverId = userInfo[AnyHashable("receiver_id")] as? Int {
+        if let receiverId = userInfo[AnyHashable("receiver_id")] as? String {
             print("receiver_id: \(receiverId)")
             
             noti.receiver_id = receiverId
@@ -257,7 +264,7 @@ class NotificationcallVC: UIViewController {
                     
                 }else{
                     
-                    
+                   
                     
                 }
             }else{

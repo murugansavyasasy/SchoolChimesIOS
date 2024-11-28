@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="PlayVocieButton" destination="PFx-VU-hBK" id="Acl-wx-8hq"/>
                 <outlet property="Slider" destination="yrB-w1-Sok" id="1BV-Xv-aty"/>
+                <outlet property="addAttachHeadingLbl" destination="O7I-Xw-uxl" id="hML-32-sbH"/>
                 <outlet property="addAttachTop" destination="3kg-Ls-oEv" id="4FJ-zp-v2E"/>
                 <outlet property="addBtn" destination="rFS-fP-RGk" id="ZDH-Ct-uAM"/>
                 <outlet property="agreeView" destination="Ra4-7A-Kaf" id="1mT-vL-Uxv"/>
@@ -55,7 +56,8 @@
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </view>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AppBG" translatesAutoresizingMaskIntoConstraints="NO" id="fs2-bM-D3c">
-                    <rect key="frame" x="0.0" y="59" width="393" height="759"/>
+                    <rect key="frame" x="0.0" y="59" width="393" height="809"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EoU-Ng-Dw4">
                     <rect key="frame" x="0.0" y="59" width="393" height="759"/>
@@ -83,8 +85,8 @@
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Submit LSRW" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="L4x-1P-zoC">
-                                    <rect key="frame" x="60.000000000000007" y="7.6666666666666714" width="124.66666666666669" height="25"/>
-                                    <fontDescription key="fontDescription" name="Optima-Bold" family="Optima" pointSize="21"/>
+                                    <rect key="frame" x="60" y="7.3333333333333268" width="126" height="25.333333333333329"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -109,8 +111,8 @@
                                     </constraints>
                                 </imageView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Text" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Am2-ed-Uop">
-                                    <rect key="frame" x="20" y="10" width="29.666666666666671" height="20"/>
-                                    <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                    <rect key="frame" x="20" y="10" width="32" height="20"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -244,6 +246,8 @@
                                                 </label>
                                                 <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="yrB-w1-Sok">
                                                     <rect key="frame" x="68" y="46" width="237" height="31"/>
+                                                    <color key="minimumTrackTintColor" name="serach_color"/>
+                                                    <color key="thumbTintColor" name="serach_color"/>
                                                 </slider>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U4N-Uc-JS4">
                                                     <rect key="frame" x="10" y="40" width="40" height="40"/>
@@ -318,13 +322,13 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upload Image " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2bU-04-icV">
-                                                    <rect key="frame" x="10.000000000000007" y="17.666666666666657" width="108.66666666666669" height="20"/>
-                                                    <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                    <rect key="frame" x="10" y="17.666666666666657" width="110" height="20"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <color key="backgroundColor" red="0.81949093515813165" green="1" blue="0.94345065138300965" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <color key="backgroundColor" red="0.90196078431372551" green="0.92941176470588238" blue="0.95686274509803915" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="xgE-yJ-H1D" secondAttribute="trailing" constant="20" id="IPp-Vp-j7t"/>
                                                 <constraint firstAttribute="height" constant="55" id="Kdz-cM-jhq"/>
@@ -351,7 +355,7 @@
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cuE-N3-MRU">
                                                     <rect key="frame" x="90" y="20" width="223" height="20.333333333333329"/>
-                                                    <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" systemColor="linkColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -400,7 +404,7 @@
                             <constraints>
                                 <constraint firstAttribute="width" constant="150" id="N0O-Sh-6NH"/>
                             </constraints>
-                            <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="15"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                             <state key="normal" title="Add Content">
                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -410,15 +414,15 @@
                             </connections>
                         </button>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="kUw-an-bXz">
-                            <rect key="frame" x="10" y="530" width="373" height="159"/>
+                            <rect key="frame" x="10" y="545.33333333333337" width="373" height="143.66666666666663"/>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </tableView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tl8-iQ-BTz" customClass="UIViewX" customModule="VoicesnapSchoolApp" customModuleProvider="target">
                             <rect key="frame" x="131.66666666666666" y="699" width="129.99999999999997" height="40"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Submit" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ilW-Hb-QjG">
-                                    <rect key="frame" x="39.333333333333343" y="9.9999999999999982" width="51.333333333333343" height="20.333333333333329"/>
-                                    <fontDescription key="fontDescription" name="Optima-Regular" family="Optima" pointSize="17"/>
+                                    <rect key="frame" x="38" y="9.9999999999999982" width="54" height="20.333333333333329"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -487,6 +491,12 @@
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
                         </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Added File Attachments" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O7I-Xw-uxl">
+                            <rect key="frame" x="20" y="515" width="353" height="20.333333333333371"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
@@ -497,15 +507,18 @@
                         <constraint firstItem="fS6-kQ-a6D" firstAttribute="leading" secondItem="EoU-Ng-Dw4" secondAttribute="leading" constant="10" id="FVY-SU-QUH"/>
                         <constraint firstItem="rFS-fP-RGk" firstAttribute="centerX" secondItem="EoU-Ng-Dw4" secondAttribute="centerX" id="G3C-x9-WzR"/>
                         <constraint firstAttribute="trailing" secondItem="kUw-an-bXz" secondAttribute="trailing" constant="10" id="KGd-hz-4IH"/>
+                        <constraint firstAttribute="trailing" secondItem="O7I-Xw-uxl" secondAttribute="trailing" constant="20" id="RhD-XF-h8T"/>
                         <constraint firstItem="aUB-wc-E0V" firstAttribute="top" secondItem="EoU-Ng-Dw4" secondAttribute="top" id="Ry3-yH-XdI"/>
                         <constraint firstAttribute="trailing" secondItem="MYg-Oq-e3u" secondAttribute="trailing" constant="10" id="TAY-cr-GUn"/>
                         <constraint firstItem="kUw-an-bXz" firstAttribute="leading" secondItem="EoU-Ng-Dw4" secondAttribute="leading" constant="10" id="WCn-gz-fLK"/>
                         <constraint firstItem="Tl8-iQ-BTz" firstAttribute="top" secondItem="kUw-an-bXz" secondAttribute="bottom" constant="10" id="bbF-DC-NsT"/>
+                        <constraint firstItem="O7I-Xw-uxl" firstAttribute="top" secondItem="rFS-fP-RGk" secondAttribute="bottom" constant="5" id="cmx-Hy-x2w"/>
+                        <constraint firstItem="O7I-Xw-uxl" firstAttribute="leading" secondItem="EoU-Ng-Dw4" secondAttribute="leading" constant="20" id="hLq-29-KaH"/>
                         <constraint firstItem="ApB-Es-a7b" firstAttribute="centerX" secondItem="EoU-Ng-Dw4" secondAttribute="centerX" id="jRo-2X-qmT"/>
                         <constraint firstItem="MYg-Oq-e3u" firstAttribute="leading" secondItem="EoU-Ng-Dw4" secondAttribute="leading" constant="10" id="jvG-jr-PgC"/>
                         <constraint firstItem="MYg-Oq-e3u" firstAttribute="top" secondItem="aUB-wc-E0V" secondAttribute="bottom" constant="10" id="kBc-Yb-CN3"/>
                         <constraint firstItem="aUB-wc-E0V" firstAttribute="leading" secondItem="EoU-Ng-Dw4" secondAttribute="leading" id="kQQ-Y8-m7h"/>
-                        <constraint firstItem="kUw-an-bXz" firstAttribute="top" secondItem="rFS-fP-RGk" secondAttribute="bottom" constant="20" id="lIt-kd-d33"/>
+                        <constraint firstItem="kUw-an-bXz" firstAttribute="top" secondItem="O7I-Xw-uxl" secondAttribute="bottom" constant="10" id="lWs-To-prr"/>
                         <constraint firstAttribute="bottom" secondItem="Tl8-iQ-BTz" secondAttribute="bottom" constant="20" id="pRd-NT-llK"/>
                         <constraint firstItem="Tl8-iQ-BTz" firstAttribute="centerX" secondItem="EoU-Ng-Dw4" secondAttribute="centerX" id="qru-f7-J3U"/>
                         <constraint firstAttribute="trailing" secondItem="fS6-kQ-a6D" secondAttribute="trailing" constant="10" id="vqd-dm-zcQ"/>
@@ -526,7 +539,7 @@
                 <constraint firstItem="EoU-Ng-Dw4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="dbS-CI-M9I"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="EoU-Ng-Dw4" secondAttribute="bottom" id="gng-ry-zAJ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="fs2-bM-D3c" secondAttribute="trailing" id="hra-Qz-cvV"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="fs2-bM-D3c" secondAttribute="bottom" id="sXI-7q-0Wy"/>
+                <constraint firstItem="fs2-bM-D3c" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" constant="50" id="iwd-gd-6Ls"/>
             </constraints>
             <point key="canvasLocation" x="136.64122137404578" y="19.718309859154932"/>
         </view>

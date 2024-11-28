@@ -61,8 +61,8 @@
                                             </constraints>
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="LSRW" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p8B-57-lGS">
-                                            <rect key="frame" x="60" y="7.6666666666666714" width="54.666666666666657" height="25"/>
-                                            <fontDescription key="fontDescription" name="Optima-Bold" family="Optima" pointSize="21"/>
+                                            <rect key="frame" x="60" y="7.6666666666666714" width="56.333333333333343" height="25"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>

@@ -173,6 +173,8 @@ class LsrwListShowViewController: UIViewController ,UITableViewDelegate,UITableV
         cell.titleLbl.text =  ": " + skillData.Title
         cell.submittedOnLbl.text = ": " + skillData.SubmittedOn
         
+        
+        cell.selectionStyle = .none
         if skillData.Issubmitted == "1" {
             cell.takingSkillView.isHidden = true
             cell.submittedOnLbl.isHidden = false
@@ -186,6 +188,13 @@ class LsrwListShowViewController: UIViewController ,UITableViewDelegate,UITableV
             cell.submittedHeadingLbl.isHidden = true
             cell.takingSkillHeight.constant = 40
 //            cell.takingSkillBtn.setTitle(skillData.ActivityType, for: .normal)
+        }
+        
+        
+        if skillData.isAppRead == "0" {
+            cell.newLbl.isHidden = false
+        }else{
+            cell.newLbl.isHidden = true
         }
         
         

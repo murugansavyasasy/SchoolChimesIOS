@@ -68,7 +68,7 @@ class LSRWTakingSkillViewController: UIViewController,UITableViewDataSource,UITa
         let getAttach : GetAttachmentForSkillData = attachData[indexPath.row]
         cell.typeLbl.text = ": " + getAttach.ActivityType
         
-        
+        cell.selectionStyle = .none
         
         if getAttach.ActivityType == "TEXT" {
             cell.attachmentLbl.text = ": " + getAttach.Attachment

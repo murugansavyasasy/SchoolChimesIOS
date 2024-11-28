@@ -58,8 +58,8 @@
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preview LSRW" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nSn-9w-1Ui">
-                                    <rect key="frame" x="60" y="12.666666666666671" width="134" height="25"/>
-                                    <fontDescription key="fontDescription" name="Optima-Bold" family="Optima" pointSize="21"/>
+                                    <rect key="frame" x="60" y="12.333333333333327" width="133" height="25.333333333333329"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="21"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
@@ -114,7 +114,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DdL-KR-3FU">
                                                     <rect key="frame" x="300" y="55" width="0.0" height="0.0"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cV2-1u-HRb">
@@ -164,10 +164,10 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a0i-KP-Rax">
-                                    <rect key="frame" x="10" y="100" width="380" height="122"/>
+                                    <rect key="frame" x="10" y="100" width="380" height="132"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jGO-br-oka">
-                                            <rect key="frame" x="0.0" y="0.0" width="380" height="122"/>
+                                            <rect key="frame" x="5" y="5" width="370" height="122"/>
                                             <string key="text">In Swift, you can add actions to butto
 In Swift, you can add actions to buttons using UIKit or SwiftUI frameworks. Here's how you handle button actions in both:
 
@@ -178,10 +178,10 @@ In Swift, you can add actions to buttons using UIKit or SwiftUI frameworks. Here
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="jGO-br-oka" firstAttribute="leading" secondItem="a0i-KP-Rax" secondAttribute="leading" id="HPx-5F-qxf"/>
-                                        <constraint firstAttribute="bottom" secondItem="jGO-br-oka" secondAttribute="bottom" id="ePP-RX-zf0"/>
-                                        <constraint firstItem="jGO-br-oka" firstAttribute="top" secondItem="a0i-KP-Rax" secondAttribute="top" id="lxC-Xl-4WH"/>
-                                        <constraint firstAttribute="trailing" secondItem="jGO-br-oka" secondAttribute="trailing" id="zSH-q0-YIi"/>
+                                        <constraint firstItem="jGO-br-oka" firstAttribute="leading" secondItem="a0i-KP-Rax" secondAttribute="leading" constant="5" id="HPx-5F-qxf"/>
+                                        <constraint firstAttribute="bottom" secondItem="jGO-br-oka" secondAttribute="bottom" constant="5" id="ePP-RX-zf0"/>
+                                        <constraint firstItem="jGO-br-oka" firstAttribute="top" secondItem="a0i-KP-Rax" secondAttribute="top" constant="5" id="lxC-Xl-4WH"/>
+                                        <constraint firstAttribute="trailing" secondItem="jGO-br-oka" secondAttribute="trailing" constant="5" id="zSH-q0-YIi"/>
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lpW-eR-dpO">

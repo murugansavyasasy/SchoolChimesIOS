@@ -12,7 +12,7 @@ import ObjectMapper
 class Notimodal : Mappable{
     
     var url : String!
-    var duration : Int!
+    var duration : String!
     var ei1 : String!
     var ei2 : String!
     var ei3 : String!
@@ -20,11 +20,11 @@ class Notimodal : Mappable{
     var ei5 : String!
     var start_time : String!
     var end_time : String!
-    var retry_count : Int!
+    var retry_count : String!
     var phone : String!
-    var receiver_id : Int!
-    var circular_id : Int!
-    var diallist_id : Int!
+    var receiver_id : String!
+    var circular_id : String!
+    var diallist_id : String!
     var call_status : String!
     
     init(){}

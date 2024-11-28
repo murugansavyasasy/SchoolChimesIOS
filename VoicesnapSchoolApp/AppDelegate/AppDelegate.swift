@@ -58,7 +58,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate,UNUserNo
     
     var isPasswordBind = String()
     var isPasswordBindPassword = String()
-    
+    var audioPlayer: AVAudioPlayer?
     var strDeviceToken = String()
     var player: AVAudioPlayer?
     var isPopupOpened = 0
@@ -181,6 +181,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate,UNUserNo
     }
     
     
+    
+    
+    
+    func playAudioFile(named fileName: String, fileType: String) {
+            // Get the file path
+            guard let filePath = Bundle.main.path(forResource: fileName, ofType: fileType) else {
+                print("Audio file not found.")
+                return
+            }
+            
+            let fileURL = URL(fileURLWithPath: filePath)
+            
+            do {
+                // Initialize the audio player
+                audioPlayer = try AVAudioPlayer(contentsOf: fileURL)
+                audioPlayer?.prepareToPlay()
+                audioPlayer?.play() // Start playback
+            } catch {
+                print("Error playing audio: \(error.localizedDescription)")
+            }
+        }
+    
+    
+    
+    
     func registerNotificationCategories() {
         let callCategory = UNNotificationCategory(
             identifier: "CALL_CATEGORY",
@@ -298,7 +323,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate,UNUserNo
     func userNotificationCenter(_ center: UNUserNotificationCenter,willPresent notification: UNNotification,withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void){
         
         
-        
+        playAudioFile(named: "schoolchimes_tone", fileType: "wav")
         completionHandler([.alert, .badge,.sound])
         
         if(isPopupOpened == 0){

@@ -16,16 +16,18 @@ import KRProgressHUD
 
 class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UIDocumentPickerDelegate, PHPickerViewControllerDelegate,AVAudioRecorderDelegate, AVAudioPlayerDelegate,UITextViewDelegate {
     
+    @IBOutlet weak var addAttachHeadingLbl: UILabel!
     
     @IBOutlet weak var restrictionTv: UITableView!
     
     @IBOutlet weak var restrictionView: UIView!
     
     
+   
     @IBOutlet weak var playVoiceHeight: NSLayoutConstraint!
     @IBOutlet weak var voiceOverAllHeight: NSLayoutConstraint!
     @IBOutlet weak var addAttachTop: NSLayoutConstraint!
-    @IBOutlet weak var timeCountingLbl: UILabel!
+  
     @IBOutlet weak var PlayVocieButton: UIButton!
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var submitView: UIView!
@@ -137,7 +139,7 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
         let strImageLimit : NSString = UserDefaults.standard.object(forKey: IMAGE_COUNT) as! NSString
         imageLimit = strImageLimit.integerValue
         print("imageLimit",imageLimit)
-    
+        addAttachHeadingLbl.isHidden = true
         
         
         let agreeGesture = UITapGestureRecognizer(target: self, action: #selector(pickVideoFromGallery))
@@ -177,7 +179,7 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
     
 
     
-    
+//    MARK: Drop Down
     @IBAction func selectMonthViewClick(){
         
         
@@ -251,7 +253,7 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
                 voiceOverAllVie.isHidden = false
                 imgPdfPathShowView.isHidden = true
                 imageOverAllView.isHidden = true
-                addAttachTop.constant = -80
+                addAttachTop.constant = 30
                 voicePlayView.isHidden = true
                 addBtn.setTitle("Add File Attachments", for: .normal)
                 
@@ -284,7 +286,7 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
         if addBtn.backgroundColor != .lightGray {
             
           
-            
+            addAttachHeadingLbl.isHidden = false
             if dropDownTextLbl.text == "Text" {
                 pathArr.append(contentTextViw.text)
                 print("pathArrpathArr",pathArr.count)
@@ -307,7 +309,7 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
                     typeArr.append("IMAGE")
                 
                 
-                
+           
                 
                 
                 fileArr.append("ImageIcon")
@@ -321,7 +323,7 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
 
             }else  if dropDownTextLbl.text == "Pdf" {
                 
-                
+               
                 pathArr.append(contentsOf: aswPdf)
                 overAllPathArr.append(contentsOf: pathArr)
                 
@@ -339,7 +341,7 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
 //                pathArr.append(contentTextViw.text)
                 pathArr.append(contentsOf: aswVoice)
                 addBtn.backgroundColor = .lightGray
-                
+              
                 typeArr.append("VOICE")
                 
                 tv.delegate = self
@@ -348,7 +350,7 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
                 submitView.backgroundColor = UIColor(named: "serach_color")
 
             }else  if dropDownTextLbl.text == "Video" {
-             
+              
                 
                 pathArr.append(contentsOf: aswImg)
                 overAllPathArr.append(contentsOf: pathArr)
@@ -384,90 +386,6 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
     }
     
     
-    
-   
-    
-    
-    
-   
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print("pathArrcount",pathArr.count)
-        if tableView == restrictionTv {
-            return restrictionData.count
-        }else{
-            return pathArr.count
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        if tableView == restrictionTv {
-            
-            let cell = tableView.dequeueReusableCell(withIdentifier: restrictionRowNib, for: indexPath) as! RestrictionTableViewCell
-            
-            let restriction : RestrictionResponse = restrictionData[indexPath.row]
-            cell.contentLbl.text = restriction.Content
-            
-         
-            return cell
-           
-        }else{
-            let cell = tableView.dequeueReusableCell(withIdentifier: rowId, for: indexPath) as! FileAttachmentTableViewCell
-            
-            cell.contentFilePathLbl.text = pathArr[indexPath.row]
-            
-            //     img   cell.contentFilePathLbl.text = fileArr[indexPath.row]
-            cell.selectionStyle = .none
-            
-            
-            let currentType = typeArr[indexPath.row]
-            print("CellcurrentType",currentType)
-            
-            // Update the cell's image based on type
-            switch currentType {
-            case "IMAGE":
-                cell.img.image = UIImage(named: "ImageIcon")
-            case "TEXT":
-                cell.img.image = UIImage(named: "TextIcon")
-            case "VIDEO":
-                cell.img.image = UIImage(named: "p23")
-            case "PDF":
-                cell.img.image = UIImage(named: "pdfImage")
-            case "VOICE":
-                cell.img.image = UIImage(named: "p1")
-            default:
-                cell.img.image = nil // Fallback image or nil
-            }
-            
-            cell.indexPath = indexPath
-            
-            // Set the delete action closure
-            cell.deleteAction = { [weak self] indexPath in
-                self?.deleteSelectdItem(at: indexPath)
-            }
-            
-            
-            let closeGesture = UITapGestureRecognizer(target: self, action: #selector(selectMonthViewClick))
-            dropDownView.addGestureRecognizer(closeGesture)
-            
-            
-            if submitView.backgroundColor != .lightGray {
-                
-                let submitGesture = UITapGestureRecognizer(target: self, action: #selector(submitAct))
-                submitView.addGestureRecognizer(submitGesture)
-                
-            }
-            
-            
-            return  cell
-        }
-        
-        
-        
-//
-    }
-    
   
     
     func deleteSelectdItem(at indexPath: IndexPath) {
@@ -483,10 +401,6 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
            }, completion: nil)
         }
 //
-       
-    
-   
-    
     func textViewDidChange(_ textView: UITextView) {
           print("Text changed to: \(textView.text ?? "")")
         if textView.text.count > 0 {
@@ -498,8 +412,6 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
             }
          
       }
-    
-    
     
     
     func selectPDF() {
@@ -515,9 +427,6 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
     }
     
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt urls: URL) {
-        
-        
-        
         
         let fileurl: URL = urls as URL
         let filename = urls.lastPathComponent
@@ -597,8 +506,7 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
         
         
         if dropDownTextLbl.text == "Image" {
-//
-            
+   
             let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
             alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
                 self.ImagePickerGallery()
@@ -829,9 +737,11 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
                     imageFilePath.add(imageDicthome)
                     
                     KRProgressHUD.dismiss()
-                    addBtn.backgroundColor = UIColor(named: "AddContent")
-                
-                    
+                    DispatchQueue.main.async {
+                        
+                        addBtn.backgroundColor = UIColor(named: "AddContent")
+                        
+                    }
                     self.currentImageCount = self.currentImageCount + 1
                     if self.currentImageCount < self.totalImageCount{
                         DispatchQueue.main.async {
@@ -892,7 +802,7 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
         // MARK: This method is called when the user has picked a video
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-//        var images : [Int] = []
+//
         if cameraSelect == 1 {
                         let chosenImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
 
@@ -918,8 +828,6 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
         }
 
     
-    
-    
     func getFileSize(at url: URL) -> UInt64? {
     do {
         let attributes = try FileManager.default.attributesOfItem(atPath: url.path)
@@ -934,9 +842,6 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
 
     func createVimeoUploadURL(authToken: String, videoFilePath: URL, completion: @escaping (UploadResult) -> Void) {
 
-  
-
-    
     guard let fileSize = getFileSize(at: videoFilePath) else {
         completion(.failure(NSError(domain: "com.vimeo", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unable to get file size"])))
         return
@@ -1209,13 +1114,6 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
     
   
     
-    
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        UITableView.automaticDimension
-    }
-    
-    
     @IBAction func AttachmentRedirect(ges : LsrwListShowGesture) {
         
         
@@ -1404,7 +1302,12 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
         @IBAction func recodeVc(){
 
             
+            addAttachTop.constant = -80
+            voicePlayView.isHidden = true
+            self.addBtn.backgroundColor = .lightGray
+            aswVoice.removeAll()
 
+            
     //        clickHereLabel.text = "Click here,Stop Recording"
 
             if(isRecording)
@@ -1752,7 +1655,7 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
                 playVoiceHeight.constant = 110
 
                 voicePlayView.isHidden = false
-                addAttachTop.constant = 90
+                addAttachTop.constant = 40
              
                 addBtn.isHidden = false
 
@@ -2088,38 +1991,22 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
 
         func funcStopRecording(){
 
-    //        self.TitleForStartRecord()
-
-            
+   
             self.voiceRecordBtn.setImage(UIImage(named:"VocieRecord"), for: UIControl.State.normal)
 
             self.finishRecording(success: true)
 
-    //        playVoiceMessageView.isHidden = false
-
-         
 
             if(UIDevice.current.userInterfaceIdiom == .pad){
 
-                
-
-    //            PlayVoiceMsgViewHeight.constant = 180
-
-                
+               
 
                 self.overallTimeLbl.text = TotaldurationFormat
-
-//                self.timeCountingLbl.text = "00.00"
 
             }else{
 
-    //            PlayVoiceMsgViewHeight.constant = 120
-
-                
 
                 self.overallTimeLbl.text = TotaldurationFormat
-
-//                self.timeCountingLbl.text = "00.00"
 
             }
 
@@ -2131,13 +2018,8 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
 
         
 
-      
 
-
-
-    //
-
-        //MARK:Play Audio BUTTON ACTION
+        //MARK: Play Audio BUTTON ACTION
 
         @IBAction func actionPlayVoiceMessage(_ sender: UIButton){
 
@@ -2400,6 +2282,91 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
         
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("pathArrcount",pathArr.count)
+        if tableView == restrictionTv {
+            return restrictionData.count
+        }else{
+            return pathArr.count
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        if tableView == restrictionTv {
+            
+            let cell = tableView.dequeueReusableCell(withIdentifier: restrictionRowNib, for: indexPath) as! RestrictionTableViewCell
+            
+            let restriction : RestrictionResponse = restrictionData[indexPath.row]
+            cell.contentLbl.text = restriction.Content
+            cell.selectionStyle = .none
+         
+            return cell
+           
+        }else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: rowId, for: indexPath) as! FileAttachmentTableViewCell
+            
+            cell.contentFilePathLbl.text = pathArr[indexPath.row]
+            
+            //     img   cell.contentFilePathLbl.text = fileArr[indexPath.row]
+            cell.selectionStyle = .none
+            
+            
+            let currentType = typeArr[indexPath.row]
+            print("CellcurrentType",currentType)
+            
+            // Update the cell's image based on type
+            switch currentType {
+            case "IMAGE":
+                cell.img.image = UIImage(named: "ImageIcon")
+            case "TEXT":
+                cell.img.image = UIImage(named: "TextIcon")
+            case "VIDEO":
+                cell.img.image = UIImage(named: "p23")
+            case "PDF":
+                cell.img.image = UIImage(named: "pdfImage")
+            case "VOICE":
+                cell.img.image = UIImage(named: "p1")
+            default:
+                cell.img.image = nil // Fallback image or nil
+            }
+            
+            cell.indexPath = indexPath
+            
+            // Set the delete action closure
+            cell.deleteAction = { [weak self] indexPath in
+                self?.deleteSelectdItem(at: indexPath)
+            }
+            
+            
+            let closeGesture = UITapGestureRecognizer(target: self, action: #selector(selectMonthViewClick))
+            dropDownView.addGestureRecognizer(closeGesture)
+            
+            
+            if submitView.backgroundColor != .lightGray {
+                
+                let submitGesture = UITapGestureRecognizer(target: self, action: #selector(submitAct))
+                submitView.addGestureRecognizer(submitGesture)
+                
+            }
+            
+            
+            return  cell
+        }
+        
+        
+        
+//
+    }
+    
+    
+      
+      
+      
+      func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+          UITableView.automaticDimension
+      }
+      
    
     
 }

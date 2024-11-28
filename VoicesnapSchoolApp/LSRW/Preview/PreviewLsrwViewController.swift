@@ -94,12 +94,18 @@ class PreviewLsrwViewController: UIViewController,AVAudioRecorderDelegate, AVAud
             let urlString = attactText!
             
             
-            guard let url = URL(string: urlString) else { return }
-                   
-                   // Load PDF into WKWebView
-                  
-            let requestObj = URLRequest(url: url)
-            pdfWebview.load(requestObj)
+            guard let url = URL(string: urlString) else {
+                        return
+                    }
+                    
+                    // Download and load the PDF
+                    loadPDF(from: url)
+//            guard let url = URL(string: urlString) else { return }
+//                   
+//                   // Load PDF into WKWebView
+//                  
+//            let requestObj = URLRequest(url: url)
+//            pdfWebview.load(requestObj)
             
             pdfView.isHidden = false
             voiceHoleView.isHidden = true
@@ -140,7 +146,35 @@ class PreviewLsrwViewController: UIViewController,AVAudioRecorderDelegate, AVAud
         // Do any additional setup after loading the view.
     }
 
-    
+func loadPDF(from url: URL) {
+        // Create a URLSession data task to download the file
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            if let error = error {
+                print("Failed to download file: \(error)")
+                return
+            }
+            
+            guard let data = data else {
+                print("No data received")
+                return
+            }
+            
+            // Save the PDF locally in the app's temporary directory
+            let tempURL = FileManager.default.temporaryDirectory.appendingPathComponent("temp.pdf")
+            
+            do {
+                try data.write(to: tempURL)
+                DispatchQueue.main.async {
+                    // Load the PDF in the WKWebView
+                    self.pdfWebview.loadFileURL(tempURL, allowingReadAccessTo: tempURL)
+                }
+            } catch {
+                print("Error saving file locally: \(error)")
+            }
+        }
+        
+        task.resume()
+    }
     
     @IBAction func playVoiceBtnAction(_ sender: UIButton) {
         
@@ -318,7 +352,7 @@ class PreviewLsrwViewController: UIViewController,AVAudioRecorderDelegate, AVAud
 
         playerItem?.seek(to: CMTime.zero)
 
-        timeCountingLbl.text = "00:00" 
+        timeCountingLbl.text = "00:00"
 
         PlayVocieButton.setImage(UIImage(named: "PlayIcon"), for: .normal)
 

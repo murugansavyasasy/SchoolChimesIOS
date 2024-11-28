@@ -10,6 +10,7 @@ import UIKit
 
 class LsrwListShowTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var newLbl: UILabel!
     @IBOutlet weak var typeLbl: UILabel!
     
     @IBOutlet weak var takingSkillHeight: NSLayoutConstraint!
