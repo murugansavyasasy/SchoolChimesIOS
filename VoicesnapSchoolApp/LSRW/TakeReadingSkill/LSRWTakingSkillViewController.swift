@@ -104,15 +104,15 @@ class LSRWTakingSkillViewController: UIViewController,UITableViewDataSource,UITa
             [self] (res) in
             
             let getAttachResp : GetAttachmentForSkillResponse = Mapper<GetAttachmentForSkillResponse>().map(JSONString: res)!
-            
-            if getAttachResp.Status == 1 {
-                attachData = getAttachResp.getAttachData
-                tv.dataSource = self
-                tv.delegate = self
-                tv.reloadData()
-                
+            if  DefaultsKeys.failedErrorCode != 500 {
+                if getAttachResp.Status == 1 {
+                    attachData = getAttachResp.getAttachData
+                    tv.dataSource = self
+                    tv.delegate = self
+                    tv.reloadData()
+                    
+                }
             }
-            
             
         }
         

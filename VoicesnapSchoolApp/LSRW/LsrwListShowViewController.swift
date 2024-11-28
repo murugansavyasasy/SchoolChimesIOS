@@ -133,21 +133,25 @@ class LsrwListShowViewController: UIViewController ,UITableViewDelegate,UITableV
             [self] (res) in
             
             let viewAllSkillByStudentResp : ViewAllSkillByStudentResponse = Mapper<ViewAllSkillByStudentResponse>().map(JSONString: res)!
-            
-            if viewAllSkillByStudentResp.Status == 1 {
-                viewSkillDatas = viewAllSkillByStudentResp.viewAllSkillByData
-                clone_list  = viewAllSkillByStudentResp.viewAllSkillByData
-                tv.dataSource = self
-                tv.delegate = self
-                tv.reloadData()
+            if  DefaultsKeys.failedErrorCode != 500 {
+                if viewAllSkillByStudentResp.Status == 1 {
+                    viewSkillDatas = viewAllSkillByStudentResp.viewAllSkillByData
+                    clone_list  = viewAllSkillByStudentResp.viewAllSkillByData
+                    tv.dataSource = self
+                    tv.delegate = self
+                    tv.reloadData()
+                    
+                }else{
+                    nodataView.isHidden = false
+                    nodataLbl.isHidden = false
+                    nodataLbl.text = viewAllSkillByStudentResp.Message
+                }
                 
             }else{
                 nodataView.isHidden = false
                 nodataLbl.isHidden = false
-                nodataLbl.text = viewAllSkillByStudentResp.Message
+                nodataLbl.text = "Failure"
             }
-            
-            
         }
         
         

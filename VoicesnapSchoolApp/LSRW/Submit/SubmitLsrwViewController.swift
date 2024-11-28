@@ -17,17 +17,11 @@ import KRProgressHUD
 class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UIDocumentPickerDelegate, PHPickerViewControllerDelegate,AVAudioRecorderDelegate, AVAudioPlayerDelegate,UITextViewDelegate {
     
     @IBOutlet weak var addAttachHeadingLbl: UILabel!
-    
     @IBOutlet weak var restrictionTv: UITableView!
-    
     @IBOutlet weak var restrictionView: UIView!
-    
-    
-   
     @IBOutlet weak var playVoiceHeight: NSLayoutConstraint!
     @IBOutlet weak var voiceOverAllHeight: NSLayoutConstraint!
     @IBOutlet weak var addAttachTop: NSLayoutConstraint!
-  
     @IBOutlet weak var PlayVocieButton: UIButton!
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var submitView: UIView!
@@ -39,7 +33,6 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
     @IBOutlet weak var addBtn: UIButton!
     @IBOutlet weak var imgPdfPathShowView: UIView!
     @IBOutlet weak var overAllTextView: UIView!
-  
     @IBOutlet weak var Slider: UISlider!
     @IBOutlet weak var voiceeTapView: UIView!
     @IBOutlet weak var timerLbl: UILabel!
@@ -53,8 +46,8 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
     @IBOutlet weak var imageOverAllView: UIView!
     @IBOutlet weak var dropDownView: UIViewX!
     @IBOutlet weak var dropDownTextLbl: UILabel!
-    
     @IBOutlet weak var agreeView: UIView!
+    
     var items = ["Text", "Voice", "Image","Pdf","Video"]
     var rowId = "FileAttachmentTableViewCell"
     var currentImageCount = 0
@@ -83,7 +76,6 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
     var overAllFileArr : [String] = []
     var typeArr : [String] = []
     var fileArr : [String] = []
-  
     var urlData: URL?
     var TotaldurationFormat = String()
     var MaxMinutes = Int()
@@ -97,24 +89,23 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
     var dropDown  = DropDown()
     var imagePicker = UIImagePickerController()
     var AudioPlayUrl : String!
-        var Audiopath  : URL!
+    var Audiopath  : URL!
     var timer = Timer()
     var timeLabelForPlayVoice : String!
     var audioPlayer : AVAudioPlayer!
-        
     var isAudioRecordingGranted: Bool!
     var isRecording = false
     var isPlaying = false
-       
-        var url: URL!
+    var url: URL!
     var studentId = String()
     var skillId : String!
-    
     var cameraSelect : Int!
     var restrictionData : [RestrictionResponse] = []
     var imageLimit : Int!
-     var restrictionRowNib = "RestrictionTableViewCell"
+    var restrictionRowNib = "RestrictionTableViewCell"
     var strTextViewPlaceholder = String()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self
@@ -307,10 +298,7 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
                
               
                     typeArr.append("IMAGE")
-                
-                
-           
-                
+               
                 
                 fileArr.append("ImageIcon")
                 overAllFileArr.append(contentsOf: typeArr)
@@ -377,16 +365,11 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
     }
     
     
-    
-    
     @IBAction func voiceRecordBtnAction(_ sender: UIButton) {
         
         recodeVc()
         
     }
-    
-    
-  
     
     func deleteSelectdItem(at indexPath: IndexPath) {
         print("indexPath",indexPath.row)
@@ -496,9 +479,6 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
      
                   present(picker, animated: true, completion: nil)
                   
-                  
-                  
-        
     }
     
     
@@ -571,7 +551,6 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
         
         uploadRequest?.contentType = "application/pdf"
         
-        
         let transferManager = AWSS3TransferManager.default()
         transferManager.upload(uploadRequest!).continueWith { [self] (task) -> AnyObject? in
             
@@ -589,17 +568,16 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
                     aswPdf.removeAll()
                     aswPdf.append(absoluteString)
                
-                    addBtn.backgroundColor = UIColor(named: "AddContent")
                     
                     let imageDict = NSMutableDictionary()
                     imageDict["FileName"] = absoluteString
                     self.imageUrlArray.add(imageDict)
-                    self.convertedImagesUrlArray = self.imageUrlArray
-                    
-                    
-                    
-                    
-                    
+                  
+                    DispatchQueue.main.async {
+                        addBtn.backgroundColor = UIColor(named: "AddContent")
+                        self.convertedImagesUrlArray = self.imageUrlArray
+                    }
+                  
                 }
             }
             else {
@@ -610,8 +588,6 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
             return nil
         }
     }
-    
-    
     
     func presentPhotoPicker(from viewController: UIViewController, selectionLimit: Int = 1) {
         var configuration = PHPickerConfiguration()
@@ -669,13 +645,9 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
         let CognitoPoolID = DefaultsKeys.CognitoPoolID
         let Region = AWSRegionType.APSouth1
         
-        
-      
         let currentTimeStamp = NSString.init(format: "%ld",Date() as CVarArg)
         let imageNameWithoutExtension = NSString.init(format: "vc_%@",currentTimeStamp)
         let imageName = NSString.init(format: "%@%@",imageNameWithoutExtension, ".png")
-        
-        
         
         let dateFormatter = DateFormatter()
         
@@ -708,7 +680,6 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
             uploadRequest?.contentType = "image/png"
         }
       
-        
         let transferManager = AWSS3TransferManager.default()
         transferManager.upload(uploadRequest!).continueWith { [self] (task) -> AnyObject? in
             
@@ -1002,8 +973,6 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
                     
                     
                     present(refreshAlert, animated: true, completion: nil)
-                    
-                    
                    
                 }
                 
@@ -1026,23 +995,8 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
     }
     }
 
-
-  
-    
-
-    
-    
-  
-  
-    
-   
-    
    
     func Awws3Voice(URLPath : URL) {
-        
-  
-        
-        
         
         if let remoteUrl = URL(string: URLPath.absoluteString) {
             let task = URLSession.shared.downloadTask(with: remoteUrl) { localUrl, response, error in
@@ -1089,31 +1043,13 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
        
         
     }
-//    func directoryURL() -> NSURL? {
-//        print("urlData12",urlData)
-//        let fileManager = FileManager.default
-//        let urls = fileManager.urls(for: .documentDirectory, in: .userDomainMask)
-//        let documentDirectory = urls[0] as NSURL
-//        let soundURL = documentDirectory.appendingPathComponent("sample.mp4")
-////        UtilObj.printLogKey(printKey: "Recorded Audio", printingValue: soundURL!)
-//        
-//        
-//        
-//        return soundURL as NSURL?
-//    }
-    
+
     @IBAction func takeReadingSkill() {
         let vc = LSRWTakingSkillViewController(nibName: nil, bundle: nil)
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated:   true)
     }
 
-    
-    
-    
-    
-  
-    
     @IBAction func AttachmentRedirect(ges : LsrwListShowGesture) {
         
         
@@ -1133,25 +1069,16 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
         
         let attachModal = AttachmentData()
        
-        
-//        for (type, content) in zip(typeArr, pathArr) {
-//            print("Number: \(type), Letter: \(content)")
-//            attachModal.type = type
-//            attachModal.content = content
-//            imageAryy.append(attachModal)
-//        }
-      
-        
         for path in pathArr {
             attachModal.content = path
             print("pathArr",path)
-//
+
         }
         
         for path in typeArr {
             attachModal.type = path
             print("typeArr",path)
-//
+
         }
         
         
@@ -1194,25 +1121,27 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
             
             let submitModalResp : [SubmitResponse] = Mapper<SubmitResponse>().mapArray(JSONString: res)!
             
-            if submitModalResp[0].Status == 1 {
+            if  DefaultsKeys.failedErrorCode != 500 {
+                if submitModalResp[0].Status == 1 {
+                    
+                    let alert = UIAlertController(title: "Alert",
+                                                  message: submitModalResp[0].Message,
+                                                  preferredStyle: .alert)
+                    
+                    // Add an action (button)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+                        dismiss(animated: true)
+                    }))
+                    
+                    // Present the alert
+                    self.present(alert, animated: true, completion: nil)
+                    
+                    //
+                    
+                }
                 
-                let alert = UIAlertController(title: "Alert",
-                                              message: submitModalResp[0].Message,
-                                                      preferredStyle: .alert)
-                        
-                        // Add an action (button)
-                        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
-                            dismiss(animated: true)
-                        }))
-                        
-                        // Present the alert
-                        self.present(alert, animated: true, completion: nil)
-                
-//         
                 
             }
-            
-            
         }
         
     }
@@ -1264,16 +1193,12 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
             }
 
         }
-
-        
-
+    
         func startSlider() {
 
             Slider.value = 0
 
             Slider.maximumValue = 10
-
-            
 
             Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { [weak self] (timer) in
 
@@ -1287,7 +1212,6 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
 
         }
 
-        
 
         @objc private func updateSlider(to value: Float) {
 
@@ -1295,9 +1219,6 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
 
         }
 
-        
-
-        
 
         @IBAction func recodeVc(){
 
@@ -1307,66 +1228,22 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
             self.addBtn.backgroundColor = .lightGray
             aswVoice.removeAll()
 
-            
-    //        clickHereLabel.text = "Click here,Stop Recording"
-
             if(isRecording)
 
             {
 
                 finishAudioRecording(success: true)
 
-                
-
-                
-
                 self.voiceRecordBtn.setImage(UIImage(named:"VocieRecord"), for: UIControl.State.normal)
 
                 isRecording = false
 
-                
-
-                
-
-                
-
-                
-
-                
-
-    //            if  durationLable.text == "00:00" + " / " + "00:00"{
-
-    //
-
-    //
-
-    //
-
-    //
-
-    //
-
-    //
-
-    //            }
-
-                
-
-                
-
+          
             }
 
             else
 
             {
-
-                
-
-                
-
-                
-
-                
 
                 if isAudioRecordingGranted == false{
 
@@ -1388,13 +1265,7 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
 
                 }else{
 
-                    
-
-                    
-
                     setup_recorder()
-
-                    
 
                     audioRecorder.record()
 
@@ -1402,22 +1273,12 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
 
                     self.voiceRecordBtn.setImage(UIImage(named:"VoiceRecordSelect"), for: UIControl.State.normal)
 
-                 
-
-                   
 
                     isRecording = true
 
                 }
 
                 
-
-                
-
-                
-
-                
-
             }
 
             
@@ -1434,19 +1295,7 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
 
             let documentsDirectory = paths[0]
 
-            
-
-            
-
-            
-
             print("asds",paths)
-
-            
-
-            
-
-            
 
             return documentsDirectory
 
@@ -1469,59 +1318,25 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
             print("filee",filePath)
 
             
-
             var myurl = filePath
 
             
-
             var urlString: String = myurl.absoluteString
 
-            
-
-            
 
             url = filePath
 
-            
-
-            
-
             overallTimeLbl.text = ""
-
-            
-
-            
 
             Audiopath = filePath
 
             AudioPlayUrl = filePath.absoluteString
-
-            
-
-            
-
-            
-
-    //        let VoicePalyRecord = UITapGestureRecognizer(target: self, action: #selector(OrderplayAudio))
-
-    //
-
-    //        voicePlayView.addGestureRecognizer(VoicePalyRecord)
-
-    //
-
-            
-
-            
 
             return filePath
 
         }
 
         
-
-        
-
         func setup_recorder()
 
         {
@@ -1582,21 +1397,7 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
 
             }
 
-            
-
         }
-
-        
-
-        
-
-        
-
-      
-
-        
-
-          
 
         
 
@@ -1620,10 +1421,6 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
 
         }
 
-        
-
-        
-
         func finishAudioRecording(success: Bool)
 
         {
@@ -1634,23 +1431,11 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
 
             {
 
-                
-
                 audioRecorder.stop()
-
-                
 
                 audioRecorder = nil
 
-                
-
                 meterTimer.invalidate()
-
-                
-
-                
-
-                
 
                 playVoiceHeight.constant = 110
 
@@ -1666,12 +1451,6 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
                 self.voiceRecordBtn.setImage(UIImage(named:"VocieRecord"), for: UIControl.State.normal)
 
          
-
-                
-
-                
-
-                
 
                 if  overallTimeLbl.text == "00:00" + " / " + "00:00"{
 
@@ -1689,23 +1468,8 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
 
                     }))
 
-                    
-
-                    
-
-                    
-
                     present(refreshAlert, animated: true, completion: nil)
 
-                    
-
-                    
-
-                    
-
-                    
-
-               
 
                 }
 
@@ -1715,65 +1479,22 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
 
                 else{
 
-                  
-
-                    
 
                     overallTimeLbl.isHidden = false
 
-                    
-
-                    
-
                     if timeLabelForPlayVoice == ""  || timeLabelForPlayVoice == nil {
-
                         
-
                         overallTimeLbl.text = "00:00" + " / " +  "00:00"
-
-                        
-
                     }
-
-                    
-
-                    //
 
                     else{
 
-                        
-
-                        
-
                         overallTimeLbl.text = "00:00" + " / " + timeLabelForPlayVoice
-
-                        
-
-                      
 
                     }
 
-                    
-
-                    
-
                 }
-
-                
-
-                
-
-                
-
-                
-
-                
-
-           
-
-                
-
-                
+ 
 
             }
 
@@ -1785,8 +1506,6 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
 
             {
 
-                
-
                 display_alert(msg_title: "Error", msg_desc: "Recording failed.", action_title: "OK")
 
                 
@@ -1796,9 +1515,6 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
         }
 
         
-
-        
-
         func prepare_play()
 
         {
@@ -1823,10 +1539,6 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
 
         }
 
-        
-
-        
-
         @objc func updateAudioMeter(timer: Timer)
 
         {
@@ -1845,39 +1557,16 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
 
                 let time  = String(format: "%02d",sec)
 
-                
-
-    //            audioSeconds = time
-
                 print("klllllllfedsaz",time,sec)
-
-                
 
                 timeLabelForPlayVoice = totalTimeString
 
                 timerLbl.text = totalTimeString + " / " + "03:00"
-
-                
-
                 audioRecorder.updateMeters()
-
-                
-
-                
-
-                
 
             }
 
         }
-
-        
-
-        
-
-        
-
-        
 
         func secondsToHoursMinutesSeconds(_ seconds: Int) -> (Int, Int, Int) {
 
@@ -1885,7 +1574,6 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
 
         }
 
-        
 
         func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool)
 
@@ -1894,18 +1582,11 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
             if !flag
 
             {
-
                 finishAudioRecording(success: false)
-
             }
 
-            
-
         }
-
-        
-
-       
+ 
     
     func directoryURL() -> NSURL? {
 
@@ -1961,8 +1642,6 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
 
         }
 
-        
-
         func finishRecording(success: Bool) {
 
             audioRecorder.stop()
@@ -1982,13 +1661,6 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
         }
 
         
-
-        
-
-        
-
-        
-
         func funcStopRecording(){
 
    
@@ -2011,37 +1683,20 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
             }
 
             
-
-            
-
         }
-
-        
 
 
         //MARK: Play Audio BUTTON ACTION
 
         @IBAction func actionPlayVoiceMessage(_ sender: UIButton){
 
-           
-
             audioRecorder = nil
 
-            
-
-            
-
-            
-
             var urls = URL(string: AudioPlayUrl)
-
-            
 
             playerItem = AVPlayerItem(url: urls!)
 
             player = AVPlayer(playerItem: playerItem!)
-
-            
 
             if self.player!.currentItem?.status == .readyToPlay{
 
@@ -2063,23 +1718,13 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
 
                 let targetTime : CMTime = CMTimeMake(value: seconds1, timescale: 1)
 
-                
-
                 player!.seek(to: targetTime)
 
                 strPlayStatus = "PlayIcon"
 
                 player?.pause()
 
-                
-
                 PlayVocieButton.setImage(UIImage(named: "PlayIcon"), for: .normal)
-
-                
-
-                
-
-                
 
             }else{
 
@@ -2091,8 +1736,6 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
 
                 player!.seek(to: targetTime)
 
-                
-
                 strPlayStatus = "play"
 
                 player?.volume = 1
@@ -2100,8 +1743,6 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
                 player?.play()
 
                 PlayVocieButton.setImage(UIImage(named: "PauseIcon"), for: .normal)
-
-                
 
                 print("enddddd")
 
@@ -2112,9 +1753,6 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
         }
 
         
-
-        
-
         @objc func updateSlidersss(){
 
             if self.player!.currentItem?.status == .readyToPlay {
@@ -2163,8 +1801,6 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
 
         }
 
-        
-
         @objc func playerDidFinishPlaying(sender: Notification) {
 
             timer.invalidate()
@@ -2176,9 +1812,6 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
             PlayVocieButton.isSelected = false
 
             playerItem?.seek(to: CMTime.zero)
-
-//            timeCountingLbl.text = "00:00" + " / " + timeLabelForPlayVoice
-
             PlayVocieButton.setImage(UIImage(named: "PlayIcon"), for: .normal)
 
         }
@@ -2186,43 +1819,30 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
     
     func restrictionList() {
         
-        
-        
         RestrictionRequest.call_request(param: ""){ [self]
             
             (res) in
-            
-            
+    
             let restrictionResp : [RestrictionResponse] =
             Mapper<RestrictionResponse>().mapArray(JSONString: res)!
             
-          
-            
             restrictionData = restrictionResp
-            
             restrictionTv.delegate = self
             restrictionTv.dataSource = self
             restrictionTv.reloadData()
             
         }
         
-        
-        
-        
     }
     func textViewDidEndEditing(_ textView: UITextView) {
         print("false")
 
-
-
-        //
         if contentTextViw.text == "" {
             contentTextViw.text = strTextViewPlaceholder
             contentTextViw.textColor = UIColor.black
            
         }
          
-      
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -2233,11 +1853,8 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
             contentTextViw.textColor = UIColor.black
             contentTextViw.font = .boldSystemFont(ofSize: 14)
 
-//            eventNameTextField.font = UIFont(name: "verdana", size: 14.0)
         }
         
-        
-
     }
     
     @objc func didPressDoneButton(button: UIButton) {
@@ -2246,9 +1863,7 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
             contentTextViw.textColor = UIColor.black
         }
         contentTextViw.resignFirstResponder()
-//        textviewEnableorDisable()
     }
-    
     
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
         setupTextViewAccessoryView()
@@ -2258,7 +1873,6 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
             contentTextViw.text = ""
             contentTextViw.textColor = UIColor.black
             contentTextViw.font = .boldSystemFont(ofSize: 14)
-            
         }
         
         return true
@@ -2274,11 +1888,6 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
         doneButton.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.black], for: .normal)
         toolBar.items = [flexsibleSpace, doneButton]
         contentTextViw.inputAccessoryView = toolBar
-        
-        
-       
-        
-       
         
     }
     
@@ -2354,15 +1963,9 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
             return  cell
         }
         
-        
-        
 //
     }
     
-    
-      
-      
-      
       func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
           UITableView.automaticDimension
       }
