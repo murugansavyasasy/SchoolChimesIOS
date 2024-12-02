@@ -293,6 +293,8 @@
 		842C31462C01C8E100E98F85 /* AcidmicYrRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842C31452C01C8E100E98F85 /* AcidmicYrRequest.swift */; };
 		842C314A2C01CF4600E98F85 /* ScheduleCallCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 842C31492C01CF4600E98F85 /* ScheduleCallCollectionViewCell.xib */; };
 		842C314B2C01CF4600E98F85 /* ScheduleCallCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 842C31482C01CF4600E98F85 /* ScheduleCallCollectionViewCell.swift */; };
+		84385F922CF9F1570020E94D /* AttendTvCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84385F912CF9F1570020E94D /* AttendTvCell.xib */; };
+		84385F932CF9F1570020E94D /* AttendTvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84385F902CF9F1570020E94D /* AttendTvCell.swift */; };
 		8442AA7A2CDF86C80006068E /* NotificationCallingscreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8442AA772CDF86C80006068E /* NotificationCallingscreen.swift */; };
 		8442AA7B2CDF86C80006068E /* NotificationcallVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8442AA752CDF86C80006068E /* NotificationcallVC.swift */; };
 		8442AA7C2CDF86C80006068E /* NotificationCallingscreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8442AA782CDF86C80006068E /* NotificationCallingscreen.xib */; };
@@ -956,6 +958,8 @@
 		842C31452C01C8E100E98F85 /* AcidmicYrRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcidmicYrRequest.swift; sourceTree = "<group>"; };
 		842C31482C01CF4600E98F85 /* ScheduleCallCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCallCollectionViewCell.swift; sourceTree = "<group>"; };
 		842C31492C01CF4600E98F85 /* ScheduleCallCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScheduleCallCollectionViewCell.xib; sourceTree = "<group>"; };
+		84385F902CF9F1570020E94D /* AttendTvCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendTvCell.swift; sourceTree = "<group>"; };
+		84385F912CF9F1570020E94D /* AttendTvCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AttendTvCell.xib; sourceTree = "<group>"; };
 		8442AA742CDF86C80006068E /* isnotification.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = isnotification.wav; sourceTree = "<group>"; };
 		8442AA752CDF86C80006068E /* NotificationcallVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationcallVC.swift; sourceTree = "<group>"; };
 		8442AA762CDF86C80006068E /* NotificationcallVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationcallVC.xib; sourceTree = "<group>"; };
@@ -2619,6 +2623,15 @@
 			path = CvCell;
 			sourceTree = "<group>";
 		};
+		84385F8F2CF9F07B0020E94D /* AttendanceTVcell */ = {
+			isa = PBXGroup;
+			children = (
+				84385F902CF9F1570020E94D /* AttendTvCell.swift */,
+				84385F912CF9F1570020E94D /* AttendTvCell.xib */,
+			);
+			path = AttendanceTVcell;
+			sourceTree = "<group>";
+		};
 		8442AA792CDF86C80006068E /* NotificationCallVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -2654,6 +2667,7 @@
 		845B1BCC2CAFD82700D6E6F5 /* AttReportApi */ = {
 			isa = PBXGroup;
 			children = (
+				84385F8F2CF9F07B0020E94D /* AttendanceTVcell */,
 				845B1BCD2CAFD86200D6E6F5 /* AttendReportResp.swift */,
 				845B1BCF2CAFD88500D6E6F5 /* AttendReportReq.swift */,
 			);
@@ -4171,6 +4185,7 @@
 				8491E4432B0638A000CF858F /* HwImageZoomViewController.xib in Resources */,
 				1873EB832983990D008E30AA /* FeeDetailReceiptTableViewCell.xib in Resources */,
 				841ED6332C8F4AB100A65EEA /* CheckAviableTv.xib in Resources */,
+				84385F922CF9F1570020E94D /* AttendTvCell.xib in Resources */,
 				18D37B7229C2DE8400A61132 /* DataCollectionTvHeaderView.xib in Resources */,
 				841ED63F2C8F4AB100A65EEA /* StaffPtmViewController.xib in Resources */,
 				848E5D4F2BFE281100DBBBB5 /* NewAbsenteesViewController.xib in Resources */,
@@ -4357,6 +4372,7 @@
 				B51CCCC11F1504F000AAE733 /* Reachability.m in Sources */,
 				D6EE64B8210088CB0029351C /* PrincipalAddRemoveSubjectVC.swift in Sources */,
 				C1C2C1A925F798F80022A9AA /* UploadSubmitTVCell.swift in Sources */,
+				84385F932CF9F1570020E94D /* AttendTvCell.swift in Sources */,
 				84CD56ED2C9C03350068800A /* LocationHistoryVc.swift in Sources */,
 				18EC6D742A00EF6200ACD29E /* getLessonPlanStaffReportResponse.swift in Sources */,
 				84CD56EB2C9C03350068800A /* GetLocationReq.swift in Sources */,

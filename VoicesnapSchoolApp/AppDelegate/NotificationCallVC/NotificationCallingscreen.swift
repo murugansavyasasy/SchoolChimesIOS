@@ -24,6 +24,7 @@ class NotificationCallingscreen: UIViewController {
     
    
     var userInfo = [AnyHashable : Any]()
+    var strMobileNo : String! = nil
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -32,13 +33,15 @@ class NotificationCallingscreen: UIViewController {
         //        view = GradientView()
         
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.timeStyle = .short // Automatically uses 12-hour or 24-hour based on device settings
-        let currentTime = dateFormatter.string(from: Date())
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let currentDateTime = Date()
+        let formattedDate = formatter.string(from: currentDateTime)
+
+        print(formattedDate)
         
-        print("Current time is: \(currentTime)")
-        
-        currentTimes = currentTime
+        currentTimes = formattedDate
+       
         
         
         
@@ -61,11 +64,11 @@ class NotificationCallingscreen: UIViewController {
         vcc.callStatus = callStatus
         vcc.StartcurrentTimes = currentTimes
         vcc.urlss = urlss
+        vcc.strMobileNo = strMobileNo
         vcc.modalPresentationStyle = .fullScreen
         
         present(vcc, animated: true)
-//        NotiApi()
-//        exit(0)
+
         
     }
     
@@ -73,11 +76,11 @@ class NotificationCallingscreen: UIViewController {
     @IBAction func DeclineClcik(){
         callStatus = "NO"
         
-        exit(0)
+
        
         
         
-//        NotiApi()
+        NotiApi()
         
     }
     
@@ -102,16 +105,19 @@ class NotificationCallingscreen: UIViewController {
     
     func NotiApi(){
         
-        
+        strMobileNo = UserDefaults.standard.object(forKey: USERNAME) as! String
        
        let noti = Notimodal()
         
         noti.url = urlss
         noti.call_status = callStatus
-        noti.duration = "00:00"
+        noti.duration = "0"
         noti.start_time = currentTimes
-        noti.end_time = "00:00"
+        noti.end_time = currentTimes
+        print("strMobileNo",strMobileNo)
         
+      
+        noti.phone = strMobileNo
         if let ei1 = userInfo[AnyHashable("ei1")] as? String {
             print("ei1: \(ei1)")
             noti.ei1 = ei1
@@ -134,11 +140,12 @@ class NotificationCallingscreen: UIViewController {
         if let ei5 = userInfo[AnyHashable("ei5")] as? String {
             print("ei5: \(ei5)")
             noti.ei5 = ei5
+            noti.diallist_id = ei5
         }
 
         if let retryCount = userInfo[AnyHashable("retrycount")] as? String{
             print("retrycount: \(retryCount)")
-            noti.retry_count = retryCount
+            noti.retrycount = retryCount
         }
 
         if let circularId = userInfo[AnyHashable("circular_id")] as? String {
@@ -152,6 +159,7 @@ class NotificationCallingscreen: UIViewController {
             noti.receiver_id = receiverId
         }
 
+       
         
         
         var  notiModalStr = noti.toJSONString()
@@ -160,32 +168,21 @@ class NotificationCallingscreen: UIViewController {
 
         NotiRequst.call_request(param: notiModalStr!) {
             
-            [self] (res) in
+      (res) in
             
-            let notiresponces : notiRes = Mapper<notiRes>().map(JSONString: res)!
+            let notiresponces : [notiRes] = Mapper<notiRes>().mapArray(JSONString: res)!
             
             
             
-            if notiresponces.Status == 1{
+            if notiresponces[0].Status == 1{
                 
              
-                if callStatus == "NO"{
+               
                     
                     
-                    exit(0)
+                exit(0)
                     
-                }else{
-                    
-//                    let vcc = NotificationcallVC(nibName: nil, bundle: nil)
-//                    vcc.userInfo = userInfo
-//                    vcc.callStatus = callStatus
-//                    vcc.StartcurrentTimes = currentTimes
-//                    vcc.urlss = urlss
-//                    vcc.modalPresentationStyle = .fullScreen
-//                    
-//                    present(vcc, animated: true)
-                    
-                }
+               
                 
                 
                 
@@ -196,7 +193,7 @@ class NotificationCallingscreen: UIViewController {
             }
             
             
-            
+            exit(0)
         }
         
         

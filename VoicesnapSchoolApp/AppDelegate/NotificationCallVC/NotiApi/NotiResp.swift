@@ -20,7 +20,7 @@ class Notimodal : Mappable{
     var ei5 : String!
     var start_time : String!
     var end_time : String!
-    var retry_count : String!
+    var retrycount : String!
     var phone : String!
     var receiver_id : String!
     var circular_id : String!
@@ -50,6 +50,7 @@ class Notimodal : Mappable{
         circular_id <- map["circular_id"]
         diallist_id <- map["diallist_id"]
         call_status <- map["call_status"]
+        retrycount <- map["retrycount"]
     }
     
     

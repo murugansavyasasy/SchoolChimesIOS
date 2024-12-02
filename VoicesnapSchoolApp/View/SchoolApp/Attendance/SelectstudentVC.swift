@@ -11,6 +11,18 @@ import UIKit
 import Alamofire
 class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableViewDataSource {
     
+    @IBOutlet weak var SetTitleBtnHeight: NSLayoutConstraint!
+    @IBOutlet weak var sortBtnName: UIButton!
+    @IBOutlet weak var sortBtnHeight: NSLayoutConstraint!
+    @IBOutlet weak var desendingImgView: UIImageView!
+    @IBOutlet weak var assendingImgView: UIImageView!
+    @IBOutlet weak var ZtoAImgView: UIImageView!
+    @IBOutlet weak var AtoZImgView: UIImageView!
+    @IBOutlet weak var DesendingView: UIView!
+    @IBOutlet weak var ascendingView: UIView!
+    @IBOutlet weak var ZtoAView: UIView!
+    @IBOutlet weak var AtoZView: UIView!
+    @IBOutlet weak var sortByFullView: UIView!
     @IBOutlet weak var OkButton: UIButton!
     @IBOutlet weak var CancelButton: UIButton!
     @IBOutlet weak var SectionLabel: UILabel!
@@ -21,6 +33,7 @@ class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableV
     @IBOutlet weak var SelectImage: UIImageView!
     @IBOutlet weak var SectionNameLabel: UILabel!
     
+    @IBOutlet weak var SortTitbleBtn: UIButton!
     var sessionType : String!
     var attendanceType : String!
     
@@ -41,6 +54,7 @@ class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableV
     var StudentCount = Int()
     var SenderNameString = String()
     var StudentAdmissionNoArray : Array = [String]()
+    var StudentRollNumberNoArray : Array = [String]()
     var SelectedStudentAdmissionNoArray : Array = [String]()
     var SectionStandardName = String()
     var SelectedDictforApi = [String:Any]() as NSDictionary
@@ -79,12 +93,18 @@ class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableV
     var vimeoVideoURL : URL!
     
     var attendacePassType : Int!
+    var  FilterarrayDatas: NSArray = []
     
     @IBOutlet weak var SelectAllButton: UIButton!
     
     @IBOutlet weak var TotalPresentedStudentLabel: UILabel!
+    
+    var clkickId : Int!
     override func viewDidLoad() {
         super.viewDidLoad()
+        sortByFullView.isHidden = true
+       
+        sortBtnHeight.constant = 0
         strCountryCode = UserDefaults.standard.object(forKey: COUNTRY_CODE) as! String
         self.callSelectedLanguage()
         let nc = NotificationCenter.default
@@ -95,15 +115,39 @@ class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableV
         SectionNameLabel.text = SectionStandardName
         //
         if(SenderNameString == "StudentExamTextVC"){
+            print("StudentExamTextVC",SenderNameString)
             SelectedSectionCode = String(describing: ExamTestApiDict["SectionCode"]!)
             print(SelectedSectionCode)
         }else if(SenderNameString == "ExamTextVC"){
+            print("ExamTextVC",SenderNameString)
             
             SelectedSectionCode = String(describing: SectionDetailDictionary["SectionId"]!)
             SubjectCodeStr = String(describing: SelectedSubjectDict["SubjectId"]!)
         } else if(SenderNameString == "StaffAssignment" || SenderNameString == "SendAssignment"){
             
-        }else{
+            print("SendAssignment",SenderNameString)
+            
+        }
+        else if (SenderNameString == "AttendanceVC"){
+            
+         
+            MyTableView.separatorStyle = .singleLine
+            sortBtnHeight.constant = 35
+            let nib = UINib(nibName: "AttendTvCell", bundle: nil)
+            MyTableView.register(nib, forCellReuseIdentifier: "AttendTvCell")
+            
+            MyTableView.rowHeight = UITableView.automaticDimension
+            MyTableView.estimatedRowHeight = 44.0
+            print("AttendaceVcccc",SenderNameString)
+            
+            SelectedSectionCode = String(describing: SectionDetailDictionary["SectionId"]!)
+        }
+        else{
+            
+           
+            
+           
+            print("AttendaceVcccc",SenderNameString)
             
             SelectedSectionCode = String(describing: SectionDetailDictionary["SectionId"]!)
         }
@@ -115,8 +159,261 @@ class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableV
                 Util.showAlert("", msg:strNoInternet )
             }
         }
+        
+        let Atoz = UITapGestureRecognizer(target: self, action: #selector(AtoZClick))
+        AtoZView.addGestureRecognizer(Atoz)
+        let ZtoA = UITapGestureRecognizer(target: self, action: #selector(ZtoAClick))
+        ZtoAView.addGestureRecognizer(ZtoA)
+        let Assendings = UITapGestureRecognizer(target: self, action: #selector(AsendingClick))
+        ascendingView.addGestureRecognizer(Assendings)
+        let desendings = UITapGestureRecognizer(target: self, action: #selector(DesendingClick))
+        DesendingView.addGestureRecognizer(desendings)
+        
+        sortByFullView.layer.cornerRadius = 10
+        sortByFullView.clipsToBounds = true
     }
     
+    
+    
+
+    @IBAction func cancelFilterBtn(_ sender: Any) {
+        sortBtnName.isHidden = false
+        sortByFullView.isHidden = true
+        removeBlurredBackground()
+    }
+    
+    func addBlurredBackground() {
+        // Remove existing background layers (prevent duplicates)
+        removeBlurredBackground()
+
+        // Create a blur effect
+        let blurEffect = UIBlurEffect(style: .dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = view.bounds
+        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        blurEffectView.tag = 1001 // Assign a tag for easier identification
+
+        // Create a black overlay
+        let darkOverlay = UIView(frame: view.bounds)
+        darkOverlay.backgroundColor = UIColor.black.withAlphaComponent(0.0) // Corrected alpha value
+        darkOverlay.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        darkOverlay.tag = 1002 // Assign a tag for easier identification
+
+        // Add the views below `sortByFullView`
+        view.insertSubview(blurEffectView, belowSubview: sortByFullView)
+        view.insertSubview(darkOverlay, belowSubview: sortByFullView)
+    }
+    
+    func removeBlurredBackground() {
+        // Remove blur and overlay using their tags
+        view.viewWithTag(1001)?.removeFromSuperview() // Remove blur view
+        view.viewWithTag(1002)?.removeFromSuperview() // Remove black overlay
+    }
+    @IBAction func doneFiltrBtn(_ sender: Any) {
+        
+        sortBtnName.isHidden = false
+        removeBlurredBackground()
+      
+        if clkickId == 1{
+            
+            sortByFullView.isHidden = true
+            
+          
+          
+            
+          
+            let atozSortedArray = sortFilterArrayByName(ascending: true)
+            print("A-to-Z Order:")
+            atozSortedArray.forEach { item in
+                if let dict = item as? [String: Any],
+                   let rollNo = dict["RollNO"] as? String,
+                   let studentName = dict["StudentName"] as? String,
+                   let studentId = dict["StudentID"]as? String,
+                   let admissionNo = dict["StudentAdmissionNo"] as? String {
+                    print("RollNO: \(rollNo), Student Name: \(studentName), Admission No: \(admissionNo)")
+                    StudentNameArray.append(studentName)
+                    StudentAdmissionNoArray.append(admissionNo)
+                    StudentRollNumberNoArray.append(rollNo)
+                    StudentIDArray.append(studentId)
+                    MyTableView.reloadData()
+                }
+            }
+        }else if clkickId == 2{
+            sortByFullView.isHidden = true
+            
+           
+           
+            let ztoaSortedArray = sortFilterArrayByName(ascending: false)
+            print("Z-to-A Order:")
+            ztoaSortedArray.forEach { item in
+                if let dict = item as? [String: Any],
+                   let rollNo = dict["RollNO"] as? String,
+                   let studentName = dict["StudentName"] as? String,
+                   let studentId = dict["StudentID"]as? String,
+                   let admissionNo = dict["StudentAdmissionNo"] as? String {
+                    print("RollNO: \(rollNo), Student Name: \(studentName), Admission No: \(admissionNo)")
+                    StudentNameArray.append(studentName)
+                    StudentAdmissionNoArray.append(admissionNo)
+                    StudentRollNumberNoArray.append(rollNo)
+                    StudentIDArray.append(studentId)
+                    MyTableView.reloadData()
+                }
+            }
+            
+            
+        }else if clkickId == 3{
+            
+            sortByFullView.isHidden = true
+            
+           
+            
+            let ascendingSortedArray = sortFilterArrayByRollNO(ascending: true)
+            print("Ascending Order:")
+            ascendingSortedArray.forEach { item in
+                if let dict = item as? [String: Any],
+                   let rollNo = dict["RollNO"] as? String,
+                   let studentName = dict["StudentName"] as? String,
+                   let studentId = dict["StudentID"]as? String,
+                   let admissionNo = dict["StudentAdmissionNo"] as? String {
+                    print("RollNO: \(rollNo), Student Name: \(studentName), Admission No: \(admissionNo)","Student Id: \(studentId)")
+                    
+                    StudentNameArray.append(studentName)
+                    StudentAdmissionNoArray.append(admissionNo)
+                    StudentRollNumberNoArray.append(rollNo)
+                    StudentIDArray.append(studentId)
+                   
+                    MyTableView.reloadData()
+                    
+                }
+            }
+            
+            
+        }else if clkickId == 4{
+            
+            sortByFullView.isHidden = true
+            
+           
+          
+            let descendingSortedArray = sortFilterArrayByRollNO(ascending: false)
+            print("\nDescending Order:")
+            descendingSortedArray.forEach { item in
+                if let dict = item as? [String: Any],
+                   let rollNo = dict["RollNO"] as? String,
+                   let studentName = dict["StudentName"] as? String,
+                   let studentId = dict["StudentID"] as? String,
+                   let admissionNo = dict["StudentAdmissionNo"] as? String {
+                    print("RollNO: \(rollNo), Student Name: \(studentName), Admission No: \(admissionNo)")
+                    
+                    StudentNameArray.append(studentName)
+                    StudentAdmissionNoArray.append(admissionNo)
+                    StudentRollNumberNoArray.append(rollNo)
+                    StudentIDArray.append(studentId)
+                    MyTableView.reloadData()
+                }
+            }
+            
+        }
+        
+    }
+    
+    
+    @IBAction func AtoZClick(){
+        
+        clkickId = 1
+        
+//        sortBtnName.titleLabel?.text = "Ascending Order - A-Z(Student Name)"
+//        sortBtnName.setTitle("Ascending Order - A-Z(Student Name)", for: .normal)
+       
+        StudentNameArray.removeAll()
+        StudentAdmissionNoArray.removeAll()
+        StudentRollNumberNoArray.removeAll()
+        StudentIDArray.removeAll()
+        
+        AtoZImgView.image = UIImage(named: "CheckBoximage")
+        ZtoAImgView.image = UIImage(named: "UnCheckBoxIcon")
+        assendingImgView.image = UIImage(named: "UnCheckBoxIcon")
+        desendingImgView.image = UIImage(named: "UnCheckBoxIcon")
+        
+        
+    }
+    @IBAction func ZtoAClick(){
+        clkickId = 2
+        
+//        sortBtnName.titleLabel?.text = "Ascending Order - Z-A(Student Name)"
+//        sortBtnName.setTitle("Ascending Order - Z-A(Student Name)", for: .normal)
+        StudentNameArray.removeAll()
+        StudentAdmissionNoArray.removeAll()
+        StudentRollNumberNoArray.removeAll()
+        StudentIDArray.removeAll()
+        
+        AtoZImgView.image = UIImage(named: "UnCheckBoxIcon")
+        ZtoAImgView.image = UIImage(named: "CheckBoximage")
+        assendingImgView.image = UIImage(named: "UnCheckBoxIcon")
+        desendingImgView.image = UIImage(named: "UnCheckBoxIcon")
+        
+        
+    }
+    @IBAction func AsendingClick(){
+        
+        clkickId = 3
+//        sortBtnName.titleLabel?.text = "Ascending Order - Roll Number"
+//        sortBtnName.setTitle("Ascending Order - Roll Number", for: .normal)
+        StudentNameArray.removeAll()
+        StudentAdmissionNoArray.removeAll()
+        StudentRollNumberNoArray.removeAll()
+        StudentIDArray.removeAll()
+        
+        AtoZImgView.image = UIImage(named: "UnCheckBoxIcon")
+        ZtoAImgView.image = UIImage(named: "UnCheckBoxIcon")
+        assendingImgView.image = UIImage(named: "CheckBoximage")
+        desendingImgView.image = UIImage(named: "UnCheckBoxIcon")
+    
+        
+        
+    }
+    @IBAction func DesendingClick(){
+       
+        clkickId = 4
+       
+//        sortBtnName.titleLabel?.text = "Descending Order - Roll Number"
+//        sortBtnName.setTitle("Descending Order - Roll Number", for: .normal)
+        StudentNameArray.removeAll()
+        StudentAdmissionNoArray.removeAll()
+        StudentRollNumberNoArray.removeAll()
+        StudentIDArray.removeAll()
+        
+        AtoZImgView.image = UIImage(named: "UnCheckBoxIcon")
+        ZtoAImgView.image = UIImage(named: "UnCheckBoxIcon")
+        assendingImgView.image = UIImage(named: "UnCheckBoxIcon")
+        desendingImgView.image = UIImage(named: "CheckBoximage")
+        
+        
+    }
+    @IBAction func filterBtn(_ sender: Any) {
+        
+        sortByFullView.isHidden = false
+        sortBtnName.isHidden = true
+        addBlurredBackground()
+        
+        
+    }
+    
+    func sortFilterArrayByName(ascending: Bool) -> NSArray {
+        let sortedArray = FilterarrayDatas.sorted { (obj1, obj2) -> Bool in
+            guard
+                let dict1 = obj1 as? [String: Any],
+                let dict2 = obj2 as? [String: Any],
+                let name1 = dict1["StudentName"] as? String,
+                let name2 = dict2["StudentName"] as? String
+            else {
+                return false
+            }
+            
+            return ascending ? (name1 < name2) : (name1 > name2)
+        }
+        return sortedArray as NSArray
+    }
+   
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
@@ -132,24 +429,63 @@ class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableV
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SelectStudentTVC", for: indexPath) as! SelectStudentTVC
         
         
-        cell.attendendanceType = attendacePassType
-        cell.StudentNameLabel.text = StudentNameArray[indexPath.row]
-        
-        cell.StudentIdLabel.text = StudentAdmissionNoArray[indexPath.row]
-        
-        if(SelectedStudentIDArray.count > 0){
-            if(SelectedStudentIDArray.contains(StudentIDArray[indexPath.row])){
-                self.MyTableView.selectRow(at: indexPath, animated: false, scrollPosition:UITableView.ScrollPosition.none)
+        if SenderNameString == "AttendanceVC"{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "AttendTvCell", for: indexPath) as! AttendTvCell
+            
+            //        AttendTvCell
+            cell.attendendanceType = attendacePassType
+            
+            cell.StudentNameLabel.text = StudentNameArray[indexPath.row]
+            
+            if StudentRollNumberNoArray[indexPath.row] == ""{
+                
+                cell.RollNumLbl.isHidden = true
             }else{
-                self.MyTableView.deselectRow(at: indexPath, animated: false)
+                
+                cell.RollNumLbl.text = "Roll No                      : " + StudentRollNumberNoArray[indexPath.row]
+                
             }
+            
+            cell.StudentIdLabel.text = "Admission No             : " + StudentAdmissionNoArray[indexPath.row]
+          
+            
+            
+            if(SelectedStudentIDArray.count > 0){
+                if(SelectedStudentIDArray.contains(StudentIDArray[indexPath.row])){
+                    self.MyTableView.selectRow(at: indexPath, animated: false, scrollPosition:UITableView.ScrollPosition.none)
+                }else{
+                    self.MyTableView.deselectRow(at: indexPath, animated: false)
+                }
+            }
+            
+            
+            
+            return cell
+        }else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SelectStudentTVC", for: indexPath) as! SelectStudentTVC
+            
+            //        AttendTvCell
+            cell.attendendanceType = attendacePassType
+            
+            cell.StudentNameLabel.text = StudentNameArray[indexPath.row]
+            
+            cell.StudentIdLabel.text = StudentAdmissionNoArray[indexPath.row]
+            
+            if(SelectedStudentIDArray.count > 0){
+                if(SelectedStudentIDArray.contains(StudentIDArray[indexPath.row])){
+                    self.MyTableView.selectRow(at: indexPath, animated: false, scrollPosition:UITableView.ScrollPosition.none)
+                }else{
+                    self.MyTableView.deselectRow(at: indexPath, animated: false)
+                }
+            }
+            return cell
         }
-        return cell
     }
-    
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return UITableView.automaticDimension
+//    }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         OkButton.isUserInteractionEnabled = true
@@ -617,7 +953,12 @@ class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableV
         let myDict:NSMutableDictionary = ["SchoolId" : SchoolId, "TargetCode" : SelectedSectionCode, "StaffID": StaffId]
         UtilObj.printLogKey(printKey: "requestString", printingValue: requestString)
         
+        
+        
+        
         UtilObj.printLogKey(printKey: "myDict", printingValue: myDict)
+        
+        print("myDictmyDictmyDictmyDict",myDict)
         let myString = Util.convertDictionary(toString: myDict)
         apiCall.nsurlConnectionFunction(requestString, myString, "GetStudentDetail")
     }
@@ -728,8 +1069,17 @@ class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableV
                 StudentAdmissionNoArray.removeAll()
                 if let CheckedArray = arrayDatas as? NSArray{
                     
+                    FilterarrayDatas = arrayDatas
+                    
+                    
+                    print("FilterarrayDatas",FilterarrayDatas)
+                    
+                    
+                    
                     for var i in 0..<arrayDatas.count
                     {
+                        
+                    
                         dicResponse = arrayDatas[i] as! NSDictionary
                         if(dicResponse != nil){
                             if(dicResponse["StudentID"] != nil){
@@ -743,6 +1093,7 @@ class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableV
                                     StudentIDArray.append(String(describing: dicResponse["StudentID"]!))
                                     StudentNameArray.append(String(describing: dicResponse["StudentName"]!))
                                     StudentAdmissionNoArray.append(String(describing: dicResponse["StudentAdmissionNo"]!))
+                                    StudentRollNumberNoArray.append(String(describing: dicResponse["RollNO"]!))
                                     MyTableView.reloadData()
                                     
                                 }
@@ -832,6 +1183,33 @@ class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableV
     func hideLoading() -> Void{
         hud.hide(true)
         
+    }
+    
+    
+    
+    func extractNumericRollNO(_ rollNO: String) -> Int {
+        let digits = rollNO.compactMap { $0.isNumber ? Int(String($0)) : nil }
+        return digits.isEmpty ? Int.max : Int(digits.reduce(0, { $0 * 10 + $1 }))
+    }
+
+    // Sorting function
+    func sortFilterArrayByRollNO(ascending: Bool) -> NSArray {
+        let sortedArray = FilterarrayDatas.sorted { (obj1, obj2) -> Bool in
+            guard
+                let dict1 = obj1 as? [String: Any],
+                let dict2 = obj2 as? [String: Any],
+                let rollNo1 = dict1["RollNO"] as? String,
+                let rollNo2 = dict2["RollNO"] as? String
+            else {
+                return false
+            }
+            
+            let rollNo1Value = rollNo1.isEmpty ? Int.max : extractNumericRollNO(rollNo1)
+            let rollNo2Value = rollNo2.isEmpty ? Int.max : extractNumericRollNO(rollNo2)
+            
+            return ascending ? (rollNo1Value < rollNo2Value) : (rollNo1Value > rollNo2Value)
+        }
+        return sortedArray as NSArray
     }
     
     // MARK: Language Selection

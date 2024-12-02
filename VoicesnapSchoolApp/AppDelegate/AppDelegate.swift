@@ -60,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate,UNUserNo
     var isPasswordBindPassword = String()
     var audioPlayer: AVAudioPlayer?
     var strDeviceToken = String()
-    var player: AVAudioPlayer?
+//    var player: AVAudioPlayer?
     var isPopupOpened = 0
     var LoginParentDetailArray = NSArray()
     var appIsStarting = false
@@ -70,11 +70,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate,UNUserNo
     var redirectOTPDict = NSDictionary()
     
     var strSchoolID = String()
-    
+    private var player: AVPlayer?
     
     var mainParentIconArray : [String] = []
     var mainParentSegueArray : [String] = []
-    
+    var Id = 0
     //
     // Language Parent Menu Arrays
     
@@ -184,27 +184,54 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate,UNUserNo
     
     
     
-    func playAudioFile(named fileName: String, fileType: String) {
-            // Get the file path
-            guard let filePath = Bundle.main.path(forResource: fileName, ofType: fileType) else {
-                print("Audio file not found.")
+//    func playAudioFile(named fileName: String, fileType: String) {
+//            // Get the file path
+//        
+//        print("playAudioFileplayAudioFile")
+//            guard let filePath = Bundle.main.path(forResource: fileName, ofType: fileType) else {
+//                print("Audio file not found.")
+//                return
+//            }
+//            
+//            let fileURL = URL(fileURLWithPath: filePath)
+//            
+//            do {
+//                // Initialize the audio player
+//                audioPlayer = try AVAudioPlayer(contentsOf: fileURL)
+//                audioPlayer?.prepareToPlay()
+//                audioPlayer?.play() // Start playback
+//            } catch {
+//                print("Error playing audio: \(error.localizedDescription)")
+//            }
+//        }
+    
+    
+    func playAudio(from urlString: String) {
+            guard let url = URL(string: "https://schoolchimes-files-india.s3.ap-south-1.amazonaws.com/communication/IOS+App/schoolchimes_tone.wav"
+        ) else {
+                print("Invalid URL")
                 return
             }
-            
-            let fileURL = URL(fileURLWithPath: filePath)
-            
+            player = AVPlayer(url: url)
+            player?.play()
+            print("Playing audio...")
+        }
+
+        func stopAudio() {
+            player?.pause()
+            player = nil
+            print("Audio stopped.")
+        }
+
+        private func configureAudioSession() {
             do {
-                // Initialize the audio player
-                audioPlayer = try AVAudioPlayer(contentsOf: fileURL)
-                audioPlayer?.prepareToPlay()
-                audioPlayer?.play() // Start playback
+                try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [])
+                try AVAudioSession.sharedInstance().setActive(true)
+                print("Audio session configured for background playback.")
             } catch {
-                print("Error playing audio: \(error.localizedDescription)")
+                print("Failed to configure audio session: \(error.localizedDescription)")
             }
         }
-    
-    
-    
     
     func registerNotificationCategories() {
         let callCategory = UNNotificationCategory(
@@ -323,7 +350,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate,UNUserNo
     func userNotificationCenter(_ center: UNUserNotificationCenter,willPresent notification: UNNotification,withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void){
         
         
-        playAudioFile(named: "schoolchimes_tone", fileType: "wav")
+        Id = 1
+//        playAudioFile(named: "schoolchimes_tone", fileType: "caf")
+        
+//        configureAudioSession()
+//        playAudio(from: "")
         completionHandler([.alert, .badge,.sound])
         
         if(isPopupOpened == 0){
@@ -340,9 +371,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate,UNUserNo
     func applicationDidEnterBackground(_ application: UIApplication) {
         isPasswordBind = "1"
         
+        print("applicationDidEnterBackground")
+//        if Id == 1{
+//            
+//            playAudio(from: "")
+//        }
     }
     
     func applicationWillEnterForeground(_ application: UIApplication) {
+        print("applicationWillEnterForeground")
+//        if Id == 1{
+//            
+//            playAudio(from: "")
+//        }
+        
         
     }
     

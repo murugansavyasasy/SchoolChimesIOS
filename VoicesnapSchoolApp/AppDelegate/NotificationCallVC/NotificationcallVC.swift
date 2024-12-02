@@ -41,10 +41,16 @@ class NotificationcallVC: UIViewController {
       var timeObserverToken: Any?
     var audioURL:  String!
     var totalDuraion:  String!
-      
+    var duration : String!
+    
+    var strMobileNo : String! = nil
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        
+        
+     
+        
         audioURL = urlss
         createGradientLayer(view: self.view)
 
@@ -62,7 +68,8 @@ class NotificationcallVC: UIViewController {
 
     
     @IBAction func DeclineClcik(){
-        callStatus = "NO"
+        callStatus = "OC"
+        
         let dateFormatter = DateFormatter()
         dateFormatter.timeStyle = .short // Automatically uses 12-hour or 24-hour based on device settings
         let currentTime = dateFormatter.string(from: Date())
@@ -129,7 +136,7 @@ class NotificationcallVC: UIViewController {
                
                self.durationLbl.text = "\(formattedCurrentTime) / \(formattedTotalDuration)"
                print("Playback time: \(formattedCurrentTime) / \(formattedTotalDuration)")
-               totalDuraion = formattedTotalDuration
+               totalDuraion = formattedCurrentTime
            }
        }
        
@@ -149,6 +156,16 @@ class NotificationcallVC: UIViewController {
        }
        
        func stopPlayer() {
+           
+           let formatter = DateFormatter()
+           formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+           let currentDateTime = Date()
+           let formattedDate = formatter.string(from: currentDateTime)
+
+           print(formattedDate)
+           
+           Endtime = formattedDate
+           
            player?.pause()
            player?.seek(to: .zero)
            
@@ -161,9 +178,9 @@ class NotificationcallVC: UIViewController {
            playerItem = nil
            print("Player stopped and resources released.")
            
-//           NotiApi()
+           NotiApi()
            
-           exit(0)
+           
        }
        
        deinit {
@@ -192,15 +209,34 @@ class NotificationcallVC: UIViewController {
     
     func NotiApi(){
         
+        strMobileNo = UserDefaults.standard.object(forKey: USERNAME) as! String
+        
+        let timeString = totalDuraion
+        let components = timeString!.split(separator: ":").compactMap { Int($0) }
+
+        if components.count == 2 {
+            let hours = components[0]
+            let minutes = components[1]
+            let totalSeconds = (hours * 3600) + (minutes * 60)
+            print("Total seconds: \(totalSeconds)")
+            
+            duration = String(totalSeconds)
+            
+        } else {
+            print("Invalid time format")
+        }
         
         
         let noti = Notimodal()
         
         noti.url = urlss
         noti.call_status = callStatus
-        noti.duration = totalDuraion
+        noti.duration = duration
         noti.start_time = StartcurrentTimes
         noti.end_time = Endtime
+        print("strMobileNostrMobileNo",strMobileNo)
+        noti.phone = strMobileNo
+        
         
         if let ei1 = userInfo[AnyHashable("ei1")] as? String {
             print("ei1: \(ei1)")
@@ -224,11 +260,12 @@ class NotificationcallVC: UIViewController {
         if let ei5 = userInfo[AnyHashable("ei5")] as? String {
             print("ei5: \(ei5)")
             noti.ei5 = ei5
+            noti.diallist_id = ei5
         }
         
         if let retryCount = userInfo[AnyHashable("retrycount")] as? String {
             print("retrycount: \(retryCount)")
-            noti.retry_count = retryCount
+            noti.retrycount = retryCount
         }
         
         if let circularId = userInfo[AnyHashable("circular_id")] as? String {
@@ -242,7 +279,12 @@ class NotificationcallVC: UIViewController {
             noti.receiver_id = receiverId
         }
         
-        
+       
+           
+            
+          
+      
+       
         
         var  notiModalStr = noti.toJSONString()
         print("punchModalStr",noti.toJSON())
@@ -252,24 +294,23 @@ class NotificationcallVC: UIViewController {
             
             [self] (res) in
             
-            let notiresponces : notiRes = Mapper<notiRes>().map(JSONString: res)!
+            let notiresponces : [notiRes] = Mapper<notiRes>().mapArray(JSONString: res)!
             
             
             
-            if notiresponces.Status == 1{
+            if notiresponces[0].Status == 1{
                 
-                if callStatus == "NO"{
+               
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [self] in
                     
                     exit(0)
-                    
-                }else{
-                    
+                }
                    
                     
-                }
+                
             }else{
                 
-                
+                exit(0)
                 
             }
             
