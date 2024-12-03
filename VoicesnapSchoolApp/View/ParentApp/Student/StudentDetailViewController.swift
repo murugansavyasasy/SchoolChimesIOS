@@ -114,6 +114,7 @@ class StudentDetailViewController: UIViewController ,Apidelegate ,UICollectionVi
     
     var ChildId : String!
     
+    let deviceName = UIDevice.current.name
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -133,7 +134,8 @@ class StudentDetailViewController: UIViewController ,Apidelegate ,UICollectionVi
         
         print("SchoolIDString",SchoolIDString)
         
-        
+       
+        print("Device name: \(deviceName)")
 
 
         var schoolNameReg  = userDefaults.string(forKey: DefaultsKeys.SchoolNameRegional)!
@@ -515,7 +517,12 @@ print("schoolNameReg",schoolNameReg)
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: (self.CollectionViewGrid.frame.size.width/3) - 10, height: (self.CollectionViewGrid.frame.size.height/4) - 12)
+        if deviceName == "iPhone 8" {
+            return CGSize(width: (self.CollectionViewGrid.frame.size.width/3) - 10, height: (self.CollectionViewGrid.frame.size.height/2) - 12)
+        }
+        else{
+            return CGSize(width: (self.CollectionViewGrid.frame.size.width/3) - 10, height: (self.CollectionViewGrid.frame.size.height/4) - 12)
+        }
     }
     
     

@@ -131,6 +131,8 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
     var rowSelected : Int?
     var coutData : [countResponce] = []
     var OverAllCountValue  = 0;
+    
+    let deviceName = UIDevice.current.name
     override func viewDidLoad()
     {
         super.viewDidLoad()
@@ -399,10 +401,12 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        
-        
-        return CGSize(width: (self.CollectionViewGrid.frame.size.width/3) - 10, height: (self.CollectionViewGrid.frame.size.height/4) - 12)
-        
+        if deviceName == "iPhone 8" {
+            return CGSize(width: (self.CollectionViewGrid.frame.size.width/3) - 10, height: 150)
+        }else{
+            return CGSize(width: (self.CollectionViewGrid.frame.size.width/3) - 10, height: (self.CollectionViewGrid.frame.size.height/4) - 12)
+            
+        }
     }
     
     

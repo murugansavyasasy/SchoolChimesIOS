@@ -13,6 +13,7 @@ import AVFoundation
 
 class ManagementVimeoViewController: UIViewController,UIWebViewDelegate {
 
+    @IBOutlet weak var downloadLbl: UILabel!
     @IBOutlet weak var progressCountLbl: UILabel!
     @IBOutlet weak var videoView: UIView!
     
@@ -48,6 +49,8 @@ class ManagementVimeoViewController: UIViewController,UIWebViewDelegate {
         progressCountLbl.isHidden = true
         gifImg.isHidden = true
         
+        videoView.isHidden = true
+        downloadLbl.isHidden = true
         
         videoPlayer()
         
@@ -59,8 +62,10 @@ class ManagementVimeoViewController: UIViewController,UIWebViewDelegate {
         print("managementDownloadShowID",getDownloadShowID)
         if getDownloadShowID == 1 {
             videoView.isHidden = false
+            downloadLbl.isHidden = false
         }else{
             videoView.isHidden = true
+            downloadLbl.isHidden = true
         }
         
         let videoGest = UITapGestureRecognizer(target: self, action: #selector(getVideoDownload))

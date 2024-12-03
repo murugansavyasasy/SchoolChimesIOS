@@ -15,6 +15,7 @@ import WebKit
 class VimeoVideoDetailVC: UIViewController,UIWebViewDelegate {
    
     
+    @IBOutlet weak var downloadLbl: UILabel!
     @IBOutlet weak var gifImg: UIImageView!
     @IBOutlet weak var progressCountLbl: UILabel!
     
@@ -56,12 +57,15 @@ class VimeoVideoDetailVC: UIViewController,UIWebViewDelegate {
         print("getDownloadShowID",getDownloadShowID)
         
         videoPlayer()
-        
+        videoDownloadView.isHidden = true
+        downloadLbl.isHidden = true
         
         if getDownloadShowID == 1 {
             videoDownloadView.isHidden = false
+            downloadLbl.isHidden = false
         }else{
             videoDownloadView.isHidden = true
+            downloadLbl.isHidden = true
         }
         let downloadGesture = UITapGestureRecognizer(target: self, action: #selector(getVideoDownload))
         videoDownloadView.addGestureRecognizer(downloadGesture)
