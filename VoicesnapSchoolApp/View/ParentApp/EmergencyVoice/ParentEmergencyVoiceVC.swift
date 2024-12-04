@@ -627,6 +627,8 @@ class ParentEmergencyVoiceVC: UIViewController,UITableViewDelegate, UITableViewD
         var requestStringer = baseUrlString! + GET_FILES
         if(appDelegate.isPasswordBind == "1"){
             requestStringer = baseReportUrlString! + GET_FILES
+            
+            print("requestStringer",requestStringer)
         }
         if(bIsArchive){
             requestStringer = baseReportUrlString! + GET_FILES_SEEMORE
@@ -635,6 +637,8 @@ class ParentEmergencyVoiceVC: UIViewController,UITableViewDelegate, UITableViewD
         
         let requestString = requestStringer.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
         let myDict:NSMutableDictionary = ["ChildID": ChildId,"SchoolID" : SchoolId,"CircularDate" : TextDateLabel.text!,"Type" : "VOICE", COUNTRY_CODE: strCountryCode]
+        
+        print("myDictmyDictmyDictmyDict",myDict)
         utilObj.printLogKey(printKey: "myDict", printingValue: myDict)
         let myString = Util.convertNSDictionary(toString: myDict)
         utilObj.printLogKey(printKey: "myString", printingValue: myString!)

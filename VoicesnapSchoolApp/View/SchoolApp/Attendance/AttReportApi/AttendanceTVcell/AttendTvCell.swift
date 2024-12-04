@@ -10,6 +10,8 @@ import UIKit
 
 class AttendTvCell: UITableViewCell {
 
+    @IBOutlet weak var DefaultrollColun: UILabel!
+    @IBOutlet weak var defaultRollLbl: UILabel!
     @IBOutlet weak var SelectionImage: UIImageView!
     @IBOutlet weak var StudentNameLabel: UILabel!
     @IBOutlet weak var StudentIdLabel: UILabel!
