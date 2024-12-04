@@ -15,6 +15,7 @@ import WebKit
 class VimeoVideoDetailVC: UIViewController,UIWebViewDelegate {
    
     
+    @IBOutlet weak var fullView: UIView!
     @IBOutlet weak var downloadLbl: UILabel!
     @IBOutlet weak var gifImg: UIImageView!
     @IBOutlet weak var progressCountLbl: UILabel!
@@ -63,9 +64,11 @@ class VimeoVideoDetailVC: UIViewController,UIWebViewDelegate {
         if getDownloadShowID == 1 {
             videoDownloadView.isHidden = false
             downloadLbl.isHidden = false
+            fullView.isHidden = true
         }else{
             videoDownloadView.isHidden = true
             downloadLbl.isHidden = true
+            fullView.isHidden = true
         }
         let downloadGesture = UITapGestureRecognizer(target: self, action: #selector(getVideoDownload))
         videoDownloadView.addGestureRecognizer(downloadGesture)
@@ -205,15 +208,16 @@ class VimeoVideoDetailVC: UIViewController,UIWebViewDelegate {
                                        if let savedURL = savedURL {
                                            
                                            
-                                           getVideoPath = savedURL.absoluteString
-                                           
-                                           
+                                         
                                            
                                            
                                            
                                            
                                            
                                            print("Downloaded video saved at: \(savedURL)")
+                                           getVideoPath = savedURL.absoluteString
+                                           
+                                           
                                            // Use the saved URL as needed
                                        } else {
                                            print("Failed to download video.")
@@ -260,13 +264,14 @@ class VimeoVideoDetailVC: UIViewController,UIWebViewDelegate {
             progressView.isHidden = false
           
             progressShowView.isHidden = false
-
+            fullView.isHidden = false
             progressCountLbl.isHidden = false
             gifImg.isHidden = false
             
             var number = Int(progressView.progress*100)
             progressCountLbl.text = "Downloading" + " " + String(number) + " % "
             print("pr1234567", progressView.progress*100)
+            print("getVideoPath", getVideoPath)
             if progressView.progress*100 == 100 {
                 progressShowView.isHidden = true
                 

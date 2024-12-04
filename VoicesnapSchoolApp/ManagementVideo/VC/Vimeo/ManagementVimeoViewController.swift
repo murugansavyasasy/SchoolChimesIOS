@@ -13,6 +13,7 @@ import AVFoundation
 
 class ManagementVimeoViewController: UIViewController,UIWebViewDelegate {
 
+    @IBOutlet weak var overAllView: UIView!
     @IBOutlet weak var downloadLbl: UILabel!
     @IBOutlet weak var progressCountLbl: UILabel!
     @IBOutlet weak var videoView: UIView!
@@ -60,12 +61,14 @@ class ManagementVimeoViewController: UIViewController,UIWebViewDelegate {
         viewBack.addGestureRecognizer(backGesture)
         print("managemenvideoIdideoId",videoId)
         print("managementDownloadShowID",getDownloadShowID)
-        if getDownloadShowID == 1 {
-            videoView.isHidden = false
+        if getDownloadShowID == 0 {
+            overAllView.isHidden = true
             downloadLbl.isHidden = false
+            videoView.isHidden = false
         }else{
             videoView.isHidden = true
             downloadLbl.isHidden = true
+            overAllView.isHidden = true
         }
         
         let videoGest = UITapGestureRecognizer(target: self, action: #selector(getVideoDownload))
@@ -186,15 +189,15 @@ class ManagementVimeoViewController: UIViewController,UIWebViewDelegate {
                                        if let savedURL = savedURL {
                                            
                                            
-                                           getVideoPath = savedURL.absoluteString
-                                           
-                                           
+                                        
                                            
                                            
                                            
                                            
                                            
                                            print("Downloaded video saved at: \(savedURL)")
+                                           getVideoPath = savedURL.absoluteString
+                                           
                                            
                                        } else {
                                            print("Failed to download video.")
@@ -243,7 +246,7 @@ class ManagementVimeoViewController: UIViewController,UIWebViewDelegate {
 
             progressCountLbl.isHidden = false
             gifImg.isHidden = false
-            
+            overAllView.isHidden = false
             var number = Int(progressView.progress*100)
             progressCountLbl.text = "Downloading" + " " + String(number) + " % "
             print("pr1234567", progressView.progress*100)
