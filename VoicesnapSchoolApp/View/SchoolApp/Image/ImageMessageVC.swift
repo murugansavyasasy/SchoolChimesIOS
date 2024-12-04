@@ -163,6 +163,7 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
         
         let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
+//            self.changeImgClick  = 1
             self.ImagePickerGallery()
         }))
         
@@ -615,6 +616,13 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
     }
     
     func ImagePickerGallery() {
+        
+        if   changeImgClick == 1 {
+            selectedImages.removeAll()
+            imagesArray.removeAllObjects()
+            imgCountShowView.isHidden = true
+            imgCountLbl.isHidden = true
+        }
 //        var config = ImagePickerConfiguration()
 //        config.doneButtonTitle = "Finish"
 //        config.noImagesTitle = "Sorry! There are no images here!"
@@ -647,14 +655,12 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
     
     
     @IBAction func pickImages() {
-        if   changeImgClick == 1 {
-            selectedImages.removeAll()
-            imagesArray.removeAllObjects()
-        }
+       
            var config = PHPickerConfiguration()
         config.selectionLimit = imageLimit // Limit the selection to 4 images
            config.filter = .images  // Only allow image selection
            
+        print("changeimageLimitk",imageLimit)
            let picker = PHPickerViewController(configuration: config)
            picker.delegate = self
            present(picker, animated: true, completion: nil)
@@ -665,12 +671,8 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
            
         
            print("changeImgClick",changeImgClick)
-           if   changeImgClick == 1 {
-               imgCountShowView.isHidden = true
-               imgCountLbl.isHidden = true
-               selectedImages.removeAll()
-               imagesArray.removeAllObjects()
-           }
+           print("chanresultsk",results)
+         
            let group = DispatchGroup()
            
            for result in results {
@@ -679,10 +681,6 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
                    if let image = object as? UIImage {
                        self.selectedImages.append(image)
                        
-                   
-                       
-                       
-                    
 //                       print("Selected images: \(selectedImages)")
                        print("IMGARRCOUNT",imgArr.count)
                        print("IMGAimagesArrayNT",imagesArray.count)
