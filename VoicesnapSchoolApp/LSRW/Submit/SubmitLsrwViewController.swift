@@ -173,7 +173,7 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
 //    MARK: Drop Down
     @IBAction func selectMonthViewClick(){
         
-        
+        cameraSelect = 0
         let myArray = items
         
         dropDown.dataSource = myArray//4
