@@ -400,15 +400,10 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//        
-//        if deviceName == "iPhone 8" || deviceName == "iPhone" {
-//            return CGSize(width: (self.CollectionViewGrid.frame.size.width/3) - 10, height: (self.CollectionViewGrid.frame.size.height/3) - 12)
-//        }else{
-        return CGSize(width: (self.CollectionViewGrid.frame.size.width/3) - 10, height: 75)
 
-//            return CGSize(width: (self.CollectionViewGrid.frame.size.width/3) - 10, height: (self.CollectionViewGrid.frame.size.height/4) - 12)
-            
-//        }
+        return CGSize(width: (self.CollectionViewGrid.frame.size.width/3) - 10, height: 80)
+
+
     }
     
     

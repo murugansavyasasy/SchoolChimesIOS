@@ -715,7 +715,7 @@ class AttendanceMessageVC: UIViewController,Apidelegate,UIPickerViewDelegate ,UI
         else if attendanceTypeLbl.text == "Select attendance type"{
             
             
-            Util.showAlert(languageDict["alert"] as? String ,msg:languageDict["select_attendance_type"] as? String)
+            Util.showAlert("Kindly select the attendance type" as? String ,msg:languageDict["select_attendance_type"] as? String)
          
             
             
