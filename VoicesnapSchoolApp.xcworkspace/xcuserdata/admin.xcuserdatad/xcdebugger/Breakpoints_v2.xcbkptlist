@@ -48,7 +48,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "978"
             endingLineNumber = "978"
-            landmarkName = "CallChangePasswordApi()"
+            landmarkName = "CallHelpSendApi()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

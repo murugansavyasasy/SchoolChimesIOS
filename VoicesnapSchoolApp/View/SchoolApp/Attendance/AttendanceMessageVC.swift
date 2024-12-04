@@ -141,24 +141,30 @@ class AttendanceMessageVC: UIViewController,Apidelegate,UIPickerViewDelegate ,UI
         nc.addObserver(self,selector: #selector(AttendanceMessageVC.catchNotification), name: NSNotification.Name(rawValue: "comeBack1"), object:nil)
         
         nc.addObserver(self,selector: #selector(AttendanceMessageVC.catchNotification1), name: NSNotification.Name(rawValue: "comeBackMenu"), object:nil)
+        
         loginAsName = UserDefaults.standard.object(forKey:LOGINASNAME) as! String
         if(loginAsName == "Principal")
         {
+            
+            print("bigIfFF",loginAsName)
             if checkSchoolId == "1" {
                 SchoolId =   String(describing: SchoolDeatilDict["SchoolID"]!)
                 StaffId = String(describing: SchoolDeatilDict["StaffID"]!)
+                
+                print("checkSchoolIdifif",checkSchoolId)
             }else{
                 
                 let userDefaults = UserDefaults.standard
                 
                 SchoolId = userDefaults.string(forKey: DefaultsKeys.SchoolD)!
                 StaffId = userDefaults.string(forKey: DefaultsKeys.StaffID)!
-                
+                print("checkSchoolIdelse",checkSchoolId)
             }
         }else{
+            print("checkSchoolIdELSEE",loginAsName)
             let Dict = appDelegate.LoginSchoolDetailArray[0] as! NSDictionary
-            SchoolId = String(describing: Dict["SchoolID"]!)
-            StaffId = String(describing: Dict["StaffID"]!)
+            SchoolId = String(describing: SchoolDeatilDict["SchoolID"]!)
+            StaffId = String(describing: SchoolDeatilDict["StaffID"]!)
             
             
         }
@@ -704,7 +710,18 @@ class AttendanceMessageVC: UIViewController,Apidelegate,UIPickerViewDelegate ,UI
                     Util.showAlert(languageDict["alert"] as? String, msg: languageDict["select_standard_section_alert"] as? String)
                 }
             }
-        }else{
+        }
+        
+        else if attendanceTypeLbl.text == "Select attendance type"{
+            
+            
+            Util.showAlert(languageDict["alert"] as? String ,msg:languageDict["select_attendance_type"] as? String)
+         
+            
+            
+        }
+        
+        else{
             if((StandardNameTextField.text?.count)! > 0 && (SectionNameTextField.text?.count)! > 0){
                 SelectedDictforApi = ["SchoolID":SchoolId,"StaffID": StaffId,"ClassID": SelectedClassIDString,"SectionID":SelectedSectionIDString]
                 let studentVC = self.storyboard?.instantiateViewController(withIdentifier: "SelectstudentVC") as! SelectstudentVC

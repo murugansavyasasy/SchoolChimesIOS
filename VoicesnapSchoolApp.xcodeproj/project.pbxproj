@@ -305,6 +305,7 @@
 		8442AA852CE219B40006068E /* NotiReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8442AA842CE219B40006068E /* NotiReq.swift */; };
 		8453C0D62CB513620026F182 /* CountResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453C0D52CB513620026F182 /* CountResp.swift */; };
 		8453C0D82CB513750026F182 /* CountResq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453C0D72CB513750026F182 /* CountResq.swift */; };
+		8458635F2D003A3E00B9115C /* Schoolchimess.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8458635E2D003A3E00B9115C /* Schoolchimess.wav */; };
 		845B1BC42CAFCD8200D6E6F5 /* homeWorkResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845B1BC32CAFCD8200D6E6F5 /* homeWorkResp.swift */; };
 		845B1BC62CAFCD9B00D6E6F5 /* homeWorkResq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845B1BC52CAFCD9B00D6E6F5 /* homeWorkResq.swift */; };
 		845B1BCE2CAFD86200D6E6F5 /* AttendReportResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845B1BCD2CAFD86200D6E6F5 /* AttendReportResp.swift */; };
@@ -970,6 +971,7 @@
 		8442AA842CE219B40006068E /* NotiReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiReq.swift; sourceTree = "<group>"; };
 		8453C0D52CB513620026F182 /* CountResp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountResp.swift; sourceTree = "<group>"; };
 		8453C0D72CB513750026F182 /* CountResq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountResq.swift; sourceTree = "<group>"; };
+		8458635E2D003A3E00B9115C /* Schoolchimess.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = Schoolchimess.wav; sourceTree = "<group>"; };
 		845B1BC32CAFCD8200D6E6F5 /* homeWorkResp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = homeWorkResp.swift; sourceTree = "<group>"; };
 		845B1BC52CAFCD9B00D6E6F5 /* homeWorkResq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = homeWorkResq.swift; sourceTree = "<group>"; };
 		845B1BCD2CAFD86200D6E6F5 /* AttendReportResp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendReportResp.swift; sourceTree = "<group>"; };
@@ -2638,6 +2640,7 @@
 				8442AA812CE218F40006068E /* NotiApi */,
 				8442AA742CDF86C80006068E /* isnotification.wav */,
 				8442AA752CDF86C80006068E /* NotificationcallVC.swift */,
+				8458635E2D003A3E00B9115C /* Schoolchimess.wav */,
 				8442AA762CDF86C80006068E /* NotificationcallVC.xib */,
 				8442AA772CDF86C80006068E /* NotificationCallingscreen.swift */,
 				8442AA782CDF86C80006068E /* NotificationCallingscreen.xib */,
@@ -4185,6 +4188,7 @@
 				8491E4432B0638A000CF858F /* HwImageZoomViewController.xib in Resources */,
 				1873EB832983990D008E30AA /* FeeDetailReceiptTableViewCell.xib in Resources */,
 				841ED6332C8F4AB100A65EEA /* CheckAviableTv.xib in Resources */,
+				8458635F2D003A3E00B9115C /* Schoolchimess.wav in Resources */,
 				84385F922CF9F1570020E94D /* AttendTvCell.xib in Resources */,
 				18D37B7229C2DE8400A61132 /* DataCollectionTvHeaderView.xib in Resources */,
 				841ED63F2C8F4AB100A65EEA /* StaffPtmViewController.xib in Resources */,
