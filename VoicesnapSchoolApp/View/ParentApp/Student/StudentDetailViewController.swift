@@ -517,12 +517,13 @@ print("schoolNameReg",schoolNameReg)
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        if deviceName == "iPhone 8" || deviceName == "iPhone" {
-            return CGSize(width: (self.CollectionViewGrid.frame.size.width/3) - 10, height: (self.CollectionViewGrid.frame.size.height/3) - 12)
-        }
-        else{
-            return CGSize(width: (self.CollectionViewGrid.frame.size.width/3) - 10, height: (self.CollectionViewGrid.frame.size.height/3) - 12)
-        }
+//        if deviceName == "iPhone 8" || deviceName == "iPhone" {
+//            return CGSize(width: (self.CollectionViewGrid.frame.size.width/3) - 10, height: (self.CollectionViewGrid.frame.size.height/3) - 12)
+//        }
+//        else{
+            return CGSize(width: (self.CollectionViewGrid.frame.size.width/3) - 10, height: 75)
+//                            (self.CollectionViewGrid.frame.size.height/3) - 12)
+//        }
     }
     
     

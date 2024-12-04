@@ -400,13 +400,15 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        if deviceName == "iPhone 8" || deviceName == "iPhone" {
-            return CGSize(width: (self.CollectionViewGrid.frame.size.width/3) - 10, height: (self.CollectionViewGrid.frame.size.height/3) - 12)
-        }else{
-            return CGSize(width: (self.CollectionViewGrid.frame.size.width/3) - 10, height: (self.CollectionViewGrid.frame.size.height/4) - 12)
+//        
+//        if deviceName == "iPhone 8" || deviceName == "iPhone" {
+//            return CGSize(width: (self.CollectionViewGrid.frame.size.width/3) - 10, height: (self.CollectionViewGrid.frame.size.height/3) - 12)
+//        }else{
+        return CGSize(width: (self.CollectionViewGrid.frame.size.width/3) - 10, height: 75)
+
+//            return CGSize(width: (self.CollectionViewGrid.frame.size.width/3) - 10, height: (self.CollectionViewGrid.frame.size.height/4) - 12)
             
-        }
+//        }
     }
     
     
@@ -474,7 +476,7 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
         if(self.CellIndexIdsArray[indexPath.row] as! String == "100"){
             print("RippleInside")
             if indexPath.row == 0 {
-                cell.cellIconTopCnstraints.constant = 5
+                cell.cellIconTopCnstraints.constant = -5
                 cell.iconWidth.constant = 100
                 cell.iconHeight.constant = 100
 //                cell.CellIcon.contentMode = .scaleAspectFill
@@ -487,7 +489,7 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
             
             cell.iconHeight.constant = 35
             cell.iconWidth.constant = 35
-            cell.cellIconTopCnstraints.constant = 10
+            cell.cellIconTopCnstraints.constant = 13
             
         }
         
