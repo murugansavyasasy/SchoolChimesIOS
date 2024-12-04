@@ -193,6 +193,12 @@ class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableV
         
         sortByFullView.layer.cornerRadius = 10
         sortByFullView.clipsToBounds = true
+        
+//        let defaults = UserDefaults.standard
+//        print(" defaults.string(forKey:DefaultsKeys.sortName)", defaults.string(forKey:DefaultsKeys.sortName))
+      
+//            userDefault.set(name, forKey: DefaultsKeys.sortName)
+       
     }
     
     
@@ -303,7 +309,7 @@ class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableV
                    let studentName = dict["StudentName"] as? String,
                    let studentId = dict["StudentID"]as? String,
                    let admissionNo = dict["StudentAdmissionNo"] as? String {
-                    print("RollNO: \(rollNo), Student Name: \(studentName), Admission No: \(admissionNo)")
+                    print("RollNO:vgbhjnkm.n,m \(rollNo), Student Name: \(studentName), Admission No: \(admissionNo)")
                     StudentNameArray.append(studentName)
                     StudentAdmissionNoArray.append(admissionNo)
                     StudentRollNumberNoArray.append(rollNo)
@@ -400,7 +406,11 @@ class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableV
             
         setTitleLbl.text = "Sort Alphabetically (A → Z)"
       
-      
+        var name : String = "Sort Alphabetically (A → Z)"
+        
+        let userDefault = UserDefaults.standard
+        userDefault.set(name, forKey: DefaultsKeys.sortName)
+        
         StudentNameArray.removeAll()
         StudentAdmissionNoArray.removeAll()
         StudentRollNumberNoArray.removeAll()
@@ -418,7 +428,12 @@ class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableV
         
 //
                 setTitleLbl.text = "Sort Alphabetically (Z → A)"
-      
+       
+        
+        var name : String = setTitleLbl.text!
+        
+        let userDefault = UserDefaults.standard
+        userDefault.set(name, forKey: DefaultsKeys.sortName)
         StudentNameArray.removeAll()
         StudentAdmissionNoArray.removeAll()
         StudentRollNumberNoArray.removeAll()
@@ -438,6 +453,11 @@ class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableV
         
                
         setTitleLbl.text = "Sort by Roll Number (Low → High)"
+      
+        var name : String = setTitleLbl.text!
+        
+        let userDefault = UserDefaults.standard
+        userDefault.set(name, forKey: DefaultsKeys.sortName)
         StudentNameArray.removeAll()
         StudentAdmissionNoArray.removeAll()
         StudentRollNumberNoArray.removeAll()
@@ -457,6 +477,10 @@ class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableV
        
 
         setTitleLbl.text = "Sort by Roll Number (High → Low)"
+        var name : String = setTitleLbl.text!
+        
+        let userDefault = UserDefaults.standard
+        userDefault.set(name, forKey: DefaultsKeys.sortName)
         StudentNameArray.removeAll()
         StudentAdmissionNoArray.removeAll()
         StudentRollNumberNoArray.removeAll()
@@ -1202,6 +1226,33 @@ class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableV
                                     StudentRollNumberNoArray.append(String(describing: dicResponse["RollNO"]!))
                                     SearchStudentNameArray.append(String(describing: dicResponse["StudentName"]!))
                                     MyTableView.reloadData()
+                                    
+                                    let defaults = UserDefaults.standard
+                                    
+                                  
+                                    
+                                    if defaults.string(forKey:DefaultsKeys.sortName) == "Sort Alphabetically (A → Z)" {
+                                        
+                                        clkickId = 1
+                                        AtoZClick()
+                                        
+                                        doneFiltrBtn(self)
+                                        
+                                    }else if  defaults.string(forKey:DefaultsKeys.sortName) == "Sort Alphabetically (Z → A)"{
+                                        
+                                        clkickId = 2
+                                        ZtoAClick()
+                                        doneFiltrBtn(self)
+                                    }else if  defaults.string(forKey:DefaultsKeys.sortName) == "Sort by Roll Number (Low → High)"{
+                                      
+                                        clkickId = 3
+                                        AsendingClick()
+                                        doneFiltrBtn(self)
+                                    }else if  defaults.string(forKey:DefaultsKeys.sortName) == "Sort by Roll Number (High → Low)"{
+                                        clkickId = 4
+                                        DesendingClick()
+                                        doneFiltrBtn(self)
+                                    }
                                     
                                 }
                                 else

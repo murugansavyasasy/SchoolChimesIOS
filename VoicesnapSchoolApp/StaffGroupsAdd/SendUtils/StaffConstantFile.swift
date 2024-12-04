@@ -80,6 +80,8 @@ struct DefaultsKeys {
     static var ClickID : Int!
     static var coutData : [countResponce] = []
     static var failedErrorCode : Int!
+    static var sortName = "Sort Alphabetically (A → Z)"
+    
 
     
 }
