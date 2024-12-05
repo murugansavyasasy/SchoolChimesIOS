@@ -524,9 +524,7 @@ class LessonEditViewController: UIViewController,UITableViewDataSource,UITableVi
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("index",indexPath.row)
-        
-        
+     
         
     }
     
