@@ -76,6 +76,7 @@ class AttendanceSelectSchoolVC: UIViewController,UITableViewDelegate,UITableView
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         SelectedSchoolDeatilDict = appDelegate.LoginSchoolDetailArray[indexPath.row] as! NSDictionary
+        print("SelectedSchoolDeatilDict",SelectedSchoolDeatilDict)
         UtilObj.printLogKey(printKey: "SelectedSchoolDeatilDict", printingValue: SelectedSchoolDeatilDict)
         print("Direct12")
          self.performSegue(withIdentifier: "AttendanceMessageSegue", sender: self)

@@ -162,10 +162,20 @@ class AttendanceMessageVC: UIViewController,Apidelegate,UIPickerViewDelegate ,UI
             }
         }else{
             print("checkSchoolIdELSEE",loginAsName)
-            let Dict = appDelegate.LoginSchoolDetailArray[0] as! NSDictionary
-            SchoolId = String(describing: SchoolDeatilDict["SchoolID"]!)
-            StaffId = String(describing: SchoolDeatilDict["StaffID"]!)
-            
+            print("SchoolDeatilDict",SchoolDeatilDict)
+            if checkSchoolId == "1" {
+                SchoolId =   String(describing: SchoolDeatilDict["SchoolID"]!)
+                StaffId = String(describing: SchoolDeatilDict["StaffID"]!)
+                
+                print("checkSchoolIdifif",checkSchoolId)
+            }else{
+                
+                let userDefaults = UserDefaults.standard
+                
+                SchoolId = userDefaults.string(forKey: DefaultsKeys.SchoolD)!
+                StaffId = userDefaults.string(forKey: DefaultsKeys.StaffID)!
+                print("checkSchoolIdelse",checkSchoolId)
+            }
             
         }
         

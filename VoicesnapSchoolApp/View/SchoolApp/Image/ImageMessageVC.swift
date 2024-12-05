@@ -116,7 +116,7 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
             ClickImageCaptureButton.backgroundColor = UIColor.lightGray
         }
         
-        ImageView.addGestureRecognizer(tapped)
+//        ImageView.addGestureRecognizer(tapped)
         if(UIDevice.current.userInterfaceIdiom == .pad){
             headerViewHeight.constant = 527
         }else{
@@ -159,7 +159,7 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
         
         
         self.ClickHereButton.setTitleColor(UIColor.white, for: .normal)
-        self.ClickHereButton.isUserInteractionEnabled = true
+        self.ClickHereButton.isUserInteractionEnabled = false
         
         let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
@@ -236,7 +236,7 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
        
         
         self.ClickHereButton.setTitleColor(UIColor.white, for: .normal)
-        self.ClickHereButton.isUserInteractionEnabled = true
+        self.ClickHereButton.isUserInteractionEnabled = false
         
         let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { [self] _ in
@@ -320,6 +320,10 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
     }
     func FromPDF(){
         strFrom = "PDF"
+        MyImageView.isHidden = true
+        MyImageView2.isHidden = true
+        MyImageView3.isHidden = true
+        MyImageView4.isHidden = true
         
         let types = [kUTTypePDF, kUTTypeText, kUTTypeRTF, kUTTypeSpreadsheet]
         let documentPicker = UIDocumentPickerViewController(documentTypes: types as [String], in: .import)
@@ -376,6 +380,7 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
             imagesArray.removeAllObjects()
             moreImagesArray.removeAllObjects()
                    MyImageView.image = chosenImage
+            MyImageView.isHidden =  false
                    self.moreImagesArray.add(chosenImage)
             imagesArray.add(chosenImage)
             img1Width.constant = 353
@@ -776,6 +781,8 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
         print("SetImagesIntoPathCount",images.count)
         if(images.count == 1){
             self.MyImageView.image = images[0]
+            MyImageView.isHidden = false
+           
             imgCountShowView.isHidden = true
             imgCountLbl.isHidden = true
             img1Width.constant = 353
@@ -783,6 +790,9 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
         }else if(images.count == 2){
             self.MyImageView.image = images[0]
             self.MyImageView2.image = images[1]
+            MyImageView.isHidden = false
+            MyImageView2.isHidden = false
+         
             imgCountShowView.isHidden = true
             img1Width.constant = 176
             img1Height.constant = 80
@@ -794,6 +804,9 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
             self.MyImageView3.image = images[2]
             img1Width.constant = 176
             img1Height.constant = 80
+            MyImageView.isHidden = false
+            MyImageView2.isHidden = false
+            MyImageView3.isHidden = false
            
             imgCountShowView.isHidden = true
             imgCountLbl.isHidden = true
@@ -804,6 +817,10 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
             self.MyImageView4.image = images[3]
             img1Width.constant = 176
             img1Height.constant = 80
+            MyImageView.isHidden = false
+            MyImageView2.isHidden = false
+            MyImageView3.isHidden = false
+            MyImageView4.isHidden = false
            
             if images.count > 4 {
                 imgCountShowView.isHidden = false
