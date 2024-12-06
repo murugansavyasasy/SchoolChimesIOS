@@ -159,7 +159,7 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
         
         
         self.ClickHereButton.setTitleColor(UIColor.white, for: .normal)
-        self.ClickHereButton.isUserInteractionEnabled = false
+        self.ClickHereButton.isUserInteractionEnabled = true
         
         let alert = UIAlertController(title: "Choose Image", message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Gallery", style: .default, handler: { _ in
@@ -710,6 +710,7 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
                print("Selected images: \(selectedImages)")
 //               print("IMGARRCOUNT",imgArr.count)
                
+             
                if(selectedImages.count > 0){
                    ClickHereButton.isHidden = true
                    ClickImageCaptureButton.isEnabled = true
@@ -779,6 +780,7 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
         let countGest = UITapGestureRecognizer(target: self, action: #selector(imgListNavigate))
         imgCountShowView.addGestureRecognizer(countGest)
         print("SetImagesIntoPathCount",images.count)
+       
         if(images.count == 1){
             self.MyImageView.image = images[0]
             MyImageView.isHidden = false
@@ -787,6 +789,7 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
             imgCountLbl.isHidden = true
             img1Width.constant = 353
             img1Height.constant = 160
+            self.ClickHereButton.isUserInteractionEnabled = false
         }else if(images.count == 2){
             self.MyImageView.image = images[0]
             self.MyImageView2.image = images[1]
@@ -796,7 +799,7 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
             imgCountShowView.isHidden = true
             img1Width.constant = 176
             img1Height.constant = 80
-           
+            self.ClickHereButton.isUserInteractionEnabled = false
             imgCountLbl.isHidden = true
         }else if(images.count == 3){
             self.MyImageView.image = images[0]
@@ -807,7 +810,7 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
             MyImageView.isHidden = false
             MyImageView2.isHidden = false
             MyImageView3.isHidden = false
-           
+            self.ClickHereButton.isUserInteractionEnabled = false
             imgCountShowView.isHidden = true
             imgCountLbl.isHidden = true
         }else if(images.count > 4) || images.count == 4{
@@ -821,7 +824,7 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
             MyImageView2.isHidden = false
             MyImageView3.isHidden = false
             MyImageView4.isHidden = false
-           
+            self.ClickHereButton.isUserInteractionEnabled = false
             if images.count > 4 {
                 imgCountShowView.isHidden = false
                 imgCountLbl.isHidden = false

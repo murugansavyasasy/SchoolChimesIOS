@@ -65,7 +65,7 @@ class StaffImageVC: UIViewController, UIActionSheetDelegate, UIImagePickerContro
                 ClickImageCaptureButton.backgroundColor = UIColor(red: 230.0/255.0, green: 126.0/255.0, blue: 34.0/255.0, alpha: 1)
                 
             }else{
-                MoreImagesButton.isHidden = true
+//                MoreImagesButton.isHidden = true
                 ClickHereButton.isHidden = false
                 ClickImageCaptureButton.isEnabled = false
                 ClickImageCaptureButton.backgroundColor = UIColor.lightGray
