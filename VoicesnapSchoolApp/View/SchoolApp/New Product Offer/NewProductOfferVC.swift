@@ -36,6 +36,7 @@ class NewProductOfferVC: UIViewController,UIWebViewDelegate {
         }
         
         showLoading()
+        print("strURLstrURL",strURL)
         let url = URL(string: strURL)
         myWebView.loadRequest(URLRequest(url: url!))
         

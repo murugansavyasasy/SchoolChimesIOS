@@ -609,6 +609,7 @@ class StandardOrStudentsStaff : UIViewController,Apidelegate,UIPickerViewDelegat
     
     func SendVimeoVideoToSection()
     {
+        print("SendVimeoVideoToSectionSendVimeoVideoToSection")
         showLoading()
         strApiFrom = "sendVimeoVideo"
         let apiCall = API_call.init()
@@ -617,10 +618,12 @@ class StandardOrStudentsStaff : UIViewController,Apidelegate,UIPickerViewDelegat
         let requestStringer = baseUrlString! + SEND_VIMEO_VIDEO_ENTIRE_SECTION
         let requestString = requestStringer.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
         let SectionID = String(describing: SelectedSectionDeatil["SectionId"]!)
-        self.vimeoVideoDict["Seccode"] = SectionID
+        self.vimeoVideoDict["Seccode"] = [["TargetCode":SectionID]]
         self.vimeoVideoDict[COUNTRY_CODE] = strCountryCode
+//        "Seccode":
         
         let myString = Util.convertDictionary(toString: vimeoVideoDict)
+        print("SendVimeoVideoToSectionSectionmyString",myString)
         UtilObj.printLogKey(printKey: "myDict", printingValue: vimeoVideoDict)
         apiCall.nsurlConnectionFunction(requestString, myString, "sendVimeoVideo")
     }
@@ -797,6 +800,7 @@ class StandardOrStudentsStaff : UIViewController,Apidelegate,UIPickerViewDelegat
         if(csData != nil)        {
             UtilObj.printLogKey(printKey: "csData", printingValue: csData!)
             
+            print("SECTION",strApiFrom)
             if(strApiFrom.isEqual(to:"sendVimeoVideo"))
             {
                 UtilObj.printLogKey(printKey: "csdata", printingValue: csData!)

@@ -256,7 +256,7 @@
 #define GETCONFRENCELIST_TYPE @"getConferenceList"
 #define APPVERSION @"4"
 #define CHECK_UPDATE @"VersionCheck"
-#define VERSION_VALUE @"79"
+#define VERSION_VALUE @"80"
 //74Oct20
 //73
 //"72"
