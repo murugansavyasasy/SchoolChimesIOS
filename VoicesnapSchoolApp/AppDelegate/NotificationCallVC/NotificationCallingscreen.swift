@@ -8,6 +8,7 @@
 
 import UIKit
 import ObjectMapper
+import AVFAudio
 class NotificationCallingscreen: UIViewController {
     
     @IBOutlet weak var acceptView: UIView!
@@ -25,6 +26,9 @@ class NotificationCallingscreen: UIViewController {
    
     var userInfo = [AnyHashable : Any]()
     var strMobileNo : String! = nil
+    
+    
+    var audioPlayer: AVAudioPlayer?
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -57,6 +61,13 @@ class NotificationCallingscreen: UIViewController {
     
     @IBAction func appectClcik(){
         
+        
+        
+        if let player = audioPlayer, player.isPlaying {
+            print("Stopping currently playing sound")
+            player.stop()
+        }
+        
         callStatus = "OC"
         
         let vcc = NotificationcallVC(nibName: nil, bundle: nil)
@@ -74,6 +85,11 @@ class NotificationCallingscreen: UIViewController {
     
     
     @IBAction func DeclineClcik(){
+        
+//        if let player = audioPlayer, player.isPlaying {
+//            print("Stopping currently playing sound")
+//            player.stop()
+//        }
         callStatus = "NO"
         
 

@@ -304,7 +304,6 @@
 		8442AA852CE219B40006068E /* NotiReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8442AA842CE219B40006068E /* NotiReq.swift */; };
 		8453C0D62CB513620026F182 /* CountResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453C0D52CB513620026F182 /* CountResp.swift */; };
 		8453C0D82CB513750026F182 /* CountResq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453C0D72CB513750026F182 /* CountResq.swift */; };
-		8458635F2D003A3E00B9115C /* schoolchimes_tone.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8458635E2D003A3E00B9115C /* schoolchimes_tone.wav */; };
 		845B1BC42CAFCD8200D6E6F5 /* homeWorkResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845B1BC32CAFCD8200D6E6F5 /* homeWorkResp.swift */; };
 		845B1BC62CAFCD9B00D6E6F5 /* homeWorkResq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845B1BC52CAFCD9B00D6E6F5 /* homeWorkResq.swift */; };
 		845B1BCE2CAFD86200D6E6F5 /* AttendReportResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845B1BCD2CAFD86200D6E6F5 /* AttendReportResp.swift */; };
@@ -388,6 +387,9 @@
 		84B39EEB2BEB459A00D56819 /* PayModeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B39EEA2BEB459A00D56819 /* PayModeRequest.swift */; };
 		84B39EEE2BEB483B00D56819 /* PaymentListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B39EEC2BEB483B00D56819 /* PaymentListTableViewCell.swift */; };
 		84B39EEF2BEB483B00D56819 /* PaymentListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84B39EED2BEB483B00D56819 /* PaymentListTableViewCell.xib */; };
+		84B7BA552D0AA7C3008E0117 /* schoolchimes_tone.wav in Resources */ = {isa = PBXBuildFile; fileRef = 84B7BA542D0AA7C3008E0117 /* schoolchimes_tone.wav */; };
+		84B7BA572D0AE489008E0117 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B7BA562D0AE489008E0117 /* SceneDelegate.swift */; };
+		84B7BA592D0B03A8008E0117 /* notisample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B7BA582D0B03A8008E0117 /* notisample.swift */; };
 		84BA340E2BEA5DFB001D1800 /* DailycollResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BA340D2BEA5DFB001D1800 /* DailycollResp.swift */; };
 		84BA34102BEA5E0B001D1800 /* DailyCollReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BA340F2BEA5E0B001D1800 /* DailyCollReq.swift */; };
 		84C499DA2C33DE6100BA6EF4 /* PTMViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84C499D92C33DE6100BA6EF4 /* PTMViewController.xib */; };
@@ -969,7 +971,6 @@
 		8442AA842CE219B40006068E /* NotiReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiReq.swift; sourceTree = "<group>"; };
 		8453C0D52CB513620026F182 /* CountResp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountResp.swift; sourceTree = "<group>"; };
 		8453C0D72CB513750026F182 /* CountResq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountResq.swift; sourceTree = "<group>"; };
-		8458635E2D003A3E00B9115C /* schoolchimes_tone.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = schoolchimes_tone.wav; sourceTree = "<group>"; };
 		845B1BC32CAFCD8200D6E6F5 /* homeWorkResp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = homeWorkResp.swift; sourceTree = "<group>"; };
 		845B1BC52CAFCD9B00D6E6F5 /* homeWorkResq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = homeWorkResq.swift; sourceTree = "<group>"; };
 		845B1BCD2CAFD86200D6E6F5 /* AttendReportResp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttendReportResp.swift; sourceTree = "<group>"; };
@@ -1052,6 +1053,9 @@
 		84B39EEA2BEB459A00D56819 /* PayModeRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayModeRequest.swift; sourceTree = "<group>"; };
 		84B39EEC2BEB483B00D56819 /* PaymentListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentListTableViewCell.swift; sourceTree = "<group>"; };
 		84B39EED2BEB483B00D56819 /* PaymentListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentListTableViewCell.xib; sourceTree = "<group>"; };
+		84B7BA542D0AA7C3008E0117 /* schoolchimes_tone.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = schoolchimes_tone.wav; sourceTree = "<group>"; };
+		84B7BA562D0AE489008E0117 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		84B7BA582D0B03A8008E0117 /* notisample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = notisample.swift; sourceTree = "<group>"; };
 		84BA340D2BEA5DFB001D1800 /* DailycollResp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailycollResp.swift; sourceTree = "<group>"; };
 		84BA340F2BEA5E0B001D1800 /* DailyCollReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailyCollReq.swift; sourceTree = "<group>"; };
 		84C499D82C33DE6100BA6EF4 /* PTMViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PTMViewController.swift; sourceTree = "<group>"; };
@@ -2638,7 +2642,6 @@
 				8442AA812CE218F40006068E /* NotiApi */,
 				8442AA742CDF86C80006068E /* isnotification.wav */,
 				8442AA752CDF86C80006068E /* NotificationcallVC.swift */,
-				8458635E2D003A3E00B9115C /* schoolchimes_tone.wav */,
 				8442AA762CDF86C80006068E /* NotificationcallVC.xib */,
 				8442AA772CDF86C80006068E /* NotificationCallingscreen.swift */,
 				8442AA782CDF86C80006068E /* NotificationCallingscreen.xib */,
@@ -2649,8 +2652,10 @@
 		8442AA812CE218F40006068E /* NotiApi */ = {
 			isa = PBXGroup;
 			children = (
+				84B7BA542D0AA7C3008E0117 /* schoolchimes_tone.wav */,
 				8442AA822CE219210006068E /* NotiResp.swift */,
 				8442AA842CE219B40006068E /* NotiReq.swift */,
+				84B7BA582D0B03A8008E0117 /* notisample.swift */,
 			);
 			path = NotiApi;
 			sourceTree = "<group>";
@@ -3478,6 +3483,7 @@
 			children = (
 				8442AA792CDF86C80006068E /* NotificationCallVC */,
 				847E22A02B0E01B100C0C42D /* Ripple1.gif */,
+				84B7BA562D0AE489008E0117 /* SceneDelegate.swift */,
 				B5E499081F0CB99D00A503AB /* AppDelegate.swift */,
 			);
 			path = AppDelegate;
@@ -4185,7 +4191,6 @@
 				8491E4432B0638A000CF858F /* HwImageZoomViewController.xib in Resources */,
 				1873EB832983990D008E30AA /* FeeDetailReceiptTableViewCell.xib in Resources */,
 				841ED6332C8F4AB100A65EEA /* CheckAviableTv.xib in Resources */,
-				8458635F2D003A3E00B9115C /* schoolchimes_tone.wav in Resources */,
 				84385F922CF9F1570020E94D /* AttendTvCell.xib in Resources */,
 				18D37B7229C2DE8400A61132 /* DataCollectionTvHeaderView.xib in Resources */,
 				841ED63F2C8F4AB100A65EEA /* StaffPtmViewController.xib in Resources */,
@@ -4256,6 +4261,7 @@
 				1829528B299520500003B9D6 /* QuizViewTableViewCell.xib in Resources */,
 				18F119A029658890002C0A0A /* SendStaffGroupsVoiceTableViewCell.xib in Resources */,
 				1829525929951D120003B9D6 /* QuizExamMenuViewController.xib in Resources */,
+				84B7BA552D0AA7C3008E0117 /* schoolchimes_tone.wav in Resources */,
 				182DF6CF29A8782C00E2D992 /* ExamUpcomingViewController.xib in Resources */,
 				189E36F4296D959B0032A8CA /* ManagementVimeoViewController.xib in Resources */,
 				18D37B6E29C2D5B500A61132 /* DailyCollectionTableViewCell.xib in Resources */,
@@ -4564,6 +4570,7 @@
 				84978E492C09D08400B4083E /* HolidaysModal.swift in Sources */,
 				D64EF0A920C7ABD20051AA89 /* TestMessageVC.swift in Sources */,
 				D64EF0A620C7ABC10051AA89 /* VocieMessageTVCell.swift in Sources */,
+				84B7BA572D0AE489008E0117 /* SceneDelegate.swift in Sources */,
 				D68B9CA620D3E62F00FDA753 /* ParentLibraryTVCell.swift in Sources */,
 				18D37B6229C1F3B800A61132 /* DaliyCollectionFeeViewController.swift in Sources */,
 				B50294A01F1E0A5C00AAAFFC /* ImageMessageVC.swift in Sources */,
@@ -4826,6 +4833,7 @@
 				D650466320D5430C0097FCAF /* StudentMarkVC.swift in Sources */,
 				18A816B72A11EDFA00E7FDF7 /* MakeDropDown.swift in Sources */,
 				18294E64295AF03D0019849F /* ParentVideoVc.swift in Sources */,
+				84B7BA592D0B03A8008E0117 /* notisample.swift in Sources */,
 				18294E20295335810019849F /* UITextField.swift in Sources */,
 				848E5D772BFE297300DBBBB5 /* StudentListReq.swift in Sources */,
 				D64EF0AD20C7ABF10051AA89 /* PhotosVC.swift in Sources */,
@@ -5097,7 +5105,7 @@
 				CODE_SIGN_ENTITLEMENTS = VoicesnapSchoolApp/VoicesnapSchoolApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9.4.8;
+				CURRENT_PROJECT_VERSION = 9.4.9;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 6Z355RG34N;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5110,7 +5118,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 8.7.8;
+				MARKETING_VERSION = 8.7.9;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.voicesnap.schoolmessenger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5131,7 +5139,7 @@
 				CODE_SIGN_ENTITLEMENTS = VoicesnapSchoolApp/VoicesnapSchoolAppRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9.4.8;
+				CURRENT_PROJECT_VERSION = 9.4.9;
 				DEVELOPMENT_TEAM = 6Z355RG34N;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5143,7 +5151,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 8.7.8;
+				MARKETING_VERSION = 8.7.9;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.voicesnap.schoolmessenger;
 				PRODUCT_NAME = "$(TARGET_NAME)";

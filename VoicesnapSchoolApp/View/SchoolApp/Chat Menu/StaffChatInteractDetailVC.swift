@@ -99,6 +99,7 @@ class StaffChatInteractDetailVC: UIViewController ,UITableViewDelegate,UITableVi
     // MARK: - TableView delegates
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("stdSubjectArray.count")
         return stdSubjectArray.count
     }
     
@@ -160,7 +161,8 @@ class StaffChatInteractDetailVC: UIViewController ,UITableViewDelegate,UITableVi
         let myDict:NSMutableDictionary = ["StaffId" : StaffId,MOBILE_NUMBER : appDelegate.strMobileNumber , SCHOOLIID : SchoolId]
         
         let myString = Util.convertDictionary(toString: myDict)
-        print("myString\(myString)")
+        print("myStringStaffchat\(myString)")
+//        print(<#T##items: Any...##Any#>)
         apiCall.nsurlConnectionFunction(requestString, myString, "GetStaffDetailApi")
     }
     
@@ -179,7 +181,7 @@ class StaffChatInteractDetailVC: UIViewController ,UITableViewDelegate,UITableVi
                     if let Dict = CheckedDict[0] as? NSDictionary{
                         let stdID = String(describing: Dict["StandardId"]!)
                         let alrtMessage = Dict["Standard"] as! String
-                        let getUnreadCount = Dict["unread_count"] as! String
+//                        let getUnreadCount = Dict["unread_count"] as! String
                         if(stdID != "0"){
                             stdSubjectArray = NSMutableArray(array: CheckedDict)
                             myTableView.reloadData()

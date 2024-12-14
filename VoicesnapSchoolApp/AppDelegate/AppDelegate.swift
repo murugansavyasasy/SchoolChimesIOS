@@ -78,6 +78,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate,UNUserNo
     //
     // Language Parent Menu Arrays
     
+    var lastNotificationTime: Date?
+    var backgroundTask: UIBackgroundTaskIdentifier = .invalid
+//        let notificationHandler = NotificationHandler()
+//    var player: AVPlayer?
+      var playerItem: AVPlayerItem?
     var receivedNotifications: Set<String> = []
     var mainParentArray = ["en" : ["Emergency Voice","Non-Emergency Voice","Text Messages","Homework","Exam/Test","Exam Marks","Circulars","Notice Board","School / Class Events","Attendance Report","Leave Information","Fee Details","Images","Library Details","Staff Details","Online Text Book","YouTube Video","","Assignment","Video","Online Meeting"],
                            "ar" : ["صوت الطوارئ","صوت غير طارئ","رسائل نصية","واجب منزلي","/ اختبارامتحان","علامات الامتحان","التعاميم","لوح الإعلانات","أحداث المدرسة / الصف","تقرير الحضور","اترك المعلومات","تفاصيل الرسوم","صور","تفاصيل المكتبة","تفاصيل الموظفين","كتاب النصوص على الانترنت","فيديو يوتيوب","","","مهمة","فيديو"], "ms" :["Suara Kecemasan","Suara Bukan Kecemasan","Mesej teks","Kerja rumah","Ujian / Ujian","Tanda Peperiksaan","Pekeliling","Papan kenyataan","Peristiwa Sekolah / Kelas","Laporan Kehadiran","Tinggalkan Maklumat","Butiran Bayaran","Imej","Butiran Perpustakaan","Butiran Staf","Buku Teks Dalam Talian","YouTube Video","","Tugasan","Video"], "fr": ["Voix d'urgence","Voix non urgente","Des messages texte","Devoirs","Examen / tester","Marques d'examen","Circulaires","Tableau d'affichage","Événements scolaires / de classe","Rapport de présence","Laisser des informations","Détails des frais","l' image ","Détails de la bibliothèque","Détails du personnel","Livre de texte en ligne","YouTube Video","","affectation","vidéo"],"es": ["Voz de emergencia","Voz no de emergencia","Mensajes de texto","Deberes","Examen / Examen","Marcas de examen","Circulares","Tablón de anuncios","Escuela / eventos de clase","Reporte de asistencia","Dejar informacion","Detalles de la tarifa","Imágenes","Detalles de la biblioteca","Detalles del personal","Libro de texto en línea","YouTube Video","","Asignación","Vídeo"], "de" : ["Notstimme","Allgemeine Stimme","Text Messages","Hausaufgaben","Prüfung / Test","Prüfzeichen","Rundschreiben","Schild","Schulveranstaltungen","Teilnahmebericht","Informationen hinterlassen","Fee Details","Bilder","Bibliotheksdetails","Staff Details","Online Text Book","YouTube Video","","Opgave","Video"],"it" : ["Voice di emergenza","Voce non di emergenza","Messaggi di testo","Compiti a casa","Exam/Test","Marchi d'esame","circolari","Bacheca","Eventi scuola / classe","Rapporto di partecipazione","Invia informazioni","Dettagli della tariffa","immagini","Dettagli della biblioteca","Dettagli del personale","Libro di testo online","YouTube Video","Assignment","","Incarico","Video"],
@@ -176,12 +181,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate,UNUserNo
         }
         application.registerForRemoteNotifications()
         Messaging.messaging().delegate = self
-        
+        application.setMinimumBackgroundFetchInterval(UIApplication.backgroundFetchIntervalMinimum)
         
         return true
     }
     
-    
+    func application(_ application: UIApplication, performFetchWithCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        // Perform background tasks, e.g., fetching new data
+        print("Background fetch started")
+        completionHandler(.newData)
+    }
     
     
     
@@ -253,9 +262,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate,UNUserNo
         }
     }
     
-    func applicationWillResignActive(_ application: UIApplication) {
-        self.appIsStarting = false
-    }
+   
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         
@@ -275,226 +282,57 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate,UNUserNo
         strDeviceToken = "1234"
     }
     
+
+  
+
+       // Handle foreground notifications
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+
+               
+        
+        let  userInfo = notification.request.content.userInfo
+        
+       
+        
+                  completionHandler([.banner,.sound,.badge])
+
+
+    }
+ 
     func userNotificationCenter(
            _ center: UNUserNotificationCenter,
            didReceive response: UNNotificationResponse,
            withCompletionHandler completionHandler: @escaping () -> Void
        ) {
-           // Remove the specific notification after interaction
-           let identifier = response.notification.request.identifier
-           UNUserNotificationCenter.current().removeDeliveredNotifications(withIdentifiers: [identifier])
            
-           print("Cleared notification with identifier: \(identifier)")
-           
-           
-           let userInfo = response.notification.request.content.userInfo
-           
-           
-           print("userInfouserInfo",userInfo)
+         let userInfo = response.notification.request.content.userInfo
            if let type = userInfo[AnyHashable("type")] as? String {
-               print("Type:dcdcsdcsdcs \(type)")
-               
-               if type == "isCall"{
+               print("Notification type: \(type)")
+
+               if type == "isCall" {
                    if let url = userInfo[AnyHashable("url")] as? String {
-                       print("URL: \(url)")
-                       
+                       print("Notification contains URL: \(url)")
+                      
                        navigateToViewController(with: URL(string: url)!, userInfo: userInfo)
                    }
                }
            }
-           
+         
            completionHandler()
+     
        }
-    
-    
-    
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        print("Received: \(userInfo)")
         
-        
-        
-        if let type = userInfo[AnyHashable("type")] as? String {
-                   print("Type:dcdcsdcsdcs \(type)")
-       
-                   if type == "isCall"{
-                       if let url = userInfo[AnyHashable("url")] as? String {
-                           print("URL: \(url)")
-       
-                           navigateToViewController(with: URL(string: url)!, userInfo: userInfo)
-                       }
-                   }
-               }
-        
-        guard let ei5 = userInfo[AnyHashable("ei5")] as? String else {
-            completionHandler(.noData)
-            return
-        }
-        
-        // Create content for the notification
-        let content = UNMutableNotificationContent()
-        content.title = userInfo[AnyHashable("title")] as! String
-        content.body = userInfo[AnyHashable("body")] as! String
-        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "schoolchimes_tone.wav"))
-        
-        // Attach additional data (if needed for navigation)
-        if let url = userInfo[AnyHashable("url")] as? String {
-            content.userInfo["url"] = url
-            
-        }
-        
-        // Create a unique identifier using `ei5`
-        let identifier = ei5
-        
-        // Schedule the notification
-        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: nil) // Immediate notification
-        UNUserNotificationCenter.current().add(request) { error in
-            if let error = error {
-                print("Error adding notification: \(error.localizedDescription)")
-            }
-        }
-        
-        completionHandler(.newData)
-    }
 
+   
+       
     
-    
-    
-//    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-//        print("Recived: \(userInfo)")
-//       
-//        
-//        completionHandler(.newData)
-//        self.playSound(userInfo: userInfo)
-//       
-//      
-//        
-//        if let type = userInfo[AnyHashable("type")] as? String {
-//            print("Type:dcdcsdcsdcs \(type)")
-//            
-//            if type == "isCall"{
-//                if let url = userInfo[AnyHashable("url")] as? String {
-//                    print("URL: \(url)")
-//                    
-//                    navigateToViewController(with: URL(string: url)!, userInfo: userInfo)
-//                }
-//            }
-//        }
-//
-//        
-//        
-//        application.applicationIconBadgeNumber = 1
-//        application.applicationIconBadgeNumber = 0
-//        if(isPopupOpened == 0){
-//            let nc = NotificationCenter.default
-//            nc.post(name: NSNotification.Name(rawValue: "PushNotification"), object: nil)
-//        }
-//    }
-//    
-    
-    
-//    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-//        print("Received: \(userInfo)")
-//        
-//        guard let ei5 = userInfo[AnyHashable("ei5")] as? String else {
-//               completionHandler(.noData)
-//               return
-//           }
-//        
-//        // Play sound
-//        playSound(userInfo: userInfo)
-//        
-//        // Handle the notification type
-//        if let type = userInfo[AnyHashable("type")] as? String, type == "isCall",
-//           let urlString = userInfo[AnyHashable("url")] as? String,
-//           let url = URL(string: urlString) {
-//            navigateToViewController(with: url, userInfo: userInfo)
-//        }
-//        
-//        // Reset the app badge number
-//        application.applicationIconBadgeNumber = 1
-//        application.applicationIconBadgeNumber = 0
-//        
-//        // Notify other parts of the app
-//        if isPopupOpened == 0 {
-//            let nc = NotificationCenter.default
-//            nc.post(name: NSNotification.Name(rawValue: "PushNotification"), object: nil)
-//        }
-//        
-//        let content = UNMutableNotificationContent()
-//        content.title =  "dfr"
-//            content.body = "rfwrdfed"
-//            content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "schoolchimes_tone.wav"))
-//        
-//        let identifier = ei5
-//           
-//           // Schedule the notification
-//           let request = UNNotificationRequest(identifier: identifier, content: content, trigger: nil) // Immediate notification
-//           UNUserNotificationCenter.current().add(request) { error in
-//               if let error = error {
-//                   print("Error adding notification: \(error.localizedDescription)")
-//               }
-//           }
-//           
-//           completionHandler(.newData)
-//    }
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-//    func sendNotification(with payload: [String: Any]) {
-//        // Ensure ei5 exists and is a String
-//        guard let ei5 = payload["ei5"] as? String else {
-//            print("ei5 key is missing or not a String")
-//            return
-//        }
-//
-//        // Remove existing notification with the same ei5 value
-//      
-//
-//        // Prepare the new notification content
-//        let content = UNMutableNotificationContent()
-//
-//        // Extract and cast the notification dictionary
-//        if let notification = payload["notification"] as? [String: Any],
-//           let title = notification["title"] as? String,
-//           let body = notification["body"] as? String {
-//            content.title = title
-//            content.body = body
-//        } else {
-//            content.title = "Default Title"
-//            content.body = "Default Body"
-//        }
-//
-//        // Extract sound if available
-//        if let apns = payload["apns"] as? [String: Any],
-//           let aps = apns["payload"] as? [String: Any],
-//           let apsDictionary = aps["aps"] as? [String: Any],
-//           let soundName = apsDictionary["sound"] as? String {
-//            content.sound = UNNotificationSound(named: UNNotificationSoundName(soundName))
-//        } else {
-//            content.sound = UNNotificationSound.default
-//        }
-//
-//        // Create a notification request with ei5 as the identifier
-//        let request = UNNotificationRequest(identifier: ei5, content: content, trigger: nil)
-//
-//        // Add the new notification
-//        UNUserNotificationCenter.current().add(request) { error in
-//            if let error = error {
-//                print("Error adding notification: \(error.localizedDescription)")
-//            } else {
-//                print("Notification with ei5 \(ei5) updated successfully")
-//            }
-//        }
-//    }
-//    
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
+        
+        print("applicationapplicationapplicationapplicationdidReceiveRemoteNotification")
+       
         application.applicationIconBadgeNumber = 1
         application.applicationIconBadgeNumber = 0
         if(isPopupOpened == 0){
@@ -503,8 +341,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate,UNUserNo
         }
     }
     
+  
+       func applicationWillResignActive(_ application: UIApplication) {
+           self.appIsStarting = false
+           
+           print("applicationWillResignActive")
+           
+       }
+    
+       func applicationDidEnterBackground(_ application: UIApplication) {
+           isPasswordBind = "1"
+       
+       }
+       
+       func applicationWillEnterForeground(_ application: UIApplication) {
+          
+       }
     
     
+       
+       func applicationDidBecomeActive(_ application: UIApplication) {
+        
+          
+       }
+    
+    
+       
+       func applicationWillTerminate(_ application: UIApplication) {
+           
+       }
+    
+
     func playSound(userInfo: [AnyHashable : Any]) {
         var msgsound = userInfo["tone"] as? String ?? "TEST_MESSAGE"
         var ext = ".wav"
@@ -539,209 +406,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate,UNUserNo
     }
     
     @available(iOS 10.0, *)
-//    func userNotificationCenter(_ center: UNUserNotificationCenter,willPresent notification: UNNotification,withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void){
-//      
-////
-//        if let type =   notification.request.content.userInfo[AnyHashable("type")] as? String {
-//            print("Type: \(type)")
-//            
-//            if type == "isCall"{
-//                if let ei5 = notification.request.content.userInfo[AnyHashable("ei5")] as? String {
-//                    print("URL:fevjn,fvn,df \(ei5)")
-//                    
-//                    let notificationID = ei5
-//                    
-//                   
-//                 
-//                    
-//                
-//                }
-//            }
-//            
-//            
-//            
-//            
-//           
-//            
-//            
-//        }
-//        
-//       
-//        
-// 
-//        completionHandler([.alert, .badge,.sound])
-//        
-//        if(isPopupOpened == 0){
-//            let nc = NotificationCenter.default
-//            nc.post(name: NSNotification.Name(rawValue: "PushNotification"), object: nil)
-//        }
-//    }
-    
-    
-    
-    
-//    func userNotificationCenter(_ center: UNUserNotificationCenter,willPresent notification: UNNotification,withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void){
-//        let userInfo = notification.request.content.userInfo
-//        //          print(&quot;Will Present Notification: \(userInfo)&quot;)
-//        
-//        // Handle specific notification types
-//        
-//       
-//            
-//            
-//            
-//            completionHandler([.alert, .badge,.sound])
-//            
-//            if(isPopupOpened == 0){
-//                let nc = NotificationCenter.default
-//                nc.post(name: NSNotification.Name(rawValue: "PushNotification"), object: nil)
-//            }
-//            
-//            
-//            // Present the notification (alert, badge, sound)
-//            
-//        }
 
-   
-//    
-//    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-//        let userInfo = notification.request.content.userInfo
-//        
-//        
-//        guard let ei5 = userInfo[AnyHashable("ei5")] as? String else {
-//            
-//            completionHandler([.alert, .badge, .sound])
-//            return
-//        }
-//        
-//        if let type = userInfo[AnyHashable("type")] as? String {
-//            print("Type: \(type)")
-//            
-//            
-//            
-//            
-//            if type == "isCall"{
-//               
-//                
-//                // Create content for the notification
-//                let content = UNMutableNotificationContent()
-//                content.title = notification.request.content
-//                    .title
-//                content.body = notification.request.content.body
-//                content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "schoolchimes_tone.wav"))
-//                content.attachments = notification.request.content.attachments
-////                content.userInfo = userInfo
-//                
-//                // Attach additional data
-//                if let url = userInfo[AnyHashable("url")] as? String {
-//                    content.userInfo["url"] = url
-//                    content.userInfo["type"] = type
-//                }
-//                
-//                // Create a unique identifier using `ei5`
-//                let identifier = ei5
-//                
-//                // Schedule the notification
-//                let request = UNNotificationRequest(identifier: identifier, content: content, trigger: nil)
-//                UNUserNotificationCenter.current().add(request) { error in
-//                    if let error = error {
-//                        print("Error adding notification: \(error.localizedDescription)")
-//                    }
-//                }
-//            }else{
-//                
-//                completionHandler([.alert, .badge, .sound])
-//            }
-////            
-////           
-//        }
-//
-//        
-//       
-//      
-//        
-//        // Show the notification in the foreground
-////        completionHandler([.alert, .badge, .sound])
-//        
-//    }
-//
     
-    
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        let userInfo = notification.request.content.userInfo
-        
-        guard let ei5 = userInfo[AnyHashable("ei5")] as? String else {
-            completionHandler([.alert, .badge, .sound])
-           
-            return
-        }
-        print("ei5ei5",ei5)
-        // Create content for the notification
-        let content = UNMutableNotificationContent()
-        content.title = notification.request.content.title
-        content.body = notification.request.content.body
-        content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: "schoolchimes_tone.wav"))
-        content.attachments = notification.request.content.attachments
-        
-        // Attach additional data
-        if let url = userInfo[AnyHashable("url")] as? String {
-            content.userInfo["url"] = url
-            
-           
-        }
-        if let type = userInfo[AnyHashable("type")] as? String {
-           
-            content.userInfo["type"] = type
-        }
-        
-        // Create a unique identifier using `ei5`
-        let identifier = ei5
-        
-        // Schedule the notification
-        let request = UNNotificationRequest(identifier: identifier, content: content, trigger: nil)
-        UNUserNotificationCenter.current().add(request) { error in
-            if let error = error {
-                print("Error adding notification: \(error.localizedDescription)")
-            }
-        }
-        
-        // Show the notification in the foreground
-//        completionHandler([.alert, .badge, .sound])
-    }
 
-   
-       // MARK: - Play Sound
-      
-     
     
-    
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        isPasswordBind = "1"
-        
-        print("applicationDidEnterBackground")
-//        if Id == 1{
-//            
-//            playAudio(from: "")
-//        }
-    }
-    
-    func applicationWillEnterForeground(_ application: UIApplication) {
-        print("applicationWillEnterForeground")
-//        if Id == 1{
-//            
-//            playAudio(from: "")
-//        }
-        
-        
-    }
-    
-    func applicationDidBecomeActive(_ application: UIApplication) {
-        
-    }
-    
-    func applicationWillTerminate(_ application: UIApplication) {
-        
-    }
+ 
     
     func emptyAssignment(){
         if (UserDefaults.standard.bool(forKey: "HasLaunchedOnce")) {
@@ -788,7 +457,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate,UNUserNo
     
     
     
-    
+  
     
     
     static  var adDataList : [MenuData] = []
@@ -851,11 +520,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate,UNUserNo
     
     func navigateToViewController(with wavURL: URL,userInfo:[AnyHashable : Any]) {
            
+        
+        if let player =  DefaultsKeys.audioPlayer, player.isPlaying {
+            print("Stopping currently playing sound")
+            player.stop()
+        }
+        
         let vc = getCurrentViewController()
 
         let vcc = NotificationCallingscreen(nibName: nil, bundle: nil)
         vcc.userInfo = userInfo
         vcc.urlss = wavURL.absoluteString
+        
         vcc.modalPresentationStyle = .fullScreen
 
         vc?.present(vcc, animated: true)
@@ -878,7 +554,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate,UNUserNo
     }
     
     
-    
+    func sceneDidEnterBackground(_ scene: UIScene) {
+        // Called as the scene transitions from the foreground to the background.
+        // Use this method to save data, release shared resources, and store enough scene-specific state information
+        // to restore the scene back to its current state.
+        
+        print("sceneDidEnterBackground")
+    }
+
     
     
 }

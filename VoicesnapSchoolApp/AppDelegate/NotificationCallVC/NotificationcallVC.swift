@@ -234,13 +234,24 @@ class NotificationcallVC: UIViewController {
         noti.duration = duration
         noti.start_time = StartcurrentTimes
         noti.end_time = Endtime
-        print("strMobileNostrMobileNo",strMobileNo)
+        print("strMobileNostrMobileNo",Endtime)
         noti.phone = strMobileNo
         
         
-        if let ei1 = userInfo[AnyHashable("ei1")] as? String {
-            print("ei1: \(ei1)")
-            noti.ei1 = ei1
+       
+        
+        do{
+            if let ei1 = userInfo[AnyHashable("ei1")] as? String {
+                print("ei1: \(ei1)")
+                noti.ei1 = ei1
+            }else{
+                
+                print("False",userInfo[AnyHashable("ei1")])
+            }
+            
+        }catch let error  {
+            
+            print("error",error)
         }
         
         if let ei2 = userInfo[AnyHashable("ei2")] as? String {
@@ -249,7 +260,7 @@ class NotificationcallVC: UIViewController {
             noti.ei2 = ei2
         }
         
-        if let ei3 = userInfo[AnyHashable("ei3")] as? String {
+        if let ei3 = userInfo[AnyHashable("ei3")] as? String  {
             noti.ei3 = ei3
         }
         

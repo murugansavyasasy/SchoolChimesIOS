@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import AVFAudio
 
 
 class StaffConstantFile {
@@ -82,7 +83,7 @@ struct DefaultsKeys {
     static var failedErrorCode : Int!
     static var sortName = "Sort Alphabetically (A → Z)"
     
-
+    static var audioPlayer: AVAudioPlayer?
     
 }
 

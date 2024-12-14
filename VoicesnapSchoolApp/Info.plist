@@ -47,13 +47,23 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>LSSupportsOpeningDocumentsInPlace</key>
+	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSBiometricUsageDescription</key>
+	<string>Your reason for using Touch ID</string>
 	<key>NSCameraUsageDescription</key>
 	<string>Capture the image of the student details and send to parents</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Your reason for using Face ID</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>We need your location to provide better services.</string>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>We need your location to provide better services.</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>Record voice message of the students</string>
 	<key>NSPhotoLibraryUsageDescription</key>
@@ -75,8 +85,6 @@
 		<string>fetch</string>
 		<string>remote-notification</string>
 	</array>
-	<key>LSSupportsOpeningDocumentsInPlace</key>
-	<true/>
 	<key>UIFileSharingEnabled</key>
 	<true/>
 	<key>UILaunchStoryboardName</key>
@@ -97,13 +105,5 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>We need your location to provide better services.</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>We need your location to provide better services.</string>
-	<key>NSFaceIDUsageDescription</key>
-	<string>Your reason for using Face ID</string>
-	<key>NSBiometricUsageDescription</key>
-	<string>Your reason for using Touch ID</string>
 </dict>
 </plist>

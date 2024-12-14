@@ -45,7 +45,7 @@ class Notimodal : Mappable{
         ei5 <- map["ei5"]
         start_time <- map["start_time"]
         phone <- map["phone"]
-        start_time <- map["start_time"]
+        end_time <- map["end_time"]
         receiver_id <- map["receiver_id"]
         circular_id <- map["circular_id"]
         diallist_id <- map["diallist_id"]

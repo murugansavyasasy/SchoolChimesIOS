@@ -434,7 +434,9 @@ class CheckPasswordVC: UIViewController ,Apidelegate,UITextFieldDelegate,UITable
         let baseUrlString = UserDefaults.standard.object(forKey:BASEURL) as? String
         let requestStringer = baseUrlString! + FORGOTPSWD_METHOD_BY_COUNTRYID
         let requestString = requestStringer.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
+        print("requestString",requestString)
         let myDict:NSMutableDictionary = ["MobileNumber" : strMobileNo ,COUNTRY_CODE : strCountryCode,COUNTRY_ID : strCountryID]
+        print("myDictmyDict",myDict)
         let myString = Util.convertDictionary(toString: myDict)
         apiCall.nsurlConnectionFunction(requestString, myString, "ForgotPassword")
     }

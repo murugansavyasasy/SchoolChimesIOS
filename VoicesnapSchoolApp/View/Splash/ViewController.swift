@@ -123,6 +123,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         nc.addObserver(self,selector: #selector(ViewController.callNotification), name: NSNotification.Name(rawValue: "PushNotification"), object:nil)
         
         
+     
+        
         
         
         isAppAlreadyLaunchedOnce()
@@ -504,9 +506,19 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     func callAppStore ()
     {
+        
+        
         UserDefaults.standard.set(true, forKey: ACCEPT_TERMS_CONDITION)
         UserDefaults.standard.set("No" as NSString, forKey: COUNTRYFIRST)
-        UIApplication.shared.openURL(NSURL(string: LIVE_ITUNES)! as URL)
+      
+        let myUrl = LIVE_ITUNES
+        if let url = URL(string: "\(myUrl)"), !url.absoluteString.isEmpty {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+        guard let url = URL(string: "\(myUrl)"), !url.absoluteString.isEmpty else {
+        return
+        }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     //MARK: Webview delegate
     
@@ -906,6 +918,9 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                             UserDefaults.standard.set(arraylanguage, forKey: LANGUAGE_ARRAY)
                         }
                         let updateAvail = String(describing: dict.object(forKey: "UpdateAvailable")!)
+                        let VersionAlertContent = String(describing: dict.object(forKey: "VersionAlertContent")!)
+                        
+                        let VersionAlertTitle = String(describing: dict.object(forKey: "VersionAlertTitle")!)
                         let forceUpdate = String(describing: dict.object(forKey: "ForceUpdate")!)
                         let isAlertAvailable = String(describing: dict.object(forKey: "isAlertAvailable")!)
                         let strAlertContent = String(describing: dict.object(forKey: "AlertContent")!)
@@ -939,7 +954,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { action in
                                 if(updateAvail .isEqual("1") && forceUpdate .isEqual("0"))
                                 {
-                                    let alert = UIAlertController(title: UPDATE_TITLE, message: UPDATE_AVAIL_MESSAGE, preferredStyle: UIAlertController.Style.alert)
+                                    let alert = UIAlertController(title: VersionAlertTitle, message: VersionAlertContent, preferredStyle: UIAlertController.Style.alert)
                                     alert.addAction(UIAlertAction(title: "Not Now", style: UIAlertAction.Style.default, handler: { action in self.callNormalFlow()}))
                                     alert.addAction(UIAlertAction(title: "Update", style: UIAlertAction.Style.default, handler: { action in self.callAppStore()}))
                                     
@@ -949,7 +964,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                                 }
                                 else if(forceUpdate .isEqual("1") )
                                 {
-                                    let alert = UIAlertController(title: UPDATE_TITLE, message: FORCE_UPDATE_AVAIL_MESSAGE , preferredStyle: UIAlertController.Style.alert)
+                                   
+                                    let alert = UIAlertController(title: VersionAlertTitle, message: VersionAlertContent , preferredStyle: UIAlertController.Style.alert)
                                     
                                     alert.addAction(UIAlertAction(title: "Update", style: .default, handler: { action in self.callAppStore()}))
                                     
@@ -972,7 +988,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                         }else{
                             if(updateAvail .isEqual("1") && forceUpdate .isEqual("0"))
                             {
-                                let alert = UIAlertController(title: UPDATE_TITLE, message: UPDATE_AVAIL_MESSAGE, preferredStyle: UIAlertController.Style.alert)
+                                let alert = UIAlertController(title: VersionAlertTitle, message: VersionAlertContent, preferredStyle: UIAlertController.Style.alert)
                                 alert.addAction(UIAlertAction(title: "Not Now", style: UIAlertAction.Style.default, handler: { action in self.callNormalFlow()}))
                                 alert.addAction(UIAlertAction(title: "Update", style: UIAlertAction.Style.default, handler: { action in self.callAppStore()}))
                                 
@@ -982,7 +998,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                             }
                             else if(forceUpdate .isEqual("1") )
                             {
-                                let alert = UIAlertController(title: UPDATE_TITLE, message: FORCE_UPDATE_AVAIL_MESSAGE , preferredStyle: UIAlertController.Style.alert)
+                                let alert = UIAlertController(title: VersionAlertTitle, message: VersionAlertContent , preferredStyle: UIAlertController.Style.alert)
                                 
                                 alert.addAction(UIAlertAction(title: "Update", style: .default, handler: { action in self.callAppStore()}))
                                 
