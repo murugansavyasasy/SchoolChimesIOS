@@ -237,7 +237,7 @@ class TextHomeWorkVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UI
         
         
         imgPdfAttachBtn.isHidden = true
-        attachmentViewTop.constant = -190
+        attachmentViewTop.constant = -240
         imagePicker.delegate = self
         
         voicePlayView.isHidden = true
@@ -513,10 +513,12 @@ class TextHomeWorkVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UI
     
     @IBAction func VoiceCloseViewVc() {
         
-        
-        
+        print("VoiceCloseViewVc")
+        attachmentViewTop.constant = 10
+
+        voiceRecordHeight1.constant = 0
         voiceRecordView.isHidden = true
-        attacTopView1.constant = -60
+//        attacTopView1.constant = -60
         
     }
     
@@ -900,6 +902,7 @@ class TextHomeWorkVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UI
     }
     
     @IBAction func actionCloseView(_ sender: UIButton) {
+        
         dismiss(animated: false, completion: nil)
     }
     
@@ -1404,7 +1407,7 @@ class TextHomeWorkVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UI
     
     
     func voiceAction() {
-        attachmentViewTop.constant = 60
+        attachmentViewTop.constant = 30
         voicePlayView.isHidden = true
         voiceRecordView.isHidden = false
         imgShowView.isHidden = true
@@ -1457,7 +1460,7 @@ class TextHomeWorkVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UI
         
         self.finishRecording(success: true)
         voicePlayView.isHidden = false
-        attachmentViewTop.constant = 30
+        attachmentViewTop.constant = 10
         voiceRecordHeight1.constant = 260
         calucalteDuration()
         if(UIDevice.current.userInterfaceIdiom == .pad)
