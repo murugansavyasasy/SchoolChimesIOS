@@ -68,12 +68,17 @@ struct DefaultsKeys {
     static var biometricEnable = "biometricEnable"
     static var SelectedDAte = ""
     static var allowVideoDownload = "allowVideoDownload"
-    static var bucketNameIndia = "schoolchimes-files-india"
+    
+    
+    static var bucketNameIndia = "schoolchimes-communication"
     
     static var bucketNameBangkok = "schoolchimes-files-bangkok"
     
     static var UploadProfileBucket = "schoolchimes-student-images"
     static var uploadprofileBrowes = "schoolchimes-docs"
+    
+    
+    
     static var CognitoPoolID = "ap-south-1:a8650d2e-79d6-4668-85db-110e9917583f"
     static var bookingSlotId : [Int] = []
     static var date : [String] = []

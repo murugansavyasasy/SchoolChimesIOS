@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import ObjectMapper
 
 class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegate,UIPickerViewDataSource,UITableViewDataSource,UITableViewDelegate {
     @IBOutlet var PopupChoosePickerView: UIView!
@@ -81,6 +82,9 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
     
     var vimeoVideoURL : URL!
     var countryCoded : String!
+    var UploadImageId = 0
+    
+    
     override func viewDidLoad()
     {
         
@@ -93,7 +97,7 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
         countryCoded =  UserDefaults.standard.object(forKey: COUNTRY_ID) as! String
         SendButton.layer.cornerRadius = 5
         SendButton.layer.masksToBounds = true
-        
+
         PopupChoosePickerView.isHidden = true
         
     }
@@ -353,7 +357,10 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
                     if(self.strFrom == "Image"){
                         print("imagesArrayimagesArray",imagesArray)
                         print("igesArray",self.imagesArray as! [UIImage])
-                        self.getImageURL(images: self.imagesArray as! [UIImage])
+//                        self.getImageURL(images: self.imagesArray as! [UIImage])
+//                        PresignedURL(image: imagesArray[0] as! UIImage)
+                        
+                        
                     }else{
                         self.uploadPDFFileToAWS(pdfData: pdfData!)
                     }
@@ -378,7 +385,11 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
                     print("strFromstrFrom2333",strFrom)
                     print("strFromsimagesArray",imagesArray as! [UIImage])
                     if(self.strFrom == "Image"){
+                        
+                      
+                        
                         self.getImageURL(images: self.imagesArray as! [UIImage])
+//                        PresignedURL(image:  self.imagesArray[UploadImageId] as! [UIImage])
                     }else{
                         self.uploadPDFFileToAWS(pdfData: pdfData!)
                     }
@@ -394,6 +405,11 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
         
     }
     
+    
+    
+    
+//
+
     @IBAction func actionOk(_ sender: UIButton) {
         PopupChoosePickerView.isHidden = true
         if(TableString == "Standard")
@@ -759,6 +775,8 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
     func callSendMultipleImageToStandardSection()
     
     {
+        
+        print("heloo",convertedImagesUrlArray)
         DispatchQueue.main.async {
             self.strApiFrom = "StaffMultipleImage"
             self.apicalled = "1"
@@ -776,6 +794,8 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
             let apiCall = API_call.init()
             apiCall.delegate = self;
             let myString = Util.convertDictionary(toString: self.selectedSchoolDictionary)
+            
+            print("myStringmyString",myString)
             apiCall.nsurlConnectionFunction(requestString, myString, "SendImageAsPrincipalToSelectedClass")
         }
         
@@ -1448,201 +1468,177 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
     }
     
     
+
+    
     //MARK: AWS Upload
     
-    func getImageURL(images : [UIImage]){
-        showLoading()
+    func getImageURL(images: [UIImage]) {
+    
         self.originalImagesArray = images
         self.totalImageCount = images.count
-        print("imagesimages",images)
-        print("imagcountes",images.count)
-        if currentImageCount < images.count{
-            self.uploadAWS(image: images[currentImageCount])
-        }
+            if currentImageCount < images.count {
+               
+                self.uploadAWS(image: images[currentImageCount])
+            } else {
+                print("All images uploaded. Final URLs: \("")")
+                // Handle final uploaded URLs (e.g., send them to the server or update the UI)
+            }
     }
-    
-    func uploadAWS(image : UIImage){
-        var bucketName = ""
-                print("countryCoded",countryCoded)
-                if countryCoded == "1" {
-                   
-                    bucketName = DefaultsKeys.bucketNameIndia
-                }else  {
-                     bucketName = DefaultsKeys.bucketNameBangkok
-                }
-                
-        let S3BucketName = bucketName
-        let CognitoPoolID = DefaultsKeys.CognitoPoolID
-        let Region = AWSRegionType.APSouth1
-        
-        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:Region,identityPoolId:CognitoPoolID)
-        let configuration = AWSServiceConfiguration(region:Region, credentialsProvider:credentialsProvider)
-        AWSServiceManager.default().defaultServiceConfiguration = configuration
-        
-        
-        let currentTimeStamp = NSString.init(format: "%ld",Date() as CVarArg)
-        let imageNameWithoutExtension = NSString.init(format: "vc_%@",currentTimeStamp)
-        let imageName = NSString.init(format: "%@%@",imageNameWithoutExtension, ".png")
-        
-        
+
+    func uploadAWS(image: UIImage) {
+        let currentTimeStamp = NSString.init(format: "%ld", Date() as CVarArg)
+        let imageNameWithoutExtension = NSString.init(format: "vc_%@", currentTimeStamp)
+        let imageName = NSString.init(format: "%@%@", imageNameWithoutExtension, ".png")
         let ext = imageName as String
-        
-        let fileName = imageNameWithoutExtension
-        let fileType = ".png"
-        
         let imageURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(ext)
-        //            let image = UIImage(named: "test")
-        let data = image.jpegData(compressionQuality: 0.9)
-        do {
-            try data?.write(to: imageURL)
-        }
-        catch {}
-        
-        print(imageURL)
-        let dateFormatter = DateFormatter()
-              
-              dateFormatter.dateFormat = "yyyy-MM-dd"
-              
-              let  currentDate =   dateFormatter.string(from: Date())
-        let uploadRequest = AWSS3TransferManagerUploadRequest()
-        uploadRequest?.body = imageURL
-        uploadRequest?.key = "communication" + "/" + currentDate +  "/" + ext
-        uploadRequest?.bucket = S3BucketName
-        uploadRequest?.contentType = "image/" + ext
-        uploadRequest?.acl = .publicRead
-        
-        
-        let transferManager = AWSS3TransferManager.default()
-        transferManager.upload(uploadRequest!).continueWith { (task) -> AnyObject? in
-            
-            if let error = task.error {
-                self.hideLoading()
-                print("Upload failed : (\(error))")
+
+        if let data = image.jpegData(compressionQuality: 0.9) {
+            do {
+                try data.write(to: imageURL)
+            } catch {
+                print("Error writing image data to file: \(error)")
+                return
             }
-            
-            if task.result != nil {
-                let url = AWSS3.default().configuration.endpoint.url
-                let publicURL = url?.appendingPathComponent((uploadRequest?.bucket!)!).appendingPathComponent((uploadRequest?.key!)!)
-                if let absoluteString = publicURL?.absoluteString {
-                    print("Uploaded to:\(absoluteString)")
-                    let imageDict = NSMutableDictionary()
-                    imageDict["FileName"] = absoluteString
-                    self.imageUrlArray.add(imageDict)
-                    self.currentImageCount = self.currentImageCount + 1
-                    if self.currentImageCount < self.totalImageCount{
-                        DispatchQueue.main.async {
-                            self.getImageURL(images: self.originalImagesArray)
-                            print("getImageURL",self.getImageURL)
-                        }
-                    }else{
-                        self.convertedImagesUrlArray = self.imageUrlArray
-                        if(self.SendedScreenNameStr .isEqual("MultipleImage")){
-                            self.callSendMultipleImageToStandardSection()
-                        }else{
-                            self.callStaffSendMultipleImage()
-                        }
-                        
-                        
-                        
+        }
+        
+        
+        var bucketName = ""
+        if countryCoded == "1" {
+                          
+        bucketName = DefaultsKeys.bucketNameIndia
+        }else  {
+        bucketName = DefaultsKeys.bucketNameBangkok
+        }
+                       
+        
+        AWSPreSignedURL.shared.fetchPresignedURL(
+            bucket: bucketName,
+            fileName: imageURL,
+            SchoolId: SchoolId,
+            fileType: "image"
+        ) { [self] result in
+            switch result {
+            case .success(let awsResponse):
+                print("Presigned URL fetched: \(awsResponse.data?.presignedUrl ?? "")")
+                let presignedURL = awsResponse.data?.presignedUrl
+                let Uploadimages = awsResponse.data?.fileUrl
+              
+                AWSUploadManager.shared.uploadImageToAWS(image: image, presignedURL: presignedURL!) { result in
+                    switch result {
+                    case .success(let uploadedURL):
+                        print("Image uploaded successfully: \(uploadedURL)")
+                      
+                    case .failure(let error):
+                        print("Failed to upload image: \(error.localizedDescription)")
                     }
-                }
+        
+                    let imageDict = NSMutableDictionary()
+                    imageDict["FileName"] = Uploadimages
+                    imageUrlArray.add(imageDict)
+                    self.currentImageCount += 1
+                      if self.currentImageCount < self.totalImageCount {
+                          
+                          DispatchQueue.main.async {
+                              self.getImageURL(images: self.originalImagesArray)
+                              print("getImageURL",self.getImageURL)
+                          }
+                       } else {
+                           print("All images uploaded. Final URLs: \(imageUrlArray)")
+                           // Handle final uploaded URLs (e.g., send them to the server or update the UI
+                           self.convertedImagesUrlArray = self.imageUrlArray
+                            if(self.SendedScreenNameStr .isEqual("MultipleImage")){
+                            self.callSendMultipleImageToStandardSection()
+                            }else{
+                            self.callStaffSendMultipleImage()
+                            }
+                           }
+                          }
+           
+            case .failure(let error):
+                print("Error fetching presigned URL: \(error.localizedDescription)")
             }
-            else {
-                self.hideLoading()
-                print("Unexpected empty result.")
-            }
-            return nil
         }
+        
+   
+       
     }
     
     
+    
+
     func uploadPDFFileToAWS(pdfData : NSData){
-        self.showLoading()
-        
-        var bucketName = ""
-                print("countryCoded",countryCoded)
-                if countryCoded == "1" {
-                   
-                    bucketName = DefaultsKeys.bucketNameIndia
-                }else  {
-                     bucketName = DefaultsKeys.bucketNameBangkok
-                }
-                
-        let S3BucketName = bucketName
-        let CognitoPoolID = DefaultsKeys.CognitoPoolID
-        let Region = AWSRegionType.APSouth1
-        
-        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:Region,identityPoolId:CognitoPoolID)
-        let configuration = AWSServiceConfiguration(region:Region, credentialsProvider:credentialsProvider)
-        AWSServiceManager.default().defaultServiceConfiguration = configuration
-        
-        
-        
+//        self.showLoading()
         let currentTimeStamp = NSString.init(format: "%ld",Date() as CVarArg)
         let imageNameWithoutExtension = NSString.init(format: "vc_%@",currentTimeStamp)
         let imageName = NSString.init(format: "%@%@",imageNameWithoutExtension, ".pdf")
-        
-        
         let ext = imageName as String
-        
         let fileName = imageNameWithoutExtension
         let fileType = ".pdf"
-        
         let imageURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(ext)
-        
         do {
             try pdfData.write(to: imageURL)
         }
         catch {}
-        
         print(imageURL)
+       
+      
         
-        let dateFormatter = DateFormatter()
-              
-              dateFormatter.dateFormat = "yyyy-MM-dd"
-              
-              let  currentDate =   dateFormatter.string(from: Date())
-        let uploadRequest = AWSS3TransferManagerUploadRequest()
-        uploadRequest?.body = imageURL
-        uploadRequest?.key = "communication" + "/" + currentDate +  "/" + ext
-        uploadRequest?.bucket = S3BucketName
-        uploadRequest?.contentType = "application/pdf"
-        uploadRequest?.acl = .publicRead
         
-        let transferManager = AWSS3TransferManager.default()
-        transferManager.upload(uploadRequest!).continueWith { (task) -> AnyObject? in
-            
-            if let error = task.error {
-                print("Upload failed : (\(error))")
-                self.hideLoading()
-            }
-            
-            if task.result != nil {
-                let url = AWSS3.default().configuration.endpoint.url
-                let publicURL = url?.appendingPathComponent((uploadRequest?.bucket!)!).appendingPathComponent((uploadRequest?.key!)!)
-                if let absoluteString = publicURL?.absoluteString {
-                    print("Uploaded to:\(absoluteString)")
-                    let imageDict = NSMutableDictionary()
-                    imageDict["FileName"] = absoluteString
-                    self.imageUrlArray.add(imageDict)
-                    self.convertedImagesUrlArray = self.imageUrlArray
-                    if(self.SendedScreenNameStr .isEqual("MultipleImage")){
-                        self.callSendPDFToStandardSection()
-                    }else{
-                        self.callStaffSendPDF()
-                    }
-                    
-                    
-                }
-            }
-            else {
-                self.hideLoading()
-                print("Unexpected empty result.")
-            }
-            return nil
+        var bucketName = ""
+        print("countryCoded",countryCoded)
+        if countryCoded == "1" {
+                          
+        bucketName = DefaultsKeys.bucketNameIndia
+        }else  {
+        bucketName = DefaultsKeys.bucketNameBangkok
         }
+                       
+        
+        AWSPreSignedURL.shared.fetchPresignedURL(
+            bucket: bucketName,
+            fileName: imageURL,
+            SchoolId: SchoolId,
+            fileType: "application"
+        ) { [self] result in
+            switch result {
+            case .success(let awsResponse):
+                print("Presigned URL fetched: \(awsResponse.data?.presignedUrl ?? "")")
+                let presignedURL = awsResponse.data?.presignedUrl
+                let UploadPDf = awsResponse.data?.fileUrl
+              
+                AWSUploadManager.shared.uploadPDFAWSUsingPresignedURL(pdfData: pdfData as Data, presignedURL:presignedURL! ){ result in
+                    
+                    switch result {
+                    case .success(let uploadedURL):
+                        print("Image uploaded successfully: \(uploadedURL)")
+                      
+                    case .failure(let error):
+                        print("Failed to upload image: \(error.localizedDescription)")
+                    }
+        
+                    let imageDict = NSMutableDictionary()
+                    imageDict["FileName"] = UploadPDf
+                    imageUrlArray.add(imageDict)
+                    
+                       self.convertedImagesUrlArray = self.imageUrlArray
+                              if(self.SendedScreenNameStr .isEqual("MultipleImage")){
+                              self.callSendPDFToStandardSection()
+                              }else{
+                                  self.callStaffSendPDF()
+                                  }
+                   
+                          }
+           
+            case .failure(let error):
+                print("Error fetching presigned URL: \(error.localizedDescription)")
+            }
+        }
+        
     }
     
+    
+    
+  
     
 }
 

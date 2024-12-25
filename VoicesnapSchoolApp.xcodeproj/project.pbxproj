@@ -302,6 +302,10 @@
 		8442AA7E2CDF86C80006068E /* NotificationcallVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8442AA762CDF86C80006068E /* NotificationcallVC.xib */; };
 		8442AA832CE219210006068E /* NotiResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8442AA822CE219210006068E /* NotiResp.swift */; };
 		8442AA852CE219B40006068E /* NotiReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8442AA842CE219B40006068E /* NotiReq.swift */; };
+		8444FE462D1A9B7D00FC936C /* AwsResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8444FE452D1A9B7D00FC936C /* AwsResp.swift */; };
+		8444FE482D1A9C7E00FC936C /* AwsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8444FE472D1A9C7E00FC936C /* AwsRequest.swift */; };
+		8444FE922D1BC90A00FC936C /* schoolchimes_tone.wav in Resources */ = {isa = PBXBuildFile; fileRef = 8444FE912D1BC90A00FC936C /* schoolchimes_tone.wav */; };
+		8444FE942D1BCFEA00FC936C /* CommonAwsUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8444FE932D1BCFEA00FC936C /* CommonAwsUpload.swift */; };
 		8453C0D62CB513620026F182 /* CountResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453C0D52CB513620026F182 /* CountResp.swift */; };
 		8453C0D82CB513750026F182 /* CountResq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8453C0D72CB513750026F182 /* CountResq.swift */; };
 		845B1BC42CAFCD8200D6E6F5 /* homeWorkResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845B1BC32CAFCD8200D6E6F5 /* homeWorkResp.swift */; };
@@ -387,7 +391,6 @@
 		84B39EEB2BEB459A00D56819 /* PayModeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B39EEA2BEB459A00D56819 /* PayModeRequest.swift */; };
 		84B39EEE2BEB483B00D56819 /* PaymentListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B39EEC2BEB483B00D56819 /* PaymentListTableViewCell.swift */; };
 		84B39EEF2BEB483B00D56819 /* PaymentListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84B39EED2BEB483B00D56819 /* PaymentListTableViewCell.xib */; };
-		84B7BA552D0AA7C3008E0117 /* schoolchimes_tone.wav in Resources */ = {isa = PBXBuildFile; fileRef = 84B7BA542D0AA7C3008E0117 /* schoolchimes_tone.wav */; };
 		84B7BA572D0AE489008E0117 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B7BA562D0AE489008E0117 /* SceneDelegate.swift */; };
 		84B7BA592D0B03A8008E0117 /* notisample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B7BA582D0B03A8008E0117 /* notisample.swift */; };
 		84BA340E2BEA5DFB001D1800 /* DailycollResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84BA340D2BEA5DFB001D1800 /* DailycollResp.swift */; };
@@ -969,6 +972,10 @@
 		8442AA782CDF86C80006068E /* NotificationCallingscreen.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationCallingscreen.xib; sourceTree = "<group>"; };
 		8442AA822CE219210006068E /* NotiResp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiResp.swift; sourceTree = "<group>"; };
 		8442AA842CE219B40006068E /* NotiReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiReq.swift; sourceTree = "<group>"; };
+		8444FE452D1A9B7D00FC936C /* AwsResp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwsResp.swift; sourceTree = "<group>"; };
+		8444FE472D1A9C7E00FC936C /* AwsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AwsRequest.swift; sourceTree = "<group>"; };
+		8444FE912D1BC90A00FC936C /* schoolchimes_tone.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = schoolchimes_tone.wav; sourceTree = "<group>"; };
+		8444FE932D1BCFEA00FC936C /* CommonAwsUpload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonAwsUpload.swift; sourceTree = "<group>"; };
 		8453C0D52CB513620026F182 /* CountResp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountResp.swift; sourceTree = "<group>"; };
 		8453C0D72CB513750026F182 /* CountResq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountResq.swift; sourceTree = "<group>"; };
 		845B1BC32CAFCD8200D6E6F5 /* homeWorkResp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = homeWorkResp.swift; sourceTree = "<group>"; };
@@ -1053,7 +1060,6 @@
 		84B39EEA2BEB459A00D56819 /* PayModeRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PayModeRequest.swift; sourceTree = "<group>"; };
 		84B39EEC2BEB483B00D56819 /* PaymentListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentListTableViewCell.swift; sourceTree = "<group>"; };
 		84B39EED2BEB483B00D56819 /* PaymentListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PaymentListTableViewCell.xib; sourceTree = "<group>"; };
-		84B7BA542D0AA7C3008E0117 /* schoolchimes_tone.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = schoolchimes_tone.wav; sourceTree = "<group>"; };
 		84B7BA562D0AE489008E0117 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		84B7BA582D0B03A8008E0117 /* notisample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = notisample.swift; sourceTree = "<group>"; };
 		84BA340D2BEA5DFB001D1800 /* DailycollResp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DailycollResp.swift; sourceTree = "<group>"; };
@@ -2652,7 +2658,7 @@
 		8442AA812CE218F40006068E /* NotiApi */ = {
 			isa = PBXGroup;
 			children = (
-				84B7BA542D0AA7C3008E0117 /* schoolchimes_tone.wav */,
+				8444FE912D1BC90A00FC936C /* schoolchimes_tone.wav */,
 				8442AA822CE219210006068E /* NotiResp.swift */,
 				8442AA842CE219B40006068E /* NotiReq.swift */,
 				84B7BA582D0B03A8008E0117 /* notisample.swift */,
@@ -3242,6 +3248,9 @@
 				B52F3C292015B1EB00B55F21 /* Main.storyboard */,
 				18294E612959F8150019849F /* ParentImageVc.swift */,
 				18294E63295AF03D0019849F /* ParentVideoVc.swift */,
+				8444FE452D1A9B7D00FC936C /* AwsResp.swift */,
+				8444FE472D1A9C7E00FC936C /* AwsRequest.swift */,
+				8444FE932D1BCFEA00FC936C /* CommonAwsUpload.swift */,
 			);
 			path = VoicesnapSchoolApp;
 			sourceTree = "<group>";
@@ -4261,8 +4270,8 @@
 				1829528B299520500003B9D6 /* QuizViewTableViewCell.xib in Resources */,
 				18F119A029658890002C0A0A /* SendStaffGroupsVoiceTableViewCell.xib in Resources */,
 				1829525929951D120003B9D6 /* QuizExamMenuViewController.xib in Resources */,
-				84B7BA552D0AA7C3008E0117 /* schoolchimes_tone.wav in Resources */,
 				182DF6CF29A8782C00E2D992 /* ExamUpcomingViewController.xib in Resources */,
+				8444FE922D1BC90A00FC936C /* schoolchimes_tone.wav in Resources */,
 				189E36F4296D959B0032A8CA /* ManagementVimeoViewController.xib in Resources */,
 				18D37B6E29C2D5B500A61132 /* DailyCollectionTableViewCell.xib in Resources */,
 				84B066272AFB88CE00CEB417 /* HomeWorkPdfImageShomViewController.xib in Resources */,
@@ -4410,6 +4419,7 @@
 				840B2BDF2C78AB330027071D /* CalendarCollectionViewCell.swift in Sources */,
 				046E6D25245C42FA00BA5E0D /* AssignmentImageDetailVC.swift in Sources */,
 				84F981B02BD64DE20077A77E /* PendingFeeReportTableViewCell.swift in Sources */,
+				8444FE482D1A9C7E00FC936C /* AwsRequest.swift in Sources */,
 				18E0C82A2A286A170088A258 /* AdViewerRequest.swift in Sources */,
 				B5CBE75B201A17FA00DF01C7 /* StaffTextVC.swift in Sources */,
 				841ED6BB2C8F4F8300A65EEA /* CancelAndCloseSlotByStaffModal.swift in Sources */,
@@ -4460,6 +4470,7 @@
 				C1744F8F25F8E20E00F84772 /* DeleteTVCell.swift in Sources */,
 				D64EF0E420C7AD040051AA89 /* TextFileDetailVC.swift in Sources */,
 				842C31442C01C8C600E98F85 /* acidmicYrResponce.swift in Sources */,
+				8444FE462D1A9B7D00FC936C /* AwsResp.swift in Sources */,
 				186E4E552A0CD35A00D7C3F2 /* ParticularDataEditRequest.swift in Sources */,
 				84A9E6E12C6A12AC00BC2D6B /* CancelSlotResponse.swift in Sources */,
 				D64EF0F820C7AD1A0051AA89 /* TextVC.swift in Sources */,
@@ -4510,6 +4521,7 @@
 				84CD56F72C9C03350068800A /* locationReq.swift in Sources */,
 				8414F7C62BD6862C0066F206 /* ScheduleCallViewController.swift in Sources */,
 				046E6D31245FF98A00BA5E0D /* StaffViewAssignmentTVCell.swift in Sources */,
+				8444FE942D1BCFEA00FC936C /* CommonAwsUpload.swift in Sources */,
 				C17887192727242F0041FFF0 /* OnlineDetailVC.swift in Sources */,
 				18BA0CD82CF721F300709E68 /* SubmitLsrwRequest.swift in Sources */,
 				1873EB8C2983AD83008E30AA /* FeeReceiptPdfDownloadRequest.swift in Sources */,

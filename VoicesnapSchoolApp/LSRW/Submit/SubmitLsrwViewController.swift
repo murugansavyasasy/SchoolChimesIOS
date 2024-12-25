@@ -673,6 +673,9 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
         uploadRequest?.body = imageURL
         uploadRequest?.key =   currentDate +  "/" + "File_" + ext
         uploadRequest?.bucket = S3BucketName
+   
+         
+
         
         if getImagePdfType == "Image" {
             uploadRequest?.contentType = "image/png"
