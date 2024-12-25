@@ -1379,7 +1379,8 @@ class TextHomeWorkVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UI
     
     
     func ImagePickerGallery() {
-        attacTopView1.constant = 100
+//        attacTopView1.constant = 100
+        attachmentViewTop.constant = -240
         
         
         let config = ImagePickerConfiguration()
@@ -1557,7 +1558,7 @@ class TextHomeWorkVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UI
         let audioUrl = URL(fileURLWithPath: URLPath.path)
         
         AWSS3Manager.shared.uploadAudio(audioUrl: audioUrl, progress: { [weak self] (progress) in
-            
+                
             
             
             
