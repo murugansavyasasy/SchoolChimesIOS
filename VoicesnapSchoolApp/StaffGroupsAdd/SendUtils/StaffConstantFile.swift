@@ -69,6 +69,8 @@ struct DefaultsKeys {
     static var SelectedDAte = ""
     static var allowVideoDownload = "allowVideoDownload"
     
+//    schoolchimes-communication
+    
     
     static var bucketNameIndia = "schoolchimes-communication"
     
@@ -76,6 +78,7 @@ struct DefaultsKeys {
     
     static var UploadProfileBucket = "schoolchimes-student-images"
     static var uploadprofileBrowes = "schoolchimes-docs"
+    
     
     
     

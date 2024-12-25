@@ -640,6 +640,7 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
     func uploadAWS(image : UIImage){
     
         aswImg.removeAll()
+        
         let S3BucketName =  DefaultsKeys.bucketNameIndia
            
         let CognitoPoolID = DefaultsKeys.CognitoPoolID
@@ -744,6 +745,22 @@ class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableVi
             self.uploadAWS(image: images[currentImageCount])
         }
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     func textViewShouldEndEditing(_ textView: UITextView) -> Bool {
         contentTextViw.resignFirstResponder() // Dismiss keyboard

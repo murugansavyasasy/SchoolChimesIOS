@@ -407,9 +407,28 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
         
         
     }
-    func uploadAWS(image : UIImage){
-        showLoading()
-//        let S3BucketName = "school-master-documents"
+    
+    
+    
+    
+    
+    func uploadAWS(image: UIImage) {
+        let currentTimeStamp = NSString.init(format: "%ld", Date() as CVarArg)
+        let imageNameWithoutExtension = NSString.init(format: "vc_%@", currentTimeStamp)
+        let imageName = NSString.init(format: "%@%@", imageNameWithoutExtension, ".png")
+        let ext = imageName as String
+        let imageURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(ext)
+
+        if let data = image.jpegData(compressionQuality: 0.9) {
+            do {
+                try data.write(to: imageURL)
+            } catch {
+                print("Error writing image data to file: \(error)")
+                return
+            }
+        }
+        
+        
         
         
         var  bucket = ""
@@ -421,99 +440,104 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
             
             bucket = DefaultsKeys.UploadProfileBucket
         }
+                       
         
-        let S3BucketName = bucket
-        let CognitoPoolID = DefaultsKeys.CognitoPoolID
-        let Region = AWSRegionType.APSouth1
-        
-        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:Region,identityPoolId:CognitoPoolID)
-        let configuration = AWSServiceConfiguration(region:Region, credentialsProvider:credentialsProvider)
-        AWSServiceManager.default().defaultServiceConfiguration = configuration
-        
-        // url for image in the bundle
-        
-        let currentTimeStamp = NSString.init(format: "%ld",Date() as CVarArg)
-        let imageNameWithoutExtension = NSString.init(format: "vc_%@",currentTimeStamp)
-        let imageName = NSString.init(format: "%@%@",imageNameWithoutExtension, ".png")
-        
-        // signatureImageName = imageName as String
-        
-        let ext = imageName as String
-        //  let imageURL = Bundle.main.url(forResource: "lock_icon", withExtension: ext)!
-        
-        let fileName = imageNameWithoutExtension
-        let fileType = ".png"
-        
-        let imageURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(ext)
-        //            let image = UIImage(named: "test")
-        let data = image.jpegData(compressionQuality: 0.9)
-        do {
-            try data?.write(to: imageURL)
-        }
-        catch {}
-        
-        print("IMG",imageURL)
-
-        if browseFileType == 1 {
-
-            urlPath = imageURL
-            self.setPDFFile()
-            DispatchQueue.main.async {
-                self.hideLoading()
-            }
-        }else{
-
-
-
-            
-            
-            let uploadRequest = AWSS3TransferManagerUploadRequest()
-            uploadRequest?.body = imageURL
-            
-            if  browseFileType == 1{
+        AWSPreSignedURL.shared.fetchPresignedURL(
+            bucket: bucket,
+            fileName: imageURL,
+            SchoolId: instuteId,
+            fileType: "image"
+        ) { [self] result in
+            switch result {
+            case .success(let awsResponse):
+                print("Presigned URL fetched: \(awsResponse.data?.presignedUrl ?? "")")
+                let presignedURL = awsResponse.data?.presignedUrl
+                let Uploadimages = awsResponse.data?.fileUrl
               
-                uploadRequest?.key = "student-documents" + "/" + instuteId + "/" + ext
-            }else{
-                uploadRequest?.key = "student_photos" + "/" + instuteId + "/" + ext
-            }
-//            uploadRequest?.key =  ext
-            uploadRequest?.bucket = S3BucketName
-            uploadRequest?.contentType = ".jpg"
-            uploadRequest?.acl = .publicRead
-
-            // upload
-
-            let transferManager = AWSS3TransferManager.default()
-            transferManager.upload(uploadRequest!).continueWith { [self] (task) -> AnyObject? in
-
-                if let error = task.error {
-                    print("Upload failed : (\(error))")
-                }
-
-                if task.result != nil {
-                    let url = AWSS3.default().configuration.endpoint.url
-                    let publicURL = url?.appendingPathComponent((uploadRequest?.bucket!)!).appendingPathComponent((uploadRequest?.key!)!)
-                    if let absoluteString = publicURL?.absoluteString {
-                        print("Uploaded to:\(absoluteString)")
-
-
-
-                        self.profileImgeUrl = absoluteString
-
-
-
+                AWSUploadManager.shared.uploadImageToAWS(image: image, presignedURL: presignedURL!) { [self] result in
+                    switch result {
+                    case .success(let uploadedURL):
+                        print("Image uploaded successfully: \(uploadedURL)")
+                      
+                    case .failure(let error):
+                        print("Failed to upload image: \(error.localizedDescription)")
                     }
-                    DispatchQueue.main.async {
-                        self.hideLoading()
+        
+                    if browseFileType == 1 {
+
+                        urlPath = imageURL
+                        self.setPDFFile()
+                        DispatchQueue.main.async {
+                            self.hideLoading()
+                        }
+                    }else{
+
+
+                        self.profileImgeUrl = Uploadimages!
+
+                       
                     }
-                }
-                else {
-                    print("Unexpected empty result.")
-                }
-                return nil
+                    
+                    
+                    
+                          }
+           
+            case .failure(let error):
+                print("Error fetching presigned URL: \(error.localizedDescription)")
             }
         }
+        
+   
+       
     }
+    
+    
+    
+    
+    
+    
+    
+    
+//    func uploadAWS(image : UIImage){
+//        showLoading()
+////        let S3BucketName = "school-master-documents"
+//        
+//        
+//        var  bucket = ""
+//        if browseFileType == 1 {
+//            
+//            bucket = DefaultsKeys.uploadprofileBrowes
+//            
+//        }else{
+//            
+//            bucket = DefaultsKeys.UploadProfileBucket
+//        }
+//        
+//        
+//        
+//        
+//       
+//
+//        if browseFileType == 1 {
+//
+//            urlPath = imageURL
+//            self.setPDFFile()
+//            DispatchQueue.main.async {
+//                self.hideLoading()
+//            }
+//        }else{
+//
+//
+//                        self.profileImgeUrl = absoluteString
+//
+//           
+//        }
+//    }
+//    
+//    
+//    
+//    
+//    
     
     func addBrowseFile(strPath : String){
         
@@ -535,76 +559,65 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
     
     
   
-    
     func uploadPDFFileToAWS(pdfData : NSData){
-        showLoading()
-        var  bucket = ""
-        if browseFileType == 1 {
-            
-            bucket = DefaultsKeys.uploadprofileBrowes
-            
-        }else{
-            
-            bucket = DefaultsKeys.UploadProfileBucket
-        }
-        let S3BucketName = bucket
-        let CognitoPoolID = DefaultsKeys.CognitoPoolID
-        let Region = AWSRegionType.APSouth1
-        
-        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:Region,identityPoolId:CognitoPoolID)
-        let configuration = AWSServiceConfiguration(region:Region, credentialsProvider:credentialsProvider)
-        AWSServiceManager.default().defaultServiceConfiguration = configuration
-        
-        // url for image in the bundle
-        
+//        self.showLoading()
         let currentTimeStamp = NSString.init(format: "%ld",Date() as CVarArg)
-        let imageNameWithoutExtension = NSString.init(format: "School_Upload_Doc_%@",currentTimeStamp)
+        let imageNameWithoutExtension = NSString.init(format: "vc_%@",currentTimeStamp)
         let imageName = NSString.init(format: "%@%@",imageNameWithoutExtension, ".pdf")
-        
-        // signatureImageName = imageName as String
-        
         let ext = imageName as String
-        //  let imageURL = Bundle.main.url(forResource: "lock_icon", withExtension: ext)!
-        
         let fileName = imageNameWithoutExtension
         let fileType = ".pdf"
-        
         let imageURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(ext)
-        
         do {
             try pdfData.write(to: imageURL)
         }
         catch {}
-        
         print(imageURL)
+       
+      
         
-        let uploadRequest = AWSS3TransferManagerUploadRequest()
-        uploadRequest?.body = imageURL
-        uploadRequest?.key = "student-documents" + "/" + instuteId + "/" + ext
-//        uploadRequest?.key =  ext
-        uploadRequest?.bucket = S3BucketName
-        uploadRequest?.contentType =  ext
-        uploadRequest?.acl = .publicRead
         
-        // upload
-        
-        let transferManager = AWSS3TransferManager.default()
-        transferManager.upload(uploadRequest!).continueWith { [self] (task) -> AnyObject? in
+        var bucketName = ""
+       
+        if browseFileType == 1 {
             
-            if let error = task.error {
-                print("Upload failed : (\(error))")
-            }
+            bucketName = DefaultsKeys.uploadprofileBrowes
             
-            if task.result != nil {
-                let url = AWSS3.default().configuration.endpoint.url
-                let publicURL = url?.appendingPathComponent((uploadRequest?.bucket!)!).appendingPathComponent((uploadRequest?.key!)!)
-                if let absoluteString = publicURL?.absoluteString {
-                    print("Uploaded to:\(absoluteString)")
+        }else{
+            
+            bucketName = DefaultsKeys.UploadProfileBucket
+        }
+                       
+        
+        AWSPreSignedURL.shared.fetchPresignedURL(
+            bucket: bucketName,
+            fileName: imageURL,
+            SchoolId: instuteId,
+            fileType: "application"
+        ) { [self] result in
+            switch result {
+            case .success(let awsResponse):
+                print("Presigned URL fetched: \(awsResponse.data?.presignedUrl ?? "")")
+                let presignedURL = awsResponse.data?.presignedUrl
+                let UploadPDf = awsResponse.data?.fileUrl
+              
+                AWSUploadManager.shared.uploadPDFAWSUsingPresignedURL(pdfData: pdfData as Data, presignedURL:presignedURL! ){ [self] result in
+                    
+                    switch result {
+                    case .success(let uploadedURL):
+                        print("Image uploaded successfully: \(uploadedURL)")
+                      
+                    case .failure(let error):
+                        print("Failed to upload image: \(error.localizedDescription)")
+                    }
+        
+                   
+                    
                     let imageDict = NSMutableDictionary()
-                    imageDict["FileName"] = absoluteString
+                    imageDict["FileName"] = UploadPDf
                     
 
-                        self.selectDict["documentPath"] = absoluteString
+                        self.selectDict["documentPath"] = UploadPDf
                         self.selectDict["documentName"] = fileName
 
 
@@ -618,14 +631,17 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
                         self.hideLoading()
                         self.uploadTableView.reloadData()
                     }
-                }
+                          }
+           
+            case .failure(let error):
+                print("Error fetching presigned URL: \(error.localizedDescription)")
             }
-            else {
-                print("Unexpected empty result.")
-            }
-            return nil
         }
+        
     }
+    
+    
+   
     
     func callAPIsubmitFiles(){
         showLoading()
