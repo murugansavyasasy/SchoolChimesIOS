@@ -1699,20 +1699,27 @@ class StaffAddNewClassVC: UIViewController,Apidelegate,UIPickerViewDelegate,UIPi
         }
         
         
+        
+        let currentDate = AWSPreSignedURL.shared.getCurrentDateString()
         var bucketName = ""
-        if countryCoded == "1" {
-                          
-        bucketName = DefaultsKeys.bucketNameIndia
-        }else  {
-        bucketName = DefaultsKeys.bucketNameBangkok
+        var bucketPath = ""
+        if countryCoded == "4" {
+            bucketName = DefaultsKeys.THAI_SCHOOL_CHIMES_COMMUNICATION
+            bucketPath = currentDate+"/"+String(SchoolId)
+        }
+        else
+        {
+            bucketName = DefaultsKeys.SCHOOL_CHIMES_COMMUNICATION
+            bucketPath = currentDate+"/"+String(SchoolId)
+
         }
                        
         
         AWSPreSignedURL.shared.fetchPresignedURL(
             bucket: bucketName,
             fileName: imageURL,
-            SchoolId: SchoolId,
-            fileType: "image"
+            bucketPath: bucketPath,
+            fileType: "image/png"
         ) { [self] result in
             switch result {
             case .success(let awsResponse):
@@ -1832,21 +1839,27 @@ class StaffAddNewClassVC: UIViewController,Apidelegate,UIPickerViewDelegate,UIPi
       
         
         
+        
+        let currentDate = AWSPreSignedURL.shared.getCurrentDateString()
         var bucketName = ""
-        print("countryCoded",countryCoded)
-        if countryCoded == "1" {
-                          
-        bucketName = DefaultsKeys.bucketNameIndia
-        }else  {
-        bucketName = DefaultsKeys.bucketNameBangkok
+        var bucketPath = ""
+        if countryCoded == "4" {
+            bucketName = DefaultsKeys.THAI_SCHOOL_CHIMES_COMMUNICATION
+            bucketPath = currentDate+"/"+String(SchoolId)
+        }
+        else
+        {
+            bucketName = DefaultsKeys.SCHOOL_CHIMES_COMMUNICATION
+            bucketPath = currentDate+"/"+String(SchoolId)
+
         }
                        
         
         AWSPreSignedURL.shared.fetchPresignedURL(
             bucket: bucketName,
             fileName: imageURL,
-            SchoolId: SchoolId,
-            fileType: "application"
+            bucketPath: bucketPath,
+            fileType: "application/pdf"
         ) { [self] result in
             switch result {
             case .success(let awsResponse):
@@ -1904,359 +1917,98 @@ class StaffAddNewClassVC: UIViewController,Apidelegate,UIPickerViewDelegate,UIPi
     }
     
     
+ 
     
-    
-    
-    
-    
-    
-    
-//    
-//    
-//    func getImageURL(images : [UIImage]){
-//        showLoading()
-//        self.originalImagesArray = images
-//        self.totalImageCount = images.count
-//        if currentImageCount < images.count{
-//            self.uploadAWS(image: images[currentImageCount])
-//        }
-//    }
-//    
-//    func uploadAWS(image : UIImage){
-//        
-//        self.showLoading()
-//        
-//        var bucketName = ""
-//        print("countryCoded",countryCoded)
-//        if countryCoded == "1" {
-//           
-//            bucketName = DefaultsKeys.bucketNameIndia
-//        }else  {
-//            bucketName = DefaultsKeys.bucketNameBangkok
-//        }
-////        let S3BucketName = "schoolchimes-india"
-//        let CognitoPoolID = DefaultsKeys.CognitoPoolID
-//        let Region = AWSRegionType.APSouth1
-//        
-//        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:Region,identityPoolId:CognitoPoolID)
-//        let configuration = AWSServiceConfiguration(region:Region, credentialsProvider:credentialsProvider)
-//        AWSServiceManager.default().defaultServiceConfiguration = configuration
-//        
-//        
-//        
-//        let currentTimeStamp = NSString.init(format: "%ld",Date() as CVarArg)
-//        let imageNameWithoutExtension = NSString.init(format: "vc_%@",currentTimeStamp)
-//        let imageName = NSString.init(format: "%@%@",imageNameWithoutExtension, ".png")
-//        
-//        let ext = imageName as String
-//        
-//        let fileName = imageNameWithoutExtension
-//        let fileType = ".png"
-//        
-//        let imageURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(ext)
-//        
-//        let data = image.jpegData(compressionQuality: 0.9)
-//        do {
-//            try data?.write(to: imageURL)
-//        }
-//        catch {}
-//        
-//        print("awsimageURL",imageURL)
-//        
-//        let dateFormatter = DateFormatter()
-//        
-//        dateFormatter.dateFormat = "yyyy-MM-dd"
-//        
-//        let  currentDate =   dateFormatter.string(from: Date())
-//        
-//        print("currentDate",currentDate)
-//        let uploadRequest = AWSS3TransferManagerUploadRequest()
-//        uploadRequest?.body = imageURL
-//        uploadRequest?.key = "communication" + "/" + currentDate +  "/" + ext
-//        uploadRequest?.bucket = bucketName
-//        uploadRequest?.contentType = "image/" + ext
-//        uploadRequest?.acl = .publicRead
-//        
-//        
-//        let transferManager = AWSS3TransferManager.default()
-//        transferManager.upload(uploadRequest!).continueWith { [self] (task) -> AnyObject? in
-//            
-//            if let error = task.error {
-//                self.hideLoading()
-//                print("Upload failed : (\(error))")
-//            }
-//            var imageFilePath = NSMutableArray()
-//            if task.result != nil {
-//                let url = AWSS3.default().configuration.endpoint.url
-//                let publicURL = url?.appendingPathComponent((uploadRequest?.bucket!)!).appendingPathComponent((uploadRequest?.key!)!)
-//                if let absoluteString = publicURL?.absoluteString {
-//                    print("Uploaded to:\(absoluteString)")
-//                    let imageDicthome = NSMutableDictionary()
-//                    imageDicthome["path"] = absoluteString
-//                    imageDicthome["type"] = "PDF"
-//                    let imageDict = NSMutableDictionary()
-//                    var emptyDictionary = [String: String]()
-//                    if HomeWorkPdf == "Image" {
-//                        imageDict["path"] = absoluteString
-//                        imageDict["type"] = "IMAGE"
-//                        
-//                        yourArray1["path"] = absoluteString
-//                        yourArray1["type"] = "IMAGE"
-//                        FilePathArrayPath = absoluteString
-//                        FilePathArrayType = "IMAGE"
-//                    }else{
-//                        
-//                        imageDict["FileName"] = absoluteString
-//                    }
-//                    
-//                    
-//                    imageFilePath.add(imageDicthome)
-//                    
-//                    
-//                    
-//                    self.imageUrlArray.add(imageDict)
-//                    
-//                    
-//                    self.currentImageCount = self.currentImageCount + 1
-//                    if self.currentImageCount < self.totalImageCount{
-//                        DispatchQueue.main.async {
-//                            self.getImageURL(images: self.originalImagesArray)
-//                        }
-//                    }else{
-//                        self.convertedImagesUrlArray = self.imageUrlArray
-//                        
-//                        filepathArray.removeAllObjects()
-//                        if HomeWorkType == "1" {
-//                            
-//                            
-//                            filepathArray.add(imageUrlArray)
-//                            print("SelectedSectionCodeArray12rr : ",imageUrlArray)
-//                            print("yourArray1 : ",yourArray1)
-//                            
-//                            SendTextHomeWorkApi()
-//                            print("convertedImagesUrlArray",convertedImagesUrlArray)
-//                            print("HomeWorkPdfType",HomeWorkPdf)
-//                        }else{
-//                            
-//                            self.SendImageAssignmentApi()
-//                        }
-//                    }
-//                }
-//            }
-//            
-//            return nil
-//        }
-//    }
-//    
-//    
-//    func uploadPDFFileToAWS(pdfData : NSData){
-//        self.showLoading()
-//        var bucketName = ""
-//        if countryCoded == "1" {
-//               
-//                bucketName = DefaultsKeys.bucketNameIndia
-//            }else  {
-//                 bucketName = DefaultsKeys.bucketNameBangkok
-//            }
-//        
-//        let S3BucketName = bucketName
-//                   
-//        let CognitoPoolID = DefaultsKeys.CognitoPoolID
-//        let Region = AWSRegionType.APSouth1
-//        
-//        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:Region,identityPoolId:CognitoPoolID)
-//        let configuration = AWSServiceConfiguration(region:Region, credentialsProvider:credentialsProvider)
-//        AWSServiceManager.default().defaultServiceConfiguration = configuration
-//        
-//        let currentTimeStamp = Date().currentTimeMillis()
-//        let imageNameWithoutExtension = "VC-\(currentTimeStamp)"
-//        let imageName = "\(imageNameWithoutExtension).pdf"
-//        
-//        let ext = imageName as String
-//        
-//        let fileName = imageNameWithoutExtension
-//        var fileTypeAws = ".pdf"
-//        
-//        let imageURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(ext)
-//        
-//        do {
-//            try pdfData.write(to: imageURL)
-//        }
-//        catch {}
-//        
-//        print(imageURL)
-//        let dateFormatter = DateFormatter()
-//        
-//        dateFormatter.dateFormat = "yyyy-MM-dd"
-//        
-//        let  currentDate =   dateFormatter.string(from: Date())
-//        
-//        
-//        let uploadRequest = AWSS3TransferManagerUploadRequest()
-//        uploadRequest?.body = imageURL
-//        uploadRequest?.key = "communication" + "/" + currentDate +  "/" + ext
-//        uploadRequest?.bucket = bucketName
-//        uploadRequest?.contentType = "application/pdf"
-//       uploadRequest?.acl = .publicRead
-//        let expression = AWSS3TransferUtilityUploadExpression()
-//        expression.progressBlock = { (task, progress) in
-//            DispatchQueue.main.async(execute: {
-//            })
-//        }
-//        
-//        var completionHandler: AWSS3TransferUtilityUploadCompletionHandlerBlock?
-//        completionHandler = { (task, error) -> Void in
-//            DispatchQueue.main.async(execute: {
-//                
-//            })
-//        }
-//        
-//        let transferUtility = AWSS3TransferUtility.default()
-//        transferUtility.uploadData(pdfData as Data,
-//                                   bucket: S3BucketName,
-//                                   key: ext,
-//                                   contentType: "application/pdf" ,
-//                                   expression: expression, completionHandler: completionHandler).continueWith { [self] (task) -> Any? in
-//            if let error = task.error {
-//                print("Error : \(error.localizedDescription)")
-//            }
-//            
-//            if task.result != nil {
-//                let url = AWSS3.default().configuration.endpoint.url
-//                print("task URL : ",url)
-//                
-//                let publicURL = url?.appendingPathComponent(S3BucketName).appendingPathComponent(ext)
-//                if let absoluteString = publicURL?.absoluteString {
-//                    
-//                    print("Image URL : ",absoluteString)
-//                    
-//                    print("HomeWorkType",HomeWorkType)
-//                    if HomeWorkType == "1" {
-//                        filepathArray.removeAllObjects()
-//                        var pdftype : String!
-//                        pdftype = "PDF"
-//                        let StudentDic:NSDictionary = ["path" : absoluteString,"type" : pdftype ]
-//                        filepathArray.add(StudentDic)
-//                        FilePathArrayPath = absoluteString
-//                        FilePathArrayType = pdftype
-//                        
-//                        self.imageUrlArray.add(StudentDic)
-//                        selectfilepathArray.append(filepathArray)
-//                        
-//                        print("SelectedSectionCodeArray12rr : ",StudentDic)
-//                        
-//                        SendTextHomeWorkApi()
-//                    }else{
-//                        
-//                        
-//                        
-//                        
-//                        let imageDict = NSMutableDictionary()
-//                        imageDict["FileName"] = absoluteString
-//                        self.imageUrlArray.add(imageDict)
-//                        self.convertedImagesUrlArray = self.imageUrlArray
-//                        self.SendPdfAssignmentApi()
-//                    }
-//                }
-//            }else {
-//                self.hideLoading()
-//                print("Unexpected empty result.")
-//            }
-//            
-//            return nil
-//        }
-//    }
-    
-    
-    func multipartAudio() {
-        
-        
-        
-        
-        var urlString : String!
-        urlString  = voiceURl.absoluteString
-        print("urlStringurlString",urlString!)
-        
-        
-        let audioUrl = URL(fileURLWithPath: urlString)
-        AWSS3Manager.shared.uploadAudio(audioUrl: audioUrl, progress: { [weak self] (progress) in
-            
-            guard let strongSelf = self else { return }
-            
-        }) { [weak self] (uploadedFileUrl, error) in
-            
-            guard let strongSelf = self else { return }
-            if let finalPath = uploadedFileUrl as? String {
-                print("finalPath",finalPath)
-            } else {
-                print("\(String(describing: error?.localizedDescription))")
-            }
-        }
-        
-        
-        
-        
-    }
-    
+
     func Awws3Voice(URLPath : URL) {
         
         
         
         let audioUrl = URL(fileURLWithPath: URLPath.path)
         
-        AWSS3Manager.shared.uploadAudio(audioUrl: audioUrl, progress: { [weak self] (progress) in
-            
-            
-            
-            print("audioUrl!",audioUrl)
-            
-            guard let strongSelf = self else { return }
-            
-            
-            
-        }) { [weak self] (uploadedFileUrl, error) in
-            
-            
-            
-            guard let strongSelf = self else { return }
-            
-            if let finalPath = uploadedFileUrl as? String {
-                
-                self!.voiceURl = URL(string: finalPath)
-                print("finalPath123!",finalPath)
-                var pdftype : String!
-                pdftype = "VOICE"
-                
-                self!.filepathArray.removeAllObjects()
-                let imageDict = NSMutableDictionary()
-                
-                imageDict["path"] = self!.voiceURl
-                
-                
-                
-                imageDict["type"] = "VOICE"
-                
-                
-                self!.voicePathUrl = self!.voiceURl.absoluteString
-                self!.voiceType = "VOICE"
-                
-                print("voiceURl.path",self!.voiceURl.absoluteString)
-                
-                
-                
-                self!.filepathArray.add(imageDict)
-                self!.imageUrlArray.add(imageDict)
-                self!.SendTextHomeWorkApi()
-                
-                
-            } else {
-                
-                print("\(String(describing: error?.localizedDescription))")
-                
-            }
-            
+      
+        
+        
+        let currentDate = AWSPreSignedURL.shared.getCurrentDateString()
+        var bucketName = ""
+        var bucketPath = ""
+        if countryCoded == "4" {
+            bucketName = DefaultsKeys.THAI_SCHOOL_CHIMES_COMMUNICATION
+            bucketPath = currentDate+"/"+String(SchoolId)
+        }
+        else
+        {
+            bucketName = DefaultsKeys.SCHOOL_CHIMES_COMMUNICATION
+            bucketPath = currentDate+"/"+String(SchoolId)
+
         }
         
+        
+     
+       
+        
+        
+        AWSPreSignedURL.shared.fetchPresignedURL(
+            bucket: bucketName,
+            fileName: URLPath,
+            bucketPath: bucketPath,
+            fileType: "application/pdf"
+        ) { [self] result in
+            switch result {
+            case .success(let awsResponse):
+                print("Presigned URL fetched: \(awsResponse.data?.presignedUrl ?? "")")
+                let presignedURL = awsResponse.data?.presignedUrl
+                let voice = awsResponse.data?.fileUrl
+                
+                
+                
+                
+                AWSUploadManager.shared.uploadVoiceToAWS(audioFileURL: URLPath, presignedURL: presignedURL!) { result in
+                    switch result {
+                    case .success(let url):
+                        print("File uploaded successfully to: \(url)")
+                    case .failure(let error):
+                        print("Failed to upload file:", error.localizedDescription)
+                    }
+                    
+                    self.voiceURl = URL(string: voice!)
+                                    print("finalPath123!",voice)
+                                    var pdftype : String!
+                                    pdftype = "VOICE"
+                                    
+                    self.filepathArray.removeAllObjects()
+                                    let imageDict = NSMutableDictionary()
+                                    
+                    imageDict["path"] = self.voiceURl
+                                    
+                                    
+                                    
+                                    imageDict["type"] = "VOICE"
+                                    
+                                    
+                    self.voicePathUrl = self.voiceURl.absoluteString
+                    self.voiceType = "VOICE"
+                                    
+                    print("voiceURl.path",self.voiceURl.absoluteString)
+                                    
+                                    
+                                    
+                    self.filepathArray.add(imageDict)
+                                    self.imageUrlArray.add(imageDict)
+                                    self.SendTextHomeWorkApi()
+                    
+                    
+                }
+                
+                
+                
+                
+            case .failure(_):
+                ""
+            }
+            
+            
+        }
         
     }
     

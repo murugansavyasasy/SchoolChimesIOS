@@ -22,23 +22,35 @@ class AWSUploadManager {
 
         var request = URLRequest(url: url)
         request.httpMethod = "PUT"
-        request.setValue("image/jpeg", forHTTPHeaderField: "Content-Type")
+        request.setValue("image/png", forHTTPHeaderField: "Content-Type")
 
+        
+        
         let uploadTask = URLSession.shared.uploadTask(with: request, from: imageData) { _, response, error in
-            if let error = error {
-                completion(.failure(error))
-                return
+                if let httpResponse = response as? HTTPURLResponse {
+                    print("Status Code:", httpResponse.statusCode)
+
+                    if httpResponse.statusCode == 200 {
+                        // Successful upload
+                        completion(.success(presignedURL))
+                    } else {
+                        // Error with specific status code
+                        let errorDescription = "Failed with status code: \(httpResponse.statusCode)"
+                        let uploadError = NSError(domain: "UploadError", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: errorDescription])
+                        completion(.failure(uploadError))
+                    }
+                } else {
+                    print("Failed to retrieve HTTP response.")
+                }
+
+                // Log any general error
+                if let error = error {
+                    print("Error:", error.localizedDescription)
+                    completion(.failure(error))
+                }
             }
 
-            if let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 {
-                completion(.success(presignedURL)) // Returning the presigned URL as confirmation
-            } else {
-                let uploadError = NSError(domain: "UploadError", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed with an unexpected response"])
-                completion(.failure(uploadError))
-            }
-        }
-
-        uploadTask.resume()
+            uploadTask.resume()
     }
     
     
@@ -73,6 +85,55 @@ class AWSUploadManager {
         // Start the upload task
         uploadTask.resume()
     }
+    
+    
+    
+    func uploadVoiceToAWS(audioFileURL: URL, presignedURL: String, completion: @escaping (Result<String, Error>) -> Void) {
+        do {
+            // Read the audio file data
+            let audioData = try Data(contentsOf: audioFileURL)
+            
+            // Create URL from the presigned URL string
+            guard let url = URL(string: presignedURL) else {
+                completion(.failure(NSError(domain: "InvalidInput", code: 400, userInfo: [NSLocalizedDescriptionKey: "Invalid URL"])))
+                return
+            }
+
+            var request = URLRequest(url: url)
+            request.httpMethod = "PUT"
+            request.setValue("audio/mpeg", forHTTPHeaderField: "Content-Type") // Adjust MIME type if necessary
+
+            let uploadTask = URLSession.shared.uploadTask(with: request, from: audioData) { _, response, error in
+                if let httpResponse = response as? HTTPURLResponse {
+                    print("Status Code:", httpResponse.statusCode)
+
+                    if httpResponse.statusCode == 200 {
+                        // Successful upload
+                        completion(.success(presignedURL))
+                    } else {
+                        // Error with specific status code
+                        let errorDescription = "Failed with status code: \(httpResponse.statusCode)"
+                        let uploadError = NSError(domain: "UploadError", code: httpResponse.statusCode, userInfo: [NSLocalizedDescriptionKey: errorDescription])
+                        completion(.failure(uploadError))
+                    }
+                } else {
+                    print("Failed to retrieve HTTP response.")
+                }
+
+                // Log any general error
+                if let error = error {
+                    print("Error:", error.localizedDescription)
+                    completion(.failure(error))
+                }
+            }
+
+            uploadTask.resume()
+        } catch {
+            print("Failed to read audio file data:", error.localizedDescription)
+            completion(.failure(error))
+        }
+    }
+
 }
 
 
@@ -82,13 +143,17 @@ class AWSPreSignedURL {
 
     private init() {} // Prevent external initialization
 
-    func fetchPresignedURL(bucket: String, fileName: URL, SchoolId: String, fileType: String, completion: @escaping (Result<AwsResps, Error>) -> Void) {
+    func fetchPresignedURL(bucket: String, fileName: URL, bucketPath: String, fileType: String, completion: @escaping (Result<AwsResps, Error>) -> Void) {
         
+
+        let fname = fileName.lastPathComponent
+        print("fname \(fname)")
+    
         let currentDate = getCurrentDateString()
         let param: [String: Any] = [
             "bucket": bucket,
-            "fileName": fileName.absoluteString,
-            "bucketPath": currentDate + "/" + SchoolId,
+            "fileName": fname,
+            "bucketPath": bucketPath,
             "fileType": fileType
         ]
 

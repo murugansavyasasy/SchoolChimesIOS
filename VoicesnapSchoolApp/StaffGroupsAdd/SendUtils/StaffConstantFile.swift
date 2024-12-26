@@ -71,18 +71,18 @@ struct DefaultsKeys {
     
 //    schoolchimes-communication
     
+    static var SCHOOL_CHIMES_LMS = "schoolchimes-lms"
+    static var SCHOOL_DOCS = "schoolchimes-schooldocs"
+    static var SCHOOL_PHOTOS = "schoolchimes-studentphotos"
+    static var SCHOOL_CHIMES_COMMUNICATION = "schoolchimes-communication"
+
+    static var   THAI_SCHOOL_CHIMES_LMS = "thai-schoolchimes-lms"
+    static var  THAI_SCHOOL_DOCS = "thai-schoolchimes-schooldocs"
+    static var   THAI_SCHOOL_PHOTOS = "thai-schoolchimes-studentphotos"
+    static var  THAI_SCHOOL_CHIMES_COMMUNICATION = "thai-schoolchimes-communication"
     
-    static var bucketNameIndia = "schoolchimes-communication"
-    
-    static var bucketNameBangkok = "schoolchimes-files-bangkok"
-    
-    static var UploadProfileBucket = "schoolchimes-student-images"
-    static var uploadprofileBrowes = "schoolchimes-docs"
     
     
-    
-    
-    static var CognitoPoolID = "ap-south-1:a8650d2e-79d6-4668-85db-110e9917583f"
     static var bookingSlotId : [Int] = []
     static var date : [String] = []
     static var timesarr : [String] = []

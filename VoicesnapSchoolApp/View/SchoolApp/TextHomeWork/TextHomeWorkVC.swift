@@ -1551,47 +1551,47 @@ class TextHomeWorkVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UI
         
     }
     
-    func Awws3Voice(URLPath : URL) {
-        
-        
-        
-        let audioUrl = URL(fileURLWithPath: URLPath.path)
-        
-        AWSS3Manager.shared.uploadAudio(audioUrl: audioUrl, progress: { [weak self] (progress) in
-                
-            
-            
-            
-            
-            
-            
-            print("audioUrl!",audioUrl)
-            
-            guard let strongSelf = self else { return }
-            
-            
-            
-        }) { [weak self] (uploadedFileUrl, error) in
-            
-            
-            guard let strongSelf = self else { return }
-            
-            if let finalPath = uploadedFileUrl as? String {
-                
-                self!.urlData = URL(string: finalPath)
-                print("finalPath123!",finalPath)
-                
-                
-            } else {
-                
-                print("\(String(describing: error?.localizedDescription))")
-                
-            }
-            
-        }
-        
-        
-    }
+//    func Awws3Voice(URLPath : URL) {
+//        
+//        
+//        
+//        let audioUrl = URL(fileURLWithPath: URLPath.path)
+//        
+//        AWSS3Manager.shared.uploadAudio(audioUrl: audioUrl, progress: { [weak self] (progress) in
+//                
+//            
+//            
+//            
+//            
+//            
+//            
+//            print("audioUrl!",audioUrl)
+//            
+//            guard let strongSelf = self else { return }
+//            
+//            
+//            
+//        }) { [weak self] (uploadedFileUrl, error) in
+//            
+//            
+//            guard let strongSelf = self else { return }
+//            
+//            if let finalPath = uploadedFileUrl as? String {
+//                
+//                self!.urlData = URL(string: finalPath)
+//                print("finalPath123!",finalPath)
+//                
+//                
+//            } else {
+//                
+//                print("\(String(describing: error?.localizedDescription))")
+//                
+//            }
+//            
+//        }
+//        
+//        
+//    }
     func directoryURL() -> NSURL? {
         print("urlData12",urlData)
         let fileManager = FileManager.default
@@ -1716,47 +1716,7 @@ class TextHomeWorkVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UI
         
         let audioUrl = URL(fileURLWithPath: filePath!.path)
         
-        AWSS3Manager.shared.uploadAudio(audioUrl: audioUrl, progress: { [weak self] (progress) in
-            
-            
-            
-            
-            
-            
-            
-            print("audioUrl!",audioUrl)
-            
-            guard let strongSelf = self else { return }
-            
-            
-            
-        }) { [weak self] (uploadedFileUrl, error) in
-            
-            
-            
-            guard let strongSelf = self else { return }
-            
-            if let finalPath = uploadedFileUrl as? String {
-                
-                self!.urlData = URL(string: finalPath)
-                print("finalPath123!",finalPath)
-                
-                
-                
-            } else {
-                
-                print("\(String(describing: error?.localizedDescription))")
-                
-            }
-            
-        }
-        
-        
-        
-        
-        
-        
-        
+        urlData = filePath
         return filePath!
         
     }
@@ -1882,6 +1842,8 @@ class TextHomeWorkVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UI
         playbackSliderValueChanged(playbackSlider: AudioSlider)
         
     }
+    
+    
     
     
     

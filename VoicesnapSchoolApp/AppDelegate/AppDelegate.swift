@@ -162,7 +162,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate,UNUserNo
         }
         
         
-        initializeS3()
+       
         
         let deviceid = UIDevice.current.identifierForVendor?.uuidString
         print("deviceiddeviceid",deviceid)
@@ -507,15 +507,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate,UNUserNo
         
     }
     
-    func initializeS3() {
-        let poolId = DefaultsKeys.CognitoPoolID // 3-1
-        print("poolIdpoolIdpoolId",poolId)
-        let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .APSouth1, identityPoolId: poolId)//3-2
-        let configuration = AWSServiceConfiguration(region: .APSouth1, credentialsProvider: credentialsProvider)
-        AWSServiceManager.default().defaultServiceConfiguration = configuration
-        
-        
-    }
+  
     
     
     func navigateToViewController(with wavURL: URL,userInfo:[AnyHashable : Any]) {

@@ -1502,20 +1502,27 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
         }
         
         
+        
+        let currentDate = AWSPreSignedURL.shared.getCurrentDateString()
         var bucketName = ""
-        if countryCoded == "1" {
-                          
-        bucketName = DefaultsKeys.bucketNameIndia
-        }else  {
-        bucketName = DefaultsKeys.bucketNameBangkok
+        var bucketPath = ""
+        if countryCoded == "4" {
+            bucketName = DefaultsKeys.THAI_SCHOOL_CHIMES_COMMUNICATION
+            bucketPath = currentDate+"/"+String(SchoolId)
+        }
+        else
+        {
+            bucketName = DefaultsKeys.SCHOOL_CHIMES_COMMUNICATION
+            bucketPath = currentDate+"/"+String(SchoolId)
+
         }
                        
         
         AWSPreSignedURL.shared.fetchPresignedURL(
             bucket: bucketName,
             fileName: imageURL,
-            SchoolId: SchoolId,
-            fileType: "image"
+            bucketPath: bucketPath,
+            fileType: "image/png"
         ) { [self] result in
             switch result {
             case .success(let awsResponse):
@@ -1584,21 +1591,27 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
       
         
         
+        
+        let currentDate = AWSPreSignedURL.shared.getCurrentDateString()
         var bucketName = ""
-        print("countryCoded",countryCoded)
-        if countryCoded == "1" {
-                          
-        bucketName = DefaultsKeys.bucketNameIndia
-        }else  {
-        bucketName = DefaultsKeys.bucketNameBangkok
+        var bucketPath = ""
+        if countryCoded == "4" {
+            bucketName = DefaultsKeys.THAI_SCHOOL_CHIMES_COMMUNICATION
+            bucketPath = currentDate+"/"+String(SchoolId)
+        }
+        else
+        {
+            bucketName = DefaultsKeys.SCHOOL_CHIMES_COMMUNICATION
+            bucketPath = currentDate+"/"+String(SchoolId)
+
         }
                        
         
         AWSPreSignedURL.shared.fetchPresignedURL(
             bucket: bucketName,
             fileName: imageURL,
-            SchoolId: SchoolId,
-            fileType: "application"
+            bucketPath: bucketPath,
+            fileType: "application/pdf"
         ) { [self] result in
             switch result {
             case .success(let awsResponse):

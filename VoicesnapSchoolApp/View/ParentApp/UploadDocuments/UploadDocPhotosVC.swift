@@ -64,9 +64,10 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
     
     var browseFileType = 0
     var instuteId : String!
+    var countryCoded : String!
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        countryCoded =  UserDefaults.standard.object(forKey: COUNTRY_ID) as! String
         let strProfile = "\(appDelegate.strUploadPhotoTitle)"
         
         self.title = strProfile
@@ -140,7 +141,7 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
         }else if ((action.title!.elementsEqual("Files"))){
 
 
-
+            browseFileType = 1
             FromPDF()
 
         }
@@ -151,6 +152,7 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
     }
 
     func fileSelection(){
+        
         
         if(UIDevice.current.userInterfaceIdiom == .pad){
             let alertController = UIAlertController(title: LanguageDict["upload_image"] as? String, message: LanguageDict["choose_option"] as? String, preferredStyle: .alert)
@@ -282,6 +284,7 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
         let chosenImage = info[UIImagePickerController.InfoKey.editedImage] as! UIImage
         
         if browseFileType == 1 {
@@ -397,7 +400,7 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
             
             let urlString: String = urlPath.absoluteString
             self.addBrowseFile(strPath: urlString)
-            print("urlStringurlString",urlString)
+            print("urlStringurlStringsdzxfghj",urlString)
             print("addBrowseFile11",addBrowseFile)
             self.uploadTableView.reloadData()
 
@@ -429,24 +432,44 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
         }
         
         
+        print("browseFileType",browseFileType)
         
         
-        var  bucket = ""
+        var bucketName = ""
+        var bucketPath = ""
         if browseFileType == 1 {
             
-            bucket = DefaultsKeys.uploadprofileBrowes
+            if countryCoded == "4" {
+                bucketName = DefaultsKeys.THAI_SCHOOL_DOCS
+                bucketPath = String(instuteId)
+            }
+            else
+            {
+                bucketName = DefaultsKeys.SCHOOL_DOCS
+                bucketPath = String(instuteId)
+
+            }
             
         }else{
             
-            bucket = DefaultsKeys.UploadProfileBucket
+            if countryCoded == "4" {
+                bucketName = DefaultsKeys.THAI_SCHOOL_PHOTOS
+                bucketPath = String(instuteId)+"/"+"profile"
+            }
+            else
+            {
+                bucketName = DefaultsKeys.SCHOOL_PHOTOS
+                bucketPath = String(instuteId)+"/"+"profile"
+
+            }
         }
                        
         
         AWSPreSignedURL.shared.fetchPresignedURL(
-            bucket: bucket,
+            bucket: bucketName,
             fileName: imageURL,
-            SchoolId: instuteId,
-            fileType: "image"
+            bucketPath: bucketPath,
+            fileType: "image/png"
         ) { [self] result in
             switch result {
             case .success(let awsResponse):
@@ -461,6 +484,7 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
                       
                     case .failure(let error):
                         print("Failed to upload image: \(error.localizedDescription)")
+                      
                     }
         
                     if browseFileType == 1 {
@@ -491,54 +515,7 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
        
     }
     
-    
-    
-    
-    
-    
-    
-    
-//    func uploadAWS(image : UIImage){
-//        showLoading()
-////        let S3BucketName = "school-master-documents"
-//        
-//        
-//        var  bucket = ""
-//        if browseFileType == 1 {
-//            
-//            bucket = DefaultsKeys.uploadprofileBrowes
-//            
-//        }else{
-//            
-//            bucket = DefaultsKeys.UploadProfileBucket
-//        }
-//        
-//        
-//        
-//        
-//       
-//
-//        if browseFileType == 1 {
-//
-//            urlPath = imageURL
-//            self.setPDFFile()
-//            DispatchQueue.main.async {
-//                self.hideLoading()
-//            }
-//        }else{
-//
-//
-//                        self.profileImgeUrl = absoluteString
-//
-//           
-//        }
-//    }
-//    
-//    
-//    
-//    
-//    
-    
+
     func addBrowseFile(strPath : String){
         
         bIsTitle = false
@@ -553,6 +530,7 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
             "documentDisplayName" : self.filenameTF.text ?? "",
         ]
         self.arrBrowseFile.add(myDict)
+        
         self.uploadTableView.reloadData()
         //  callSplitSections()
     }
@@ -578,22 +556,40 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
         
         
         var bucketName = ""
-       
+        var bucketPath = ""
         if browseFileType == 1 {
             
-            bucketName = DefaultsKeys.uploadprofileBrowes
+            if countryCoded == "4" {
+                bucketName = DefaultsKeys.THAI_SCHOOL_DOCS
+                bucketPath = String(instuteId)
+            }
+            else
+            {
+                bucketName = DefaultsKeys.SCHOOL_DOCS
+                bucketPath = String(instuteId)
+
+            }
             
         }else{
             
-            bucketName = DefaultsKeys.UploadProfileBucket
+            if countryCoded == "4" {
+                bucketName = DefaultsKeys.THAI_SCHOOL_PHOTOS
+                bucketPath = String(instuteId)+"/"+"profile"
+            }
+            else
+            {
+                bucketName = DefaultsKeys.SCHOOL_PHOTOS
+                bucketPath = String(instuteId)+"/"+"profile"
+
+            }
         }
                        
         
         AWSPreSignedURL.shared.fetchPresignedURL(
             bucket: bucketName,
             fileName: imageURL,
-            SchoolId: instuteId,
-            fileType: "application"
+            bucketPath: bucketPath,
+            fileType: "application/pdf"
         ) { [self] result in
             switch result {
             case .success(let awsResponse):
@@ -605,10 +601,11 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
                     
                     switch result {
                     case .success(let uploadedURL):
-                        print("Image uploaded successfully: \(uploadedURL)")
+                        print("Pdf uploaded successfully: \(uploadedURL)")
                       
                     case .failure(let error):
-                        print("Failed to upload image: \(error.localizedDescription)")
+                        
+                        print("Failed to upload Pdf: \(error.localizedDescription)")
                     }
         
                    
