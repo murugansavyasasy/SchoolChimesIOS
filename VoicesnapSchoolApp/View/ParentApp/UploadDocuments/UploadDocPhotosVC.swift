@@ -65,6 +65,7 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
     var browseFileType = 0
     var instuteId : String!
     var countryCoded : String!
+    var browseFile = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         countryCoded =  UserDefaults.standard.object(forKey: COUNTRY_ID) as! String
@@ -131,7 +132,7 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
 
 
             browseFileType = 1
-
+            browseFile = "Gallery"
 
             print("gallery")
 //
@@ -285,7 +286,7 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         
-        let chosenImage = info[UIImagePickerController.InfoKey.editedImage] as! UIImage
+        let chosenImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
         
         if browseFileType == 1 {
 
@@ -402,7 +403,7 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
             self.addBrowseFile(strPath: urlString)
             print("urlStringurlStringsdzxfghj",urlString)
             print("addBrowseFile11",addBrowseFile)
-            self.uploadTableView.reloadData()
+//            self.uploadTableView.reloadData()
 
         } catch {
             print("set PDF filer error : ", error)
@@ -481,26 +482,33 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
                     switch result {
                     case .success(let uploadedURL):
                         print("Image uploaded successfully: \(uploadedURL)")
-                      
+                        print("browseFileType",browseFileType)
+                        print("imageURL",uploadedURL)
+                        if browseFileType == 1 {
+
+                            urlPath = URL(string: uploadedURL)
+                            
+//                            if browseFile == "Gallery" {
+//                            }
+//                            else{
+                                self.setPDFFile()
+//                            }
+                            DispatchQueue.main.async {
+                                self.hideLoading()
+                            }
+                        }else{
+
+
+                            self.profileImgeUrl = Uploadimages!
+
+                           
+                        }
+                        
                     case .failure(let error):
                         print("Failed to upload image: \(error.localizedDescription)")
                       
                     }
-        
-                    if browseFileType == 1 {
-
-                        urlPath = imageURL
-                        self.setPDFFile()
-                        DispatchQueue.main.async {
-                            self.hideLoading()
-                        }
-                    }else{
-
-
-                        self.profileImgeUrl = Uploadimages!
-
-                       
-                    }
+                  
                     
                     
                     
@@ -523,15 +531,19 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
         let currentTimeStamp = NSString.init(format: "%ld",Date() as CVarArg)
         let imageNameWithoutExtension = NSString.init(format: "School_Upload_Doc_%@",currentTimeStamp)
         let imageName = NSString.init(format: "%@%@",imageNameWithoutExtension, ".pdf")
-        
+        var getFileName  = ""
+        getFileName = filenameTF.text!
         let myDict:NSMutableDictionary = [
             "documentPath" :strPath,
             "documentName" : imageName,
-            "documentDisplayName" : self.filenameTF.text ?? "",
+            "documentDisplayName" : getFileName
         ]
         self.arrBrowseFile.add(myDict)
         
-        self.uploadTableView.reloadData()
+        DispatchQueue.main.async() {
+            self.uploadTableView.reloadData()
+        }
+      
         //  callSplitSections()
     }
     
@@ -775,10 +787,15 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
                     
                     // cell.titleLbl.text = dicStores.object(forKey: "name") as? String
                     let strP = dicStores.object(forKey: "documentPath") as? String ?? ""
-                    cell.pathLbl.text = strP
+                    let components = strP.components(separatedBy: "/")
+                    if let vcString = components.last?.components(separatedBy: ".").first {
+                        cell.pathLbl.text = vcString
+                        print(vcString) // Output: vc_-8285773687839968195
+                    }
+                    print("strPstrPget",strP)
                     if(strP.contains("amazonaws.com")){
                         cell.uploadBtn.setTitle("Delete", for: .normal)
-                        
+                        cell.uploadBtn.addTarget(self, action: #selector(callDeleteAction), for: .touchUpInside)
                         if(!bIsuploadTitle){
                             bIsuploadTitle = true
                             cell.titleLbl.text = "Uploaded Documents : (Only these documents will be sent for approval )"
@@ -819,7 +836,11 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
                     
                     // cell.titleLbl.text = dicStores.object(forKey: "name") as? String
                     let strP = dicStores.object(forKey: "documentPath") as? String ?? ""
-                    cell.pathLbl.text = strP
+                    let components = strP.components(separatedBy: "/")
+                    if let vcString = components.last?.components(separatedBy: ".").first {
+                        cell.pathLbl.text = vcString
+                        print(vcString) // Output: vc_-8285773687839968195
+                    }
                     if(strP.contains("amazonaws.com")){
                         cell.uploadBtn.setTitle("Delete", for: .normal)
                         
@@ -900,7 +921,7 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
             let strP = dicStores.object(forKey: "documentPath") as? String ?? ""
             print("SelPath: \(strP)")
             if(strP.contains("amazonaws.com")){
-                
+                print("filenamstrP.contains",iIndex)
                 if(iIndex <= arrBrowseFile.count){
                     bIsTitle = false
                     arrBrowseFile.remove(selectDict)
@@ -910,6 +931,7 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
                 }
                 
             }else{
+                print("filenameTFfilenameTF",filenameTF)
                 if(filenameTF.text!.count > 0){
                     selectDict["documentDisplayName"] = self.filenameTF.text
                     
@@ -944,7 +966,7 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
             bIsuploadTitle = false
             
             let strP = dicStores.object(forKey: "documentPath") as? String ?? ""
-            print("SelPath: \(strP)")
+            print("SelPath12: \(strP)")
             if(strP.contains("amazonaws.com")){
                 
                 if(iIndex <= arrBrowseFile.count){
