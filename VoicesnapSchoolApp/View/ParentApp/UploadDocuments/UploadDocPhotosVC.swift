@@ -493,6 +493,8 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
 //                            else{
                                 self.setPDFFile()
 //                            }
+                            
+                            self.arrSectionBrowseFile.add(selectDict)
                             DispatchQueue.main.async {
                                 self.hideLoading()
                             }
@@ -795,7 +797,7 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
                     print("strPstrPget",strP)
                     if(strP.contains("amazonaws.com")){
                         cell.uploadBtn.setTitle("Delete", for: .normal)
-                        cell.uploadBtn.addTarget(self, action: #selector(callDeleteAction), for: .touchUpInside)
+                      
                         if(!bIsuploadTitle){
                             bIsuploadTitle = true
                             cell.titleLbl.text = "Uploaded Documents : (Only these documents will be sent for approval )"
@@ -953,7 +955,8 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
     }
     
     @objc func callDeleteAction(sender: UIButton){
-        print("delete")
+        print("delete",sender.tag)
+        print("arrSectionBrowseFile",arrSectionBrowseFile)
         let iIndex = sender.tag
         
         if let dicStores = arrSectionBrowseFile.object(at: iIndex) as? NSDictionary {
