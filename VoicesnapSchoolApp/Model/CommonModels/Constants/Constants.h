@@ -155,35 +155,15 @@
 /**************************************************************************************************************************************************/
 
 
-/*
-#define TERMS_AND_CONDITION @"http://vs3.voicesnapforschools.com/School/TermsConditions"
 
-#define LIVE_DOMAIN @"https://vs3.voicesnapforschools.com/api/MergedApi/"
-#define LIVE_COUNTRY_LIST @"https://vs3.voicesnapforschools.com/api/MergedApi/GetCountryListV4"
-#define ACCEPT_TERMS_AND_CONDITION @"https://vs3.voicesnapforschools.com/api/MergedApi/AgreeTermsAndConditions"
-*/
-
-//#define TERMS_AND_CONDITION @"https://gradit.voicesnap.com/School/SchoolTermsConditions"
-//
 
 #define TERMS_AND_CONDITION @"https://schoolchimes.com/vs_web/terms_conditions/"
-//#define TERMS_AND_CONDITION@"https://gradit.voicesnap.com/School/SchoolTermsConditions" Old
 
-//(https://api.schoolchimes.com/nodejs/api/MergedApi/` Nov 27 Change this domain name
 #define LIVE_DOMAIN @"https://api.schoolchimes.com/nodejs/api/MergedApi/"
-#define LIVE_COUNTRY_LIST @"https://api.schoolchimes.com/nodejs/api/MergedApi/GetCountryList"
 
-//#define LIVE_DOMAIN @"https://vstest3.voicesnapforschools.com/nodejs/api/MergedApi/"
-//#define LIVE_COUNTRY_LIST @"https://vstest3.voicesnapforschools.com/nodejs/api/MergedApi/GetCountryListV4"
 
 #define ACCEPT_TERMS_AND_CONDITION @"https://api.schoolchimes.com/nodejs/api/MergedApi/AgreeTermsAndConditions"
 
-
-//#define LIVE_COUNTRY_LIST @"http://202.21.35.54/nodejs/api/MergedApi/GetCountryListV4"
-
-//#define LIVE_DOMAIN @"http://202.21.35.54/nodejs/api/MergedApi/"
-//#define LIVE_COUNTRY_LIST @"http://202.21.35.54/nodejs/api/MergedApi/GetCountryListV4"
-//#define ACCEPT_TERMS_AND_CONDITION @"http://202.21.35.54/nodejs/api/MergedApi/AgreeTermsAndConditions"
 
 /*****************************************************************************************************************************/
 #define FORCE_UPDATE_AVAIL_MESSAGE @"The developer of this app needs to update it to improve its compatibility"

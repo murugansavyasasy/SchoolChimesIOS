@@ -84,7 +84,7 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
     var countryCoded : String!
     var UploadImageId = 0
     
-    
+    var MultipleLoginId : String?
     override func viewDidLoad()
     {
         
@@ -93,6 +93,8 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
         view.isOpaque = false
         print("test11")
         
+        SchoolId
+        print("viewDidLoad SchoolId",SchoolId)
         print("GetvimeoVideoURL",vimeoVideoURL)
         countryCoded =  UserDefaults.standard.object(forKey: COUNTRY_ID) as! String
         SendButton.layer.cornerRadius = 5
@@ -357,7 +359,7 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
                     if(self.strFrom == "Image"){
                         print("imagesArrayimagesArray",imagesArray)
                         print("igesArray",self.imagesArray as! [UIImage])
-//                        self.getImageURL(images: self.imagesArray as! [UIImage])
+                        self.getImageURL(images: self.imagesArray as! [UIImage])
 //                        PresignedURL(image: imagesArray[0] as! UIImage)
                         
                         
@@ -1443,18 +1445,33 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
     }
     
     func loadViewData(){
+        print("loadViewData",SchoolId)
         let strStandard : String = languageDictionary["teacher_atten_standard"] as? String ?? "Standard"
         let strSection : String = languageDictionary["teacher_atten_sections"] as? String ?? "Section(s)"
         SectionTitleArray = [strStandard, strSection]
         print("StandardOrSectionVCStaff SendedScreenNameStr\(SendedScreenNameStr)")
         
         if(SendedScreenNameStr == "TextToParents" || SendedScreenNameStr == "VoiceToParents"){
-            print(SchoolId)
+            
+            print("VoiceToParents",SchoolId)
         }else{
-            SchoolDetailDict = appDelegate.LoginSchoolDetailArray[0] as! NSDictionary
-            SchoolId = String(describing: SchoolDetailDict["SchoolID"]!)
-            StaffId = String(describing: SchoolDetailDict["StaffID"]!)
+            
+            if MultipleLoginId == "1"{
+                
+                
+                
+            }else{
+                
+                SchoolDetailDict = appDelegate.LoginSchoolDetailArray[0] as! NSDictionary
+                SchoolId = String(describing: SchoolDetailDict["SchoolID"]!)
+                StaffId = String(describing: SchoolDetailDict["StaffID"]!)
+                print("VoiceToParentselseelse",SchoolId)
+            }
+           
+          
         }
+        
+        
         if(StandardSectionSubjectArray.count == 0){
             if(UtilObj.IsNetworkConnected()){
                 self.GetAllSectionCodeapi()
@@ -1486,6 +1503,7 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
     }
 
     func uploadAWS(image: UIImage) {
+        print("SchoolIdSchoolId",SchoolId)
         let currentTimeStamp = NSString.init(format: "%ld", Date() as CVarArg)
         let imageNameWithoutExtension = NSString.init(format: "vc_%@", currentTimeStamp)
         let imageName = NSString.init(format: "%@%@", imageNameWithoutExtension, ".png")
@@ -1509,6 +1527,7 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
         if countryCoded == "4" {
             bucketName = DefaultsKeys.THAI_SCHOOL_CHIMES_COMMUNICATION
             bucketPath = currentDate+"/"+String(SchoolId)
+            
         }
         else
         {

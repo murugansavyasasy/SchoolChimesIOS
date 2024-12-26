@@ -33,7 +33,7 @@ class AwsReq{
 
     private static func get_url() -> String {
 
-        return String (format:  "%@get-s3-presigned-url",StaffConstantFile.SmsBaseUrl as! CVarArg )
+        return String (format:  "%@get-s3-presigned-url", LIVE_DOMAIN)
 
     }
 

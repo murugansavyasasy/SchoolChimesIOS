@@ -569,8 +569,8 @@ print("tableView",tableView)
 
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-print("schoolsArray",schoolsArray)
-        print("selectedSchoolsArray",selectedSchoolsArray)
+print("schoolsArrayfvfvfv",schoolsArray)
+        print("selectedSchoolsArrayfvfvfvf",selectedSchoolsArray)
 
         if btnOne.backgroundColor == UIColor(named: "CustomOrange"){
             if(selectedSchoolsArray .contains(schoolsArray.object(at: indexPath.row)))
@@ -584,6 +584,8 @@ print("schoolsArray",schoolsArray)
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        
+        print("didDeselectRowAt",selectedSchoolsArray)
         if btnOne.backgroundColor == UIColor(named: "CustomOrange"){
             if(selectedSchoolsArray .contains(schoolsArray.object(at: indexPath.row)))
             {
@@ -657,6 +659,8 @@ print("schoolsArray",schoolsArray)
         
         print("FromDate",fromdate)
         print("ToDate",todate)
+        
+        print("SchoolsSchools",selectedSchoolsArray)
         let apiCall = API_call.init()
         apiCall.delegate = self;
         let myString = Util.convertDictionary(toString: myDict)

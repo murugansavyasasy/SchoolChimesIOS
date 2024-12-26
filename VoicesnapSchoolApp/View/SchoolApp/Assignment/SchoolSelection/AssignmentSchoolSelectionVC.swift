@@ -125,14 +125,14 @@ class AssignmentSchoolSelectionVC: UIViewController ,UITableViewDataSource,UITab
             self.present(AddCV, animated: false, completion: nil)
         }else  if(sendAssignmentType == "image"){
             let AddCV = self.storyboard?.instantiateViewController(withIdentifier: "SendImagePDFAssignmentVC") as! SendImagePDFAssignmentVC
-            AddCV.SchoolDetailDict = appDelegate.LoginSchoolDetailArray[0] as! NSDictionary
+            AddCV.SchoolDetailDict = SelectedSchoolDeatilDict
             AddCV.strFrom = "Assignment"
             AddCV.assignmentType = "image"
             self.present(AddCV, animated: false, completion: nil)
             
         }else  if(sendAssignmentType == "pdf"){
             let AddCV = self.storyboard?.instantiateViewController(withIdentifier: "SendImagePDFAssignmentVC") as! SendImagePDFAssignmentVC
-            AddCV.SchoolDetailDict = appDelegate.LoginSchoolDetailArray[0] as! NSDictionary
+            AddCV.SchoolDetailDict = SelectedSchoolDeatilDict
             AddCV.strFrom = "Assignment"
             AddCV.assignmentType = "pdf"
             self.present(AddCV, animated: false, completion: nil)

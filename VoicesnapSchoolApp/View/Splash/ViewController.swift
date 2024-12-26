@@ -647,7 +647,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         strApiFrom = "CountryList"
         let apiCall = API_call.init()
         apiCall.delegate = self;
-        let requestStringer = LIVE_COUNTRY_LIST
+        let requestStringer = LIVE_DOMAIN  + "GetCountryList"
         let requestString = requestStringer.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
         let myCountryDict:NSMutableDictionary = ["AppID":"3",COUNTRY_CODE : strCountryCode]
         print("my country Dictionary data : \(requestStringer)")

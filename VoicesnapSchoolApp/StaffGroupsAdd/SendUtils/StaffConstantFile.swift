@@ -25,11 +25,7 @@ class StaffConstantFile {
 //    static let demoSmsBaseUrl : String = "https://vss.voicesnapforschools.com/nodejs/api/"
     static  let SmsBaseUrl  = UserDefaults.standard.object(forKey:BASEURL)
     
-    static let demoAlumni   = "http://106.51.127.215:8061/api/"
-    
-    
-//    let defaults = UserDefaults.standard
-//    static let SmsBaseUrl : String = defaults.string(forKey: BASEURL)!
+
     
 }
 

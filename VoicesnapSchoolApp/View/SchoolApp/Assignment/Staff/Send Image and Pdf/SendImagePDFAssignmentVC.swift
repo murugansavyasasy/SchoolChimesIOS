@@ -468,7 +468,10 @@ class SendImagePDFAssignmentVC: UIViewController , UIActionSheetDelegate, UIImag
         ]
         utilObj.printLogKey(printKey: "assignmentDict", printingValue: assignmentDict)
         let AddCV = self.storyboard?.instantiateViewController(withIdentifier: "StaffAddNewClassVC") as! StaffAddNewClassVC
+        print("SendImagePDFAssignmentVC SchoolDetailDict",SchoolDetailDict)
         AddCV.SchoolDetailDict = SchoolDetailDict
+        AddCV.checkSchoolID = "1"
+//        AddCV.SchoolId = SchoolId
         AddCV.sendAssignmentDict = self.assignmentDict
         AddCV.assignmentType = "StaffAssignment"
         AddCV.pdfData = self.pdfData

@@ -116,8 +116,10 @@ class StaffAddNewClassVC: UIViewController,Apidelegate,UIPickerViewDelegate,UIPi
     {
         
         print("HomeWorkImage :",HomeWorkPdf)
+        print("checkSchoolIDcheckSchoolID :",checkSchoolID)
         super.viewDidLoad()
         view.isOpaque = false
+        print("schoolIddfgfdsfgfds",SchoolId)
         SendButton.layer.cornerRadius = 5
         SendButton.layer.masksToBounds = true
         assigmentSendButton.layer.cornerRadius = 5
@@ -141,12 +143,25 @@ class StaffAddNewClassVC: UIViewController,Apidelegate,UIPickerViewDelegate,UIPi
             
             
             
-            let userDefaults = UserDefaults.standard
-            
-            SchoolId = userDefaults.string(forKey: DefaultsKeys.SchoolD)!
-            StaffId = userDefaults.string(forKey: DefaultsKeys.StaffID)!
+            if checkSchoolID == "1" {
+                
+                SchoolId =   String(describing: SchoolDetailDict["SchoolID"]!)
+                StaffId = String(describing: SchoolDetailDict["StaffID"]!)
+                
+                print("checkSchoolIdifif",SchoolId)
+            }else{
+                
+               
+                
+                let userDefaults = UserDefaults.standard
+                
+                SchoolId = userDefaults.string(forKey: DefaultsKeys.SchoolD)!
+                StaffId = userDefaults.string(forKey: DefaultsKeys.StaffID)!
+            }
             
         }
+        
+        
         countryCoded =  UserDefaults.standard.object(forKey: COUNTRY_ID) as! String
         print("URLDATA:",voiceURl)
         

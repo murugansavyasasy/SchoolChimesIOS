@@ -63,7 +63,7 @@ class PrincipalGroupSelectionVC: UIViewController,Apidelegate {
         
         
         print("StaffID",StaffID)
-        print("SchoolID",SchoolID)
+        print("SchoolIDsaran",SchoolID)
         print("fromView",fromView)
         print("strFrom",strFrom)
         
@@ -103,8 +103,13 @@ class PrincipalGroupSelectionVC: UIViewController,Apidelegate {
     @IBAction func actionStandardSectionButton(_ sender: UIButton)
     {
         let StaffVC = self.storyboard?.instantiateViewController(withIdentifier: "StandardOrSectionVCStaff") as! StandardOrSectionVCStaff
+        
+        print("PrincipalGroupSelectionVC",SchoolID)
         StaffVC.SendedScreenNameStr = fromViewController as String
+        
+        print("selectedSchoolDictionaryselectedSchoolDictionary",selectedSchoolDictionary)
         StaffVC.selectedSchoolDictionary = selectedSchoolDictionary
+        StaffVC.MultipleLoginId = "1"
         StaffVC.SchoolId = SchoolID as String
         StaffVC.StaffId = StaffID as String
         StaffVC.VoiceurlData = urlData
