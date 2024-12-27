@@ -102,8 +102,8 @@ class AbsenteesDeteViceVC: UIViewController,UITableViewDelegate,UITableViewDataS
         let titleLabel = UILabel()
         titleLabel.frame = CGRect(x: 0, y: 0, width: self.view.frame.width , height: 45)
         titleLabel.textColor = UIColor (red:166.0/255.0, green: 114.0/255.0, blue: 155.0/255.0, alpha: 1)
-        let secondWord : String = LanguageDict["home_absentees"] as? String ?? "Absentees"//"Absentees "
-        let thirdWord : String   = LanguageDict["report"] as? String ?? "Report"//"Report"
+        let secondWord : String = commonStringNames.home_absentees.translated() as? String ?? "Absentees"//"Absentees "
+        let thirdWord : String   = commonStringNames.report.translated() as? String ?? "Report"//"Report"
         let comboWord = secondWord + " " + thirdWord
         let attributedText = NSMutableAttributedString(string:comboWord)
         let attrs = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 22), NSAttributedString.Key.foregroundColor: UIColor.white]

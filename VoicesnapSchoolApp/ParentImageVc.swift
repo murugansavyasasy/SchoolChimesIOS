@@ -372,8 +372,8 @@ class ParentImageVc: UIViewController,UITableViewDataSource,Apidelegate,UITableV
             }
         }
        
-        cell1.ViewFullImageButton.setTitle(languageDict["hint_save_image"] as? String, for: .normal)
-        cell1.SaveButton.setTitle(languageDict["btn_save_image"] as? String, for: .normal)
+            cell1.ViewFullImageButton.setTitle(commonStringNames.hint_save_image.translated() as? String, for: .normal)
+                                               cell1.SaveButton.setTitle(commonStringNames.btn_save_image.translated() as? String, for: .normal)
         
         cell1.MyImageView?.isUserInteractionEnabled = true
         cell1.MyImageView?.tag = indexPath.row
@@ -1026,9 +1026,9 @@ class ParentImageVc: UIViewController,UITableViewDataSource,Apidelegate,UITableV
     func AlerMessage()
     {
         
-        let alertController = UIAlertController(title: languageDict["alert"] as? String, message: strNoRecordAlert, preferredStyle: .alert)
+                let alertController = UIAlertController(title: commonStringNames.alert.translated() as? String, message: strNoRecordAlert, preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: languageDict["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+                let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             self.dismiss(animated: true, completion: nil)
         }

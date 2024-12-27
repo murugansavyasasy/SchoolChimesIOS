@@ -303,7 +303,7 @@ class PrincipleStandardSectionVC: UIViewController ,Apidelegate,UIPickerViewDele
     func actionSelectStandard()
     {
         TableString = "Standard"
-        PickerTitleLabel.text =  LanguageDict["select_standard"] as? String//"Select Standard"
+        PickerTitleLabel.text =  commonStringNames.select_standard.translated() as? String//"Select Standard"
         
         self.MyPickerView.reloadAllComponents()
         
@@ -321,7 +321,7 @@ class PrincipleStandardSectionVC: UIViewController ,Apidelegate,UIPickerViewDele
         }
         else
         {
-            Util.showAlert("Alert", msg: LanguageDict["no_students"] as? String)
+            Util.showAlert("Alert", msg: commonStringNames.no_students.translated() as? String)
         }
         
     }
@@ -357,7 +357,7 @@ class PrincipleStandardSectionVC: UIViewController ,Apidelegate,UIPickerViewDele
                 self.present(studentVC, animated: false, completion: nil)
                 
             }else{
-                Util.showAlert("", msg: LanguageDict["alert_section"] as? String)
+                Util.showAlert("", msg: commonStringNames.alert_section.translated() as? String)
             }
         }else{
             
@@ -388,7 +388,7 @@ class PrincipleStandardSectionVC: UIViewController ,Apidelegate,UIPickerViewDele
                 
                 
             }else{
-                Util.showAlert("", msg: LanguageDict["alert_section"] as? String)
+                Util.showAlert("", msg: commonStringNames.alert_section.translated() as? String)
             }
         }
         

@@ -361,15 +361,15 @@ class StudentSubmitAssignmentVC: UIViewController, UIActionSheetDelegate, UIImag
         
         print("DUE \(noOfDays)")
         if( noOfDays > 0){
-            alertMessage = (LanguageDict["expires_submission_date"] as? String)!
+            alertMessage = (commonStringNames.expires_submission_date.translated() as? String)!
         }else{
-            alertMessage = (LanguageDict["submission_alert"] as? String)!
+                alertMessage = (commonStringNames.submission_alert.translated() as? String)!
         }
         
-        let alertController = UIAlertController(title: LanguageDict["alert"] as? String, message: alertMessage, preferredStyle: .alert)
+                                let alertController = UIAlertController(title: commonStringNames.alert.translated() as? String, message: alertMessage, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: LanguageDict["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+                                                                        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             self.showLoading()
             
@@ -385,7 +385,7 @@ class StudentSubmitAssignmentVC: UIViewController, UIActionSheetDelegate, UIImag
             }
             
         }
-        let cancelAction = UIAlertAction(title: LanguageDict["teacher_cancel"] as? String, style: UIAlertAction.Style.cancel) {
+                                                                                                     let cancelAction = UIAlertAction(title: commonStringNames.teacher_cancel.translated() as? String, style: UIAlertAction.Style.cancel) {
             UIAlertAction in
             
         }

@@ -655,10 +655,10 @@ class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableV
     func showOkAlert(){
         
         
-        let alertController = UIAlertController(title: LanguageDict["alert"] as? String, message:  LanguageDict["submission_alert"] as? String, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.alert.translated() as? String, message:  commonStringNames.submission_alert.translated() as? String, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: LanguageDict["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             if(self.SenderNameString == "SendAssignment"){
                 let mutableArray = NSMutableArray(array: self.SelectedStudentIDArray)
@@ -681,7 +681,7 @@ class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableV
             
             
         }
-        let cancelAction = UIAlertAction(title: LanguageDict["teacher_cancel"] as? String, style: UIAlertAction.Style.cancel) {
+                                     let cancelAction = UIAlertAction(title: commonStringNames.teacher_cancel.translated() as? String, style: UIAlertAction.Style.cancel) {
             UIAlertAction in
             
         }
@@ -694,16 +694,16 @@ class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableV
     func showSendVimeoAlert(){
         
         
-        let alertController = UIAlertController(title: LanguageDict["alert"] as? String, message:  "Are you sure you want to send the Video?", preferredStyle: .alert)
+            let alertController = UIAlertController(title: commonStringNames.alert.translated() as? String, message:  "Are you sure you want to send the Video?", preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: LanguageDict["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+                                                    let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             self.vimeoVideoDict["IDS"] = self.ChoosenStudentIDArray
             self.CallUploadVideoToVimeoServer()
             
         }
-        let cancelAction = UIAlertAction(title: LanguageDict["teacher_cancel"] as? String, style: UIAlertAction.Style.cancel) {
+                                                                                 let cancelAction = UIAlertAction(title: commonStringNames.teacher_cancel.translated() as? String, style: UIAlertAction.Style.cancel) {
             UIAlertAction in
             
         }

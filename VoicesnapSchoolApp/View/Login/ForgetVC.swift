@@ -355,11 +355,11 @@ class ForgetVC: UIViewController,UITextFieldDelegate,Apidelegate,HTTPClientDeleg
             
             else
             {
-                Util.showAlert("", msg: languageDict["password_missmatch"] as? String)
+                Util.showAlert("", msg: commonStringNames.password_missmatch.translated() as? String)
             }
         }else
         {
-            Util.showAlert("", msg: languageDict["hint_password"] as? String)
+                    Util.showAlert("", msg: commonStringNames.hint_password.translated() as? String)
         }
         
         
@@ -382,7 +382,7 @@ class ForgetVC: UIViewController,UITextFieldDelegate,Apidelegate,HTTPClientDeleg
         }
         else
         {
-            Util.showAlert("", msg: languageDict["registered_mobile"] as? String);
+            Util.showAlert("", msg: commonStringNames.registered_mobile.translated() as? String);
         }
     }
     
@@ -1068,7 +1068,7 @@ class ForgetVC: UIViewController,UITextFieldDelegate,Apidelegate,HTTPClientDeleg
                             self.performSegue(withIdentifier: "LoginToOTPSegue", sender: self)
                         }
                     }else{
-                        Util.showAlert("", msg: languageDict["mobile_not_available"] as? String)
+                        Util.showAlert("", msg: commonStringNames.mobile_not_available.translated() as? String)
                         
                     }
                 }else{

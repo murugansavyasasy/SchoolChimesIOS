@@ -595,7 +595,7 @@ class AttendanceMessageVC: UIViewController,Apidelegate,UIPickerViewDelegate ,UI
         print("actionChooseStandardButton")
         
         TableString = "Standard"
-        PickerTitleLabel.text =  languageDict["select_standard"] as? String //"Select Standard"
+        PickerTitleLabel.text =  commonStringNames.select_standard.translated() as? String //"Select Standard"
         PickerTitleLabel.textAlignment = .center
         self.MyPickerView.reloadAllComponents()
         if(pickerStandardArray.count > 0){
@@ -612,7 +612,7 @@ class AttendanceMessageVC: UIViewController,Apidelegate,UIPickerViewDelegate ,UI
         }else{
             
             print("pickerStandardArrayELSE")
-            Util.showAlert(languageDict["alert"] as? String, msg: languageDict["no_students"] as? String)
+            Util.showAlert(commonStringNames.alert.translated() as? String, msg: commonStringNames.no_students.translated() as? String)
         }
     }
     
@@ -621,7 +621,7 @@ class AttendanceMessageVC: UIViewController,Apidelegate,UIPickerViewDelegate ,UI
         print("actionChooseSectionButton")
         
         TableString = "Section"
-        PickerTitleLabel.text =  languageDict["select_section"] as? String //"Select Section"
+                PickerTitleLabel.text =  commonStringNames.select_section.translated() as? String //"Select Section"
         PickerTitleLabel.textAlignment = .center
         self.MyPickerView.reloadAllComponents()
         if((StandardNameTextField.text?.count)! > 0 && pickerSectionArray.count > 0){
@@ -635,9 +635,9 @@ class AttendanceMessageVC: UIViewController,Apidelegate,UIPickerViewDelegate ,UI
             popupChooseStandard.show()
         }else{
             if(pickerSectionArray.count == 0){
-                Util.showAlert(languageDict["alert"] as? String, msg: languageDict["no_section"] as? String)
+                Util.showAlert(commonStringNames.alert.translated() as? String, msg: commonStringNames.no_section.translated() as? String)
             }else{
-                Util.showAlert(languageDict["alert"] as? String, msg: languageDict["standard_first"] as? String)
+                    Util.showAlert(commonStringNames.alert.translated() as? String, msg: commonStringNames.standard_first.translated() as? String)
             }
             
         }
@@ -671,7 +671,7 @@ class AttendanceMessageVC: UIViewController,Apidelegate,UIPickerViewDelegate ,UI
                 Util.showAlert("", msg:strNoInternet )
             }
         }else{
-            Util.showAlert(languageDict["alert"] as? String, msg: languageDict["select_standard_section_alert"] as? String)
+            Util.showAlert(commonStringNames.alert.translated() as? String, msg: commonStringNames.select_standard_section_alert.translated() as? String)
         }
         
         
@@ -717,7 +717,7 @@ class AttendanceMessageVC: UIViewController,Apidelegate,UIPickerViewDelegate ,UI
                     self.present(studentVC, animated: false, completion: nil)
                     
                 }else{
-                    Util.showAlert(languageDict["alert"] as? String, msg: languageDict["select_standard_section_alert"] as? String)
+                    Util.showAlert(commonStringNames.alert.translated() as? String, msg: commonStringNames.select_standard_section_alert.translated() as? String)
                 }
             }
         }
@@ -725,7 +725,7 @@ class AttendanceMessageVC: UIViewController,Apidelegate,UIPickerViewDelegate ,UI
         else if attendanceTypeLbl.text == "Select attendance type"{
             
             
-            Util.showAlert("Kindly select the attendance type" as? String ,msg:languageDict["select_attendance_type"] as? String)
+            Util.showAlert("Kindly select the attendance type" as? String ,msg:  languageDict["select_attendance_type"] as? String)
          
             
             
@@ -751,7 +751,7 @@ class AttendanceMessageVC: UIViewController,Apidelegate,UIPickerViewDelegate ,UI
                 self.present(studentVC, animated: false, completion: nil)
                 
             }else{
-                Util.showAlert(languageDict["alert"] as? String, msg: languageDict["select_standard_section_alert"] as? String)
+                Util.showAlert(commonStringNames.alert.translated() as? String, msg: commonStringNames.select_standard_section_alert.translated() as? String)
                 
             }
         }

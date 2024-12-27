@@ -94,7 +94,7 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
         browseView.addGestureRecognizer(tap)
         
         callSelectedLanguage()
-        strSomething = LanguageDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         
     }
     
@@ -156,18 +156,18 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
         
         
         if(UIDevice.current.userInterfaceIdiom == .pad){
-            let alertController = UIAlertController(title: LanguageDict["upload_image"] as? String, message: LanguageDict["choose_option"] as? String, preferredStyle: .alert)
+            let alertController = UIAlertController(title: commonStringNames.upload_image.translated() as? String, message: commonStringNames.choose_option.translated() as? String, preferredStyle: .alert)
             // Initialize Actions
-            let yesAction = UIAlertAction(title: LanguageDict["choose_from_gallery"] as? String, style: .default) { (action) -> Void in
+            let yesAction = UIAlertAction(title: commonStringNames.choose_from_gallery.translated() as? String, style: .default) { (action) -> Void in
                 self.FromLibrary()
             }
             
-            let cameraAction = UIAlertAction(title:  LanguageDict["compose_camera"] as? String, style: .default) {
+                                          let cameraAction = UIAlertAction(title:  commonStringNames.compose_camera.translated() as? String, style: .default) {
                 (action) -> Void in
                 self.FromLibrary()
                 
             }
-            let CancelAction = UIAlertAction(title: LanguageDict["teacher_cancel"] as? String, style: .default) { (action) -> Void in
+                                                                           let CancelAction = UIAlertAction(title: commonStringNames.teacher_cancel.translated() as? String, style: .default) { (action) -> Void in
                 alertController.dismiss(animated: true, completion: nil)
             }
             
@@ -181,17 +181,17 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
         }
         else{
             
-            let alert = UIAlertController(title:  LanguageDict["upload_image"] as? String, message: LanguageDict["choose_option"] as? String, preferredStyle: .actionSheet)
+            let alert = UIAlertController(title:  commonStringNames.upload_image.translated() as? String, message: commonStringNames.choose_option.translated() as? String, preferredStyle: .actionSheet)
             
-            alert.addAction(UIAlertAction(title: LanguageDict["choose_from_gallery"] as? String, style: .default , handler:{ (UIAlertAction)in
+                                              alert.addAction(UIAlertAction(title: commonStringNames.choose_from_gallery.translated() as? String, style: .default , handler:{ (UIAlertAction)in
                 self.FromLibrary()
             }))
             
-            alert.addAction(UIAlertAction(title:  LanguageDict["compose_camera"] as? String, style: .default , handler:{ (UIAlertAction)in
+                                              alert.addAction(UIAlertAction(title:  commonStringNames.compose_camera.translated() as? String, style: .default , handler:{ (UIAlertAction)in
                 self.FromPhoto()
             }))
             
-            alert.addAction(UIAlertAction(title: LanguageDict["teacher_cancel"] as? String, style: .cancel, handler:{ (UIAlertAction)in
+                                              alert.addAction(UIAlertAction(title: commonStringNames.teacher_cancel.translated() as? String, style: .cancel, handler:{ (UIAlertAction)in
                 print("User click Dismiss button")
             }))
             

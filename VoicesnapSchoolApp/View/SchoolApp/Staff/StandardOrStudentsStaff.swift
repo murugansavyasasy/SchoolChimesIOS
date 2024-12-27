@@ -200,7 +200,7 @@ class StandardOrStudentsStaff : UIViewController,Apidelegate,UIPickerViewDelegat
                 SelectedSectionIDString = String(describing: SelectedSectionDeatil["SectionId"]!)
             }
             else{
-                Util.showAlert("", msg: languageDict["no_section"] as? String)
+                Util.showAlert("", msg: commonStringNames.no_section.translated() as? String)
                 SectionNameLbl.text = ""
                 pickerSectionArray = []
                 SelectedSectionIDString = ""
@@ -241,7 +241,7 @@ class StandardOrStudentsStaff : UIViewController,Apidelegate,UIPickerViewDelegat
     
     @IBAction func actionChooseStandardButton(_ sender: UIButton) {
         TableString = "Standard"
-        PickerTitleLabel.text = languageDict["select_standard"] as? String//"Select Standard"
+                    PickerTitleLabel.text = commonStringNames.select_standard.translated() as? String//"Select Standard"
         self.MyPickerView.reloadAllComponents()
         if(pickerStandardArray.count > 0)
         {
@@ -276,7 +276,7 @@ class StandardOrStudentsStaff : UIViewController,Apidelegate,UIPickerViewDelegat
         }
         else
         {
-            Util.showAlert("", msg: languageDict["no_students"] as? String)
+            Util.showAlert("", msg: commonStringNames.no_students.translated() as? String)
             
         }
         
@@ -285,7 +285,7 @@ class StandardOrStudentsStaff : UIViewController,Apidelegate,UIPickerViewDelegat
     // MARK: CHOOSE SECTION BUTTON ACTION
     @IBAction func actionChooseSectionButton(_ sender: UIButton) {
         TableString = "Section"
-        PickerTitleLabel.text = languageDict["select_section"] as? String //"Select Section"
+                PickerTitleLabel.text = commonStringNames.select_section.translated() as? String //"Select Section"
         self.MyPickerView.reloadAllComponents()
         if((StandardNameLbl.text?.count)! > 0){
             if(UIDevice.current.userInterfaceIdiom == .pad){
@@ -308,7 +308,7 @@ class StandardOrStudentsStaff : UIViewController,Apidelegate,UIPickerViewDelegat
             
             print("StandardOrStudentStaff1222")
         }else{
-            Util.showAlert("", msg: languageDict["standard_first"] as? String)
+            Util.showAlert("", msg: commonStringNames.standard_first.translated() as? String)
         }
         
     }
@@ -355,7 +355,7 @@ class StandardOrStudentsStaff : UIViewController,Apidelegate,UIPickerViewDelegat
             
             
         }else{
-            Util.showAlert("", msg: languageDict["select_standard_section_alert"] as? String)
+            Util.showAlert("", msg: commonStringNames.select_standard_section_alert.translated() as? String)
         }
     }
     
@@ -386,7 +386,7 @@ class StandardOrStudentsStaff : UIViewController,Apidelegate,UIPickerViewDelegat
                 Util.showAlert("", msg:strNoInternet )
             }
         }else{
-            Util.showAlert("", msg: languageDict["select_standard_section_alert"] as? String)
+            Util.showAlert("", msg: commonStringNames.select_standard_section_alert.translated() as? String)
             
         }
     }
