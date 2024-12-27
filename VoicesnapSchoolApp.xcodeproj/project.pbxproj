@@ -5117,7 +5117,7 @@
 				CODE_SIGN_ENTITLEMENTS = VoicesnapSchoolApp/VoicesnapSchoolApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9.4.9;
+				CURRENT_PROJECT_VERSION = 9.5.0;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 6Z355RG34N;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5130,7 +5130,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 8.7.9;
+				MARKETING_VERSION = 8.8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.voicesnap.schoolmessenger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5151,7 +5151,7 @@
 				CODE_SIGN_ENTITLEMENTS = VoicesnapSchoolApp/VoicesnapSchoolAppRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9.4.9;
+				CURRENT_PROJECT_VERSION = 9.5.0;
 				DEVELOPMENT_TEAM = 6Z355RG34N;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5163,7 +5163,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 8.7.9;
+				MARKETING_VERSION = 8.8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.voicesnap.schoolmessenger;
 				PRODUCT_NAME = "$(TARGET_NAME)";

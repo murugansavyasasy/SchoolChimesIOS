@@ -642,14 +642,15 @@
     //                    let imageDict = NSMutableDictionary()
     //                    imageDict["FileName"] = Uploadimages
     //                    imageUrlArray.add(imageDict)
-    self.currentImageCount += 1
-    if self.currentImageCount < self.totalImageCount {
-
-    DispatchQueue.main.async {
-    self.getImageURL(images: self.originalImagesArray)
-    print("getImageURL",self.getImageURL)
-    }
-    } else {
+//    self.currentImageCount += 1
+//    if self.currentImageCount < self.totalImageCount {
+//
+//    DispatchQueue.main.async {
+//    self.getImageURL(images: self.originalImagesArray)
+//    print("getImageURL",self.getImageURL)
+//    }
+//    }
+//        else {
     print("All images uploaded. Final URLs: \(imageUrlArray)")
     // Handle final uploaded URLs (e.g., send them to the server or update the UI
 
@@ -683,7 +684,7 @@
     self.convertedImagesUrlArray = self.imageUrlArray
 
 
-    }
+//    }
 
     }
 
