@@ -208,8 +208,8 @@ class ImageTVCTableViewController: UITableViewController,Apidelegate,UISearchBar
                 }
             }
             
-            cell1.ViewFullImageButton.setTitle(languageDict["hint_save_image"] as? String, for: .normal)
-            cell1.SaveButton.setTitle(languageDict["btn_save_image"] as? String, for: .normal)
+            cell1.ViewFullImageButton.setTitle(commonStringNames.hint_save_image.translated() as? String, for: .normal)
+                                               cell1.SaveButton.setTitle(commonStringNames.btn_save_image.translated() as? String, for: .normal)
             
             cell1.MyImageView?.isUserInteractionEnabled = true
             cell1.MyImageView?.tag = indexPath.row
@@ -835,10 +835,10 @@ class ImageTVCTableViewController: UITableViewController,Apidelegate,UISearchBar
     func AlerMessage()
     {
         
-        let alertController = UIAlertController(title: languageDict["alert"] as? String, message: strNoRecordAlert, preferredStyle: .alert)
+                let alertController = UIAlertController(title: commonStringNames.alert.translated() as? String, message: strNoRecordAlert, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: languageDict["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+                                                        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             // print("Okaction")
             self.dismiss(animated: true, completion: nil)
@@ -910,7 +910,7 @@ class ImageTVCTableViewController: UITableViewController,Apidelegate,UISearchBar
                     Util.showAlert("", msg: strNoRecordAlert)
                 }
             }else{
-                TextDateLabel.text = languageDict["recent_photos"] as? String
+                TextDateLabel.text = commonStringNames.recent_photos.translated() as? String
                 ChildId = String(describing: appDelegate.SchoolDetailDictionary["ChildID"]!)
                 SchoolId = String(describing: appDelegate.SchoolDetailDictionary["SchoolID"]!)
                 self.CallImageDetailApi()

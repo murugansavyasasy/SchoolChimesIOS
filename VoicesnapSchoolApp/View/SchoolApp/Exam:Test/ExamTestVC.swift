@@ -228,7 +228,7 @@ class ExamTestVC: UIViewController,UITextViewDelegate,UITextFieldDelegate {
             
             
         }else{
-            Util.showAlert("", msg: languageDict["exam_title_alert"] as? String)
+            Util.showAlert("", msg: commonStringNames.exam_title_alert.translated() as? String)
         }
     }
     @IBAction func actionSectionOrStudentSelection(_ sender: UIButton) {
@@ -247,7 +247,7 @@ class ExamTestVC: UIViewController,UITextViewDelegate,UITextFieldDelegate {
             StudentVC.StaffId = StaffId
             self.present(StudentVC, animated: false, completion: nil)
         }else{
-            Util.showAlert("", msg: languageDict["exam_title_alert"] as? String)
+            Util.showAlert("", msg: commonStringNames.exam_title_alert.translated() as? String)
         }
     }
     

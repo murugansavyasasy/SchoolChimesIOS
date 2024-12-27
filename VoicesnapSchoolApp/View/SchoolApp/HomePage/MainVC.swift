@@ -1209,13 +1209,13 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
         
         var strLogged : String = String()
         if(strLoggedAS == "Staff"){
-            strLogged = LanguageDict["as_staff"] as? String ?? "Staff"
+            strLogged = commonStringNames.as_staff.translated() as? String ?? "Staff"
         }else  if(strLoggedAS == "Admin"){
-            strLogged = LanguageDict["as_admin"] as? String ?? "Admin"
+            strLogged = commonStringNames.as_admin.translated() as? String ?? "Admin"
         }else  if(strLoggedAS == "Principal"){
-            strLogged = LanguageDict["as_principal"] as? String ?? "Principal"
+            strLogged = commonStringNames.as_principal.translated() as? String ?? "Principal"
         }else  if(strLoggedAS == "GroupHead"){
-            strLogged = LanguageDict["as_grouphead"] as? String ?? "GroupHead"
+            strLogged = commonStringNames.as_grouphead.translated() as? String ?? "GroupHead"
         }else{
             strLogged = appDelegate.staffDisplayRole
         }
@@ -2232,7 +2232,7 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
         print("Main")
         var selectString = notification.object as? String ?? ""
         selectString = selectString.lowercased()
-        let log = LanguageDict["txt_menu_logout"] as? String ?? ""
+        let log = commonStringNames.txt_menu_logout.translated() as? String ?? ""
         if(selectString == log.lowercased()){
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() )
             {
@@ -2270,13 +2270,13 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
     }
     
     func showLogoutAlert(){
-        let alertController = UIAlertController(title: LanguageDict["txt_menu_logout"] as? String, message: LanguageDict["want_to_logut"] as? String, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.txt_menu_logout.translated() as? String, message: commonStringNames.want_to_logut.translated() as? String, preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: LanguageDict["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             self.moveToLogInScreen(strFromStaff: "Staff")
         }
-        let cancelAction = UIAlertAction(title: LanguageDict["teacher_cancel"] as? String, style: UIAlertAction.Style.cancel) {
+        let cancelAction = UIAlertAction(title: commonStringNames.teacher_cancel.translated() as? String, style: UIAlertAction.Style.cancel) {
             UIAlertAction in
             
         }

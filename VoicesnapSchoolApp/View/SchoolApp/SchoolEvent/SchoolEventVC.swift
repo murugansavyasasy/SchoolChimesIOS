@@ -266,7 +266,7 @@ class SchoolEventVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UIT
                 self.performSegue(withIdentifier: "SchoolEventToPrincipalGroupSegue", sender: self)
             }
         }else{
-            Util.showAlert("", msg: LanguageDict["fill_all_alert"] as? String)
+            Util.showAlert("", msg: commonStringNames.fill_all_alert.translated() as? String)
         }
         
     }

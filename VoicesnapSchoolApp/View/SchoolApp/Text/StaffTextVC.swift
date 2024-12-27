@@ -219,7 +219,7 @@ class StaffTextVC:  UIViewController,UITextViewDelegate,UITextFieldDelegate,UITa
                 
                 present(vc, animated: true, completion: nil)
             }else{
-                Util.showAlert("", msg: languageDict["please_select_message"] as? String)
+                Util.showAlert("", msg: commonStringNames.please_select_message.translated() as? String)
             }
             
             
@@ -289,7 +289,7 @@ class StaffTextVC:  UIViewController,UITextViewDelegate,UITextFieldDelegate,UITa
                 StaffVC.HomeTextViewText = String(describing: Dict["Content"]!)
                 self.present(StaffVC, animated: false, completion: nil)
             }else{
-                Util.showAlert("", msg: languageDict["please_select_message"] as? String)
+                Util.showAlert("", msg: commonStringNames.please_select_message.translated() as? String)
             }
             
         }
@@ -312,7 +312,7 @@ class StaffTextVC:  UIViewController,UITextViewDelegate,UITextFieldDelegate,UITa
                 StaffStudent.HomeTextViewText = String(describing: Dict["Content"]!)
                 self.present(StaffStudent, animated: false, completion: nil)
             }else{
-                Util.showAlert("", msg: languageDict["please_select_message"] as? String)
+                Util.showAlert("", msg: commonStringNames.please_select_message.translated() as? String)
             }
         }
     }

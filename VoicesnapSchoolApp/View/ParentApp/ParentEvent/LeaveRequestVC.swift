@@ -583,7 +583,7 @@ class LeaveRequestVC: UIViewController,UITextViewDelegate,Apidelegate {
         }
         strPlaceholder =  commonStringNames.hint_leave_reason.translated() as? String ?? "Reason for leave"
                                                                                             LeaveHistoryButton.setTitle(commonStringNames.leave_history.translated() as? String , for: .normal)
-                                                                                                                        ApplyButton.setTitlecommonStringNames.requesttttt as? String , for: .normal)
+                                                                                                                        ApplyButton.setTitle(commonStringNames.requesttttt.translated() as? String , for: .normal)
         
                                                                                                                         FloatFromLabel.text = commonStringNames.txt_from.translated() as? String
                                                                                                                         FloatToLabel.text = commonStringNames.txt_to.translated() as? String

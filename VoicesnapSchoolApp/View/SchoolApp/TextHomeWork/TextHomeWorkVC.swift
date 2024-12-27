@@ -606,7 +606,7 @@ class TextHomeWorkVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UI
     }
     func actionSelectCategory(){
         TableString = "category"
-        selectCategorylbl.text = LanguageDict["select_category"] as? String
+        selectCategorylbl.text = commonStringNames.select_category.translated() as? String
         self.CategorypickerView.reloadAllComponents()
         if(UIDevice.current.userInterfaceIdiom == .pad)
         {

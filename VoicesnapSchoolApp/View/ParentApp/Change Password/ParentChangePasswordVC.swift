@@ -149,12 +149,12 @@ class ParentChangePasswordVC: UIViewController ,UITextFieldDelegate,UITextViewDe
             }
             else
             {
-                Util.showAlert("", msg: LanguageDict["password_missmatch"] as? String)
+                Util.showAlert("", msg: commonStringNames.password_missmatch.translated() as? String)
             }
         }
         else
         {
-            Util.showAlert("", msg: LanguageDict["teacher_pop_password_hint_exist"] as? String)
+                    Util.showAlert("", msg: commonStringNames.teacher_pop_password_hint_exist.translated() as? String)
         }
     }
     
@@ -204,14 +204,14 @@ class ParentChangePasswordVC: UIViewController ,UITextFieldDelegate,UITextViewDe
     }
     
     func showLogoutAlert(){
-        let alertController = UIAlertController(title: LanguageDict["txt_menu_logout"] as? String, message: LanguageDict["want_to_logut"] as? String, preferredStyle: .alert)
+                        let alertController = UIAlertController(title: commonStringNames.txt_menu_logout.translated() as? String, message: commonStringNames.want_to_logut.translated() as? String, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: LanguageDict["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+                                                                let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             self.logoutAction()
         }
-        let cancelAction = UIAlertAction(title: LanguageDict["teacher_cancel"] as? String, style: UIAlertAction.Style.cancel) {
+                                                                                             let cancelAction = UIAlertAction(title: commonStringNames.teacher_cancel.translated() as? String, style: UIAlertAction.Style.cancel) {
             UIAlertAction in
             self.actionClose(self)
         }

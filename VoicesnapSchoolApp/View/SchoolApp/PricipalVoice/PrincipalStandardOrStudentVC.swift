@@ -181,7 +181,7 @@ class PrincipalStandardOrStudentVC: UIViewController,Apidelegate,UIPickerViewDel
                 pickerSectionArray = []
                 SectionNameLbl.text = ""
                 SelectedSectionIDString = ""
-                Util.showAlert("", msg: LanguageDict["no_section"] as? String)
+                Util.showAlert("", msg: commonStringNames.no_section.translated() as? String)
             }
             
             SelectedClassIDString = String(StandarCodeArray[selectedStandardRow])
@@ -222,7 +222,7 @@ class PrincipalStandardOrStudentVC: UIViewController,Apidelegate,UIPickerViewDel
         print("PopupChooseStandardPickerViewWorking")
         TableString = "Standard"
         
-        PickerTitleLabel.text = LanguageDict["select_standard"] as? String
+                    PickerTitleLabel.text = commonStringNames.select_standard.translated() as? String
         self.MyPickerView.reloadAllComponents()
         if(pickerStandardArray.count > 0)
         {
@@ -242,7 +242,7 @@ class PrincipalStandardOrStudentVC: UIViewController,Apidelegate,UIPickerViewDel
         }
         else
         {
-            Util.showAlert("", msg: LanguageDict["no_students"] as? String)
+            Util.showAlert("", msg: commonStringNames.no_students.translated() as? String)
             
         }
         
@@ -252,7 +252,7 @@ class PrincipalStandardOrStudentVC: UIViewController,Apidelegate,UIPickerViewDel
     @IBAction func actionChooseSectionButton(_ sender: UIButton) {
         PopupChooseStandardPickerView.isHidden = false
         TableString = "Section"
-        PickerTitleLabel.text = LanguageDict["select_section"] as? String
+                PickerTitleLabel.text = commonStringNames.select_section.translated() as? String
         self.MyPickerView.reloadAllComponents()
         if((StandardNameLbl.text?.count)! > 0)
         {
@@ -271,7 +271,7 @@ class PrincipalStandardOrStudentVC: UIViewController,Apidelegate,UIPickerViewDel
         }
         else
         {
-            Util.showAlert("", msg: LanguageDict["standard_first"] as? String)
+            Util.showAlert("", msg: commonStringNames.standard_first.translated() as? String)
         }
         
     }
@@ -310,7 +310,7 @@ class PrincipalStandardOrStudentVC: UIViewController,Apidelegate,UIPickerViewDel
         }
         else
         {
-            Util.showAlert("", msg: LanguageDict["select_standard_section_alert"] as? String)
+            Util.showAlert("", msg: commonStringNames.select_standard_section_alert.translated() as? String)
             
         }
         
@@ -345,7 +345,7 @@ class PrincipalStandardOrStudentVC: UIViewController,Apidelegate,UIPickerViewDel
         }
         else
         {
-            Util.showAlert("", msg: LanguageDict["select_standard_section_alert"] as? String)
+            Util.showAlert("", msg: commonStringNames.select_standard_section_alert.translated() as? String)
             
         }
     }

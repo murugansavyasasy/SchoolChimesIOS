@@ -483,7 +483,7 @@ class StaffAddNewClassVC: UIViewController,Apidelegate,UIPickerViewDelegate,UIPi
                 Util.showAlert("", msg:strNoInternet )
             }
         }else{
-            Util.showAlert("", msg: LanguageDict["alert_section"] as? String)
+            Util.showAlert("", msg: commonStringNames.alert_section.translated() as? String)
         }
         
     }
@@ -492,7 +492,7 @@ class StaffAddNewClassVC: UIViewController,Apidelegate,UIPickerViewDelegate,UIPi
     
     func actionSelectCategory(){
         TableString = "Category"
-        PickerTitleLabel.text = LanguageDict["select_category"] as? String
+                PickerTitleLabel.text = commonStringNames.select_category.translated() as? String
         self.MyPickerView.reloadAllComponents()
         if(UIDevice.current.userInterfaceIdiom == .pad)
         {
@@ -524,7 +524,7 @@ class StaffAddNewClassVC: UIViewController,Apidelegate,UIPickerViewDelegate,UIPi
     func actionSelectSection()
     {
         TableString = "Section"
-        PickerTitleLabel.text = LanguageDict["select_section"] as? String
+                PickerTitleLabel.text = commonStringNames.select_section.translated() as? String
         self.MyPickerView.reloadAllComponents()
         if(UIDevice.current.userInterfaceIdiom == .pad)
         {
@@ -539,7 +539,7 @@ class StaffAddNewClassVC: UIViewController,Apidelegate,UIPickerViewDelegate,UIPi
     func actionSelectStandard()
     {
         TableString = "Standard"
-        PickerTitleLabel.text = LanguageDict["select_standard"] as? String
+                PickerTitleLabel.text = commonStringNames.select_standard.translated() as? String
         
         self.MyPickerView.reloadAllComponents()
         
@@ -557,14 +557,14 @@ class StaffAddNewClassVC: UIViewController,Apidelegate,UIPickerViewDelegate,UIPi
         }
         else
         {
-            Util.showAlert(LanguageDict["alert"] as? String, msg: LanguageDict["no_students"] as? String)
+            Util.showAlert(commonStringNames.alert.translated() as? String, msg: commonStringNames.no_students.translated() as? String)
         }
         
     }
     
     func actionSelectSubject() {
         TableString = "Subject"
-        PickerTitleLabel.text = LanguageDict["select_subject"] as? String
+                PickerTitleLabel.text = commonStringNames.select_subject.translated() as? String
         self.ChooseSubject()
     }
     func UpdateStandardValue(StandardName : String)
@@ -616,12 +616,12 @@ class StaffAddNewClassVC: UIViewController,Apidelegate,UIPickerViewDelegate,UIPi
             }
             else
             {
-                Util.showAlert("", msg: LanguageDict["no_subject"] as? String)
+                Util.showAlert("", msg: commonStringNames.no_subject.translated() as? String)
             }
             
         }else
         {
-            Util.showAlert("", msg: LanguageDict["alert_subject"] as? String)
+                    Util.showAlert("", msg: commonStringNames.alert_subject.translated() as? String)
         }
         
         
@@ -672,7 +672,7 @@ class StaffAddNewClassVC: UIViewController,Apidelegate,UIPickerViewDelegate,UIPi
             
         }
         else{
-            Util.showAlert("", msg: LanguageDict["alert_section"] as? String)
+            Util.showAlert("", msg:commonStringNames.alert_section.translated() as? String)
         }
         
     }
@@ -789,7 +789,7 @@ class StaffAddNewClassVC: UIViewController,Apidelegate,UIPickerViewDelegate,UIPi
                 }
             }
         }else{
-            Util.showAlert("", msg: LanguageDict["alert_section"] as? String)
+            Util.showAlert("", msg: commonStringNames.alert_section.translated() as? String)
         }
         
     }
@@ -847,7 +847,7 @@ class StaffAddNewClassVC: UIViewController,Apidelegate,UIPickerViewDelegate,UIPi
                 UpdateSubjectValue(SubjectName: SelectedSubjectString)
                 PopupChoosePickerView.isHidden = true
             }else{
-                Util.showAlert("", msg: LanguageDict["no_subject"] as? String)
+                Util.showAlert("", msg: commonStringNames.no_subject.translated() as? String)
             }
             
         }

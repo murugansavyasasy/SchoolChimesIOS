@@ -460,7 +460,7 @@ class StaffImageVC: UIViewController, UIActionSheetDelegate, UIImagePickerContro
     
     func noCamera(){
         let alertVC = UIAlertController(title: "No Camera",message: "Sorry, this device has no camera",preferredStyle: .alert)
-        let okAction = UIAlertAction(title: LanguageDict["teacher_btn_ok"] as? String,style:.default,handler: nil)
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String,style:.default,handler: nil)
         alertVC.addAction(okAction)
         present(alertVC,animated: true,completion: nil)
     }

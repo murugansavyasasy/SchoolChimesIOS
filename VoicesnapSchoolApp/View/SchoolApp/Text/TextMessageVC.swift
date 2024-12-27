@@ -104,11 +104,11 @@ class TextMessageVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UIT
                 schoolsArray.add(schoolDic)
                 selectedSchoolsArray.add(schoolDic)
             }
-            sendButton.setTitle(languageDict["teacher_Select_school"] as? String  , for: .normal)
+            sendButton.setTitle(commonStringNames.teacher_Select_school.translated() as? String  , for: .normal)
             self.enableButtonAction()
         }
         else{
-            sendButton.setTitle(languageDict["select_reciepients"] as? String, for: .normal)
+                sendButton.setTitle(commonStringNames.select_reciepients.translated() as? String, for: .normal)
         }
         
         if(schoolsArray.count > 0){
