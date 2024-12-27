@@ -1,0 +1,236 @@
+/*
+  Localizable.strings
+  VsSchoolChimes
+
+  Created by admin on 08/11/24.
+  
+*/
+ "welcome_message" = "Welcome";
+ "change_language" = "Change Language";
+ "Home" = "Home";
+ "Help" = "Help";
+ "Settings" = "Settings";
+ "Profile" = "Profile";
+
+// MARK: Settings page
+"Notifications" = "Notifications";
+"FAQ" = "FAQ";
+"Contact Us" = "Contact Us";
+"Terms and Conditions" = "Terms and Conditions";
+"Change App Language" = "Change App Language";
+"Feedback" = "Feedback";
+"Report a bug" = "Report a bug";
+"Send Feedback" = "Send Feedback";
+"Logout" = "Logout";
+"General" = "General";
+"Feedback" = "Feedback";
+"Settings" = "Settings";
+"Rate Us" = "Rate Us";
+
+// MARK: Dashboard
+"discussion" = "discussion";
+"SmallIcon" = "SmallIcon";
+"drawing-compass" = "drawing-compass";
+"knowledge" = "knowledge";
+"pencil" = "pencil";
+"scale" = "scale";
+"schoolss" = "schoolss";
+"university" = "university";
+"support" = "support";
+"SmallIcon" = "SmallIcon";
+"Video" = "Video";
+
+"Communication" = "Communication";
+"Image/Pdf" = "Image/Pdf";
+"Video Upload" = "Video Upload";
+"Circulars" = "Circulars";
+"Homework" = "Homework";
+"Schedule Exam/Test" = "Schedule Exam/Test";
+"Notice Board" = "Notice Board";
+"Attendance marking" = "Attendance marking";
+"Messages from management" = "Messages from management";
+"Leave Requests" = "Leave Requests";
+"Assignment" = "Assignment";
+"Interaction with student" = "Interaction with student";
+"Online Meeting" = "Online Meeting";
+"Lesson Plan" = "Lesson Plan";
+"PTM" = "PTM";
+"Mark your attendance" = "Mark your attendance";
+"Absentees Report" = "Absentees Report";
+"School Strength" = "School Strength";
+"Daily Collection" = "Daily Collection";
+"Student Report" = "Student Report";
+"Fee Pending Report" = "Fee Pending Report";
+"Staff Wise Attendance Report" = "Staff Wise Attendance Report";
+
+
+
+"Events/Holidays" = "Events/Holidays";
+"Request Leave" = "Request Leave";
+"Fee Details" = "Fee Details";
+"Images" = "Images";
+"Interaction with Staff" = "Interaction with Staff";
+"Quiz Exam" = "Quiz Exam";
+"LSRW" = "LSRW";
+"Class Timetable" = "Class Timetable";
+"Certificate Request" = "Certificate Request";
+
+// MARK: profile page
+"Family Details" = "Family Details";
+"Fathername" = "Fathername";
+"Mothername" = "Mothername";
+"Father occupation" = "Father occupation";
+"Mother occupation" = "Mother occupation";
+"Secondary Phone no" = "Secondary Phone no";
+"Profile" = "Profile";
+"About Student" = "About Student";
+"Register number" = "Register number";
+"Standard" = "Standard";
+"Section" = "Section";
+"Contact details" = "Contact details";
+
+"Cancel"   = "Cancel";
+"Select" = "Select";
+"Choose an option" = "Choose an option";
+//MARK: Image Sender Side
+"Upload Image/Pdf" = "Upload Image/Pdf";
+"Description" = "Description";
+"Camera" = "Camera";
+"Gallery"= "Gallery";
+"Pdf" = "PDF";
+"Upload Attachment" = "Upload Attachment";
+"Camera Not Available" = "Camera Not Available";
+"This device has no camera." = "This device has no camera.";
+
+
+// MARK: piechart
+"OK" = "OK";
+"Rate Us" = "Rate Us";
+
+"School Strength" = "School Strength";
+"Total Strength" = "Total Strength";
+"Staff's count" = "Staff's count";
+"Boy's count" = "Boy's count";
+"Girl's count" = "Girl's count";
+
+// MARK: Logout page
+
+"Are you sure you want to logout?" = "Are you sure you want to logout?";
+"Cancel" = "Cancel";
+"Logout" = "Logout";
+"English" = "English";
+//MARK: Common Staff Side
+"Groups" = "Groups";
+"Standard or section" = "Standard or section";
+"Section or student" = "Section or student";
+//MARK: Video Sender Side
+"Enter Video Title" = "Enter Video Title";
+"Enter Video Description" = "Enter Video Description";
+"Choose Video From Gallery" = "Choose Video From Gallery";
+"Change Video" = "Change Video";
+"Upload Video" = "Upload Video";
+"Send" = "Send";
+"Click To Choose Video From File" = "Click To Choose Video From File";
+
+//MARK: Home Work Sender Side
+"Home Work" = "Home Work";
+"Content" = "Content";
+"Home Work Reports" = "Home Work Reports";
+"Compose Home work Message" = "Compose Home work Message";
+
+"NoticeBoard" = "NoticeBoard";
+"Search" = "Search";
+"Compose NoticeBoard" = "Compose NoticeBoard";
+"From" = "From";
+"To" = "To";
+"Upload Attachment" = "Upload Attachment";
+"Submit" = "Submit";
+"Image/Pdf" = "Image/Pdf";
+
+
+// MARK: Sender Side Assignment
+
+"Select the type in which you want to create the assignment" = "Select the type in which you want to create the assignment";
+"CREATE" = "CREATE";
+"VIEW" = "VIEW";
+"Assignment" = "Assignment";
+"Compose Assignment" = "Compose Assignment";
+"Submission Date" = "Submission Date";
+"Category" = "Category";
+"Click here to choose Image" = "Click here to choose Image";
+"Subject" = "Subject";
+"Category" = "Category";
+"Submission Due" = "Submission Due";
+"Submission Count" = "Submission Count";
+"Total Count" = "Total Count";
+"Forward" = "Forward";
+"Delete" = "Delete";
+"Submission" = "Submission";
+"Total" = "Total";
+"View" = "View";
+
+//MARK: Sender side Events
+//MARK: Attendence
+"Name" = "Name";
+"RollNo" = "Roll No";
+"Status" = "Status";
+"LeaveRequests" = "Leave Requests";
+"Section" = "Section '10th C'";
+"RollNo DESC" = "Roll No DESC";
+"RollNo ASC" = "Roll No ASC";
+"Name ASC" = "Name ASC";
+"Name DESC" = "Name DESC";
+"Apsent" = "Absent";
+"Present" = "Present";
+"Filter" = "Filter";
+"Present" = "Present";
+"Absent" = "Absent";
+"RollNo_ASC" = "Roll Number Ascending";
+"RollNo_DESC" = "Roll Number Descending";
+"Name_ASC" = "Name Ascending";
+"Name_DESC" = "Name Descending";
+"getAllStudent" = "Get All Students";
+"completed" = "Completed";
+"pending" = "Pending";
+
+//MARK: Event
+"Circulars" = "Circulars";
+"EnterPlace" = "Enter place";
+"EnterTitle" = "Enter Title";
+"EnterTextHere" = "Enter your Text here...";
+"AddPhotos1" = "Add Photos (Optional?)";
+"Venue" = "Venue";
+"History" = "History";
+"Create" = "Create";
+"AddPhotos" = "Add Photos";
+"Optional" = "(Optional?)";
+"From" = "From";
+"To" = "To";
+"EventTitle" = "Event Title";
+"EventDetails" = "Event Details";
+"CreateEvent" = "Create Event";
+"EnterPlace" = "Enter place";
+"EnterTitle" = "Enter Title";
+"EnterTextHere" = "Enter your Text here...";
+"egYogaEvent" = "eg. Yoga event";
+"egChennai" = "eg. Chennai";
+//MARK: Comunication
+"BackToTextMessage" = "Back to Text Message";
+"BackToVoiceMessage" = "Back to Voice Message";
+"selectedText" = "Selected Text";
+"invalidSelection" = "Invalid Selection";
+"selectDatesWithinMonth" = "You can only select dates within the currently displayed month.";
+//MARK: ScheduleExam
+"scheduleExam" = "Schedule Exam";
+
+
+
+
+
+
+
+
+
+
+
+
