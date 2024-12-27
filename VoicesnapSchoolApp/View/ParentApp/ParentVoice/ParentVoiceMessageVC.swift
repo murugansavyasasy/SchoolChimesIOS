@@ -660,20 +660,20 @@ class ParentVoiceMessageVC: UIViewController, UITableViewDelegate, UITableViewDa
             self.view.semanticContentAttribute = .forceLeftToRight
             self.BottomView.semanticContentAttribute = .forceLeftToRight
         }
-        HomeLabel.text = LangDict["home"] as? String
-        FAQLabel.text = LangDict["faq"] as? String
-        PasswordLabel.text = LangDict["txt_password"] as? String
-        LogoutLabel.text = LangDict["txt_menu_setting"] as? String
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Records Found.."
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        HomeLabel.text = commonStringNames.home.translated() as? String
+        FAQLabel.text = commonStringNames.faq.translated() as? String
+        PasswordLabel.text = commonStringNames.txt_password.translated() as? String
+        LogoutLabel.text = commonStringNames.txt_menu_setting.translated() as? String
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Records Found.."
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         self.loadViewData()
         
     }
     
     func loadViewData(){
         strCountryCode = UserDefaults.standard.object(forKey: COUNTRY_CODE) as! String
-        self.title = languageDictionary["recent_voice_messages"] as? String
+        self.title = commonStringNames.recent_voice_messages as? String
         if(Util .isNetworkConnected()){
             DispatchQueue.main.async {
                 self.CallDatawiseVoiceApi()

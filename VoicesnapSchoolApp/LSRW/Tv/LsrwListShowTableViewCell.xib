@@ -201,14 +201,19 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="descHeadLbl" destination="XVf-pX-tXR" id="97L-dz-DnS"/>
                 <outlet property="descLbl" destination="LTR-si-xx1" id="v0a-H3-f2f"/>
                 <outlet property="newLbl" destination="te6-MZ-Rx9" id="9d4-nn-gTd"/>
                 <outlet property="sentByLbl" destination="yF0-vo-IwM" id="NY1-Zg-Jhd"/>
+                <outlet property="sentHeadLBl" destination="H1q-Kl-LJh" id="2JT-hi-O7c"/>
+                <outlet property="subHeadLbl" destination="0ow-O1-SJN" id="N4L-sc-aAM"/>
                 <outlet property="subLbl" destination="uEH-pt-UMQ" id="Rja-db-xgc"/>
+                <outlet property="submitHeadLbl" destination="fdm-SW-0eU" id="8kg-oj-TpM"/>
                 <outlet property="submittedHeadingLbl" destination="fdm-SW-0eU" id="Qkc-6U-Djb"/>
                 <outlet property="submittedOnLbl" destination="wkI-Ub-cUa" id="YZa-RK-8Rb"/>
                 <outlet property="takingSkillHeight" destination="KQt-1t-Geo" id="qsI-fo-cjY"/>
                 <outlet property="takingSkillView" destination="b80-Cn-kUv" id="mDL-Fk-mjp"/>
+                <outlet property="titHeadLbl" destination="QDF-xM-r5L" id="JS2-ie-4hP"/>
                 <outlet property="titleLbl" destination="Lts-u6-OsJ" id="aWP-xg-sPl"/>
                 <outlet property="typeLbl" destination="L7i-9P-1Jd" id="Rkx-a5-ITB"/>
             </connections>
@@ -220,10 +225,10 @@
             <color red="0.0" green="0.37599998712539673" blue="0.3919999897480011" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemGray5Color">
-            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemIndigoColor">
-            <color red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

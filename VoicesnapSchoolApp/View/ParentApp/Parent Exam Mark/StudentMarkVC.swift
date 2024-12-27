@@ -466,9 +466,9 @@ class StudentMarkVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             
         }
         
-        strNoRecordAlert = LangDict["no_exams"] as? String ?? "No Exams Found.."
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        strNoRecordAlert = commonStringNames.no_exams.translated() as? String ?? "No Exams Found.."
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         self.navTitle()
         
     }

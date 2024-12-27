@@ -605,10 +605,10 @@ class CheckOTPVC: UIViewController,Apidelegate,UITextFieldDelegate,HTTPClientDel
         }else{
             self.view.semanticContentAttribute = .forceLeftToRight
         }
-        OTPLabel.text = LangDict["enter_your_otp"] as? String
-        OTPText.placeholder = LangDict["enter_your_otp"] as? String
-        ResendOTPButton.setTitle(LangDict["resend_otp"] as? String, for: .normal)
-        SubmitButton.setTitle(LangDict["btn_sign_submit"] as? String, for: .normal)
+        OTPLabel.text = commonStringNames.enter_your_otp.translated() as? String
+        OTPText.placeholder = commonStringNames.enter_your_otp.translated() as? String
+        ResendOTPButton.setTitle(commonStringNames.resend_otp.translated() as? String, for: .normal)
+                                 SubmitButton.setTitle(commonStringNames.btn_sign_submit.translated() as? String, for: .normal)
         
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?)

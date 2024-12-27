@@ -36,9 +36,11 @@ struct GetTeachData  {
 class PTMViewController: UIViewController ,UITableViewDelegate,UITableViewDataSource,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout{
 
 
+    @IBOutlet weak var scheduleLbl: UILabel!
     @IBOutlet weak var bookSlotBtn: UIButton!
     
-
+    @IBOutlet weak var meetLbl: UILabel!
+    
     @IBOutlet weak var tvLeading: NSLayoutConstraint!
     
     @IBOutlet weak var tvTralling: NSLayoutConstraint!
@@ -63,6 +65,8 @@ class PTMViewController: UIViewController ,UITableViewDelegate,UITableViewDataSo
     @IBOutlet weak var calanderHeightCon: NSLayoutConstraint!
 
     @IBOutlet weak var noRecordsView: UIView!
+    
+    @IBOutlet weak var actionTitleLbl: UILabel!
     var getStaffIdArr = [Int]()
     var getEventNameArr = [String]()
     let drop_down = DropDown()
@@ -139,7 +143,7 @@ var getLoginClassId : Int!
         staffId = userDefaults.integer(forKey: DefaultsKeys.StaffID)
         getLoginClassId = userDefaults.integer(forKey: DefaultsKeys.ClassID)
         var strChild = userDefaults.string(forKey: DefaultsKeys.chilId)
-
+        actionTitleLbl.text = "Parent Teacher Meeting".translated()
       
         studentId = Int(strChild!)
        

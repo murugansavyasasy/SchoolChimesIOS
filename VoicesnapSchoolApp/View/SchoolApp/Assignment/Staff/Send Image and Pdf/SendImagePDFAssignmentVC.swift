@@ -634,20 +634,20 @@ class SendImagePDFAssignmentVC: UIViewController , UIActionSheetDelegate, UIImag
         
         if(assignmentType == "pdf"){
             titleImageIcon.image = UIImage(named: "pdfImage")
-            ClickHereButton.setTitle(LangDict["click_here_pdf"] as? String, for: .normal)
-            ClickImageCaptureButton.setTitle(LangDict["change_pdf"] as? String, for: .normal)
-            SendImageLabel.text = LangDict["compose_pdf"] as? String
-            descriptionTextField.placeholder = LangDict["assignment_title"] as? String
+            ClickHereButton.setTitle(commonStringNames.click_here_pdf.translated() as? String, for: .normal)
+                                     ClickImageCaptureButton.setTitle(commonStringNames.change_pdf.translated() as? String, for: .normal)
+                                                                      SendImageLabel.text = commonStringNames.compose_pdf.translated() as? String
+                                                                      descriptionTextField.placeholder = commonStringNames.assignment_title.translated() as? String
         }else{
             titleImageIcon.image = UIImage(named: "ImageIcon")
-            ClickHereButton.setTitle(LangDict["click_here_image"] as? String, for: .normal)
-            ClickImageCaptureButton.setTitle(LangDict["change_image"] as? String, for: .normal)
-            SendImageLabel.text = LangDict["teacher_txt_compose_Img"] as? String
-            descriptionTextField.placeholder = LangDict["assignment_title"] as? String
+                ClickHereButton.setTitle(commonStringNames.click_here_image as? String, for: .normal)
+                                         ClickImageCaptureButton.setTitle(commonStringNames.change_image.translated() as? String, for: .normal)
+                                                                          SendImageLabel.text = commonStringNames.teacher_txt_compose_Img.translated() as? String
+                                                                          descriptionTextField.placeholder = commonStringNames.assignment_title.translated() as? String
         }
-        SubmissionDateLabel.text = LangDict["subission_date"] as? String
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
-        SendButton.setTitle(LangDict["teacher_choose_recipient"] as? String, for: .normal)
+                                                                          SubmissionDateLabel.text = commonStringNames.subission_date.translated() as? String
+                                                                          strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
+                                                                          SendButton.setTitle(commonStringNames.teacher_choose_recipient.translated() as? String, for: .normal)
         
     }
     

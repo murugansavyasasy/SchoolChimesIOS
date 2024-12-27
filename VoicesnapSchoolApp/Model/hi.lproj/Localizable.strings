@@ -1,0 +1,236 @@
+/*
+  Localizable.strings
+  VsSchoolChimes
+
+  Created by admin on 08/11/24.
+  
+*/
+"welcome_message" = "स्वागत है";
+"change_language" = "भाषा बदलें";
+"Home" = "होम";
+"Help" = "मदद";
+"Settings" = "सेटिंग्स";
+"Profile" = "प्रोफाइल";
+
+// MARK: Settings page
+"Notifications" = "सूचनाएं";
+"FAQ" = "सामान्य प्रश्न";
+"Contact Us" = "हमसे संपर्क करें";
+"Terms and Conditions" = "नियम और शर्तें";
+"Change App Language" = "ऐप की भाषा बदलें";
+"Feedback" = "प्रतिक्रिया";
+"Report a bug" = "त्रुटि की रिपोर्ट करें";
+"Send Feedback" = "प्रतिक्रिया भेजें";
+"Logout" = "लॉगआउट करें";
+"General" = "सामान्य";
+"Feedback" = "प्रतिक्रिया";
+"Settings" = "सेटिंग्स";
+"Rate Us" = "हमें रेट करें";
+"Contact Support" = "सहायता संपर्क करें";
+
+// MARK: Dashboard
+"discussion" = "चर्चा";
+"SmallIcon" = "छोटा आइकन";
+"drawing-compass" = "चित्रकला यंत्र";
+"knowledge" = "ज्ञान";
+"pencil" = "पेंसिल";
+"scale" = "स्केल";
+"schoolss" = "स्कूल";
+"university" = "विश्वविद्यालय";
+"support" = "समर्थन";
+"Video" = "वीडियो";
+
+"Communication" = "संचार";
+"Image/Pdf" = "छवि/पीडीएफ";
+"Video Upload" = "वीडियो अपलोड";
+"Circulars" = "परिपत्र";
+"Homework" = "गृहकार्य";
+"Schedule Exam/Test" = "परीक्षा/परीक्षण अनुसूची";
+"Notice Board" = "सूचना पट्ट";
+"Attendance marking" = "उपस्थिति अंकित करना";
+"Messages from management" = "प्रबंधन से संदेश";
+"Leave Requests" = "अवकाश अनुरोध";
+"Assignment" = "कार्य";
+"Interaction with student" = "छात्र के साथ बातचीत";
+"Online Meeting" = "ऑनलाइन बैठक";
+"Lesson Plan" = "पाठ योजना";
+"PTM" = "अभिभावक-शिक्षक बैठक";
+"Mark your attendance" = "अपनी उपस्थिति दर्ज करें";
+"Absentees Report" = "अनुपस्थित रिपोर्ट";
+"School Strength" = "विद्यालय की ताकत";
+"Daily Collection" = "दैनिक संग्रह";
+"Student Report" = " छात्र रिपोर्ट";
+"Fee Pending Report" = "फीस लंबित रिपोर्ट";
+"Staff Wise Attendance Report" = "कर्मचारी वार उपस्थिति रिपोर्ट";
+
+
+
+"Events/Holidays" = "कार्यक्रम/छुट्टियां";
+"Request Leave" = "अवकाश का अनुरोध";
+"Fee Details" = "शुल्क विवरण";
+"Images" = "छवियां";
+"Interaction with Staff" = "कर्मचारियों के साथ बातचीत";
+"Quiz Exam" = "प्रश्नोत्तरी परीक्षा";
+"LSRW" = "सुनना, बोलना, पढ़ना, लिखना ";
+"Class Timetable" = "कक्षा समय सारिणी";
+"Certificate Request" = "प्रमाणपत्र अनुरोध";
+
+
+
+
+// MARK: profile page
+"Family Details" = "परिवार का विवरण";
+"Fathername" = "पिता का नाम";
+"Mothername" = "माता का नाम";
+"Father occupation" = "पिता का व्यवसाय";
+"Mother occupation" = "माता का व्यवसाय";
+"Secondary Phone no" = "द्वितीयक फोन नंबर";
+"About Student" = "छात्र के बारे में";
+"Profile" = "प्रोफ़ाइल";
+"Register number" = "पंजीकरण संख्या";
+"Standard" = "कक्षा";
+"Section" = "अनुभाग";
+"Contact details" = "संपर्क विवरण";
+
+// MARK: piechart
+"School Strength" = "विद्यालय की कुल संख्या";
+"Total Strength" = "कुल संख्या";
+"Staff's count" = "कर्मचारियों की संख्या";
+"Boy's count" = "लड़कों की संख्या";
+"Girl's count" = "लड़कियों की संख्या";
+
+// MARK: Logout page
+"Are you sure you want to logout?" = "क्या आप वाकई लॉगआउट करना चाहते हैं?";
+"Cancel" = "रद्द करें";
+
+
+"Select" = "चयन करें";
+"Choose an option" = "एक विकल्प चुनें";
+//MARK: Image Sender Side
+"Upload Image/Pdf" = "छवि/PDF अपलोड करें";
+"Description" = "विवरण";
+"Camera" = "कैमरा";
+"Gallery" = "गैलरी";
+"Pdf" = "पीडीएफ";
+"Upload Attachment" = "संलग्नक अपलोड करें";
+"Camera Not Available" = "कैमरा उपलब्ध नहीं है";
+"This device has no camera." = "इस डिवाइस में कैमरा नहीं है";
+"OK" = "ठीक है";
+"Camera Not Available" = "कैमरा उपलब्ध नहीं है";
+"This device has no camera." = "इस डिवाइस में कैमरा नहीं है";
+//MARK: Common Staff Side
+"Groups" = "समूह";
+"Standard or section" = "मानक या खंड";
+"Section or student" = " खंड या छात्र";
+//MARK: Video Sender Side
+"Enter Video Title" = "वीडियो शीर्षक दर्ज करें";
+"Enter Video Description" = "वीडियो विवरण दर्ज करें";
+"Choose Video From Gallery" = "गैलरी से वीडियो चुनें";
+"Change Video" = "वीडियो बदलें";
+"Upload Video" = "वीडियो अपलोड करें";
+"Send" = "भेजें";
+"Click To Choose Video From File" = "फाइल से वीडियो चुनने के लिए क्लिक करें";
+
+//MARK: Home Work Sender Side
+"Home Work" = "होमवर्क";
+"Content" = "सामग्री";
+"Home Work Reports" = "होमवर्क रिपोर्ट्स";
+"Compose Home work Message" = "สहोमवर्क संदेश तैयार करें।";
+
+// MARK: Feedback page
+"How satisfied are you with the School Chimes?" = "आप School Chimes से कितने संतुष्ट हैं?";
+"Maybe later" = "शायद बाद में";
+"Any other suggestions? (optional)" = "कोई अन्य सुझाव? (वैकल्पिक)";
+"SUBMIT" = "प्रस्तुत करें";
+"Thank You" = "धन्यवाद";
+"We appreciate your feedback! Your rating helps us improve." = "हम आपके फीडबैक की सराहना करते हैं! आपकी रेटिंग से हमें सुधार में मदद मिलती है।";
+"Back to Home <<" = "मुखपृष्ठ पर वापस जाएं <<";
+
+// MARK: Report bugs page
+"Select Module*" = "मॉड्यूल का चयन करें*";
+"Enter Bugs *" = "त्रुटियां दर्ज करें *";
+"Upload Attachment" = "संलग्नक अपलोड करें";
+
+"NoticeBoard" = "सूचना पट्ट";
+"Search" = "खोजें";
+"Compose NoticeBoard" = "सूचना पट्ट बनाएं";
+"From" = "से";
+"To" = "तक";
+"Upload Attachment" = "संलग्नक अपलोड करें";
+"Submit" = "प्रस्तुत करें";
+"Image/Pdf" = "छवि/पीडीएफ";
+
+
+
+// MARK: Sender Side Assignment
+
+"Select the type in which you want to create the assignment" = "असाइनमेंट बनाने के प्रकार का चयन करें";
+"CREATE" = "बनाएं";
+"VIEW" = "देखें";
+"Assignment" = "असाइनमेंट तैयार करें";
+"Compose Assignment" = "असाइनमेंट का शीर्षक";
+"Submission Date" = "जमा करने की तारीख";
+"Category" = "श्रेणी";
+"Click here to choose Image" = "यहाँ छवि चुनने के लिए क्लिक करें";
+"Subject" = "विषय";
+"Category" = "श्रेणी";
+"Submission Due" = "जमा करने की समय-सीमा";
+"Submission Count" = "जमा की गई संख्या";
+"Total Count" = "कुल संख्या";
+"Forward" = "आगे बढ़ाएं";
+"Delete" = "हटाएं";
+"Submission" = "जमा करें";
+"Total" = "कुल";
+"View" = "देखें";
+
+//MARK: Sender side Events
+//Temp:
+"Name" = "नाम";
+"RollNo" = "रोल नंबर";
+"Status" = "स्थिति";
+"LeaveRequests" = "छुट्टी के अनुरोध";
+"Section" = "सेक्शन '10वीं सी'";
+"RollNo DESC" = "Roll No घटता क्रम";
+"RollNo ASC" = "Roll No बढ़ता क्रम";
+"Name ASC" = "नाम बढ़ता क्रम";
+"Name DESC" = "नाम घटता क्रम";
+"Apsent" = "अनुपस्थित";
+"Present" = "उपस्थित";
+"Filter" = "फ़िल्टर";
+"Present" = "उपस्थित";
+"Absent" = "अनुपस्थित";
+
+//MARK: Event
+"Circulars" = "परिपत्र";
+"EventTitle" = "कार्यक्रम का शीर्षक";
+"EventDetails" = "कार्यक्रम विवरण";
+"AddPhotos1" = "फोटो जोड़ें (वैकल्पिक?)";
+"Venue" = "स्थान";
+"From" = "से";
+"To" = "तक";
+"CreateEvent" = "कार्यक्रम बनाएं";
+"History" = "इतिहास";
+"Create" = "बनाएं";
+"Optional" = "(वैकल्पिक?)";
+"AddPhotos" = "फोटो जोड़ें";
+"EnterPlace" = "स्थान दर्ज करें";
+"EnterTitle" = "शीर्षक दर्ज करें";
+"EnterTextHere" = "यहाँ अपना टेक्स्ट दर्ज करें...";
+"egYogaEvent" = "उदा. योग कार्यक्रम";
+"egChennai" = "उदा. चेन्नई";
+"RollNo_ASC" = "क्रमांक आरोही";
+"RollNo_DESC" = "क्रमांक अवरोही";
+"Name_ASC" = "नाम आरोही";
+"Name_DESC" = "नाम अवरोही";
+"getAllStudent" = "सभी छात्रों को प्राप्त करें";
+"completed" = "पूर्ण";
+"pending" = "लंबित";
+
+//MARK: Comunication
+"BackToTextMessage" = "टेक्स्ट संदेश पर वापस जाएं";
+"BackToVoiceMessage" = "वॉयस संदेश पर वापस जाएं";
+"selectedText" = "चयनित पाठ";
+"invalidSelection" = "अमान्य चयन";
+"selectDatesWithinMonth" = "आप केवल वर्तमान में प्रदर्शित माह के भीतर की तिथियों का चयन कर सकते हैं।";
+//MARK: ScheduleExam
+"scheduleExam" = "परीक्षा निर्धारित करें";

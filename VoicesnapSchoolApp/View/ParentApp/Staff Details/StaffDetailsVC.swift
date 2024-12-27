@@ -404,15 +404,14 @@ class StaffDetailsVC: UIViewController,UITableViewDelegate,UITableViewDataSource
             
             
         }
-        HomeLabel.text = LangDict["home"] as? String
-        //        LanguageLabel.text = LangDict["txt_language"] as? String
-        FAQLabel.text = LangDict["faq"] as? String
-        PasswordLabel.text = LangDict["txt_password"] as? String
-        LogoutLabel.text = LangDict["txt_menu_setting"] as? String
+        HomeLabel.text = commonStringNames.home as? String
+        FAQLabel.text = commonStringNames.faq as? String
+        PasswordLabel.text = commonStringNames.txt_password as? String
+        LogoutLabel.text = commonStringNames.txt_menu_setting as? String
         
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        strNoRecordAlert = commonStringNames.no_records as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message as? String ?? "Something went wrong.Try Again"
         
         self.loadViewData()
         

@@ -457,27 +457,27 @@ class OnlineMeetingVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,
             TextMessageView.textAlignment = .left
         }
         if(strFrom == "Assignment"){
-            ComposeTitleLabel.text  =  LangDict["teacher_txt_composemsg"] as? String
-            SubmissionDateLabel.text = LangDict["subission_date"] as? String
+            ComposeTitleLabel.text  =  commonStringNames.teacher_txt_composemsg.translated() as? String
+            SubmissionDateLabel.text = commonStringNames.subission_date.translated() as? String
             
-            TitleText.placeholder  =  LangDict["assignment_title"] as? String
+            TitleText.placeholder  =  commonStringNames.assignment_title.translated() as? String
             ToStandardSection.setTitle("Choose Recipients", for: .normal)
-            textViewPlaceholder =  LangDict["teacher_txt_typemsg"] as? String ?? "Content?"
+            textViewPlaceholder =  commonStringNames.teacher_txt_typemsg.translated() as? String ?? "Content?"
             
         }
         else{
-            TitleText.placeholder  = LangDict["teacher_txt_only_title"] as? String
+            TitleText.placeholder  = commonStringNames.teacher_txt_only_title.translated() as? String
             if (strCountryName.uppercased() == SELECT_COUNTRY){
-                ToStandardSection.setTitle(LangDict["teacher_staff_to_sections_usa"] as? String, for: .normal)
+                ToStandardSection.setTitle(commonStringNames.teacher_staff_to_sections_usa.translated() as? String, for: .normal)
                 print(ToStandardSection)
-                ToGroupSection.setTitle(LangDict["send_to_standard_groups_usa"] as? String, for: .normal)
+                                           ToGroupSection.setTitle(commonStringNames.send_to_standard_groups_usa.translated() as? String, for: .normal)
             }
             else{
-                ToStandardSection.setTitle(LangDict["teacher_staff_to_sections"] as? String, for: .normal)
-                ToGroupSection.setTitle(LangDict["send_to_standard_groups"] as? String, for: .normal)
+                    ToStandardSection.setTitle(commonStringNames.teacher_staff_to_sections.translated() as? String, for: .normal)
+                                               ToGroupSection.setTitle(commonStringNames.send_to_standard_groups.translated() as? String, for: .normal)
             }
             
-            textViewPlaceholder =  LangDict["teacher_txt_typemsg"] as? String ?? "Content?"
+                                                                       textViewPlaceholder =  commonStringNames.teacher_txt_typemsg.translated() as? String ?? "Content?"
         }
         TextMessageView.text = textViewPlaceholder
         TextMessageView.textColor = UIColor.lightGray

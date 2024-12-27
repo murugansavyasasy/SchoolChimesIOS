@@ -899,22 +899,21 @@ class ParentExamTestVC: UIViewController, UITableViewDataSource,UITableViewDeleg
             self.BottomView.semanticContentAttribute = .forceLeftToRight
             // self.searchBar.makeTextWritingDirectionLeftToRight(AnyClass.self)
         }
-        HomeLabel.text = LangDict["home"] as? String
-        //        LanguageLabel.text = LangDict["txt_language"] as? String
-        FAQLabel.text = LangDict["faq"] as? String
-        PasswordLabel.text = LangDict["txt_password"] as? String
-        LogoutLabel.text = LangDict["txt_menu_setting"] as? String
-        searchBar.placeholder = LangDict["search_exams"] as? String
+        HomeLabel.text = commonStringNames.home.translated() as? String
+        FAQLabel.text = commonStringNames.faq.translated() as? String
+        PasswordLabel.text = commonStringNames.txt_password.translated() as? String
+        LogoutLabel.text = commonStringNames.txt_menu_setting.translated() as? String
+        searchBar.placeholder = commonStringNames.search_exams.translated() as? String
         
-        strExamName = LangDict["teacher_txt_exam_title"] as? String ?? "Exam Name"
-        strSyllabus = LangDict["teacher_txt_exam_typemsg"] as? String ?? "Exam Syllabus"
-        strSubject = LangDict["subject_title"] as? String ?? "Subject :"
-        strMark = LangDict["max_mark"] as? String ?? "Date :"
-        strDate = LangDict["subject_date"] as? String ?? "Max Mark :"
-        strSession = LangDict["subject_session"] as? String ?? "Session :"
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        strExamName = commonStringNames.teacher_txt_exam_title.translated() as? String ?? "Exam Name"
+        strSyllabus = commonStringNames.teacher_txt_exam_typemsg.translated() as? String ?? "Exam Syllabus"
+        strSubject = commonStringNames.subject_title.translated() as? String ?? "Subject :"
+        strMark = commonStringNames.max_mark.translated() as? String ?? "Date :"
+        strDate = commonStringNames.subject_date.translated() as? String ?? "Max Mark :"
+        strSession = commonStringNames.subject_session.translated() as? String ?? "Session :"
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         self.loadViewData()
         
     }

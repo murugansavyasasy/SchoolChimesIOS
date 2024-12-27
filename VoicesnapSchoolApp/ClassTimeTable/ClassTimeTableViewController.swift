@@ -18,6 +18,7 @@ class ClassTimeTableViewController: UIViewController,UITableViewDataSource,UITab
     
     @IBOutlet weak var timeLbl: UILabel!
     
+    @IBOutlet weak var actTimeLbl: UILabel!
     
     @IBOutlet weak var alerView: UIView!
     

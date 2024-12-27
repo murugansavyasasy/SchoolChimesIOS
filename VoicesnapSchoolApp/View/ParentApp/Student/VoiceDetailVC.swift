@@ -303,7 +303,7 @@ class VoiceDetailVC: UIViewController,AVAudioPlayerDelegate {
             self.navigationController?.navigationBar.semanticContentAttribute = .forceLeftToRight
             self.view.semanticContentAttribute = .forceLeftToRight
         }
-        PlayVoiceMsgLabel.text = LangDict["hint_play_voice"] as? String
+        PlayVoiceMsgLabel.text = commonStringNames.hint_play_voice.translated() as? String
     }
     
 }

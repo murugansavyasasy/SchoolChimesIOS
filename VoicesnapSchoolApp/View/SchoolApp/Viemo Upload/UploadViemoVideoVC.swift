@@ -546,21 +546,21 @@ class UploadViemoVideoVC: UIViewController, UIActionSheetDelegate, UIImagePicker
             aboutTextField.textAlignment = .left
         }
         if (strCountryName.uppercased() == SELECT_COUNTRY){
-            StandardSectionButton.setTitle(LangDict["teacher_staff_to_sections_usa"] as? String, for: .normal)
-            StandardStudentButton.setTitle(LangDict["teacher_staff_to_students"] as? String, for: .normal)
+            StandardSectionButton.setTitle(commonStringNames.teacher_staff_to_sections_usa.translated() as? String, for: .normal)
+                                           StandardStudentButton.setTitle(commonStringNames.teacher_staff_to_students.translated() as? String, for: .normal)
         }
         else{
-            StandardSectionButton.setTitle(LangDict["teacher_staff_to_sections"] as? String, for: .normal)
-            StandardStudentButton.setTitle(LangDict["teacher_staff_to_students"] as? String, for: .normal)
+                StandardSectionButton.setTitle(commonStringNames.teacher_staff_to_sections.translated() as? String, for: .normal)
+                                               StandardStudentButton.setTitle(commonStringNames.teacher_staff_to_students.translated() as? String, for: .normal)
         }
-        ClickHereButton.setTitle(LangDict["choose_gallery_video"] as? String, for: .normal)
-        ClickImageCaptureButton.setTitle(LangDict["change_video"] as? String, for: .normal)
-        SendImageLabel.text = LangDict["compose_video"] as? String
-        titleTextField.placeholder = LangDict["title"] as? String
-        aboutTextField.placeholder = LangDict["about_video"] as? String
+                                                                              ClickHereButton.setTitle(commonStringNames.choose_gallery_video.translated() as? String, for: .normal)
+                                                                                                       ClickImageCaptureButton.setTitle(commonStringNames.change_video.translated() as? String, for: .normal)
+                                                                                                                                        SendImageLabel.text = commonStringNames.compose_video.translated() as? String
+                                                                                                                                        titleTextField.placeholder = commonStringNames.title.translated() as? String
+                                                                                                                                        aboutTextField.placeholder = commonStringNames.about_video.translated() as? String
         
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
-        SendButton.setTitle(LangDict["teacher_choose_recipient"] as? String, for: .normal)
+                                                                                                                                        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
+                                                                                                                                        SendButton.setTitle(commonStringNames.teacher_choose_recipient.translated() as? String, for: .normal)
         
     }
     

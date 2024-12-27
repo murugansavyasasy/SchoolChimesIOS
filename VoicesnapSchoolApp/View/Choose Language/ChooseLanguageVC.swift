@@ -155,12 +155,12 @@ class ChooseLanguageVC: UIViewController ,UITableViewDelegate,UITableViewDataSou
             self.ChooseLanguageTableView.semanticContentAttribute = .forceLeftToRight
             chooseLanguageLabel.textAlignment = .left
         }
-        chooseLanguageLabel.text = LangDict["choose_language"] as? String
-        cancelButton.setTitle(LangDict["teacher_cancel"] as? String, for: .normal)
-        okButton.setTitle(LangDict["teacher_btn_ok"] as? String, for: .normal)
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        chooseLanguageLabel.text = commonStringNames.choose_language.translated() as? String
+        cancelButton.setTitle(commonStringNames.teacher_cancel.translated() as? String, for: .normal)
+        okButton.setTitle(commonStringNames.teacher_btn_ok.translated() as? String, for: .normal)
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+                          strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+                          strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
     }
     
     //MARK: API  DELEGATE

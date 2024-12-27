@@ -82,7 +82,7 @@ class NewProductOfferVC: UIViewController,UIWebViewDelegate {
             UIView.appearance().semanticContentAttribute = .forceLeftToRight
         }
         if(viewFromString == "p21"){
-            self.title = LangDict["special_offer"] as? String
+            self.title = commonStringNames.special_offer.translated() as? String
             self.title = "Important Info"
         }else{
             self.title = "New Products"

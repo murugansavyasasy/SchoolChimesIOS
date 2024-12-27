@@ -749,13 +749,13 @@ class SchoolSelectionVC: UIViewController ,UITableViewDelegate,UITableViewDataSo
         if (self.fromVC == "daily_collection_report") {
             
         }
-        self.SendButton.setTitle(LangDict["teacher_pop_response_btn_send"] as? String, for: .normal)
-        self.SendButton.setTitle(LangDict["teacher_pop_response_btn_send"] as? String, for: .normal)
+        self.SendButton.setTitle(commonStringNames.teacher_pop_response_btn_send.translated() as? String, for: .normal)
+                                 self.SendButton.setTitle(commonStringNames.teacher_pop_response_btn_send.translated() as? String, for: .normal)
         
         
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         self.loadViewData()
         
     }

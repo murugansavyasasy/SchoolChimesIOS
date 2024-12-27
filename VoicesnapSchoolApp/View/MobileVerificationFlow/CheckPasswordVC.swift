@@ -786,17 +786,17 @@ class CheckPasswordVC: UIViewController ,Apidelegate,UITextFieldDelegate,UITable
         }else{
             self.view.semanticContentAttribute = .forceLeftToRight
         }
-        PasswordLabel.text = LangDict["enter_your_passworddd"] as? String
-        UserPassWordText.placeholder = LangDict["hint_password"] as? String
-        SubmitButton.setTitle(LangDict["btn_sign_submit"] as? String, for: .normal)
-        CancelButton.setTitle(LangDict["teacher_pop_password_btnCancel"] as? String, for: .normal)
-        UpdateButton.setTitle(LangDict["teacher_pop_password_btnUpdate"] as? String, for: .normal)
+        PasswordLabel.text = commonStringNames.enter_your_passworddd.translated() as? String
+        UserPassWordText.placeholder = commonStringNames.hint_password.translated() as? String
+        SubmitButton.setTitle(commonStringNames.btn_sign_submit.translated() as? String, for: .normal)
+                              CancelButton.setTitle(commonStringNames.teacher_pop_password_btnCancel.translated() as? String, for: .normal)
+                                                    UpdateButton.setTitle(commonStringNames.teacher_pop_password_btnUpdate.translated() as? String, for: .normal)
         
-        EnterOTPLabel.text = LangDict["enter_your_otp"] as? String
-        NewPasswordLabel.text = LangDict["teacher_pop_password_txt_new"] as? String
-        VerifyPasswordLabel.text = LangDict["teacher_pop_password_txt_repeat"] as? String
-        TitleChangePswdLabel.text = LangDict["reset_password"] as? String
-        self.passwordBindLabel.text = LangDict["password_bind"] as? String
+                                                                          EnterOTPLabel.text = commonStringNames.enter_your_otp.translated() as? String
+                                                                          NewPasswordLabel.text = commonStringNames.teacher_pop_password_txt_new.translated() as? String
+                                                                          VerifyPasswordLabel.text = commonStringNames.teacher_pop_password_txt_repeat.translated() as? String
+                                                                          TitleChangePswdLabel.text = commonStringNames.reset_password.translated() as? String
+                                                                          self.passwordBindLabel.text = commonStringNames.password_bind.translated() as? String
         
     }
     

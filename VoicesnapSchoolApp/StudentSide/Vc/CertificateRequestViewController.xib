@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -12,15 +12,20 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CertificateRequestViewController" customModule="VoicesnapSchoolApp" customModuleProvider="target">
             <connections>
+                <outlet property="actReqLBl" destination="a7E-dT-KBF" id="mnt-Yb-Due"/>
+                <outlet property="actionCertiLbl" destination="Ea7-H5-Q6X" id="WMt-T9-cqJ"/>
                 <outlet property="adView" destination="UBE-wv-Tda" id="YPY-hq-eY3"/>
                 <outlet property="adViewHeight" destination="vtI-os-IX7" id="Exw-uE-x6m"/>
                 <outlet property="imageView" destination="ULH-1m-2u1" id="OfD-mk-EMh"/>
                 <outlet property="noRecordLbl" destination="E0p-oF-7Xn" id="KoG-mk-hPY"/>
                 <outlet property="noRecordVieww" destination="fVA-ho-Y5p" id="XQb-Zh-y18"/>
                 <outlet property="reasonViewHide" destination="axu-4x-FKn" id="wS0-sf-tCt"/>
+                <outlet property="reqCetLbl" destination="ybB-KU-mau" id="rA6-Ku-S9G"/>
                 <outlet property="reqDataShowView" destination="phO-OA-EYQ" id="ToX-ph-h4q"/>
                 <outlet property="requestCertificateView" destination="xRD-6C-76r" id="cyw-KM-nx5"/>
                 <outlet property="segControl" destination="meu-7H-Kdr" id="8pW-fE-m0C"/>
+                <outlet property="selCertLbl" destination="mPF-y9-NrX" id="fGz-4t-BdX"/>
+                <outlet property="selUrgLbl" destination="LWH-OJ-Ye8" id="kTd-CP-a8T"/>
                 <outlet property="selectCertificateLbl" destination="Pcd-gN-Fx9" id="upa-OI-zGm"/>
                 <outlet property="selectCertificateView" destination="uoa-mZ-9wS" id="Grm-WL-Cwi"/>
                 <outlet property="selectUrgencyView" destination="Qik-4H-CQR" id="g6n-Vd-119"/>
@@ -429,7 +434,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

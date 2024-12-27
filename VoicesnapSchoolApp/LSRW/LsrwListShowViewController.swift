@@ -18,6 +18,7 @@ case failure(Error)
 
 class LsrwListShowViewController: UIViewController ,UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate {
   
+    @IBOutlet weak var actTitleLbl: UILabel!
     
     @IBOutlet weak var nodataLbl: UILabel!
     @IBOutlet weak var nodataView: UIView!

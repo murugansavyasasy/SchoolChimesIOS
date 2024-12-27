@@ -542,8 +542,8 @@ class StudentSubmitAssignmentVC: UIViewController, UIActionSheetDelegate, UIImag
             descriptionTextField.textAlignment = .left
         }
         
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
-        SendButton.setTitle(LangDict["pop_response_btn_send"] as? String, for: .normal)
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
+        SendButton.setTitle(commonStringNames.pop_response_btn_send.translated() as? String, for: .normal)
         
     }
     

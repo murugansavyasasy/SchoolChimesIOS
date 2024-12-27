@@ -298,12 +298,12 @@ class StaffLeaveRequestVC: UIViewController ,UITableViewDelegate,UITableViewData
             UIView.appearance().semanticContentAttribute = .forceLeftToRight
         }
         
-        ApproveLabel.text = LangDict["approved"] as? String
-        DeclineLabel.text = LangDict["declined"] as? String
-        WaitingLabel.text = LangDict["waiting_for_approval"] as? String
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        ApproveLabel.text = commonStringNames.approved.translated() as? String
+        DeclineLabel.text = commonStringNames.declined.translated() as? String
+        WaitingLabel.text = commonStringNames.waiting_for_approval.translated() as? String
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         
         self.loadViewData()
         

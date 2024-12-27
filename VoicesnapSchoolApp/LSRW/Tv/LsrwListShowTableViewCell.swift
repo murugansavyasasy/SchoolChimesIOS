@@ -10,6 +10,20 @@ import UIKit
 
 class LsrwListShowTableViewCell: UITableViewCell {
 
+    
+    
+    @IBOutlet weak var sentHeadLBl: UILabel!
+    @IBOutlet weak var submitHeadLbl: UILabel!
+    
+    
+    @IBOutlet weak var subHeadLbl: UILabel!
+    
+    @IBOutlet weak var descHeadLbl: UILabel!
+    @IBOutlet weak var titHeadLbl: UILabel!
+    
+    
+    
+    
     @IBOutlet weak var newLbl: UILabel!
     @IBOutlet weak var typeLbl: UILabel!
     

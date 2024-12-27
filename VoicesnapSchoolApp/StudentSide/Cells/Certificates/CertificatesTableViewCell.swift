@@ -10,6 +10,17 @@ import UIKit
 
 class CertificatesTableViewCell: UITableViewCell {
 
+    
+    @IBOutlet weak var stsTitLbl: UILabel!
+    
+    @IBOutlet weak var reaTitleLbl: UILabel!
+    
+    @IBOutlet weak var creaOnLbl: UILabel!
+    @IBOutlet weak var cerTypeLBl: UILabel!
+    
+    
+    
+    
     @IBOutlet weak var viewHeight: NSLayoutConstraint!
     @IBOutlet weak var conductTypeLbl: UILabel!
     @IBOutlet weak var pdfView: UIView!

@@ -581,18 +581,18 @@ class LeaveRequestVC: UIViewController,UITextViewDelegate,Apidelegate {
             UIView.appearance().semanticContentAttribute = .forceLeftToRight
             TextMessageView.textAlignment = .left
         }
-        strPlaceholder =  LangDict["hint_leave_reason"] as? String ?? "Reason for leave"
-        LeaveHistoryButton.setTitle(LangDict["leave_history"] as? String , for: .normal)
-        ApplyButton.setTitle(LangDict["requesttttt"] as? String , for: .normal)
+        strPlaceholder =  commonStringNames.hint_leave_reason.translated() as? String ?? "Reason for leave"
+                                                                                            LeaveHistoryButton.setTitle(commonStringNames.leave_history.translated() as? String , for: .normal)
+                                                                                                                        ApplyButton.setTitlecommonStringNames.requesttttt as? String , for: .normal)
         
-        FloatFromLabel.text = LangDict["txt_from"] as? String
-        FloatToLabel.text = LangDict["txt_to"] as? String
-        FloatChooseDate.text = LangDict["choose_date"] as? String
-        CancelButton.setTitle(LangDict["teacher_cancel"] as? String , for: .normal)
-        DoneButton.setTitle(LangDict["teacher_btn_ok"] as? String , for: .normal)
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Records Found.."
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+                                                                                                                        FloatFromLabel.text = commonStringNames.txt_from.translated() as? String
+                                                                                                                        FloatToLabel.text = commonStringNames.txt_to.translated() as? String
+                                                                                                                        FloatChooseDate.text = commonStringNames.choose_date.translated() as? String
+                                                                                                                        CancelButton.setTitle(commonStringNames.teacher_cancel.translated() as? String , for: .normal)
+                                                                                                                                              DoneButton.setTitle(commonStringNames.teacher_btn_ok.translated() as? String , for: .normal)
+                                                                                                                                                                  strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Records Found.."
+                                                                                                                                                                  strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+                                                                                                                                                                  strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         self.loadViewData()
         
     }

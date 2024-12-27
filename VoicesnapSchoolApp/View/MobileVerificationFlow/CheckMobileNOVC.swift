@@ -275,9 +275,8 @@ class CheckMobileNOVC: UIViewController,UITextFieldDelegate,Apidelegate{
        
         
         FloatMobileLabel.text = MobileLenghtStr + " Digit"  + " Mobile Number"
-        //        UserMobileNoText.placeholder = LangDict["hint_mobile"] as? String
-        NextButton.setTitle(LangDict["teacher_txt_next"] as? String, for: .normal)
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        NextButton.setTitle(commonStringNames.teacher_txt_next.translated() as? String, for: .normal)
+                            strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         
     }
     

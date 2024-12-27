@@ -684,16 +684,15 @@ class PayFeeVC: UIViewController,UITableViewDelegate, UITableViewDataSource,Apid
             
             
         }
-        HomeLabel.text = LangDict["home"] as? String
-        //        LanguageLabel.text = LangDict["txt_language"] as? String
-        FAQLabel.text = LangDict["faq"] as? String
-        PasswordLabel.text = LangDict["txt_password"] as? String
-        LogoutLabel.text = LangDict["txt_menu_setting"] as? String
-        strNoRecordAlert = LangDict["no_exams"] as? String ?? "No Exams Found.."
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
-        segmentedControl.setTitle(LangDict["paid_details"] as? String, forSegmentAt: 0)
-        segmentedControl.setTitle(LangDict["upcomming"] as? String, forSegmentAt: 1)
+        HomeLabel.text = commonStringNames.home.translated() as? String
+        FAQLabel.text = commonStringNames.faq.translated() as? String
+        PasswordLabel.text = commonStringNames.txt_password.translated() as? String
+        LogoutLabel.text = commonStringNames.txt_menu_setting.translated() as? String
+        strNoRecordAlert = commonStringNames.no_exams.translated() as? String ?? "No Exams Found.."
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
+        segmentedControl.setTitle(commonStringNames.paid_details.translated() as? String, forSegmentAt: 0)
+                                  segmentedControl.setTitle(commonStringNames.upcomming as? String, forSegmentAt: 1)
         
         self.loadViewData()
         

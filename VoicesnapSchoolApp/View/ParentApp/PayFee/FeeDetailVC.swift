@@ -1409,7 +1409,7 @@ class FeeDetailVC: UIViewController,Apidelegate,UITableViewDelegate,UITableViewD
             
         }
         
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         
     }
     

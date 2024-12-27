@@ -12,6 +12,8 @@ import DropDown
 
 class CertificateRequestViewController: UIViewController,UITableViewDataSource,UITableViewDelegate ,UITextViewDelegate{
     
+    @IBOutlet weak var selUrgLbl: UILabel!
+    @IBOutlet weak var selCertLbl: UILabel!
     @IBOutlet weak var noRecordLbl: UILabel!
     
     @IBOutlet weak var noRecordVieww: UIView!
@@ -24,6 +26,7 @@ class CertificateRequestViewController: UIViewController,UITableViewDataSource,U
     
     @IBOutlet weak var urgencyLbl: UILabel!
     
+    @IBOutlet weak var reqCetLbl: UILabel!
     @IBOutlet weak var viewBack: UIView!
     @IBOutlet weak var tv: UITableView!
     @IBOutlet weak var segControl: UISegmentedControl!
@@ -33,7 +36,9 @@ class CertificateRequestViewController: UIViewController,UITableViewDataSource,U
     @IBOutlet weak var requestCertificateView: UIView!
     @IBOutlet weak var selectUrgencyView: UIView!
     
+    @IBOutlet weak var actionCertiLbl: UILabel!
     
+    @IBOutlet weak var actReqLBl: UILabel!
     var  paraentRequestList : [ParentRequestListData] = []
     let rowIdentifier =  "CertificatesTableViewCell"
     var certificate_data : [certificateData] = []

@@ -156,7 +156,7 @@ class DropDownVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
         
       
         if(fromVC == "FAQ"){
-              arrFAQName = [LangDict["fag_for_parent"] as? String ?? "",LangDict["faq_for_school"] as? String ?? ""]
+            arrFAQName = [commonStringNames.fag_for_parent.translated() as? String ?? "",commonStringNames.faq_for_school.translated() as? String ?? ""]
             self.navigationController?.navigationBar.isHidden = true
             if(UIDevice.current.userInterfaceIdiom == .pad){
                 self.preferredContentSize = CGSize(width: 250, height: 100)
@@ -165,7 +165,7 @@ class DropDownVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
             }
         } else if(fromVC == "setting"){
         
-            arrFAQName =  [LangDict["txt_menu_help"] as? String ?? "",LangDict["txt_menu_logout"] as? String ?? ""]
+            arrFAQName =  [commonStringNames.txt_menu_help.translated() as? String ?? "",commonStringNames.txt_menu_logout.translated() as? String ?? ""]
                    self.navigationController?.navigationBar.isHidden = true
             print(arrFAQName)
                    if(UIDevice.current.userInterfaceIdiom == .pad){
@@ -176,12 +176,12 @@ class DropDownVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
                }
         else if(fromVC == "settings"){
            
-            arrFAQName =  ["Upload Document and Photos",LangDict["txt_menu_help"] as? String ?? "" ,LangDict["txt_menu_logout"] as? String ?? ""]
+            arrFAQName =  ["Upload Document and Photos",commonStringNames.txt_menu_help.translated() as? String ?? "" ,commonStringNames.txt_menu_logout.translated() as? String ?? "",commonStringNames.language_change.translated() as? String ?? ""]
                    self.navigationController?.navigationBar.isHidden = true
                    if(UIDevice.current.userInterfaceIdiom == .pad){
                        self.preferredContentSize = CGSize(width: 300, height: 120)
                    }else{
-                       self.preferredContentSize = CGSize(width: 260, height: 110)
+                       self.preferredContentSize = CGSize(width: 260, height: 180)
                    }
                }
      else if(fromVC == "meeting"){
@@ -194,7 +194,7 @@ class DropDownVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
         }
     }
         else{
-            self.title = LangDict["teacher_select_school"] as? String
+            self.title = commonStringNames.teacher_select_school.translated() as? String
             self.navigationController?.navigationBar.isHidden = false
             if(UIDevice.current.userInterfaceIdiom == .pad){
                 self.preferredContentSize = CGSize(width: 600, height: 600)

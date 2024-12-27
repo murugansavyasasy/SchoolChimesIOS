@@ -1111,22 +1111,22 @@ class LoginVC: UIViewController,UITextFieldDelegate,Apidelegate,HTTPClientDelega
         
         
         FloatMobileLabel.text = MobileLenghtStr + " Digit"  + " Mobile Number"
-        UserPasswordText.placeholder = LangDict["hint_password"] as? String
-        TitleForgotPswdLabel.text = LangDict["forgot_password"] as? String
-        EnterOTPLabel.text = LangDict["enter_your_otp"] as? String
-        NewPasswordLabel.text = LangDict["teacher_pop_password_txt_new"] as? String
-        VerifyPasswordLabel.text = LangDict["teacher_pop_password_txt_repeat"] as? String
-        TitleChangePswdLabel.text = LangDict["reset_password"] as? String
+        UserPasswordText.placeholder = commonStringNames.hint_password.translated() as? String
+        TitleForgotPswdLabel.text = commonStringNames.forgot_password.translated() as? String
+        EnterOTPLabel.text = commonStringNames.enter_your_otp.translated() as? String
+        NewPasswordLabel.text = commonStringNames.teacher_pop_password_txt_new.translated() as? String
+        VerifyPasswordLabel.text = commonStringNames.teacher_pop_password_txt_repeat.translated() as? String
+        TitleChangePswdLabel.text = commonStringNames.reset_password.translated() as? String
         
-        LoginButton.setTitle(LangDict["btn_login"] as? String, for: .normal)
-        ForgotPasswordButton.setTitle(LangDict["btn_forgot_password"] as? String, for: .normal)
-        ForgotPasswordOkButton.setTitle(LangDict["teacher_btn_ok"] as? String, for: .normal)
-        CancelButton.setTitle(LangDict["teacher_pop_password_btnCancel"] as? String, for: .normal)
-        UpdateButton.setTitle(LangDict["teacher_pop_password_btnUpdate"] as? String, for: .normal)
+        LoginButton.setTitle(commonStringNames.btn_login as? String, for: .normal)
+                             ForgotPasswordButton.setTitle(commonStringNames.btn_forgot_password.translated() as? String, for: .normal)
+                                                           ForgotPasswordOkButton.setTitle(commonStringNames.teacher_btn_ok as? String, for: .normal)
+                                                                                           CancelButton.setTitle(commonStringNames.teacher_pop_password_btnCancel.translated() as? String, for: .normal)
+                                                                                                                 UpdateButton.setTitle(commonStringNames.teacher_pop_password_btnUpdate.translated() as? String, for: .normal)
         
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+                                                                                                                                       strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+                                                                                                                                       strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+                                                                                                                                       strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         
     }
     

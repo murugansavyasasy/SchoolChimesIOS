@@ -819,11 +819,11 @@ class UpdateNewUserPasswordVC: UIViewController,Apidelegate,UITextFieldDelegate 
         }else{
             self.view.semanticContentAttribute = .forceLeftToRight
         }
-        CreatePswdLabel.text = LangDict["create_new_password"] as? String
-        ConfirmPswdLabel.text = LangDict["confirm_password"] as? String
-        PasswordText.placeholder = LangDict["hint_password"] as? String
-        ConfirmPasswordText.placeholder = LangDict["hint_password"] as? String
-        SubmitButton.setTitle(LangDict["btn_sign_submit"] as? String, for: .normal)
+        CreatePswdLabel.text = commonStringNames.create_new_password.translated() as? String
+        ConfirmPswdLabel.text = commonStringNames.confirm_password.translated() as? String
+        PasswordText.placeholder = commonStringNames.hint_password.translated() as? String
+        ConfirmPasswordText.placeholder = commonStringNames.hint_password.translated() as? String
+        SubmitButton.setTitle(commonStringNames.btn_sign_submit.translated() as? String, for: .normal)
         
     }
     

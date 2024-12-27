@@ -979,15 +979,19 @@ class ParentEmergencyVoiceVC: UIViewController,UITableViewDelegate, UITableViewD
     }
     
     func loadLanguageData(LangDict : NSDictionary, Language : String){
+        print("lalanguageDictionaryictionary",languageDictionary)
+        print("LangDict",LangDict)
         languageDictionary = LangDict
         if(Language == "ar"){
             UIView.appearance().semanticContentAttribute = .forceRightToLeft
         }else{
             UIView.appearance().semanticContentAttribute = .forceLeftToRight
         }
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        print("lalangAfterary",languageDictionary)
+        print("LangDiAfert",commonStringNames.no_records)
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         self.loadViewData()
         
     }

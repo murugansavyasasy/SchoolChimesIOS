@@ -10,6 +10,10 @@ import UIKit
 
 class ChangeLanguageTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var changeLang: UILabel!
+    @IBOutlet weak var defalutLang: UILabel!
+    @IBOutlet weak var checkImg: UIImageView!
+    @IBOutlet weak var langIconImg: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

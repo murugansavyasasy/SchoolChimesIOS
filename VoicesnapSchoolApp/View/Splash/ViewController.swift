@@ -1223,6 +1223,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         {
             let segueid = segue.destination as! ParentTableVC
             segueid.ArrayChildData = arrUserData
+            DefaultsKeys.arrUserData = arrUserData
+            DefaultsKeys.ParentSelectedLoginIndex = ParentSelectedLoginIndex
             segueid.SelectedLoginIndexInt = ParentSelectedLoginIndex
         }
     }                                                                                                                                                                                                                                                                                                                           
@@ -1466,12 +1468,12 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             PopupChangePassword.semanticContentAttribute = .forceLeftToRight
         }
         
-        EnterOTPLabel.text = LangDict["enter_your_otp"] as? String
-        NewPasswordLabel.text = LangDict["teacher_pop_password_txt_new"] as? String
-        VerifyPasswordLabel.text = LangDict["teacher_pop_password_txt_repeat"] as? String
-        TitleChangePswdLabel.text = LangDict["reset_password"] as? String
-        CancelButton.setTitle(LangDict["teacher_pop_password_btnCancel"] as? String, for: .normal)
-        UpdateButton.setTitle(LangDict["teacher_pop_password_btnUpdate"] as? String, for: .normal)
+        EnterOTPLabel.text = commonStringNames.enter_your_otp.translated() as? String
+        NewPasswordLabel.text = commonStringNames.teacher_pop_password_txt_new.translated() as? String
+        VerifyPasswordLabel.text = commonStringNames.teacher_pop_password_txt_repeat.translated() as? String
+        TitleChangePswdLabel.text = commonStringNames.reset_password.translated() as? String
+        CancelButton.setTitle(commonStringNames.teacher_pop_password_btnCancel.translated() as? String, for: .normal)
+                              UpdateButton.setTitle(commonStringNames.teacher_pop_password_btnUpdate.translated() as? String, for: .normal)
         
     }
     

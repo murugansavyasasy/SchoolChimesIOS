@@ -76,7 +76,7 @@ class StudentDetailViewController: UIViewController ,Apidelegate ,UICollectionVi
     var firstImage : Int  = 0
     weak var timer: Timer?
     var image_choose: Bool = false
-    
+    var languageCode : String!
     var SelectedAssets = [PHAsset]()
     
     //    var updateTime = Int!
@@ -117,8 +117,8 @@ class StudentDetailViewController: UIViewController ,Apidelegate ,UICollectionVi
     let deviceName = UIDevice.current.model
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print("11VC")
+        print("11VClanguageCode",languageCode)
+        print("11VC",stralerMsg)
         let userDefaults = UserDefaults.standard
         
         staffRole = userDefaults.string(forKey: DefaultsKeys.StaffRole)!
@@ -342,10 +342,14 @@ print("schoolNameReg",schoolNameReg)
         }
     }
     override func viewDidDisappear(_ animated: Bool) {
+        print("viewDidDisappear")
         stopTimer()
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        print("viewDidAppear")
+        
+        languageCode = DefaultsKeys.languageCode
         startTimer()
     }
     
@@ -877,9 +881,10 @@ print("schoolNameReg",schoolNameReg)
     @objc func UpdateLogoutSelection(notification:Notification) -> Void
     {
         print("SDetails")
-        
+      
         var selectString = notification.object as? String ?? ""
         selectString = selectString.lowercased()
+        print("SDetails",selectString)
         let log = languageDictionary["txt_menu_logout"] as? String ?? ""
         if(selectString == log.lowercased()){
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() )
@@ -890,12 +895,22 @@ print("schoolNameReg",schoolNameReg)
             callEditProfile()
         }else if(selectString.contains("help")){
             callhelp()
+        }else if(selectString.contains("change language")){
+            callLanguageVc()
         }
         else{
             callUploadDocumentView()
         }
         
     }
+    
+    func callLanguageVc(){
+        let vc = ChangeLanguageViewController(nibName: nil, bundle: nil)
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
+    }
+    
+    
     func callEditProfile(){
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let newViewController = storyBoard.instantiateViewController(withIdentifier: "EditProfileVC") as! EditProfileVC
@@ -1332,13 +1347,13 @@ print("schoolNameReg",schoolNameReg)
             self.SchoolLocationLabel.textAlignment = .left
             
         }
-        HomeLabel.text = LangDict["home"] as? String
-        FAQLabel.text = LangDict["faq"] as? String
-        PasswordLabel.text = LangDict["txt_password"] as? String
-        LogoutLabel.text = LangDict["txt_menu_setting"] as? String
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        HomeLabel.text = commonStringNames.home.translated() as? String
+        FAQLabel.text = commonStringNames.faq.translated() as? String
+        PasswordLabel.text = commonStringNames.txt_password.translated() as? String
+        LogoutLabel.text = commonStringNames.txt_menu_setting.translated() as? String
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         //
         self.loadCellArrayData()
     }

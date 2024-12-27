@@ -38,7 +38,6 @@ class ParentTableVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     var strPopOverFrom = String()
     let UtilObj = UtilClass()
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    
 
 
     @IBOutlet weak var remainingCharactersLabel: UILabel!
@@ -69,7 +68,8 @@ class ParentTableVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     var SelSchool = String()
     var  QuestionData : [UpdateDetailsData]! = []
     
-    
+    var languageCode : String!
+    var changeLanguage = 1
     
     @IBOutlet weak var PrincipalView: UIView!
     
@@ -84,29 +84,47 @@ class ParentTableVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     var arrMembersData = NSMutableArray()
     var staffRole : String!
     var SchoolIDString = String()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("1VC")
-        self.navigationItem.setHidesBackButton(true, animated:true)
-        
-        UtilObj.printLogKey(printKey: "ArrayChildData", printingValue: ArrayChildData)
-        ParentTableView.reloadData()
-        helpText()
-        addShadow(MenuView)
-        
-        
-        let userDefaults = UserDefaults.standard
-        
-        staffRole = userDefaults.string(forKey: DefaultsKeys.StaffRole)!
-        
-        
-        
-        
-        UserMobileNo = UserDefaults.standard.object(forKey: USERNAME) as! String
-        
-        UserPassword =  UserDefaults.standard.object(forKey:USERPASSWORD) as? String ?? ""
-        appDelegate.strMobileNumber = UserMobileNo
+        print("1VC",SelectedLoginIndexInt)
+//        if changeLanguage == 2 {
+//            self.navigationItem.setHidesBackButton(true, animated:true)
+//            UtilObj.printLogKey(printKey: "ArrayChildData", printingValue: ArrayChildData)
+//            ParentTableView.reloadData()
+//            let userDefaults = UserDefaults.standard
+//            
+//            staffRole = userDefaults.string(forKey: DefaultsKeys.StaffRole)!
+//            
+//            
+//            
+//            
+//            UserMobileNo = UserDefaults.standard.object(forKey: USERNAME) as! String
+//            
+//            UserPassword =  UserDefaults.standard.object(forKey:USERPASSWORD) as? String ?? ""
+//            appDelegate.strMobileNumber = UserMobileNo
+//        }else{
+            self.navigationItem.setHidesBackButton(true, animated:true)
+            
+            UtilObj.printLogKey(printKey: "ArrayChildData", printingValue: ArrayChildData)
+            ParentTableView.reloadData()
+            helpText()
+            addShadow(MenuView)
+            
+            
+            let userDefaults = UserDefaults.standard
+            
+            staffRole = userDefaults.string(forKey: DefaultsKeys.StaffRole)!
+            
+            
+            
+            
+            UserMobileNo = UserDefaults.standard.object(forKey: USERNAME) as! String
+            
+            UserPassword =  UserDefaults.standard.object(forKey:USERPASSWORD) as? String ?? ""
+            appDelegate.strMobileNumber = UserMobileNo
+//        }
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -118,8 +136,6 @@ class ParentTableVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         strCountryCode = UserDefaults.standard.object(forKey: COUNTRY_CODE) as! String
         strCountryID = UserDefaults.standard.object(forKey: COUNTRY_ID) as! String
         self.callSelectedLanguage()
-        
-        //      
         
         
     }
@@ -269,7 +285,7 @@ class ParentTableVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     // MARK: - TableView Delegate
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+        print("numberOfRowsInSectionCOUNT",ArrayChildData.count)
         if(ArrayChildData.count > 0)
         {
             MenuPopupView.isHidden = true
@@ -1057,6 +1073,10 @@ class ParentTableVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         {
             let segueid = segue.destination as! StudentDetailViewController
             segueid.selectedDictionary = selectedDictionary
+            
+            DefaultsKeys.selectedDictionary = selectedDictionary
+            DefaultsKeys.stralerMsg = stralerMsg
+            DefaultsKeys.QuestionData = QuestionData
             print("segueid.selectedDictionary",selectedDictionary)
             segueid.stralerMsg = stralerMsg
             segueid.QuestionData = QuestionData
@@ -1103,18 +1123,22 @@ class ParentTableVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             self.navigationController?.navigationBar.semanticContentAttribute = .forceRightToLeft
             
         }else{
-            UIView.appearance().semanticContentAttribute = .forceLeftToRight
-            self.ParentTableView.semanticContentAttribute = .forceLeftToRight
-            self.PrincipalView.semanticContentAttribute = .forceLeftToRight
-            self.BottomView.semanticContentAttribute = .forceLeftToRight
-            self.navigationController?.navigationBar.semanticContentAttribute = .forceLeftToRight
-            
+            if changeLanguage == 2 {
+            }else{
+                UIView.appearance().semanticContentAttribute = .forceLeftToRight
+                self.ParentTableView.semanticContentAttribute = .forceLeftToRight
+                self.PrincipalView.semanticContentAttribute = .forceLeftToRight
+                self.BottomView.semanticContentAttribute = .forceLeftToRight
+                self.navigationController?.navigationBar.semanticContentAttribute = .forceLeftToRight
+                
+                FAQLabel.text = commonStringNames.faq.translated() as? String
+                PasswordLabel.text = commonStringNames.txt_password.translated() as? String
+                LogoutLabel.text = commonStringNames.txt_menu_setting.translated() as? String
+                
+                self.loadViewData()
+            }
         }
-        FAQLabel.text = LangDict["faq"] as? String
-        PasswordLabel.text = LangDict["txt_password"] as? String
-        LogoutLabel.text = LangDict["txt_menu_setting"] as? String
         
-        self.loadViewData()
         
     }
     

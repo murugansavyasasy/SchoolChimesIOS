@@ -219,11 +219,11 @@ class CreateAssignmentVC: UIViewController {
             self.navigationController?.navigationBar.semanticContentAttribute = .forceLeftToRight
             self.view.semanticContentAttribute = .forceLeftToRight
         }
-        textLabel.text = LangDict["send_assignment_title"] as? String
-        TextButton.setTitle(LangDict["teacher_txt_text"] as? String, for: .normal)
-        ImageButton.setTitle(LangDict["teacher_txt_Image"] as? String, for: .normal)
-        VoiceButton.setTitle(LangDict["teacher_txt_voice"] as? String, for: .normal)
-        PdfButton.setTitle(LangDict["pdf_1"] as? String, for: .normal)
+        textLabel.text = commonStringNames.send_assignment_title.translated() as? String
+        TextButton.setTitle(commonStringNames.teacher_txt_text.translated() as? String, for: .normal)
+                            ImageButton.setTitle(commonStringNames.teacher_txt_Image.translated() as? String, for: .normal)
+                                                 VoiceButton.setTitle(commonStringNames.teacher_txt_voice.translated() as? String, for: .normal)
+                                                                      PdfButton.setTitle(commonStringNames.pdf_1 as? String, for: .normal)
     }
     
 }

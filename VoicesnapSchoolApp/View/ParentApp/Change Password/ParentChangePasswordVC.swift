@@ -357,15 +357,15 @@ class ParentChangePasswordVC: UIViewController ,UITextFieldDelegate,UITextViewDe
             VerifyNewPasswordText.textAlignment = .left
         }
         
-        TitleLabel.text = LangDict["pop_password_title"] as? String
-        FloatExistingLabel.text = LangDict["pop_password_txt_exist"] as? String
-        FloatVerifyLabel.text = LangDict["pop_password_txt_repeat"] as? String
-        FloatNewLabel.text = LangDict["pop_password_txt_new"] as? String
-        CancelButton.setTitle(LangDict["pop_password_btnCancel"] as? String, for: .normal)
-        UpdateButton.setTitle(LangDict["pop_password_btnUpdate"] as? String, for: .normal)
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        TitleLabel.text = commonStringNames.pop_password_title.translated() as? String
+        FloatExistingLabel.text = commonStringNames.pop_password_txt_exist.translated() as? String
+        FloatVerifyLabel.text = commonStringNames.pop_password_txt_repeat.translated() as? String
+        FloatNewLabel.text = commonStringNames.pop_password_txt_new.translated() as? String
+        CancelButton.setTitle(commonStringNames.pop_password_btnCancel.translated() as? String, for: .normal)
+                              UpdateButton.setTitle(commonStringNames.pop_password_btnUpdate.translated() as? String, for: .normal)
+                                                    strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+                                                    strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+                                                    strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
     }
     
 }

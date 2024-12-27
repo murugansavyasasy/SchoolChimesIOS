@@ -154,6 +154,7 @@
 		1873FC882CEDEC2C000B8F56 /* SubmitLsrwViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1873FC862CEDEC2C000B8F56 /* SubmitLsrwViewController.xib */; };
 		1873FC8A2CEE06BB000B8F56 /* ViewAllSkillByStudentModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1873FC892CEE06BB000B8F56 /* ViewAllSkillByStudentModal.swift */; };
 		1873FC8C2CEE0749000B8F56 /* ViewAllSkillByStudentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1873FC8B2CEE0749000B8F56 /* ViewAllSkillByStudentRequest.swift */; };
+		188129192D1EB62F004E099B /* AppUsingStringName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188129182D1EB62F004E099B /* AppUsingStringName.swift */; };
 		188ADB0B28FBDB3400A36569 /* ForgetVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 188ADB0A28FBDB3400A36569 /* ForgetVC.swift */; };
 		189246AC293F46A90062B7D1 /* AdRedirectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189246AA293F46A90062B7D1 /* AdRedirectViewController.swift */; };
 		189246AD293F46A90062B7D1 /* AdRedirectViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189246AB293F46A90062B7D1 /* AdRedirectViewController.xib */; };
@@ -170,6 +171,15 @@
 		189E36F3296D959B0032A8CA /* ManagementVimeoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E36F1296D959B0032A8CA /* ManagementVimeoViewController.swift */; };
 		189E36F4296D959B0032A8CA /* ManagementVimeoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 189E36F2296D959B0032A8CA /* ManagementVimeoViewController.xib */; };
 		189E36F6296E88610032A8CA /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 189E36F5296E88610032A8CA /* Toast.swift */; };
+		18A0B9C42D1E74310080E83B /* ChangeLanguageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A0B9C32D1E74310080E83B /* ChangeLanguageViewController.xib */; };
+		18A0B9C52D1E74310080E83B /* ChangeLanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A0B9C22D1E74310080E83B /* ChangeLanguageViewController.swift */; };
+		18A0B9E02D1E778A0080E83B /* ChangeLanguageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A0B9DE2D1E778A0080E83B /* ChangeLanguageTableViewCell.swift */; };
+		18A0B9E12D1E778A0080E83B /* ChangeLanguageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A0B9DF2D1E778A0080E83B /* ChangeLanguageTableViewCell.xib */; };
+		18A0B9E52D1E852C0080E83B /* LanguageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A0B9E32D1E852C0080E83B /* LanguageManager.swift */; };
+		18A0B9E62D1E852C0080E83B /* Bundle+Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A0B9E42D1E852C0080E83B /* Bundle+Language.swift */; };
+		18A0B9E72D1E852C0080E83B /* TranslationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A0B9E22D1E852C0080E83B /* TranslationManager.swift */; };
+		18A0BA052D1EAB4F0080E83B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 18A0BA042D1EAB4F0080E83B /* Localizable.strings */; };
+		18A0BA072D1EACBE0080E83B /* LocalizableStrings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A0BA062D1EACBE0080E83B /* LocalizableStrings.swift */; };
 		18A7443A2934CFF1009A0D38 /* ImageAdvertisment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A744392934CFF1009A0D38 /* ImageAdvertisment.swift */; };
 		18A7449E2935E529009A0D38 /* AdvertismentModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A7449D2935E529009A0D38 /* AdvertismentModal.swift */; };
 		18A744A02935E61D009A0D38 /* AdvertismentRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A7449F2935E61D009A0D38 /* AdvertismentRequest.swift */; };
@@ -822,6 +832,7 @@
 		1873FC862CEDEC2C000B8F56 /* SubmitLsrwViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SubmitLsrwViewController.xib; sourceTree = "<group>"; };
 		1873FC892CEE06BB000B8F56 /* ViewAllSkillByStudentModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllSkillByStudentModal.swift; sourceTree = "<group>"; };
 		1873FC8B2CEE0749000B8F56 /* ViewAllSkillByStudentRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewAllSkillByStudentRequest.swift; sourceTree = "<group>"; };
+		188129182D1EB62F004E099B /* AppUsingStringName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUsingStringName.swift; sourceTree = "<group>"; };
 		188ADB0A28FBDB3400A36569 /* ForgetVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgetVC.swift; sourceTree = "<group>"; };
 		189246AA293F46A90062B7D1 /* AdRedirectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdRedirectViewController.swift; sourceTree = "<group>"; };
 		189246AB293F46A90062B7D1 /* AdRedirectViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdRedirectViewController.xib; sourceTree = "<group>"; };
@@ -838,6 +849,18 @@
 		189E36F1296D959B0032A8CA /* ManagementVimeoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementVimeoViewController.swift; sourceTree = "<group>"; };
 		189E36F2296D959B0032A8CA /* ManagementVimeoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ManagementVimeoViewController.xib; sourceTree = "<group>"; };
 		189E36F5296E88610032A8CA /* Toast.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
+		18A0B9C22D1E74310080E83B /* ChangeLanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeLanguageViewController.swift; sourceTree = "<group>"; };
+		18A0B9C32D1E74310080E83B /* ChangeLanguageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangeLanguageViewController.xib; sourceTree = "<group>"; };
+		18A0B9DE2D1E778A0080E83B /* ChangeLanguageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeLanguageTableViewCell.swift; sourceTree = "<group>"; };
+		18A0B9DF2D1E778A0080E83B /* ChangeLanguageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangeLanguageTableViewCell.xib; sourceTree = "<group>"; };
+		18A0B9E22D1E852C0080E83B /* TranslationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TranslationManager.swift; sourceTree = "<group>"; };
+		18A0B9E32D1E852C0080E83B /* LanguageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageManager.swift; sourceTree = "<group>"; };
+		18A0B9E42D1E852C0080E83B /* Bundle+Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+Language.swift"; sourceTree = "<group>"; };
+		18A0BA002D1EAB4F0080E83B /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		18A0BA012D1EAB4F0080E83B /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = hi.lproj/Localizable.strings; sourceTree = "<group>"; };
+		18A0BA022D1EAB4F0080E83B /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = "ta-IN.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		18A0BA032D1EAB4F0080E83B /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Localizable.strings; path = th.lproj/Localizable.strings; sourceTree = "<group>"; };
+		18A0BA062D1EACBE0080E83B /* LocalizableStrings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalizableStrings.swift; sourceTree = "<group>"; };
 		18A744392934CFF1009A0D38 /* ImageAdvertisment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageAdvertisment.swift; sourceTree = "<group>"; };
 		18A7449D2935E529009A0D38 /* AdvertismentModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertismentModal.swift; sourceTree = "<group>"; };
 		18A7449F2935E61D009A0D38 /* AdvertismentRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdvertismentRequest.swift; sourceTree = "<group>"; };
@@ -2167,6 +2190,21 @@
 			path = Vimeo;
 			sourceTree = "<group>";
 		};
+		18A0B9C12D1E74110080E83B /* LanguageChange */ = {
+			isa = PBXGroup;
+			children = (
+				18A0BA062D1EACBE0080E83B /* LocalizableStrings.swift */,
+				18A0B9E22D1E852C0080E83B /* TranslationManager.swift */,
+				18A0B9E32D1E852C0080E83B /* LanguageManager.swift */,
+				18A0B9E42D1E852C0080E83B /* Bundle+Language.swift */,
+				18A0B9C22D1E74310080E83B /* ChangeLanguageViewController.swift */,
+				18A0B9C32D1E74310080E83B /* ChangeLanguageViewController.xib */,
+				18A0B9DE2D1E778A0080E83B /* ChangeLanguageTableViewCell.swift */,
+				18A0B9DF2D1E778A0080E83B /* ChangeLanguageTableViewCell.xib */,
+			);
+			path = LanguageChange;
+			sourceTree = "<group>";
+		};
 		18A744382934C87E009A0D38 /* ImageAd */ = {
 			isa = PBXGroup;
 			children = (
@@ -3218,6 +3256,7 @@
 		B51702BA1F0A2F2B00879602 /* VoicesnapSchoolApp */ = {
 			isa = PBXGroup;
 			children = (
+				18A0B9C12D1E74110080E83B /* LanguageChange */,
 				18067F6B2CF450B6008A22B9 /* SenderSideImgShow */,
 				1873FC1A2CEDAA21000B8F56 /* LSRW */,
 				845B1BD52CB01C7900D6E6F5 /* NoticeBoardVc */,
@@ -3258,6 +3297,8 @@
 		B51CCCAF1F1504F000AAE733 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				188129182D1EB62F004E099B /* AppUsingStringName.swift */,
+				18A0BA042D1EAB4F0080E83B /* Localizable.strings */,
 				18FD3FB322928EA800970B2B /* Language File */,
 				B51CCCC51F15055900AAE733 /* Controller */,
 				B51CCCB01F1504F000AAE733 /* CommonModels */,
@@ -4130,6 +4171,9 @@
 				English,
 				en,
 				Base,
+				hi,
+				"ta-IN",
+				th,
 			);
 			mainGroup = B51702AF1F0A2F2B00879602;
 			packageReferences = (
@@ -4255,6 +4299,7 @@
 				84CCA2C52C708DEC009303CD /* TimeCollectionViewCell.xib in Resources */,
 				1873FC882CEDEC2C000B8F56 /* SubmitLsrwViewController.xib in Resources */,
 				C1EB24B523EE914100F9B997 /* es.json in Resources */,
+				18A0BA052D1EAB4F0080E83B /* Localizable.strings in Resources */,
 				84CD56E62C9C03350068800A /* deleteTV.xib in Resources */,
 				18FD3FBB22928F4300970B2B /* ar.json in Resources */,
 				848E5D732BFE296700DBBBB5 /* SectionViewController.xib in Resources */,
@@ -4268,6 +4313,7 @@
 				848E5D6D2BFE295100DBBBB5 /* SectionTvTableViewCell.xib in Resources */,
 				D608953D20E29227001E8081 /* school.sqlite in Resources */,
 				1829528B299520500003B9D6 /* QuizViewTableViewCell.xib in Resources */,
+				18A0B9C42D1E74310080E83B /* ChangeLanguageViewController.xib in Resources */,
 				18F119A029658890002C0A0A /* SendStaffGroupsVoiceTableViewCell.xib in Resources */,
 				1829525929951D120003B9D6 /* QuizExamMenuViewController.xib in Resources */,
 				182DF6CF29A8782C00E2D992 /* ExamUpcomingViewController.xib in Resources */,
@@ -4279,6 +4325,7 @@
 				1865D8DD2A0A716400CD43F3 /* LessonPlanViewController.xib in Resources */,
 				18F119A62965A01E002C0A0A /* StaffGroupVoiceViewController.xib in Resources */,
 				1873FC1E2CEDAB26000B8F56 /* LsrwListShowViewController.xib in Resources */,
+				18A0B9E12D1E778A0080E83B /* ChangeLanguageTableViewCell.xib in Resources */,
 				B51702C31F0A2F2C00879602 /* Assets.xcassets in Resources */,
 				B80A23D528BA5BE000147B89 /* message.mp3 in Resources */,
 				84CD56F22C9C03350068800A /* CreateLocationViewController.xib in Resources */,
@@ -4509,11 +4556,15 @@
 				D64EF0BA20C7AC2D0051AA89 /* HomeWorkTextDetailVC.swift in Sources */,
 				18A816CD2A13B06D00E7FDF7 /* PdfVcViewController.swift in Sources */,
 				18D832A829A5E4330058B79F /* QuizQuestionCollectionViewCell.swift in Sources */,
+				18A0B9C52D1E74310080E83B /* ChangeLanguageViewController.swift in Sources */,
 				848E5D5B2BFE284A00DBBBB5 /* ClassTableViewCell.swift in Sources */,
 				B5E499721F0CBAB400A503AB /* ViewController.swift in Sources */,
 				04D34736245AD3C4008C41B3 /* AssignmentListTVCell.swift in Sources */,
 				841ED6322C8F4AB100A65EEA /* CheckAviableTv.swift in Sources */,
 				B5EE9FC71F3076B2009C9BF9 /* SelectSchoolVC.swift in Sources */,
+				18A0B9E52D1E852C0080E83B /* LanguageManager.swift in Sources */,
+				18A0B9E62D1E852C0080E83B /* Bundle+Language.swift in Sources */,
+				18A0B9E72D1E852C0080E83B /* TranslationManager.swift in Sources */,
 				D60EFBE320D8E58C00AB940F /* MonthlyFeeTVCell.swift in Sources */,
 				186E4E592A0CE83600D7C3F2 /* LessonEditTableViewCell.swift in Sources */,
 				1865D8DC2A0A716400CD43F3 /* LessonPlanViewController.swift in Sources */,
@@ -4837,6 +4888,7 @@
 				84F981B52BD66C800077A77E /* NewDailyCollectionViewController.swift in Sources */,
 				849736972B048B6B0012C139 /* UpdateDetailWebviewLoadViewController.swift in Sources */,
 				1805FE632297F5E000A3872E /* MoreImagesVC.swift in Sources */,
+				18A0BA072D1EACBE0080E83B /* LocalizableStrings.swift in Sources */,
 				B5EE9FC61F3076B2009C9BF9 /* SelectSchoolTVC.swift in Sources */,
 				1873FC8A2CEE06BB000B8F56 /* ViewAllSkillByStudentModal.swift in Sources */,
 				B502949C1F1E09AB00AAAFFC /* SendTextMessageVC.swift in Sources */,
@@ -4848,6 +4900,7 @@
 				84B7BA592D0B03A8008E0117 /* notisample.swift in Sources */,
 				18294E20295335810019849F /* UITextField.swift in Sources */,
 				848E5D772BFE297300DBBBB5 /* StudentListReq.swift in Sources */,
+				188129192D1EB62F004E099B /* AppUsingStringName.swift in Sources */,
 				D64EF0AD20C7ABF10051AA89 /* PhotosVC.swift in Sources */,
 				84CD56FB2C9C03350068800A /* LocationViewController.swift in Sources */,
 				B51CCCC41F1504F000AAE733 /* Util.m in Sources */,
@@ -4872,6 +4925,7 @@
 				D64EF0FA20C7AD1A0051AA89 /* ImageDetailVC.swift in Sources */,
 				841ED6BD2C8F4FD100A65EEA /* StandardSectionDetailsForStaffResponse.swift in Sources */,
 				1829531F299B51510003B9D6 /* QuizGetQues.swift in Sources */,
+				18A0B9E02D1E778A0080E83B /* ChangeLanguageTableViewCell.swift in Sources */,
 				841ED6362C8F4AB100A65EEA /* CheckAviableViewController.swift in Sources */,
 				84CD56F02C9C03350068800A /* StaffListResp.swift in Sources */,
 				D64EF0E120C7ACF80051AA89 /* PdfFileTableViewCell.swift in Sources */,
@@ -4900,6 +4954,20 @@
 			targetProxy = 84E485D12CE37DBB0064CB25 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		18A0BA042D1EAB4F0080E83B /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				18A0BA002D1EAB4F0080E83B /* Localizable.strings */,
+				18A0BA012D1EAB4F0080E83B /* Localizable.strings */,
+				18A0BA022D1EAB4F0080E83B /* Localizable.strings */,
+				18A0BA032D1EAB4F0080E83B /* Localizable.strings */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		84E485D42CE37DBB0064CB25 /* Debug */ = {

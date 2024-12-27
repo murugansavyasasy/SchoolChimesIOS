@@ -835,16 +835,16 @@ class PrincipalGroupSelectionVC: UIViewController,Apidelegate {
             self.view.semanticContentAttribute = .forceLeftToRight
         }
         
-        strAlertMsg = LangDict["confirm_to_send"] as? String ?? "Are you confirm to send"
-        strAlertTitle = LangDict["alert"] as? String ?? "Alert"
-        strOk = LangDict["teacher_pop_remove_btn_yes"] as? String ?? "Ok"
-        strCancel = LangDict["teacher_pop_remove_btn_no"] as? String ?? "Cancel"
-        SendEntireSchoolButton.setTitle(LangDict["send_to_entire_school"] as? String, for: .normal)
-        SendStandardGroupButton.setTitle(LangDict["send_to_standard_groups"] as? String, for: .normal)
-        SendStandardSectionButton.setTitle(LangDict["send_to_standard_section"] as? String, for: .normal)
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        strAlertMsg = commonStringNames.confirm_to_send.translated() as? String ?? "Are you confirm to send"
+        strAlertTitle = commonStringNames.alert.translated() as? String ?? "Alert"
+        strOk = commonStringNames.teacher_pop_remove_btn_yes.translated() as? String ?? "Ok"
+        strCancel = commonStringNames.teacher_pop_remove_btn_no.translated() as? String ?? "Cancel"
+        SendEntireSchoolButton.setTitle(commonStringNames.send_to_entire_school.translated() as? String, for: .normal)
+        SendStandardGroupButton.setTitle(commonStringNames.send_to_standard_groups.translated() as? String, for: .normal)
+                                         SendStandardSectionButton.setTitle(commonStringNames.send_to_standard_section.translated() as? String, for: .normal)
+                                                                            strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+                                                                            strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+                                                                            strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
     }
     
     //MARK: AWS Upload

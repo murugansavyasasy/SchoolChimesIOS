@@ -78,7 +78,7 @@ struct DefaultsKeys {
     static var  THAI_SCHOOL_CHIMES_COMMUNICATION = "thai-schoolchimes-communication"
     
     
-    
+   static var ParentSelectedLoginIndex = 0
     static var bookingSlotId : [Int] = []
     static var date : [String] = []
     static var timesarr : [String] = []
@@ -86,8 +86,12 @@ struct DefaultsKeys {
     static var coutData : [countResponce] = []
     static var failedErrorCode : Int!
     static var sortName = "Sort Alphabetically (A → Z)"
-    
+    static var arrUserData: NSArray = []
     static var audioPlayer: AVAudioPlayer?
-    
-}
+    static var Language = ""
+    static  var selectedDictionary = NSDictionary()
+    static  var stralerMsg = String()
 
+    static   var  QuestionData : [UpdateDetailsData]! = []
+    static   var languageCode = "en"
+}
