@@ -58,7 +58,7 @@ class LsrwListShowViewController: UIViewController ,UITableViewDelegate,UITableV
         super.viewDidLoad()
         
         searchBar.delegate = self
-        
+        actTitleLbl.text = commonStringNames.LSRW.translated()
         
         let userDefaults = UserDefaults.standard
         instituteId = userDefaults.integer(forKey: DefaultsKeys.SchoolD)

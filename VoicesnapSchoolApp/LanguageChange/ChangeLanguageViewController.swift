@@ -12,7 +12,7 @@ struct language{
     let language:String
     var selected:Bool
 }
-
+//language(language: "Tamil", selected: false),
 
 
 class ChangeLanguageViewController: UIViewController {
@@ -21,15 +21,15 @@ class ChangeLanguageViewController: UIViewController {
     @IBOutlet weak var tv: UITableView!
     var arrUserData: NSArray = []
     var Items = [language(language: "English", selected: false),
-                 language(language: "Tamil", selected: false),
+               
                  language(language: "Hindi", selected: false),
                  language(language: "Thai", selected: false)]
     
-    var Language = ["English","தமிழ்","हिंदी","ไทย"]
+    var Language = ["English","हिंदी","ไทย"]
     var rowId = "ChangeLanguageTableViewCell"
     var languageCode = "en"
     var index = 0
-    var  Buttontext = ["Confirm","உறுதிப்படுத்தவும்","पुष्टि करें","ยืนยัน"]
+    var  Buttontext = ["Confirm","पुष्टि करें","ยืนยัน"]
     var ParentSelectedLoginIndex = 0
     
     var selectedLanguage: String?
@@ -42,7 +42,11 @@ class ChangeLanguageViewController: UIViewController {
     }
 
 
-   
+    @IBAction func closeAct(_ sender: UIButton) {
+        
+        dismiss(animated: true)
+    }
+    
     @IBAction func confirmAct(_ sender: UIButton) {
         
         
@@ -147,4 +151,8 @@ extension ChangeLanguageViewController : UITableViewDelegate,UITableViewDataSour
         
         return  75
     }
+    
+    
+    
+    
 }

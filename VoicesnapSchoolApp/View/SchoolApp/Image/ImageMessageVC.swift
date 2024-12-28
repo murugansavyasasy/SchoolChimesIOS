@@ -962,10 +962,10 @@ class ImageMessageVC: UIViewController, UIActionSheetDelegate, UIImagePickerCont
             self.view.semanticContentAttribute = .forceLeftToRight
             descriptionTextField.textAlignment = .left
         }
-        SendImageLabel.text = LangDict["teacher_txt_composeImg"] as? String
-        descriptionTextField.placeholder = LangDict["teacher_image_hint_title"] as? String
-        ClickHereButton.setTitle(LangDict["image_pdf_title_click"] as? String, for: .normal)
-        ClickImageCaptureButton.setTitle(LangDict["teacher_txt_change_selection"] as? String, for: .normal)
+        SendImageLabel.text = commonStringNames.teacher_txt_composeImg.translated() as? String
+        descriptionTextField.placeholder = commonStringNames.teacher_image_hint_title.translated() as? String
+        ClickHereButton.setTitle(commonStringNames.image_pdf_title_click.translated() as? String, for: .normal)
+        ClickImageCaptureButton.setTitle(commonStringNames.teacher_txt_change_selection.translated() as? String, for: .normal)
         
     }
     

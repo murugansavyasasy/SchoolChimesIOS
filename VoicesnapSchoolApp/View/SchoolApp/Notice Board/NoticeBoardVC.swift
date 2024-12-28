@@ -871,12 +871,12 @@ print("schoolsArrayfvfvfv",schoolsArray)
             topicHeadingTextField.textAlignment = .left
             TextMessageView.textAlignment = .left
         }
-        strTextViewPlaceholder = LangDict["teacher_nb_hint_msg"] as? String ?? "Type content here"
-        ConfirmButton.setTitle(LangDict["teacher_txt_send"] as? String, for: .normal)
-        topicHeadingTextField.placeholder = LangDict["teacher_nb_hint_title"] as? String ?? "Type News Topic?"
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        strTextViewPlaceholder = commonStringNames.teacher_nb_hint_msg.translated() as? String ?? "Type content here"
+        ConfirmButton.setTitle(commonStringNames.teacher_txt_send.translated() as? String, for: .normal)
+        topicHeadingTextField.placeholder = commonStringNames.teacher_nb_hint_title.translated() as? String ?? "Type News Topic?"
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         self.Config()
         
     }

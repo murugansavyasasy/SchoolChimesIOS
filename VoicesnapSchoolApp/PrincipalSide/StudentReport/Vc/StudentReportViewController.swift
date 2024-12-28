@@ -12,6 +12,10 @@ import ObjectMapper
 
 class StudentReportViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
+    @IBOutlet weak var getAllStudHeadLbl: UILabel!
+    @IBOutlet weak var selSecHeadLbl: UILabel!
+    @IBOutlet weak var selStdHeadLbl: UILabel!
+    @IBOutlet weak var actStudRepLbl: UILabel!
     
     @IBOutlet weak var alertLbl: UILabel!
     @IBOutlet weak var alertView: UIView!
@@ -63,6 +67,12 @@ class StudentReportViewController: UIViewController,UITableViewDataSource,UITabl
         
         alertView.isHidden = true
         alertLbl.isHidden = true
+        actStudRepLbl.text = commonStringNames.StudentReport.translated()
+        selStdHeadLbl.text = commonStringNames.SelectStandard.translated()
+        selSecHeadLbl.text = commonStringNames.studentReportSection
+            .translated()
+        selStdHeadLbl.text = commonStringNames.studentReportStandard.translated()
+        
         
         
         intialstandardType = "1"

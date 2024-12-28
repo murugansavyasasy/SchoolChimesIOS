@@ -12,6 +12,13 @@ import DropDown
 
 class PendingFeeReportViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
     
+    
+    @IBOutlet weak var actHeadLbl: UILabel!
+    
+    @IBOutlet weak var classHEadLbl: UILabel!
+    
+    @IBOutlet weak var catHeadLbl: UILabel!
+    
     @IBOutlet weak var nodataLbl: UILabel!
     
     @IBOutlet weak var fromLbl: UILabel!
@@ -51,7 +58,10 @@ class PendingFeeReportViewController: UIViewController,UITableViewDataSource,UIT
     var type : Int!
     override func viewDidLoad() {
         super.viewDidLoad()
+        catHeadLbl.text = commonStringNames.CategoryWise.translated()
+        classHEadLbl.text = commonStringNames.ClassWise.translated()
         
+        actHeadLbl.text = commonStringNames.FeePending.translated()
         let userDefaults = UserDefaults.standard
         
         nodataLbl.isHidden = true

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -12,10 +12,12 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StudentReportViewController" customModule="VoicesnapSchoolApp" customModuleProvider="target">
             <connections>
                 <outlet property="PopupChooseStandardPickerView" destination="q9E-aR-ktJ" id="m9u-rz-ugi"/>
+                <outlet property="actStudRepLbl" destination="XBf-CD-r8D" id="eUn-TR-G4A"/>
                 <outlet property="alertLbl" destination="Uxx-8u-4eO" id="AXu-x6-4gT"/>
                 <outlet property="alertView" destination="wlG-FL-fDt" id="kk8-uz-SmB"/>
                 <outlet property="backView" destination="PAi-fg-06R" id="9BO-cY-HMu"/>
                 <outlet property="getAllSectionView" destination="FUH-Kq-lIz" id="3mf-K0-5Sr"/>
+                <outlet property="getAllStudHeadLbl" destination="Grh-l8-v1S" id="jJf-SN-WZa"/>
                 <outlet property="getAllStudentTop" destination="VKY-k5-8kE" id="pzF-X0-9pj"/>
                 <outlet property="getAllStudentView" destination="nsQ-yI-Agc" id="tKL-BA-8vl"/>
                 <outlet property="pickerLbl" destination="A89-cB-rmn" id="jfE-Ui-B6Z"/>
@@ -23,7 +25,9 @@
                 <outlet property="search_bar" destination="0q8-hb-jV3" id="5tZ-sd-af5"/>
                 <outlet property="secFullView" destination="YnG-4O-OkE" id="utl-FO-nI3"/>
                 <outlet property="sectionLbl" destination="gQW-ur-Pog" id="7kz-OP-XXw"/>
+                <outlet property="selSecHeadLbl" destination="Rgf-TB-52d" id="h2E-4g-VQe"/>
                 <outlet property="selSecLbl" destination="Rgf-TB-52d" id="hBe-Np-5ZE"/>
+                <outlet property="selStdHeadLbl" destination="XiT-2s-BYc" id="JAC-PE-GuB"/>
                 <outlet property="selectStandardFullView" destination="FEU-Al-eCQ" id="iOj-Jo-Ldi"/>
                 <outlet property="standardLbl" destination="A30-p5-Idj" id="cgJ-lJ-xzK"/>
                 <outlet property="tv" destination="mxN-VY-hhV" id="Yev-Z1-E5A"/>

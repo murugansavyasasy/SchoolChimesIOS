@@ -661,20 +661,20 @@ class PrincipleStandardSectionVC: UIViewController ,Apidelegate,UIPickerViewDele
             self.view.semanticContentAttribute = .forceLeftToRight
             
         }
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         PickerTitleLabel.textAlignment = .center
-        self.SubjectButtonButton.setTitle(LangDict["select_student_attedance"] as? String, for: .normal)
+        self.SubjectButtonButton.setTitle(commonStringNames.select_student_attedance.translated() as? String, for: .normal)
         
-        self.StudentButtonButton.setTitle(LangDict["select_subjects"] as? String, for: .normal)
-        self.SendButton.setTitle(LangDict["teacher_confirm"] as? String, for: .normal)
+        self.StudentButtonButton.setTitle(commonStringNames.select_subjects.translated() as? String, for: .normal)
+        self.SendButton.setTitle(commonStringNames.teacher_confirm.translated() as? String, for: .normal)
         self.SendAssignmentButton.setTitle(LangDict["teacher_confirm"] as? String, for: .normal)
         
-        let strSection : String = LangDict["teacher_atten_sections"] as? String ?? "Section(s)"
-        let strStandard : String = LangDict["teacher_atten_standard"] as? String ?? "Standard"
-        pickerOkButton.setTitle(LangDict["teacher_btn_ok"] as? String, for: .normal)
-        pickerCancelButton.setTitle(LangDict["teacher_cancel"] as? String, for: .normal)
+        let strSection : String = commonStringNames.teacher_atten_sections.translated() as? String ?? "Section(s)"
+        let strStandard : String = commonStringNames.teacher_atten_standard.translated() as? String ?? "Standard"
+        pickerOkButton.setTitle(commonStringNames.teacher_btn_ok.translated() as? String, for: .normal)
+        pickerCancelButton.setTitle(commonStringNames.teacher_cancel.translated() as? String, for: .normal)
         SectionTitleArray = [strStandard,strSection]
         if(StandardSectionSubjectArray.count == 0){
             if(UtilObj.IsNetworkConnected()){

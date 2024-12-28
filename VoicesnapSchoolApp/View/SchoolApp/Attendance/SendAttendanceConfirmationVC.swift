@@ -599,17 +599,17 @@ class SendAttendanceConfirmationVC: UIViewController,UITableViewDataSource,UITab
             
         }
         MessageTitleLabel.textAlignment = .center
-        TitleLabel.text = LangDict["confirmation"] as? String
-        OkButton.setTitle(LangDict["teacher_btn_ok"] as? String, for: .normal)
-        CancelButton.setTitle(LangDict["teacher_cancel"] as? String, for: .normal)
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        TitleLabel.text = commonStringNames.confirmation.translated() as? String
+        OkButton.setTitle(commonStringNames.teacher_btn_ok.translated() as? String, for: .normal)
+        CancelButton.setTitle(commonStringNames.teacher_cancel.translated() as? String, for: .normal)
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         
         if(CheckAttendanceVCStr == "AttendanceVC"){
-            MessageTitleLabel.text = LangDict["absent_message"] as? String
+            MessageTitleLabel.text = commonStringNames.absent_message as? String
         }else{
-            MessageTitleLabel.text = LangDict["confirm_send_message"] as? String
+            MessageTitleLabel.text = commonStringNames.confirm_send_message as? String
         }
     }
     

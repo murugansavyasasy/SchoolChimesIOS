@@ -1076,22 +1076,22 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
             self.ListenVoiceMsgLabel.textAlignment = .left
             self.RecordVoiceLabel.textAlignment = .left
         }
-        self.NewVoiceRecordingLabel.text =  LangDict["record_new_voice_msg"] as? String
-        self.SelectFromVoiceHistoryLabel.text =  LangDict["record_voice_history"] as? String
-        self.RecordVoiceLabel.text = LangDict["voice_compose_msg"] as? String
-        self.DescriptionText.placeholder =  LangDict["teacher_txt_onwhat"] as? String
+        self.NewVoiceRecordingLabel.text =  commonStringNames.record_new_voice_msg.translated() as? String
+        self.SelectFromVoiceHistoryLabel.text =  commonStringNames.record_voice_history.translated() as? String
+        self.RecordVoiceLabel.text = commonStringNames.voice_compose_msg.translated() as? String
+        self.DescriptionText.placeholder =  commonStringNames.teacher_txt_onwhat.translated() as? String
         
         if (strCountryNAme.uppercased() == SELECT_COUNTRY){
-            self.ChooseStandardSectionButton.setTitle( LangDict["teacher_staff_to_sections_usa"] as? String, for: .normal)
-            self.ChooseStandardStudentButton.setTitle( LangDict["teacher_staff_to_students"] as? String, for: .normal)
+            self.ChooseStandardSectionButton.setTitle(commonStringNames.teacher_staff_to_sections_usa.translated() as? String, for: .normal)
+            self.ChooseStandardStudentButton.setTitle(commonStringNames.teacher_staff_to_students.translated() as? String, for: .normal)
         }
         else{
-            self.ChooseStandardSectionButton.setTitle( LangDict["teacher_staff_to_sections"] as? String, for: .normal)
-            self.ChooseStandardStudentButton.setTitle( LangDict["teacher_staff_to_students"] as? String, for: .normal)
+            self.ChooseStandardSectionButton.setTitle(commonStringNames.teacher_staff_to_sections.translated() as? String, for: .normal)
+            self.ChooseStandardStudentButton.setTitle(commonStringNames.teacher_staff_to_students.translated() as? String, for: .normal)
         }
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         self.loadViewData()
         
     }

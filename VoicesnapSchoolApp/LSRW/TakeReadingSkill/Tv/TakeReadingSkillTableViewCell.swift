@@ -11,6 +11,12 @@ import UIKit
 class TakeReadingSkillTableViewCell: UITableViewCell {
     
     
+    
+    @IBOutlet weak var attachHeadLbl: UILabel!
+    
+    
+    @IBOutlet weak var typeHeadLbl: UILabel!
+    
     @IBOutlet weak var viewAttac: UIView!
     
     
@@ -19,6 +25,10 @@ class TakeReadingSkillTableViewCell: UITableViewCell {
     @IBOutlet weak var attachmentLbl: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        
+//        attachHeadLbl.text =
+//        typeHeadLbl.text = 
         // Initialization code
     }
 

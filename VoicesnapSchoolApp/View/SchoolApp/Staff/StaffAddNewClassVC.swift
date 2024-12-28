@@ -1647,15 +1647,15 @@ class StaffAddNewClassVC: UIViewController,Apidelegate,UIPickerViewDelegate,UIPi
             self.view.semanticContentAttribute = .forceLeftToRight
         }
         
-        let strStandard : String = LangDict["teacher_atten_standard"] as? String ?? "Standard"
-        let strSection : String = LangDict["teacher_atten_sections"] as? String ?? "Section(s)"
-        let strSubject : String = LangDict["teacher_atten_subject"] as? String ?? "Subject"
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Records Found.."
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
-        SendButton.setTitle(LangDict["teacher_txt_send"] as? String, for: .normal)
-        pickerCancelButton.setTitle(LangDict["teacher_cancel"] as? String, for: .normal)
-        pickerOkButton.setTitle(LangDict["teacher_btn_ok"] as? String, for: .normal)
+        let strStandard : String = commonStringNames.teacher_atten_standard.translated() as? String ?? "Standard"
+        let strSection : String = commonStringNames.teacher_atten_sections.translated() as? String ?? "Section(s)"
+        let strSubject : String = commonStringNames.teacher_atten_subject.translated() as? String ?? "Subject"
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Records Found.."
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
+        SendButton.setTitle(commonStringNames.teacher_txt_send.translated() as? String, for: .normal)
+        pickerCancelButton.setTitle(commonStringNames.teacher_cancel.translated() as? String, for: .normal)
+        pickerOkButton.setTitle(commonStringNames.teacher_btn_ok.translated() as? String, for: .normal)
         SectionTitleArray = [strStandard,strSection,"",strSubject]
         MyTableView.reloadData()
     }

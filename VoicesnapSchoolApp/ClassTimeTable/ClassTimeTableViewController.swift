@@ -103,7 +103,7 @@ class ClassTimeTableViewController: UIViewController,UITableViewDataSource,UITab
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        actTimeLbl.text = commonStringNames.ClassTimetable.translated()
         
         ChildId = String(describing: appDelegate.SchoolDetailDictionary["ChildID"]!)
         

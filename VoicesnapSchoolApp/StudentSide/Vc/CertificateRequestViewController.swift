@@ -66,6 +66,12 @@ class CertificateRequestViewController: UIViewController,UITableViewDataSource,U
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        actReqLBl.text = commonStringNames.CertificateOnly.translated()
+        actionCertiLbl.text = commonStringNames.CertificateOnly.translated()
+        reqCetLbl.text = commonStringNames.RequestCertificate.translated()
+        selCertLbl.text = commonStringNames.SelectCertificate.translated()
+        selUrgLbl.text = commonStringNames.SelectUrgencyLevel.translated()
         SchoolId = String(describing: appDelegate.SchoolDetailDictionary["SchoolID"]!)
         
         ChildId = String(describing: appDelegate.SchoolDetailDictionary["ChildID"]!)
