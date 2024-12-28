@@ -1057,15 +1057,15 @@ class StandardOrStudentsStaff : UIViewController,Apidelegate,UIPickerViewDelegat
             SectionNameLbl.textAlignment = .left
             StandardNameLbl.textAlignment = .left
         }
-        self.SendButton.setTitle(LangDict["teacher_pop_response_btn_send"] as? String, for: .normal)
-        self.SelectStudentButton.setTitle(LangDict["select_student_attedance"] as? String, for: .normal)
-        self.pickerOkButton.setTitle(LangDict["teacher_btn_ok"] as? String, for: .normal)
-        self.pickerCancelButton.setTitle(LangDict["teacher_cancel"] as? String, for: .normal)
-        FloatStandardNameLabel.text = LangDict["teacher_atten_standard"] as? String
-        FloatSectionLabel.text = LangDict["teacher_atten_sections"] as? String
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        self.SendButton.setTitle(commonStringNames.teacher_pop_response_btn_send.translated() as? String, for: .normal)
+        self.SelectStudentButton.setTitle(commonStringNames.select_student_attedance.translated() as? String, for: .normal)
+        self.pickerOkButton.setTitle(commonStringNames.teacher_btn_ok.translated() as? String, for: .normal)
+        self.pickerCancelButton.setTitle(commonStringNames.teacher_cancel.translated() as? String, for: .normal)
+        FloatStandardNameLabel.text = commonStringNames.teacher_atten_standard.translated() as? String
+        FloatSectionLabel.text = commonStringNames.teacher_atten_sections.translated() as? String
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
     }
     
     //MARK: AWS Upload

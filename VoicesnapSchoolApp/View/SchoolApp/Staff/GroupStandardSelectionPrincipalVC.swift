@@ -606,13 +606,13 @@ class GroupStandardSelectionPrincipalVC: UIViewController ,UICollectionViewDeleg
             self.view.semanticContentAttribute = .forceLeftToRight
         }
         
-        SendButton.setTitle(LangDict["teacher_txt_send"] as? String, for: .normal)
-        entireButton.setTitle(LangDict["send_to_entire_school"] as? String, for: .normal)
-        StandardLabel.text = LangDict["standards_teacher"] as? String
-        GroupsLabel.text = LangDict["groups_teacher"] as? String
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        SendButton.setTitle(commonStringNames.teacher_txt_send.translated() as? String, for: .normal)
+        entireButton.setTitle(commonStringNames.send_to_entire_school.translated() as? String, for: .normal)
+        StandardLabel.text = commonStringNames.standards_teacher.translated() as? String
+        GroupsLabel.text = commonStringNames.groups_teacher.translated() as? String
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
     }
     
     

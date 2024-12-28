@@ -274,14 +274,14 @@ class FeedbackVC: UIViewController,UIPopoverPresentationControllerDelegate,UITex
             ContactMobileNoText.textAlignment = .left
             EmailIDText.textAlignment = .left
         }
-        FloatNameLabel.text = LangDict["yourname"] as? String
-        FloatSchoolNameLabel.text = LangDict["schoolname"] as? String
-        FloatMobileNoLabel.text = LangDict["alternate_mobile_number"] as? String
-        FlaotEmailLabel.text = LangDict["email_id"] as? String
-        NextButton.setTitle(LangDict["btn_next"] as? String, for: .normal)
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        FloatNameLabel.text = commonStringNames.yourname.translated() as? String
+        FloatSchoolNameLabel.text = commonStringNames.schoolname.translated() as? String
+        FloatMobileNoLabel.text = commonStringNames.alternate_mobile_number.translated() as? String
+        FlaotEmailLabel.text = commonStringNames.email_id.translated() as? String
+        NextButton.setTitle(commonStringNames.btn_next.translated() as? String, for: .normal)
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         navTitle()
     }
 }

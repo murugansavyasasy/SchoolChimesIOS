@@ -40,6 +40,12 @@ class LsrwListShowTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        titHeadLbl.text = commonStringNames.Title.translated()
+        descHeadLbl.text = commonStringNames.Description.translated()
+        subHeadLbl.text = commonStringNames.Subject.translated()
+        submitHeadLbl.text = commonStringNames.SubmittedOn.translated()
+        sentHeadLBl.text = commonStringNames.SentBy.translated()
         // Initialization code
     }
 

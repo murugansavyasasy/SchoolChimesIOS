@@ -15,6 +15,7 @@ class PrincipalLessonPlanViewController: UIViewController,UITableViewDelegate,UI
         print("viewupd",upd)
     }
     
+    @IBOutlet weak var actLsnPlnLbl: UILabel!
     
     @IBOutlet weak var viewEmpty: UIView!
     @IBOutlet weak var search_bar: UISearchBar!
@@ -48,6 +49,9 @@ class PrincipalLessonPlanViewController: UIViewController,UITableViewDelegate,UI
         tv.dataSource = self
         tv.delegate = self
         
+        classHandleBtn.setTitle(commonStringNames.ClassesYouHandle.translated(), for: .normal)
+        actLsnPlnLbl.text = commonStringNames.LessonPlan.translated()
+        allClassBtn.setTitle(commonStringNames.AllClasses.translated(), for: .normal)
         search_bar.delegate = self
         
         viewEmpty.alpha = 0

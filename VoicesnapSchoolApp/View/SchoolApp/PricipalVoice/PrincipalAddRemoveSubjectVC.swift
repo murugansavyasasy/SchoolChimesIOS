@@ -825,22 +825,22 @@ class PrincipalAddRemoveSubjectVC: UIViewController,UITableViewDataSource,UITabl
             self.navigationController?.navigationBar.semanticContentAttribute = .forceLeftToRight
             self.view.semanticContentAttribute = .forceLeftToRight
         }
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         
         PickerTitleLabel.textAlignment = .center
-        PickerTitleLabel.text =  LangDict["select_session"] as? String
+        PickerTitleLabel.text =  commonStringNames.select_session.translated() as? String
         DatePickerTitleLabel.textAlignment = .center
-        DatePickerTitleLabel.text =  LangDict["select_date"] as? String
-        self.SelectStudentButton.setTitle(LangDict["select_student_attedance"] as? String, for: .normal)
-        self.SendButton.setTitle(LangDict["teacher_txt_send"] as? String, for: .normal)
-        self.StudentSendButton.setTitle(LangDict["teacher_txt_send"] as? String, for: .normal)
+        DatePickerTitleLabel.text =  commonStringNames.select_date.translated() as? String
+        self.SelectStudentButton.setTitle(commonStringNames.select_student_attedance.translated() as? String, for: .normal)
+        self.SendButton.setTitle(commonStringNames.teacher_txt_send.translated() as? String, for: .normal)
+        self.StudentSendButton.setTitle(commonStringNames.teacher_txt_send.translated() as? String, for: .normal)
         
-        datePickerOkButton.setTitle(LangDict["teacher_btn_ok"] as? String, for: .normal)
-        datePickerCancelButton.setTitle(LangDict["teacher_cancel"] as? String, for: .normal)
-        pickerOkButton.setTitle(LangDict["teacher_btn_ok"] as? String, for: .normal)
-        pickerCancelButton.setTitle(LangDict["teacher_cancel"] as? String, for: .normal)
+        datePickerOkButton.setTitle(commonStringNames.teacher_btn_ok.translated() as? String, for: .normal)
+        datePickerCancelButton.setTitle(commonStringNames.teacher_cancel.translated() as? String, for: .normal)
+        pickerOkButton.setTitle(commonStringNames.teacher_btn_ok.translated() as? String, for: .normal)
+        pickerCancelButton.setTitle(commonStringNames.teacher_cancel.translated() as? String, for: .normal)
         
     }
     

@@ -913,6 +913,10 @@ class AttendanceMessageVC: UIViewController,Apidelegate,UIPickerViewDelegate ,UI
         
     }
     
+   
+  
+    
+    
     func hideLoading() -> Void{
         hud.hide(true)
     }
@@ -965,22 +969,22 @@ class AttendanceMessageVC: UIViewController,Apidelegate,UIPickerViewDelegate ,UI
             StandardNameTextField.textAlignment = .left
             SectionNameTextField.textAlignment = .left
         }
-        AttendanceTitle.text = LangDict["attedance"] as? String
-        StandardLabel.text = LangDict["teacher_atten_standard"] as? String
-        SectionLabel.text = LangDict["teacher_atten_section"] as? String
-        OrLabel.text = LangDict["teacher_or"] as? String
-        AlertConfirmLabel.text = LangDict["confirmation"] as? String
-        AlertMessageLabel.text = LangDict["mark_all_present"] as? String
+        AttendanceTitle.text = commonStringNames.attedance.translated() as? String
+        StandardLabel.text = commonStringNames.teacher_atten_standard.translated() as? String
+        SectionLabel.text = commonStringNames.teacher_atten_section.translated() as? String
+        OrLabel.text = commonStringNames.teacher_or.translated() as? String
+        AlertConfirmLabel.text = commonStringNames.confirmation.translated() as? String
+        AlertMessageLabel.text = commonStringNames.mark_all_present.translated() as? String
         
-        MarkAllasPresentButton.setTitle(LangDict["teacher_btn_mark_all_present"] as? String, for: .normal)
-        SelectStudentButton.setTitle(LangDict["select_student_attedance"] as? String, for: .normal)
-        AlertOkLabel.setTitle(LangDict["teacher_btn_ok"] as? String, for: .normal)
-        AlertCancelLabel.setTitle(LangDict["teacher_cancel"] as? String, for: .normal)
-        PickerOkButton.setTitle(LangDict["teacher_btn_ok"] as? String, for: .normal)
-        PickerCancelButton.setTitle(LangDict["teacher_cancel"] as? String, for: .normal)
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        MarkAllasPresentButton.setTitle(commonStringNames.teacher_btn_mark_all_present.translated() as? String, for: .normal)
+        SelectStudentButton.setTitle(commonStringNames.select_student_attedance.translated() as? String, for: .normal)
+        AlertOkLabel.setTitle(commonStringNames.teacher_btn_ok.translated() as? String, for: .normal)
+        AlertCancelLabel.setTitle(commonStringNames.teacher_cancel.translated() as? String, for: .normal)
+        PickerOkButton.setTitle(commonStringNames.teacher_btn_ok.translated() as? String, for: .normal)
+        PickerCancelButton.setTitle(commonStringNames.teacher_cancel.translated() as? String, for: .normal)
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
     }
     
     

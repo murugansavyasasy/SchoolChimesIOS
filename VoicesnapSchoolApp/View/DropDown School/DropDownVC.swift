@@ -165,13 +165,13 @@ class DropDownVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
             }
         } else if(fromVC == "setting"){
         
-            arrFAQName =  [commonStringNames.txt_menu_help.translated() as? String ?? "",commonStringNames.txt_menu_logout.translated() as? String ?? ""]
+            arrFAQName =  [commonStringNames.txt_menu_help.translated() as? String ?? "",commonStringNames.txt_menu_logout.translated() as? String ?? "",commonStringNames.language_change.translated() as? String ?? ""]
                    self.navigationController?.navigationBar.isHidden = true
             print(arrFAQName)
                    if(UIDevice.current.userInterfaceIdiom == .pad){
                        self.preferredContentSize = CGSize(width: 180, height: 100)
                    }else{
-                       self.preferredContentSize = CGSize(width: 160, height: 90)
+                       self.preferredContentSize = CGSize(width: 220, height: 140)
                    }
                }
         else if(fromVC == "settings"){

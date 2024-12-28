@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -14,17 +14,23 @@
             <connections>
                 <outlet property="AcadamidropDown" destination="92g-4N-b24" id="LRv-LI-EKo"/>
                 <outlet property="TodateView" destination="dLj-7Q-oNe" id="tTB-ns-NGj"/>
+                <outlet property="actHEadLbl" destination="QEM-vc-HSB" id="DVI-aX-Qqb"/>
                 <outlet property="backView" destination="mPa-aC-Cr6" id="L03-BQ-ujO"/>
                 <outlet property="caleView" destination="6vD-Hp-PeJ" id="PZT-bg-uc5"/>
                 <outlet property="calendarView" destination="V0y-aK-beX" id="V3y-8l-zKm"/>
+                <outlet property="categoryHeadLbl" destination="cyO-vf-Urw" id="S0V-T7-VgN"/>
                 <outlet property="categoryWiseView" destination="MbM-t7-1fs" id="V6i-Em-Q8R"/>
+                <outlet property="classHEadLBl" destination="nIJ-Gc-0st" id="UJd-b5-csF"/>
                 <outlet property="classWiseView" destination="Lbc-UT-pgo" id="8fU-gu-wBA"/>
                 <outlet property="datePicker" destination="YF2-ye-jYi" id="IuN-JN-zU9"/>
                 <outlet property="dateViewHeight" destination="ywI-Pa-1zE" id="vYE-sT-wlY"/>
                 <outlet property="dropDownLbl" destination="4ad-mq-ZHE" id="Yf8-UW-Mcg"/>
+                <outlet property="fromDateHeadLBl" destination="eBy-qE-DZO" id="UTP-Ah-Llb"/>
                 <outlet property="fromLbl" destination="zxg-eO-hbB" id="R5Z-IZ-1qZ"/>
+                <outlet property="modeHeadLbl" destination="y1S-cy-Yqt" id="d20-Cw-Gl7"/>
                 <outlet property="modeView" destination="rT1-fU-sDh" id="N6R-TX-KVr"/>
                 <outlet property="norecordLbl" destination="OHj-Q1-eNO" id="RcZ-6K-jFR"/>
+                <outlet property="toDateHeadLBl" destination="5fI-UB-YTf" id="bcF-SS-E9M"/>
                 <outlet property="todateLbl" destination="ivg-1d-QRx" id="cVs-c2-H6U"/>
                 <outlet property="tv" destination="MtD-R9-d7q" id="pKn-Yy-d1p"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -399,7 +405,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray6Color">
-            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

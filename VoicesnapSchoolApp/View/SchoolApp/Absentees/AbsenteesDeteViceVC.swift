@@ -239,9 +239,9 @@ class AbsenteesDeteViceVC: UIViewController,UITableViewDelegate,UITableViewDataS
             self.navigationController?.navigationBar.semanticContentAttribute = .forceLeftToRight
             self.view.semanticContentAttribute = .forceLeftToRight
         }
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         NoRecordFoundLabel.text = strNoRecordAlert
         TitleForNavigation()
     }

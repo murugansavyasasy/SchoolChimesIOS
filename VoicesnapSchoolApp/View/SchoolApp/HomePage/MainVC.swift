@@ -1350,14 +1350,14 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
             
         }
         
-        FAQLabel.text = LangDict["faq"] as? String
-        PasswordLabel.text = LangDict["txt_password"] as? String
-        LogoutLabel.text = LangDict["txt_menu_setting"] as? String
+        FAQLabel.text = commonStringNames.faq.translated() as? String
+        PasswordLabel.text = commonStringNames.txt_password.translated() as? String
+        LogoutLabel.text = commonStringNames.txt_menu_setting.translated() as? String
         
-        CHomeLabel.text = LangDict["home"] as? String
-        CFAQLabel.text = LangDict["faq"] as? String
-        CPasswordLabel.text = LangDict["txt_password"] as? String
-        CLogoutLabel.text = LangDict["txt_menu_setting"] as? String
+        CHomeLabel.text = commonStringNames.home.translated() as? String
+        CFAQLabel.text = commonStringNames.faq.translated() as? String
+        CPasswordLabel.text = commonStringNames.txt_password.translated() as? String
+        CLogoutLabel.text = commonStringNames.txt_menu_setting.translated() as? String
         print("loadCellArrayData1LoadLanguage")
         
         self.loadCellArrayData()
@@ -2242,12 +2242,19 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
             callEditProfile()
         }else if(selectString.contains("help")){
             callhelp()
+        }else if(selectString.contains("change language")){
+            callLanguageVc()
         }
         else{
             callUploadDocumentView()
         }
         
         
+    }
+    func callLanguageVc(){
+        let vc = ChangeLanguageViewController(nibName: nil, bundle: nil)
+        vc.modalPresentationStyle = .formSheet
+        present(vc, animated: true)
     }
     
     func callEditProfile(){

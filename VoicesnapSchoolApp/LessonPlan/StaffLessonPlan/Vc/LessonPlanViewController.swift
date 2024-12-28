@@ -24,6 +24,10 @@ class LessonPlanViewController: UIViewController,UITableViewDataSource,UITableVi
     @IBOutlet weak var tv: UITableView!
     @IBOutlet weak var backView: UIView!
     
+    
+    @IBOutlet weak var actlsnPlnLbl: UILabel!
+    
+    
     var getLessonPlanData : [GetLessonPlanStaffReportResponseData] = []
     var  clone_list : [GetLessonPlanStaffReportResponseData] = []
     
@@ -37,6 +41,8 @@ class LessonPlanViewController: UIViewController,UITableViewDataSource,UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        actlsnPlnLbl.text = commonStringNames.LessonPlan.translated()
         
         tv.dataSource = self
         tv.delegate = self

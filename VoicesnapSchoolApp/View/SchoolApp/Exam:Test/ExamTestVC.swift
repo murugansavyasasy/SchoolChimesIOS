@@ -327,23 +327,23 @@ class ExamTestVC: UIViewController,UITextViewDelegate,UITextFieldDelegate {
             ExamTestTitle.textAlignment = .left
             TextMessageView.textAlignment = .left
         }
-        TitleLabel.text = LangDict["teacher_txt_composeExammsg"] as? String
-        ExamTestTitle.placeholder = LangDict["teacher_txt_exam_title"] as? String
-        strTextViewPlaceholder = LangDict["teacher_txt_typemsg"] as? String ?? "Exam Syllabus"
+        TitleLabel.text = commonStringNames.teacher_txt_composeExammsg.translated() as? String
+        ExamTestTitle.placeholder = commonStringNames.teacher_txt_exam_title.translated() as? String
+        strTextViewPlaceholder = commonStringNames.teacher_txt_typemsg.translated() as? String ?? "Exam Syllabus"
         
         if (strCountryName.uppercased() == SELECT_COUNTRY){
-            self.ToSelectStandardSectionButton.setTitle( LangDict["teacher_staff_to_sections_usa"] as? String, for: .normal)
-            self.ToSelectSectionStudentButton.setTitle( LangDict["teacher_staff_to_students"] as? String, for: .normal)
+            self.ToSelectStandardSectionButton.setTitle(commonStringNames.teacher_staff_to_sections_usa.translated() as? String, for: .normal)
+            self.ToSelectSectionStudentButton.setTitle(commonStringNames.teacher_staff_to_students.translated() as? String, for: .normal)
         }
         
         else{
-            self.ToSelectStandardSectionButton.setTitle( LangDict["teacher_staff_to_sections"] as? String, for: .normal)
-            self.ToSelectSectionStudentButton.setTitle( LangDict["teacher_staff_to_students"] as? String, for: .normal)
+                                                            self.ToSelectStandardSectionButton.setTitle(commonStringNames.teacher_staff_to_sections.translated() as? String, for: .normal)
+            self.ToSelectSectionStudentButton.setTitle(commonStringNames.teacher_staff_to_students.translated() as? String, for: .normal)
         }
         
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         self.loadViewData()
         
     }

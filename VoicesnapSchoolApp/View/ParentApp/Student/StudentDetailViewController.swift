@@ -906,7 +906,7 @@ print("schoolNameReg",schoolNameReg)
     
     func callLanguageVc(){
         let vc = ChangeLanguageViewController(nibName: nil, bundle: nil)
-        vc.modalPresentationStyle = .fullScreen
+        vc.modalPresentationStyle = .formSheet
         present(vc, animated: true)
     }
     
