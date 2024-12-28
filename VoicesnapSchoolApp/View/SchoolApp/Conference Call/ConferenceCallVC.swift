@@ -423,13 +423,13 @@ class ConferenceCallVC: UIViewController,Apidelegate,UITableViewDelegate,UITable
             self.view.semanticContentAttribute = .forceLeftToRight
             SelectAllLabel.textAlignment = .right
         }
-        SelectAllLabel.text = LangDict["teacher_txt_select"] as? String
-        StaffListLabel.text = LangDict["staff_list"] as? String
-        searchBar.placeholder = LangDict["search_staffs"] as? String
-        MakeCallButton.setTitle(LangDict["make_call"] as? String, for: .normal)
-        strNoRecordAlert = LangDict["no_staffs"] as? String ?? "No Staff"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        SelectAllLabel.text = commonStringNames.teacher_txt_select.translated() as? String
+        StaffListLabel.text = commonStringNames.staff_list.translated() as? String
+        searchBar.placeholder = commonStringNames.search_staffs.translated() as? String
+        MakeCallButton.setTitle(commonStringNames.make_call.translated() as? String, for: .normal)
+        strNoRecordAlert = commonStringNames.no_staffs.translated() as? String ?? "No Staff"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         noDataLabel.text = strNoRecordAlert
         
     }

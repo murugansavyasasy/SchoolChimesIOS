@@ -57,6 +57,7 @@ class ChangeLanguageViewController: UIViewController {
         print("languageCode",DefaultsKeys.Language)
         TranslationManager.shared.setLanguage(languageCode)
         
+        
         // Apply the language immediately
         userDefault.synchronize()
         let value = UserDefaults.standard.integer(forKey: "passvalue")
