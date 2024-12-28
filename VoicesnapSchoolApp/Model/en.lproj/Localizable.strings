@@ -868,6 +868,59 @@
 "note" = "Note : ";
 "password_bind" = "Your password is bind automatically. Click Submit to continue";
 
+"Mark Attendance" = "Mark Attendance";
+"Your Attendance Details" = "Your Attendance Details";
+"Note : You are outside the institutes boundary. You will not be able to mark your attendance" = "Note : You are outside the institutes boundary. You will not be able to mark your attendance";
+"Please try again when you are within the designated area." = "Please try again when you are within the designated area.";
+"Add new punch location" = "Add new punch location";
+"Enter iPhone Passcode for “School Chimes”" = "Enter iPhone Passcode for “School Chimes”";
+"Please Authenticate to proceed" = "Please Authenticate to proceed";
+"Important" = "Important";
 
+"Accurate location settings are crucial for ensuring that attendance is only marked when users are within the designated area of the institute.
+ Please double check the location before submitting." = "Accurate location settings are crucial for ensuring that attendance is only marked when users are within the designated area of the institute. Please double check the location before submitting.";
+
+"Once saved, this location will be used to verify the proximity of users when they mark their attendance. Ensure that location is correct as it will directly impact attendance functionality." = "Once saved, this location will be used to verify the proximity of users when they mark their attendance. Ensure that location is correct as it will directly impact attendance functionality.";
+
+"Pin Your location name" = "Pin Your location name";
+"Drop your distance in meter" = "Drop your distance in meter";
+"Meters" = "Meters";
+"Your address" = "Your address";
+"Allow “School Chimes” to use your location?" = "Allow “School Chimes” to use your location?";
+"We need your location to provide better services." = "We need your location to provide better services.";
+"Allow Once" = "Allow Once";
+"Allow While Using App" = "Allow While Using App";
+"Don’t Allow" = "Don’t Allow";
+"Allow location access to mark your attendance!" = "Allow location access to mark your attendance!";
+"To enhance your experience and provide accurate location-based features, please enable GPS." = "To enhance your experience and provide accurate location-based features, please enable GPS.";
+"Enable Location" = "Enable Location";
+"Attachment" = "Attachment";
+"Type" = "Type";
+"View Attachment" = "View Attachment";
+"Next" = "Next";
+"Preview LSRW" = "Preview LSRW";
+"Submit LSRW" = "Submit LSRW";
+"Add Content" = "Add Content";
+"Submit" = "Submit";
+
+"Sunday" = "Sunday";
+"Monday" = "Monday";
+"Tuesday" = "Tuesday";
+"Wednesday" = "Wednesday";
+"Thursday" = "Thursday";
+"Friday" = "Friday";
+"Saturday" = "Saturday";
+"January" = "January";
+"February" = "February";
+"March" = "March";
+"April" = "April";
+"May" = "May";
+"June" = "June";
+"July" = "July";
+"August" = "August";
+"September" = "September";
+"October" = "October";
+"November" = "November";
+"December" = "December";
 
 
