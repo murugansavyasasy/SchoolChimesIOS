@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -12,7 +12,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LocationViewController" customModule="VoicesnapSchoolApp" customModuleProvider="target">
             <connections>
+                <outlet property="AllowLocationMsgLbl" destination="Q75-J7-uES" id="Yyb-68-OXj"/>
+                <outlet property="EnableLocationLbl" destination="kuq-3u-CAr" id="xAA-oG-sCx"/>
                 <outlet property="ErrorLablelView" destination="63o-Kq-6GO" id="bUB-DF-n9J"/>
+                <outlet property="MarkAttendanceHeaderLbl" destination="ryj-xd-mXw" id="oES-lY-ebD"/>
+                <outlet property="ToenhanceMsgLbl" destination="fS3-kR-ah7" id="mgd-N4-cgx"/>
+                <outlet property="addNewPunchLocationLbl" destination="dG5-jz-anA" id="uTB-cF-qzs"/>
                 <outlet property="attendanceDefltLbl" destination="X1F-WR-N2s" id="uCM-YI-l1P"/>
                 <outlet property="backView" destination="rTk-xn-OIq" id="PMG-tg-bME"/>
                 <outlet property="enabelview" destination="Nf6-ou-5T1" id="7Qf-Ss-Liq"/>

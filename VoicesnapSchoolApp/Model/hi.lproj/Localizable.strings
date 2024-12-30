@@ -368,7 +368,7 @@
 "btn_apply" = "सूचित करें";
 "hint_attendance" = "पिछले 30 कार्य दिवसों में आपके वार्ड की उपस्थिति रिपोर्ट";
 "external_dir" = "GetSignature";
-"home_emergency" = "आपातकालीन आवाज";
+"Emergency Voice" = "आपातकालीन आवाज";
 "home_voice_parents" = "सामान्य आवाज";
 "home_text_parents" = "टेक्स्ट संदेश";
 "home_notice_board" = "सूचना बोर्ड";
@@ -995,3 +995,22 @@
 "Certificate" = "प्रमाणपत्र";
 "Request" = "अनुरोध";
 "Submitted On" = "जमा की गई तिथि";
+"DATE & TIME" = "तिथि और समय";
+"MEETING TYPE" = "बैठक प्रकार";
+"SUBJECT" = "विषय";
+"Subject" = "विषय";
+"Category" = "श्रेणी";
+"Submission Due" = "जमा करने की तिथि";
+"Send By" = "भेजने की तिथि";
+"Select date to start" = "शुरू करने के लिए तिथि चुनें";
+"Failure" = "विफलता";
+"--- Select Date ---" = "--- तिथि चुनें ---";
+"Select Section" = "विभाग चुनें";
+"CATEGORY" = "श्रेणी";
+"CLASS" = "कक्षा";
+"MODE" = "प्रकार";
+
+"Tap to view all dates" = "सभी तिथियों को देखने के लिए टैप करें";
+"Between" = "के बीच";
+"Slots" = "स्लॉट्स";
+"Note : Please deselect the selected date for change the timing." = "नोट : समय बदलने के लिए कृपया चुनी गई तिथि को अचयनित करें।";

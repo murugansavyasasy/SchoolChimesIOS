@@ -83,7 +83,7 @@ class NewProductOfferVC: UIViewController,UIWebViewDelegate {
         }
         if(viewFromString == "p21"){
             self.title = commonStringNames.special_offer.translated() as? String
-            self.title = "Important Info"
+            self.title = commonStringNames.ImportantInfo.translated()
         }else{
             self.title = "New Products"
         }

@@ -66,7 +66,7 @@ class commonStringNames {
     static let dailyCategory = "CATEGORY"
     static let dailyClass = "CLASS"
     static let dailyMode = "MODE"
-    static let ClassWise = " WISE"
+    static let ClassWise = "CLASS WISE"
     static let AttendanceReport = "Attendance Report"
     static let TodaysReport = "Today’s Report"
     static let StaffWiseReport = "Staff wise Report"
@@ -915,6 +915,19 @@ class commonStringNames {
     static let Status = "Status"
     static let Meetings = "Meetings"
     static let Videos = "Videos"
+
+    static let DateAndTime = "DATE & TIME"
+    static let MeetingType = "MEETING TYPE"
+    static let SendBy = "Send By"
+    static let SelectDateToStart = "Select date to start"
+    static let Failure = "Failure"
+    static let SelectDatePlaceholder = "--- Select Date ---"
+    
+    static let TapToViewAllDates = "Tap to view all dates"
+    static let Between = "Between"
+    static let Slots = "Slots"
+    static let NoteDeselectDate = "Note : Please deselect the selected date for change the timing."
+
 
 
 

@@ -189,7 +189,7 @@ class StaffPtmViewController: UIViewController,UITableViewDelegate,UITableViewDa
     @IBAction func  TodaySlotVC (){
         
         createView.isHidden = false
-        dateLbl.text = "--- Select Date ---"
+        dateLbl.text = commonStringNames.SelectDatePlaceholder.translated()
         slotView.backgroundColor = .lightGray
         todaSlotView.backgroundColor = UIColor(named: CustomOrange)
         dateWiseSlot()
@@ -198,7 +198,7 @@ class StaffPtmViewController: UIViewController,UITableViewDelegate,UITableViewDa
         createView.isHidden = true
         todaSlotView.backgroundColor = .lightGray
         slotView.backgroundColor = UIColor(named: CustomOrange)
-        dateLbl.text = "--- Select Date ---"
+        dateLbl.text = commonStringNames.SelectDatePlaceholder.translated()
         display_date = "ALL"
         StaffDetailsForStaff()
         
@@ -748,9 +748,9 @@ class StaffPtmViewController: UIViewController,UITableViewDelegate,UITableViewDa
    
     func dateWiseSlot(){
        
-        if  dateLbl.text == "--- Select Date ---"{
+        if  dateLbl.text == commonStringNames.SelectDatePlaceholder.translated(){
             
-            nodatalabl.text = "Select date to start"
+            nodatalabl.text = commonStringNames.SelectDateToStart.translated()
             nodatalabl.isHidden = false
             tv.isHidden = true
             

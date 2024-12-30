@@ -12,6 +12,8 @@ import ObjectMapper
 
 class StudentReportViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
+    @IBOutlet weak var OkBtn: UIButton!
+    @IBOutlet weak var cancelBtn: UIButton!
     @IBOutlet weak var getAllStudHeadLbl: UILabel!
     @IBOutlet weak var selSecHeadLbl: UILabel!
     @IBOutlet weak var selStdHeadLbl: UILabel!
@@ -72,7 +74,10 @@ class StudentReportViewController: UIViewController,UITableViewDataSource,UITabl
         selSecHeadLbl.text = commonStringNames.studentReportSection
             .translated()
         selStdHeadLbl.text = commonStringNames.studentReportStandard.translated()
-        
+        getAllStudHeadLbl.text = commonStringNames.GetAllStudent.translated()
+        search_bar.placeholder = commonStringNames.Search.translated()
+        cancelBtn.setTitle(commonStringNames.Cancel.translated(), for: .normal)
+        OkBtn.setTitle(commonStringNames.OK.translated(), for: .normal)
         
         
         intialstandardType = "1"
@@ -223,7 +228,7 @@ class StudentReportViewController: UIViewController,UITableViewDataSource,UITabl
         
         
         
-        if pickerLbl.text != "Select Standard" {
+        if pickerLbl.text != commonStringNames.SelectStandard.translated() {
             secFullView.isHidden = false
             selSecLbl.isHidden = false
             
@@ -437,7 +442,7 @@ class StudentReportViewController: UIViewController,UITableViewDataSource,UITabl
             print("stad.Standard",stad.Standard)
             print("stad.Standard",stad.StandardId)
             stad.StandardId
-            pickerLbl.text = "Select Standard"
+            pickerLbl.text = commonStringNames.SelectStandard.translated()
             
             getSection = stad.SectionNameData
             standardLbl.text = stad.Standard
@@ -445,7 +450,7 @@ class StudentReportViewController: UIViewController,UITableViewDataSource,UITabl
             
         }else {
             let sec : SectionNameDataList = getSection[row]
-            pickerLbl.text = "Select Section "
+            pickerLbl.text = commonStringNames.select_section.translated()
             print("didSelectstad.getSection.count",sec.SectionName)
             sectionLbl.text = sec.SectionName
             return sec.SectionName
@@ -460,7 +465,7 @@ class StudentReportViewController: UIViewController,UITableViewDataSource,UITabl
         
         
         if pickerView.tag == 0 {
-            pickerLbl.text = "Select Standard"
+            pickerLbl.text = commonStringNames.SelectStandard.translated()
             let stad : GetAllStandardsAndGroupsList = GetStandardList[row]
             standardLbl.text = stad.Standard
             

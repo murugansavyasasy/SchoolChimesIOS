@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -491,12 +491,23 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="AdmissionNoTitLbl" destination="wpH-MT-VDe" id="lNs-Q3-j1i"/>
+                <outlet property="DobTitLbl" destination="Q8S-KD-zgF" id="Tyl-0i-TxA"/>
+                <outlet property="GenderTitLbl" destination="MrA-B8-Aff" id="OB8-TX-igi"/>
+                <outlet property="MobileNoTitLbl" destination="Tvi-jn-rj5" id="1Yw-OT-JZE"/>
+                <outlet property="SectionTitLbl" destination="HII-J4-cwx" id="Kyo-C1-KC5"/>
+                <outlet property="SendSmsLbl" destination="lEZ-Bb-McO" id="Cqa-q2-hFe"/>
+                <outlet property="StudentnameTitLbl" destination="w7q-se-rWI" id="M2k-R4-ETu"/>
                 <outlet property="admissionLbl" destination="uE2-p0-5e8" id="JMt-6o-SCr"/>
+                <outlet property="callLbl" destination="XEy-j7-4LO" id="foh-5k-jDg"/>
                 <outlet property="callView" destination="FC5-8n-NmZ" id="phh-yu-89d"/>
                 <outlet property="classTeacherLbl" destination="UCz-LP-m8B" id="xBO-Cf-06s"/>
+                <outlet property="classnameTitlbl" destination="u4i-GM-hti" id="aR5-fI-ZEz"/>
                 <outlet property="classsNameLbl" destination="ucG-fc-ffh" id="HSb-K3-Kc8"/>
+                <outlet property="classteacherNametitLbl" destination="1Ib-ZK-lIC" id="fiQ-Fv-JxR"/>
                 <outlet property="dobLbl" destination="P0H-fR-KBX" id="9Os-NN-tcs"/>
                 <outlet property="fatherNameLbl" destination="8xS-ra-ojH" id="tnd-VB-usv"/>
+                <outlet property="fathernameLbl" destination="CEq-Ha-JxW" id="i6h-fK-aKO"/>
                 <outlet property="genderLbl" destination="IAc-Af-1v3" id="Xlb-XK-7sm"/>
                 <outlet property="mobileNoLbl" destination="X3d-OB-Y5b" id="rih-CO-OtH"/>
                 <outlet property="sectionNameLbl" destination="asr-j6-xlq" id="fDd-aq-gfe"/>
@@ -511,7 +522,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="tintColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

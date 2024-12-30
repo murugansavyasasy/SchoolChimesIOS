@@ -369,7 +369,7 @@
 "btn_apply" = "แจ้ง";
 "hint_attendance" = "รายงานการเข้าร่วมเรียนของบุตรหลานของคุณใน 30 วันที่ผ่านมา";
 "external_dir" = "GetSignature";
-"home_emergency" = "เสียงฉุกเฉิน";
+"Emergency Voice" = "เสียงฉุกเฉิน";
 "home_voice_parents" = "เสียงทั่วไป";
 "home_text_parents" = "ข้อความ";
 "home_notice_board" = "กระดานข่าว";
@@ -996,3 +996,23 @@
 "Certificate" = "ใบรับรอง";
 "Request" = "คำขอ";
 "Submitted On" = "ส่งเมื่อ";
+"DATE & TIME" = "วันที่และเวลา";
+"MEETING TYPE" = "ประเภทการประชุม";
+"SUBJECT" = "หัวข้อ";
+"Subject" = "หัวข้อ";
+"Category" = "หมวดหมู่";
+"Submission Due" = "กำหนดส่ง";
+"Send By" = "ส่งโดย";
+"Select date to start" = "เลือกวันที่เริ่มต้น";
+"Failure" = "ล้มเหลว";
+"--- Select Date ---" = "--- เลือกวันที่ ---";
+"Select Section" = "เลือกส่วน";
+"CATEGORY" = "หมวดหมู่";
+"CLASS" = "ชั้นเรียน";
+"MODE" = "โหมด";
+
+"Tap to view all dates" = "แตะเพื่อดูวันที่ทั้งหมด";
+"Between" = "ระหว่าง";
+"Slots" = "ช่องเวลา";
+"Note : Please deselect the selected date for change the timing." = "หมายเหตุ: โปรดยกเลิกการเลือกวันที่ที่เลือกไว้เพื่อเปลี่ยนเวลา";
+

@@ -157,6 +157,7 @@
 "Compose Assignment" = "Compose Assignment";
 "Submission Date" = "Submission Date";
 "Category" = "Category";
+"CATEGORY" = "CATEGORY";
 "Click here to choose Image" = "Click here to choose Image";
 "Subject" = "Subject";
 "Category" = "Category";
@@ -356,7 +357,7 @@
 "btn_apply" = "Inform";
 "hint_attendance" = "Your ward attendance report for past 30 working days";
 "external_dir" = "GetSignature";
-"home_emergency" = "Emergency Voice";
+"Emergency Voice" = "Emergency Voice";
 "home_voice_parents" = "General Voice";
 "home_text_parents" = "Text Messages";
 "home_notice_board" = "Notice Board";
@@ -794,6 +795,8 @@
 "choose_date" = "Choose Date";
 "name" = "Name";
 "class" = "Class";
+"CLASS" = "CLASS";
+"MODE" = "MODE";
 "seconds" = " seconds ";
 "minutes" = " minutes ";
 "listen" = "Listen";
@@ -804,8 +807,8 @@
 "absent" = "Absent";
 "date_select" = "Please choose From date";
 "choose_reason" = "Please enter reason";
-"select_standard" = "Select Standard";
-"select_section" = "Select Section";
+"Select Standard" = "Select Standard";
+"Select Section" = "Select Section";
 "select_subject" = "Select Subject";
 "select_category" = "Select Category";
 "no_subject" = "No subject found";
@@ -988,3 +991,18 @@
 "Certificate" = "Certificate";
 "Request" = "Request";
 "Submitted On" = "Submitted On";
+"DATE & TIME" = "DATE & TIME";
+"MEETING TYPE" = "MEETING TYPE";
+"SUBJECT" = "SUBJECT";
+"Subject" = "Subject";
+"Category" = "Category";
+"Submission Due" = "Submission Due";
+"Send By" = "Send By";
+"Select date to start" = "Select date to start";
+"Failure" = "Failure";
+"--- Select Date ---" = "--- Select Date ---";
+
+"Tap to view all dates" = "Tap to view all dates";
+"Between" = "Between";
+"Slots" = "Slots";
+"Note : Please deselect the selected date for change the timing." = "Note : Please deselect the selected date for change the timing.";

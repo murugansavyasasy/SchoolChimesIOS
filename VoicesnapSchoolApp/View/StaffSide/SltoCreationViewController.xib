@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -12,7 +12,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SltoCreationViewController" customModule="VoicesnapSchoolApp" customModuleProvider="target">
             <connections>
+                <outlet property="BetweenLbl" destination="1x3-Hd-07a" id="Pyy-6u-Ra1"/>
+                <outlet property="CancelBtn" destination="dKZ-r5-OKC" id="l8r-zE-DLT"/>
+                <outlet property="DoneBtn" destination="JtB-QE-HI8" id="4z9-8h-lOH"/>
                 <outlet property="FscalanderView" destination="xKP-s8-Rtr" id="tWa-Ae-reZ"/>
+                <outlet property="PurposeofDisscussionLbl" destination="yeO-xt-7ht" id="0WC-UJ-ynb"/>
+                <outlet property="SelectmodeLbl" destination="dPk-nZ-vDa" id="K5F-pq-Dbh"/>
+                <outlet property="TaptoViewLbl" destination="WEv-nx-Xh7" id="aZY-MX-66x"/>
                 <outlet property="backview" destination="a5a-Jf-WUe" id="vAD-Iz-lda"/>
                 <outlet property="breakMinsLbl" destination="jxx-zO-tAk" id="UtA-oi-UAt"/>
                 <outlet property="btweenDefaultLbl" destination="1x3-Hd-07a" id="Uqb-iT-Oz4"/>
@@ -27,18 +33,25 @@
                 <outlet property="holeFsCalandeView" destination="6aE-XZ-H0c" id="mu5-Sy-ZMv"/>
                 <outlet property="linkTextFiledHeight" destination="4Ha-kb-NXe" id="ecA-jP-KUO"/>
                 <outlet property="minitsDrop" destination="l4V-fV-vJq" id="26h-NM-KMQ"/>
+                <outlet property="needbreakLbl" destination="1fT-7A-zwK" id="alr-uN-KaQ"/>
                 <outlet property="norecord" destination="E5S-ct-3Xe" id="pAx-gv-RXp"/>
+                <outlet property="openslotsBtweenLbl" destination="g14-hh-ouI" id="hzO-XF-sS7"/>
                 <outlet property="purposeTextFld" destination="Kmh-It-sqJ" id="9XA-1K-6Zr"/>
+                <outlet property="selectClass" destination="x8e-t2-GYW" id="2ZC-BM-9I3"/>
                 <outlet property="selectDateLbl" destination="2LJ-Q2-ekW" id="AcY-QI-jt7"/>
                 <outlet property="selectDateView" destination="MZy-FN-E1y" id="1Qp-YG-ALh"/>
                 <outlet property="selectModeView" destination="RdU-kd-pMe" id="jLD-YF-eD0"/>
                 <outlet property="selectSlotEachView" destination="uYi-uP-UYI" id="jQ1-1N-Np6"/>
+                <outlet property="selectdateforslotLbl" destination="kQr-V6-EJh" id="T5f-fl-IvU"/>
                 <outlet property="slotBetweenHeight" destination="bIJ-SA-llo" id="rGT-kW-oYf"/>
                 <outlet property="slotBreakSwitch" destination="ncu-BD-SoA" id="VuQ-n9-BJo"/>
+                <outlet property="slotCreationHeaderLbl" destination="nwp-M6-avD" id="h9V-aW-91K"/>
                 <outlet property="slotDefaultlbl" destination="mEH-br-lWt" id="8sl-rI-ilv"/>
                 <outlet property="slotDurationLbl" destination="0UM-Pc-itt" id="n85-NS-rAG"/>
                 <outlet property="slotDurationView" destination="G54-d7-lCn" id="FuJ-mZ-RHa"/>
                 <outlet property="slotEachLbl" destination="CCW-9B-G6a" id="XM9-ge-X5l"/>
+                <outlet property="slotduration" destination="neE-jb-LCc" id="1aB-Ju-rLB"/>
+                <outlet property="slotsLbl" destination="mEH-br-lWt" id="xGq-yn-5Hn"/>
                 <outlet property="tapToviewLbl" destination="WEv-nx-Xh7" id="CE4-cf-oGU"/>
                 <outlet property="toTimeLbl" destination="YsX-ZF-vMC" id="chv-TI-PrQ"/>
                 <outlet property="toTimeView" destination="aa5-xx-AtW" id="3RD-B4-LRz"/>
@@ -654,13 +667,13 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray6Color">
-            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

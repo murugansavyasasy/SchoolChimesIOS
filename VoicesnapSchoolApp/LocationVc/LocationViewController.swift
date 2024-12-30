@@ -13,6 +13,13 @@
     import LocalAuthentication
 class LocationViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate {
     
+    
+    @IBOutlet weak var EnableLocationLbl: UILabel!
+    @IBOutlet weak var ToenhanceMsgLbl: UILabel!
+    @IBOutlet weak var AllowLocationMsgLbl: UILabel!
+    
+    @IBOutlet weak var addNewPunchLocationLbl: UILabel!
+    @IBOutlet weak var MarkAttendanceHeaderLbl: UILabel!
     @IBOutlet weak var plusViewHeight: NSLayoutConstraint!
     @IBOutlet weak var markAttendDfltLbl: UILabel!
     @IBOutlet weak var attendanceDefltLbl: UILabel!
@@ -77,6 +84,12 @@ class LocationViewController: UIViewController,UITableViewDelegate,UITableViewDa
     var apiDistanceForPuchCheck :  Int!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        MarkAttendanceHeaderLbl.text = commonStringNames.MarkAttendance.translated()
+        markAttendDfltLbl.text = commonStringNames.MarkAttendance.translated()
+        attendanceDefltLbl.text = commonStringNames.YourAttendanceDetails.translated()
+        addNewPunchLocationLbl.text = commonStringNames.AddNewPunchLocation.translated()
+        
         switchBtn.isHidden = true
         faceIdDefaultLbl.isHidden = true
 //        locationAlertFullView.isHidden = true

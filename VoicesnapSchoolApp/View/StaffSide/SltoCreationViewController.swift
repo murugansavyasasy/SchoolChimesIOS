@@ -12,6 +12,19 @@ import DropDown
 import FSCalendar
 class SltoCreationViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout, FSCalendarDelegate, FSCalendarDataSource, UITextFieldDelegate {
     
+    @IBOutlet weak var CancelBtn: UIButton!
+    @IBOutlet weak var DoneBtn: UIButton!
+    @IBOutlet weak var TaptoViewLbl: UILabel!
+    @IBOutlet weak var selectdateforslotLbl: UILabel!
+    @IBOutlet weak var slotsLbl: UILabel!
+    @IBOutlet weak var BetweenLbl: UILabel!
+    @IBOutlet weak var needbreakLbl: UILabel!
+    @IBOutlet weak var slotduration: UILabel!
+    @IBOutlet weak var openslotsBtweenLbl: UILabel!
+    @IBOutlet weak var selectClass: UILabel!
+    @IBOutlet weak var SelectmodeLbl: UILabel!
+    @IBOutlet weak var PurposeofDisscussionLbl: UILabel!
+    @IBOutlet weak var slotCreationHeaderLbl: UILabel!
     @IBOutlet weak var enterDuratonTextFld: UITextField!
     @IBOutlet weak var linkTextFiledHeight: NSLayoutConstraint!
     
@@ -73,6 +86,21 @@ class SltoCreationViewController: UIViewController,UICollectionViewDelegate,UICo
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        slotCreationHeaderLbl.text = commonStringNames.SlotCreation.translated()
+        PurposeofDisscussionLbl.text = commonStringNames.PurposeOfDiscussion.translated()
+        selectClass.text = commonStringNames.SelectClass.translated()
+        SelectmodeLbl.text = commonStringNames.SelectMode.translated()
+        openslotsBtweenLbl.text = commonStringNames.OpenSlotsBetween.translated()
+        slotduration.text = commonStringNames.SlotDuration.translated()
+        needbreakLbl.text = commonStringNames.NeedBreakBetweenSlots.translated()
+        selectdateforslotLbl.text = commonStringNames.SelectDateForSlot.translated()
+        warningLabl.text = commonStringNames.NoteDeselectDate.translated()
+        BetweenLbl.text = commonStringNames.Between.translated()
+        slotsLbl.text = commonStringNames.Slots.translated()
+        TaptoViewLbl.text = commonStringNames.TapToViewAllDates.translated()
+        
+        
         linkTextFiledHeight.constant = 0
         timeArry.removeAll()
         holeFsCalandeView.isHidden = true

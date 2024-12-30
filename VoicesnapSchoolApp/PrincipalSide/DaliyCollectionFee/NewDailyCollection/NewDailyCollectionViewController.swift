@@ -73,7 +73,8 @@ class NewDailyCollectionViewController: UIViewController,UITableViewDataSource,U
         categoryHeadLbl.text = commonStringNames.dailyCategory.translated()
         classHEadLBl.text = commonStringNames.dailyClass.translated()
         modeHeadLbl.text = commonStringNames.dailyMode.translated()
-        
+        fromDateHeadLBl.text = commonStringNames.FromDate.translated()
+        toDateHeadLBl.text = commonStringNames.ToDate.translated()
         
         let userDefaults = UserDefaults.standard
         print("Schooltype",type)

@@ -48,7 +48,7 @@ class PrincipalLessonPlanViewController: UIViewController,UITableViewDelegate,UI
         
         tv.dataSource = self
         tv.delegate = self
-        
+        search_bar.placeholder = commonStringNames.Search.translated()
         classHandleBtn.setTitle(commonStringNames.ClassesYouHandle.translated(), for: .normal)
         actLsnPlnLbl.text = commonStringNames.LessonPlan.translated()
         allClassBtn.setTitle(commonStringNames.AllClasses.translated(), for: .normal)
