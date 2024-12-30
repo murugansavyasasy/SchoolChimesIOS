@@ -141,8 +141,6 @@ class StaffDetailsVC: UIViewController,UITableViewDelegate,UITableViewDataSource
             cell.StaffNameLabel.text =  "Name " + " : "  + StaffName
             cell.SubjectfNameLabel.text = "Sub " + " : " + String(describing: Dict["subjectname"]!)
         }
-        //  cell.FloatStaffNameLabel.text = languageDictionary["staffname"] as? String
-        //  cell.FloatSubjectfNameLabel.text = languageDictionary["subjectname"] as? String
         
         if(String(describing: Dict["StaffID"]!) == "0"){
             cell.interactButton.isHidden = true
@@ -315,8 +313,8 @@ class StaffDetailsVC: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     func AlerMessage(alrtStr : String){
         
-        let alertController = UIAlertController(title: languageDictionary["alert"] as? String, message: alrtStr, preferredStyle: .alert)
-        let okAction = UIAlertAction(title:languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let alertController = UIAlertController(title: commonStringNames.alert.translated() as? String, message: alrtStr, preferredStyle: .alert)
+        let okAction = UIAlertAction(title:commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             print("Okaction")
             self.navigationController?.popViewController(animated: true)
@@ -348,8 +346,8 @@ class StaffDetailsVC: UIViewController,UITableViewDelegate,UITableViewDataSource
         titleLabel.frame = CGRect(x: 0, y: 0, width: self.view.frame.width , height: 45)
         //titleLabel.textColor = UIColor (red:128.0/255.0, green:205.0/255.0, blue: 244.0/255.0, alpha: 1)
         titleLabel.textColor = UIColor (red:0.0/255.0, green:183.0/255.0, blue: 190.0/255.0, alpha: 1)
-        let secondWord =  languageDictionary["Staff"] as? String
-        let thirdWord   = languageDictionary["details"] as? String
+        let secondWord =  commonStringNames.Staff.translated() as? String
+        let thirdWord   = commonStringNames.details.translated() as? String
         let comboWord = (secondWord ?? "Staff" ) + " " + (thirdWord ?? "Details")
         let attributedText = NSMutableAttributedString(string:comboWord)
         let attrs = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 22), NSAttributedString.Key.foregroundColor: UIColor.white]
@@ -404,14 +402,14 @@ class StaffDetailsVC: UIViewController,UITableViewDelegate,UITableViewDataSource
             
             
         }
-        HomeLabel.text = commonStringNames.home as? String
-        FAQLabel.text = commonStringNames.faq as? String
-        PasswordLabel.text = commonStringNames.txt_password as? String
-        LogoutLabel.text = commonStringNames.txt_menu_setting as? String
+        HomeLabel.text = commonStringNames.home.translated() as? String
+        FAQLabel.text = commonStringNames.faq.translated() as? String
+        PasswordLabel.text = commonStringNames.txt_password.translated() as? String
+        LogoutLabel.text = commonStringNames.txt_menu_setting.translated() as? String
         
-        strNoRecordAlert = commonStringNames.no_records as? String ?? "No Record Found"
-        strNoInternet = commonStringNames.check_internet as? String ?? "Check your Internet connectivity"
-        strSomething = commonStringNames.catch_message as? String ?? "Something went wrong.Try Again"
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         
         self.loadViewData()
         

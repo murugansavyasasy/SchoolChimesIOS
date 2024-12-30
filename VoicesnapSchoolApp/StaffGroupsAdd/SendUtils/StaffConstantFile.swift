@@ -93,5 +93,5 @@ struct DefaultsKeys {
     static  var stralerMsg = String()
 
     static   var  QuestionData : [UpdateDetailsData]! = []
-    static   var languageCode = "en"
+    static   var languageCode = ""
 }

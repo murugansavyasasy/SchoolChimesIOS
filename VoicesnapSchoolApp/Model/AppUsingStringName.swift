@@ -929,6 +929,8 @@ class commonStringNames {
     static let NoteDeselectDate = "Note : Please deselect the selected date for change the timing."
 
 
+    static let instantCall = "Instant Call"
+    static let scheduleCall = "Schedule Call"
 
 
 }

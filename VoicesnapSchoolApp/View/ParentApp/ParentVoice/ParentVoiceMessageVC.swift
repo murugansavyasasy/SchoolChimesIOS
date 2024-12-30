@@ -413,14 +413,14 @@ class ParentVoiceMessageVC: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     func showLogoutAlert(){
-        let alertController = UIAlertController(title: languageDictionary["txt_menu_logout"] as? String, message: languageDictionary["want_to_logut"] as? String, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.txt_menu_logout.translated() as? String, message: commonStringNames.want_to_logut.translated() as? String, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             self.moveToLogInScreen(strFromStaff: "Child")
         }
-        let cancelAction = UIAlertAction(title: languageDictionary["teacher_cancel"] as? String, style: UIAlertAction.Style.cancel) {
+        let cancelAction = UIAlertAction(title: commonStringNames.teacher_cancel.translated() as? String, style: UIAlertAction.Style.cancel) {
             UIAlertAction in
             
         }
@@ -614,9 +614,9 @@ class ParentVoiceMessageVC: UIViewController, UITableViewDelegate, UITableViewDa
     func AlertMessage(strAlert : String)
     {
         
-        let alertController = UIAlertController(title: languageDictionary["alert"] as? String, message: strAlert, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.alert.translated() as? String, message: strAlert, preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             print("Okaction")
             self.navigationController?.popViewController(animated: true)

@@ -35,6 +35,7 @@ class ParentEmergencyVoiceVC: UIViewController,UITableViewDelegate, UITableViewD
     var MainDetailTextArray: NSMutableArray = NSMutableArray()
     var SelectedSectionArray : NSMutableArray = NSMutableArray()
     
+    @IBOutlet weak var actheadLbl: UILabel!
     @IBOutlet weak var TextDateLabel: UILabel!
     @IBOutlet weak var HiddenLabel: UILabel!
     @IBOutlet weak var EmergencyTableView: UITableView!
@@ -74,7 +75,7 @@ class ParentEmergencyVoiceVC: UIViewController,UITableViewDelegate, UITableViewD
     override func viewDidLoad()  {
         super.viewDidLoad()
         
-        
+        actheadLbl.text = commonStringNames.home_emergency.translated()
         print("ParentEmergencyVoiceVC")
         HiddenLabel.isHidden = true
         bIsSeeMore = false
@@ -373,8 +374,8 @@ class ParentEmergencyVoiceVC: UIViewController,UITableViewDelegate, UITableViewD
             cell.TimeLbl.text = String(describing: dict["Time"]!)
             cell.DateLbl.text = String(describing: dict["Date"]!)
             cell.SubjectLbl.text = String(describing: dict["Subject"]!)
-            cell.playAudioButton.setTitle(languageDictionary["teacher_btn_voice_play"] as? String, for: .normal)
-            cell.VocieMessageLabel.text = languageDictionary["hint_play_voice"] as? String
+            cell.playAudioButton.setTitle(commonStringNames.teacher_btn_voice_play.translated() as? String, for: .normal)
+            cell.VocieMessageLabel.text = commonStringNames.hint_play_voice.translated() as? String
             cell.DiscriptionTextLbl.isHidden = false
             if(SenderType == "FromStaff"){
                 cell.playAudioButton.backgroundColor = UIColor (red:232.0/255.0, green:127.0/255.0, blue: 32.0/255.0, alpha: 1)
@@ -1064,7 +1065,7 @@ class ParentEmergencyVoiceVC: UIViewController,UITableViewDelegate, UITableViewD
                 }
                 EmergencyTableView.reloadData()
                 
-                TextDateLabel.text = languageDictionary["emergency"] as? String ?? "Emergency"
+                TextDateLabel.text = commonStringNames.emergency.translated() as? String ?? "Emergency"
                 MessageId = "MessageID"
                 
                 self.CallDetailEmergencyVocieApi()
@@ -1273,14 +1274,14 @@ class ParentEmergencyVoiceVC: UIViewController,UITableViewDelegate, UITableViewD
     }
     
     func showLogoutAlert(){
-        let alertController = UIAlertController(title: languageDictionary["txt_menu_logout"] as? String, message: languageDictionary["want_to_logut"] as? String, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.txt_menu_logout.translated() as? String, message: commonStringNames.want_to_logut.translated() as? String, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             self.moveToLogInScreen(strFromStaff: "Child")
         }
-        let cancelAction = UIAlertAction(title: languageDictionary["teacher_cancel"] as? String, style: UIAlertAction.Style.cancel) {
+        let cancelAction = UIAlertAction(title: commonStringNames.teacher_cancel.translated() as? String, style: UIAlertAction.Style.cancel) {
             UIAlertAction in
             
         }

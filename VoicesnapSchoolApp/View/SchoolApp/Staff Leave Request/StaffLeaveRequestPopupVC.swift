@@ -184,10 +184,10 @@ class StaffLeaveRequestPopupVC: UIViewController,Apidelegate,UITextViewDelegate 
         languageDictionary = LangDict
         if(Language == "ar"){
             UIView.appearance().semanticContentAttribute = .forceRightToLeft
-            self.TitlLable.text = languageDictionary["leave_history"] as? String
+            self.TitlLable.text = commonStringNames.leave_history.translated() as? String
         }else{
             UIView.appearance().semanticContentAttribute = .forceLeftToRight
-            self.TitlLable.text = languageDictionary["leave_history"] as? String
+            self.TitlLable.text = commonStringNames.leave_history.translated() as? String
         }
         strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
         strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
@@ -258,15 +258,15 @@ class StaffLeaveRequestPopupVC: UIViewController,Apidelegate,UITextViewDelegate 
             LeaveToLabel.text = " : " + String(describing: selectedHistoryDict["LeaveTODate"]!)
             reasonTextView.text =  String(describing: selectedHistoryDict["Reason"]!)
         }
-        self.FloatNameLabel.text = languageDictionary["name"] as? String
+        self.FloatNameLabel.text = commonStringNames.name.translated() as? String
         self.FloatClassLabel.text = languageDictionary["class"] as? String
-        self.FloatLeaveToLabel.text = languageDictionary["leave_to_date"] as? String
-        self.FlaotReason.text = languageDictionary["leave_reason"] as? String
-        self.FloatLeaveFromLabel.text = languageDictionary["leave_from_date"] as? String
-        self.FlaotLeaveAppiledOnLabel.text = languageDictionary["appliedon"] as? String
+        self.FloatLeaveToLabel.text = commonStringNames.leave_to_date.translated() as? String
+        self.FlaotReason.text = commonStringNames.leave_reason.translated() as? String
+        self.FloatLeaveFromLabel.text = commonStringNames.leave_from_date.translated() as? String
+        self.FlaotLeaveAppiledOnLabel.text = commonStringNames.appliedon.translated() as? String
 
-        self.ApproveButton.setTitle(languageDictionary["approve"] as? String, for: .normal)
-        self.DeclineButton.setTitle(languageDictionary["decline"] as? String, for: .normal)
+        self.ApproveButton.setTitle(commonStringNames.approve.translated() as? String, for: .normal)
+        self.DeclineButton.setTitle(commonStringNames.decline.translated() as? String, for: .normal)
      
     }
     

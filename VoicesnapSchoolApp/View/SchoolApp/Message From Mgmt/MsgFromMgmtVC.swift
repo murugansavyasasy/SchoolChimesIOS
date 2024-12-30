@@ -226,11 +226,11 @@ class MsgFromMgmtVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             }else{
                 cell.UnreadVideoCountLabel.isHidden = true
             }
-            let strVoice = languageDictionary ["teacher_txt_voice"] as? String ?? "Voice"
-            let strText = languageDictionary ["teacher_txt_text"] as? String ?? "Text"
-            let strImage = languageDictionary ["teacher_txt_Image"] as? String ?? "Image"
-            let strpdf = languageDictionary ["pdf_1"] as? String ?? "PDF"
-            let strvideo = languageDictionary ["videoName"] as? String ?? "PDF"
+            let strVoice = commonStringNames.teacher_txt_voice.translated() as? String ?? "Voice"
+            let strText = commonStringNames.teacher_txt_text.translated() as? String ?? "Text"
+            let strImage = commonStringNames.teacher_txt_Image.translated() as? String ?? "Image"
+            let strpdf = commonStringNames.pdf_1.translated() as? String ?? "PDF"
+            let strvideo = commonStringNames.videoName.translated() as? String ?? "PDF"
             
             cell.VoiceCountLbl.text =  strVoice + "(" + VoiceCount + ")"
             cell.ImageCountLbl.text = strImage + "(" + ImageCount  + ")"
@@ -527,7 +527,7 @@ class MsgFromMgmtVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
         
         
-        let okAction = UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             print("Okaction")
             self.navigationController?.popViewController(animated: true)
@@ -682,8 +682,8 @@ print("SelectedDict34",SelectedDict)
         let titleLabel = UILabel()
         titleLabel.frame = CGRect(x: 0, y: 0, width: self.view.frame.width , height: 45)
         titleLabel.textColor = UIColor (red:166.0/255.0, green: 114.0/255.0, blue: 155.0/255.0, alpha: 1)
-        let secondWord : String  = languageDictionary["messages"] as? String ?? "Messages"
-        let thirdWord   : String  = languageDictionary["from_management"] as? String ?? "from Management"
+        let secondWord : String  = commonStringNames.messages.translated() as? String ?? "Messages"
+        let thirdWord   : String  = commonStringNames.from_management.translated() as? String ?? "from Management"
         let comboWord = secondWord + " " + thirdWord
         let attributedText = NSMutableAttributedString(string:comboWord)
         if(UIDevice.current.userInterfaceIdiom == .pad){

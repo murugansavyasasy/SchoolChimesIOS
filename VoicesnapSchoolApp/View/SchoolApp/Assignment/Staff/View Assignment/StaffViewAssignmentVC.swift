@@ -258,16 +258,16 @@ class StaffViewAssignmentVC: UIViewController ,UITableViewDataSource,UITableView
                     
                     
                 }
-                cell.subjectLabelLang.text = languageDictionary["teacher_atten_subject"] as? String
-                cell.dueLabelLang.text = languageDictionary["subission_due"] as? String
-                cell.countLabelLang.text = languageDictionary["subission_count"] as? String
-                cell.totalLabelLang.text = languageDictionary["total_count"] as? String
-                cell.categoryLabelLang.text = languageDictionary["category"] as? String
-                cell.viewButton.setTitle(languageDictionary["view"] as? String, for: .normal)
-                cell.totalButton.setTitle(languageDictionary["total"] as? String, for: .normal)
-                cell.submissionButton.setTitle(languageDictionary["submissions"] as? String, for: .normal)
-                cell.deleteButton.setTitle(languageDictionary["delete"] as? String, for: .normal)
-                cell.forwardButton.setTitle(languageDictionary["forward"] as? String, for: .normal)
+                cell.subjectLabelLang.text = commonStringNames.teacher_atten_subject.translated() as? String
+                cell.dueLabelLang.text = commonStringNames.subission_due.translated() as? String
+                cell.countLabelLang.text = commonStringNames.subission_count.translated() as? String
+                cell.totalLabelLang.text = commonStringNames.total_count.translated() as? String
+                cell.categoryLabelLang.text = commonStringNames.category.translated() as? String
+                cell.viewButton.setTitle(commonStringNames.view.translated() as? String, for: .normal)
+                cell.totalButton.setTitle(commonStringNames.total.translated() as? String, for: .normal)
+                cell.submissionButton.setTitle(commonStringNames.submissions.translated() as? String, for: .normal)
+                cell.deleteButton.setTitle(commonStringNames.delete.translated() as? String, for: .normal)
+                cell.forwardButton.setTitle(commonStringNames.forward.translated() as? String, for: .normal)
                 return cell
             }
             
@@ -538,13 +538,13 @@ class StaffViewAssignmentVC: UIViewController ,UITableViewDataSource,UITableView
     
     func showDeleteAlert(){
         
-        let alertController = UIAlertController(title: languageDictionary["alert"] as? String, message: languageDictionary["delete_assignment_alert"] as? String, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.alert.translated() as? String, message: commonStringNames.delete_assignment_alert.translated() as? String, preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: languageDictionary["rb_yes"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.rb_yes.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             self.CallDeleteAssignmentApi()
         }
-        let cancelAction = UIAlertAction(title: languageDictionary["rb_no"] as? String, style: UIAlertAction.Style.cancel) {
+        let cancelAction = UIAlertAction(title: commonStringNames.rb_no.translated() as? String, style: UIAlertAction.Style.cancel) {
             UIAlertAction in
             
         }
@@ -557,9 +557,9 @@ class StaffViewAssignmentVC: UIViewController ,UITableViewDataSource,UITableView
     
     func AlertMessage(strAlert : String){
         
-        let alertController = UIAlertController(title: languageDictionary["alert"] as? String, message: strAlert, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.alert.translated() as? String, message: strAlert, preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             print("Okaction")
             self.dismiss(animated: true, completion: nil)

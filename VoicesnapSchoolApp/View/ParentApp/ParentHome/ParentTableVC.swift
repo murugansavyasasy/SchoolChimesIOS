@@ -349,10 +349,10 @@ class ParentTableVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
 
         cell.SchoolLogoImage.sd_setImage(with: URL(string: String(describing: (dicChilddetail["SchoolLogoUrl"]!))), placeholderImage: UIImage(named: "placeHolder.png"))
         
-        cell.FloatRollNoLabel.text = languageDictionary["child_roll_no"] as? String
-        cell.FlaotClassLabel.text = languageDictionary["child_class"] as? String
-        cell.FloatLabel.text = languageDictionary["childname"] as? String
-        cell.noteLabel.text = languageDictionary["note"] as? String
+        cell.FloatRollNoLabel.text = commonStringNames.child_roll_no.translated() as? String
+        cell.FlaotClassLabel.text = commonStringNames.child_class.translated() as? String
+        cell.FloatLabel.text = commonStringNames.childname.translated() as? String
+        cell.noteLabel.text = commonStringNames.note.translated() as? String
         let isNotv = dicChilddetail["IsNotAllow"] as? String ?? "0"
         
         
@@ -704,7 +704,7 @@ class ParentTableVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
         var selectString = notification.object as? String ?? ""
         selectString = selectString.lowercased()
-        let log = languageDictionary["txt_menu_logout"] as? String ?? ""
+        let log = commonStringNames.txt_menu_logout.translated() as? String ?? ""
         if(selectString == log.lowercased()){
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() )
             {
@@ -739,14 +739,14 @@ class ParentTableVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     
     func showLogoutAlert(){
-        let alertController = UIAlertController(title: languageDictionary["txt_menu_logout"] as? String, message: languageDictionary["want_to_logut"] as? String, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.txt_menu_logout.translated() as? String, message: commonStringNames.want_to_logut.translated() as? String, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             self.moveToLogInScreen(strFromStaff: "Child")
         }
-        let cancelAction = UIAlertAction(title: languageDictionary["teacher_cancel"] as? String, style: UIAlertAction.Style.cancel) {
+        let cancelAction = UIAlertAction(title: commonStringNames.teacher_cancel.translated() as? String, style: UIAlertAction.Style.cancel) {
             UIAlertAction in
             
         }
@@ -1016,7 +1016,7 @@ class ParentTableVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         // titleLabel.textColor = UIColor (red:128.0/255.0, green:205.0/255.0, blue: 244.0/255.0, alpha: 1)
         titleLabel.textColor = UIColor (red:0.0/255.0, green:183.0/255.0, blue: 190.0/255.0, alpha: 1)
         titleLabel.textColor = .white
-        let secondWord : String =   languageDictionary["choose"] as? String ?? "Choose"
+        let secondWord : String =   commonStringNames.choose.translated() as? String ?? "Choose"
         let thirdWord : String  = strTitleName
         let comboWord = secondWord + " " + thirdWord
         let attributedText = NSMutableAttributedString(string:comboWord)
@@ -1155,7 +1155,7 @@ class ParentTableVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         if(strLoginAs == "Parent"){
             PrincipalView.isHidden = true
             PrincipalHeightConst.constant = 0
-            strTitleName = languageDictionary["your_child"] as? String ??  "Your Child"
+            strTitleName = commonStringNames.your_child.translated() as? String ??  "Your Child"
             
         }
         else if(strcombination == "Yes")
@@ -1174,7 +1174,7 @@ class ParentTableVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             
             LoginAsLabel.text = loginAs
             
-            strTitleName = languageDictionary["role"] as? String ?? "Your Roll"
+            strTitleName = commonStringNames.role.translated() as? String ?? "Your Roll"
         }
         
         else
@@ -1188,10 +1188,10 @@ class ParentTableVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 PrincipalHeightConst.constant = 110
             }
             let loginAs : String = languageDictionary[strLoginAs] as? String ??  strLoginAs
-            let floatValue : String = languageDictionary["login_as"] as? String ??  "Login As "
+            let floatValue : String = commonStringNames.login_as.translated() as? String ??  "Login As "
             
             LoginAsLabel.text = loginAs
-            strTitleName = languageDictionary["role"] as? String ??  "Your Roll"
+            strTitleName = commonStringNames.role.translated() as? String ??  "Your Roll"
             
         }
         

@@ -83,7 +83,9 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var VoiceRecordView: UIView!
     
+    @IBOutlet weak var scheduleCallLbl: UILabel!
     
+    @IBOutlet weak var instantCallHeadLbl: UILabel!
     //MARK: Voice History
     @IBOutlet var voiceHistoryTableView: UITableView!
     @IBOutlet weak var voiceHistoryView: UIView!
@@ -183,6 +185,8 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
         doneView.isHidden  = true
         fsCaleView.isHidden  = true
         
+        scheduleCallLbl.text = commonStringNames.scheduleCall
+        instantCallHeadLbl.text = commonStringNames.instantCall
         DefaultsKeys.SelectInstantSchedule = 0
         SchoolDetailDict = appDelegate.LoginSchoolDetailArray[0] as! NSDictionary
         school_type = userDefaults.string(forKey: DefaultsKeys.school_type)
@@ -430,7 +434,7 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
         
         let idGroupHead = appDelegate.idGroupHead as NSString
         if(idGroupHead .isEqual(to: "true")){
-            self.sendButton.setTitle( languageDictionary["teacher_Select_school"] as? String, for: .normal)
+            self.sendButton.setTitle( commonStringNames.teacher_Select_school.translated() as? String, for: .normal)
             for  schoolDict in appDelegate.LoginSchoolDetailArray {
                 let singleSchoolDictionary = schoolDict as? NSDictionary
                 let schoolDic = NSMutableDictionary()
@@ -443,10 +447,10 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
         }else{
             if groupHeadRole == "Group Head" {
                 groupHeadSelectStandardBtn.isHidden = false
-                sendButton.setTitle(languageDictionary["teacher_Select_school"] as? String, for: .normal)
+                sendButton.setTitle(commonStringNames.teacher_Select_school.translated() as? String, for: .normal)
                 
             }else{
-                sendButton.setTitle(languageDictionary["select_reciepients"] as? String, for: .normal)
+                sendButton.setTitle(commonStringNames.select_reciepients.translated() as? String, for: .normal)
             }
         }
         
@@ -1126,8 +1130,8 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
     
     // MARK: TITLE FOR START AND STOP RECORD
     func TitleForStartRecord(){
-        let firstword : String =  languageDictionary["teacher_txt_start_record"] as? String ?? "Press the button to"
-        let secondWord : String  =  languageDictionary["record"] as? String ?? " RECORD"
+        let firstword : String =  commonStringNames.teacher_txt_start_record.translated() as? String ?? "Press the button to"
+        let secondWord : String  =  commonStringNames.record.translated() as? String ?? " RECORD"
         let comboWord = firstword + secondWord
         let attributedText = NSMutableAttributedString(string:comboWord)
         var attrs =  [NSAttributedString.Key : NSObject]()
@@ -1152,8 +1156,8 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
     
     func TitleForStopRecord(){
         
-        let firstword : String =  languageDictionary["teacher_txt_start_record"] as? String ?? "Press the button to"
-        let secondWord  : String =  languageDictionary["stop_record"] as? String ?? " STOP RECORD"
+        let firstword : String =  commonStringNames.teacher_txt_start_record.translated() as? String ?? "Press the button to"
+        let secondWord  : String =  commonStringNames.stop_record.translated() as? String ?? " STOP RECORD"
         let comboWord = firstword + secondWord
         let attributedText = NSMutableAttributedString(string:comboWord)
         var attrs =  [NSAttributedString.Key : NSObject]()
@@ -1177,9 +1181,9 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
     }
     
     func TitleForListenVoice(){
-        let firstword : String = languageDictionary["listen"] as? String ??  "Listen"
-        let secondWord : String  = languageDictionary["voice"] as? String ?? " Voice "
-        let thirdWord  : String = languageDictionary["message"] as? String ?? "Message"
+        let firstword : String = commonStringNames.listen.translated() as? String ??  "Listen"
+        let secondWord : String  = commonStringNames.voice.translated() as? String ?? " Voice "
+        let thirdWord  : String = commonStringNames.message.translated() as? String ?? "Message"
         let comboWord = firstword  + secondWord  + thirdWord
         let attributedText = NSMutableAttributedString(string:comboWord)
         var attrs =  [NSAttributedString.Key : NSObject]()
@@ -1275,8 +1279,8 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
         cell.SubjectLbl.text = String(describing: dict["Description"]!)
         cell.playAudioButton.addTarget(self, action: #selector(actionplayAudioButton(sender:)), for: .touchUpInside)
         cell.playAudioButton.tag = indexPath.row
-        cell.PressThePlayButtonLabel.text = languageDictionary["hint_play_voice"] as? String
-        cell.playAudioButton.setTitle(languageDictionary["teacher_btn_voice_play"] as? String, for: .normal)
+        cell.PressThePlayButtonLabel.text = commonStringNames.hint_play_voice.translated() as? String
+        cell.playAudioButton.setTitle(commonStringNames.teacher_btn_voice_play.translated() as? String, for: .normal)
         cell.audioCheckBoxButton.tag = indexPath.row
         cell.audioCheckBoxButton.addTarget(self, action: #selector(actionVoiceHistoryCheckboxButton(sender:)), for: .touchUpInside)
         
@@ -1504,7 +1508,7 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
     
     func alertWithAction(strAlert : String){
         let alertController = UIAlertController(title: "", message: strAlert, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             self.actionNewVoiceRecording()
         }
@@ -1567,9 +1571,9 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
         headerViewHeight.constant = headerViewHeight.constant - 110
         count = 0
         HomeWorkSecondStr = Int(appDelegate.MaxGeneralVoiceDuartionString)!
-        let strSeconRecord : String = languageDictionary["teacher_txt_general_title"] as? String ?? "You can record general voice message upto "
-        let strSeconds : String = languageDictionary["seconds"] as? String ?? " seconds "
-        let strminutes : String = languageDictionary["minutes"] as? String ?? " minutes "
+        let strSeconRecord : String = commonStringNames.teacher_txt_general_title.translated() as? String ?? "You can record general voice message upto "
+        let strSeconds : String = commonStringNames.seconds.translated() as? String ?? " seconds "
+        let strminutes : String = commonStringNames.minutes.translated() as? String ?? " minutes "
         
         if(HomeWorkSecondStr < 60)
         {

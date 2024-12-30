@@ -388,14 +388,14 @@ class HomeWorkVC: UIViewController,Apidelegate ,UIPopoverPresentationControllerD
     }
     
     func showLogoutAlert(){
-        let alertController = UIAlertController(title: languageDictionary["txt_menu_logout"] as? String, message: languageDictionary["want_to_logut"] as? String, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.txt_menu_logout.translated() as? String, message: commonStringNames.want_to_logut.translated() as? String, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             self.moveToLogInScreen(strFromStaff: "Child")
         }
-        let cancelAction = UIAlertAction(title: languageDictionary["teacher_cancel"] as? String, style: UIAlertAction.Style.cancel) {
+        let cancelAction = UIAlertAction(title: commonStringNames.teacher_cancel.translated() as? String, style: UIAlertAction.Style.cancel) {
             UIAlertAction in
             
         }
@@ -603,10 +603,10 @@ class HomeWorkVC: UIViewController,Apidelegate ,UIPopoverPresentationControllerD
     func AlertMessage()
     {
         
-        let alertController = UIAlertController(title: languageDictionary["alert"] as? String, message: strNoRecordAlert, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.alert.translated() as? String, message: strNoRecordAlert, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             print("Okaction")
             self.navigationController?.popViewController(animated: true)
@@ -666,7 +666,7 @@ class HomeWorkVC: UIViewController,Apidelegate ,UIPopoverPresentationControllerD
     }
     
     func loadViewData(){
-        self.title = languageDictionary["title_homework"] as? String
+        self.title = commonStringNames.title_homework.translated() as? String
         if(Util .isNetworkConnected()){
             self.CallHomeWorkMessageApi()
         }

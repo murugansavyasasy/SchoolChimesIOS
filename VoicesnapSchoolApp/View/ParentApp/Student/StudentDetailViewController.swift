@@ -349,7 +349,6 @@ print("schoolNameReg",schoolNameReg)
     override func viewDidAppear(_ animated: Bool) {
         print("viewDidAppear")
         
-        languageCode = DefaultsKeys.languageCode
         startTimer()
     }
     
@@ -885,7 +884,7 @@ print("schoolNameReg",schoolNameReg)
         var selectString = notification.object as? String ?? ""
         selectString = selectString.lowercased()
         print("SDetails",selectString)
-        let log = languageDictionary["txt_menu_logout"] as? String ?? ""
+        let log = commonStringNames.txt_menu_logout.translated() as? String ?? ""
         if(selectString == log.lowercased()){
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() )
             {
@@ -932,13 +931,13 @@ print("schoolNameReg",schoolNameReg)
     }
     
     func showLogoutAlert(){
-        let alertController = UIAlertController(title: languageDictionary["txt_menu_logout"] as? String, message: languageDictionary["want_to_logut"] as? String, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.txt_menu_logout.translated() as? String, message: commonStringNames.want_to_logut.translated() as? String, preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             self.moveToLogInScreen(strFromStaff: "Child")
         }
-        let cancelAction = UIAlertAction(title: languageDictionary["teacher_cancel"] as? String, style: UIAlertAction.Style.cancel) {
+        let cancelAction = UIAlertAction(title: commonStringNames.teacher_cancel.translated() as? String, style: UIAlertAction.Style.cancel) {
             UIAlertAction in
             
         }

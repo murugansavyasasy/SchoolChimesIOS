@@ -357,9 +357,9 @@ class ParentChangePasswordVC: UIViewController ,UITextFieldDelegate,UITextViewDe
             VerifyNewPasswordText.textAlignment = .left
         }
         
-        TitleLabel.text = commonStringNames.pop_password_title.translated() as? String
-        FloatExistingLabel.text = commonStringNames.pop_password_txt_exist.translated() as? String
-        FloatVerifyLabel.text = commonStringNames.pop_password_txt_repeat.translated() as? String
+        TitleLabel.text = commonStringNames.pop_password_title.translated()
+        FloatExistingLabel.text = commonStringNames.pop_password_txt_exist.translated()
+        FloatVerifyLabel.text = commonStringNames.pop_password_txt_repeat.translated() 
         FloatNewLabel.text = commonStringNames.pop_password_txt_new.translated() as? String
         CancelButton.setTitle(commonStringNames.pop_password_btnCancel.translated() as? String, for: .normal)
                               UpdateButton.setTitle(commonStringNames.pop_password_btnUpdate.translated() as? String, for: .normal)

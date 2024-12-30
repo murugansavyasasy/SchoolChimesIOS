@@ -1086,9 +1086,9 @@ class TextHomeWorkVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UI
     func loadViewData(){
         HomeWorkSecondStr = Int(appDelegate.MaxHWVoiceDurationString)!
         
-        let strSeconRecord : String = languageDictionary["teacher_txt_general_title"] as? String ?? "You can record upto "
-        let strSeconds : String = languageDictionary["seconds"] as? String ?? " seconds "
-        let strminutes : String = languageDictionary["minutes"] as? String ?? " minutes "
+        let strSeconRecord : String = commonStringNames.teacher_txt_general_title.translated() as? String ?? "You can record upto "
+        let strSeconds : String = commonStringNames.seconds.translated() as? String ?? " seconds "
+        let strminutes : String = commonStringNames.minutes.translated() as? String ?? " minutes "
         if(HomeWorkSecondStr < 60)
         {
             UtilObj.printLogKey(printKey: "", printingValue: HomeWorkSecondStr)
@@ -1850,8 +1850,8 @@ class TextHomeWorkVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UI
     
     func TitleForStopRecord()
     {
-        let firstword : String =  languageDictionary["teacher_txt_start_record"] as? String ?? "Press the button to"
-        let secondWord  : String =  languageDictionary["stop_record"] as? String ?? " STOP RECORD"
+        let firstword : String =  commonStringNames.teacher_txt_start_record.translated() as? String ?? "Press the button to"
+        let secondWord  : String =  commonStringNames.stop_record.translated() as? String ?? " STOP RECORD"
         let comboWord = firstword + secondWord
         let attributedText = NSMutableAttributedString(string:comboWord)
         var attrs =  [NSAttributedString.Key : NSObject]()
@@ -1875,8 +1875,8 @@ class TextHomeWorkVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UI
     
     func TitleForStartRecord()
     {
-        let firstword : String =  languageDictionary["teacher_txt_start_record"] as? String ?? "Press the button to"
-        let secondWord : String  =  languageDictionary["record"] as? String ?? " RECORD"
+        let firstword : String =  commonStringNames.teacher_txt_start_record.translated() as? String ?? "Press the button to"
+        let secondWord : String  =  commonStringNames.record.translated() as? String ?? " RECORD"
         let comboWord = firstword + secondWord
         let attributedText = NSMutableAttributedString(string:comboWord)
         var attrs =  [NSAttributedString.Key : NSObject]()

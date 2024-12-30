@@ -157,10 +157,10 @@ class FAQVC: UIViewController,Apidelegate,UIWebViewDelegate {
     func AlerMessage()
     {
         
-        let alertController = UIAlertController(title: languageDictionary["alert"] as? String, message: AlertString, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.alert.translated() as? String, message: AlertString, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             print("Okaction")
             self.navigationController?.popViewController(animated: true)

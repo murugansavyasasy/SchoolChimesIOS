@@ -96,8 +96,8 @@ class HomeWorkVoiceVC: UIViewController ,UITableViewDelegate, UITableViewDataSou
         cell.SubjectLbl.text = String(describing: dict["HomeworkSubject"]!)
         cell.DiscriptionTextLbl.text = String(describing: dict["HomeworkTitle"]!)
         cell.playAudioButton.addTarget(self, action: #selector(actionplayAudioButton(sender:)), for: .touchUpInside)
-        cell.playAudioButton.setTitle(languageDictionary["teacher_btn_voice_play"] as? String, for: .normal)
-        cell.VocieMessageLabel.text = languageDictionary["hint_play_voice"] as? String
+        cell.playAudioButton.setTitle(commonStringNames.teacher_btn_voice_play.translated() as? String, for: .normal)
+        cell.VocieMessageLabel.text = commonStringNames.hint_play_voice.translated() as? String
         cell.playAudioButton.tag = indexPath.row
         return cell
     }
@@ -200,10 +200,10 @@ class HomeWorkVoiceVC: UIViewController ,UITableViewDelegate, UITableViewDataSou
     
     func AlertMessage(){
         
-        let alertController = UIAlertController(title: languageDictionary["alert"] as? String, message: strNoRecordAlert, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.alert.translated() as? String, message: strNoRecordAlert, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: .default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: .default) {
             UIAlertAction in
             print("Okaction")
             self.navigationController?.popViewController(animated: true)

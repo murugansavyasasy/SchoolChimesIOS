@@ -333,9 +333,9 @@ class PdfVC: UIViewController,UITableViewDataSource,UITableViewDelegate,Apideleg
             cell1.ViewFileButton.tag = indexPath.row
             cell1.DownloadButton.addTarget(self, action: #selector(PdfVC.SavePdfFileButton(sender:)), for: .touchUpInside)
             cell1.DownloadButton.tag = indexPath.row
-            cell1.ViewFileButton.setTitle(languageDictionary["btn_pdf_view"] as? String, for: .normal)
-            cell1.DownloadButton.setTitle(languageDictionary["btn_pdf_save"] as? String, for: .normal)
-            cell1.DiscriptionLabel.text = languageDictionary["hint_view_pdf"] as? String
+            cell1.ViewFileButton.setTitle(commonStringNames.btn_pdf_view.translated() as? String, for: .normal)
+            cell1.DownloadButton.setTitle(commonStringNames.btn_pdf_save.translated() as? String, for: .normal)
+            cell1.DiscriptionLabel.text = commonStringNames.hint_view_pdf.translated() as? String
             cell1.descLbl.isHidden = true
             let iReadVoice : Int? = Int((detailsDictionary["AppReadStatus"] as? String)!)
 
@@ -791,10 +791,10 @@ class PdfVC: UIViewController,UITableViewDataSource,UITableViewDelegate,Apideleg
     func AlertMessage(strAlert : String)
     {
         
-        let alertController = UIAlertController(title: languageDictionary["alert"] as? String, message: strAlert, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.alert.translated() as? String, message: strAlert, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             self.dismiss(animated: true, completion: nil)
         }
@@ -898,7 +898,7 @@ class PdfVC: UIViewController,UITableViewDataSource,UITableViewDelegate,Apideleg
                     ChildId = String(describing: appDelegate.SchoolDetailDictionary["ChildID"]!)
                     SchoolId = String(describing: appDelegate.SchoolDetailDictionary["SchoolID"]!)
                 }
-                TextDateLabel.text =  languageDictionary["recent_files"] as? String
+                TextDateLabel.text =  commonStringNames.recent_files.translated() as? String
                 self.CallPdfMessageApi()
             }
             
@@ -935,19 +935,19 @@ class PdfVC: UIViewController,UITableViewDataSource,UITableViewDelegate,Apideleg
                     try FileManager.default.copyItem(at: destinationURL, to: iCloudDocumentsURL)
                 }
             }
-            self.showAlert(message: self.languageDictionary["pdf_saved"] as? String ?? "PDF file saved successfully!")
+            self.showAlert(message: commonStringNames.pdf_saved.translated() as? String ?? "PDF file saved successfully!")
             
         } catch let error {
             
             print("Copy Error: \(error.localizedDescription)")
-            self.showAlert(message: self.languageDictionary["pdf_alreadysaved"] as? String ?? "PDF file already saved!")
+            self.showAlert(message: commonStringNames.pdf_alreadysaved.translated() as? String ?? "PDF file already saved!")
             
         }
     }
     
     func showAlert(message : String){
-        let alert = UIAlertController(title: languageDictionary["alert"] as? String, message: message, preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default, handler: nil))
+        let alert = UIAlertController(title: commonStringNames.alert.translated() as? String, message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
     

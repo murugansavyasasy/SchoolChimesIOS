@@ -335,13 +335,13 @@ class ParentExamTestVC: UIViewController, UITableViewDataSource,UITableViewDeleg
     }
     
     func showLogoutAlert(){
-        let alertController = UIAlertController(title: languageDictionary["txt_menu_logout"] as? String, message: languageDictionary["want_to_logut"] as? String, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.txt_menu_logout.translated() as? String, message: commonStringNames.want_to_logut.translated() as? String, preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             self.moveToLogInScreen(strFromStaff: "Child")
         }
-        let cancelAction = UIAlertAction(title: languageDictionary["teacher_cancel"] as? String, style: UIAlertAction.Style.cancel) {
+        let cancelAction = UIAlertAction(title: commonStringNames.teacher_cancel.translated() as? String, style: UIAlertAction.Style.cancel) {
             UIAlertAction in
             
         }
@@ -782,9 +782,9 @@ class ParentExamTestVC: UIViewController, UITableViewDataSource,UITableViewDeleg
     
     func AlertMessage(alrString:String){
         
-        let alertController = UIAlertController(title: languageDictionary["alert"] as? String, message: alrString, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.alert.translated() as? String, message: alrString, preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             self.navigationController?.popViewController(animated: true)
             
@@ -798,8 +798,8 @@ class ParentExamTestVC: UIViewController, UITableViewDataSource,UITableViewDeleg
         let titleLabel = UILabel()
         titleLabel.frame = CGRect(x: 0, y: 0, width: self.view.frame.width , height: 45)
         titleLabel.textColor = UIColor (red:0.0/255.0, green:183.0/255.0, blue: 190.0/255.0, alpha: 1)
-        let secondWord  : String =  languageDictionary["exam_test"] as? String ?? "Exam Test"
-        let thirdWord  : String =  languageDictionary["circulars"] as? String ?? "Circulars"
+        let secondWord  : String =  commonStringNames.exam_test.translated() as? String ?? "Exam Test"
+        let thirdWord  : String =  commonStringNames.circulars.translated() as? String ?? "Circulars"
         let comboWord = secondWord + " " + thirdWord
         let attributedText = NSMutableAttributedString(string:comboWord)
         let attrs = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 22), NSAttributedString.Key.foregroundColor: UIColor.white]
