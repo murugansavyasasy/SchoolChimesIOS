@@ -669,7 +669,7 @@ class PrincipleStandardSectionVC: UIViewController ,Apidelegate,UIPickerViewDele
         
         self.StudentButtonButton.setTitle(commonStringNames.select_subjects.translated() as? String, for: .normal)
         self.SendButton.setTitle(commonStringNames.teacher_confirm.translated() as? String, for: .normal)
-        self.SendAssignmentButton.setTitle(LangDict["teacher_confirm"] as? String, for: .normal)
+        self.SendAssignmentButton.setTitle(commonStringNames.teacher_confirm.translated() as? String, for: .normal)
         
         let strSection : String = commonStringNames.teacher_atten_sections.translated() as? String ?? "Section(s)"
         let strStandard : String = commonStringNames.teacher_atten_standard.translated() as? String ?? "Standard"

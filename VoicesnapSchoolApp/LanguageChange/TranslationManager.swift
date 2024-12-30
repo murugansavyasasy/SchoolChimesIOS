@@ -14,10 +14,10 @@ class TranslationManager {
     // Default language (set to English initially)
     private var currentLanguageCode: String {
         get {
-            return UserDefaults.standard.string(forKey: DefaultsKeys.Language) ?? "en" // Default to English if no language is set
+            return UserDefaults.standard.string(forKey: DefaultsKeys.languageCode) ?? "en" // Default to English if no language is set
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: DefaultsKeys.Language)
+            UserDefaults.standard.set(newValue, forKey: DefaultsKeys.languageCode)
             UserDefaults.standard.synchronize()
         }
     }

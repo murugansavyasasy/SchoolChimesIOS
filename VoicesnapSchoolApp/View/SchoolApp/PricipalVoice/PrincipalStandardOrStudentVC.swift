@@ -674,14 +674,14 @@ class PrincipalStandardOrStudentVC: UIViewController,Apidelegate,UIPickerViewDel
             
         }
         PickerTitleLabel.textAlignment = .center
-        self.SelectSubjectButton.setTitle(LangDict["select_subjects"] as? String, for: .normal)
-        StandardLabel.text = LangDict["teacher_atten_standard"] as? String
-        SectionLabel.text = LangDict["teacher_atten_sections"] as? String
-        pickerOkButton.setTitle(LangDict["teacher_btn_ok"] as? String, for: .normal)
-        pickerCancelButton.setTitle(LangDict["teacher_cancel"] as? String, for: .normal)
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        self.SelectSubjectButton.setTitle(commonStringNames.select_subjects.translated() as? String, for: .normal)
+        StandardLabel.text = commonStringNames.teacher_atten_standard.translated() as? String
+        SectionLabel.text = commonStringNames.teacher_atten_sections.translated() as? String
+        pickerOkButton.setTitle(commonStringNames.teacher_btn_ok.translated() as? String, for: .normal)
+        pickerCancelButton.setTitle(commonStringNames.teacher_cancel.translated() as? String, for: .normal)
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
     }
     
     

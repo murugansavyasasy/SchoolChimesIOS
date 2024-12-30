@@ -36,6 +36,8 @@ class ChangeLanguageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tv.dataSource =  self
+        
+        print("langtesteCode",DefaultsKeys.languageCode)
         tv.delegate =  self
         
         tv.register(UINib(nibName: rowId, bundle: nil), forCellReuseIdentifier: rowId)
@@ -52,35 +54,21 @@ class ChangeLanguageViewController: UIViewController {
         
         UserDefaults.standard.set(index, forKey: "index")
         let userDefault = UserDefaults.standard
-        userDefault.set(languageCode, forKey: DefaultsKeys.Language)
+      
         
-        print("languageCode",DefaultsKeys.Language)
+       
         TranslationManager.shared.setLanguage(languageCode)
+        userDefault.set(languageCode, forKey: DefaultsKeys.languageCode)
         
         // Apply the language immediately
         userDefault.synchronize()
-        let value = UserDefaults.standard.integer(forKey: "passvalue")
         
         DefaultsKeys.languageCode = languageCode
-//        LanguageManager.shared.setLanguage(languageCode)
-//
-//                // Reload UI
-//        reloadApplication(value: value)
+        print("langualanguageCodede",languageCode)
+        print("languageCode",DefaultsKeys.languageCode)
         dismiss(animated: true)
-//        let vc = PTMViewController(nibName: nil, bundle: nil)
-       
-////        
-////        
-////        vc.selectedDictionary = DefaultsKeys.selectedDictionary
-////        print("segueid.selectedDictionary",DefaultsKeys.selectedDictionary)
-////        print("segueid.stralerMsg",DefaultsKeys.stralerMsg)
-////        print("segueid.QuestionData",DefaultsKeys.QuestionData)
-////        vc.stralerMsg = DefaultsKeys.stralerMsg
-////        vc.QuestionData = DefaultsKeys.QuestionData
-//        
-//        vc.modalPresentationStyle = .fullScreen
-//        present(vc, animated: true)
-//        
+  
+
     }
     
 }
@@ -133,9 +121,10 @@ extension ChangeLanguageViewController : UITableViewDelegate,UITableViewDataSour
         
         let userDefault = UserDefaults.standard
         
-        if selectedLanguage == "Tamil" {
-            languageCode = "ta-IN"
-        } else if selectedLanguage == "Thai" {
+//        if selectedLanguage == "Tamil" {
+//            languageCode = "ta-IN"
+//        }
+     if selectedLanguage == "Thai" {
             languageCode = "th"
         } else if selectedLanguage == "Hindi" {
             languageCode = "hi"
