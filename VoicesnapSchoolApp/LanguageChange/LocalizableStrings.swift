@@ -34,7 +34,7 @@ extension String {
         // Retrieve the language code saved in UserDefaults
         
         
-        if let languageCode = defaults.string(forKey: DefaultsKeys.Language),
+        if let languageCode = defaults.string(forKey: DefaultsKeys.languageCode),
            let path = Bundle.main.path(forResource: languageCode, ofType: "lproj"),
            let bundle = Bundle(path: path) {
             
