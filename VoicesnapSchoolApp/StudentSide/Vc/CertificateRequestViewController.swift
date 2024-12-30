@@ -67,11 +67,14 @@ class CertificateRequestViewController: UIViewController,UITableViewDataSource,U
         super.viewDidLoad()
         
         
-        actReqLBl.text = commonStringNames.CertificateOnly.translated()
+        actReqLBl.text = commonStringNames.RequestOnly.translated()
         actionCertiLbl.text = commonStringNames.CertificateOnly.translated()
         reqCetLbl.text = commonStringNames.RequestCertificate.translated()
         selCertLbl.text = commonStringNames.SelectCertificate.translated()
         selUrgLbl.text = commonStringNames.SelectUrgencyLevel.translated()
+        segControl.setTitle(commonStringNames.Request.translated(), forSegmentAt: 0)
+        segControl.setTitle(commonStringNames.Certificates.translated(), forSegmentAt: 1)
+
         SchoolId = String(describing: appDelegate.SchoolDetailDictionary["SchoolID"]!)
         
         ChildId = String(describing: appDelegate.SchoolDetailDictionary["ChildID"]!)

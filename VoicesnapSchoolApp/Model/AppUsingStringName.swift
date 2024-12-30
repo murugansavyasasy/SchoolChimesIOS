@@ -887,5 +887,35 @@ class commonStringNames {
     static let AlternateMobileNumber = "Alternate Mobile Number"
     static let EmailID = "Email ID"
     static let ImportantInfo = "Important Info"
+    
+    static let January = "Jan"
+    static let February = "Feb"
+    static let March = "Mar"
+    static let April = "Apr"
+    static let May = "May"
+    static let June = "Jun"
+    static let July = "Jul"
+    static let August = "Aug"
+    static let September = "Sep"
+    static let October = "Oct"
+    static let November = "Nov"
+    static let December = "Dec"
+
+    static let Monday = "Mon"
+    static let Tuesday = "Tue"
+    static let Wednesday = "Wed"
+    static let Thursday = "Thu"
+    static let Friday = "Fri"
+    static let Saturday = "Sat"
+    static let Sunday = "Sun"
+    
+    static let CertificateType = "Certificate Type"
+    static let CreatedOn = "Created On"
+    static let Reason = "Reason"
+    static let Status = "Status"
+    static let Meetings = "Meetings"
+    static let Videos = "Videos"
+
+
 
 }

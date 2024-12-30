@@ -254,6 +254,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
+                <outlet property="ViewLbl" destination="DFU-cy-ikt" id="sqm-xV-hDe"/>
                 <outlet property="cerTypeLBl" destination="0Ng-0O-G1W" id="TU0-0u-g3D"/>
                 <outlet property="conductTypeLbl" destination="Ukh-aF-5nS" id="vAp-27-uNA"/>
                 <outlet property="creaOnLbl" destination="rIu-d9-X5e" id="MAF-RU-csQ"/>

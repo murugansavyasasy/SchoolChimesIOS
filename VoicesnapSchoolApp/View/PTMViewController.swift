@@ -143,8 +143,10 @@ var getLoginClassId : Int!
         staffId = userDefaults.integer(forKey: DefaultsKeys.StaffID)
         getLoginClassId = userDefaults.integer(forKey: DefaultsKeys.ClassID)
         var strChild = userDefaults.string(forKey: DefaultsKeys.chilId)
-        actionTitleLbl.text = "Parent Teacher Meeting".translated()
-      
+        actionTitleLbl.text = commonStringNames.ParentTeacherMeeting.translated()
+        scheduleLbl.text = commonStringNames.ScheduleMeeting.translated()
+        meetLbl.text = commonStringNames.MeetingHistory.translated()
+        bookSlotBtn.setTitle(commonStringNames.BookSlot.translated(), for: .normal)
         studentId = Int(strChild!)
        
 
@@ -344,7 +346,7 @@ print("studentId",studentId)
                 dateFormatter.dateFormat = "d"
                 let formattedDate = dateFormatter.string(from: date)
                 
-                cell.monthLbl.text =  formattedDate2
+            cell.monthLbl.text =  formattedDate2.translated()
                 cell.dateLbl.text = formattedDate + "," + formattedDate1
             
                     return cell

@@ -57,6 +57,7 @@ class LsrwListShowViewController: UIViewController ,UITableViewDelegate,UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        searchBar.placeholder = commonStringNames.Search.translated()
         searchBar.delegate = self
         actTitleLbl.text = commonStringNames.LSRW.translated()
         

@@ -104,6 +104,13 @@ class ClassTimeTableViewController: UIViewController,UITableViewDataSource,UITab
         super.viewDidLoad()
         
         actTimeLbl.text = commonStringNames.ClassTimetable.translated()
+        monLbl.text = commonStringNames.Monday.translated()
+        tueLbl.text = commonStringNames.Tuesday.translated()
+        wedLbl.text = commonStringNames.Wednesday.translated()
+        thurLbl.text = commonStringNames.Thursday.translated()
+        friLbl.text = commonStringNames.Friday.translated()
+        staLbl.text = commonStringNames.Saturday.translated()
+        sunLbl.text = commonStringNames.Sunday.translated()
         
         ChildId = String(describing: appDelegate.SchoolDetailDictionary["ChildID"]!)
         
