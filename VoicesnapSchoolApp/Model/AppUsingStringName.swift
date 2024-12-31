@@ -97,7 +97,7 @@ class commonStringNames {
     static let TakeSpeakingSkill = "Take Speaking Skill"
     static let TakeWritingSkill = "Take Writing Skill"
     static let WelcomeMessage = "Welcome"
-    static let ChangeLanguage = "Change Language"
+    static let change_language = "Change Language"
     static let Home = "Home"
     static let Help = "Help"
     static let Settings = "Settings"

@@ -239,10 +239,7 @@ print("schoolNameReg",schoolNameReg)
                     }
                     
                     print("admodalStr_count", AdConstant.adDataList .count)
-                    
-                    
-                    
-                    //
+                   
                 }
                 
                 
