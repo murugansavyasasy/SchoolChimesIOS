@@ -12,6 +12,7 @@ import AVFoundation
 
 class EmergencyVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDelegate,UITextFieldDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,Apidelegate,UIDocumentPickerDelegate{
     
+    @IBOutlet weak var addFileHeadLbl: UILabel!
     @IBOutlet weak var pathImg: UIImageView!
     @IBOutlet weak var pathLbl: UILabel!
     @IBOutlet weak var addFileView: UIViewX!
@@ -96,6 +97,9 @@ class EmergencyVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerD
     override func viewDidLoad(){
         super.viewDidLoad()
         
+        
+        addFileHeadLbl.text = commonStringNames.AddMp3File.translated()
+        TitleLabel.text = commonStringNames.PressToRecord.translated()
         pathLbl.text = ""
         pathLbl.isHidden = true
         pathImg.isHidden = true

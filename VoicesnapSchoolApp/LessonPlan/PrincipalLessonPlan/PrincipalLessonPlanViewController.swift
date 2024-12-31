@@ -53,7 +53,7 @@ class PrincipalLessonPlanViewController: UIViewController,UITableViewDelegate,UI
         actLsnPlnLbl.text = commonStringNames.LessonPlan.translated()
         allClassBtn.setTitle(commonStringNames.AllClasses.translated(), for: .normal)
         search_bar.delegate = self
-        
+        search_bar.placeholder = commonStringNames.Search.translated()
         viewEmpty.alpha = 0
         emptyLbl.alpha = 0
         allClassBtn.layer.borderColor = UIColor.red.cgColor

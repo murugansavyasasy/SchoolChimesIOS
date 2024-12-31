@@ -63,6 +63,7 @@ class LocationHistoryVc: UIViewController, UITableViewDataSource, UITableViewDel
         yearsView.isHidden = true
         monthView.isHidden = true
         searchbar.delegate = self
+        searchbar.placeholder = commonStringNames.Search.translated()
         staffDropViewHeight.constant = 0
         selectYrHeight.constant = 0
         selctStaffHeight.constant = 0

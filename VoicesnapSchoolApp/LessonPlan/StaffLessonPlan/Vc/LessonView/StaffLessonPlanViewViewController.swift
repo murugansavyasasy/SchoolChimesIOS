@@ -142,6 +142,7 @@ class StaffLessonPlanViewViewController: UIViewController, UITableViewDataSource
         tv.dataSource = self
         
         search_bar.delegate = self
+        search_bar.placeholder = commonStringNames.Search.translated()
         if demoInt == 1 {
             
         }else{

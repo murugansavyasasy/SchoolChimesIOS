@@ -110,6 +110,7 @@ class StudentReportViewController: UIViewController,UITableViewDataSource,UITabl
         //        self.performSegue(withIdentifier: "MainToSchoolSelectionSegue", sender: self)
         
         search_bar.delegate = self
+        search_bar.placeholder = commonStringNames.Search.translated()
         
         getDataList ()
         getStandardList ()

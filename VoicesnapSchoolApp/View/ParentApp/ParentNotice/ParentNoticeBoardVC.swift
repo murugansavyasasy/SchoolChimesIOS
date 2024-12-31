@@ -86,6 +86,7 @@ class ParentNoticeBoardVC: UIViewController,UITableViewDataSource,UITableViewDel
         
         
         search_bar.delegate = self
+        search_bar.placeholder = commonStringNames.Search.translated()
         if(appDelegate.isPasswordBind == "0"){
             bIsSeeMore = true
         }
@@ -696,7 +697,7 @@ class ParentNoticeBoardVC: UIViewController,UITableViewDataSource,UITableViewDel
         noview.addSubview(noDataLabel)
         
         let button = UIButton(frame: CGRect(x: self.NoticeBoardTableview.bounds.size.width - 108, y: noDataLabel.frame.height + 30, width: 100, height: 32))
-        button.setTitle(SEE_MORE_TITLE, for: .normal)
+        button.setTitle(commonStringNames.SeeMore.translated(), for: .normal)
         button.backgroundColor = .white
         button.setTitleColor(utilObj.PARENT_NAV_BAR_COLOR, for: .normal)
         button.addTarget(self, action: #selector(self.seeMoreButtonTapped), for: .touchUpInside)

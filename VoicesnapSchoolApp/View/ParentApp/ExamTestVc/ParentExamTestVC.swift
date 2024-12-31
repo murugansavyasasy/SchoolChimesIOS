@@ -798,8 +798,8 @@ class ParentExamTestVC: UIViewController, UITableViewDataSource,UITableViewDeleg
         let titleLabel = UILabel()
         titleLabel.frame = CGRect(x: 0, y: 0, width: self.view.frame.width , height: 45)
         titleLabel.textColor = UIColor (red:0.0/255.0, green:183.0/255.0, blue: 190.0/255.0, alpha: 1)
-        let secondWord  : String =  commonStringNames.exam_test.translated() as? String ?? "Exam Test"
-        let thirdWord  : String =  commonStringNames.circulars.translated() as? String ?? "Circulars"
+        let secondWord  : String =  commonStringNames.exam_test.translated()
+        let thirdWord  : String =  commonStringNames.circulars.translated() 
         let comboWord = secondWord + " " + thirdWord
         let attributedText = NSMutableAttributedString(string:comboWord)
         let attrs = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 22), NSAttributedString.Key.foregroundColor: UIColor.white]

@@ -88,6 +88,7 @@ class OnlineViewMeetingVC: UIViewController,UITextViewDelegate,UITextFieldDelega
         
         view.isOpaque = false
         search_bar.delegate = self
+        search_bar.placeholder = commonStringNames.Search.translated()
         //        view.backgroundColor = .white
         
         let nc = NotificationCenter.default

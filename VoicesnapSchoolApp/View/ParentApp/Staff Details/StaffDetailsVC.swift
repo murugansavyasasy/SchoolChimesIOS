@@ -63,6 +63,7 @@ class StaffDetailsVC: UIViewController,UITableViewDelegate,UITableViewDataSource
         super.viewDidLoad()
         
         search_bar.delegate = self
+        search_bar.placeholder = commonStringNames.Search.translated()
         
         SchoolIDString = String(describing: appDelegate.SchoolDetailDictionary["SchoolID"]!)
         print("StaffDetailsVC1122")

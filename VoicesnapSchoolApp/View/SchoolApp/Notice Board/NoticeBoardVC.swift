@@ -144,7 +144,7 @@ class NoticeBoardVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UIT
             listTv.dataSource = self
                 listTv.delegate = self
             search_bar.delegate = self
-
+            search_bar.placeholder = commonStringNames.Search.translated()
             segmentViewHeight.constant = 0
             CallDetailNoticeMessageApi()
             noticeBoardTop.constant = 100
@@ -943,6 +943,7 @@ print("schoolsArrayfvfvfv",schoolsArray)
     listTv.dataSource = self
         listTv.delegate = self
     search_bar.delegate = self
+        search_bar.placeholder = commonStringNames.Search.translated()
 //        CallDetailNoticeMessageApi()
         btnTwo.backgroundColor = UIColor(named: "CustomOrange")
         btnOne.backgroundColor = .white
@@ -1030,7 +1031,7 @@ print("schoolsArrayfvfvfv",schoolsArray)
         noview.addSubview(noDataLabel)
 
         let button = UIButton(frame: CGRect(x: self.listTv.bounds.size.width - 108, y: noDataLabel.frame.height + 30, width: 100, height: 32))
-        button.setTitle(SEE_MORE_TITLE, for: .normal)
+        button.setTitle(commonStringNames.SeeMore.translated(), for: .normal)
         button.backgroundColor = .white
         button.setTitleColor(utilObj.PARENT_NAV_BAR_COLOR, for: .normal)
         button.addTarget(self, action: #selector(self.seeMoreButtonTapped), for: .touchUpInside)
