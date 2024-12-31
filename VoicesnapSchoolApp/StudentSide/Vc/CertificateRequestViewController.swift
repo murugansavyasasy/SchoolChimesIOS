@@ -48,7 +48,7 @@ class CertificateRequestViewController: UIViewController,UITableViewDataSource,U
     
     var drop_down = DropDown()
     var SchoolIDString = String()
-    let placeholder = "Reason for Certificate"
+    let placeholder = commonStringNames.ReasonForCertificate.translated()
     var ChildIDString = String()
     var getadID : Int!
     

@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PreviewLsrwViewController" customModule="VoicesnapSchoolApp" customModuleProvider="target">
             <connections>
+                <outlet property="HeaderLbl" destination="nSn-9w-1Ui" id="cNa-y5-epT"/>
                 <outlet property="PlayVocieButton" destination="38d-a2-1t5" id="3RC-AZ-Jy0"/>
                 <outlet property="backView" destination="4I3-kF-3ru" id="Qta-nw-iiR"/>
                 <outlet property="img" destination="8gi-Rm-YoQ" id="HdU-mu-rhs"/>

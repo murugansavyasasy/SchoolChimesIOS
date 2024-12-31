@@ -842,10 +842,15 @@
 "Important" = "สำคัญ";
 "Accurate location settings are crucial for ensuring that attendance is only marked when users are within the designated area of the institute. Please double check the location before submitting." = "การตั้งค่าตำแหน่งที่ถูกต้องเป็นสิ่งสำคัญเพื่อให้แน่ใจว่ามีการทำเครื่องหมายการเข้าเรียนเฉพาะเมื่อผู้ใช้อยู่ในพื้นที่ที่กำหนดของสถาบัน โปรดตรวจสอบตำแหน่งอีกครั้งก่อนส่ง";
 "Once saved, this location will be used to verify the proximity of users when they mark their attendance. Ensure that location is correct as it will directly impact attendance functionality." = "เมื่อบันทึกแล้ว ตำแหน่งนี้จะถูกใช้เพื่อตรวจสอบความใกล้ชิดของผู้ใช้เมื่อพวกเขาทำเครื่องหมายการเข้าเรียน ตรวจสอบให้แน่ใจว่าตำแหน่งถูกต้องเนื่องจากจะส่งผลโดยตรงต่อการทำงานของการเข้าเรียน";
-"Pin Your location name" = "ปักชื่อสถานที่ของคุณ";
+"Pin Your Location Name" = "ปักชื่อสถานที่ของคุณ";
 "Drop your distance in meter" = "ป้อนระยะทางของคุณในหน่วยเมตร";
 "Meters" = "เมตร";
-"Your address" = "ที่อยู่ของคุณ";
+"Your Address" = "ที่อยู่ของคุณ";
+"Click to get Latitude and longitude" = "คลิกเพื่อรับละติจูดและลองจิจูด";
+"Current Latitude and Longitude is :" = "ละติจูดและลองจิจูดปัจจุบันคือ :";
+"Tap to view your existing punch locations" = "แตะเพื่อดูตำแหน่งการปักหมุดที่มีอยู่ของคุณ";
+"Drop your distance" = "ระบุระยะทางของคุณ";
+
 "Allow “School Chimes” to use your location?" = "อนุญาตให้ “School Chimes” ใช้ตำแหน่งของคุณหรือไม่?";
 "We need your location to provide better services." = "เราต้องการตำแหน่งของคุณเพื่อให้บริการที่ดีขึ้น";
 "Allow Once" = "อนุญาตครั้งเดียว";
@@ -966,4 +971,5 @@
 "Between" = "ระหว่าง";
 "Slots" = "ช่องเวลา";
 "Note : Please deselect the selected date for change the timing." = "หมายเหตุ: โปรดยกเลิกการเลือกวันที่ที่เลือกไว้เพื่อเปลี่ยนเวลา";
+"Add File Attachments" = "เพิ่มไฟล์แนบ";
 

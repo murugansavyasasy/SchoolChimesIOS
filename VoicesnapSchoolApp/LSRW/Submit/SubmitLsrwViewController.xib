@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SubmitLsrwViewController" customModule="VoicesnapSchoolApp" customModuleProvider="target">
             <connections>
+                <outlet property="HeaderLbl" destination="L4x-1P-zoC" id="2Xo-QL-Sxt"/>
                 <outlet property="PlayVocieButton" destination="PFx-VU-hBK" id="Acl-wx-8hq"/>
                 <outlet property="Slider" destination="yrB-w1-Sok" id="1BV-Xv-aty"/>
                 <outlet property="addAttachHeadingLbl" destination="O7I-Xw-uxl" id="hML-32-sbH"/>
@@ -33,6 +34,7 @@
                 <outlet property="recordlbl" destination="dfg-Yd-wyg" id="k4n-v3-b5G"/>
                 <outlet property="restrictionTv" destination="LZI-R3-b4E" id="KxW-UU-qSr"/>
                 <outlet property="restrictionView" destination="ApB-Es-a7b" id="AT9-lf-wDq"/>
+                <outlet property="submitLbl" destination="ilW-Hb-QjG" id="n6W-Aq-PLb"/>
                 <outlet property="submitView" destination="Tl8-iQ-BTz" id="uJw-0e-3gK"/>
                 <outlet property="timerLbl" destination="BBw-Pk-dp3" id="DgP-GZ-N8Y"/>
                 <outlet property="tv" destination="kUw-an-bXz" id="tTx-FU-J5W"/>

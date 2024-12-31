@@ -839,10 +839,15 @@
 "Important" = "महत्वपूर्ण";
 "Accurate location settings are crucial for ensuring that attendance is only marked when users are within the designated area of the institute. Please double check the location before submitting." = "सटीक स्थान सेटिंग यह सुनिश्चित करने के लिए महत्वपूर्ण है कि उपस्थिति केवल तभी चिह्नित की जाए जब उपयोगकर्ता संस्थान के निर्दिष्ट क्षेत्र में हों। कृपया सबमिट करने से पहले स्थान की दोबारा जांच करें।";
 "Once saved, this location will be used to verify the proximity of users when they mark their attendance. Ensure that location is correct as it will directly impact attendance functionality." = "सहेजे जाने के बाद, इस स्थान का उपयोग उपयोगकर्ताओं की निकटता को सत्यापित करने के लिए किया जाएगा जब वे अपनी उपस्थिति चिह्नित करेंगे। सुनिश्चित करें कि स्थान सही है क्योंकि इसका उपस्थिति कार्यक्षमता पर सीधा प्रभाव पड़ेगा।";
-"Pin Your location name" = "अपना स्थान नाम पिन करें";
+"Pin Your Location Name" = "अपना स्थान नाम पिन करें";
 "Drop your distance in meter" = "अपना दूरी मीटर में दर्ज करें";
 "Meters" = "मीटर";
-"Your address" = "आपका पता";
+"Your Address" = "आपका पता";
+"Click to get Latitude and longitude" = "अक्षांश और देशांतर प्राप्त करने के लिए क्लिक करें";
+"Current Latitude and Longitude is :" = "वर्तमान अक्षांश और देशांतर है :";
+"Tap to view your existing punch locations" = "अपने मौजूदा पंच स्थान देखने के लिए टैप करें";
+"Drop your distance" = "अपनी दूरी डालें";
+
 "Allow “School Chimes” to use your location?" = "“School Chimes” को आपका स्थान उपयोग करने की अनुमति दें?";
 "We need your location to provide better services." = "हमें बेहतर सेवाएं प्रदान करने के लिए आपका स्थान चाहिए।";
 "Allow Once" = "एक बार अनुमति दें";
@@ -963,3 +968,4 @@
 "Between" = "के बीच";
 "Slots" = "स्लॉट्स";
 "Note : Please deselect the selected date for change the timing." = "नोट : समय बदलने के लिए कृपया चुनी गई तिथि को अचयनित करें।";
+"Add File Attachments" = "फाइल अटैचमेंट जोड़ें";

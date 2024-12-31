@@ -16,7 +16,9 @@
 
     class SubmitLsrwViewController: UIViewController,UITableViewDataSource,UITableViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UIDocumentPickerDelegate, PHPickerViewControllerDelegate,AVAudioRecorderDelegate, AVAudioPlayerDelegate,UITextViewDelegate {
 
-    @IBOutlet weak var addAttachHeadingLbl: UILabel!
+        @IBOutlet weak var submitLbl: UILabel!
+        @IBOutlet weak var HeaderLbl: UILabel!
+        @IBOutlet weak var addAttachHeadingLbl: UILabel!
     @IBOutlet weak var restrictionTv: UITableView!
     @IBOutlet weak var restrictionView: UIView!
     @IBOutlet weak var playVoiceHeight: NSLayoutConstraint!
@@ -103,12 +105,16 @@
     var restrictionData : [RestrictionResponse] = []
     var imageLimit : Int!
     var restrictionRowNib = "RestrictionTableViewCell"
-    var strTextViewPlaceholder = String()
+        var strTextViewPlaceholder = commonStringNames.Content.translated()
     //    var
     var instuteId : Int!
     var countryCoded : String!
     override func viewDidLoad() {
     super.viewDidLoad()
+        
+        HeaderLbl.text = commonStringNames.SubmitLSRW.translated()
+        contentTextViw.text = strTextViewPlaceholder
+        submitLbl.text = commonStringNames.Submit.translated()
     imagePicker.delegate = self
 
     let userDefaults = UserDefaults.standard
@@ -126,7 +132,7 @@
     overAllTextView.isHidden = false
     contentTextViw.isHidden = false
     timerLbl.text = "00:00"
-    addBtn.setTitle("Add Content", for: .normal)
+        addBtn.setTitle(commonStringNames.AddContent.translated(), for: .normal)
     let backGesture = UITapGestureRecognizer(target: self, action: #selector(backVc))
     backView.addGestureRecognizer(backGesture)
 
@@ -155,7 +161,7 @@
 
     check_record_permission()
 
-    strTextViewPlaceholder = "Content"
+        
 
     let imgGesture = UITapGestureRecognizer(target: self, action: #selector(selectImages))
     changeImgView.addGestureRecognizer(imgGesture)
@@ -205,7 +211,7 @@
     imgPdfPathShowView.isHidden = true
     imageOverAllView.isHidden = true
     addAttachTop.constant = -100
-    addBtn.setTitle("Add Content", for: .normal)
+        addBtn.setTitle(commonStringNames.AddContent.translated(), for: .normal)
 
     } else if item == "Image" {
     addBtn.backgroundColor = .lightGray
@@ -278,7 +284,6 @@
 
     @IBAction func addFileAttachmentBtnAction(_ sender: UIButton) {
     if addBtn.backgroundColor != .lightGray {
-
 
     addAttachHeadingLbl.isHidden = false
     if dropDownTextLbl.text == "Text" {

@@ -139,6 +139,7 @@
                 <outlet property="typeHeadLbl" destination="1Mb-UE-Bgg" id="fdb-zH-eqF"/>
                 <outlet property="typeLbl" destination="sgC-fT-Sru" id="oht-aJ-FFv"/>
                 <outlet property="viewAttac" destination="xvn-Na-bkd" id="0hl-IU-ATX"/>
+                <outlet property="viewAttachmentLbl" destination="76J-Ma-Jvg" id="kxW-WP-frm"/>
             </connections>
             <point key="canvasLocation" x="308.39694656488547" y="-15.140845070422536"/>
         </tableViewCell>
@@ -148,10 +149,10 @@
             <color red="0.0" green="0.37599998712539673" blue="0.3919999897480011" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemGray5Color">
-            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemIndigoColor">
-            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.34509803919999998" green="0.33725490200000002" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

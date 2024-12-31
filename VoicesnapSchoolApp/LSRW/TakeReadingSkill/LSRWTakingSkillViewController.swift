@@ -15,7 +15,9 @@ class LSRWTakingSkillViewController: UIViewController,UITableViewDataSource,UITa
 
     @IBOutlet weak var backView: UIView!
     
+    @IBOutlet weak var HeaderLbl: UILabel!
     
+    @IBOutlet weak var NextBtn: UIButton!
     
     
     @IBOutlet weak var tv: UITableView!
@@ -27,7 +29,8 @@ class LSRWTakingSkillViewController: UIViewController,UITableViewDataSource,UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         
-      
+        NextBtn.setTitle(commonStringNames.Next.translated(), for: .normal)
+        HeaderLbl.text = commonStringNames.LSRW.translated()
         
         let userDefaults = UserDefaults.standard
        

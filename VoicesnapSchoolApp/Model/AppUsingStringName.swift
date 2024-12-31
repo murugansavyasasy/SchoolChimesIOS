@@ -856,6 +856,10 @@ class commonStringNames {
     static let DropDistanceInMeter = "Drop your distance in meter"
     static let Meters = "Meters"
     static let YourAddress = "Your Address"
+    static let Getlattitude = "Click to get Latitude and longitude"
+    static let currentLatitude = "Current Latitude and Longitude is :"
+    static let TapToViewPunchLocations = "Tap to view your existing punch locations"
+    static let DropYourDistance = "Drop your distance"
 
     static let AllowLocationUsagePrompt = "Allow “School Chimes” to use your location?"
     static let LocationServiceExplanation = "We need your location to provide better services."
@@ -931,6 +935,8 @@ class commonStringNames {
 
     static let instantCall = "Instant Call"
     static let scheduleCall = "Schedule Call"
+    static let AddFileAttachments = "Add File Attachments"
+
 
 
 }

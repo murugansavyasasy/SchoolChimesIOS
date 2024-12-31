@@ -14,6 +14,7 @@ class TakeReadingSkillTableViewCell: UITableViewCell {
     
     @IBOutlet weak var attachHeadLbl: UILabel!
     
+    @IBOutlet weak var viewAttachmentLbl: UILabel!
     
     @IBOutlet weak var typeHeadLbl: UILabel!
     
@@ -27,8 +28,9 @@ class TakeReadingSkillTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         
-//        attachHeadLbl.text =
-//        typeHeadLbl.text = 
+        attachHeadLbl.text = commonStringNames.Attachment.translated()
+        typeHeadLbl.text = commonStringNames.type.translated()
+        viewAttachmentLbl.text = commonStringNames.ViewAttachment.translated()
         // Initialization code
     }
 

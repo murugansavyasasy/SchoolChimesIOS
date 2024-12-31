@@ -883,10 +883,15 @@
 
 "Once saved, this location will be used to verify the proximity of users when they mark their attendance. Ensure that location is correct as it will directly impact attendance functionality." = "Once saved, this location will be used to verify the proximity of users when they mark their attendance. Ensure that location is correct as it will directly impact attendance functionality.";
 
-"Pin Your location name" = "Pin Your location name";
+"Pin Your Location Name" = "Pin Your Location Name";
 "Drop your distance in meter" = "Drop your distance in meter";
 "Meters" = "Meters";
-"Your address" = "Your address";
+"Your Address" = "Your Address";
+"Click to get Latitude and longitude" = "Click to get Latitude and longitude";
+"Current Latitude and Longitude is :" = "Current Latitude and Longitude is :";
+"Tap to view your existing punch locations" = "Tap to view your existing punch locations";
+"Drop your distance" = "Drop your distance";
+
 "Allow “School Chimes” to use your location?" = "Allow “School Chimes” to use your location?";
 "We need your location to provide better services." = "We need your location to provide better services.";
 "Allow Once" = "Allow Once";
@@ -1004,3 +1009,4 @@
 "Between" = "Between";
 "Slots" = "Slots";
 "Note : Please deselect the selected date for change the timing." = "Note : Please deselect the selected date for change the timing.";
+"Add File Attachments" = "Add File Attachments";

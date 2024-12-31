@@ -12,6 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LSRWTakingSkillViewController" customModule="VoicesnapSchoolApp" customModuleProvider="target">
             <connections>
+                <outlet property="HeaderLbl" destination="pjl-kd-fhk" id="dTU-UG-w2W"/>
+                <outlet property="NextBtn" destination="8gM-Zc-WNd" id="Yw7-fc-kGy"/>
                 <outlet property="backView" destination="w1g-5e-NDV" id="aIH-1I-TZ1"/>
                 <outlet property="tv" destination="chS-gH-2Xh" id="PjP-vS-AhJ"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>

@@ -11,6 +11,7 @@ import AVFoundation
 import WebKit
 class PreviewLsrwViewController: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDelegate,UITextViewDelegate{
 
+    @IBOutlet weak var HeaderLbl: UILabel!
     @IBOutlet weak var pdfView: UIView!
     
     @IBOutlet weak var pdfWebview: WKWebView!
@@ -54,6 +55,7 @@ class PreviewLsrwViewController: UIViewController,AVAudioRecorderDelegate, AVAud
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        HeaderLbl.text = commonStringNames.PreviewLSRW.translated()
         
         print("attactType",attactType)
         if attactType == "TEXT" {
