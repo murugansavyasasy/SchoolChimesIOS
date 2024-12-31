@@ -275,7 +275,7 @@ class commonStringNames {
     static let hint_save_image = "Click here to View full image"
     static let btn_save_image = "Download Image"
     static let txt_new = "New"
-    static let sample_txt_msg = "Voice Snap is an innovative provider of Voice based Solutions and Products that add value to enterprises across the business value chain. From a technology perspective, we harness CTI, IVR and Web Technologies along with a deep understanding of Business Process Engineering to create value to Enterprises across the Business Value Chain."
+    static let sample_txt_msg = "Savyasasy is an innovative provider of Voice based Solutions and Products that add value to enterprises across the business value chain. From a technology perspective, we harness CTI, IVR and Web Technologies along with a deep understanding of Business Process Engineering to create value to Enterprises across the Business Value Chain."
     static let hint_play_voice = "Press the Play button to play the voice message"
     static let hint_view_pdf = "Press the Download button to download the attached file"
     static let btn_pdf_view = "VIEW FILE"
