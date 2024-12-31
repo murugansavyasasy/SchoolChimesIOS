@@ -372,13 +372,13 @@ class LeaveRequestVC: UIViewController,UITextViewDelegate,Apidelegate {
         dismissKeyboard()
         if(FromDateLbl.text == "")
         {
-            Util.showAlert("", msg: languageDictionary["date_select"] as? String)
+            Util.showAlert("", msg: commonStringNames.date_select.translated() as? String)
         }else if(ToDateLbl.text == "")
         {
-            Util.showAlert("", msg: languageDictionary["to_date_alert"] as? String)
+            Util.showAlert("", msg: commonStringNames.to_date_alert.translated() as? String)
         }else if(TextMessageView.text == strPlaceholder || TextMessageView.text == " " || TextMessageView.text.count == 0)
         {
-            Util.showAlert("", msg: languageDictionary["choose_reason"] as? String)
+            Util.showAlert("", msg: commonStringNames.choose_reason.translated() as? String)
         }
         
         else{
@@ -540,8 +540,8 @@ class LeaveRequestVC: UIViewController,UITextViewDelegate,Apidelegate {
         
         titleLabel.frame = CGRect(x: 0, y: 0, width: self.view.frame.width , height: 45)
         titleLabel.textColor = UIColor (red:0.0/255.0, green:183.0/255.0, blue: 190.0/255.0, alpha: 1)
-        let secondWord =  languageDictionary["leave"] as? String
-        let thirdWord   = languageDictionary["requesttttt"] as? String
+        let secondWord =  commonStringNames.leave.translated() as? String
+        let thirdWord   = commonStringNames.requesttttt.translated() as? String
         let comboWord = (secondWord ?? "Leave" ) + " " + (thirdWord ?? "Request")
         let attributedText = NSMutableAttributedString(string:comboWord)
         let attrs = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 22), NSAttributedString.Key.foregroundColor: UIColor.white]

@@ -63,7 +63,6 @@ class ChangeLanguageViewController: UIViewController {
         // Apply the language immediately
         userDefault.synchronize()
         
-        DefaultsKeys.languageCode = languageCode
         print("langualanguageCodede",languageCode)
         print("languageCode",DefaultsKeys.languageCode)
         dismiss(animated: true)
@@ -131,6 +130,10 @@ extension ChangeLanguageViewController : UITableViewDelegate,UITableViewDataSour
         } else if selectedLanguage == "English" {
             languageCode = "en"
         }
+        
+      
+       
+        userDefault.set(languageCode, forKey: DefaultsKeys.languageCode)
         
         tv.reloadData()
     }

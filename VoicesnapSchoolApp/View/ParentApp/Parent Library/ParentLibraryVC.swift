@@ -76,10 +76,10 @@ class ParentLibraryVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         cell.backgroundColor = UIColor.clear
         let dict:NSDictionary = arrLibraryData[indexPath.row] as! NSDictionary
         
-        cell.FloatBookIdLbl.text = languageDictionary["book_id"] as? String
-        cell.FloatBookNameLbl.text = languageDictionary["bookname"] as? String
-        cell.FloatDueDateLbl.text = languageDictionary["due_date"] as? String
-        cell.FloatIssueDateLbl.text = languageDictionary["issued_date"] as? String
+        cell.FloatBookIdLbl.text = commonStringNames.book_id.translated() as? String
+        cell.FloatBookNameLbl.text = commonStringNames.bookname.translated() as? String
+        cell.FloatDueDateLbl.text = commonStringNames.due_date.translated() as? String
+        cell.FloatIssueDateLbl.text = commonStringNames.issued_date.translated() as? String
         if(strLanguage == "ar"){
             cell.MainView.semanticContentAttribute = .forceRightToLeft
             cell.BookIdLbl.textAlignment = .right
@@ -185,14 +185,14 @@ class ParentLibraryVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     }
     
     func showLogoutAlert(){
-        let alertController = UIAlertController(title: languageDictionary["txt_menu_logout"] as? String, message: languageDictionary["want_to_logut"] as? String, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.txt_menu_logout.translated() as? String, message: commonStringNames.want_to_logut.translated() as? String, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             self.moveToLogInScreen(strFromStaff: "Child")
         }
-        let cancelAction = UIAlertAction(title: languageDictionary["teacher_cancel"] as? String, style: UIAlertAction.Style.cancel) {
+        let cancelAction = UIAlertAction(title: commonStringNames.teacher_cancel.translated() as? String, style: UIAlertAction.Style.cancel) {
             UIAlertAction in
             
         }
@@ -280,10 +280,10 @@ class ParentLibraryVC: UIViewController, UITableViewDelegate, UITableViewDataSou
     func AlerMessage(alrtMessage: String)
     {
         
-        let alertController = UIAlertController(title: languageDictionary["alert"] as? String, message: alrtMessage, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.alert.translated() as? String, message: alrtMessage, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             //   print("Okaction")
             self.navigationController?.popViewController(animated: true)
@@ -318,8 +318,8 @@ class ParentLibraryVC: UIViewController, UITableViewDelegate, UITableViewDataSou
         titleLabel.frame = CGRect(x: 0, y: 0, width: self.view.frame.width , height: 45)
         //titleLabel.textColor = UIColor (red:128.0/255.0, green:205.0/255.0, blue: 244.0/255.0, alpha: 1)
         titleLabel.textColor = UIColor (red:0.0/255.0, green:183.0/255.0, blue: 190.0/255.0, alpha: 1)
-        let secondWord =  languageDictionary["library"] as? String
-        let thirdWord   = languageDictionary["details"] as? String
+        let secondWord =  commonStringNames.library.translated() as? String
+        let thirdWord   = commonStringNames.details.translated() as? String
         let comboWord = (secondWord ?? "Library" ) + " " + (thirdWord ?? "Details")
         let attributedText = NSMutableAttributedString(string:comboWord)
         let attrs = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 22), NSAttributedString.Key.foregroundColor: UIColor.white]

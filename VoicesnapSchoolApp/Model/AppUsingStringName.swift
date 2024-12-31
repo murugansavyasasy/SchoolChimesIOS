@@ -97,7 +97,7 @@ class commonStringNames {
     static let TakeSpeakingSkill = "Take Speaking Skill"
     static let TakeWritingSkill = "Take Writing Skill"
     static let WelcomeMessage = "Welcome"
-    static let ChangeLanguage = "Change Language"
+    static let change_language = "Change Language"
     static let Home = "Home"
     static let Help = "Help"
     static let Settings = "Settings"
@@ -929,6 +929,8 @@ class commonStringNames {
     static let NoteDeselectDate = "Note : Please deselect the selected date for change the timing."
 
 
+    static let instantCall = "Instant Call"
+    static let scheduleCall = "Schedule Call"
 
 
 }

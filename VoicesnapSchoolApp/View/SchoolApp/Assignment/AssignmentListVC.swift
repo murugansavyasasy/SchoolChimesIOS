@@ -393,14 +393,14 @@ class AssignmentListVC: UIViewController ,UITableViewDataSource,UITableViewDeleg
                 
                 
             }
-            cell.subjectLabelLang.text = languageDictionary["teacher_atten_subject"] as? String
-            cell.dueLabelLang.text = languageDictionary["subission_due"] as? String
-            cell.countLabelLang.text = languageDictionary["subission_count"] as? String
-            cell.sendByLabelLang.text = languageDictionary["send_by"] as? String
-            cell.categoryLabelLang.text = languageDictionary["category"] as? String
-            cell.viewButton.setTitle(languageDictionary["view"] as? String, for: .normal)
-            cell.submitButton.setTitle(languageDictionary["btn_sign_submit"] as? String, for: .normal)
-            cell.submissionButton.setTitle(languageDictionary["submissions"] as? String, for: .normal)
+            cell.subjectLabelLang.text = commonStringNames.teacher_atten_subject.translated() as? String
+            cell.dueLabelLang.text = commonStringNames.subission_due.translated() as? String
+            cell.countLabelLang.text = commonStringNames.subission_count.translated() as? String
+            cell.sendByLabelLang.text = commonStringNames.send_by.translated() as? String
+            cell.categoryLabelLang.text = commonStringNames.category.translated() as? String
+            cell.viewButton.setTitle(commonStringNames.view.translated() as? String, for: .normal)
+            cell.submitButton.setTitle(commonStringNames.btn_sign_submit.translated() as? String, for: .normal)
+            cell.submissionButton.setTitle(commonStringNames.submissions.translated() as? String, for: .normal)
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "SeeMoreTVCell", for: indexPath) as! SeeMoreTVCell
@@ -614,10 +614,10 @@ class AssignmentListVC: UIViewController ,UITableViewDataSource,UITableViewDeleg
     func AlertMessage(strAlert : String)
     {
         
-        let alertController = UIAlertController(title: languageDictionary["alert"] as? String, message: strAlert, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.alert.translated() as? String, message: strAlert, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             print("Okaction")
             self.dismiss(animated: true, completion: nil)

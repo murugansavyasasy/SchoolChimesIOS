@@ -435,8 +435,8 @@ class StudentChatVC: UIViewController ,UITableViewDelegate,UITableViewDataSource
     
     func AlerMessage(alrtStr : String){
         
-        let alertController = UIAlertController(title: languageDictionary["alert"] as? String, message: alrtStr, preferredStyle: .alert)
-        let okAction = UIAlertAction(title:languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let alertController = UIAlertController(title: commonStringNames.alert.translated() as? String, message: alrtStr, preferredStyle: .alert)
+        let okAction = UIAlertAction(title:commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             
         }

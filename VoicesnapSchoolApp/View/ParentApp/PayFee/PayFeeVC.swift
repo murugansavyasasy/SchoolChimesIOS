@@ -504,8 +504,8 @@ class PayFeeVC: UIViewController,UITableViewDelegate, UITableViewDataSource,Apid
         titleLabel.frame = CGRect(x: 0, y: 0, width: self.view.frame.width , height: 45)
         // titleLabel.textColor = UIColor (red:128.0/255.0, green:205.0/255.0, blue: 244.0/255.0, alpha: 1)
         titleLabel.textColor = UIColor (red:0.0/255.0, green:183.0/255.0, blue: 190.0/255.0, alpha: 1)
-        let secondWord : String  = languageDictionary["fee"] as? String ?? "Fee"
-        let thirdWord  : String  = languageDictionary["details"] as? String ?? "Details"
+        let secondWord : String  = commonStringNames.fee.translated() as? String ?? "Fee"
+        let thirdWord  : String  = commonStringNames.details.translated() as? String ?? "Details"
         let comboWord = secondWord + " " + thirdWord
         let attributedText = NSMutableAttributedString(string:comboWord)
         let attrs = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 22), NSAttributedString.Key.foregroundColor: UIColor.white]

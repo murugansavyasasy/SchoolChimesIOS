@@ -36,19 +36,7 @@ class AssignmentListTVCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        viewButton.setTitle(commonStringNames.View.translated(), for: .normal)
-        
-        submitButton.setTitle(commonStringNames.Submit.translated(), for: .normal)
-        
-        submissionButton.setTitle(commonStringNames.submissions.translated(), for: .normal)
-        
-      
-        dueLabelLang.text = commonStringNames.SubmissionDue.translated()
-        categoryLabelLang.text = commonStringNames.Category.translated()
-        subjectLabelLang.text = commonStringNames.Subject.translated()
-        
-        sendByLabelLang.text = commonStringNames.send_by.translated()
-        countLabelLang.text = commonStringNames.SubmissionCount.translated()
+//       
         buttonBorder(view: viewButton)
         buttonBorder(view: submitButton)
         buttonBorder(view: submissionButton)

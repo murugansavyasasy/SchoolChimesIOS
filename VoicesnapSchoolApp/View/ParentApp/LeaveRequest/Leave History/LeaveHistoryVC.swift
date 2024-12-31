@@ -106,12 +106,12 @@ class LeaveHistoryVC: UIViewController ,UITableViewDelegate,UITableViewDataSourc
         }
         
         
-        cell.FloatNameLabel.text = languageDictionary["name"] as? String
+        cell.FloatNameLabel.text = commonStringNames.name.translated() as? String
         cell.FloatClassLabel.text = languageDictionary["class"] as? String
-        cell.FloatLeaveToLabel.text = languageDictionary["leave_to_date"] as? String
-        cell.FloatreasonLabel.text = languageDictionary["leave_reason"] as? String
-        cell.FloatLeaveFromLabel.text = languageDictionary["leave_from_date"] as? String
-        cell.FloatLeaveAppiledOnLabel.text = languageDictionary["appliedon"] as? String
+        cell.FloatLeaveToLabel.text = commonStringNames.leave_to_date.translated() as? String
+        cell.FloatreasonLabel.text = commonStringNames.leave_reason.translated() as? String
+        cell.FloatLeaveFromLabel.text = commonStringNames.leave_from_date.translated() as? String
+        cell.FloatLeaveAppiledOnLabel.text = commonStringNames.appliedon.translated() as? String
         
         let strStatus : String = String(describing: Dict["Status"]!)
         if(strStatus == "2"){
@@ -210,9 +210,9 @@ class LeaveHistoryVC: UIViewController ,UITableViewDelegate,UITableViewDataSourc
     func AlerMessage(alrtStr : String)
     {
         
-        let alertController = UIAlertController(title: languageDictionary["alert"] as? String, message: alrtStr, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.alert.translated() as? String, message: alrtStr, preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             print("Okaction")
             self.navigationController?.popViewController(animated: true)
@@ -245,7 +245,7 @@ class LeaveHistoryVC: UIViewController ,UITableViewDelegate,UITableViewDataSourc
         
         titleLabel.frame = CGRect(x: 0, y: 0, width: self.view.frame.width , height: 45)
         titleLabel.textColor = UIColor (red:0.0/255.0, green:183.0/255.0, blue: 190.0/255.0, alpha: 1)
-        let secondWord : String  = languageDictionary["leave"] as? String ?? "Leave"//"Staff "
+        let secondWord : String  = commonStringNames.leave.translated() as? String ?? "Leave"//"Staff "
         let thirdWord  : String   = languageDictionary["history"] as? String ?? "History"
         let comboWord = secondWord + " " + thirdWord
         let attributedText = NSMutableAttributedString(string:comboWord)

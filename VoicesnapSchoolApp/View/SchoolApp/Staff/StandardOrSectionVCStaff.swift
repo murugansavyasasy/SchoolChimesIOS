@@ -293,7 +293,7 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
     func actionSelectStandard()
     {
         TableString = "Standard"
-        PickerTitleLabel.text = languageDictionary["select_standard"] as? String
+        PickerTitleLabel.text = commonStringNames.select_standard.translated() as? String
         PopupChoosePickerView.isHidden = false
         self.MyPickerView.reloadAllComponents()
         
@@ -312,7 +312,7 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
         }
         else
         {
-            Util.showAlert(languageDictionary["alert"] as? String, msg: languageDictionary["no_students"] as? String)
+            Util.showAlert(commonStringNames.alert.translated() as? String, msg: commonStringNames.no_students.translated() as? String)
         }
         
     }
@@ -402,7 +402,7 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
                 Util.showAlert("", msg:strNoInternet )
             }
         }else{
-            Util.showAlert("", msg: languageDictionary["alert_section"] as? String)
+            Util.showAlert("", msg: commonStringNames.alert_section.translated() as? String)
         }
         
     }
@@ -1446,8 +1446,8 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
     
     func loadViewData(){
         print("loadViewData",SchoolId)
-        let strStandard : String = languageDictionary["teacher_atten_standard"] as? String ?? "Standard"
-        let strSection : String = languageDictionary["teacher_atten_sections"] as? String ?? "Section(s)"
+        let strStandard : String = commonStringNames.teacher_atten_standard.translated() as? String ?? "Standard"
+        let strSection : String = commonStringNames.teacher_atten_sections.translated() as? String ?? "Section(s)"
         SectionTitleArray = [strStandard, strSection]
         print("StandardOrSectionVCStaff SendedScreenNameStr\(SendedScreenNameStr)")
         

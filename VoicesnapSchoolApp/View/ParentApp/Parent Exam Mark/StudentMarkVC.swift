@@ -424,8 +424,8 @@ class StudentMarkVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         titleLabel.frame = CGRect(x: 0, y: 0, width: self.view.frame.width , height: 45)
         //titleLabel.textColor = UIColor (red:128.0/255.0, green:205.0/255.0, blue: 244.0/255.0, alpha: 1)
         titleLabel.textColor = UIColor (red:0.0/255.0, green:183.0/255.0, blue: 190.0/255.0, alpha: 1)
-        let secondWord : String =  languageDictionary["student"] as? String ?? "Student"//"Student "
-        let thirdWord  : String =  languageDictionary["marksss"] as? String ?? "Marks" //"Marks"
+        let secondWord : String =  commonStringNames.student.translated() as? String ?? "Student"//"Student "
+        let thirdWord  : String =  commonStringNames.marksss.translated() as? String ?? "Marks" //"Marks"
         let comboWord = secondWord  + " " + thirdWord
         let attributedText = NSMutableAttributedString(string:comboWord)
         let attrs = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 22), NSAttributedString.Key.foregroundColor: UIColor.white]

@@ -71,7 +71,7 @@ class StudentReportViewController: UIViewController,UITableViewDataSource,UITabl
         alertLbl.isHidden = true
         actStudRepLbl.text = commonStringNames.StudentReport.translated()
         selStdHeadLbl.text = commonStringNames.SelectStandard.translated()
-        selSecHeadLbl.text = commonStringNames.studentReportSection
+        selSecHeadLbl.text = commonStringNames.studentReportSection.translated()
             .translated()
         selStdHeadLbl.text = commonStringNames.studentReportStandard.translated()
         getAllStudHeadLbl.text = commonStringNames.GetAllStudent.translated()
