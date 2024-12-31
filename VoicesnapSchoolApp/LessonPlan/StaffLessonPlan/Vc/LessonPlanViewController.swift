@@ -52,6 +52,7 @@ class LessonPlanViewController: UIViewController,UITableViewDataSource,UITableVi
         emptyLbl.alpha = 0
         
         search_bar.delegate = self
+        search_bar.placeholder = commonStringNames.Search.translated()
         
         
         

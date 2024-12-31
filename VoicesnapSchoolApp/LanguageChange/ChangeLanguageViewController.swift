@@ -63,6 +63,8 @@ class ChangeLanguageViewController: UIViewController {
         // Apply the language immediately
         userDefault.synchronize()
         
+        
+        
         print("langualanguageCodede",languageCode)
         print("languageCode",DefaultsKeys.languageCode)
         dismiss(animated: true)

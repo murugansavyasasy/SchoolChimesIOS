@@ -7,6 +7,7 @@
 */
 "welcome_message" = "ยินดีต้อนรับ";
 "Change Language" = "เปลี่ยนภาษา";
+"change language" = "เปลี่ยนภาษา";
 "Home" = "หน้าหลัก";
 "Help" = "ช่วยเหลือ";
 "Settings" = "การตั้งค่า";
@@ -887,7 +888,7 @@
 "November" = "พฤศจิกายน";
 "December" = "ธันวาคม";
 
-"You can record emergency voice message upto 30 seconds" = "คุณสามารถบันทึกข้อความเสียงฉุกเฉินได้สูงสุด 30 วินาที";
+"You can record emergency voice message upto" = "คุณสามารถบันทึกข้อความเสียงฉุกเฉินได้สูงสุด";
 "Press the button to RECORD" = "กดปุ่มเพื่อบันทึก";
 "Add file(mp3)" = "เพิ่มไฟล์(mp3)";
 "Instant call" = "โทรทันที";

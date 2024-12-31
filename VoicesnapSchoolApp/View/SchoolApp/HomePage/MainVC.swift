@@ -2242,13 +2242,13 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
             callEditProfile()
         }else if(selectString.contains("help")){
             callhelp()
-        }else if(selectString.contains("change language")){
+        }else if(selectString.contains(commonStringNames.change_language.translated())){
             callLanguageVc()
         }
         else{
             callUploadDocumentView()
         }
-        
+        print("selectStringselectString",selectString)
         
     }
     func callLanguageVc(){

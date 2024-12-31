@@ -7,6 +7,8 @@
 */
 "welcome_message" = "स्वागत है";
 "Change Language" = "भाषा बदलें";
+"change language" = "भाषा बदलें";
+
 "Home" = "होम";
 "Help" = "मदद";
 "Settings" = "सेटिंग्स";
@@ -884,7 +886,7 @@
 "November" = "नवंबर";
 "December" = "दिसंबर";
 
-"You can record emergency voice message upto 30 seconds" = "आप 30 सेकंड तक आपातकालीन वॉइस संदेश रिकॉर्ड कर सकते हैं";
+"You can record emergency voice message upto" = "आप 30 सेकंड तक आपातकालीन वॉइस संदेश रिकॉर्ड कर सकते हैं";
 "Press the button to RECORD" = "रिकॉर्ड करने के लिए बटन दबाएं";
 "Add file(mp3)" = "फाइल जोड़ें(mp3)";
 "Instant call" = "तुरंत कॉल";

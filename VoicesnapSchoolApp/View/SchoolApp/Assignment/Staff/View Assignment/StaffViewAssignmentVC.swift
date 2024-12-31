@@ -648,7 +648,7 @@ class StaffViewAssignmentVC: UIViewController ,UITableViewDataSource,UITableView
         noview.addSubview(noDataLabel)
         
         let button = UIButton(frame: CGRect(x: self.assignmentTableview.bounds.size.width - 108, y: noDataLabel.frame.height + 10, width: 100, height: 32))
-        button.setTitle(SEE_MORE_TITLE, for: .normal)
+        button.setTitle(commonStringNames.SeeMore.translated(), for: .normal)
         button.backgroundColor = .white
         button.setTitleColor(utilObj.PARENT_NAV_BAR_COLOR, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 12)

@@ -62,7 +62,7 @@ class ExamMarkVC: UIViewController , UITableViewDelegate, UITableViewDataSource,
         
         
         search_bar.delegate = self
-        
+        search_bar.placeholder = commonStringNames.Search.translated()
         
         SchoolIDString = String(describing: appDelegate.SchoolDetailDictionary["SchoolID"]!)
         

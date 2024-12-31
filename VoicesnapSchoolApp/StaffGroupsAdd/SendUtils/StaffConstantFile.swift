@@ -18,8 +18,8 @@ class StaffConstantFile {
 //    static let BaseUrl : String = "http://reporting.schoolchimes.com/nodejs/api/MergedApi/"
     
     
-       // REPOTING : BaseUrl
-       // VOICESNAP : SmsBaseUrl
+       // REPOTING : BaseUrl parent side
+       // VOICESNAP : SmsBaseUrl sender side
     
     
 //    static let demoSmsBaseUrl : String = "https://vss.voicesnapforschools.com/nodejs/api/"

@@ -65,7 +65,7 @@ class QuizExamMenuViewController: UIViewController,UITableViewDataSource,UITable
         tv.delegate = self
         
         search_bar.delegate = self
-        
+        search_bar.placeholder = commonStringNames.Search.translated()
         
         getTimeTable()
         

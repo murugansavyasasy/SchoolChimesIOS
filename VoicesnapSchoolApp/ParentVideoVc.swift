@@ -75,7 +75,8 @@ class ParentVideoVc: UIViewController,UITableViewDataSource,UITableViewDelegate,
         super.viewDidLoad()
         print("SearchBarVideo")
         search_bar.delegate = self
-        
+        search_bar.placeholder = commonStringNames.Search.translated()
+
         TextDetailstableview.dataSource = self
         TextDetailstableview.delegate = self
         
@@ -751,7 +752,7 @@ class ParentVideoVc: UIViewController,UITableViewDataSource,UITableViewDelegate,
         
 
         let button = UIButton(frame: CGRect(x: self.TextDetailstableview.bounds.size.width - 108, y: noDataLabel.frame.height + 40, width: 100, height: 32))
-         button.setTitle(SEE_MORE_TITLE, for: .normal)
+         button.setTitle(commonStringNames.SeeMore.translated(), for: .normal)
          button.backgroundColor = .white
         button.setTitleColor(utilObj.PARENT_NAV_BAR_COLOR, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 12)
