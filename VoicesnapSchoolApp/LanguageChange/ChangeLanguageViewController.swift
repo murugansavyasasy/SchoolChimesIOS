@@ -16,12 +16,12 @@ struct language{
 
 
 class ChangeLanguageViewController: UIViewController {
-
+    
     @IBOutlet weak var confirmBtn: UIButton!
     @IBOutlet weak var tv: UITableView!
     var arrUserData: NSArray = []
     var Items = [language(language: "English", selected: false),
-               
+                 
                  language(language: "Hindi", selected: false),
                  language(language: "Thai", selected: false)]
     
@@ -35,6 +35,9 @@ class ChangeLanguageViewController: UIViewController {
     var selectedLanguage: String?
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        index = UserDefaults.standard.integer(forKey: "index")
+        Items[index].selected = true
         tv.dataSource =  self
         
         print("langtesteCode",DefaultsKeys.languageCode)
@@ -42,8 +45,8 @@ class ChangeLanguageViewController: UIViewController {
         
         tv.register(UINib(nibName: rowId, bundle: nil), forCellReuseIdentifier: rowId)
     }
-
-
+    
+    
     @IBAction func closeAct(_ sender: UIButton) {
         
         dismiss(animated: true)
@@ -51,24 +54,57 @@ class ChangeLanguageViewController: UIViewController {
     
     @IBAction func confirmAct(_ sender: UIButton) {
         
-        
         UserDefaults.standard.set(index, forKey: "index")
         let userDefault = UserDefaults.standard
-      
         
-       
         TranslationManager.shared.setLanguage(languageCode)
         userDefault.set(languageCode, forKey: DefaultsKeys.languageCode)
         
         // Apply the language immediately
         userDefault.synchronize()
         
-        
-        
         print("langualanguageCodede",languageCode)
         print("languageCode",DefaultsKeys.languageCode)
-        dismiss(animated: true)
-  
+//      p  dismiss(animated: true)
+        
+        
+      //  UserDefaults.standard.set(index, forKey: "index")
+//        if #available(iOS 13.0, *) {
+//            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+//                  let window = windowScene.windows.first else { return }
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let initialViewController = storyboard.instantiateInitialViewController()
+//            window.rootViewController = initialViewController
+//            window.makeKeyAndVisible()
+//        } else {
+//            guard let window = UIApplication.shared.keyWindow else { return }
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let initialViewController = storyboard.instantiateInitialViewController()
+//            window.rootViewController = initialViewController
+//            window.makeKeyAndVisible()
+//        }
+        
+//        UserDefaults.standard.set(index, forKey: "index")
+//            let userDefault = UserDefaults.standard
+//            TranslationManager.shared.setLanguage(languageCode)
+//            userDefault.set(languageCode, forKey: DefaultsKeys.languageCode)
+//            userDefault.synchronize()
+//
+//            print("languageCode", languageCode)
+//
+//            // Reload the entire application
+            guard let window = UIApplication.shared.keyWindow else { return }
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let initialViewController = storyboard.instantiateInitialViewController()
+            window.rootViewController = initialViewController
+            window.makeKeyAndVisible()
+
+            // Optional: Add a transition animation
+            UIView.transition(with: window,
+                              duration: 0.3,
+                              options: .transitionCrossDissolve,
+                              animations: nil,
+                              completion: nil)
 
     }
     
@@ -122,10 +158,10 @@ extension ChangeLanguageViewController : UITableViewDelegate,UITableViewDataSour
         
         let userDefault = UserDefaults.standard
         
-//        if selectedLanguage == "Tamil" {
-//            languageCode = "ta-IN"
-//        }
-     if selectedLanguage == "Thai" {
+        //        if selectedLanguage == "Tamil" {
+        //            languageCode = "ta-IN"
+        //        }
+        if selectedLanguage == "Thai" {
             languageCode = "th"
         } else if selectedLanguage == "Hindi" {
             languageCode = "hi"
@@ -133,11 +169,12 @@ extension ChangeLanguageViewController : UITableViewDelegate,UITableViewDataSour
             languageCode = "en"
         }
         
-      
-       
+        
+        
         userDefault.set(languageCode, forKey: DefaultsKeys.languageCode)
         
         tv.reloadData()
+       
     }
     
     

@@ -175,6 +175,9 @@ class DropDownVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
                    }
                }
         else if(fromVC == "settings"){
+            
+            print("settingssettings",commonStringNames.language_change)
+            print("settingssettings23456",commonStringNames.language_change.translated())
            
             arrFAQName =  ["Upload Document and Photos",commonStringNames.txt_menu_help.translated() as? String ?? "" ,commonStringNames.txt_menu_logout.translated() as? String ?? "",commonStringNames.language_change.translated() as? String ?? ""]
                    self.navigationController?.navigationBar.isHidden = true

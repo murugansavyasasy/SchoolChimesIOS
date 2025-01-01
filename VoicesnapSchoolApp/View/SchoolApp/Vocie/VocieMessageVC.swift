@@ -185,8 +185,8 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
         doneView.isHidden  = true
         fsCaleView.isHidden  = true
         
-        scheduleCallLbl.text = commonStringNames.scheduleCall
-        instantCallHeadLbl.text = commonStringNames.instantCall
+        scheduleCallLbl.text = commonStringNames.scheduleCall.translated()
+        instantCallHeadLbl.text = commonStringNames.instantCall.translated()
         DefaultsKeys.SelectInstantSchedule = 0
         SchoolDetailDict = appDelegate.LoginSchoolDetailArray[0] as! NSDictionary
         school_type = userDefaults.string(forKey: DefaultsKeys.school_type)
@@ -1885,8 +1885,17 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
     
     func timeSS(){
         
-        print("timeId1",timeId)
-        RPickerTwo.selectDate(title: "Select time", cancelText: "Cancel", datePickerMode: .time, style: .Wheel, didSelectDate: {[weak self] (today_date) in
+        let calendar = Calendar.current
+         let now = Date()
+         let todayStart = calendar.startOfDay(for: now)
+         let formatter = DateFormatter()
+         formatter.dateFormat = "HH:mm"
+         let minimumTime = calendar.date(byAdding: .hour, value: 4, to: todayStart) // 4:00 AM
+         let maximumTime = calendar.date(byAdding: .hour, value: 22, to: todayStart) // 5:00 PM
+         print("timeId1",timeId)
+         RPickerTwo.selectDate(title: "Select time", cancelText: "Cancel", datePickerMode: .time, minDate:minimumTime,maxDate: maximumTime, style: .Wheel, didSelectDate: {[weak self] (today_date) in
+       // print("timeId1",timeId)
+        //RPickerTwo.selectDate(title: "Select time", cancelText: "Cancel", datePickerMode: .time, style: .Wheel, didSelectDate: {[weak self] (today_date) in
             
             
             self?.display_date = today_date.dateString("HH:mm")

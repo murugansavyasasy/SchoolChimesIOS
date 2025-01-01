@@ -879,8 +879,9 @@ print("schoolNameReg",schoolNameReg)
         print("SDetails")
       
         var selectString = notification.object as? String ?? ""
+        print("SDetails23",selectString)
         selectString = selectString.lowercased()
-        print("SDetails",selectString)
+        print("SDetailsfgh",selectString)
         let log = commonStringNames.txt_menu_logout.translated() as? String ?? ""
         if(selectString == log.lowercased()){
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() )
@@ -891,13 +892,14 @@ print("schoolNameReg",schoolNameReg)
             callEditProfile()
         }else if(selectString.contains("help")){
             callhelp()
-        }else if(selectString.contains(commonStringNames.change_language.translated())){
+        }else if (selectString.contains("Change Language")){
             callLanguageVc()
+        
+           
         }
         else{
             callUploadDocumentView()
         }
-        
     }
     
     func callLanguageVc(){
@@ -1281,6 +1283,7 @@ print("schoolNameReg",schoolNameReg)
         
     }
     func CallLanguageChangeApi(){
+        print("DefaultsKeys.languageCodeParent",DefaultsKeys.languageCode)
         memberArray()
         strApiFrom = "changeLang"
         let apiCall = API_call.init()
