@@ -168,10 +168,7 @@ extension ChangeLanguageViewController : UITableViewDelegate,UITableViewDataSour
         } else if selectedLanguage == "English" {
             languageCode = "en"
         }
-        
-        
-        
-        userDefault.set(languageCode, forKey: DefaultsKeys.languageCode)
+    
         
         tv.reloadData()
        

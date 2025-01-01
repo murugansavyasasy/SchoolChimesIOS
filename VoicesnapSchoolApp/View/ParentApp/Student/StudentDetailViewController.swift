@@ -880,24 +880,23 @@ print("schoolNameReg",schoolNameReg)
       
         var selectString = notification.object as? String ?? ""
         print("SDetails23",selectString)
-        selectString = selectString.lowercased()
-        print("SDetailsfgh",selectString)
+//        selectString = selectString.lowercased()
         let log = commonStringNames.txt_menu_logout.translated() as? String ?? ""
-        if(selectString == log.lowercased()){
+        if(selectString == log){
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() )
             {
                 self.showLogoutAlert()
+                
             }
         }else if(selectString.contains("edit")){
             callEditProfile()
-        }else if(selectString.contains("help")){
+        }else if(selectString.contains(commonStringNames.txt_menu_help.translated())){
             callhelp()
-        }else if (selectString.contains("Change Language")){
+        }else if (selectString.contains(commonStringNames.language_change.translated())){
             callLanguageVc()
-        
-           
         }
         else{
+            print("elseeee",selectString)
             callUploadDocumentView()
         }
     }

@@ -515,7 +515,7 @@ class commonStringNames {
     static let confirm_password = "Confirm password"
     static let btn_submit = "Submit"
     static let btn_next = "Next"
-    static let language_change = "Change Language"
+    static let language_change = "change language"
     static let choose_language = "Choose Language"
     static let search_exams = "Search Exams"
     static let no_exams = "No Exams"
