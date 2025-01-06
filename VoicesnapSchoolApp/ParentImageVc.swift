@@ -71,7 +71,7 @@ class ParentImageVc: UIViewController,UITableViewDataSource,Apidelegate,UITableV
         TextDetailstableview.dataSource = self
         TextDetailstableview.delegate = self
         
-        
+        TextDateLabel.text = commonStringNames.Images.translated()
         search_bar.delegate = self
         search_bar.placeholder = commonStringNames.Search.translated()
         self.view.backgroundColor = UIColor(named: "serach_color")
@@ -730,6 +730,7 @@ class ParentImageVc: UIViewController,UITableViewDataSource,Apidelegate,UITableV
     func CallStaffImageMessageApi() {
         showLoading()
         strApiFrom = "CallStaffImageMessageApi"
+        print("CallStaffImageMessageApi")
         let apiCall = API_call.init()
         apiCall.delegate = self;
         
@@ -746,6 +747,7 @@ class ParentImageVc: UIViewController,UITableViewDataSource,Apidelegate,UITableV
         print("SCHOOL",SchoolId)
         print("MEMEBER",ChildId)
         let myDict:NSMutableDictionary = ["SchoolId": SchoolId,"MemberId" : ChildId,"CircularDate" : TextDateLabel.text!,"Type" : "IMAGE", COUNTRY_CODE: strCountryCode]
+        print("myDictmyDictCallStaffImageMessageApi",myDict)
         utilObj.printLogKey(printKey: "myDict", printingValue: myDict)
         let myString = Util.convertNSDictionary(toString: myDict)
         utilObj.printLogKey(printKey: "myString", printingValue: myString!)

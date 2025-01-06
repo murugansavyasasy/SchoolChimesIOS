@@ -188,10 +188,10 @@ class StaffnoticeBoardVcViewController: UIViewController, Apidelegate,UITableVie
     func AlertMessage(strAlert : String)
     {
         
-        let alertController = UIAlertController(title: "Alert", message: strAlert, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.Alert.translated(), message: strAlert, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: "ok", style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.OK.translated(), style: UIAlertAction.Style.default) {
             UIAlertAction in
             print("Okaction")
             self.dismiss(animated: true, completion: nil)

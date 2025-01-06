@@ -53,6 +53,7 @@ class ParentSchoolEventVC: UIViewController,UITableViewDataSource,UITableViewDel
     var firstImage : Int  = 0
     var getadID : Int!
     
+    
     weak var timer: Timer?
     var holidayData : [HolidayDataRes] = []
     
@@ -400,6 +401,7 @@ class ParentSchoolEventVC: UIViewController,UITableViewDataSource,UITableViewDel
             else{
                 let cell = tableView.dequeueReusableCell(withIdentifier: "SeeMoreTVCell", for: indexPath) as! SeeMoreTVCell
                 print("7")
+                cell.SeeMoreBtn.setTitle(commonStringNames.SeeMore.translated(), for: .normal)
                 cell.SeeMoreBtn.addTarget(self, action: #selector(self.seeMoreButtonTapped), for: .touchUpInside)
                 cell.backgroundColor = .clear
                 return cell
@@ -567,13 +569,53 @@ class ParentSchoolEventVC: UIViewController,UITableViewDataSource,UITableViewDel
     
     @objc func UpdateLogoutSelection(notification:Notification) -> Void
     {
-        print("PSch")
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() )
-        {
-            self.showLogoutAlert()
+//        print("PSch")
+//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() )
+//        {
+//            self.showLogoutAlert()
+//        }
+        print("SDetails")
+      
+        var selectString = notification.object as? String ?? ""
+        print("SDetails23",selectString)
+        selectString = selectString.lowercased()
+        let log = commonStringNames.logout.translated() as? String ?? ""
+        if(selectString == log){
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() )
+            {
+                self.showLogoutAlert()
+                
+            }
+        }else if(selectString.contains("edit")){
+            callEditProfile()
+        }else if(selectString.contains(commonStringNames.help.translated())){
+            callhelp()
+        }else if (selectString.contains(commonStringNames.language_change.translated())){
+            callLanguageVc()
         }
-        
     }
+    
+    func callLanguageVc(){
+        let vc = ChangeLanguageViewController(nibName: nil, bundle: nil)
+        vc.modalPresentationStyle = .formSheet
+        present(vc, animated: true)
+    }
+    
+    
+    func callEditProfile(){
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "EditProfileVC") as! EditProfileVC
+        newViewController.strPageFrom = "edit"
+        self.navigationController?.pushViewController(newViewController, animated: true)
+    }
+    func callhelp(){
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "EditProfileVC") as! EditProfileVC
+        newViewController.strPageFrom = "help"
+        self.navigationController?.pushViewController(newViewController, animated: true)
+    }
+    
+    
     
     func showLogoutAlert(){
         let alertController = UIAlertController(title: commonStringNames.txt_menu_logout.translated() as? String, message: commonStringNames.want_to_logut.translated() as? String, preferredStyle: .alert)
@@ -1009,7 +1051,7 @@ class ParentSchoolEventVC: UIViewController,UITableViewDataSource,UITableViewDel
         PasswordLabel.text = commonStringNames.txt_password.translated() as? String
         LogoutLabel.text = commonStringNames.txt_menu_setting.translated() as? String
         
-        segmentedControl.setTitle(commonStringNames.events as? String, forSegmentAt: 0)
+        segmentedControl.setTitle(commonStringNames.events.translated() as? String, forSegmentAt: 0)
                                   segmentedControl.setTitle(commonStringNames.holidays.translated() as? String, forSegmentAt: 1)
         
                                                             strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Records Found.."

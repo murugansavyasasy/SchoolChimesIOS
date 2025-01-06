@@ -54,7 +54,7 @@ class StaffTextVC:  UIViewController,UITextViewDelegate,UITextFieldDelegate,UITa
         let nc = NotificationCenter.default
         nc.addObserver(self,selector: #selector(StaffTextVC.catchNotification), name: NSNotification.Name(rawValue: "comeBackMenu"), object:nil)
         
-        
+        ToStaffGroups.setTitle(commonStringNames.ToGroups.translated(), for: .normal)
         ToStaffGroups.isHidden = false
         ToStaffGroups.isHidden = true
         

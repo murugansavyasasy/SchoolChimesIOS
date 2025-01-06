@@ -132,7 +132,9 @@ class FeeDetailVC: UIViewController,Apidelegate,UITableViewDelegate,UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Fee Details"
+        self.title = commonStringNames.FeeDetails.translated()
+        segmentedControl.setTitle(commonStringNames.PAYMENT.translated(), forSegmentAt: 0)
+        segmentedControl.setTitle(commonStringNames.RECEIPT.translated(), forSegmentAt: 1)
         
         loadWebView()
         
@@ -338,7 +340,7 @@ class FeeDetailVC: UIViewController,Apidelegate,UITableViewDelegate,UITableViewD
     }
     
     func initialLoad(){
-        self.title = "Fee Details"
+        self.title = commonStringNames.FeeDetails.translated()
         //
         self.alertView.isHidden = true
         strChildName = String(describing: appDelegate.SchoolDetailDictionary["ChildName"]!)

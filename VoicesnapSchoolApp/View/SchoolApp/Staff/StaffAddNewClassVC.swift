@@ -122,6 +122,8 @@ class StaffAddNewClassVC: UIViewController,Apidelegate,UIPickerViewDelegate,UIPi
         print("schoolIddfgfdsfgfds",SchoolId)
         SendButton.layer.cornerRadius = 5
         SendButton.layer.masksToBounds = true
+        assigmentSendButton.setTitle(commonStringNames.SEND.translated(), for: .normal)
+        assigmentStudentButton.setTitle(commonStringNames.teacher_txt_selectStudents.translated(), for: .normal)
         assigmentSendButton.layer.cornerRadius = 5
         assigmentSendButton.layer.masksToBounds = true
         assigmentStudentButton.layer.cornerRadius = 5

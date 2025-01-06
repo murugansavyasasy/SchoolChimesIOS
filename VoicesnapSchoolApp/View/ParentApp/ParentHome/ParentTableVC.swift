@@ -702,23 +702,31 @@ class ParentTableVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     {
         print("PTable")
         
+        print("SDetails")
+      
         var selectString = notification.object as? String ?? ""
+        print("SDetails23",selectString)
         selectString = selectString.lowercased()
-        let log = commonStringNames.txt_menu_logout.translated() as? String ?? ""
-        if(selectString == log.lowercased()){
+        let log = commonStringNames.logout.translated() as? String ?? ""
+        if(selectString == log){
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() )
             {
                 self.showLogoutAlert()
+                
             }
-        }else if(selectString.contains("Edit")){
+        }else if(selectString.contains("edit")){
             callEditProfile()
-        }else if(selectString.contains("help")){
+        }else if(selectString.contains(commonStringNames.help.translated())){
             callhelp()
+        }else if (selectString.contains(commonStringNames.language_change.translated())){
+            callLanguageVc()
         }
-        
-        
     }
-    
+    func callLanguageVc(){
+        let vc = ChangeLanguageViewController(nibName: nil, bundle: nil)
+        vc.modalPresentationStyle = .formSheet
+        present(vc, animated: true)
+    }
     func callEditProfile(){
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let newViewController = storyBoard.instantiateViewController(withIdentifier: "EditProfileVC") as! EditProfileVC
@@ -731,12 +739,6 @@ class ParentTableVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         newViewController.strPageFrom = "help"
         self.navigationController?.pushViewController(newViewController, animated: true)
     }
-    func callUploadDocumentView(){
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let newViewController = storyBoard.instantiateViewController(withIdentifier: "UploadDocPhotosVC") as! UploadDocPhotosVC
-        self.navigationController?.pushViewController(newViewController, animated: true)
-    }
-    
     
     func showLogoutAlert(){
         let alertController = UIAlertController(title: commonStringNames.txt_menu_logout.translated() as? String, message: commonStringNames.want_to_logut.translated() as? String, preferredStyle: .alert)
@@ -1016,14 +1018,15 @@ class ParentTableVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         // titleLabel.textColor = UIColor (red:128.0/255.0, green:205.0/255.0, blue: 244.0/255.0, alpha: 1)
         titleLabel.textColor = UIColor (red:0.0/255.0, green:183.0/255.0, blue: 190.0/255.0, alpha: 1)
         titleLabel.textColor = .white
-        let secondWord : String =   commonStringNames.choose.translated() as? String ?? "Choose"
+        let secondWord : String = commonStringNames.choose.translated() as? String ?? "Choose"
         let thirdWord : String  = strTitleName
         let comboWord = secondWord + " " + thirdWord
+        print("comboWordcomboWord",comboWord)
         let attributedText = NSMutableAttributedString(string:comboWord)
         let attrs = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 22), NSAttributedString.Key.foregroundColor: UIColor.white]
         let range = NSString(string: comboWord).range(of: secondWord)
         attributedText.addAttributes(attrs, range: range)
-        
+        print("attributedTextattributedText",attributedText)
         titleLabel.attributedText = attributedText
         if(strLanguage == "ar"){
             titleLabel.textAlignment = .right

@@ -23,11 +23,12 @@ var strPageFrom = String()
         if(strPageFrom == "edit"){
             let strProfile = "\(appDelegate.strProfileTitle)"
             StudentIDString = String(describing: self.appDelegate.SchoolDetailDictionary["ChildID"]!)
-            self.title = strProfile
+           // self.title = strProfile
+            self.title = commonStringNames.Editprofile.translated()
 
             loadWebURl()
         }else{
-            self.title = "Help"
+            self.title = commonStringNames.Help.translated()
             loadhelp()
         }
         

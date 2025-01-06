@@ -67,6 +67,9 @@ class StudentSubmitAssignmentVC: UIViewController, UIActionSheetDelegate, UIImag
     }
     
     func initialSetup(){
+        descriptionTextField.placeholder = commonStringNames.Description.translated()
+        ClickHereButton.setTitle(commonStringNames.image_submission_title_click.translated(), for:.normal)
+        ClickImageCaptureButton.setTitle(commonStringNames.teacher_txt_change_selection.translated(), for: .normal)
         SchoolId = String(describing: appDelegate.SchoolDetailDictionary["SchoolID"]!)
         strCountryCode = UserDefaults.standard.object(forKey: COUNTRY_CODE) as! String
         ChildId = String(describing: appDelegate.SchoolDetailDictionary["ChildID"]!)
@@ -543,7 +546,7 @@ class StudentSubmitAssignmentVC: UIViewController, UIActionSheetDelegate, UIImag
         }
         
         strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
-        SendButton.setTitle(commonStringNames.pop_response_btn_send.translated() as? String, for: .normal)
+        SendButton.setTitle(commonStringNames.pop_response_btn_send.translated(), for: .normal)
         
     }
     

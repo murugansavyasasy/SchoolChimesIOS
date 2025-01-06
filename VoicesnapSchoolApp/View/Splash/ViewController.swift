@@ -1179,8 +1179,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             {
                 if(csData == nil)
                 {
-                    let alertController = UIAlertController(title: "Alert", message: SERVER_ERROR, preferredStyle: .alert)
-                    let yesAction = UIAlertAction(title: "Ok", style: .default) { (action) -> Void in
+                    let alertController = UIAlertController(title: commonStringNames.Alert.translated(), message: SERVER_ERROR, preferredStyle: .alert)
+                    let yesAction = UIAlertAction(title: commonStringNames.OK.translated(), style: .default) { (action) -> Void in
                         exit(0)
                     }
                     alertController.addAction(yesAction)

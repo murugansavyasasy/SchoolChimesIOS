@@ -7,7 +7,7 @@
 */
 "welcome_message" = "ยินดีต้อนรับ";
 "Change Language" = "เปลี่ยนภาษา";
-"change language" = "เปลี่ยนภาษา";
+"change language" = "เปลี่ยนภาษา(thai)";
 "Home" = "หน้าหลัก";
 "Help" = "ช่วยเหลือ";
 "Settings" = "การตั้งค่า";
@@ -168,8 +168,7 @@
 
 "Select the type in which you want to create the assignment" = "เลือกประเภทที่คุณต้องการสร้างงาน";
 "CREATE" = "สร้าง";
-"VIEW" = "
-ดู";
+"VIEW" = "ดู";
 "Assignment" = "งาน";
 "Compose Assignment" = "หัวข้อของงาน";
 "Submission Date" = "วันที่ส่ง";
@@ -624,7 +623,7 @@
 "PDF" = "ไฟล์ PDF";
 "VIDEO" = "วิดีโอ";
 "Edit" = "แก้ไข";
-"Choose " = "เลือก ";
+"Choose" = "เลือก ";
 "Your Role" = "บทบาทของคุณ";
 "Your Child" = "ลูกของคุณ";
 "Principal" = "ผู้อำนวยการ";
@@ -835,7 +834,7 @@
 //-------------------------
 "Mark Attendance" = "ทำเครื่องหมายการเข้าเรียน";
 "Your Attendance Details" = "รายละเอียดการเข้าเรียนของคุณ";
-"Note : You are outside the institutes boundary. You will not be able to mark your attendance" = "หมายเหตุ: คุณอยู่นอกขอบเขตของสถาบัน คุณจะไม่สามารถทำเครื่องหมายการเข้าเรียนได้";
+"Note: You are outside the institute's boundary. You will not be able to mark your attendance." = "หมายเหตุ: คุณอยู่นอกขอบเขตของสถาบัน คุณจะไม่สามารถบันทึกการเข้าร่วมของคุณได้";
 "Please try again when you are within the designated area." = "โปรดลองอีกครั้งเมื่อคุณอยู่ในพื้นที่ที่กำหนด";
 "Add new punch location" = "เพิ่มตำแหน่งใหม่";
 "Enter iPhone Passcode for “School Chimes”" = "ป้อนรหัสผ่าน iPhone สำหรับ “School Chimes”";
@@ -891,7 +890,7 @@
 "You can record emergency voice message upto" = "คุณสามารถบันทึกข้อความเสียงฉุกเฉินได้สูงสุด";
 "Press the button to RECORD" = "กดปุ่มเพื่อบันทึก";
 "Add file(mp3)" = "เพิ่มไฟล์(mp3)";
-"Instant call" = "โทรทันที";
+"Instant Call" = "โทรทันที";
 "Schedule Call" = "ตั้งเวลาสาย";
 "You can record upto 3 minutes" = "คุณสามารถบันทึกได้นานถึง 3 นาที";
 "Initiate call on" = "เริ่มการโทรใน";
@@ -974,3 +973,35 @@
 "Note : Please deselect the selected date for change the timing." = "หมายเหตุ: โปรดยกเลิกการเลือกวันที่ที่เลือกไว้เพื่อเปลี่ยนเวลา";
 "Add File Attachments" = "เพิ่มไฟล์แนบ";
 
+"logout" = "ออกจากระบบ";
+"help" = "ช่วยเหลือ";
+"upload document and photos" = "อัปโหลดเอกสารและรูปภาพ";
+"Upload Document and Photos" = "อัปโหลดเอกสารและรูปภาพ";
+"Punch History" = "ประวัติการปักหมุด";
+"Edit Profile" = "แก้ไขโปรไฟล์";
+"Your ward attendance report for past 30 working days" = "รายงานการเข้าชั้นเรียนของบุตรหลานคุณใน 30 วันทำการที่ผ่านมา";
+"Interact" = "โต้ตอบ";
+"TO SECTION OR STUDENTS" = "ไปยังส่วนหรือกลุ่มนักเรียน";
+"To Groups" = "ถึงกลุ่ม";
+"PREVIOUS" = "ก่อนหน้า";
+"SKIP" = "ข้าม";
+"NEXT" = "ถัดไป";
+"Click here to select Image/PDF" = "คลิกที่นี่เพื่อเลือกภาพ/PDF";
+"You are outside the institutes boundary. you will not be able to mark your attendance.\n\nPlease try again when you are within the designated area." = "คุณอยู่นอกขอบเขตของสถาบัน คุณจะไม่สามารถบันทึกการเข้าร่วมของคุณได้\n\nโปรดลองอีกครั้งเมื่อคุณอยู่ในพื้นที่ที่กำหนด";
+"Punch" = "ปักหมุด";
+"FaceId" = "ใบหน้าไอดี";
+"Tap on the 'Punch' button to record your attendance for the day. A confirmation message will appear once your attendance is successfully marked." = "แตะที่ปุ่ม 'ปักหมุด' เพื่อบันทึกการเข้าร่วมของคุณในวันนี้ ข้อความยืนยันจะปรากฏขึ้นเมื่อบันทึกการเข้าร่วมของคุณสำเร็จ";
+"PAYMENT" = "การชำระเงิน";
+"RECEIPT" = "ใบเสร็จรับเงิน";
+"Get Subject" = "รับหัวข้อ";
+"Click here to select Image / PDF for submission." = "คลิกที่นี่เพื่อเลือกภาพ / PDF สำหรับการส่ง";
+"Upload Student Photo (Max size 10MB)" = "อัปโหลดรูปถ่ายนักเรียน (ขนาดสูงสุด 10MB)";
+"Upload Student Docs / Fee Receipt or Proof" = "อัปโหลดเอกสารนักเรียน / ใบเสร็จค่าธรรมเนียมหรือหลักฐาน";
+"Maximum upload size - 20 MB" = "ขนาดอัปโหลดสูงสุด - 20 MB";
+"File name" = "ชื่อไฟล์";
+"Browse file" = "เรียกดูไฟล์";
+"Uploaded Documents : (Only these documents will be sent for approval)" = "เอกสารที่อัปโหลด: (เฉพาะเอกสารเหล่านี้จะถูกส่งเพื่อขออนุมัติ)";
+"(Click upload for each document to upload)" = "(คลิกอัปโหลดสำหรับเอกสารแต่ละไฟล์เพื่ออัปโหลด)";
+"Upload" = "อัปโหลด";
+"(Supported formats: *.xlsx, *.rar, *.csv, *.doc, *.docx, *.pdf, *.gif, *.jpeg, *.png, *.zip)" = "(รูปแบบที่รองรับ: *.xlsx, *.rar, *.csv, *.doc, *.docx, *.pdf, *.gif, *.jpeg, *.png, *.zip)";
+"Enter file name" = "ป้อนชื่อไฟล์";

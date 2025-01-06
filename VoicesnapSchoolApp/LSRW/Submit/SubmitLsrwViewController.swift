@@ -1194,12 +1194,12 @@
     if  DefaultsKeys.failedErrorCode != 500 {
     if submitModalResp[0].Status == 1 {
 
-    let alert = UIAlertController(title: "Alert",
+        let alert = UIAlertController(title: commonStringNames.Alert.translated(),
               message: submitModalResp[0].Message,
               preferredStyle: .alert)
 
     // Add an action (button)
-    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { _ in
+        alert.addAction(UIAlertAction(title: commonStringNames.OK.translated(), style: .default, handler: { _ in
     dismiss(animated: true)
     }))
 

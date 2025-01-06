@@ -142,6 +142,7 @@ class UploadViemoVideoVC: UIViewController, UIActionSheetDelegate, UIImagePicker
         SendButton.isEnabled = false
         StandardSectionButton.layer.cornerRadius = 5
         StandardSectionButton.isEnabled = false
+        StaffGroupButton.setTitle(commonStringNames.ToGroups.translated(), for: .normal)
         StaffGroupButton.layer.cornerRadius = 5
         StaffGroupButton.isEnabled = false
         StandardStudentButton.layer.cornerRadius = 5

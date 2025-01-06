@@ -43,6 +43,7 @@ class ViewAssignmentVC: UIViewController ,UITableViewDataSource,UITableViewDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        titleLabel.text = commonStringNames.Assignment.translated()
         HiddenLabel.isHidden = true
         assignmentTableview.estimatedRowHeight = 50
         assignmentTableview.rowHeight = UITableView.automaticDimension

@@ -85,7 +85,7 @@ class NewProductOfferVC: UIViewController,UIWebViewDelegate {
             self.title = commonStringNames.special_offer.translated() as? String
             self.title = commonStringNames.ImportantInfo.translated()
         }else{
-            self.title = "New Products"
+            self.title = commonStringNames.NewProducts.translated()
         }
         
     }

@@ -566,7 +566,7 @@ class EmergencyVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerD
         attributedText.addAttributes(attrfirst, range: range2)
         TitleLabel.attributedText = attributedText
         TitleLabel.textAlignment = .center
-        
+        print("attributedTextattributedText",attributedText)
     }
     
     func TitleForStopRecord(){
@@ -596,9 +596,9 @@ class EmergencyVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerD
     }
     
     func TitleForListenVoice(){
-        let firstword : String = commonStringNames.listen.translated() as? String ??  "Listen"
-        let secondWord : String  = commonStringNames.voice.translated() as? String ?? " Voice "
-        let thirdWord  : String = commonStringNames.message.translated() as? String ?? "Message"
+        let firstword : String = commonStringNames.listen.translated()
+        let secondWord : String  = commonStringNames.voice.translated()
+        let thirdWord  : String = commonStringNames.message.translated()
         let comboWord = firstword  + secondWord  + thirdWord
         let attributedText = NSMutableAttributedString(string:comboWord)
         var attrs =  [NSAttributedString.Key : NSObject]()
@@ -621,6 +621,7 @@ class EmergencyVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerD
         }else{
             ListenVoiceMsglabel.textAlignment = .left
         }
+        print("attributedTextattributedText",attributedText)
         ListenVoiceMsglabel.attributedText = attributedText
         
     }

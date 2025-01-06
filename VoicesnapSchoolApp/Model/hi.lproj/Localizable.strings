@@ -7,7 +7,7 @@
 */
 "welcome_message" = "स्वागत है";
 "Change Language" = "भाषा बदलें";
-"change language" = "भाषा बदलें";
+"change language" = "भाषा बदलें(hindi)";
 
 "Home" = "होम";
 "Help" = "मदद";
@@ -621,7 +621,7 @@
 "PDF" = "पीडीएफ";
 "VIDEO" = "वीडियो";
 "Edit" = "संपादित करें";
-"Choose " = "चुनें ";
+"Choose" = "चुनें ";
 "Your Role" = "आपकी भूमिका";
 "Your Child" = "आपका बच्चा";
 "Principal" = "प्रधानाचार्य";
@@ -833,7 +833,8 @@
 
 "Mark Attendance" = "उपस्थिति चिह्नित करें";
 "Your Attendance Details" = "आपकी उपस्थिति विवरण";
-"Note : You are outside the institutes boundary. You will not be able to mark your attendance" = "नोट: आप संस्थान की सीमा के बाहर हैं। आप अपनी उपस्थिति चिह्नित नहीं कर पाएंगे";
+"Note: You are outside the institute's boundary. You will not be able to mark your attendance." = "नोट: आप संस्थान की सीमा के बाहर हैं। आप अपनी उपस्थिति दर्ज नहीं कर पाएंगे।";
+
 "Please try again when you are within the designated area." = "कृपया फिर से प्रयास करें जब आप निर्दिष्ट क्षेत्र में हों।";
 "Add new punch location" = "नया पंच स्थान जोड़ें";
 "Enter iPhone Passcode for “School Chimes”" = "“School Chimes” के लिए iPhone पासकोड दर्ज करें";
@@ -889,7 +890,7 @@
 "You can record emergency voice message upto" = "आप 30 सेकंड तक आपातकालीन वॉइस संदेश रिकॉर्ड कर सकते हैं";
 "Press the button to RECORD" = "रिकॉर्ड करने के लिए बटन दबाएं";
 "Add file(mp3)" = "फाइल जोड़ें(mp3)";
-"Instant call" = "तुरंत कॉल";
+"Instant Call" = "तुरंत कॉल";
 "Schedule Call" = "कॉल अनुसूची करें";
 "You can record upto 3 minutes" = "आप 3 मिनट तक रिकॉर्ड कर सकते हैं";
 "Initiate call on" = "कॉल शुरू करें";
@@ -971,3 +972,36 @@
 "Slots" = "स्लॉट्स";
 "Note : Please deselect the selected date for change the timing." = "नोट : समय बदलने के लिए कृपया चुनी गई तिथि को अचयनित करें।";
 "Add File Attachments" = "फाइल अटैचमेंट जोड़ें";
+
+"logout" = "लॉगआउट";
+"help" = "सहायता";
+"upload document and photos" = "दस्तावेज़ और फ़ोटो अपलोड करें";
+"Upload Document and Photos" = "दस्तावेज़ और फ़ोटो अपलोड करें";
+"Punch History" = "पंच इतिहास";
+"Edit Profile" = "प्रोफ़ाइल संपादित करें";
+"Your ward attendance report for past 30 working days" = "पिछले 30 कार्यदिवसों के लिए आपके वार्ड की उपस्थिति रिपोर्ट";
+"Interact" = "बातचीत करें";
+"TO SECTION OR STUDENTS" = "विभाग या छात्रों के लिए";
+"To Groups" = "समूहों को";
+"PREVIOUS" = "पिछला";
+"SKIP" = "छोड़ें";
+"NEXT" = "अगला";
+"Click here to select Image/PDF" = "यहां क्लिक करें छवि/पीडीएफ चुनने के लिए";
+"You are outside the institutes boundary. you will not be able to mark your attendance.\n\nPlease try again when you are within the designated area." = "आप संस्थान की सीमा के बाहर हैं। आप अपनी उपस्थिति दर्ज नहीं कर पाएंगे।\n\nकृपया निर्दिष्ट क्षेत्र के भीतर होने पर पुनः प्रयास करें।";
+"Punch" = "पंच";
+"FaceId" = "चेहरा पहचान";
+"Tap on the 'Punch' button to record your attendance for the day. A confirmation message will appear once your attendance is successfully marked." = "दिन के लिए अपनी उपस्थिति दर्ज करने के लिए 'पंच' बटन पर टैप करें। आपकी उपस्थिति सफलतापूर्वक दर्ज होने पर एक पुष्टि संदेश दिखाई देगा।";
+"PAYMENT" = "भुगतान";
+"RECEIPT" = "रसीद";
+"Get Subject" = "विषय प्राप्त करें";
+"Click here to select Image / PDF for submission." = "प्रस्तुत करने के लिए छवि / पीडीएफ़ चुनने के लिए यहां क्लिक करें।";
+"Upload Student Photo (Max size 10MB)" = "छात्र की फोटो अपलोड करें (अधिकतम आकार 10MB)";
+"Upload Student Docs / Fee Receipt or Proof" = "छात्र दस्तावेज़ / शुल्क रसीद या प्रमाण अपलोड करें";
+"Maximum upload size - 20 MB" = "अधिकतम अपलोड आकार - 20 एमबी";
+"File name" = "फ़ाइल का नाम";
+"Browse file" = "फ़ाइल ब्राउज़ करें";
+"Uploaded Documents : (Only these documents will be sent for approval)" = "अपलोड किए गए दस्तावेज़: (केवल ये दस्तावेज़ अनुमोदन के लिए भेजे जाएंगे)";
+"(Click upload for each document to upload)" = "(अपलोड करने के लिए प्रत्येक दस्तावेज़ के लिए अपलोड पर क्लिक करें)";
+"Upload" = "अपलोड करें";
+"(Supported formats: *.xlsx, *.rar, *.csv, *.doc, *.docx, *.pdf, *.gif, *.jpeg, *.png, *.zip)" = "(समर्थित प्रारूप: *.xlsx, *.rar, *.csv, *.doc, *.docx, *.pdf, *.gif, *.jpeg, *.png, *.zip)";
+"Enter file name" = "फ़ाइल का नाम दर्ज करें";

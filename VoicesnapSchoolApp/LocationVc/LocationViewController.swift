@@ -14,6 +14,8 @@
 class LocationViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate {
     
     
+    @IBOutlet weak var PunchLbl: UILabel!
+    @IBOutlet weak var tapPunchtorecordAttend: UILabel!
     @IBOutlet weak var EnableLocationLbl: UILabel!
     @IBOutlet weak var ToenhanceMsgLbl: UILabel!
     @IBOutlet weak var AllowLocationMsgLbl: UILabel!
@@ -73,9 +75,9 @@ class LocationViewController: UIViewController,UITableViewDelegate,UITableViewDa
     var bioMatricEnable  : Int!
     var staus : Bool!
     
-    let firstParagraph = "Note : You are outside the institutes boundary. you will not be able to mark your attendanc"
+    let firstParagraph = commonStringNames.AttendanceOutsideBoundaryNote.translated()
     
-    let secondParagraph = "Please try again when you are within the designated area."
+    let secondParagraph = commonStringNames.RetryWithinDesignatedArea.translated()
     
     var device = UIDevice.current.name
     var punch_type = 1
@@ -89,6 +91,11 @@ class LocationViewController: UIViewController,UITableViewDelegate,UITableViewDa
         markAttendDfltLbl.text = commonStringNames.MarkAttendance.translated()
         attendanceDefltLbl.text = commonStringNames.YourAttendanceDetails.translated()
         addNewPunchLocationLbl.text = commonStringNames.AddNewPunchLocation.translated()
+        AllowLocationMsgLbl.text = commonStringNames.AllowLocationToMarkAttendance.translated()
+        ToenhanceMsgLbl.text = commonStringNames.EnableGPSForBetterFeatures.translated()
+        EnableLocationLbl.text = commonStringNames.EnableLocation.translated()
+        tapPunchtorecordAttend.text = commonStringNames.PunchAttendanceInstruction.translated()
+        PunchLbl.text = commonStringNames.Punch.translated()
         
         switchBtn.isHidden = true
         faceIdDefaultLbl.isHidden = true

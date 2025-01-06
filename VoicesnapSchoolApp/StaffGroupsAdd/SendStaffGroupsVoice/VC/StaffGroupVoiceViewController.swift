@@ -865,7 +865,7 @@ class StaffGroupVoiceViewController: UIViewController,UITableViewDelegate,UITabl
                     if i.Status.elementsEqual("1") {
                         
                         
-                        _ = SweetAlert().showAlert("Alert", subTitle: i.Message, style: .none, buttonTitle: "OK") { isOtherButton in
+                        _ = SweetAlert().showAlert(commonStringNames.Alert.translated(), subTitle: i.Message, style: .none, buttonTitle: commonStringNames.OK.translated()) { isOtherButton in
                             
                             if isOtherButton {
                                 
@@ -1013,7 +1013,7 @@ class StaffGroupVoiceViewController: UIViewController,UITableViewDelegate,UITabl
                 if i.Status.elementsEqual("1") {
                     
                     
-                    _ = SweetAlert().showAlert("Alert", subTitle: i.Message, style: .none, buttonTitle: "OK") { isOtherButton in
+                    _ = SweetAlert().showAlert(commonStringNames.Alert.translated(), subTitle: i.Message, style: .none, buttonTitle: commonStringNames.OK.translated()) { isOtherButton in
                         
                         if isOtherButton {
                             
@@ -1079,7 +1079,7 @@ class StaffGroupVoiceViewController: UIViewController,UITableViewDelegate,UITabl
                 if i.result.elementsEqual("1") {
                     
                     
-                    _ = SweetAlert().showAlert("Alert", subTitle: i.Message, style: .none, buttonTitle: "OK") { isOtherButton in
+                    _ = SweetAlert().showAlert(commonStringNames.Alert.translated(), subTitle: i.Message, style: .none, buttonTitle: commonStringNames.OK.translated()) { isOtherButton in
                         
                         if isOtherButton {
                             

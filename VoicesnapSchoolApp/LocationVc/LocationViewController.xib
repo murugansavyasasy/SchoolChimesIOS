@@ -16,6 +16,7 @@
                 <outlet property="EnableLocationLbl" destination="kuq-3u-CAr" id="xAA-oG-sCx"/>
                 <outlet property="ErrorLablelView" destination="63o-Kq-6GO" id="bUB-DF-n9J"/>
                 <outlet property="MarkAttendanceHeaderLbl" destination="ryj-xd-mXw" id="oES-lY-ebD"/>
+                <outlet property="PunchLbl" destination="0lT-0a-qtK" id="Xe6-04-m4U"/>
                 <outlet property="ToenhanceMsgLbl" destination="fS3-kR-ah7" id="mgd-N4-cgx"/>
                 <outlet property="addNewPunchLocationLbl" destination="dG5-jz-anA" id="uTB-cF-qzs"/>
                 <outlet property="attendanceDefltLbl" destination="X1F-WR-N2s" id="uCM-YI-l1P"/>
@@ -39,6 +40,7 @@
                 <outlet property="selectYrsview" destination="XfH-En-hmW" id="Q55-J6-Mwc"/>
                 <outlet property="selectyrDrop" destination="m4t-0H-cjj" id="CFb-qh-wm8"/>
                 <outlet property="switchBtn" destination="8fj-GS-E9h" id="erf-xo-QxL"/>
+                <outlet property="tapPunchtorecordAttend" destination="Fqe-gp-pvO" id="JrQ-47-gdS"/>
                 <outlet property="tv" destination="zfy-bl-J32" id="ctf-dR-JDo"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -304,7 +306,7 @@
                                         <constraint firstAttribute="width" constant="53" id="cfW-rX-7c6"/>
                                     </constraints>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="To enhance your experience and provide accurate loaction-based features,please enabel GPS. " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fS3-kR-ah7">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="To enhance your experience and provide accurate loaction-based features,please enabel GPS. " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fS3-kR-ah7" userLabel="To enhance your experience and provide accurate loaction-based features,please enabel GPS.">
                                     <rect key="frame" x="74" y="308" width="269" height="66.333333333333314"/>
                                     <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                     <nil key="textColor"/>

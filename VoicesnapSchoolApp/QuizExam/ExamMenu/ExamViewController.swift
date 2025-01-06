@@ -238,7 +238,7 @@ class ExamViewController: UIViewController,UITableViewDataSource,UITableViewDele
             }
             else {
                 //                tv.reloadData()
-                _ = SweetAlert().showAlert("Alert", subTitle: examRespose.Message, style: .none, buttonTitle: "OK")
+                _ = SweetAlert().showAlert(commonStringNames.Alert.translated(), subTitle: examRespose.Message, style: .none, buttonTitle: commonStringNames.OK.translated())
                 
                 
                 

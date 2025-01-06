@@ -354,7 +354,7 @@
 "From" = "From";
 "To" = "To";
 "Inform" = "Inform";
-"Your ward attendance report for past 30 working days" = "Your ward attendance report for past 30 working days";
+"Your ward attendance report for past 30 working days" = "Your Ward Attendance Report For Past 30 Working Days";
 "GetSignature" = "GetSignature";
 "Emergency Voice" = "Emergency Voice";
 "General Voice" = "General Voice";
@@ -562,7 +562,7 @@
 "Submit" = "Submit";
 "Next" = "Next";
 
-"change language" = "Change Language";
+"change language" = "change language(english)";
 "Change Language" = "Change Language";
 "Choose Language" = "Choose Language";
 "Search Exams" = "Search Exams";
@@ -661,7 +661,7 @@
 "PDF" = "PDF";
 "VIDEO" = "VIDEO";
 "Edit" = "Edit";
-"Choose " = "Choose ";
+"Choose" = "Choose";
 "Your Role" = "Your Role";
 "Your Child" = "Your Child";
 "Principal" = "Principal";
@@ -873,7 +873,8 @@
 
 "Mark Attendance" = "Mark Attendance";
 "Your Attendance Details" = "Your Attendance Details";
-"Note : You are outside the institutes boundary. You will not be able to mark your attendance" = "Note : You are outside the institutes boundary. You will not be able to mark your attendance";
+"Note: You are outside the institute's boundary. You will not be able to mark your attendance." = "Note: You are outside the institute's boundary. You will not be able to mark your attendance.";
+
 "Please try again when you are within the designated area." = "Please try again when you are within the designated area.";
 "Add new punch location" = "Add new punch location";
 "Enter iPhone Passcode for “School Chimes”" = "Enter iPhone Passcode for “School Chimes”";
@@ -934,12 +935,12 @@
 "You can record emergency voice message upto 30 seconds" = "You can record emergency voice message upto 30 seconds";
 "Press the button to RECORD" = "Press the button to RECORD";
 "Add file(mp3)" = "Add file(mp3)";
-"Instant call" = "Instant call";
+"Instant Call" = "Instant Call";
 "Schedule Call" = "Schedule Call";
 "You can record upto 3 minutes" = "You can record upto 3 minutes";
-"Initiate call on" = "Initiate call on";
-"Do not dial beyond" = "Do not dial beyond";
-"Selected Dates" = "Selected Dates";
+"Initiate call on" = "Initiate call on               : ";
+"Do not dial beyond" = "Do not dial beyond      :";
+"Selected Dates" = "Select Dates                :";
 "Choose Video From Gallery" = "Choose Video From Gallery";
 "There are no Messages for today. Click “See More” for previous" = "There are no Messages for today. Click “See More” for previous";
 "See More" = "See More";
@@ -1012,3 +1013,32 @@
 "Slots" = "Slots";
 "Note : Please deselect the selected date for change the timing." = "Note : Please deselect the selected date for change the timing.";
 "Add File Attachments" = "Add File Attachments";
+
+"logout" = "logout";
+"help" = "help";
+"upload document and photos" = "upload document and photos";
+"Upload Document and Photos" = "Upload Document and Photos";
+"Punch History" = "Punch History";
+"Edit Profile" = "Edit Profile";
+"Interact" = "Interact";
+"To Groups" = "To Groups";
+"PREVIOUS" = "PREVIOUS";
+"SKIP" = "SKIP";
+"NEXT" = "NEXT";
+"You are outside the institutes boundary. you will not be able to mark your attendance.\n\nPlease try again when you are within the designated area." = "You are outside the institutes boundary. you will not be able to mark your attendance.\n\nPlease try again when you are within the designated area.";
+"Punch" = "Punch";
+"FaceId" = "FaceId";
+"Tap on the 'Punch' button to record your attendance for the day. A confirmation message will appear once your attendance is successfully marked." = "Tap on the 'Punch' button to record your attendance for the day. A confirmation message will appear once your attendance is successfully marked.";
+"PAYMENT" = "PAYMENT";
+"RECEIPT" = "RECEIPT";
+"Get Subject" = "Get Subject";
+"Upload Student Photo (Max size 10MB)" = "Upload Student Photo (Max size 10MB)";
+"Upload Student Docs / Fee Receipt or Proof" = "Upload Student Docs / Fee Receipt or Proof";
+"Maximum upload size - 20 MB" = "Maximum upload size - 20 MB";
+"File name" = "File name";
+"Browse file" = "Browse file";
+"Uploaded Documents : (Only these documents will be sent for approval)" = "Uploaded Documents : (Only these documents will be sent for approval)";
+"(Click upload for each document to upload)" = "(Click upload for each document to upload)";
+"Upload" = "Upload";
+"(Supported formats: *.xlsx, *.rar, *.csv, *.doc, *.docx, *.pdf, *.gif, *.jpeg, *.png, *.zip)" = "(Supported formats: *.xlsx, *.rar, *.csv, *.doc, *.docx, *.pdf, *.gif, *.jpeg, *.png, *.zip)";
+"Enter file name" = "Enter file name";

@@ -17,6 +17,7 @@ struct language{
 
 class ChangeLanguageViewController: UIViewController {
     
+    @IBOutlet weak var LanguageView: UIView!
     @IBOutlet weak var confirmBtn: UIButton!
     @IBOutlet weak var tv: UITableView!
     var arrUserData: NSArray = []
@@ -31,11 +32,18 @@ class ChangeLanguageViewController: UIViewController {
     var index = 0
     var  Buttontext = ["Confirm","पुष्टि करें","ยืนยัน"]
     var ParentSelectedLoginIndex = 0
+    var languagePriority = "Parent"
     
     var selectedLanguage: String?
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        LanguageView.layer.cornerRadius = 15
+        confirmBtn.layer.cornerRadius = 10
+        if languagePriority == "Staff"{
+            confirmBtn.backgroundColor = UIColor(named:"AppDark" )
+        }else{
+            confirmBtn.backgroundColor = UIColor(named: "serach_color")
+        }
         index = UserDefaults.standard.integer(forKey: "index")
         Items[index].selected = true
         tv.dataSource =  self
@@ -56,56 +64,37 @@ class ChangeLanguageViewController: UIViewController {
         
         UserDefaults.standard.set(index, forKey: "index")
         let userDefault = UserDefaults.standard
-        
         TranslationManager.shared.setLanguage(languageCode)
-        userDefault.set(languageCode, forKey: DefaultsKeys.languageCode)
+        // userDefault.set(languageCode, forKey: DefaultsKeys.languageCode)
+        // Save language code
+        UserDefaults.standard.set(languageCode, forKey: DefaultsKeys.languageCode)
+        // Retrieve language code
+        if let savedCode = UserDefaults.standard.string(forKey: DefaultsKeys.languageCode) {
+            print("Language Code Successfully Saved and Retrieved: \(savedCode)")
+        } else {
+            print("Failed to Save Language Code.")
+        }
         
         // Apply the language immediately
         userDefault.synchronize()
-        
         print("langualanguageCodede",languageCode)
         print("languageCode",DefaultsKeys.languageCode)
-//      p  dismiss(animated: true)
+        //      p  dismiss(animated: true)
         
+        // Reload the entire application
+        guard let window = UIApplication.shared.keyWindow else { return }
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let initialViewController = storyboard.instantiateInitialViewController()
+        window.rootViewController = initialViewController
+        window.makeKeyAndVisible()
         
-      //  UserDefaults.standard.set(index, forKey: "index")
-//        if #available(iOS 13.0, *) {
-//            guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-//                  let window = windowScene.windows.first else { return }
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            let initialViewController = storyboard.instantiateInitialViewController()
-//            window.rootViewController = initialViewController
-//            window.makeKeyAndVisible()
-//        } else {
-//            guard let window = UIApplication.shared.keyWindow else { return }
-//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//            let initialViewController = storyboard.instantiateInitialViewController()
-//            window.rootViewController = initialViewController
-//            window.makeKeyAndVisible()
-//        }
+        // Optional: Add a transition animation
+        UIView.transition(with: window,
+                          duration: 0.3,
+                          options: .transitionCrossDissolve,
+                          animations: nil,
+                          completion: nil)
         
-//        UserDefaults.standard.set(index, forKey: "index")
-//            let userDefault = UserDefaults.standard
-//            TranslationManager.shared.setLanguage(languageCode)
-//            userDefault.set(languageCode, forKey: DefaultsKeys.languageCode)
-//            userDefault.synchronize()
-//
-//            print("languageCode", languageCode)
-//
-//            // Reload the entire application
-            guard let window = UIApplication.shared.keyWindow else { return }
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let initialViewController = storyboard.instantiateInitialViewController()
-            window.rootViewController = initialViewController
-            window.makeKeyAndVisible()
-
-            // Optional: Add a transition animation
-            UIView.transition(with: window,
-                              duration: 0.3,
-                              options: .transitionCrossDissolve,
-                              animations: nil,
-                              completion: nil)
-
     }
     
 }
@@ -126,8 +115,11 @@ extension ChangeLanguageViewController : UITableViewDelegate,UITableViewDataSour
             confirmBtn.titleLabel?.textAlignment = .center
             confirmBtn.titleLabel?.adjustsFontSizeToFitWidth = true
             cell.checkImg.image = UIImage(named: "checked_Tick")
-            cell.langIconImg.tintColor = .systemOrange
-            
+            if languagePriority == "Staff"{
+                cell.langIconImg.tintColor = UIColor(named: "AppDark")
+            }else{
+                cell.langIconImg.tintColor = UIColor(named: "serach_color")
+            }
         }else{
             
             cell.checkImg.image = UIImage(named: "CheckCircle")
@@ -168,10 +160,10 @@ extension ChangeLanguageViewController : UITableViewDelegate,UITableViewDataSour
         } else if selectedLanguage == "English" {
             languageCode = "en"
         }
-    
+        
         
         tv.reloadData()
-       
+        
     }
     
     

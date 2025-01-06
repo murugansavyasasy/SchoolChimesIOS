@@ -15,10 +15,15 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
     
     @IBOutlet weak var voiceHistoryHeight: NSLayoutConstraint!
     
+    @IBOutlet weak var InstantCallLbl: UILabel!
     
+    @IBOutlet weak var ScheduleCallLbl: UILabel!
     
+    @IBOutlet weak var DonotDialBeyondLbl: UILabel!
+    @IBOutlet weak var InitiateCallOnLbl: UILabel!
     @IBOutlet weak var staffGroupBtnTop: NSLayoutConstraint!
     
+    @IBOutlet weak var addFileDefaultLbl: UILabel!
     
     @IBOutlet weak var voiceRecordingVieww: UIView!
     
@@ -154,8 +159,18 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         DefaultsKeys.dateArr.removeAll()
 
         DefaultsKeys.SelectInstantSchedule = 0
-        
-        print("DefaultsKeys222SelectInstantSchedule",DefaultsKeys.SelectInstantSchedule)
+        addFileDefaultLbl.text = commonStringNames.AddMp3File.translated()
+        InstantCallLbl.text = commonStringNames.instantCall.translated()
+        ScheduleCallLbl.text = commonStringNames.scheduleCall.translated()
+        InitiateCallOnLbl.text = commonStringNames.InitiateCallOn.translated()
+        DonotDialBeyondLbl.text = commonStringNames.DoNotDialBeyond.translated()
+        selectedDatesLbl.text = commonStringNames.SelectedDates.translated()
+        print("commonStringNames.teacher_txt_start_record.translated()",commonStringNames.teacher_txt_start_record.translated())
+        StaffGroupButton.setTitle(commonStringNames.ToGroups.translated(), for: .normal)
+      
+        TitleLabel.text = commonStringNames.teacher_txt_start_record.translated()
+        print("StaffVoiceVCStaffVoiceVC",TitleLabel.text)
+        TitleForStartRecord()
         pathLbl.text = ""
         pathImg.isHidden = true
         pathLbl.isHidden = true
@@ -256,7 +271,9 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
     override func viewWillAppear(_ animated: Bool){
         
         strCountryCode = UserDefaults.standard.object(forKey: COUNTRY_CODE) as! String
+        
         self.callSelectedLanguage()
+        TitleForStartRecord()
     }
     
     func enableButtonAction(){
@@ -691,9 +708,12 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
     
     // MARK: TITLE FOR START AND STOP RECORD
     func TitleForStartRecord(){
+        
+        print("")
         let firstword : String =  commonStringNames.teacher_txt_start_record.translated() as? String ?? "Press the button to"
         let secondWord : String  =  commonStringNames.record.translated() as? String ?? " RECORD"
         let comboWord = firstword + secondWord
+        print("comboWord",comboWord)
         let attributedText = NSMutableAttributedString(string:comboWord)
         var attrs =  [NSAttributedString.Key : NSObject]()
         var attrfirst =  [NSAttributedString.Key : NSObject]()
@@ -711,6 +731,7 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         attributedText.addAttributes(attrs, range: range)
         attributedText.addAttributes(attrfirst, range: range2)
         TitleLabel.attributedText = attributedText
+        print("attributedText",attributedText)
         TitleLabel.textAlignment = .center
         
     }
@@ -1028,7 +1049,7 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
     
     func alertWithAction(strAlert : String){
         let alertController = UIAlertController(title: "", message: strAlert, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.OK.translated(), style: UIAlertAction.Style.default) {
             UIAlertAction in
             self.actionNewVoiceRecording()
         }
@@ -1443,7 +1464,7 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
                 var end1 = self?.doNotCallLbl.text
                 
                 if start1! > end1! {
-                    Util.showAlert("Alert", msg:  "Please select dial beyond time is after the initial call time")
+                    Util.showAlert(commonStringNames.Alert.translated(), msg:  "Please select dial beyond time is after the initial call time")
                     self?.doNotCallLbl.text = "Time"
                     print("futureTime is greater than currentTime")
                 }else{

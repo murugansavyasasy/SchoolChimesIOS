@@ -14,6 +14,7 @@ import KRProgressHUD
 class PdfVC: UIViewController,UITableViewDataSource,UITableViewDelegate,Apidelegate,UIGestureRecognizerDelegate ,URLSessionDownloadDelegate,UISearchBarDelegate, WKNavigationDelegate{
     
     
+    @IBOutlet weak var circularHeaderLbl: UILabel!
     @IBOutlet weak var adViewHeight: NSLayoutConstraint!
     
     @IBOutlet weak var search_bar: UISearchBar!
@@ -75,7 +76,7 @@ class PdfVC: UIViewController,UITableViewDataSource,UITableViewDelegate,Apideleg
         super.viewDidLoad()
         HiddenLabel.isHidden = true
         bIsSeeMore = false
-        
+        circularHeaderLbl.text = commonStringNames.Circulars.translated()
         print("Circular123")
         
         print("getMsgFromMgnt",getMsgFromMgnt)
@@ -957,7 +958,7 @@ class PdfVC: UIViewController,UITableViewDataSource,UITableViewDelegate,Apideleg
         let noview : UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.TextDetailstableview.bounds.size.width, height: self.TextDetailstableview.bounds.size.height))
         
         let noDataLabel: UILabel = UILabel(frame: CGRect(x: 0, y:  8, width: self.TextDetailstableview.bounds.size.width, height: 60))
-        noDataLabel.text = "No messages for the day. Click See More for previous messages."
+        noDataLabel.text = commonStringNames.NoMessagesForDay.translated()
         noDataLabel.textColor = .red
         noDataLabel.backgroundColor = UIColor(named: "NoDataColor")
         

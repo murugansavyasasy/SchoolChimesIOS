@@ -241,7 +241,10 @@ class ParentVoiceMessageVC: UIViewController, UITableViewDelegate, UITableViewDa
         startTimer()
     }
     override func viewWillAppear(_ animated: Bool) {
-        
+        let nc = NotificationCenter.default
+        nc.addObserver(self,selector: #selector(HomeWorkVC.LoadSelectedLanguageData), name: NSNotification.Name(rawValue: LANGUAGE_NOTIFICATION), object:nil)
+        nc.addObserver(self,selector: #selector(HomeWorkVC.UpdateLogoutSelection), name: NSNotification.Name(rawValue: "SettingNotification"), object:nil)
+        strCountryCode = UserDefaults.standard.object(forKey: COUNTRY_CODE) as! String
         
         self.callSelectedLanguage()
         
@@ -404,13 +407,52 @@ class ParentVoiceMessageVC: UIViewController, UITableViewDelegate, UITableViewDa
     
     @objc func UpdateLogoutSelection(notification:Notification) -> Void
     {
-        print("PVoice")
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() )
-        {
-            self.showLogoutAlert()
+//        print("PVoice")
+//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() )
+//        {
+//            self.showLogoutAlert()
+//        }
+        print("SDetails")
+      
+        var selectString = notification.object as? String ?? ""
+        print("SDetails23",selectString)
+        selectString = selectString.lowercased()
+        let log = commonStringNames.logout.translated() as? String ?? ""
+        if(selectString == log){
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() )
+            {
+                self.showLogoutAlert()
+                
+            }
+        }else if(selectString.contains("edit")){
+            callEditProfile()
+        }else if(selectString.contains(commonStringNames.help.translated())){
+            callhelp()
+        }else if (selectString.contains(commonStringNames.language_change.translated())){
+            callLanguageVc()
         }
         
     }
+    func callLanguageVc(){
+        let vc = ChangeLanguageViewController(nibName: nil, bundle: nil)
+        vc.modalPresentationStyle = .formSheet
+        present(vc, animated: true)
+    }
+    
+    
+    func callEditProfile(){
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "EditProfileVC") as! EditProfileVC
+        newViewController.strPageFrom = "edit"
+        self.navigationController?.pushViewController(newViewController, animated: true)
+    }
+    func callhelp(){
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "EditProfileVC") as! EditProfileVC
+        newViewController.strPageFrom = "help"
+        self.navigationController?.pushViewController(newViewController, animated: true)
+    }
+    
     
     func showLogoutAlert(){
         let alertController = UIAlertController(title: commonStringNames.txt_menu_logout.translated() as? String, message: commonStringNames.want_to_logut.translated() as? String, preferredStyle: .alert)
@@ -673,7 +715,7 @@ class ParentVoiceMessageVC: UIViewController, UITableViewDelegate, UITableViewDa
     
     func loadViewData(){
         strCountryCode = UserDefaults.standard.object(forKey: COUNTRY_CODE) as! String
-        self.title = commonStringNames.recent_voice_messages as? String
+        self.title = commonStringNames.recent_voice_messages.translated() as? String
         if(Util .isNetworkConnected()){
             DispatchQueue.main.async {
                 self.CallDatawiseVoiceApi()
@@ -700,7 +742,7 @@ class ParentVoiceMessageVC: UIViewController, UITableViewDelegate, UITableViewDa
         let noview : UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.MyTableView.bounds.size.width, height: self.MyTableView.bounds.size.height))
         
         let noDataLabel: UILabel = UILabel(frame: CGRect(x: 0, y:  -10, width: self.MyTableView.bounds.size.width, height: 60))
-        noDataLabel.text = "No messages for the day. Click See More for previous messages."
+        noDataLabel.text = commonStringNames.NoMessagesForDay.translated()
         noDataLabel.textColor = .red
         noDataLabel.backgroundColor = UIColor(named: "NoDataColor")
         

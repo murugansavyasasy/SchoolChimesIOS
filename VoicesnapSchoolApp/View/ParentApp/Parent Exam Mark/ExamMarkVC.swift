@@ -369,12 +369,50 @@ class ExamMarkVC: UIViewController , UITableViewDelegate, UITableViewDataSource,
     
     @objc func UpdateLogoutSelection(notification:Notification) -> Void
     {
-        print("EXMark")
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now())
-        {
-            self.showLogoutAlert()
-        }
+//        print("EXMark")
+//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now())
+//        {
+//            self.showLogoutAlert()
+//        }
         
+        print("SDetails")
+      
+        var selectString = notification.object as? String ?? ""
+        print("SDetails23",selectString)
+        selectString = selectString.lowercased()
+        let log = commonStringNames.logout.translated() as? String ?? ""
+        if(selectString == log){
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() )
+            {
+                self.showLogoutAlert()
+                
+            }
+        }else if(selectString.contains("edit")){
+            callEditProfile()
+        }else if(selectString.contains(commonStringNames.help.translated())){
+            callhelp()
+        }else if (selectString.contains(commonStringNames.language_change.translated())){
+            callLanguageVc()
+        }
+    }
+    func callLanguageVc(){
+        let vc = ChangeLanguageViewController(nibName: nil, bundle: nil)
+        vc.modalPresentationStyle = .formSheet
+        present(vc, animated: true)
+    }
+    
+    
+    func callEditProfile(){
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "EditProfileVC") as! EditProfileVC
+        newViewController.strPageFrom = "edit"
+        self.navigationController?.pushViewController(newViewController, animated: true)
+    }
+    func callhelp(){
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "EditProfileVC") as! EditProfileVC
+        newViewController.strPageFrom = "help"
+        self.navigationController?.pushViewController(newViewController, animated: true)
     }
     
     func showLogoutAlert(){
@@ -593,10 +631,10 @@ class ExamMarkVC: UIViewController , UITableViewDelegate, UITableViewDataSource,
     func AlerMessage(alrtStr : String)
     {
         
-        let alertController = UIAlertController(title: "Alert", message: alrtStr, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.Alert.translated(), message: alrtStr, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.OK.translated(), style: UIAlertAction.Style.default) {
             UIAlertAction in
             print("Okaction")
             self.navigationController?.popViewController(animated: true)
@@ -672,7 +710,7 @@ class ExamMarkVC: UIViewController , UITableViewDelegate, UITableViewDataSource,
         }
         HomeLabel.text = commonStringNames.home.translated() as? String
         TitleLabel.text = commonStringNames.list_of_exams.translated() as? String
-        FAQLabel.text = commonStringNames.faq as? String
+        FAQLabel.text = commonStringNames.faq.translated() as? String
         PasswordLabel.text = commonStringNames.txt_password.translated() as? String
         LogoutLabel.text = commonStringNames.txt_menu_setting.translated() as? String
         strNoRecordAlert = commonStringNames.no_exams.translated() as? String ?? "No Exams Found.."
@@ -684,7 +722,8 @@ class ExamMarkVC: UIViewController , UITableViewDelegate, UITableViewDataSource,
     }
     
     func loadViewData(){
-        self.title = languageDictionary["exams"] as? String
+        //self.title = languageDictionary["exams"] as? String
+        self.title = commonStringNames.exam_marks.translated() as? String
         ChildIDString = String(describing: appDelegate.SchoolDetailDictionary["ChildID"]!)
         SchoolIDString = String(describing: appDelegate.SchoolDetailDictionary["SchoolID"]!)
         if(Util .isNetworkConnected()){

@@ -321,7 +321,7 @@ class PrincipleStandardSectionVC: UIViewController ,Apidelegate,UIPickerViewDele
         }
         else
         {
-            Util.showAlert("Alert", msg: commonStringNames.no_students.translated() as? String)
+            Util.showAlert(commonStringNames.Alert.translated(), msg: commonStringNames.no_students.translated() as? String)
         }
         
     }

@@ -30,7 +30,7 @@ class FAQVC: UIViewController,Apidelegate,UIWebViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         webView.delegate = self
-        self.title = "FAQ"
+        self.title = commonStringNames.FAQ.translated()
         self.callSelectedLanguage()
         if(fromVC == "Parent"){
             if(appDelegate.SchoolDetailDictionary["ChildID"] != nil){

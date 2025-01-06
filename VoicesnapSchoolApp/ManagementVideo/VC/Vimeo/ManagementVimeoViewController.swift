@@ -322,10 +322,10 @@ class ManagementVimeoViewController: UIViewController,UIWebViewDelegate {
                 }
                 
                 var urlConvert = savedURL.absoluteString
-                let refreshAlert = UIAlertController(title: "Alert Title", message: urlConvert, preferredStyle: .alert)
+                let refreshAlert = UIAlertController(title: commonStringNames.Alert.translated(), message: urlConvert, preferredStyle: .alert)
 
                    // Add the "Ok" action
-                   refreshAlert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+                refreshAlert.addAction(UIAlertAction(title: commonStringNames.OK.translated(), style: .default, handler: { (action: UIAlertAction!) in
                        // Perform any action you need here
                        print("Ok button tapped")
                    }))

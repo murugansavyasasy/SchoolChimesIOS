@@ -110,6 +110,9 @@ class AttendanceMessageVC: UIViewController,Apidelegate,UIPickerViewDelegate ,UI
    
     override func viewDidLoad() {
         super.viewDidLoad()
+        attendMarkDefltLbl.text = commonStringNames.AttendanceMarking.translated()
+        attendReportLbl.text = commonStringNames.AttendanceReport.translated()
+        attendanceTypeHdngLbl.text = commonStringNames.AttendanceType.translated()
         view.isOpaque = false
         PopupChooseStandardPickerView.isHidden = true
         calanderHoleView.isHidden = true

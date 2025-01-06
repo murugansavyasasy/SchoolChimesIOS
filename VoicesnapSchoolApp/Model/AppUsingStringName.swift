@@ -936,7 +936,37 @@ class commonStringNames {
     static let instantCall = "Instant Call"
     static let scheduleCall = "Schedule Call"
     static let AddFileAttachments = "Add File Attachments"
-
+    
+    static let logout = "logout"
+    static let help = "help"
+    static let uploadDocumentandPhoto = "Upload Document and Photos"
+    static let uploaddocumentandphoto = "upload document and photos"
+    static let PunchHistory = "Punch History"
+    
+    static let Editprofile = "Edit Profile"
+    static let Interact = "Interact"
+    static let ToGroups = "To Groups"
+    static let PREVIOUS = "PREVIOUS"
+    static let SKIP = "SKIP"
+    static let NEXT = "NEXT"
+    static let OutsideBoundaryError = "You are outside the institute's boundary. You will not be able to mark your attendance.\n\nPlease try again when you are within the designated area."
+    static let Punch = "Punch"
+    static let FaceId = "FaceId"
+    static let PunchAttendanceInstruction = "Tap on the 'Punch' button to record your attendance for the day. A confirmation message will appear once your attendance is successfully marked."
+    static let PAYMENT = "PAYMENT"
+    static let RECEIPT = "RECEIPT"
+    static let GetSubject = "Get Subject"
+    
+    static let UploadStudentPhoto = "Upload Student Photo (Max size 10MB)"
+    static let UploadStudentDocsOrFeeReceipt = "Upload Student Docs / Fee Receipt or Proof"
+    static let MaxUploadSize20MB = "Maximum upload size - 20 MB"
+    static let FileName = "File name"
+    static let BrowseFile = "Browse file"
+    static let UploadedDocumentsInfo = "Uploaded Documents : (Only these documents will be sent for approval)"
+    static let ClickUploadForEachDocument = "( Click upload for each document to upload )"
+    static let UploadButton = "Upload"
+    static let SupportedFormats = "( Supported formats: *.xlsx, *.rar, *.csv, *.doc, *.docx, *.pdf, *.gif, *.jpeg, *.png, *.zip )"
+    static let EnterFileName = "Enter file name"
 
 
 }

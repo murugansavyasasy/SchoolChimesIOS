@@ -14,9 +14,25 @@
             filePath = "VoicesnapSchoolApp/View/ParentApp/ParentHome/ParentTableVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "833"
-            endingLineNumber = "833"
-            landmarkName = "CallChangePasswordApi()"
+            startingLineNumber = "835"
+            endingLineNumber = "835"
+            landmarkName = "CallHelpSendApi()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E53C9706-7EE6-498F-A846-8290410A4DD5"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "VoicesnapSchoolApp/View/SchoolApp/HomePage/MainVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "985"
+            endingLineNumber = "985"
+            landmarkName = "CallHelpSendApi()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -94,8 +110,8 @@
             filePath = "VoicesnapSchoolApp/View/SchoolApp/HomePage/MainVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1667"
-            endingLineNumber = "1667"
+            startingLineNumber = "1684"
+            endingLineNumber = "1684"
             landmarkName = "loadCellArrayData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -110,8 +126,8 @@
             filePath = "VoicesnapSchoolApp/View/SchoolApp/HomePage/MainVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1105"
-            endingLineNumber = "1105"
+            startingLineNumber = "1112"
+            endingLineNumber = "1112"
             landmarkName = "responestring(_:_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -126,8 +142,8 @@
             filePath = "VoicesnapSchoolApp/View/SchoolApp/HomePage/MainVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1783"
-            endingLineNumber = "1783"
+            startingLineNumber = "1800"
+            endingLineNumber = "1800"
             landmarkName = "loadCellArrayData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -193,6 +209,22 @@
             startingLineNumber = "835"
             endingLineNumber = "835"
             landmarkName = "validateAllFields()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "562CD810-2B2E-4294-82A3-697C85047CDA"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "VoicesnapSchoolApp/View/ParentApp/ParentEvent/ParentSchoolEventVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "235"
+            endingLineNumber = "235"
+            landmarkName = "viewWillAppear(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

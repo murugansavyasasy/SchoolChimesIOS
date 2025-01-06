@@ -10,6 +10,7 @@ import UIKit
 import ObjectMapper
 class PunchHistoryListVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
  
+    @IBOutlet weak var PunchHistoryHeaderLbl: UILabel!
     @IBOutlet weak var backView: UIView!
     
     @IBOutlet weak var noRecordLbl: UILabel!
@@ -21,6 +22,7 @@ class PunchHistoryListVC: UIViewController,UITableViewDelegate,UITableViewDataSo
     var identifier = "PunchHistTableViewCell"
     override func viewDidLoad() {
         super.viewDidLoad()
+        PunchHistoryHeaderLbl.text = commonStringNames.PunchHistory.translated()
 
        let rowNiib = UINib(nibName: identifier, bundle: nil)
         tv.register(rowNiib, forCellReuseIdentifier: identifier)

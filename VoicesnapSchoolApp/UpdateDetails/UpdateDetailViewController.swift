@@ -17,6 +17,7 @@ class UpdateDetailViewController: UIViewController, UICollectionViewDelegate,UIC
     @IBOutlet weak var nextLbl: UILabel!
     @IBOutlet weak var nextView: UIView!
     
+    @IBOutlet weak var SkipLbl: UILabel!
     
     @IBOutlet weak var cancelView: UIViewX!
     
@@ -53,12 +54,16 @@ class UpdateDetailViewController: UIViewController, UICollectionViewDelegate,UIC
     
     var schoolArrayString = String()
     
+    var previoustext = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         let userDefaults = UserDefaults.standard
         print("type",type)
-        
-        
+        previoustext = commonStringNames.PREVIOUS.translated()
+        nextLbl.text = commonStringNames.NEXT.translated()
+        SkipLbl.text = commonStringNames.SKIP.translated()
         print("UpdateDetailViewController1")
         StaffRole = userDefaults.string(forKey: DefaultsKeys.StaffRole)!
         
@@ -107,10 +112,10 @@ class UpdateDetailViewController: UIViewController, UICollectionViewDelegate,UIC
     }
     
     
-    override func viewWillDisappear(_ animated: Bool) {
-        updateDetailsApi()
-    }
-    
+//    override func viewWillDisappear(_ animated: Bool) {
+//        updateDetailsApi()
+//    }
+//    
     func updateDetailsApi(){
         
         
@@ -138,6 +143,8 @@ class UpdateDetailViewController: UIViewController, UICollectionViewDelegate,UIC
                 print("QuestionData",QuestionData?.count)
                 if QuestionData?.count == 1 {
                     nextView.isHidden = true
+                    previousView.isHidden = true
+                    
                 }else{
                     nextView.isHidden = false
                     
@@ -279,7 +286,8 @@ class UpdateDetailViewController: UIViewController, UICollectionViewDelegate,UIC
                 }else{
                     previousView.isHidden = false
                     
-                    preLbl.text = "PREVIOUS"
+                   // preLbl.text = "PREVIOUS"
+                    preLbl.text = previoustext
                 }
                 
                 
@@ -291,11 +299,11 @@ class UpdateDetailViewController: UIViewController, UICollectionViewDelegate,UIC
             cv.reloadData()
         }else {
             
-            
+            print("Checking for skip type")
             let userDefaults = UserDefaults.standard
             
             userDefaults.set(86400, forKey: DefaultsKeys.updateTime)
-            if  preLbl.text == "PREVIOUS" {
+            if  preLbl.text == previoustext {
                 print(index)
                 if index<(self.QuestionData?.count ?? 0) - 0 {
                     index -= 1
@@ -362,7 +370,8 @@ class UpdateDetailViewController: UIViewController, UICollectionViewDelegate,UIC
         }else{
             previousView.isHidden = false
             
-            preLbl.text = "PREVIOUS"
+            //preLbl.text = "PREVIOUS"
+            preLbl.text = previoustext
         }
         
         
@@ -432,11 +441,12 @@ class UpdateDetailViewController: UIViewController, UICollectionViewDelegate,UIC
             
             var countMinus = QuestionData!.count - 1
             changPos  = userDefaults.integer(forKey: DefaultsKeys.lastUpdateList)
+        
             userDefaults.set(countMinus, forKey: DefaultsKeys.updateListCount)
             
             if countMinus == changPos {
                 nextView.isHidden = true
-                preLbl.text = "PREVIOUS"
+                preLbl.text = previoustext//"PREVIOUS"
                 previousView.isHidden = false
                 print("NO DATA")
             }else{

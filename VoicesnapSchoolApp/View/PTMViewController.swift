@@ -1146,7 +1146,7 @@ print("studentId",studentId)
 
         @IBAction  func slotCancelAct(ges : CanelSlotGesture){
 
-            let alertController = UIAlertController(title: "Alert",
+            let alertController = UIAlertController(title: commonStringNames.Alert.translated(),
 
                                                             message: "Reason for Cancel",
 
@@ -1170,7 +1170,7 @@ print("studentId",studentId)
 
 
 
-            let okAction = UIAlertAction(title: "OK", style: .default) { [self] action in
+            let okAction = UIAlertAction(title: commonStringNames.OK.translated(), style: .default) { [self] action in
 
                         if let textFields = alertController.textFields,
 
@@ -1563,9 +1563,9 @@ print("studentId",studentId)
 
 
 
-                    let alert = UIAlertController(title: "Alert", message: cancelSlotsForStudRes.Message, preferredStyle: UIAlertController.Style.alert)
+                    let alert = UIAlertController(title: commonStringNames.Alert.translated(), message: cancelSlotsForStudRes.Message, preferredStyle: UIAlertController.Style.alert)
 
-                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                    alert.addAction(UIAlertAction(title: commonStringNames.OK.translated(), style: UIAlertAction.Style.default, handler: nil))
 
                     self.present(alert, animated: true, completion:{ [self] in
 

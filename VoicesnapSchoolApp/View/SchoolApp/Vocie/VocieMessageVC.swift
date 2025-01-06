@@ -12,8 +12,10 @@ import FSCalendar
 
 class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDelegate,UITextFieldDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,Apidelegate,UIDocumentPickerDelegate, FSCalendarDataSource, FSCalendarDelegate,FSCalendarDelegateAppearance,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout{
     
+    @IBOutlet weak var DonotDialBeyondLbl: UILabel!
     @IBOutlet weak var cv: UICollectionView!
     
+    @IBOutlet weak var InitiateCallOnLbl: UILabel!
     
     @IBOutlet weak var sendBtnBottom: NSLayoutConstraint!
     @IBOutlet weak var cvconstant: NSLayoutConstraint!
@@ -28,6 +30,7 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
     
     @IBOutlet weak var viewRecordTop: NSLayoutConstraint!
     
+    @IBOutlet weak var addFileDefaultLbl: UILabel!
     @IBOutlet weak var doneView: UIView!
     
     
@@ -184,7 +187,10 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
         calendarView.isHidden  = true
         doneView.isHidden  = true
         fsCaleView.isHidden  = true
-        
+        InitiateCallOnLbl.text = commonStringNames.InitiateCallOn.translated()
+        DonotDialBeyondLbl.text = commonStringNames.DoNotDialBeyond.translated()
+        addFileDefaultLbl.text = commonStringNames.AddMp3File.translated()
+        selectedDatesLbl.text = commonStringNames.SelectedDates.translated()
         scheduleCallLbl.text = commonStringNames.scheduleCall.translated()
         instantCallHeadLbl.text = commonStringNames.instantCall.translated()
         DefaultsKeys.SelectInstantSchedule = 0
@@ -422,8 +428,8 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
         
     }
     override func viewWillAppear(_ animated: Bool){
-        print("viewWillAppear")
-        
+        print("viewWillAppeaeeeefrsfsfsfsr",TitleLabel.text)
+//        TitleLabel.text?.translated()
         strCountryCode = UserDefaults.standard.object(forKey: COUNTRY_CODE) as! String
         
         self.callSelectedLanguage()
@@ -1934,7 +1940,7 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
                 var end1 = self?.doNotCallLbl.text
                 
                 if start1! > end1! {
-                    Util.showAlert("Alert", msg:  "Please select dial beyond time is after the initial call time")
+                    Util.showAlert(commonStringNames.Alert.translated(), msg:  "Please select dial beyond time is after the initial call time")
                     self?.doNotCallLbl.text = "Time"
                     print("futureTime is greater than currentTime")
                 }else{

@@ -326,13 +326,53 @@ class ParentExamTestVC: UIViewController, UITableViewDataSource,UITableViewDeleg
     
     @objc func UpdateLogoutSelection(notification:Notification) -> Void
     {
-        print("ParentExam")
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() )
-        {
-            self.showLogoutAlert()
-        }
+//        print("ParentExam")
+//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() )
+//        {
+//            self.showLogoutAlert()
+//        }
         
+        print("SDetails")
+      
+        var selectString = notification.object as? String ?? ""
+        print("SDetails23",selectString)
+        selectString = selectString.lowercased()
+        let log = commonStringNames.logout.translated() as? String ?? ""
+        if(selectString == log){
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() )
+            {
+                self.showLogoutAlert()
+                
+            }
+        }else if(selectString.contains("edit")){
+            callEditProfile()
+        }else if(selectString.contains(commonStringNames.help.translated())){
+            callhelp()
+        }else if (selectString.contains(commonStringNames.language_change.translated())){
+            callLanguageVc()
+        }
     }
+    
+    func callLanguageVc(){
+        let vc = ChangeLanguageViewController(nibName: nil, bundle: nil)
+        vc.modalPresentationStyle = .formSheet
+        present(vc, animated: true)
+    }
+    
+    
+    func callEditProfile(){
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "EditProfileVC") as! EditProfileVC
+        newViewController.strPageFrom = "edit"
+        self.navigationController?.pushViewController(newViewController, animated: true)
+    }
+    func callhelp(){
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "EditProfileVC") as! EditProfileVC
+        newViewController.strPageFrom = "help"
+        self.navigationController?.pushViewController(newViewController, animated: true)
+    }
+    
     
     func showLogoutAlert(){
         let alertController = UIAlertController(title: commonStringNames.txt_menu_logout.translated() as? String, message: commonStringNames.want_to_logut.translated() as? String, preferredStyle: .alert)

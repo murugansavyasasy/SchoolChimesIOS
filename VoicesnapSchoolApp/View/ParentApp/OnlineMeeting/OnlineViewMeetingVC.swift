@@ -13,6 +13,7 @@ import ObjectMapper
 class OnlineViewMeetingVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,
                            UITableViewDelegate,UITableViewDataSource,Apidelegate,UISearchBarDelegate{
     
+    @IBOutlet weak var MeetingsHeaderLbl: UILabel!
     @IBOutlet weak var TextMessageView: UITextView!
     @IBOutlet weak var TitleText: UITextField!
     @IBOutlet weak var SendTextMessageLabel: UILabel!
@@ -78,7 +79,7 @@ class OnlineViewMeetingVC: UIViewController,UITextViewDelegate,UITextFieldDelega
         super.viewDidLoad()
         
         print("OnlineMeeting123")
-        
+        MeetingsHeaderLbl.text = commonStringNames.Meetings.translated()
         
         SchoolId = String(describing: appDelegate.SchoolDetailDictionary["SchoolID"]!)
         ChildIDString = String(describing: appDelegate.SchoolDetailDictionary["ChildID"]!)

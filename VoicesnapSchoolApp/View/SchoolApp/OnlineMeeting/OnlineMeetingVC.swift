@@ -15,6 +15,8 @@ class OnlineMeetingVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,
                        UITableViewDelegate,UITableViewDataSource,Apidelegate,
                        UIPopoverPresentationControllerDelegate{
     
+    @IBOutlet weak var OnliineMeetingHeaderLbl: UILabel!
+    @IBOutlet weak var MeetingplatformLbl: SelectableLabel!
     @IBOutlet weak var TextMessageView: UITextView!
     @IBOutlet weak var linkTxtView: UITextView!
     
@@ -85,12 +87,17 @@ class OnlineMeetingVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        OnliineMeetingHeaderLbl.text = commonStringNames.OnlineMeeting.translated()
+        meetingSeg.setTitle(commonStringNames.Create.translated(), forSegmentAt: 0)
+        meetingSeg.setTitle(commonStringNames.View.translated(), forSegmentAt: 1)
+        MeetingplatformLbl.text = commonStringNames.MeetingPlatform.translated()
+        linkTF.placeholder = commonStringNames.PasteLink.translated()
         view.isOpaque = false
         let nc = NotificationCenter.default
         nc.addObserver(self,selector: #selector(OnlineMeetingVC.catchNotification), name: NSNotification.Name(rawValue: "comeBackMenu"), object:nil)
         nc.addObserver(self,selector: #selector(OnlineMeetingVC.UpdatemeetingSelection), name: NSNotification.Name(rawValue: "meetingNotification"), object:nil)
         nc.addObserver(self,selector: #selector(OnlineMeetingVC.PasteLableSelection), name: NSNotification.Name(rawValue: "pasteLabelNotification"), object:nil)
-        linkTF.isUserInteractionEnabled = false
+        linkTF.isUserInteractionEnabled = true
         textViewPlaceholder = "Description"
         TextMessageView.text = textViewPlaceholder
         TextMessageView.textColor = .lightGray
@@ -1067,7 +1074,7 @@ class OnlineMeetingVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,
             self.view.bringSubviewToFront(linkTF)
         }else{
             pasteMenuLbl.isHidden = false
-            linkTF.isUserInteractionEnabled = false
+            linkTF.isUserInteractionEnabled = true
         }
         let arrSteps = selectedType.object(forKey: "steps") as? NSArray ?? []
         if(arrSteps.count > 0){

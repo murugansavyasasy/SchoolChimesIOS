@@ -76,6 +76,7 @@ class ParentVideoVc: UIViewController,UITableViewDataSource,UITableViewDelegate,
         print("SearchBarVideo")
         search_bar.delegate = self
         search_bar.placeholder = commonStringNames.Search.translated()
+        TextDateLabel.text = commonStringNames.Videos.translated()
 
         TextDetailstableview.dataSource = self
         TextDetailstableview.delegate = self
@@ -394,6 +395,7 @@ class ParentVideoVc: UIViewController,UITableViewDataSource,UITableViewDelegate,
     func CallStaffVideoApi() {
         showLoading()
         strApiFrom = "CallStaffVideoApi"
+        print("CallStaffVideoApiCallStaffVideoApiCallStaffVideoApi")
         let apiCall = API_call.init()
         apiCall.delegate = self;
         
@@ -410,12 +412,15 @@ class ParentVideoVc: UIViewController,UITableViewDataSource,UITableViewDelegate,
         print("SCHOOL",SchoolId)
         print("MEMEBER",ChildId)
         let myDict:NSMutableDictionary = ["SchoolId": SchoolId,"MemberId" : ChildId,"CircularDate" : TextDateLabel.text!,"Type" : "VIDEO", COUNTRY_CODE: strCountryCode]
+        
+        print("myDictmyDict",myDict)
         utilObj.printLogKey(printKey: "myDict", printingValue: myDict)
         let myString = Util.convertNSDictionary(toString: myDict)
         utilObj.printLogKey(printKey: "myString", printingValue: myString!)
         
         apiCall.nsurlConnectionFunction(requestString, myString, "CallStaffVideoApi")
         
+       
         
     }
     
@@ -740,7 +745,7 @@ class ParentVideoVc: UIViewController,UITableViewDataSource,UITableViewDelegate,
         let noview : UIView = UIView(frame: CGRect(x: 0, y: 10, width: self.TextDetailstableview.bounds.size.width, height: self.TextDetailstableview.bounds.size.height))
 
         let noDataLabel: UILabel = UILabel(frame: CGRect(x: 0, y:  30, width: self.TextDetailstableview.bounds.size.width, height: 60))
-        noDataLabel.text = "No messages for the day. Click See More for previous messages."
+        noDataLabel.text = commonStringNames.NoMessagesForDay.translated()
         noDataLabel.textColor = .red
         noDataLabel.backgroundColor = UIColor(named: "NoDataColor")
 

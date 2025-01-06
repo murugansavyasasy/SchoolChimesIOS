@@ -692,7 +692,7 @@ class PayFeeVC: UIViewController,UITableViewDelegate, UITableViewDataSource,Apid
         strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
         strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         segmentedControl.setTitle(commonStringNames.paid_details.translated() as? String, forSegmentAt: 0)
-                                  segmentedControl.setTitle(commonStringNames.upcomming as? String, forSegmentAt: 1)
+        segmentedControl.setTitle(commonStringNames.upcomming.translated() as? String, forSegmentAt: 1)
         
         self.loadViewData()
         

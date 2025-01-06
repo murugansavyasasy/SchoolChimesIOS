@@ -582,10 +582,10 @@ class UpdateNewUserPasswordVC: UIViewController,Apidelegate,UITextFieldDelegate 
     func AlerMessage(alrtString : String)
     {
         
-        let alertController = UIAlertController(title: "Alert", message: alrtString, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.Alert.translated(), message: alrtString, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.OK.translated(), style: UIAlertAction.Style.default) {
             UIAlertAction in
             print("Okaction")
             

@@ -120,6 +120,7 @@ class StaffImageVC: UIViewController, UIActionSheetDelegate, UIImagePickerContro
         self.initialSetup()
         imagePicker.delegate = self
         
+        ClickHereButton.setTitle(commonStringNames.image_pdf_title_click.translated(), for: .normal)
         SchoolDetailDict = appDelegate.LoginSchoolDetailArray[0] as! NSDictionary
         SchoolId = String(describing: SchoolDetailDict["SchoolID"]!)
         StaffId = String(describing: SchoolDetailDict["StaffID"]!)
@@ -136,6 +137,7 @@ class StaffImageVC: UIViewController, UIActionSheetDelegate, UIImagePickerContro
         StandardStudentButton.layer.cornerRadius = 5
         StandardStudentButton.layer.masksToBounds = true
         
+        ToStaffGroupsButton.setTitle(commonStringNames.ToGroups.translated(), for: .normal)
         ToStaffGroupsButton.layer.cornerRadius = 5
         ToStaffGroupsButton.layer.masksToBounds = true
         
@@ -244,7 +246,7 @@ class StaffImageVC: UIViewController, UIActionSheetDelegate, UIImagePickerContro
         } else {
             // Camera is not available, show an alert
             let alert = UIAlertController(title: "Camera Not Available", message: "This device has no camera.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: commonStringNames.OK.translated(), style: .default, handler: nil))
             present(alert, animated: true, completion: nil)
         }
     }
@@ -875,7 +877,7 @@ class StaffImageVC: UIViewController, UIActionSheetDelegate, UIImagePickerContro
             StandardSectionButton.setTitle(commonStringNames.teacher_staff_to_sections.translated() as? String, for: .normal)
             StandardStudentButton.setTitle(commonStringNames.teacher_staff_to_students.translated() as? String, for: .normal)
         }
-        ClickHereButton.setTitle(commonStringNames.image_pdf_title_click.translated() as? String, for: .normal)
+       
         ClickImageCaptureButton.setTitle(commonStringNames.teacher_txt_change_selection.translated() as? String, for: .normal)
         strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
         strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"

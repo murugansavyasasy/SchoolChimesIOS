@@ -880,8 +880,8 @@ print("schoolNameReg",schoolNameReg)
       
         var selectString = notification.object as? String ?? ""
         print("SDetails23",selectString)
-//        selectString = selectString.lowercased()
-        let log = commonStringNames.txt_menu_logout.translated() as? String ?? ""
+        selectString = selectString.lowercased()
+        let log = commonStringNames.logout.translated() as? String ?? ""
         if(selectString == log){
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() )
             {
@@ -890,13 +890,11 @@ print("schoolNameReg",schoolNameReg)
             }
         }else if(selectString.contains("edit")){
             callEditProfile()
-        }else if(selectString.contains(commonStringNames.txt_menu_help.translated())){
+        }else if(selectString.contains(commonStringNames.help.translated())){
             callhelp()
         }else if (selectString.contains(commonStringNames.language_change.translated())){
             callLanguageVc()
-        }
-        else{
-            print("elseeee",selectString)
+        }else if (selectString.contains(commonStringNames.uploaddocumentandphoto.translated())){
             callUploadDocumentView()
         }
     }
@@ -920,13 +918,13 @@ print("schoolNameReg",schoolNameReg)
         newViewController.strPageFrom = "help"
         self.navigationController?.pushViewController(newViewController, animated: true)
     }
-    
     func callUploadDocumentView(){
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let newViewController = storyBoard.instantiateViewController(withIdentifier: "UploadDocPhotosVC") as! UploadDocPhotosVC
         newViewController.instuteId = SchoolIDString
         self.navigationController?.pushViewController(newViewController, animated: true)
     }
+    
     
     func showLogoutAlert(){
         let alertController = UIAlertController(title: commonStringNames.txt_menu_logout.translated() as? String, message: commonStringNames.want_to_logut.translated() as? String, preferredStyle: .alert)
@@ -1203,7 +1201,7 @@ print("schoolNameReg",schoolNameReg)
     
     func showAlertInView(message: NSString) -> Void {
         let alertView = UIAlertController(title: "", message: message as String, preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .default, handler: { (alert) in
+        let action = UIAlertAction(title: commonStringNames.OK.translated(), style: .default, handler: { (alert) in
             
         })
         alertView.addAction(action)

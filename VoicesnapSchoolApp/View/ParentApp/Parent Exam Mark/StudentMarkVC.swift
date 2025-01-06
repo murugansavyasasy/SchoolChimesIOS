@@ -388,10 +388,10 @@ class StudentMarkVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     func AlerMessage(alertStr: String)
     {
         
-        let alertController = UIAlertController(title: "Alert", message: alertStr, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.Alert.translated(), message: alertStr, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.OK.translated(), style: UIAlertAction.Style.default) {
             UIAlertAction in
             //    print("Okaction")
             self.navigationController?.popViewController(animated: true)

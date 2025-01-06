@@ -174,7 +174,7 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
         strLoggedAS = UserDefaults.standard.object(forKey: LOGINASNAME) as? String ?? ""
         
         self.ButtonCornerDesign()
-        callSelectedLanguage()
+//        callSelectedLanguage()
 
         coutApi()
     }
@@ -229,9 +229,12 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
             let mainvc = UpdateDetailViewController(nibName: nil, bundle: nil)
             mainvc.memeberArrayString = memeberArrayString
             mainvc.schoolArrayString  = schoolArrayString
+            mainvc.skipType = 2
             mainvc.type = "School"
             mainvc.modalPresentationStyle = .formSheet
             present(mainvc, animated: true)
+            
+           
         }
         
         
@@ -434,7 +437,7 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
         cell.backgroundColor = UIColor.clear
         cell.countView.isHidden = true
         
-        print("CellIconsImgArray",CellIconsArray)
+//        print("CellIconsImgArray",CellIconsArray)
         if(CellIconsArray.count > indexPath.row) {
             if((UIImage(named: CellIconsArray[indexPath.row] as? String ?? "")) != nil) {
                 print("Image existing")
@@ -465,7 +468,7 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
         }
         
         
-        print("CellIndexIdsArrayrow",CellIndexIdsArray)
+//        print("CellIndexIdsArrayrow",CellIndexIdsArray)
         
         
         if(self.CellIndexIdsArray[indexPath.row] as! String == "100"){
@@ -536,7 +539,10 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
         
         
         print("indexPath\(indexPath.row)")
-        print("12",CellSegueArray)
+//        print("12",CellSegueArray)
+//        print("bookIndexbookIndex",bookIndex)
+        print("MenuNamess",CellSegueArray[indexPath.row])
+        print("CellIndexIdsArray",CellIndexIdsArray)
         if(indexPath.row == bookIndex){
             if(strBookenabled == "1")
             {
@@ -549,6 +555,7 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
                     }
                 }
                 
+               
                 
             }
         }else{
@@ -1129,9 +1136,10 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
                     return
                     
                 }
-                print("RES : \(responseArray)")
+                print("RESefddgbdgbdg : \(responseArray)")
                 arrayForgetChangeDatas = responseArray
                 
+                print("arrayForgetChangeDatas.count",arrayForgetChangeDatas.count)
                 for i in 0..<arrayForgetChangeDatas.count
                 {
                     dicResponse = arrayForgetChangeDatas[i] as! NSDictionary
@@ -1149,7 +1157,7 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
                 }
                 print("loadCellArrayData1ResponString")
                 
-                loadCellArrayData()
+//                loadCellArrayData()
                 
             }else  if(strApiFrom.isEqual(to: "ChangePassword"))
             {
@@ -1312,14 +1320,19 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
     func callSelectedLanguage(){
         if(Util .isNetworkConnected())
         {
+            
+            print("isNetworkConnectedisNetworkConnected")
             self.CallLanguageChangeApi()
         }
         strLanguage = UserDefaults.standard.object(forKey: SELECTED_LANGUAGE) as! String
+        
+        print("strLanguagestrLanguage",strLanguage)
         let bundle = Bundle(for: type(of: self))
         if let theURL = bundle.url(forResource: strLanguage, withExtension: "json") {
             do {
                 let data = try Data(contentsOf: theURL)
                 if let parsedData = try? JSONSerialization.jsonObject(with: data) as AnyObject {
+                    print("loadLanguageDataloadLanguageDataparsedData")
                     self.loadLanguageData(LangDict: parsedData as! NSDictionary, Language: strLanguage)
                 }else{
                     print("loadCellArrayData1CallSelectedLanguage")
@@ -1360,12 +1373,14 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
         CLogoutLabel.text = commonStringNames.txt_menu_setting.translated() as? String
         print("loadCellArrayData1LoadLanguage")
         
-        self.loadCellArrayData()
+//        self.loadCellArrayData()
         
     }
     
     
     func loadCellArrayData(){
+        
+        print("chcking for calling times")
         self.TitleForNavigation()
         let strcombination : String  = UserDefaults.standard.object(forKey: COMBINATION) as! String
         if(strcombination == "Yes"){
@@ -1491,6 +1506,7 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
             print("iddddtrftrtrr")
             //            }
             print("empty.sCellSegueArray23456",CellSegueArray)
+            print("schoolLabelArray.countschoolLabelArray.count",schoolLabelArray)
             for idd in 0..<schoolLabelArray.count{
                 
                 
@@ -2112,6 +2128,7 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
         NewPasswordText.keyboardType = UIKeyboardType.numbersAndPunctuation
         VerifyNewPasswordText.keyboardType = UIKeyboardType.numbersAndPunctuation
         
+        print("End==================================")
     }
     
     
@@ -2232,27 +2249,25 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
         print("Main")
         var selectString = notification.object as? String ?? ""
         selectString = selectString.lowercased()
-        let log = commonStringNames.txt_menu_logout.translated() as? String ?? ""
-        if(selectString == log.lowercased()){
+        let log = commonStringNames.logout.translated() as? String ?? ""
+        if(selectString == log){
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() )
             {
                 self.showLogoutAlert()
+                
             }
         }else if(selectString.contains("edit")){
             callEditProfile()
-        }else if(selectString.contains("help")){
+        }else if(selectString.contains(commonStringNames.help.translated())){
             callhelp()
-        }else if(selectString.contains(commonStringNames.change_language.translated())){
+        }else if (selectString.contains(commonStringNames.language_change.translated())){
             callLanguageVc()
         }
-        else{
-            callUploadDocumentView()
-        }
         print("selectStringselectString",selectString)
-        
     }
     func callLanguageVc(){
         let vc = ChangeLanguageViewController(nibName: nil, bundle: nil)
+        vc.languagePriority = "Staff"
         vc.modalPresentationStyle = .formSheet
         present(vc, animated: true)
     }

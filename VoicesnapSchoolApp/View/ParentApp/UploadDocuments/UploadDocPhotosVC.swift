@@ -37,6 +37,12 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
     @IBOutlet weak var browseView: UIView!
     @IBOutlet weak var browseLabel: UILabel!
     
+    @IBOutlet weak var BrowseFileLbl: UILabel!
+    @IBOutlet weak var FilenameLbl: UILabel!
+    @IBOutlet weak var MaximumUploadSizeLbl: UILabel!
+    @IBOutlet weak var SupportedFormatsLbl: UILabel!
+    @IBOutlet weak var uploadStudntDocOrFeeReceipt: UILabel!
+    @IBOutlet weak var uploadPhotoMaximumSize: UIButton!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var filenameTF: UITextField!
@@ -71,7 +77,15 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
         countryCoded =  UserDefaults.standard.object(forKey: COUNTRY_ID) as! String
         let strProfile = "\(appDelegate.strUploadPhotoTitle)"
         
-        self.title = strProfile
+        self.title = commonStringNames.uploadDocumentandPhoto.translated()
+        uploadPhotoMaximumSize.setTitle(commonStringNames.UploadStudentPhoto.translated(), for: .normal)
+        uploadStudntDocOrFeeReceipt.text = commonStringNames.UploadStudentDocsOrFeeReceipt.translated()
+        SupportedFormatsLbl.text = commonStringNames.SupportedFormats.translated()
+        MaximumUploadSizeLbl.text = commonStringNames.MaxUploadSize20MB.translated()
+        FilenameLbl.text = commonStringNames.FileName.translated()
+        FilenameLbl.text = commonStringNames.FileName.translated()
+        BrowseFileLbl.text = commonStringNames.BrowseFile.translated()
+        filenameTF.placeholder = commonStringNames.EnterFileName.translated()
         
         filenameTF.delegate = self
         
@@ -796,21 +810,21 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
                     }
                     print("strPstrPget",strP)
                     if(strP.contains("amazonaws.com")){
-                        cell.uploadBtn.setTitle("Delete", for: .normal)
+                        cell.uploadBtn.setTitle(commonStringNames.Delete.translated(), for: .normal)
                       
                         if(!bIsuploadTitle){
                             bIsuploadTitle = true
-                            cell.titleLbl.text = "Uploaded Documents : (Only these documents will be sent for approval )"
+                            cell.titleLbl.text = commonStringNames.UploadedDocumentsInfo.translated()
                         }else{
                             cell.titleLbl.text = ""
                         }
                         
                     }else{
-                        cell.uploadBtn.setTitle("Upload", for: .normal)
+                        cell.uploadBtn.setTitle(commonStringNames.UploadButton.translated(), for: .normal)
                         
                         if(!bIsTitle){
                             bIsTitle = true
-                            cell.titleLbl.text = "( Click upload for each document to upload )"
+                            cell.titleLbl.text = commonStringNames.ClickUploadForEachDocument.translated()
                             
                         }else{
                             cell.titleLbl.text = ""
@@ -848,7 +862,7 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
                         
                         if(!bIsuploadTitle){
                             bIsuploadTitle = true
-                            cell.titleLbl.text = "Uploaded Documents : (Only these documents will be sent for approval )"
+                            cell.titleLbl.text = commonStringNames.UploadedDocumentsInfo.translated()
                         }else{
                             cell.titleLbl.text = ""
                         }

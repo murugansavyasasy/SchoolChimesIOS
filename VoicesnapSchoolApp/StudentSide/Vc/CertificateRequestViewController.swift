@@ -442,7 +442,7 @@ class CertificateRequestViewController: UIViewController,UITableViewDataSource,U
             if paraentRequestList.count == 0 {
                 noRecordVieww.isHidden = false
                 noRecordLbl.isHidden = false
-                noRecordLbl.text = "No Records"
+                noRecordLbl.text = commonStringNames.NoRecordsFound.translated()
             }else{
                 noRecordVieww.isHidden = true
                 noRecordLbl.isHidden = true
@@ -464,8 +464,8 @@ class CertificateRequestViewController: UIViewController,UITableViewDataSource,U
         
         if text_view.text.isEmpty == true || text_view.text == "Reason for Certificate" {
             
-            let alert = UIAlertController(title: "Alert", message: "Please Enter the Reason", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+            let alert = UIAlertController(title: commonStringNames.Alert.translated(), message: "Please Enter the Reason", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: commonStringNames.OK.translated(), style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             
         }else{

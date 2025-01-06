@@ -116,8 +116,8 @@ class NoticeBoardVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UIT
         ConfirmButton.layer.cornerRadius = 5
         ConfirmButton.layer.masksToBounds = true
         
-        btnOne.setTitle("Compose Notice Board", for: .normal)
-        btnTwo.setTitle("Notice Board", for: .normal)
+        btnOne.setTitle(commonStringNames.ComposeNoticeBoard.translated(), for: .normal)
+        btnTwo.setTitle(commonStringNames.NoticeBoard.translated(), for: .normal)
 
 
         let FromDateGuesture = UITapGestureRecognizer(target: self, action: #selector(FromDateAction))

@@ -44,6 +44,8 @@ class AssignmentListVC: UIViewController ,UITableViewDataSource,UITableViewDeleg
     var MainDetailTextArray: NSMutableArray = NSMutableArray()
     var SelectedSectionArray : NSMutableArray = NSMutableArray()
     
+    @IBOutlet weak var AssignmentHeaderLbl: UILabel!
+    
     @IBOutlet weak var AdView: UIView!
     
     @IBOutlet weak var imageView: UIImageView!
@@ -70,7 +72,7 @@ class AssignmentListVC: UIViewController ,UITableViewDataSource,UITableViewDeleg
         super.viewDidLoad()
         bIsSeeMore = false
         print("Assignment456")
-        
+        AssignmentHeaderLbl.text = commonStringNames.Assignment.translated()
         
         
         search_bar.placeholder = commonStringNames.Search.translated()
@@ -696,7 +698,7 @@ class AssignmentListVC: UIViewController ,UITableViewDataSource,UITableViewDeleg
         let noview : UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.assignmentTableview.bounds.size.width, height: self.assignmentTableview.bounds.size.height))
         
         let noDataLabel: UILabel = UILabel(frame: CGRect(x: 0, y:  8, width: self.assignmentTableview.bounds.size.width, height: 60))
-        noDataLabel.text = "No messages for the day.Click \("See More") for previous messages."
+        noDataLabel.text = commonStringNames.NoMessagesForDay.translated()
         noDataLabel.textColor = .red
         noDataLabel.backgroundColor = UIColor(named: "NoDataColor")
         

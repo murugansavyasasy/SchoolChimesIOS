@@ -160,6 +160,7 @@ class ImageTVCTableViewController: UITableViewController,Apidelegate,UISearchBar
         search_bar.placeholder = "Search"
         //
         
+        
         return tableHeaderView
     }
     
@@ -926,7 +927,7 @@ class ImageTVCTableViewController: UITableViewController,Apidelegate,UISearchBar
         let noview : UIView = UIView(frame: CGRect(x: 0, y: 10, width: self.TextDetailstableview.bounds.size.width, height: self.TextDetailstableview.bounds.size.height))
         
         let noDataLabel: UILabel = UILabel(frame: CGRect(x: 10, y:  10, width: self.TextDetailstableview.bounds.size.width, height: 60))
-        noDataLabel.text = "No messages for the day. Click See More for previous messages."
+        noDataLabel.text = commonStringNames.NoMessagesForDay.translated()
         noDataLabel.textColor = .red
         print("noDataLabel.text",noDataLabel.text)
         noDataLabel.backgroundColor = UIColor(named: "NoDataColor")

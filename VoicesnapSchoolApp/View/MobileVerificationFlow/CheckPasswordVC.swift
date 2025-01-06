@@ -736,8 +736,8 @@ class CheckPasswordVC: UIViewController ,Apidelegate,UITextFieldDelegate,UITable
         }
     }
     func AlerMessage(alrtStr : String){
-        let alertController = UIAlertController(title: "Alert", message: alrtStr, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
+        let alertController = UIAlertController(title: commonStringNames.Alert.translated(), message: alrtStr, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: commonStringNames.OK.translated(), style: UIAlertAction.Style.default) {
             UIAlertAction in
             self.ChangePasswordPopup(sender: self)
         }

@@ -647,7 +647,7 @@ class StaffLessonPlanViewViewController: UIViewController, UITableViewDataSource
         
         
         
-        _ = SweetAlert().showAlert("Alert", subTitle: "Are you sure want to delete?", style: .none, buttonTitle: "Cancel", buttonColor: .gray,otherButtonTitle: "Ok",otherButtonColor: .gray){ [self]
+        _ = SweetAlert().showAlert(commonStringNames.Alert.translated(), subTitle: "Are you sure want to delete?", style: .none, buttonTitle: commonStringNames.Cancel.translated(), buttonColor: .gray,otherButtonTitle: commonStringNames.OK.translated(),otherButtonColor: .gray){ [self]
             (okClick) in
             if okClick{
                 

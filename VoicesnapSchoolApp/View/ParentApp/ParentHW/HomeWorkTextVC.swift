@@ -314,9 +314,9 @@ class HomeWorkTextVC: UIViewController ,UITableViewDataSource,UITableViewDelegat
     func AlertMessage()
     {
         
-        let alertController = UIAlertController(title: "Alert", message: NO_RECORD_MESSAGE, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.Alert.translated(), message: NO_RECORD_MESSAGE, preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.OK.translated(), style: UIAlertAction.Style.default) {
             UIAlertAction in
             print("Okaction")
             self.navigationController?.popViewController(animated: true)

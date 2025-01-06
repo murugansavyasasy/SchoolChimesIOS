@@ -206,9 +206,9 @@ class PrincipalLessonPlanViewController: UIViewController,UITableViewDelegate,UI
                 tv.reloadData()
             }else{
                 tv.isHidden = true
-                let alert = UIAlertController(title: "Alert", message: lessonPlan.message, preferredStyle: UIAlertController.Style.alert)
+                let alert = UIAlertController(title: commonStringNames.Alert.translated(), message: lessonPlan.message, preferredStyle: UIAlertController.Style.alert)
                 
-                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                alert.addAction(UIAlertAction(title: commonStringNames.OK.translated(), style: UIAlertAction.Style.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             }
             
@@ -247,8 +247,8 @@ class PrincipalLessonPlanViewController: UIViewController,UITableViewDelegate,UI
                 tv.delegate = self
                 tv.reloadData()
             }else{
-                let alert = UIAlertController(title: "Alert", message: lessonPlan.message, preferredStyle: UIAlertController.Style.alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                let alert = UIAlertController(title: commonStringNames.Alert.translated(), message: lessonPlan.message, preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: commonStringNames.OK.translated(), style: UIAlertAction.Style.default, handler: nil))
                 self.present(alert, animated: true, completion:{
                     //
                     

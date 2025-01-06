@@ -116,7 +116,7 @@ class NewAbsenteesViewController: UIViewController, UICollectionViewDelegate, UI
             monthFormatter.dateFormat = "MMMM"
             let monthName = monthFormatter.string(from: date)
             print(monthName)  // Output: March
-            cell.MnthLbl.text = monthName
+            cell.MnthLbl.text = monthName.translated()
         } else {
             print("Invalid date format")
         }
@@ -133,7 +133,7 @@ class NewAbsenteesViewController: UIViewController, UICollectionViewDelegate, UI
             print("Invalid date format")
         }
         
-        cell.dayLbl.text = abesents.Day
+        cell.dayLbl.text = abesents.Day.translated()
         if abesents.TotalAbsentees == "0"{
             
             cell.countView.isHidden = true

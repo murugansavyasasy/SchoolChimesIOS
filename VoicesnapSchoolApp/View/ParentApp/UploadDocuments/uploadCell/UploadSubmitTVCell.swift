@@ -33,7 +33,7 @@ class UploadSubmitTVCell: UITableViewCell {
         MainView.backgroundColor = .clear
         
 
-        
+        submitBtn.setTitle(commonStringNames.Submit.translated(), for: .normal)
         submitBtn.backgroundColor = .clear
         submitBtn.layer.cornerRadius = 5
         submitBtn.layer.borderWidth = 1

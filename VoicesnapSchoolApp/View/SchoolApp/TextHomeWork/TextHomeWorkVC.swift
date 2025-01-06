@@ -200,6 +200,9 @@ class TextHomeWorkVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        attachmentBtn.setTitle(commonStringNames.AddAttachments.translated(), for: .normal)
+        homeWorkDefaultLbl.text = commonStringNames.HomeWork.translated()
+        homeWorkreportLbl.text = commonStringNames.HomeworkReport.translated()
         view.isOpaque = false
         Fullview.isHidden = true
         
@@ -1054,7 +1057,7 @@ class TextHomeWorkVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UI
             SubmissionDateLabel.text = commonStringNames.subission_date.translated() as? String
             
             TitleText.placeholder  =  commonStringNames.assignment_title.translated() as? String
-            ToStandardSection.setTitle("Choose Recipients", for: .normal)
+            ToStandardSection.setTitle(commonStringNames.teacher_choose_recipient.translated(), for: .normal)
             textViewPlaceholder =  commonStringNames.teacher_txt_typemsg.translated() as? String ?? "Content?"
         }else{
             ComposeTitleLabel.text  = commonStringNames.teacher_txt_compose_hwmsg.translated() as? String
