@@ -11,6 +11,7 @@ import ObjectMapper
 
 class NewAbsenteesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegate,UITableViewDataSource {
     
+    @IBOutlet weak var HeaderLbl: UILabel!
     @IBOutlet weak var Tv: UITableView!
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var cvIcon: UICollectionView!
@@ -29,6 +30,7 @@ class NewAbsenteesViewController: UIViewController, UICollectionViewDelegate, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        HeaderLbl.text = commonStringNames.AbsenteesReport.translated()
         Id = "1"
         cvIcon.register(UINib(nibName: cvIconRowId, bundle: nil), forCellWithReuseIdentifier: cvIconRowId)
         abestApi()

@@ -1005,3 +1005,6 @@
 "Upload" = "อัปโหลด";
 "(Supported formats: *.xlsx, *.rar, *.csv, *.doc, *.docx, *.pdf, *.gif, *.jpeg, *.png, *.zip)" = "(รูปแบบที่รองรับ: *.xlsx, *.rar, *.csv, *.doc, *.docx, *.pdf, *.gif, *.jpeg, *.png, *.zip)";
 "Enter file name" = "ป้อนชื่อไฟล์";
+"Absentees Students" = "นักเรียนที่ขาดเรียน";
+"Coming Soon!!!" = "เร็วๆ นี้!!!";
+"Select attendance type" = "เลือกประเภทการเข้าร่วม";

@@ -967,6 +967,10 @@ class commonStringNames {
     static let UploadButton = "Upload"
     static let SupportedFormats = "( Supported formats: *.xlsx, *.rar, *.csv, *.doc, *.docx, *.pdf, *.gif, *.jpeg, *.png, *.zip )"
     static let EnterFileName = "Enter file name"
+    
+    static let AbsenteesStudents = "Absentees Students"
+    static let ComingSoon = "Coming Soon!!!"
+    static let Selectattendancetype = "Select attendance type"
 
 
 }

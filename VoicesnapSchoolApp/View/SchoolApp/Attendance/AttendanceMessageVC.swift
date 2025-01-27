@@ -221,7 +221,7 @@ class AttendanceMessageVC: UIViewController,Apidelegate,UIPickerViewDelegate ,UI
         sessionTypeView.addGestureRecognizer(sessionTypeGes)
         
         sessionTypeLbl.text = "First Half"
-        attendanceTypeLbl.text = "Select attendance type"
+        attendanceTypeLbl.text = commonStringNames.Selectattendancetype.translated()
         
     
       

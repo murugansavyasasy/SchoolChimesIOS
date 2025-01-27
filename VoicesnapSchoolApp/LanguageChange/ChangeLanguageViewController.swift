@@ -37,13 +37,10 @@ class ChangeLanguageViewController: UIViewController {
     var selectedLanguage: String?
     override func viewDidLoad() {
         super.viewDidLoad()
+        confirmBtn.backgroundColor = .lightGray
         LanguageView.layer.cornerRadius = 15
         confirmBtn.layer.cornerRadius = 10
-        if languagePriority == "Staff"{
-            confirmBtn.backgroundColor = UIColor(named:"AppDark" )
-        }else{
-            confirmBtn.backgroundColor = UIColor(named: "serach_color")
-        }
+        
         index = UserDefaults.standard.integer(forKey: "index")
         Items[index].selected = true
         tv.dataSource =  self
@@ -62,39 +59,40 @@ class ChangeLanguageViewController: UIViewController {
     
     @IBAction func confirmAct(_ sender: UIButton) {
         
-        UserDefaults.standard.set(index, forKey: "index")
-        let userDefault = UserDefaults.standard
-        TranslationManager.shared.setLanguage(languageCode)
-        // userDefault.set(languageCode, forKey: DefaultsKeys.languageCode)
-        // Save language code
-        UserDefaults.standard.set(languageCode, forKey: DefaultsKeys.languageCode)
-        // Retrieve language code
-        if let savedCode = UserDefaults.standard.string(forKey: DefaultsKeys.languageCode) {
-            print("Language Code Successfully Saved and Retrieved: \(savedCode)")
-        } else {
-            print("Failed to Save Language Code.")
+        if confirmBtn.backgroundColor != .lightGray{
+            UserDefaults.standard.set(index, forKey: "index")
+            let userDefault = UserDefaults.standard
+            TranslationManager.shared.setLanguage(languageCode)
+            // userDefault.set(languageCode, forKey: DefaultsKeys.languageCode)
+            // Save language code
+            UserDefaults.standard.set(languageCode, forKey: DefaultsKeys.languageCode)
+            // Retrieve language code
+            if let savedCode = UserDefaults.standard.string(forKey: DefaultsKeys.languageCode) {
+                print("Language Code Successfully Saved and Retrieved: \(savedCode)")
+            } else {
+                print("Failed to Save Language Code.")
+            }
+            
+            // Apply the language immediately
+            userDefault.synchronize()
+            print("langualanguageCodede",languageCode)
+            print("languageCode",DefaultsKeys.languageCode)
+            //      p  dismiss(animated: true)
+            
+            // Reload the entire application
+            guard let window = UIApplication.shared.keyWindow else { return }
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let initialViewController = storyboard.instantiateInitialViewController()
+            window.rootViewController = initialViewController
+            window.makeKeyAndVisible()
+            
+            // Optional: Add a transition animation
+            UIView.transition(with: window,
+                              duration: 0.3,
+                              options: .transitionCrossDissolve,
+                              animations: nil,
+                              completion: nil)
         }
-        
-        // Apply the language immediately
-        userDefault.synchronize()
-        print("langualanguageCodede",languageCode)
-        print("languageCode",DefaultsKeys.languageCode)
-        //      p  dismiss(animated: true)
-        
-        // Reload the entire application
-        guard let window = UIApplication.shared.keyWindow else { return }
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let initialViewController = storyboard.instantiateInitialViewController()
-        window.rootViewController = initialViewController
-        window.makeKeyAndVisible()
-        
-        // Optional: Add a transition animation
-        UIView.transition(with: window,
-                          duration: 0.3,
-                          options: .transitionCrossDissolve,
-                          animations: nil,
-                          completion: nil)
-        
     }
     
 }
@@ -142,8 +140,11 @@ extension ChangeLanguageViewController : UITableViewDelegate,UITableViewDataSour
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        
+        if languagePriority == "Staff"{
+            confirmBtn.backgroundColor = UIColor(named:"AppDark" )
+        }else{
+            confirmBtn.backgroundColor = UIColor(named: "serach_color")
+        }
         selectedLanguage = Items[indexPath.row].language
         Items[indexPath.row].selected = true
         index = indexPath.row

@@ -708,7 +708,7 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
                     
                     
                     
-                    Util .showAlert("", msg: "Coming Soon!!!")
+                    Util .showAlert("", msg: commonStringNames.ComingSoon.translated())
                     
                 }
                 

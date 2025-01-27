@@ -118,6 +118,7 @@ class NoticeBoardVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UIT
         
         btnOne.setTitle(commonStringNames.ComposeNoticeBoard.translated(), for: .normal)
         btnTwo.setTitle(commonStringNames.NoticeBoard.translated(), for: .normal)
+        schoolNameLbl.text = commonStringNames.teacher_select_school.translated()
 
 
         let FromDateGuesture = UITapGestureRecognizer(target: self, action: #selector(FromDateAction))

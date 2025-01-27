@@ -92,6 +92,9 @@ class OnlineMeetingVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,
         meetingSeg.setTitle(commonStringNames.View.translated(), forSegmentAt: 1)
         MeetingplatformLbl.text = commonStringNames.MeetingPlatform.translated()
         linkTF.placeholder = commonStringNames.PasteLink.translated()
+        SubmissionDateLabel.text = commonStringNames.SelectMeetingPlatform.translated()
+        dateButton.setTitle(commonStringNames.SelectDate.translated(), for: .normal)
+        timeButton.setTitle(commonStringNames.SelectTime.translated(), for: .normal)
         view.isOpaque = false
         let nc = NotificationCenter.default
         nc.addObserver(self,selector: #selector(OnlineMeetingVC.catchNotification), name: NSNotification.Name(rawValue: "comeBackMenu"), object:nil)

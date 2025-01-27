@@ -782,7 +782,7 @@ class OnlineViewMeetingVC: UIViewController,UITextViewDelegate,UITextFieldDelega
                         //  Util.showAlert("", msg: NO_DATA_FOUND)
                         let alert = UIAlertController(title: "", message: NO_DATA_FOUND, preferredStyle: UIAlertController.Style.alert)
                         
-                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { action in
+                        alert.addAction(UIAlertAction(title: commonStringNames.OK.translated(), style: UIAlertAction.Style.default, handler: { action in
                             self.dismiss(animated: true)
                             
                         }))

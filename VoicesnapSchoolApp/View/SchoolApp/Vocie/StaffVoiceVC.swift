@@ -261,6 +261,7 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         
         let voiceGes  = UITapGestureRecognizer(target: self, action: #selector(addFileAct))
         voiceView.addGestureRecognizer(voiceGes)
+        
     }
     
     override func didReceiveMemoryWarning(){
@@ -273,7 +274,7 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         strCountryCode = UserDefaults.standard.object(forKey: COUNTRY_CODE) as! String
         
         self.callSelectedLanguage()
-        TitleForStartRecord()
+        self.TitleForStartRecord()
     }
     
     func enableButtonAction(){
@@ -709,7 +710,7 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
     // MARK: TITLE FOR START AND STOP RECORD
     func TitleForStartRecord(){
         
-        print("")
+        print("entered titlr for start")
         let firstword : String =  commonStringNames.teacher_txt_start_record.translated() as? String ?? "Press the button to"
         let secondWord : String  =  commonStringNames.record.translated() as? String ?? " RECORD"
         let comboWord = firstword + secondWord
@@ -731,9 +732,9 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         attributedText.addAttributes(attrs, range: range)
         attributedText.addAttributes(attrfirst, range: range2)
         TitleLabel.attributedText = attributedText
-        print("attributedText",attributedText)
+        print("attributedText1111",attributedText)
         TitleLabel.textAlignment = .center
-        
+        //TitleLabel.text="heloooooo"
     }
     
     func TitleForStopRecord(){

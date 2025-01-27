@@ -215,8 +215,8 @@ class AbsenteesRecordVC: UIViewController,UITableViewDataSource,UITableViewDeleg
         titleLabel.frame = CGRect(x: 0, y: 0, width: self.view.frame.width , height: 45)
         // titleLabel.textColor = UIColor (red:243.0/255.0, green: 191.0/255.0, blue: 145.0/255.0, alpha: 1)
         titleLabel.textColor = UIColor (red:166.0/255.0, green: 114.0/255.0, blue: 155.0/255.0, alpha: 1)
-        let secondWord : String = "School"
-        let thirdWord : String = "Strength"
+        let secondWord : String = commonStringNames.school.translated()
+        let thirdWord : String = commonStringNames.strenth.translated()
         let comboWord = secondWord + " " + thirdWord
         let attributedText = NSMutableAttributedString(string:comboWord)
         let attrs = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 22), NSAttributedString.Key.foregroundColor: UIColor.white]

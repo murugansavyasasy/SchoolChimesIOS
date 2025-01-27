@@ -699,7 +699,7 @@ print("schoolNameReg",schoolNameReg)
                 
                 else{
                     
-                    Util .showAlert("", msg: "Coming Soon!!!")
+                    Util .showAlert("", msg: commonStringNames.ComingSoon.translated())
                     
                 }
                 
@@ -713,8 +713,6 @@ print("schoolNameReg",schoolNameReg)
                 print("appDelegate.mainParentSegueArray[indexPath.row]",appDelegate.mainParentSegueArray[indexPath.row])
                 
             }
-            
-            
             
             print("CellSegueArray.count",CellSegueArray.count)
             print("indexPath.row",indexPath.row)
@@ -1351,13 +1349,13 @@ print("schoolNameReg",schoolNameReg)
         strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
         strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         //
-        self.loadCellArrayData()
+//        self.loadCellArrayData()
     }
     
     func loadCellArrayData(){
         //
         
-        
+        print("loadCellArrayData11111")
         
         strBookenabled  = String(describing: selectedDictionary["isBooksEnabled"]!)
         strBookURL = String(describing: selectedDictionary["OnlineBooksLink"]!)
