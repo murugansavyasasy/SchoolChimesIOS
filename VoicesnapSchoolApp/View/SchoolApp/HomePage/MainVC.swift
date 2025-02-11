@@ -139,6 +139,7 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
         
         
         print("MAINVC")
+        
         let userDefaults = UserDefaults.standard
         
         staffRole = userDefaults.string(forKey: DefaultsKeys.StaffRole)!
@@ -171,8 +172,9 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
         
         UserPassword = UserDefaults.standard.object(forKey:USERPASSWORD) as? String ?? ""
         
-        strLoggedAS = UserDefaults.standard.object(forKey: LOGINASNAME) as? String ?? ""
+        strLoggedAS = UserDefaults.standard.object(forKey: DefaultsKeys.role_display_name) as? String ?? ""
         
+        print("strLoggedAS23456",strLoggedAS)
         self.ButtonCornerDesign()
 //        callSelectedLanguage()
 
@@ -670,7 +672,7 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
 
 
                     let vc = StaffPtmViewController(nibName: nil, bundle: nil)
-
+                   
                     vc.modalPresentationStyle = .fullScreen
                     present(vc, animated: true)
                 }else  if(self.CellIndexIdsArray[indexPath.row] as! String == "35"){
@@ -1060,6 +1062,21 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
         }
         let requestString = requestStringer.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
         
+        print("Languagecode",DefaultsKeys.languageCode)
+        
+        if let languagecode = UserDefaults.standard.string(forKey: DefaultsKeys.languageCode) {
+            print("Username: \(languagecode)")
+            
+            var LangId = 1
+            if languagecode == "th"{
+                LangId = 2
+                
+            }else if languagecode == "hi"{
+                LangId = 3
+            }else {
+                LangId = 1
+            }
+        }
         
         let myDict:NSMutableDictionary = ["MemberData" : arrMembersData,"LanguageId": "1",COUNTRY_ID : strCountryCode]
         print(requestString)
@@ -1216,17 +1233,9 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
         titleLabel.textColor = .white
         
         var strLogged : String = String()
-        if(strLoggedAS == "Staff"){
-            strLogged = commonStringNames.as_staff.translated() as? String ?? "Staff"
-        }else  if(strLoggedAS == "Admin"){
-            strLogged = commonStringNames.as_admin.translated() as? String ?? "Admin"
-        }else  if(strLoggedAS == "Principal"){
-            strLogged = commonStringNames.as_principal.translated() as? String ?? "Principal"
-        }else  if(strLoggedAS == "GroupHead"){
-            strLogged = commonStringNames.as_grouphead.translated() as? String ?? "GroupHead"
-        }else{
-            strLogged = appDelegate.staffDisplayRole
-        }
+
+        strLogged = strLoggedAS.translated()
+     
         
         let thirdWord :String  = strLogged + "    "
         let comboWord = thirdWord

@@ -39,7 +39,7 @@
 "support" = "สนับสนุน";
 "Video" = "วิดีโอ";
 "Communication" = "การสื่อสาร";
-"Image/Pdf" = "รูปภาพ/PDF";
+"Image/Pdf" = "รูปภาพ/พีดีเอฟ";
 "Video Upload" = "อัปโหลดวิดีโอ";
 "Circulars" = "หนังสือเวียน";
 "Homework" = "การบ้าน";
@@ -92,11 +92,11 @@
 "Select" = "เลือก";
 "Choose an option" = "เลือกตัวเลือก";
 //MARK: Image Sender Side
-"Upload Image/Pdf" = "อัปโหลดรูปภาพ/PDF";
+"Upload Image/Pdf" = "อัปโหลดรูปภาพ/พีดีเอฟ";
 "Description" = "คำอธิบาย";
 "Camera" = "กล้อง";
 "Gallery"= "แกลเลอรี";
-"Pdf" = "PDF";
+"Pdf" = "พีดีเอฟ";
 "Upload Attachment" = "อัปโหลดไฟล์แนบ";
 //MARK: Common Staff Side
 "Standard or section" = "มาตรฐานหรือส่วน";
@@ -161,7 +161,7 @@
 "To" = "ถึง";
 "Upload Attachment" = "อัปโหลดไฟล์แนบ";
 "Submit" = "ส่ง";
-"Image/Pdf" = "รูปภาพ/PDF";
+"Image/Pdf" = "รูปภาพ/พีดีเอฟ";
 
 
 // MARK: Sender Side Assignment
@@ -302,7 +302,7 @@
 "Schedule Meeting" = "กำหนดการประชุม";
 "Meeting History" = "ประวัติการประชุม";
 "Book slot" = "จองช่อง";
-"LSRW" = "LSRW";
+"LSRW" = "แอลเอสอาร์ดับบลิว";
 "Title" = "หัวข้อ";
 "Description" = "คำอธิบาย";
 "Subject" = "วิชา";
@@ -413,14 +413,14 @@
 "Content" = "เนื้อหา";
 "HomeWork Topic" = "หัวข้อการบ้าน";
 "Topic" = "หัวข้อ";
-"Change Image or PDF" = "เปลี่ยนรูปภาพหรือ PDF";
+"Change Image or PDF" = "เปลี่ยนรูปภาพหรือ พีดีเอฟ";
 "Click here to..." = "คลิกที่นี่เพื่อ...";
 "Exam Name" = "ชื่อการสอบ";
 "Exam Syllabus" = "หลักสูตรการสอบ";
 "TO STANDARD OR SECTIONS" = "ถึงมาตรฐานหรือส่วนต่างๆ";
 "TO GRADE OR SECTIONS" = "ถึงระดับชั้นหรือส่วนต่างๆ";
 "Title/Subject" = "ชื่อเรื่อง/หัวข้อ";
-"Upload Image / PDF" = "อัปโหลดรูปภาพ / PDF";
+"Upload Image / PDF" = "อัปโหลดรูปภาพ / พีดีเอฟ";
 "Compose Image" = "สร้างรูปภาพ";
 "Description" = "คำอธิบาย";
 "Record Homework" = "บันทึกการบ้าน";
@@ -620,7 +620,7 @@
 "Groups" = "กลุ่ม";
 "New" = "ใหม่";
 "IMAGE (1)" = "รูปภาพ (1)";
-"PDF" = "ไฟล์ PDF";
+"PDF" = "ไฟล์ พีดีเอฟ";
 "VIDEO" = "วิดีโอ";
 "Edit" = "แก้ไข";
 "Choose" = "เลือก ";
@@ -699,7 +699,7 @@
 "Text Compose Message" = "เขียนข้อความ";
 "SMS History" = "ประวัติ SMS";
 "Choose From Gallery" = "เลือกจากแกลเลอรี";
-"Choose PDF" = "เลือก PDF";
+"Choose PDF" = "เลือก พีดีเอฟ";
 "Approve" = "อนุมัติ";
 "Decline" = "ปฏิเสธ";
 "Leave Applied On" = "การลาเริ่มเมื่อ";
@@ -723,7 +723,7 @@
 "Standard" = "มาตรฐาน";
 "Section" = "ส่วน";
 "Class Teacher" = "ครูประจำชั้น";
-"Please upload atleast one Image / PDF." = "กรุณาอัปโหลดรูปภาพหรือ PDF อย่างน้อยหนึ่งไฟล์";
+"Please upload atleast one Image / พีดีเอฟ." = "กรุณาอัปโหลดรูปภาพหรือ พีดีเอฟ อย่างน้อยหนึ่งไฟล์";
 "Recent Photos" = "รูปภาพล่าสุด";
 "Recent Messages" = "ข้อความ";
 "Recent Voice Messages" = "ข้อความเสียงล่าสุด";
@@ -794,8 +794,8 @@
 "Upload Image" = "อัปโหลดรูปภาพ";
 "Please enter exam title" = "กรุณาใส่ชื่อข้อสอบ";
 "Fill all the fields" = "กรุณากรอกข้อมูลทุกช่อง";
-"PDF file saved successfully!" = "บันทึกไฟล์ PDF เรียบร้อยแล้ว!";
-"PDF file already saved!" = "ไฟล์ PDF ถูกบันทึกไว้แล้ว!";
+"PDF file saved successfully!" = "บันทึกไฟล์ พีดีเอฟ เรียบร้อยแล้ว!";
+"PDF file already saved!" = "ไฟล์ พีดีเอฟ ถูกบันทึกไว้แล้ว!";
 "Special Offers" = "ข้อเสนอพิเศษ";
 "Reset Password" = "รีเซ็ตรหัสผ่าน";
 "View" = "ดู";
@@ -810,11 +810,11 @@
 "Create" = "สร้าง";
 "Select the type in which you want to create the Assignment" = "เลือกประเภทที่คุณต้องการสร้างงาน";
 "Are you sure you want to Delete Assignment ?" = "คุณแน่ใจหรือไม่ว่าต้องการลบงาน?";
-"Click here to choose Pdf" = "คลิกที่นี่เพื่อเลือกไฟล์ PDF";
+"Click here to choose Pdf" = "คลิกที่นี่เพื่อเลือกไฟล์ พีดีเอฟ";
 "Click here to choose Image" = "คลิกที่นี่เพื่อเลือกรูปภาพ";
-"CHANGE PDF" = "เปลี่ยน PDF";
+"CHANGE PDF" = "เปลี่ยน พีดีเอฟ";
 "CHANGE IMAGE" = "เปลี่ยนรูปภาพ";
-"Compose Pdf" = "สร้าง PDF";
+"Compose Pdf" = "สร้าง พีดีเอฟ";
 "Assignment Title" = "ชื่อหัวข้องาน";
 "Submission date crossed. you still want to submit the Assignment?" = "วันกำหนดส่งผ่านไปแล้ว คุณยังต้องการส่งงานหรือไม่?";
 "Are you sure you want to send the Assignment?" = "คุณแน่ใจหรือไม่ว่าต้องการส่งงาน?";
@@ -863,8 +863,8 @@
 "Type" = "ประเภท";
 "View Attachment" = "ดูไฟล์แนบ";
 "Next" = "ถัดไป";
-"Preview LSRW" = "ดูตัวอย่าง LSRW";
-"Submit LSRW" = "ส่ง LSRW";
+"Preview LSRW" = "ดูตัวอย่าง แอลเอสอาร์ดับบลิว";
+"Submit LSRW" = "ส่ง แอลเอสอาร์ดับบลิว";
 "Add Content" = "เพิ่มเนื้อหา";
 "Submit" = "ส่ง";
 "Sunday" = "วันอาทิตย์";
@@ -986,7 +986,7 @@
 "PREVIOUS" = "ก่อนหน้า";
 "SKIP" = "ข้าม";
 "NEXT" = "ถัดไป";
-"Click here to select Image/PDF" = "คลิกที่นี่เพื่อเลือกภาพ/PDF";
+"Click here to select Image/PDF" = "คลิกที่นี่เพื่อเลือกภาพ/พีดีเอฟ";
 "You are outside the institutes boundary. you will not be able to mark your attendance.\n\nPlease try again when you are within the designated area." = "คุณอยู่นอกขอบเขตของสถาบัน คุณจะไม่สามารถบันทึกการเข้าร่วมของคุณได้\n\nโปรดลองอีกครั้งเมื่อคุณอยู่ในพื้นที่ที่กำหนด";
 "Punch" = "ปักหมุด";
 "FaceId" = "ใบหน้าไอดี";
@@ -994,7 +994,7 @@
 "PAYMENT" = "การชำระเงิน";
 "RECEIPT" = "ใบเสร็จรับเงิน";
 "Get Subject" = "รับหัวข้อ";
-"Click here to select Image / PDF for submission." = "คลิกที่นี่เพื่อเลือกภาพ / PDF สำหรับการส่ง";
+"Click here to select Image / PDF for submission." = "คลิกที่นี่เพื่อเลือกภาพ / พีดีเอฟ สำหรับการส่ง";
 "Upload Student Photo (Max size 10MB)" = "อัปโหลดรูปถ่ายนักเรียน (ขนาดสูงสุด 10MB)";
 "Upload Student Docs / Fee Receipt or Proof" = "อัปโหลดเอกสารนักเรียน / ใบเสร็จค่าธรรมเนียมหรือหลักฐาน";
 "Maximum upload size - 20 MB" = "ขนาดอัปโหลดสูงสุด - 20 MB";
@@ -1008,3 +1008,18 @@
 "Absentees Students" = "นักเรียนที่ขาดเรียน";
 "Coming Soon!!!" = "เร็วๆ นี้!!!";
 "Select attendance type" = "เลือกประเภทการเข้าร่วม";
+"Close" = "ปิด";
+"Yet to start" = "ยังไม่เริ่ม";
+"In progress" = "กำลังดำเนินการ";
+"Completed" = "เสร็จสิ้น";
+"Syllabus" = "หลักสูตร";
+"View Marks" = "ดูคะแนน";
+"View Progress" = "ดูความคืบหน้า";
+"Receipt Number" = "หมายเลขใบเสร็จ";
+"Receipt Date" = "วันที่ใบเสร็จ";
+"Receipt Amount" = "จำนวนเงินใบเสร็จ";
+"View Receipt" = "ดูใบเสร็จ";
+"Receipt" = "ใบเสร็จ";
+"Download" = "ดาวน์โหลด";
+"Student Chat" = "แชทนักเรียน";
+"Download Image" = "ดาวน์โหลดรูปภาพ";

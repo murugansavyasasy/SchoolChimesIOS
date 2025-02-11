@@ -78,7 +78,8 @@ class StudentReportViewController: UIViewController,UITableViewDataSource,UITabl
         search_bar.placeholder = commonStringNames.Search.translated()
         cancelBtn.setTitle(commonStringNames.Cancel.translated(), for: .normal)
         OkBtn.setTitle(commonStringNames.OK.translated(), for: .normal)
-        
+//        sectionLbl.text = commonStringNames.select_section.translated()
+//        standardLbl.text = commonStringNames.select_standard.translated()
         
         intialstandardType = "1"
         getAllStudentTop.constant = -60

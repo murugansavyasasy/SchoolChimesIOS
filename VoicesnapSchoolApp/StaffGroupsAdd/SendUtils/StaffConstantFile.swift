@@ -48,6 +48,7 @@ struct DefaultsKeys {
     static let LessonSecId = "LessonSecId"
     static let getSecId = "getSecId"
     static let getgroupHeadRole = "getgroupHeadRole"
+    static let role_display_name = "role_display_name"
     static let updateTime = "86400"
     static let lastUpdateList = "lastUpdateList"
     static let updateListCount = "updateListCount"

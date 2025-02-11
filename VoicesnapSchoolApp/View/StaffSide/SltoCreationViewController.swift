@@ -1091,6 +1091,7 @@ class SltoCreationViewController: UIViewController,UICollectionViewDelegate,UICo
         ]
 
         print("paramparam",param)
+        
 
         StandardSectionDetailsStaffRequest.call_request(param: param){ [self]
             (res) in

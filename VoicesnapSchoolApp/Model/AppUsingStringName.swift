@@ -971,6 +971,25 @@ class commonStringNames {
     static let AbsenteesStudents = "Absentees Students"
     static let ComingSoon = "Coming Soon!!!"
     static let Selectattendancetype = "Select attendance type"
+    static let Close = "Close"
+    static let yetToStart = "Yet to start"
+    static let inProgress = "In progress"
+    static let Completed = "Completed"
+    static let Syllabus = "Syllabus"
+    static let ViewMarks = "View Marks"
+    static let ViewProgress = "View Progress"
+    static let ReceiptNumber = "View Progress"
+    static let ReceiptDate = "View Progress"
+    static let ReceiptAmount = "View Progress"
+    static let ViewReceipt = "View Progress"
+    static let Receipt = "Receipt"
+    static let Download = "Download"
+    static let StudentChat = "Student Chat"
+    static let DownloadImage = "Download Image"
+
+
+    
+
 
 
 }

@@ -18,14 +18,14 @@ class StandardSectionDetailsStaffRequest{
 
         BaseRequest.getAny(url: get_url(), param: param).success {
 
-
+            
 
             (res) in
 
             completion_handler(res as! String)
 
         }
-
+        print("urlsss",get_url())
     }
 
     private static func get_url() -> String {

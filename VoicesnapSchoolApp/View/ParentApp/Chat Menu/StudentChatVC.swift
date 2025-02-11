@@ -54,7 +54,7 @@ class StudentChatVC: UIViewController ,UITableViewDelegate,UITableViewDataSource
     var hud : MBProgressHUD = MBProgressHUD()
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     override func viewDidLoad() {
-        self.title = "Student Chat"
+        self.title = commonStringNames.StudentChat.translated()
         print("StaffIntreACT")
         super.viewDidLoad()
         myTableView.backgroundColor = UIColor.clear

@@ -25,6 +25,7 @@ class NewParentExamTestTVCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        FloatSyllabusLabel.text = commonStringNames.Syllabus.translated()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -14,6 +14,8 @@ class NoticeBoardVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UIT
     
     @IBOutlet weak var noticeBoardTop: NSLayoutConstraint!
     
+    @IBOutlet weak var ToDateDefLbl: UILabel!
+    @IBOutlet weak var FromdateDefLbl: UILabel!
     
     @IBOutlet weak var schoolDropDownHeight: NSLayoutConstraint!
     
@@ -119,6 +121,8 @@ class NoticeBoardVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UIT
         btnOne.setTitle(commonStringNames.ComposeNoticeBoard.translated(), for: .normal)
         btnTwo.setTitle(commonStringNames.NoticeBoard.translated(), for: .normal)
         schoolNameLbl.text = commonStringNames.teacher_select_school.translated()
+        FromdateDefLbl.text = commonStringNames.FromDate.translated()
+        ToDateDefLbl.text = commonStringNames.ToDate.translated()
 
 
         let FromDateGuesture = UITapGestureRecognizer(target: self, action: #selector(FromDateAction))

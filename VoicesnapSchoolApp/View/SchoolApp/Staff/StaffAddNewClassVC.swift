@@ -303,6 +303,7 @@ class StaffAddNewClassVC: UIViewController,Apidelegate,UIPickerViewDelegate,UIPi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "StaffAddNewClassTVCell", for: indexPath) as! StaffAddNewClassTVCell
         cell.SubjectView.backgroundColor = UIColor.white
+        cell.getSubjectButton.setTitle( commonStringNames.GetSubject.translated(), for: .normal)
         if(indexPath.section == 1)
         {
             cell.getSubjectButton.isHidden = true

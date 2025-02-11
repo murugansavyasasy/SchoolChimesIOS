@@ -325,6 +325,12 @@ class CheckOTPVC: UIViewController,Apidelegate,UITextFieldDelegate,HTTPClientDel
 
                                     
                                     appelegate.staffDisplayRole = String(describing: dicUser["staff_display_role"]!)
+                                    
+                                    var staffDisplayRole : String!
+                                    staffDisplayRole = String(describing: dicUser["staff_display_role"]!)
+                                    
+                                    defaults.set(staffDisplayRole as String, forKey: DefaultsKeys.role_display_name)
+
                                     appelegate.isStaff = String(describing: dicUser["is_staff"]!)
                                     appelegate.isParent = String(describing: dicUser["is_parent"]!)
                                     if(appelegate.isStaff == "0"){
@@ -370,26 +376,26 @@ class CheckOTPVC: UIViewController,Apidelegate,UITextFieldDelegate,HTTPClientDel
                                             //
                                         }
 
-                                        else if (appelegate.staffDisplayRole == "Group Head"){
+                                        else if (appelegate.staffRole == "p1"){
                                             appelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                             UserDefaults.standard.set("GroupHead", forKey: LOGINASNAME)
                                             UserDefaults.standard.set("No", forKey: COMBINATION)
                                             self.SelectedLoginAsIndexInt = 0
                                         }
-                                        else if (appelegate.staffDisplayRole == "Principal"){
+                                        else if (appelegate.staffRole == "p2"){
                                             
                                             appelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                             UserDefaults.standard.set("Principal", forKey: LOGINASNAME)
                                             UserDefaults.standard.set("No", forKey: COMBINATION)
                                             self.SelectedLoginAsIndexInt = 1
                                         }
-                                        else if (appelegate.staffDisplayRole == "Teaching Staff"){
+                                        else if (appelegate.staffRole == "p3"){
                                             appelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                             UserDefaults.standard.set("Staff", forKey: LOGINASNAME)
                                             UserDefaults.standard.set("No", forKey: COMBINATION)
                                             self.SelectedLoginAsIndexInt = 2
                                         }
-                                    else if (appelegate.staffDisplayRole == "Office Staff"){
+                                    else if (appelegate.staffRole == "p4"){
                                         
                                         appelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                         UserDefaults.standard.set("OfficeStaff", forKey: LOGINASNAME)
@@ -397,7 +403,7 @@ class CheckOTPVC: UIViewController,Apidelegate,UITextFieldDelegate,HTTPClientDel
                                         self.SelectedLoginAsIndexInt = 3
                                      
                                     }
-                                    else if (appelegate.staffDisplayRole == "Non Office Staff"){
+                                    else if (appelegate.staffRole == "p5"){
                                         appelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                         UserDefaults.standard.set("NonOfficeStaff", forKey: LOGINASNAME)
                                         UserDefaults.standard.set("No", forKey: COMBINATION)

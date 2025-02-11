@@ -60,7 +60,7 @@ class CertificateRequestViewController: UIViewController,UITableViewDataSource,U
     var ChildId  = String()
     var SchoolId  = String()
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    
+    var certificateName = ""
     
     var menuId : String!
     override func viewDidLoad() {
@@ -306,7 +306,7 @@ class CertificateRequestViewController: UIViewController,UITableViewDataSource,U
         
         
         let list : ParentRequestListData = paraentRequestList[indexPath.row]
-        
+        certificateName = list.requested_for
         cell.conductTypeLbl.text = list.requested_for
         cell.createdOnLbl.text = list.created_on
         cell.statusLbl.text = list.is_issued_on_app
@@ -339,7 +339,7 @@ class CertificateRequestViewController: UIViewController,UITableViewDataSource,U
         vc.webViewUrl = ges.pdfUrl
         vc.schoolId = SchoolId
         vc.childId = ChildId
-        
+        vc.CertificateName = certificateName
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }

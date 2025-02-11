@@ -921,7 +921,7 @@ class EmergencyVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerD
     
     func alertWithAction(strAlert : String){
         let alertController = UIAlertController(title: "", message: strAlert, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.OK.translated(), style: UIAlertAction.Style.default) {
             UIAlertAction in
             self.actionNewVoiceRecording()
         }

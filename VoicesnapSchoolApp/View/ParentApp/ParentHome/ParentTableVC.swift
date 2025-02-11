@@ -1175,7 +1175,13 @@ class ParentTableVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             let loginAs : String = languageDictionary[strLoginAs] as? String ??  strLoginAs
             let floatValue : String = languageDictionary["login_as"] as? String ??  "Login As "
             
-            LoginAsLabel.text = loginAs
+            
+        
+            
+            let display_name = UserDefaults.standard.object(forKey: DefaultsKeys.role_display_name) as! String
+
+            
+            LoginAsLabel.text = display_name
             
             strTitleName = commonStringNames.role.translated() as? String ?? "Your Roll"
         }
@@ -1193,7 +1199,10 @@ class ParentTableVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             let loginAs : String = languageDictionary[strLoginAs] as? String ??  strLoginAs
             let floatValue : String = commonStringNames.login_as.translated() as? String ??  "Login As "
             
-            LoginAsLabel.text = loginAs
+            
+            let display_name = UserDefaults.standard.object(forKey: DefaultsKeys.role_display_name) as! String
+
+            LoginAsLabel.text = display_name
             strTitleName = commonStringNames.role.translated() as? String ??  "Your Roll"
             
         }

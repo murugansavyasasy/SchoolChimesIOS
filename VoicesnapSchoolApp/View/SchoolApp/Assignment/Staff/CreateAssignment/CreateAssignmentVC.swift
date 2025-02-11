@@ -223,7 +223,7 @@ class CreateAssignmentVC: UIViewController {
         TextButton.setTitle(commonStringNames.teacher_txt_text.translated() as? String, for: .normal)
                             ImageButton.setTitle(commonStringNames.teacher_txt_Image.translated() as? String, for: .normal)
                                                  VoiceButton.setTitle(commonStringNames.teacher_txt_voice.translated() as? String, for: .normal)
-                                                                      PdfButton.setTitle(commonStringNames.pdf_1 as? String, for: .normal)
+        PdfButton.setTitle(commonStringNames.pdf_1.translated() as? String, for: .normal)
     }
     
 }

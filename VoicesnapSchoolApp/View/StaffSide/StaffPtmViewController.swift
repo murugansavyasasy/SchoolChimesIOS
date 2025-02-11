@@ -95,6 +95,7 @@ class StaffPtmViewController: UIViewController,UITableViewDelegate,UITableViewDa
             //        StaffId = userDefaults.string(forKey: DefaultsKeys.StaffID)
             SchoolId = userDefaults.string(forKey: (DefaultsKeys.SchoolD))!
             staffId = userDefaults.integer(forKey: DefaultsKeys.StaffID)
+            instituteId = userDefaults.integer(forKey: DefaultsKeys.SchoolD)
         }
         
         print("SchoolId",SchoolId)

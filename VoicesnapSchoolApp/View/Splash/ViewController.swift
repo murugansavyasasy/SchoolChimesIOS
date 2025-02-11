@@ -1072,6 +1072,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                                 let defaults = UserDefaults.standard
                                 defaults.set(appDelegate.staffRole, forKey: DefaultsKeys.StaffRole)
                                 //
+                              
+                                defaults.set(staffDisplayRole as String, forKey: DefaultsKeys.role_display_name)
                                 
                                 defaults.set(staffDisplayRole as String, forKey: DefaultsKeys.getgroupHeadRole)
                                 print("DefaultsKeys.DefaultsKeys.StaffRole", DefaultsKeys.StaffRole)
@@ -1120,26 +1122,26 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                                         self.LoadParentDetail()
                                     }
                                     
-                                    else if (appDelegate.staffDisplayRole == "Group head"){
+                                    else if (appDelegate.staffRole == "p1"){
                                         appDelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                         UserDefaults.standard.set("GroupHead", forKey: LOGINASNAME)
                                         self.SelectedLoginAsIndexInt = 0
                                         self.performSegue(withIdentifier: "DirectToMainViewSegue", sender: self)
                                     }
-                                    else if (appDelegate.staffDisplayRole == "Principal"){
+                                    else if (appDelegate.staffRole == "p2"){
                                         
                                         appDelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                         UserDefaults.standard.set("Principal", forKey: LOGINASNAME)
                                         self.SelectedLoginAsIndexInt = 1
                                         self.performSegue(withIdentifier: "DirectToMainViewSegue", sender: self)
                                     }
-                                    else if (appDelegate.staffDisplayRole == "Teaching Staff"){
+                                    else if (appDelegate.staffRole == "p3"){
                                         appDelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                         UserDefaults.standard.set("Staff", forKey: LOGINASNAME)
                                         self.SelectedLoginAsIndexInt = 2
                                         self.performSegue(withIdentifier: "DirectToMainViewSegue", sender: self)
                                     }
-                                    else if (appDelegate.staffDisplayRole == "Office Staff"){
+                                    else if (appDelegate.staffRole == "p4"){
                                         
                                         appDelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                         UserDefaults.standard.set("OfficeStaff", forKey: LOGINASNAME)
@@ -1147,7 +1149,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                                         self.performSegue(withIdentifier: "DirectToMainViewSegue", sender: self)
                                         
                                     }
-                                    else if (appDelegate.staffDisplayRole == "Non Office Staff"){
+                                    else if (appDelegate.staffRole == "p5"){
                                         appDelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                         self.SelectedLoginAsIndexInt = 4
                                         UserDefaults.standard.set("NonOfficeStaff", forKey: LOGINASNAME)

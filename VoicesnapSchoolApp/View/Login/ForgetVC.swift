@@ -737,6 +737,12 @@ class ForgetVC: UIViewController,UITextFieldDelegate,Apidelegate,HTTPClientDeleg
                                 
                                 
                                 appDelegate.staffDisplayRole = String(describing: dicUser["staff_display_role"]!)
+                                
+                                var staffDisplayRole : String!
+                                staffDisplayRole = String(describing: dicUser["staff_display_role"]!)
+                                
+                                defaults.set(staffDisplayRole as String, forKey: DefaultsKeys.role_display_name)
+                                
                                 appDelegate.isParent = String(describing: dicUser["is_parent"]!)
                                 appDelegate.isStaff = String(describing: dicUser["is_staff"]!)
                                 UserDefaults.standard.set(String(describing: dicUser[IMAGE_COUNT]!), forKey: IMAGE_COUNT)
@@ -785,14 +791,14 @@ class ForgetVC: UIViewController,UITextFieldDelegate,Apidelegate,HTTPClientDeleg
                                     }
                                     
                                     
-                                    else if (appDelegate.staffDisplayRole == "Group Head"){
+                                    else if (appDelegate.staffRole == "p1"){
                                         appDelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                         UserDefaults.standard.set("GroupHead", forKey: LOGINASNAME)
                                         UserDefaults.standard.set("No", forKey: COMBINATION)
                                         self.SelectedLoginAsIndexInt = 0
                                         self.updateDeviceToken()
                                     }
-                                    else if (appDelegate.staffDisplayRole == "Principal"){
+                                    else if (appDelegate.staffRole == "p2"){
                                         
                                         appDelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                         UserDefaults.standard.set("Principal", forKey: LOGINASNAME)
@@ -800,14 +806,14 @@ class ForgetVC: UIViewController,UITextFieldDelegate,Apidelegate,HTTPClientDeleg
                                         self.SelectedLoginAsIndexInt = 1
                                         self.updateDeviceToken()
                                     }
-                                    else if (appDelegate.staffDisplayRole == "Teaching Staff"){
+                                    else if (appDelegate.staffRole == "p3"){
                                         appDelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                         UserDefaults.standard.set("Staff", forKey: LOGINASNAME)
                                         UserDefaults.standard.set("No", forKey: COMBINATION)
                                         self.SelectedLoginAsIndexInt = 2
                                         self.updateDeviceToken()
                                     }
-                                    else if (appDelegate.staffDisplayRole == "Office Staff"){
+                                    else if (appDelegate.staffRole == "p4"){
                                         
                                         appDelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                         UserDefaults.standard.set("OfficeStaff", forKey: LOGINASNAME)
@@ -816,7 +822,7 @@ class ForgetVC: UIViewController,UITextFieldDelegate,Apidelegate,HTTPClientDeleg
                                         self.updateDeviceToken()
                                         
                                     }
-                                    else if (appDelegate.staffDisplayRole == "Non Office Staff"){
+                                    else if (appDelegate.staffRole == "p5"){
                                         appDelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                         UserDefaults.standard.set("NonOfficeStaff", forKey: LOGINASNAME)
                                         UserDefaults.standard.set("No", forKey: COMBINATION)

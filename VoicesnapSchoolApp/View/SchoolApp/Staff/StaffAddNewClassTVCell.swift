@@ -19,7 +19,8 @@ class StaffAddNewClassTVCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        getSubjectButton.setTitle(commonStringNames.GetSubject.translated(), for: .normal)
+       // getSubjectButton.isHidden = true
+       // getSubjectButton.setTitle("get subject", for: .normal)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

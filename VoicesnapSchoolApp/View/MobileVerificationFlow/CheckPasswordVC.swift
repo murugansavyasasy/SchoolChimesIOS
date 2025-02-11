@@ -500,6 +500,9 @@ class CheckPasswordVC: UIViewController ,Apidelegate,UITextFieldDelegate,UITable
                                 staffDisplayRole = String(describing: dicUser["staff_display_role"]!)
                                 
                                 defaults.set(staffDisplayRole as String, forKey: DefaultsKeys.getgroupHeadRole)
+                                
+                                defaults.set(staffDisplayRole as String, forKey: DefaultsKeys.role_display_name)
+                                
                                 appDelegate.isParent = String(describing: dicUser["is_parent"]!)
                                 appDelegate.isStaff = String(describing: dicUser["is_staff"]!)
                                 UserDefaults.standard.set(String(describing: dicUser[IMAGE_COUNT]!), forKey: IMAGE_COUNT)
@@ -547,14 +550,14 @@ class CheckPasswordVC: UIViewController ,Apidelegate,UITextFieldDelegate,UITable
                                     self.LoadParentDetail()
                                 }
                                 
-                                else if (appDelegate.staffDisplayRole == "Group Head"){
+                                else if (appDelegate.staffRole == "p1"){
                                     appDelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                     UserDefaults.standard.set("GroupHead", forKey: LOGINASNAME)
                                     UserDefaults.standard.set("No", forKey: COMBINATION)
                                     self.SelectedLoginAsIndexInt = 0
                                     self.updateDeviceToken()
                                 }
-                                else if (appDelegate.staffDisplayRole == "Principal"){
+                                else if (appDelegate.staffRole == "p2"){
                                     
                                     appDelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                     UserDefaults.standard.set("Principal", forKey: LOGINASNAME)
@@ -562,14 +565,14 @@ class CheckPasswordVC: UIViewController ,Apidelegate,UITextFieldDelegate,UITable
                                     self.SelectedLoginAsIndexInt = 1
                                     self.updateDeviceToken()
                                 }
-                                else if (appDelegate.staffDisplayRole == "Teaching Staff"){
+                                else if (appDelegate.staffRole == "p3"){
                                     appDelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                     UserDefaults.standard.set("Staff", forKey: LOGINASNAME)
                                     UserDefaults.standard.set("No", forKey: COMBINATION)
                                     self.SelectedLoginAsIndexInt = 2
                                     self.updateDeviceToken()
                                 }
-                                else if (appDelegate.staffDisplayRole == "Office Staff"){
+                                else if (appDelegate.staffRole == "p4"){
                                     
                                     appDelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                     UserDefaults.standard.set("OfficeStaff", forKey: LOGINASNAME)
@@ -578,13 +581,15 @@ class CheckPasswordVC: UIViewController ,Apidelegate,UITextFieldDelegate,UITable
                                     self.updateDeviceToken()
 
                                 }
-                                else if (appDelegate.staffDisplayRole == "Non Office Staff"){
+                                else if (appDelegate.staffRole == "p5"){
                                     
                                     UserDefaults.standard.set("NonOfficeStaff", forKey: LOGINASNAME)
                                     UserDefaults.standard.set("No", forKey: COMBINATION)
                                     
                                     self.updateDeviceToken()
                                 }
+                                    
+
                                 }
                                 
                                
@@ -633,6 +638,7 @@ class CheckPasswordVC: UIViewController ,Apidelegate,UITextFieldDelegate,UITable
                 UserDefaults.standard.set(strMobileNo as NSString, forKey: USERNAME)
                 UserDefaults.standard.set(UserPassWordText.text! as NSString, forKey: USERPASSWORD)
                 let strCombination : String = UserDefaults.standard.object(forKey: COMBINATION) as! String
+                print("isParentisParent",LOGINASNAME)
                 let isParent : String = UserDefaults.standard.object(forKey: LOGINASNAME) as! String
                 
                 if(strCombination == "No"){

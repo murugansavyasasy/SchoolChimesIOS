@@ -203,6 +203,7 @@ class PrincipleStandardSectionVC: UIViewController ,Apidelegate,UIPickerViewDele
             cell.SubjectView.layer.shadowRadius = 4
             cell.SubjectView.layer.shadowColor = UIColor.black.cgColor
             cell.SelectionImage.image = UIImage(named: "Downarrow")
+          
         }
         return cell
     }

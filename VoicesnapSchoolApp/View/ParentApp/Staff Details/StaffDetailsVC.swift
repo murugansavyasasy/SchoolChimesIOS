@@ -423,7 +423,7 @@ class StaffDetailsVC: UIViewController,UITableViewDelegate,UITableViewDataSource
         self.mainView.layer.masksToBounds = true
         self.interactButton.layer.cornerRadius = 5
         self.interactButton.clipsToBounds = true
-        self.interactButton.setTitle(commonStringNames.Interact, for: .normal)
+        self.interactButton.setTitle(commonStringNames.Interact.translated(), for: .normal)
         
         ChildIDString = String(describing: appDelegate.SchoolDetailDictionary["ChildID"]!)
         SchoolIDString = String(describing: appDelegate.SchoolDetailDictionary["SchoolID"]!)

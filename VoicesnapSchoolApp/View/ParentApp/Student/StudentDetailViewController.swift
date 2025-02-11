@@ -1287,6 +1287,21 @@ print("schoolNameReg",schoolNameReg)
         var requestStringer = baseUrlString! + POST_LANGUAGE_CHANGE
         let baseReportUrlString = UserDefaults.standard.object(forKey:NEWLINKREPORTBASEURL) as? String
         print("StudentDetailViewControllerrequestStringer",requestStringer)
+        
+        if let languagecode = UserDefaults.standard.string(forKey: DefaultsKeys.languageCode) {
+            print("Username: \(languagecode)")
+            
+            var LangId = 1
+            if languagecode == "th"{
+                LangId = 2
+                
+            }else if languagecode == "hi"{
+                LangId = 3
+            }else {
+                LangId = 1
+            }
+        }
+        
         if(appDelegate.isPasswordBind == "1"){
         }
         let requestString = requestStringer.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
