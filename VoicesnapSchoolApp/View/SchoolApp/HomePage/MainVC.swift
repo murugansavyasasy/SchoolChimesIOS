@@ -231,6 +231,7 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
             let mainvc = UpdateDetailViewController(nibName: nil, bundle: nil)
             mainvc.memeberArrayString = memeberArrayString
             mainvc.schoolArrayString  = schoolArrayString
+            
             mainvc.skipType = 2
             mainvc.type = "School"
             mainvc.modalPresentationStyle = .formSheet
@@ -1426,12 +1427,10 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
             //
             let arryMut : NSMutableArray = NSMutableArray(array: schoolLabelArray)
             //                arryMut.removeAllObjects()
-            if QuestionData.count > 0 {
+            if schoolLabelArray.count > 0 {
                 arryMut.insert("update_100" , at: 0)
                 print("LoadCondition")
-
 //
-
             }
                        
 //            arryMut.add("PTM_34")

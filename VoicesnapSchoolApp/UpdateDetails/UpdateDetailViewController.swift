@@ -59,6 +59,7 @@ class UpdateDetailViewController: UIViewController, UICollectionViewDelegate,UIC
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
         let userDefaults = UserDefaults.standard
         print("type",type)
         previoustext = commonStringNames.PREVIOUS.translated()
@@ -140,7 +141,11 @@ class UpdateDetailViewController: UIViewController, UICollectionViewDelegate,UIC
                 
                 self.QuestionData = modal_response[0].dataList
                 
-                print("QuestionData",QuestionData?.count)
+//                DefaultsKeys.QuestionData.append(contentsOf: QuestionData ?? [])
+                
+                
+//                var  qustion : NSArray = UserDefaults.standard.object(forKey: "PRINCIPLE_ARRAY_MENUNAMES") as? NSArray ?? []
+                print("QuestionDatajfneafbafbvbkdfs",QuestionData?.count)
                 if QuestionData?.count == 1 {
                     nextView.isHidden = true
                     previousView.isHidden = true
