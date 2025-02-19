@@ -273,6 +273,8 @@
 		840B2BE02C78AB330027071D /* CalendarCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 840B2BDE2C78AB330027071D /* CalendarCollectionViewCell.xib */; };
 		8414F7C52BD6862C0066F206 /* ScheduleCallViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8414F7C42BD6862C0066F206 /* ScheduleCallViewController.xib */; };
 		8414F7C62BD6862C0066F206 /* ScheduleCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8414F7C32BD6862C0066F206 /* ScheduleCallViewController.swift */; };
+		8415D0522D65B90E0023D9A1 /* HomePaucktVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8415D0502D65B90E0023D9A1 /* HomePaucktVC.swift */; };
+		8415D0532D65B90E0023D9A1 /* HomePaucktVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8415D0512D65B90E0023D9A1 /* HomePaucktVC.xib */; };
 		841ED6322C8F4AB100A65EEA /* CheckAviableTv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841ED6232C8F4AB100A65EEA /* CheckAviableTv.swift */; };
 		841ED6332C8F4AB100A65EEA /* CheckAviableTv.xib in Resources */ = {isa = PBXBuildFile; fileRef = 841ED6242C8F4AB100A65EEA /* CheckAviableTv.xib */; };
 		841ED6342C8F4AB100A65EEA /* CheckAviableTvHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841ED6252C8F4AB100A65EEA /* CheckAviableTvHeader.swift */; };
@@ -956,6 +958,8 @@
 		840B2BDE2C78AB330027071D /* CalendarCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CalendarCollectionViewCell.xib; sourceTree = "<group>"; };
 		8414F7C32BD6862C0066F206 /* ScheduleCallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleCallViewController.swift; sourceTree = "<group>"; };
 		8414F7C42BD6862C0066F206 /* ScheduleCallViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScheduleCallViewController.xib; sourceTree = "<group>"; };
+		8415D0502D65B90E0023D9A1 /* HomePaucktVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePaucktVC.swift; sourceTree = "<group>"; };
+		8415D0512D65B90E0023D9A1 /* HomePaucktVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomePaucktVC.xib; sourceTree = "<group>"; };
 		841ED6232C8F4AB100A65EEA /* CheckAviableTv.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckAviableTv.swift; sourceTree = "<group>"; };
 		841ED6242C8F4AB100A65EEA /* CheckAviableTv.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckAviableTv.xib; sourceTree = "<group>"; };
 		841ED6252C8F4AB100A65EEA /* CheckAviableTvHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckAviableTvHeader.swift; sourceTree = "<group>"; };
@@ -1367,6 +1371,7 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		8415D0562D65BA7A0023D9A1 /* PaucktCVcell */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PaucktCVcell; sourceTree = "<group>"; };
 		84E485CD2CE37DBB0064CB25 /* NotificationServiceExtension */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (84E485D62CE37DBB0064CB25 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = NotificationServiceExtension; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -2641,6 +2646,16 @@
 			path = ScheduleCallPopUp;
 			sourceTree = "<group>";
 		};
+		8415CFEB2D6475CF0023D9A1 /* Pauckt */ = {
+			isa = PBXGroup;
+			children = (
+				8415D0562D65BA7A0023D9A1 /* PaucktCVcell */,
+				8415D0502D65B90E0023D9A1 /* HomePaucktVC.swift */,
+				8415D0512D65B90E0023D9A1 /* HomePaucktVC.xib */,
+			);
+			path = Pauckt;
+			sourceTree = "<group>";
+		};
 		841ED6312C8F4AB100A65EEA /* StaffSide */ = {
 			isa = PBXGroup;
 			children = (
@@ -3256,6 +3271,7 @@
 		B51702BA1F0A2F2B00879602 /* VoicesnapSchoolApp */ = {
 			isa = PBXGroup;
 			children = (
+				8415CFEB2D6475CF0023D9A1 /* Pauckt */,
 				18A0B9C12D1E74110080E83B /* LanguageChange */,
 				18067F6B2CF450B6008A22B9 /* SenderSideImgShow */,
 				1873FC1A2CEDAA21000B8F56 /* LSRW */,
@@ -4115,6 +4131,9 @@
 			dependencies = (
 				84E485D22CE37DBB0064CB25 /* PBXTargetDependency */,
 			);
+			fileSystemSynchronizedGroups = (
+				8415D0562D65BA7A0023D9A1 /* PaucktCVcell */,
+			);
 			name = VoicesnapSchoolApp;
 			packageProductDependencies = (
 				8494770A2BFED49A009727F9 /* FSCalendar */,
@@ -4260,6 +4279,7 @@
 				18C437682295881D008A7559 /* ms.json in Resources */,
 				186E4E512A0CB01900D7C3F2 /* LessonEditViewController.xib in Resources */,
 				18D37B7A29C307B500A61132 /* StudentReportViewController.xib in Resources */,
+				8415D0532D65B90E0023D9A1 /* HomePaucktVC.xib in Resources */,
 				18D832AE29A6138A0058B79F /* NumberTableViewCell.xib in Resources */,
 				18A816C92A13ABD000E7FDF7 /* CertificatesTableViewCell.xib in Resources */,
 				8494208F2BD778980061B269 /* ScheduleCallTableViewCell.xib in Resources */,
@@ -4678,6 +4698,7 @@
 				1851AE102CEF124A005EC490 /* PreviewLsrwViewController.swift in Sources */,
 				D68B9C9E20D3E3D200FDA753 /* ExamMarkTVCell.swift in Sources */,
 				84B2EC742B199DAD005815AA /* UpdateDetailsModal.swift in Sources */,
+				8415D0522D65B90E0023D9A1 /* HomePaucktVC.swift in Sources */,
 				04EDB7DB249741CB0062164B /* StaffChatDetailTVCell.swift in Sources */,
 				84E415652CA278AA006B4F86 /* PunchHistoryListVC.swift in Sources */,
 				10F0851F22C4C9B600A43BC7 /* UploadYouTubeVideoVC.swift in Sources */,

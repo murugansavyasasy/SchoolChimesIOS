@@ -128,6 +128,28 @@ class ParentTableVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
     }
     override func viewWillAppear(_ animated: Bool) {
+        
+        
+        // 3. Set Custom Right Button (Image + Text)
+            let customButton = UIButton(type: .custom)
+            customButton.setImage(UIImage(systemName: "globe"), for: .normal)
+            customButton.setTitle("Language", for: .normal)
+            customButton.setTitleColor(.white, for: .normal) // Set text color to white
+            customButton.tintColor = .white // Set image color to white
+
+            // Adjust spacing and alignment
+            customButton.semanticContentAttribute = .forceRightToLeft // Image on the right, text on the left
+            customButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: -8)
+
+            // Add action
+            customButton.addTarget(self, action: #selector(barLanguageButtonTapped), for: .touchUpInside)
+
+            // Create bar button item with custom view
+            let rightBarButtonItem = UIBarButtonItem(customView: customButton)
+
+            // Assign to navigation item
+            navigationItem.rightBarButtonItem = rightBarButtonItem
+        
         let nc = NotificationCenter.default
         nc.addObserver(self,selector: #selector(ParentTableVC.UpdateFAQSelection), name: NSNotification.Name(rawValue: "FAQNotification"), object:nil)
         nc.addObserver(self,selector: #selector(ParentTableVC.UpdateLogoutSelection), name: NSNotification.Name(rawValue: "SettingNotification"), object:nil)
@@ -139,6 +161,14 @@ class ParentTableVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
         
     }
+    
+    @objc func barLanguageButtonTapped() {
+        print("Language button tapped!")
+        // Your action here
+        
+        callLanguageVc()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         
         self.navigationController?.navigationBar.barTintColor =  UIColor (red:0.0/255.0, green:96.0/255.0, blue: 100.0/255.0, alpha: 1)
