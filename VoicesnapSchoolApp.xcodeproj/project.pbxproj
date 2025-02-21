@@ -1373,6 +1373,8 @@
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		8415D0562D65BA7A0023D9A1 /* PaucktCVcell */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = PaucktCVcell; sourceTree = "<group>"; };
 		8415D0632D66090F0023D9A1 /* ApiModal */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = ApiModal; sourceTree = "<group>"; };
+		8460883F2D66EA13004814F5 /* CuoponDetails */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = CuoponDetails; sourceTree = "<group>"; };
+		8481DA832D683B3300F5AD9D /* CommonFolder */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = CommonFolder; sourceTree = "<group>"; };
 		84E485CD2CE37DBB0064CB25 /* NotificationServiceExtension */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (84E485D62CE37DBB0064CB25 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = NotificationServiceExtension; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
@@ -2650,7 +2652,8 @@
 		8415CFEB2D6475CF0023D9A1 /* Pauckt */ = {
 			isa = PBXGroup;
 			children = (
-				8415D0672D660A810023D9A1 /* CuponDetailVc */,
+				8481DA832D683B3300F5AD9D /* CommonFolder */,
+				8460883F2D66EA13004814F5 /* CuoponDetails */,
 				8415D0662D660A620023D9A1 /* HomePageVc */,
 				8415D0632D66090F0023D9A1 /* ApiModal */,
 			);
@@ -2665,13 +2668,6 @@
 				8415D0512D65B90E0023D9A1 /* HomePaucktVC.xib */,
 			);
 			path = HomePageVc;
-			sourceTree = "<group>";
-		};
-		8415D0672D660A810023D9A1 /* CuponDetailVc */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = CuponDetailVc;
 			sourceTree = "<group>";
 		};
 		841ED6312C8F4AB100A65EEA /* StaffSide */ = {
@@ -4152,6 +4148,8 @@
 			fileSystemSynchronizedGroups = (
 				8415D0562D65BA7A0023D9A1 /* PaucktCVcell */,
 				8415D0632D66090F0023D9A1 /* ApiModal */,
+				8460883F2D66EA13004814F5 /* CuoponDetails */,
+				8481DA832D683B3300F5AD9D /* CommonFolder */,
 			);
 			name = VoicesnapSchoolApp;
 			packageProductDependencies = (
