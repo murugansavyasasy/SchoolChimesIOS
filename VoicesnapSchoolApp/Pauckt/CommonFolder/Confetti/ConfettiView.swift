@@ -156,7 +156,7 @@ extension ConfettiView {
 
     public static let right = ConfettiView(
         emitters: Static.defaultEmitters,
-        direction: .left,
+        direction: .right,
         animation: .default
     )
 

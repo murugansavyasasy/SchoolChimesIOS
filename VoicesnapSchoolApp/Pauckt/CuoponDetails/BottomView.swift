@@ -380,84 +380,41 @@ class BottomView: UIViewController,UITableViewDelegate,UITableViewDataSource, Ad
 //            self.confettiLayer = nil
 //        }
 //        
-        confetti.translatesAutoresizingMaskIntoConstraints = false
+        if let window = UIApplication.shared.windows.first {
+//            confetti.translatesAutoresizingMaskIntoConstraints = false
+            confetti1.translatesAutoresizingMaskIntoConstraints = false
+            
+//            window.addSubview(confetti)
+            window.addSubview(confetti1)
 
-             confetti1.translatesAutoresizingMaskIntoConstraints = false
+            NSLayoutConstraint.activate([
+//                confetti.topAnchor.constraint(equalTo: window.topAnchor),
+//                confetti.rightAnchor.constraint(equalTo: window.rightAnchor),
+//                confetti.leftAnchor.constraint(equalTo: window.leftAnchor),
+//                confetti.bottomAnchor.constraint(equalTo: window.bottomAnchor),
+                
+                confetti1.topAnchor.constraint(equalTo: window.topAnchor),
+                confetti1.rightAnchor.constraint(equalTo: window.rightAnchor),
+                confetti1.leftAnchor.constraint(equalTo: window.leftAnchor),
+                confetti1.bottomAnchor.constraint(equalTo: window.bottomAnchor),
+            ])
 
-             self.view.addSubview(confetti)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [self] in
+                let impactEngine = UIImpactFeedbackGenerator(style: .heavy)
+                impactEngine.impactOccurred()
+//                confetti.emit()
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) {
+                    let impactEngine = UIImpactFeedbackGenerator(style: .heavy)
+                    impactEngine.impactOccurred()
+                    self.confetti1.emit()
+                }
+            }
+        }
 
-             self.view.addSubview(confetti1)
-
-           
-
-
-
-             NSLayoutConstraint.activate([
-
-                 confetti.topAnchor.constraint(equalTo: view.topAnchor),
-
-                 confetti.rightAnchor.constraint(equalTo: view.rightAnchor),
-
-                 confetti.leftAnchor.constraint(equalTo: view.leftAnchor),
-
-                 confetti.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-
-             ])
-
-             
-
-          
-
-             NSLayoutConstraint.activate([
-
-                 confetti1.topAnchor.constraint(equalTo: view.topAnchor),
-
-                 confetti1.rightAnchor.constraint(equalTo: view.rightAnchor),
-
-                 confetti1.leftAnchor.constraint(equalTo: view.leftAnchor),
-
-                 confetti1.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-
-             ])
-
-             
-
-
-
-             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) { [self] in
-
-                 
-
-             let impactEngine = UIImpactFeedbackGenerator(style: .heavy)
-
-                 impactEngine.impactOccurred()
-
-                 confetti.emit()
-
-                 
-
-                 print("Button tapped!")
-
-             
-
-                 
-
-                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.0) { [self] in
-
-                     
-
-                     
-
-                     let impactEngine = UIImpactFeedbackGenerator(style: .heavy)
-
-                         impactEngine.impactOccurred()
-                     confetti1.emit()
-                 }
-             }
          }
-         private let confetti: ConfettiView = .top
-
-         private let confetti1: ConfettiView = .bottom
+//    private let confetti: ConfettiView = .top
+    private let confetti1: ConfettiView = .right
 }
 struct CoupenDetail{
     let name:String
