@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20" height="22" id="share">
+  <g fill="none" fill-rule="evenodd" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" transform="translate(1 1)">
+    <circle cx="15" cy="3" r="3"></circle>
+    <circle cx="3" cy="10" r="3"></circle>
+    <circle cx="15" cy="17" r="3"></circle>
+    <path d="m5.59 11.51 6.83 3.98M12.41 4.51 5.59 8.49"></path>
+  </g>
+</svg>
