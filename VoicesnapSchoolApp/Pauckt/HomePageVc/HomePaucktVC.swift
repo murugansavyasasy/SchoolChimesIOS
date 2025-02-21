@@ -7,175 +7,212 @@
 //
 
 import UIKit
-
+import ObjectMapper
 class HomePaucktVC: UIViewController
 ,UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate,UICollectionViewDelegateFlowLayout{
-
-        @IBOutlet weak var reminingCoinsView: UIView!
-        @IBOutlet weak var totalCoinsView: UIView!
-        @IBOutlet weak var collectionView: UICollectionView!
+    
+    @IBOutlet weak var reminingCoinsView: UIView!
+    @IBOutlet weak var totalCoinsView: UIView!
+    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var categoriesCV: UICollectionView!
-        @IBOutlet weak var searchBar: UISearchBar!
-
+    @IBOutlet weak var searchBar: UISearchBar!
+    
     var offers: [Offer] = []
-
+    
     
     enum SectionType: Int, CaseIterable {
-           case firstCellType
-           case secondCellType
-           case thirdCellType
-       }
-
-     
-       var secondArray: [Int] = [10, 20, 30, 40]
-       var thirdArray: [Bool] = [true, false, true, false]
-    var categories: [PaucktCategory] = []
-           var filteredOffers: [Offer] = []
-
-        override func viewDidLoad() {
-               super.viewDidLoad()
-               collectionView.backgroundColor = .clear
-               let gradientLayer = CAGradientLayer()
-               gradientLayer.colors = [
-                   UIColor(red: 1.0, green: 0.9, blue: 0.9, alpha: 1.0).cgColor,
-                   UIColor.white.cgColor
-               ]
-               gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
-               gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
-               gradientLayer.frame = collectionView.bounds
-
-               let backgroundView = UIView(frame: collectionView.bounds)
-               backgroundView.layer.insertSublayer(gradientLayer, at: 0)
-               gradientLayer.frame = view.bounds
-             view.layer.insertSublayer(gradientLayer, at: 0)
-               collectionView.backgroundView = backgroundView
-               
-               
-               setupCollectionView()
-                      fetchCategories()
-                     fetchCoupen()
-               
-    
-
-//               filteredOffers = offers
-//               collectionView.register(UINib(nibName: "CoupenCvCell", bundle: nil), forCellWithReuseIdentifier: "CoupenCvCell")
-             
-
-           }
+        case firstCellType
+        case secondCellType
+        case thirdCellType
+    }
     
     
-    func fetchCategories() {
-           // This is a mock setup. Replace this with API call if needed
-        categories = [
-            PaucktCategory(id: 1, name: "Technology", imageUrl: "http://stage-api.pauket.com/masters/categories/1691684337.png"),
-            PaucktCategory(id: 2, name: "Healthcare", imageUrl: "http://stage-api.pauket.com/masters/categories/1686051712.png"),
-            PaucktCategory(id: 3, name: "Theme Park", imageUrl: "https://stage-api.pauket.com/masters/demo.png")
-           ]
+    var secondArray: [Int] = [10, 20, 30, 40]
+    var thirdArray: [Bool] = [true, false, true, false]
+    var categories: [CategoryDatas] = []
+    var filteredOffers: [Offer] = []
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        collectionView.backgroundColor = .clear
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [
+            UIColor(red: 1.0, green: 0.9, blue: 0.9, alpha: 1.0).cgColor,
+            UIColor.white.cgColor
+        ]
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
+        gradientLayer.frame = collectionView.bounds
+        
+        let backgroundView = UIView(frame: collectionView.bounds)
+        backgroundView.layer.insertSublayer(gradientLayer, at: 0)
+        gradientLayer.frame = view.bounds
+        view.layer.insertSublayer(gradientLayer, at: 0)
+        collectionView.backgroundView = backgroundView
+        
+        Get_Categories()
+        setupCollectionView()
+//        fetchCategories()
+        fetchCoupen()
         
         
-        categoriesCV.delegate = self
-       categoriesCV.dataSource = self
-        categoriesCV.reloadData()
-       }
+        
+        //               filteredOffers = offers
+        //               collectionView.register(UINib(nibName: "CoupenCvCell", bundle: nil), forCellWithReuseIdentifier: "CoupenCvCell")
+        
+        
+    }
+    
+    
+//    func fetchCategories() {
+//        // This is a mock setup. Replace this with API call if needed
+//        categories = [
+//            PaucktCategory(id: 1, name: "Technology", imageUrl: "http://stage-api.pauket.com/masters/categories/1691684337.png"),
+//            PaucktCategory(id: 2, name: "Healthcare", imageUrl: "http://stage-api.pauket.com/masters/categories/1686051712.png"),
+//            PaucktCategory(id: 3, name: "Theme Park", imageUrl: "https://stage-api.pauket.com/masters/demo.png")
+//        ]
+//        
+//        
+//        categoriesCV.delegate = self
+//        categoriesCV.dataSource = self
+//        categoriesCV.reloadData()
+//    }
     
     
     
     func fetchCoupen() {
-           // This is a mock setup. Replace this with API call if needed
+        // This is a mock setup. Replace this with API call if needed
         offers = [
             Offer(title: "Opening Soon at Jalandhar", subtitle: "Hair Dressing, Beauty, Makeup", discount: "20% Off", locationInfo: "10 locations", durationInfo: "5 days", imageName: "saloon_image"),
             Offer(title: "Fun is Back", subtitle: "Get Ready to Dizzee!", discount: "20% Off", locationInfo: "10 locations", durationInfo: "5 days", imageName: "dizzee_image"),Offer(title: "Opening Soon at Jalandhar", subtitle: "Hair Dressing, Beauty, Makeup", discount: "20% Off", locationInfo: "10 locations", durationInfo: "5 days", imageName: "saloon_image"),
             Offer(title: "Fun is Back", subtitle: "Get Ready to Dizzee!", discount: "20% Off", locationInfo: "10 locations", durationInfo: "5 days", imageName: "dizzee_image"),Offer(title: "Opening Soon at Jalandhar", subtitle: "Hair Dressing, Beauty, Makeup", discount: "20% Off", locationInfo: "10 locations", durationInfo: "5 days", imageName: "saloon_image"),
             Offer(title: "Fun is Back", subtitle: "Get Ready to Dizzee!", discount: "20% Off", locationInfo: "10 locations", durationInfo: "5 days", imageName: "dizzee_image"),Offer(title: "Opening Soon at Jalandhar", subtitle: "Hair Dressing, Beauty, Makeup", discount: "20% Off", locationInfo: "10 locations", durationInfo: "5 days", imageName: "saloon_image"),
             Offer(title: "Fun is Back", subtitle: "Get Ready to Dizzee!", discount: "20% Off", locationInfo: "10 locations", durationInfo: "5 days", imageName: "dizzee_image")
-           ]
+        ]
         collectionView.delegate = self
-       collectionView.dataSource = self
+        collectionView.dataSource = self
         filteredOffers = offers
         collectionView.reloadData()
         
         
-       }
+    }
     func setupCollectionView() {
-//        categoriesCV.delegate = self
-//        categoriesCV.dataSource = self
-    
+        //        categoriesCV.delegate = self
+        //        categoriesCV.dataSource = self
+        
         collectionView.register(UINib(nibName: "CoupenCvCell", bundle: nil), forCellWithReuseIdentifier: "CoupenCvCell")
         categoriesCV.register(UINib(nibName: "CaterogyCvCell", bundle: nil), forCellWithReuseIdentifier: "CaterogyCvCell")
         
-
         
+        
+    }
+    
+    
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        
+        if collectionView == categoriesCV{
+            
+            return categories.count
+        }else{
+            
+            return filteredOffers.count
         }
-
-
-
-       func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-           
-           
-           if collectionView == categoriesCV{
-               
-               return categories.count
-           }else{
-               
-               return filteredOffers.count
-           }
-          
-       }
-
-       func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-           
-           
-           if collectionView == categoriesCV{
-               let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CaterogyCvCell", for: indexPath) as! CaterogyCvCell
-               let caterogys = categories [indexPath.row]
-               cell.configure(with: caterogys)
-               return cell
-           }else{
-               let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CoupenCvCell", for: indexPath) as! CoupenCvCell
-//               cell.configure(with: thirdArray[indexPath.item])
-               
-               let offer = filteredOffers[indexPath.row]
-
-               cell.titleLabel.text = offer.title
-               cell.subtitleLabel.text = offer.subtitle
-               cell.discountLabel.text = offer.discount
-               cell.locationLabel.text = offer.locationInfo
-               cell.durationLabel.text = offer.durationInfo
-               cell.backgroundImageView.image = UIImage(named: offer.imageName)
-               return cell
-               
-           }
-           
-       }
-
-           func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-               if searchText.isEmpty {
-                   filteredOffers = offers
-               } else {
-                   filteredOffers = offers.filter { $0.title.lowercased().contains(searchText.lowercased()) }
-               }
-               collectionView.reloadData()
-           }
         
-        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-            if collectionView == categoriesCV{
-                let width = (collectionView.frame.width / 3) - 16
-                    return CGSize(width: width, height: 100)
-            }else{
-                return CGSize(width: collectionView.frame.width/2, height: 260)
-            }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        
+        if collectionView == categoriesCV{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CaterogyCvCell", for: indexPath) as! CaterogyCvCell
+            let caterogys = categories [indexPath.row]
+            cell.configure(with: caterogys)
+            return cell
+        }else{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CoupenCvCell", for: indexPath) as! CoupenCvCell
+            //               cell.configure(with: thirdArray[indexPath.item])
+            
+            let offer = filteredOffers[indexPath.row]
+            
+            cell.titleLabel.text = offer.title
+            cell.subtitleLabel.text = offer.subtitle
+            cell.discountLabel.text = offer.discount
+            cell.locationLabel.text = offer.locationInfo
+            cell.durationLabel.text = offer.durationInfo
+            cell.backgroundImageView.image = UIImage(named: offer.imageName)
+            return cell
             
         }
         
-        func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-           
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            filteredOffers = offers
+        } else {
+            filteredOffers = offers.filter { $0.title.lowercased().contains(searchText.lowercased()) }
         }
-       
+        collectionView.reloadData()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        if collectionView == categoriesCV{
+            let width = (collectionView.frame.width / 4) - 16
+            return CGSize(width: width, height: 100)
+        }else{
+            return CGSize(width: collectionView.frame.width/2, height: 260)
+        }
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+    }
+    
+    
+    
+    func Get_Categories(){
+        
+        let param : [String : Any] =
+        [
+            
+            "": ""
+            
+            
+        ]
+        
+        print("paramparamm,nc",param)
         
         
-    //
-       }
-
+        let headers: [String: Any] = [
+            "api-key": "b9634e2c3aa9b6fdc392527645c43871",
+            "Partner-Name": "voicesnaps"
+        ]
+        
+        Get_Category_List.call_request(param: param,headers: headers ){ [self]
+            (res) in
+            
+            print("resres",res)
+            let getattendace : CategoriesResponse = Mapper<CategoriesResponse>().map(JSONString: res)!
+            
+            if getattendace.status == true  {
+                
+                categories = getattendace.data?.categories ?? []
+                categoriesCV.delegate = self
+                categoriesCV.dataSource = self
+                categoriesCV.reloadData()
+                
+            }else{
+                
+                
+                
+            }
+        }
+        
+    }
+}
 
     struct Offer {
         let title: String

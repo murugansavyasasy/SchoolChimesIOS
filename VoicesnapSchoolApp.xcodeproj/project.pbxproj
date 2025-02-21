@@ -275,6 +275,7 @@
 		8414F7C62BD6862C0066F206 /* ScheduleCallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8414F7C32BD6862C0066F206 /* ScheduleCallViewController.swift */; };
 		8415D0522D65B90E0023D9A1 /* HomePaucktVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8415D0502D65B90E0023D9A1 /* HomePaucktVC.swift */; };
 		8415D0532D65B90E0023D9A1 /* HomePaucktVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8415D0512D65B90E0023D9A1 /* HomePaucktVC.xib */; };
+		8415D06A2D660D610023D9A1 /* get_cateorgy_Req.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8415D0692D660D610023D9A1 /* get_cateorgy_Req.swift */; };
 		841ED6322C8F4AB100A65EEA /* CheckAviableTv.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841ED6232C8F4AB100A65EEA /* CheckAviableTv.swift */; };
 		841ED6332C8F4AB100A65EEA /* CheckAviableTv.xib in Resources */ = {isa = PBXBuildFile; fileRef = 841ED6242C8F4AB100A65EEA /* CheckAviableTv.xib */; };
 		841ED6342C8F4AB100A65EEA /* CheckAviableTvHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 841ED6252C8F4AB100A65EEA /* CheckAviableTvHeader.swift */; };
@@ -960,6 +961,7 @@
 		8414F7C42BD6862C0066F206 /* ScheduleCallViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScheduleCallViewController.xib; sourceTree = "<group>"; };
 		8415D0502D65B90E0023D9A1 /* HomePaucktVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePaucktVC.swift; sourceTree = "<group>"; };
 		8415D0512D65B90E0023D9A1 /* HomePaucktVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomePaucktVC.xib; sourceTree = "<group>"; };
+		8415D0692D660D610023D9A1 /* get_cateorgy_Req.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = get_cateorgy_Req.swift; sourceTree = "<group>"; };
 		841ED6232C8F4AB100A65EEA /* CheckAviableTv.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckAviableTv.swift; sourceTree = "<group>"; };
 		841ED6242C8F4AB100A65EEA /* CheckAviableTv.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckAviableTv.xib; sourceTree = "<group>"; };
 		841ED6252C8F4AB100A65EEA /* CheckAviableTvHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckAviableTvHeader.swift; sourceTree = "<group>"; };
@@ -2650,6 +2652,7 @@
 		8415CFEB2D6475CF0023D9A1 /* Pauckt */ = {
 			isa = PBXGroup;
 			children = (
+				8415D0682D660CD50023D9A1 /* ApiReq */,
 				8415D0672D660A810023D9A1 /* CuponDetailVc */,
 				8415D0662D660A620023D9A1 /* HomePageVc */,
 				8415D0632D66090F0023D9A1 /* ApiModal */,
@@ -2672,6 +2675,14 @@
 			children = (
 			);
 			path = CuponDetailVc;
+			sourceTree = "<group>";
+		};
+		8415D0682D660CD50023D9A1 /* ApiReq */ = {
+			isa = PBXGroup;
+			children = (
+				8415D0692D660D610023D9A1 /* get_cateorgy_Req.swift */,
+			);
+			path = ApiReq;
 			sourceTree = "<group>";
 		};
 		841ED6312C8F4AB100A65EEA /* StaffSide */ = {
@@ -4865,6 +4876,7 @@
 				B51CCCC21F1504F000AAE733 /* SSKeychain.m in Sources */,
 				18A816D12A13B22A00E7FDF7 /* ParentRequestListModal.swift in Sources */,
 				B53CF22E1F387FDA0082A6D9 /* SelectstudentVC.swift in Sources */,
+				8415D06A2D660D610023D9A1 /* get_cateorgy_Req.swift in Sources */,
 				D64EF0FB20C7AD1A0051AA89 /* ImageTVCTableViewController.swift in Sources */,
 				18EC6D782A00F38200ACD29E /* UpdateStatusForLessonPlanAppModal.swift in Sources */,
 				D64EF0BD20C7AC2D0051AA89 /* HomeWorkTextVC.swift in Sources */,
