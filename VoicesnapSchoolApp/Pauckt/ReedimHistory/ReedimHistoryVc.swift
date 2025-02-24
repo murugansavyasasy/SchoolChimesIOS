@@ -16,13 +16,6 @@ class ReedimHistoryVc: UIViewController {
     override func viewDidLoad() {
             super.viewDidLoad()
            
-        
-//        segments.backgroundColor = .clear
-           
-           // Set text color to white
-        
-        
-        
         cv.backgroundColor = .clear
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [
@@ -30,7 +23,7 @@ class ReedimHistoryVc: UIViewController {
             UIColor.white.cgColor
         ]
         gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
-        gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
+        gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
         gradientLayer.frame = cv.bounds
         
         let backgroundView = UIView(frame: cv.bounds)
@@ -38,6 +31,7 @@ class ReedimHistoryVc: UIViewController {
         gradientLayer.frame = view.bounds
         view.layer.insertSublayer(gradientLayer, at: 0)
         cv.backgroundView = backgroundView
+
         
            segments.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .normal)
            segments.setTitleTextAttributes([NSAttributedString.Key.foregroundColor: UIColor.white], for: .selected)

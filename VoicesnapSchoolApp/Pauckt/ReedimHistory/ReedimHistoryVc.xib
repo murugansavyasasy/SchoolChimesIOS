@@ -53,26 +53,21 @@
                                         <outlet property="delegate" destination="-1" id="rgN-9H-fH1"/>
                                     </connections>
                                 </searchBar>
-                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="cs2-ZQ-L04">
-                                    <rect key="frame" x="0.0" y="61" width="373" height="31"/>
-                                    <subviews>
-                                        <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="3" translatesAutoresizingMaskIntoConstraints="NO" id="Kfg-gK-BUY">
-                                            <rect key="frame" x="0.0" y="0.0" width="373" height="32"/>
-                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <segments>
-                                                <segment title="All"/>
-                                                <segment title="Active"/>
-                                                <segment title="Expired"/>
-                                                <segment title="Redeemed"/>
-                                            </segments>
-                                            <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            <color key="selectedSegmentTintColor" systemColor="systemGreenColor"/>
-                                        </segmentedControl>
-                                    </subviews>
-                                </stackView>
+                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="3" translatesAutoresizingMaskIntoConstraints="NO" id="Kfg-gK-BUY">
+                                    <rect key="frame" x="0.0" y="61" width="373" height="32"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <segments>
+                                        <segment title="All"/>
+                                        <segment title="Active"/>
+                                        <segment title="Expired"/>
+                                        <segment title="Redeemed"/>
+                                    </segments>
+                                    <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="selectedSegmentTintColor" systemColor="systemGreenColor"/>
+                                </segmentedControl>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="96e-89-uck">
                                     <rect key="frame" x="0.0" y="97" width="373" height="580"/>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="580" id="wtU-8X-rbD"/>
                                     </constraints>
@@ -86,7 +81,7 @@
                             </subviews>
                         </stackView>
                     </subviews>
-                    <color key="backgroundColor" red="0.99215686274509807" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="bottom" secondItem="Ii6-cW-c4W" secondAttribute="bottom" constant="20" id="08D-LA-oWp"/>
                         <constraint firstItem="Ii6-cW-c4W" firstAttribute="top" secondItem="Smb-e2-Lhq" secondAttribute="bottom" constant="20" id="VWp-CW-nxN"/>
@@ -99,7 +94,7 @@
                 </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" red="0.99215686274509807" green="0.94509803921568625" blue="0.94509803921568625" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="gGy-S2-0uR" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="R3G-hu-KMV"/>
                 <constraint firstItem="gGy-S2-0uR" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="aMK-Nf-buq"/>
@@ -112,9 +107,6 @@
     <resources>
         <image name="chevron.left" catalog="system" width="97" height="128"/>
         <image name="suit.heart.fill" catalog="system" width="128" height="107"/>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
         <systemColor name="systemGray3Color">
             <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
