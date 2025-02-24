@@ -145,9 +145,9 @@ class HomePaucktVC: UIViewController
             
             cell.titleLabel.text = offer.categoryName
             cell.subtitleLabel.text = offer.merchantName
-            cell.discountLabel.text = offer.campaignName
-            cell.locationLabel.text = "10"
-            cell.durationLabel.text = "5"
+            cell.discountLabel.text = String(offer.discount ?? 0) + "%" + "Off"
+            cell.locationLabel.text = "10location"
+            cell.durationLabel.text = "5 days"
             
             
             cell.backgroundImageView.sd_setImage(with: URL(string: offer.thumbnail ?? ""), placeholderImage: UIImage(named: ""))
@@ -171,7 +171,7 @@ class HomePaucktVC: UIViewController
             let width = (collectionView.frame.width / 4) - 16
             return CGSize(width: width, height: 100)
         }else{
-            return CGSize(width: collectionView.frame.width/2, height: 260)
+            return CGSize(width: collectionView.frame.width/2, height: 270)
         }
         
     }
