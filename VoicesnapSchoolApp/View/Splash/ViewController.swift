@@ -74,6 +74,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     var SelectedCountryID = String()
     var SelectedCountryCode = String()
     var selectCountryName = String()
+    var Mobile_placeholder = String()
     var popupCountrySelection : KLCPopup  = KLCPopup()
     var strCountryCode = String()
     var strCountryID = String()
@@ -368,6 +369,13 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         let MobilelengthStr = String(describing: dicCountryUrl["MobileNumberLength"]!)
         UserDefaults.standard.set(MobilelengthStr, forKey: MOBILE_LENGTH)
         
+        if String(describing: dicCountryUrl["mobile_no_hint"]!) != ""{
+            let MobilePlaceholder = String(describing: dicCountryUrl["mobile_no_hint"]!)
+            UserDefaults.standard.set(MobilePlaceholder, forKey: Mobile_Place_holder)
+            
+        }
+        
+        
         strBaseUrl = dicCountryUrl["BaseUrl"] as! NSString
         assignParentStaffIDS(selectedDict: dicCountryUrl)
         
@@ -596,6 +604,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         UserDefaults.standard.set(adminIDArray, forKey: ADMIN_ARRAY_INDEX)
         UserDefaults.standard.set(groupHeadIDArray, forKey: GROUPHEAD_ARRAY_INDEX)
         UserDefaults.standard.set(menuIDArray, forKey: MENU_ARRAY_INDEX)
+//        UserDefaults.standard.set(Mobile_placeholder, forKey: Mobile_Place_holder)
         
         if(CountrySelect == "CountrySelected")
         {
@@ -776,8 +785,13 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                         let dict = arrayCountryDatas[0] as! NSDictionary
                         SelectedCountryID = String(describing: dict[COUNTRY_ID]!)
                         selectCountryName = String(describing: dict[COUNTRY_Name]!)
+                        
                         let MobilelengthStr = String(describing: dict["MobileNumberLength"]!)
                         UserDefaults.standard.set(MobilelengthStr, forKey: MOBILE_LENGTH)
+                        
+                        
+                        let MobilePlaceholder = String(describing: dict["mobile_no_hint"]!)
+                        UserDefaults.standard.set(MobilePlaceholder, forKey: Mobile_Place_holder)
                         strBaseUrl = dict["BaseUrl"] as! NSString
                         //Get Parent and Staff Ids
                         assignParentStaffIDS(selectedDict: dict)

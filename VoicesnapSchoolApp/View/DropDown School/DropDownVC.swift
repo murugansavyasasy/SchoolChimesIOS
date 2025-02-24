@@ -165,13 +165,13 @@ class DropDownVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
             }
         } else if(fromVC == "setting"){
         
-            arrFAQName =  [commonStringNames.txt_menu_help.translated() as? String ?? "",commonStringNames.txt_menu_logout.translated() as? String ?? "",commonStringNames.language_change.translated() as? String ?? ""]
+            arrFAQName =  [commonStringNames.txt_menu_help.translated() as? String ?? "",commonStringNames.txt_menu_logout.translated() as? String ?? ""/*,commonStringNames.language_change.translated() as? String ?? ""*/]
                    self.navigationController?.navigationBar.isHidden = true
             print(arrFAQName)
                    if(UIDevice.current.userInterfaceIdiom == .pad){
                        self.preferredContentSize = CGSize(width: 180, height: 100)
                    }else{
-                       self.preferredContentSize = CGSize(width: 220, height: 130)
+                       self.preferredContentSize = CGSize(width: 220, height: 110)
                    }
                }
         else if(fromVC == "settings"){
@@ -179,12 +179,12 @@ class DropDownVC: UIViewController,UITableViewDelegate,UITableViewDataSource {
             print("settingssettings",commonStringNames.language_change)
             print("settingssettings23456",commonStringNames.language_change.translated())
            
-            arrFAQName =  [commonStringNames.uploadDocumentandPhoto.translated(),commonStringNames.txt_menu_help.translated() as? String ?? "" ,commonStringNames.txt_menu_logout.translated() as? String ?? "",commonStringNames.language_change.translated() as? String ?? ""]
+            arrFAQName =  [commonStringNames.uploadDocumentandPhoto.translated(),commonStringNames.txt_menu_help.translated() as? String ?? "" ,commonStringNames.txt_menu_logout.translated() as? String ?? ""/*,commonStringNames.language_change.translated() as? String ?? ""*/]
                    self.navigationController?.navigationBar.isHidden = true
                    if(UIDevice.current.userInterfaceIdiom == .pad){
                        self.preferredContentSize = CGSize(width: 300, height: 120)
                    }else{
-                       self.preferredContentSize = CGSize(width: 260, height: 130)
+                       self.preferredContentSize = CGSize(width: 260, height: 110)
                    }
                }
      else if(fromVC == "meeting"){

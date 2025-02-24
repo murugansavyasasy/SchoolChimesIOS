@@ -56,7 +56,7 @@ class StudentReportTableViewCell: UITableViewCell {
         DobTitLbl.text = commonStringNames.DOB.translated()
         GenderTitLbl.text = commonStringNames.Gender.translated()
         MobileNoTitLbl.text = commonStringNames.MobileNo.translated()
-        classnameTitlbl.text = commonStringNames.ClassTeacherName.translated()
+        classteacherNametitLbl.text = commonStringNames.ClassTeacherName.translated()
         fathernameLbl.text = commonStringNames.FatherName.translated()
         callLbl.text = commonStringNames.Call.translated()
         SendSmsLbl.text = commonStringNames.SendSMS.translated()

@@ -37,9 +37,23 @@ class CheckMobileNOVC: UIViewController,UITextFieldDelegate,Apidelegate{
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(CheckMobileNOVC.dismissKeyboard))
         view.addGestureRecognizer(tap)
         let MobileLenghtStr : String = UserDefaults.standard.object(forKey: MOBILE_LENGTH) as! String
+        
+        let MobilePlaceHolderStr : String = UserDefaults.standard.object(forKey: Mobile_Place_holder) as! String
+
         ApiMobileLength = Int(MobileLenghtStr)! + 1
         
-        UserMobileNoText.placeholder = "Enter " + MobileLenghtStr + " Digit Mobile Number"
+        if MobilePlaceHolderStr != ""{
+            UserMobileNoText.placeholder = MobilePlaceHolderStr
+        }
+        else if MobilePlaceHolderStr == "MobilePlaceHoder"{
+            
+            UserMobileNoText.placeholder = "Enter " + MobileLenghtStr + " digit mobile number"
+        }else{
+            
+            UserMobileNoText.placeholder = "Enter " + MobileLenghtStr + " digit mobile number"
+        }
+       
+        
         UtilObj.printLogKey(printKey: "MobileLenghtStr", printingValue: MobileLenghtStr)
         UtilObj.printLogKey(printKey: "ApiMobileLength", printingValue: ApiMobileLength)
     }

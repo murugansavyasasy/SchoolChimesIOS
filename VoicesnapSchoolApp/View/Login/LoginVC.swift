@@ -99,7 +99,23 @@ class LoginVC: UIViewController,UITextFieldDelegate,Apidelegate,HTTPClientDelega
         ApiMobileLength = Int(MobileLenghtStr)! + 1
         
         
-        UserMobileNoText.placeholder = "Enter " + MobileLenghtStr + " Digit Mobile Number"
+        
+        let MobilePlaceHolderStr : String = UserDefaults.standard.object(forKey: Mobile_Place_holder) as! String
+
+       
+        
+        if MobilePlaceHolderStr != ""{
+            UserMobileNoText.placeholder = MobilePlaceHolderStr
+        }
+        else if MobilePlaceHolderStr == "MobilePlaceHoder"{
+            
+            UserMobileNoText.placeholder = "Enter " + MobileLenghtStr + " digit mobile number"
+        }else{
+            
+            UserMobileNoText.placeholder = "Enter " + MobileLenghtStr + " digit mobile number"
+        }
+        
+        
         
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(LoginVC.dismissKeyboard))
         view.addGestureRecognizer(tap)

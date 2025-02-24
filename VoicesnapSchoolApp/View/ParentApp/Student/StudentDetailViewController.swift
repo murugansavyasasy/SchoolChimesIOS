@@ -476,25 +476,25 @@ print("schoolNameReg",schoolNameReg)
         self.title = String(describing: selectedDictionary["ChildName"]!)
         
         
-        // 3. Set Custom Right Button (Image + Text)
-            let customButton = UIButton(type: .custom)
-            customButton.setImage(UIImage(systemName: "globe"), for: .normal)
-            customButton.setTitle("Language", for: .normal)
-            customButton.setTitleColor(.white, for: .normal) // Set text color to white
-            customButton.tintColor = .white // Set image color to white
-
-            // Adjust spacing and alignment
-            customButton.semanticContentAttribute = .forceRightToLeft // Image on the right, text on the left
-            customButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: -8)
-
-            // Add action
-            customButton.addTarget(self, action: #selector(barLanguageButtonTapped), for: .touchUpInside)
-
-            // Create bar button item with custom view
-            let rightBarButtonItem = UIBarButtonItem(customView: customButton)
-
-            // Assign to navigation item
-            navigationItem.rightBarButtonItem = rightBarButtonItem
+//        // 3. Set Custom Right Button (Image + Text)
+//            let customButton = UIButton(type: .custom)
+//            customButton.setImage(UIImage(systemName: "globe"), for: .normal)
+//            customButton.setTitle("Language", for: .normal)
+//            customButton.setTitleColor(.white, for: .normal) // Set text color to white
+//            customButton.tintColor = .white // Set image color to white
+//
+//            // Adjust spacing and alignment
+//            customButton.semanticContentAttribute = .forceRightToLeft // Image on the right, text on the left
+//            customButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: -8)
+//
+//            // Add action
+//            customButton.addTarget(self, action: #selector(barLanguageButtonTapped), for: .touchUpInside)
+//
+//            // Create bar button item with custom view
+//            let rightBarButtonItem = UIBarButtonItem(customView: customButton)
+//
+//            // Assign to navigation item
+//            navigationItem.rightBarButtonItem = rightBarButtonItem
         
     }
     @objc func BackAction(sender : UIButton) {
