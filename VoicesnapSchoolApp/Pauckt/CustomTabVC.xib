@@ -45,7 +45,7 @@
                                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g2f-xr-02B">
                                     <rect key="frame" x="156.66666666666663" y="0.0" width="156.33333333333337" height="60"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                    <state key="normal" image="person.fill" catalog="system"/>
+                                    <state key="normal" image="history"/>
                                     <connections>
                                         <action selector="changeIndex:" destination="-1" eventType="touchUpInside" id="dr3-s8-mX5"/>
                                     </connections>
@@ -78,8 +78,8 @@
         </view>
     </objects>
     <resources>
+        <image name="history" width="24" height="24"/>
         <image name="house.fill" catalog="system" width="128" height="104"/>
-        <image name="person.fill" catalog="system" width="128" height="120"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

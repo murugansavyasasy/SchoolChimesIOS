@@ -52,7 +52,10 @@ class ReedimHistoryVc: UIViewController {
            
         }
         
-       
+    @IBAction func back(_ sender: UIButton) {
+        dismiss(animated: true)
+    }
+    
     }
 extension ReedimHistoryVc:UICollectionViewDelegate,UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

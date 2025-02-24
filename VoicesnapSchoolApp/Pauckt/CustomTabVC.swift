@@ -12,8 +12,7 @@ class CustomTabVC: UIViewController {
 
     // Child View Controllers
     let homeVC = HomePaucktVC()
-    let searchVC = UIViewController()
-    let profileVC = UIViewController()
+    let profileVC = ReedimHistoryVc()
     let selectColor = UIColor(red: 244/255, green: 245/255, blue: 249/255, alpha: 1)
     @IBOutlet weak var rewardsBtn: UIButton!
     @IBOutlet weak var containerView: UIView!
@@ -49,8 +48,7 @@ class CustomTabVC: UIViewController {
         let selectedVC: UIViewController
         switch index {
         case 0: selectedVC = homeVC
-        case 1: selectedVC = searchVC
-        case 2: selectedVC = profileVC
+        case 1: selectedVC = profileVC
         default: return
         }
         
