@@ -29,6 +29,7 @@ pod 'LinearProgressBar'
 pod 'ALCameraViewController'
 pod "BSImagePicker"
 pod 'FSCalendar'
+pod 'SDWebImage'
 
  
  pod "KRProgressHUD"

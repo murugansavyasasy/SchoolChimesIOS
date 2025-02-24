@@ -32,10 +32,10 @@ class CooponViewVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
             let detailViewController = BottomView()
             let nav = UINavigationController(rootViewController: detailViewController)
-
+            
             // 1 - Set modal presentation style
             nav.modalPresentationStyle = .pageSheet
-
+            
             // 2 - Configure bottom sheet
             if let sheet = nav.sheetPresentationController {
                 if #available(iOS 16.0, *) {
@@ -44,14 +44,14 @@ class CooponViewVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
                 sheet.prefersGrabberVisible = false // Hide grabber
                 sheet.largestUndimmedDetentIdentifier = .large // REMOVE BACKGROUND DIMMING
             }
-
+            
             // 3 - Prevent dismiss on swipe down
             nav.isModalInPresentation = true
-
+            
             // 4 - Present the bottom sheet
             present(nav, animated: true)
         }
-
+        
     }
     func startAutoScroll() {
         autoScrollTimer = Timer.scheduledTimer(timeInterval: 4.0, target: self, selector: #selector(autoScroll), userInfo: nil, repeats: true)
@@ -73,10 +73,10 @@ class CooponViewVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 3
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CVCell", for: indexPath) as! CVCell
-
+        
         return cell
     }
     @IBAction func back(_ sender: UIButton) {
@@ -84,9 +84,25 @@ class CooponViewVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
             self.dismiss(animated: true)
         }
     }
+    @IBAction func share(_ sender: UIButton) {
+        let url = URL(string: "https://www.example.com")! // Replace with your actual URL
+        let activityVC = UIActivityViewController(activityItems: [url], applicationActivities: nil)
+        
+        // For iPad support
+        if let popoverController = activityVC.popoverPresentationController {
+            popoverController.sourceView = sender
+            popoverController.sourceRect = sender.bounds
+        }
+        
+        present(activityVC, animated: true)
+    }
     
-   
- func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-     return CGSize(width: collectionView.frame.width, height:collectionView.frame.height)
- }
+    @IBAction func addFav(_ sender: UIButton) {
+        
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: collectionView.frame.width, height:collectionView.frame.height)
+    }
 }

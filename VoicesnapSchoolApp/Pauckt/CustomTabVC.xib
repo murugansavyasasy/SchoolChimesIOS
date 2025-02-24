@@ -12,6 +12,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomTabVC" customModule="VoicesnapSchoolApp" customModuleProvider="target">
             <connections>
                 <outlet property="containerView" destination="9Da-ji-QVk" id="fH2-gO-p66"/>
+                <outlet property="hoemBtn" destination="l9P-wg-wLm" id="L8y-Dc-Ofc"/>
+                <outlet property="rewardsBtn" destination="g2f-xr-02B" id="CsX-en-bd0"/>
                 <outlet property="tabView" destination="36P-qY-ob4" id="dSt-nB-j8f"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -28,11 +30,12 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="36P-qY-ob4">
                     <rect key="frame" x="20" y="748" width="353" height="70"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="enU-60-k5j">
-                            <rect key="frame" x="10" y="5" width="333" height="60"/>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="enU-60-k5j">
+                            <rect key="frame" x="20" y="5" width="313" height="60"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l9P-wg-wLm">
-                                    <rect key="frame" x="0.0" y="0.0" width="190.33333333333334" height="60"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="156.66666666666666" height="60"/>
+                                    <color key="tintColor" systemColor="systemBlueColor"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                     <state key="normal" image="house.fill" catalog="system"/>
                                     <connections>
@@ -40,7 +43,7 @@
                                     </connections>
                                 </button>
                                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g2f-xr-02B">
-                                    <rect key="frame" x="190.33333333333337" y="0.0" width="142.66666666666663" height="60"/>
+                                    <rect key="frame" x="156.66666666666663" y="0.0" width="156.33333333333337" height="60"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                     <state key="normal" image="person.fill" catalog="system"/>
                                     <connections>
@@ -53,9 +56,9 @@
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="70" id="75e-Td-57O"/>
-                        <constraint firstItem="enU-60-k5j" firstAttribute="leading" secondItem="36P-qY-ob4" secondAttribute="leading" constant="10" id="CFI-Uj-OFq"/>
+                        <constraint firstItem="enU-60-k5j" firstAttribute="leading" secondItem="36P-qY-ob4" secondAttribute="leading" constant="20" id="CFI-Uj-OFq"/>
                         <constraint firstAttribute="bottom" secondItem="enU-60-k5j" secondAttribute="bottom" constant="5" id="XIT-Kw-Val"/>
-                        <constraint firstAttribute="trailing" secondItem="enU-60-k5j" secondAttribute="trailing" constant="10" id="hU6-R2-dYp"/>
+                        <constraint firstAttribute="trailing" secondItem="enU-60-k5j" secondAttribute="trailing" constant="20" id="hU6-R2-dYp"/>
                         <constraint firstItem="enU-60-k5j" firstAttribute="top" secondItem="36P-qY-ob4" secondAttribute="top" constant="5" id="jvI-8Y-wZv"/>
                     </constraints>
                 </view>
@@ -79,6 +82,9 @@
         <image name="person.fill" catalog="system" width="128" height="120"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemBlueColor">
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

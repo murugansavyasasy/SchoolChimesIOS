@@ -58,6 +58,9 @@
                             </constraints>
                             <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                             <state key="normal" image="share"/>
+                            <connections>
+                                <action selector="share:" destination="-1" eventType="touchUpInside" id="vZW-tf-LXy"/>
+                            </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qOH-k2-Elk">
                             <rect key="frame" x="40" y="0.0" width="30" height="30"/>
@@ -65,6 +68,9 @@
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <inset key="imageEdgeInsets" minX="5" minY="5" maxX="5" maxY="5"/>
                             <state key="normal" image="heart.fill" catalog="system"/>
+                            <connections>
+                                <action selector="addFav:" destination="-1" eventType="touchUpInside" id="d9v-YJ-fiW"/>
+                            </connections>
                         </button>
                     </subviews>
                 </stackView>

@@ -18,7 +18,7 @@ class BottomView: UIViewController,UITableViewDelegate,UITableViewDataSource, Ad
     private var isAnimating = true
     private let confetti1: ConfettiView = .right
     @IBOutlet weak var tv: UITableView!
-    var coupendetail = [CoupenDetail(name: "things to remember", contentDetail: "Loren ipsum dolor sit amet,consectetur adipiscing elit,send do eiusmod tempor incididunt", isSelected: false),CoupenDetail(name: "Terms&", contentDetail: "Loren ipsum dolor sit amet,consectetur adipiscing elit,send do eiusmod tempor incididunt", isSelected: false)]
+    var coupendetail = [CoupenDetail(name: "things to remember", contentDetail: "Loren ipsum dolor sit amet,consectetur adipiscing elit,send do eiusmod tempor incididunt", isSelected: false),CoupenDetail(name: "Terms & Conditions", contentDetail: "Loren ipsum dolor sit amet,consectetur adipiscing elit,send do eiusmod tempor incididunt", isSelected: false)]
     var coupenAdded = false
     override func viewDidLoad() {
         super.viewDidLoad()
