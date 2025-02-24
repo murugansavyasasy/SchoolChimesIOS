@@ -236,30 +236,7 @@
 #define GETCONFRENCELIST_TYPE @"getConferenceList"
 #define APPVERSION @"4"
 #define CHECK_UPDATE @"VersionCheck"
-#define VERSION_VALUE @"83"
-//74Oct20
-//73
-//"72"
-
-//already 69 (aug 20)
-//already 70 (aug 22)
-//already 68 (aug 19)
-//already 67 (july 30)
-//already 66 (july 17)
-//already 65 (july 8)
-//already 63 (jun 17)
-//already 59 n(jun 4)
-//already 62 n(jun 10)
-
-//already 61 n(jun 7)
-//already 60 n(jun 6)
-//already version value 54 (Jan2)
-//already version value 55 (Jan11)
-//alreadyText message crash  version value 56 (Jan24)
-//already Kh school GetAds  crash  version value 57 (Jan30)
-//already GET MENU DETAILS ,Ad,Img size width  version value 58 irunthathu ippo 59(Apr6)
-
- 
+#define VERSION_VALUE @"84"
 #define IMAGE_COUNT @"ImageCount"
 #define UPLOAD_YOUTUBE_VIDEO @"UploadVideostoYoutube"
 
@@ -449,6 +426,7 @@
 #define COUNTRY_CODE @"CountryID"
 #define COUNTRY_ID @"CountryID"
 #define COUNTRY_Name @"CountryName"
+#define Mobile_Place_holder @"MobilePlaceHoder"
 #define OLD_BASE_URL @"OldBaseURl"
 #define LANGUAGE_NOTIFICATION @"Language Notification"
 #define SCHOOLIID @"SchoolID"

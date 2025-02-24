@@ -75,8 +75,8 @@ class CaterogyCvCell: UICollectionViewCell {
         ])
     }
     
-    func configure(with category: PaucktCategory) {
-        titleLabel.text = category.name
-        iconImageView.sd_setImage(with: URL(string: category.imageUrl), placeholderImage: UIImage(systemName: "photo"))
+    func configure(with category: CategoryDatas) {
+        titleLabel.text = category.categoryName
+        iconImageView.sd_setImage(with: URL(string: category.categoryImage ?? ""), placeholderImage: UIImage(systemName: "photo"))
     }
 }

@@ -142,24 +142,24 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
         print("MAINVC")
         
         
-        let customButton = UIButton(type: .custom)
-            customButton.setImage(UIImage(systemName: "globe"), for: .normal)
-            customButton.setTitle("Language", for: .normal)
-            customButton.setTitleColor(.white, for: .normal)
-//            customButton.setTitleColor(.systemBlue, for: .normal)
-
-            // Adjust layout to have image on the left, label on the right
-        customButton.semanticContentAttribute = .forceRightToLeft
-            customButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -8, bottom: 0, right: 8)
-
-            // Optional: Set button size if needed
-            customButton.sizeToFit()
-
-            // Add target action
-            customButton.addTarget(self, action: #selector(barLanguageButtonTapped), for: .touchUpInside)
-
-            // Assign the custom view to your IBOutlet UIBarButtonItem
-            barLanguageClick.customView = customButton
+//        let customButton = UIButton(type: .custom)
+//            customButton.setImage(UIImage(systemName: "globe"), for: .normal)
+//            customButton.setTitle("Language", for: .normal)
+//            customButton.setTitleColor(.white, for: .normal)
+////            customButton.setTitleColor(.systemBlue, for: .normal)
+//
+//            // Adjust layout to have image on the left, label on the right
+//        customButton.semanticContentAttribute = .forceRightToLeft
+//            customButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -8, bottom: 0, right: 8)
+//
+//            // Optional: Set button size if needed
+//            customButton.sizeToFit()
+//
+//            // Add target action
+//            customButton.addTarget(self, action: #selector(barLanguageButtonTapped), for: .touchUpInside)
+//
+//            // Assign the custom view to your IBOutlet UIBarButtonItem
+//            barLanguageClick.customView = customButton
         
         
         

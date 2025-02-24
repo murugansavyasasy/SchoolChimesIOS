@@ -330,6 +330,8 @@
 		845B1BD92CB01CAB00D6E6F5 /* StaffnoticeBoardVcViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 845B1BD62CB01CAB00D6E6F5 /* StaffnoticeBoardVcViewController.swift */; };
 		846666612C77466C008E7F24 /* TimeHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8466665F2C774668008E7F24 /* TimeHeader.xib */; };
 		846666622C77466C008E7F24 /* TimeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846666602C77466C008E7F24 /* TimeHeader.swift */; };
+		8467D09B2D684A780099522F /* get_cateorgy_Req.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8467D0992D684A780099522F /* get_cateorgy_Req.swift */; };
+		8467D09D2D684CEF0099522F /* get_campaigns_Req.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8467D09C2D684CEF0099522F /* get_campaigns_Req.swift */; };
 		847E22992B0DE08700C0C42D /* GridUpdateDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847E22982B0DE08700C0C42D /* GridUpdateDetailCollectionViewCell.swift */; };
 		847E229D2B0DFE2000C0C42D /* StudentGridUpdateDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847E229C2B0DFE2000C0C42D /* StudentGridUpdateDetailCollectionViewCell.swift */; };
 		847E229F2B0E00BA00C0C42D /* UIImage+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847E229E2B0E00BA00C0C42D /* UIImage+Gif.swift */; };
@@ -960,6 +962,7 @@
 		8414F7C42BD6862C0066F206 /* ScheduleCallViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScheduleCallViewController.xib; sourceTree = "<group>"; };
 		8415D0502D65B90E0023D9A1 /* HomePaucktVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePaucktVC.swift; sourceTree = "<group>"; };
 		8415D0512D65B90E0023D9A1 /* HomePaucktVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomePaucktVC.xib; sourceTree = "<group>"; };
+		8415D0692D660D610023D9A1 /* get_cateorgy_Req.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = get_cateorgy_Req.swift; sourceTree = "<group>"; };
 		841ED6232C8F4AB100A65EEA /* CheckAviableTv.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckAviableTv.swift; sourceTree = "<group>"; };
 		841ED6242C8F4AB100A65EEA /* CheckAviableTv.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckAviableTv.xib; sourceTree = "<group>"; };
 		841ED6252C8F4AB100A65EEA /* CheckAviableTvHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckAviableTvHeader.swift; sourceTree = "<group>"; };
@@ -1015,6 +1018,8 @@
 		845B1BD72CB01CAB00D6E6F5 /* StaffnoticeBoardVcViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = StaffnoticeBoardVcViewController.xib; sourceTree = "<group>"; };
 		8466665F2C774668008E7F24 /* TimeHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TimeHeader.xib; sourceTree = "<group>"; };
 		846666602C77466C008E7F24 /* TimeHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeHeader.swift; sourceTree = "<group>"; };
+		8467D0992D684A780099522F /* get_cateorgy_Req.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = get_cateorgy_Req.swift; sourceTree = "<group>"; };
+		8467D09C2D684CEF0099522F /* get_campaigns_Req.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = get_campaigns_Req.swift; sourceTree = "<group>"; };
 		847E22982B0DE08700C0C42D /* GridUpdateDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridUpdateDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		847E229C2B0DFE2000C0C42D /* StudentGridUpdateDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentGridUpdateDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		847E229E2B0E00BA00C0C42D /* UIImage+Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Gif.swift"; sourceTree = "<group>"; };
@@ -2656,6 +2661,7 @@
 				8460883F2D66EA13004814F5 /* CuoponDetails */,
 				8415D0662D660A620023D9A1 /* HomePageVc */,
 				8415D0632D66090F0023D9A1 /* ApiModal */,
+				8467D09A2D684A780099522F /* ApiReq */,
 			);
 			path = Pauckt;
 			sourceTree = "<group>";
@@ -2668,6 +2674,14 @@
 				8415D0512D65B90E0023D9A1 /* HomePaucktVC.xib */,
 			);
 			path = HomePageVc;
+			sourceTree = "<group>";
+		};
+		8415D06B2D6844CA0023D9A1 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				8415D0692D660D610023D9A1 /* get_cateorgy_Req.swift */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		841ED6312C8F4AB100A65EEA /* StaffSide */ = {
@@ -2837,6 +2851,15 @@
 				848F1DC02C761645000F42EC /* StaffPtmTableViewCell.xib */,
 			);
 			name = BothStaffParentTv;
+			sourceTree = "<group>";
+		};
+		8467D09A2D684A780099522F /* ApiReq */ = {
+			isa = PBXGroup;
+			children = (
+				8467D0992D684A780099522F /* get_cateorgy_Req.swift */,
+				8467D09C2D684CEF0099522F /* get_campaigns_Req.swift */,
+			);
+			path = ApiReq;
 			sourceTree = "<group>";
 		};
 		848E5D362BFE26DE00DBBBB5 /* ClassTvCell */ = {
@@ -3270,6 +3293,7 @@
 				EE127559239AFB3C4AB172EC /* Pods */,
 				84E485D92CE37F010064CB25 /* NotificationServiceExtension-Bridging-Header.h */,
 				84E485F52CE46D690064CB25 /* Notification Content Extension-Bridging-Header.h */,
+				8415D06B2D6844CA0023D9A1 /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -4472,6 +4496,7 @@
 				D6EE64B8210088CB0029351C /* PrincipalAddRemoveSubjectVC.swift in Sources */,
 				C1C2C1A925F798F80022A9AA /* UploadSubmitTVCell.swift in Sources */,
 				84385F932CF9F1570020E94D /* AttendTvCell.swift in Sources */,
+				8467D09D2D684CEF0099522F /* get_campaigns_Req.swift in Sources */,
 				84CD56ED2C9C03350068800A /* LocationHistoryVc.swift in Sources */,
 				18EC6D742A00EF6200ACD29E /* getLessonPlanStaffReportResponse.swift in Sources */,
 				84CD56EB2C9C03350068800A /* GetLocationReq.swift in Sources */,
@@ -4883,6 +4908,7 @@
 				D64EF0F620C7AD1A0051AA89 /* PdfVC.swift in Sources */,
 				841ED6CF2C8F512200A65EEA /* CreateSlotsByStaffModal.swift in Sources */,
 				C297DC4E28B5EE6200AE4DD8 /* OtpConstant.swift in Sources */,
+				8467D09B2D684A780099522F /* get_cateorgy_Req.swift in Sources */,
 				D6979DC4228AA32B00511906 /* StaffDetailsVC.swift in Sources */,
 				84E485DD2CE37FC10064CB25 /* NotificationService.m in Sources */,
 				842C31462C01C8E100E98F85 /* AcidmicYrRequest.swift in Sources */,
@@ -5223,7 +5249,7 @@
 				CODE_SIGN_ENTITLEMENTS = VoicesnapSchoolApp/VoicesnapSchoolApp.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9.5.1;
+				CURRENT_PROJECT_VERSION = 9.5.2;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 6Z355RG34N;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5236,7 +5262,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 8.8.1;
+				MARKETING_VERSION = 8.8.2;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.voicesnap.schoolmessenger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -5257,7 +5283,7 @@
 				CODE_SIGN_ENTITLEMENTS = VoicesnapSchoolApp/VoicesnapSchoolAppRelease.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 9.5.1;
+				CURRENT_PROJECT_VERSION = 9.5.2;
 				DEVELOPMENT_TEAM = 6Z355RG34N;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -5269,7 +5295,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 8.8.1;
+				MARKETING_VERSION = 8.8.2;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.voicesnap.schoolmessenger;
 				PRODUCT_NAME = "$(TARGET_NAME)";
