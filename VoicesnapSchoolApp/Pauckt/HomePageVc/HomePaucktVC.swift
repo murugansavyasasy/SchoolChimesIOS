@@ -49,10 +49,9 @@ class HomePaucktVC: UIViewController
         
         let backgroundView = UIView(frame: collectionView.bounds)
         backgroundView.layer.insertSublayer(gradientLayer, at: 0)
-        gradientLayer.frame = view.bounds
+        gradientLayer.frame = UIScreen.main.bounds
         view.layer.insertSublayer(gradientLayer, at: 0)
         collectionView.backgroundView = backgroundView
-        
         
         TotalcoinsFullView.layer.cornerRadius = 12
         TotalcoinsFullView.layer.shadowColor = UIColor.black.cgColor
@@ -113,8 +112,9 @@ class HomePaucktVC: UIViewController
         
         
     }
-    
-    
+    @IBAction func  back(_ sender: UIButton) {
+        dismiss(animated: true)
+    }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
@@ -151,6 +151,9 @@ class HomePaucktVC: UIViewController
             
             
             cell.backgroundImageView.sd_setImage(with: URL(string: offer.thumbnail ?? ""), placeholderImage: UIImage(named: ""))
+            cell.brandImg.setImage(UIImage(named: "saloon_image"), for: .normal)
+            cell.brandImg.imageView?.layer.cornerRadius = 12
+            cell.brandImg.imageView?.layer.masksToBounds = true
             return cell
             
         }
@@ -171,7 +174,7 @@ class HomePaucktVC: UIViewController
             let width = (collectionView.frame.width / 4) - 16
             return CGSize(width: width, height: 100)
         }else{
-            return CGSize(width: collectionView.frame.width/2, height: 270)
+            return CGSize(width: collectionView.frame.width/2, height: 290)
         }
         
     }
@@ -179,7 +182,7 @@ class HomePaucktVC: UIViewController
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if collectionView != categoriesCV{
-            let vc = ReedimHistoryVc(nibName: nil, bundle: nil)
+            let vc = CooponViewVC(nibName: nil, bundle: nil)
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true)
         }

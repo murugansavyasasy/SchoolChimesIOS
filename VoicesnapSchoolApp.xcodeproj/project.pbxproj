@@ -403,6 +403,8 @@
 		84B066262AFB88CE00CEB417 /* HomeWorkPdfImageShomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B066242AFB88CE00CEB417 /* HomeWorkPdfImageShomViewController.swift */; };
 		84B066272AFB88CE00CEB417 /* HomeWorkPdfImageShomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84B066252AFB88CE00CEB417 /* HomeWorkPdfImageShomViewController.xib */; };
 		84B066292AFB9F8900CEB417 /* ParentHomeWorkArchiveRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B066282AFB9F8900CEB417 /* ParentHomeWorkArchiveRequest.swift */; };
+		84B066D02D6C6EC700F3463F /* CustomTabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B066CE2D6C6EC700F3463F /* CustomTabVC.swift */; };
+		84B066D12D6C6EC700F3463F /* CustomTabVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 84B066CF2D6C6EC700F3463F /* CustomTabVC.xib */; };
 		84B2EC742B199DAD005815AA /* UpdateDetailsModal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B2EC732B199DAD005815AA /* UpdateDetailsModal.swift */; };
 		84B2EC762B199DC5005815AA /* UpdateDetailRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B2EC752B199DC5005815AA /* UpdateDetailRequest.swift */; };
 		84B39EE92BEB38F300D56819 /* StanderReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84B39EE82BEB38F300D56819 /* StanderReq.swift */; };
@@ -1094,6 +1096,8 @@
 		84B066242AFB88CE00CEB417 /* HomeWorkPdfImageShomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeWorkPdfImageShomViewController.swift; sourceTree = "<group>"; };
 		84B066252AFB88CE00CEB417 /* HomeWorkPdfImageShomViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeWorkPdfImageShomViewController.xib; sourceTree = "<group>"; };
 		84B066282AFB9F8900CEB417 /* ParentHomeWorkArchiveRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParentHomeWorkArchiveRequest.swift; sourceTree = "<group>"; };
+		84B066CE2D6C6EC700F3463F /* CustomTabVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabVC.swift; sourceTree = "<group>"; };
+		84B066CF2D6C6EC700F3463F /* CustomTabVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomTabVC.xib; sourceTree = "<group>"; };
 		84B2EC732B199DAD005815AA /* UpdateDetailsModal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateDetailsModal.swift; sourceTree = "<group>"; };
 		84B2EC752B199DC5005815AA /* UpdateDetailRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateDetailRequest.swift; sourceTree = "<group>"; };
 		84B39EE82BEB38F300D56819 /* StanderReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StanderReq.swift; sourceTree = "<group>"; };
@@ -2671,6 +2675,8 @@
 				8415D0662D660A620023D9A1 /* HomePageVc */,
 				8415D0632D66090F0023D9A1 /* ApiModal */,
 				8467D09A2D684A780099522F /* ApiReq */,
+				84B066CE2D6C6EC700F3463F /* CustomTabVC.swift */,
+				84B066CF2D6C6EC700F3463F /* CustomTabVC.xib */,
 			);
 			path = Pauckt;
 			sourceTree = "<group>";
@@ -4403,6 +4409,7 @@
 				1865D8E62A0A794800CD43F3 /* StaffLessonPlanViewViewController.xib in Resources */,
 				848E5D6D2BFE295100DBBBB5 /* SectionTvTableViewCell.xib in Resources */,
 				D608953D20E29227001E8081 /* school.sqlite in Resources */,
+				84B066D12D6C6EC700F3463F /* CustomTabVC.xib in Resources */,
 				1829528B299520500003B9D6 /* QuizViewTableViewCell.xib in Resources */,
 				18A0B9C42D1E74310080E83B /* ChangeLanguageViewController.xib in Resources */,
 				18F119A029658890002C0A0A /* SendStaffGroupsVoiceTableViewCell.xib in Resources */,
@@ -4887,6 +4894,7 @@
 				C1DC9C3F25F6624F00FEF0AB /* UploadTVCell.swift in Sources */,
 				C148AF4625EA896000152CE9 /* EditProfileVC.swift in Sources */,
 				189E36ED296D74340032A8CA /* MessageFromManagentVideoModal.swift in Sources */,
+				84B066D02D6C6EC700F3463F /* CustomTabVC.swift in Sources */,
 				B55A7D12200DF34D00558FE8 /* NoticeBoardTVCell.swift in Sources */,
 				84CD56E52C9C03350068800A /* deleteTV.swift in Sources */,
 				182952D02999F48D0003B9D6 /* QuizUpcomingGetQuestionViewController.swift in Sources */,

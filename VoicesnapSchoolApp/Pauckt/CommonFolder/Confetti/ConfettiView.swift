@@ -179,7 +179,8 @@ extension ConfettiView {
             .shape(.circle, color: .systemYellow),
             .shape(.circle, color: .systemTeal),
             .shape(.circle, color: .systemBlue),
-            .shape(.circle, color: .systemGreen)
+            .shape(.circle, color: .systemGreen),
+            .shape(.ribbon,color: .blue)
         ]
     }
 

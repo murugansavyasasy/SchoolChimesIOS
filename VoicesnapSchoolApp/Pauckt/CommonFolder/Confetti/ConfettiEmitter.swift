@@ -99,24 +99,33 @@ extension ConfettiEmitter.Shape {
     /// Creates a Ribbon-like path
     private func ribbonPath(in rect: CGRect) -> CGPath {
         let path = CGMutablePath()
-        let width = rect.width
-        let height = rect.height
+        let width = rect.width * 0.2  // Make ribbons thinner
+        let height = rect.height * 3  // Increase length for wavy effect
 
-        // Start point (top left)
-        path.move(to: CGPoint(x: 0, y: height / 4))
+        // Start from the bottom left
+        path.move(to: CGPoint(x: 0, y: height * 0.05))
 
-        // Curved edges to simulate a waving ribbon
-        path.addQuadCurve(to: CGPoint(x: width / 3, y: 0), control: CGPoint(x: width / 6, y: -height / 4))
-        path.addQuadCurve(to: CGPoint(x: 2 * width / 3, y: height / 2), control: CGPoint(x: width / 2, y: height + height / 4))
-        path.addQuadCurve(to: CGPoint(x: width, y: height / 4), control: CGPoint(x: 5 * width / 6, y: -height / 4))
+        // Create multiple smooth curves to make it look like a flowing ribbon
+        path.addCurve(to: CGPoint(x: width * 0.5, y: height * 0.3),
+                      control1: CGPoint(x: width * 0.2, y: height * -0.2),
+                      control2: CGPoint(x: width * 0.4, y: height * 0.6))
 
-        // Bottom part mirroring the top for a wavy ribbon
-        path.addQuadCurve(to: CGPoint(x: 2 * width / 3, y: height), control: CGPoint(x: 5 * width / 6, y: height + height / 4))
-        path.addQuadCurve(to: CGPoint(x: width / 3, y: height / 2), control: CGPoint(x: width / 2, y: -height / 4))
-        path.addQuadCurve(to: CGPoint(x: 0, y: height * 3 / 4), control: CGPoint(x: width / 6, y: height + height / 4))
+        path.addCurve(to: CGPoint(x: width, y: height * 0.6),
+                      control1: CGPoint(x: width * 0.7, y: height * 0.2),
+                      control2: CGPoint(x: width * 0.9, y: height * 0.9))
+
+        path.addCurve(to: CGPoint(x: width * 0.5, y: height * 0.9),
+                      control1: CGPoint(x: width * 0.8, y: height * 1.2),
+                      control2: CGPoint(x: width * 0.6, y: height * 0.7))
+
+        path.addCurve(to: CGPoint(x: 0, y: height),
+                      control1: CGPoint(x: width * 0.4, y: height * 1.3),
+                      control2: CGPoint(x: width * 0.2, y: height * 0.9))
 
         path.closeSubpath()
         return path
     }
+
+
 }
 

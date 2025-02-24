@@ -729,7 +729,7 @@ print("schoolNameReg",schoolNameReg)
                 
                 else if (self.CellIndexIdsArray[indexPath.row] as! String == "27"){
                     
-                    let vc = HomePaucktVC(nibName: nil, bundle: nil)
+                    let vc = CustomTabVC(nibName: nil, bundle: nil)
                     vc.modalPresentationStyle = .fullScreen
                     present(vc, animated: true)
                     

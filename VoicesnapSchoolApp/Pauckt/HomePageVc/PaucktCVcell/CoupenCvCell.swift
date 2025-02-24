@@ -10,6 +10,8 @@ import UIKit
 
 class CoupenCvCell: UICollectionViewCell {
 
+    @IBOutlet weak var brandImg: UIButton!
+    @IBOutlet weak var groupImg: UIButton!
     @IBOutlet weak var containerView: UIView!
       @IBOutlet weak var backgroundImageView: UIImageView!
       @IBOutlet weak var titleLabel: UILabel!
@@ -22,15 +24,11 @@ class CoupenCvCell: UICollectionViewCell {
         // Initialization code
         
         backgroundImageView.layer.cornerRadius = 12
+        brandImg.layer.cornerRadius = 12
         backgroundImageView.layer.masksToBounds = true
-
-//           Optional: Shadow for the outer cell
-//          self.layer.shadowColor = UIColor.black.cgColor
-//          self.layer.shadowOpacity = 0.1
-//          self.layer.shadowOffset = CGSize(width: 0, height: 2)
-//          self.layer.shadowRadius = 6
-//          self.layer.masksToBounds = false
-
+        brandImg.layer.masksToBounds = true
+        groupImg.layer.masksToBounds = true
+        groupImg.layer.cornerRadius = groupImg.frame.width/2
         // Allow multiline labels
         titleLabel.numberOfLines = 0
         subtitleLabel.numberOfLines = 0
