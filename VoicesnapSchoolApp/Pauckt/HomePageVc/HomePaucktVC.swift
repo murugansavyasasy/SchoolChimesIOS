@@ -179,7 +179,7 @@ class HomePaucktVC: UIViewController
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if collectionView != categoriesCV{
-            let vc = CooponViewVC(nibName: nil, bundle: nil)
+            let vc = ReedimHistoryVc(nibName: nil, bundle: nil)
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true)
         }

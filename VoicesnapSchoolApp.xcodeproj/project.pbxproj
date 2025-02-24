@@ -332,6 +332,10 @@
 		846666622C77466C008E7F24 /* TimeHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 846666602C77466C008E7F24 /* TimeHeader.swift */; };
 		8467D09B2D684A780099522F /* get_cateorgy_Req.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8467D0992D684A780099522F /* get_cateorgy_Req.swift */; };
 		8467D09D2D684CEF0099522F /* get_campaigns_Req.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8467D09C2D684CEF0099522F /* get_campaigns_Req.swift */; };
+		8467D2022D6C7C5C0099522F /* ReedimHistoryVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8467D2002D6C7C5C0099522F /* ReedimHistoryVc.swift */; };
+		8467D2032D6C7C5C0099522F /* ReedimHistoryVc.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8467D2012D6C7C5C0099522F /* ReedimHistoryVc.xib */; };
+		8467D2072D6C84490099522F /* ReedimHistoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8467D2052D6C84490099522F /* ReedimHistoryCell.swift */; };
+		8467D2082D6C84490099522F /* ReedimHistoryCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8467D2062D6C84490099522F /* ReedimHistoryCell.xib */; };
 		847E22992B0DE08700C0C42D /* GridUpdateDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847E22982B0DE08700C0C42D /* GridUpdateDetailCollectionViewCell.swift */; };
 		847E229D2B0DFE2000C0C42D /* StudentGridUpdateDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847E229C2B0DFE2000C0C42D /* StudentGridUpdateDetailCollectionViewCell.swift */; };
 		847E229F2B0E00BA00C0C42D /* UIImage+Gif.swift in Sources */ = {isa = PBXBuildFile; fileRef = 847E229E2B0E00BA00C0C42D /* UIImage+Gif.swift */; };
@@ -1020,6 +1024,10 @@
 		846666602C77466C008E7F24 /* TimeHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimeHeader.swift; sourceTree = "<group>"; };
 		8467D0992D684A780099522F /* get_cateorgy_Req.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = get_cateorgy_Req.swift; sourceTree = "<group>"; };
 		8467D09C2D684CEF0099522F /* get_campaigns_Req.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = get_campaigns_Req.swift; sourceTree = "<group>"; };
+		8467D2002D6C7C5C0099522F /* ReedimHistoryVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReedimHistoryVc.swift; sourceTree = "<group>"; };
+		8467D2012D6C7C5C0099522F /* ReedimHistoryVc.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReedimHistoryVc.xib; sourceTree = "<group>"; };
+		8467D2052D6C84490099522F /* ReedimHistoryCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReedimHistoryCell.swift; sourceTree = "<group>"; };
+		8467D2062D6C84490099522F /* ReedimHistoryCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReedimHistoryCell.xib; sourceTree = "<group>"; };
 		847E22982B0DE08700C0C42D /* GridUpdateDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridUpdateDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		847E229C2B0DFE2000C0C42D /* StudentGridUpdateDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StudentGridUpdateDetailCollectionViewCell.swift; sourceTree = "<group>"; };
 		847E229E2B0E00BA00C0C42D /* UIImage+Gif.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIImage+Gif.swift"; sourceTree = "<group>"; };
@@ -2657,6 +2665,7 @@
 		8415CFEB2D6475CF0023D9A1 /* Pauckt */ = {
 			isa = PBXGroup;
 			children = (
+				8467D1FF2D6C7C180099522F /* ReedimHistory */,
 				8481DA832D683B3300F5AD9D /* CommonFolder */,
 				8460883F2D66EA13004814F5 /* CuoponDetails */,
 				8415D0662D660A620023D9A1 /* HomePageVc */,
@@ -2860,6 +2869,25 @@
 				8467D09C2D684CEF0099522F /* get_campaigns_Req.swift */,
 			);
 			path = ApiReq;
+			sourceTree = "<group>";
+		};
+		8467D1FF2D6C7C180099522F /* ReedimHistory */ = {
+			isa = PBXGroup;
+			children = (
+				8467D2042D6C84240099522F /* ReedimHistoryCell */,
+				8467D2002D6C7C5C0099522F /* ReedimHistoryVc.swift */,
+				8467D2012D6C7C5C0099522F /* ReedimHistoryVc.xib */,
+			);
+			path = ReedimHistory;
+			sourceTree = "<group>";
+		};
+		8467D2042D6C84240099522F /* ReedimHistoryCell */ = {
+			isa = PBXGroup;
+			children = (
+				8467D2052D6C84490099522F /* ReedimHistoryCell.swift */,
+				8467D2062D6C84490099522F /* ReedimHistoryCell.xib */,
+			);
+			path = ReedimHistoryCell;
 			sourceTree = "<group>";
 		};
 		848E5D362BFE26DE00DBBBB5 /* ClassTvCell */ = {
@@ -4328,6 +4356,7 @@
 				84CD56FC2C9C03350068800A /* LocationViewController.xib in Resources */,
 				1829525E29951D5C0003B9D6 /* ExamViewController.xib in Resources */,
 				184834112CF6D9320098AE3C /* RestrictionTableViewCell.xib in Resources */,
+				8467D2032D6C7C5C0099522F /* ReedimHistoryVc.xib in Resources */,
 				849DBF142CDA3706002479DF /* PdfViewVc.xib in Resources */,
 				18067F6F2CF450DF008A22B9 /* SenderSideImageShowViewController.xib in Resources */,
 				84EF47DC2BECCA1D000EBFFD /* ClassTimeTableViewController.xib in Resources */,
@@ -4359,6 +4388,7 @@
 				848E5D552BFE283300DBBBB5 /* CVIconCollectionViewCell.xib in Resources */,
 				84CCA2C52C708DEC009303CD /* TimeCollectionViewCell.xib in Resources */,
 				1873FC882CEDEC2C000B8F56 /* SubmitLsrwViewController.xib in Resources */,
+				8467D2082D6C84490099522F /* ReedimHistoryCell.xib in Resources */,
 				C1EB24B523EE914100F9B997 /* es.json in Resources */,
 				18A0BA052D1EAB4F0080E83B /* Localizable.strings in Resources */,
 				84CD56E62C9C03350068800A /* deleteTV.xib in Resources */,
@@ -4852,6 +4882,7 @@
 				D63232A720CFAFE80091F66C /* LibraryTVCell.swift in Sources */,
 				040700B3247D5B0300DB418B /* UploadViemoVideoVC.swift in Sources */,
 				84EF47D52BECCA1D000EBFFD /* ClassTimeCollectionViewCell.swift in Sources */,
+				8467D2022D6C7C5C0099522F /* ReedimHistoryVc.swift in Sources */,
 				D6DB736120DBDEBB0080C022 /* DropDownVC.swift in Sources */,
 				C1DC9C3F25F6624F00FEF0AB /* UploadTVCell.swift in Sources */,
 				C148AF4625EA896000152CE9 /* EditProfileVC.swift in Sources */,
@@ -4985,6 +5016,7 @@
 				D64EF0A720C7ABC10051AA89 /* ParentVoiceMessageVC.swift in Sources */,
 				84CD56F12C9C03350068800A /* CreateLocationViewController.swift in Sources */,
 				046E6D2C245FF81B00BA5E0D /* CreateAssignmentVC.swift in Sources */,
+				8467D2072D6C84490099522F /* ReedimHistoryCell.swift in Sources */,
 				1873FC232CEDB27F000B8F56 /* LsrwListShowTableViewCell.swift in Sources */,
 				D64EF0FA20C7AD1A0051AA89 /* ImageDetailVC.swift in Sources */,
 				841ED6BD2C8F4FD100A65EEA /* StandardSectionDetailsForStaffResponse.swift in Sources */,
