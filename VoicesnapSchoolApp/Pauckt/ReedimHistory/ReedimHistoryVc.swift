@@ -30,6 +30,7 @@ class ReedimHistoryVc: UIViewController {
         backgroundView.layer.insertSublayer(gradientLayer, at: 0)
         gradientLayer.frame = view.bounds
         view.layer.insertSublayer(gradientLayer, at: 0)
+        
         cv.backgroundView = backgroundView
 
         

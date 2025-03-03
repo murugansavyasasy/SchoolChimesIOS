@@ -204,6 +204,44 @@ final class BaseRequest{
 
     
     
+   
+
+    static func postAnyHeader(url: String, param: [String: Any]?, header: [String: Any]?) -> BaseRequest {
+        let call_back = BaseRequest()
+        
+        // Convert header dictionary to HTTPHeaders type
+        var httpHeaders: HTTPHeaders = [:]
+        if let headerDict = header {
+            for (key, value) in headerDict {
+                if let stringValue = value as? String {
+                    httpHeaders.add(name: key, value: stringValue)
+                }
+            }
+        }
+
+        if isConnectedToNetwork() {
+            AF.request(url, method: .post, parameters: param, encoding: JSONEncoding.default, headers: httpHeaders)
+                .validate()
+                .responseJSON { response in
+                    print("POST method response: \(response)")
+                    
+                    if let data = response.data {
+                        let json = String(data: data, encoding: .utf8)
+                        KRProgressHUD.dismiss {
+                            call_back.valueHandle?(json as AnyObject)
+                        }
+                    }
+                }
+        } else {
+            print("offline")
+            KRProgressHUD.dismiss {
+                call_back.valueHandle?("No Internet Connection" as AnyObject)
+            }
+        }
+        
+        return call_back
+    }
+
     
     static func verifyToken(url: String ,token: String) -> BaseRequest {
         

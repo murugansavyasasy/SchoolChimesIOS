@@ -16,6 +16,7 @@ import ObjectMapper
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate,UNUserNotificationCenterDelegate {
     
+    
     var window: UIWindow?
     var LanguageArray = NSArray()
     var emptyArray = NSArray()
@@ -130,18 +131,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate,UNUserNo
     var mainSchoolGroupHeadSegueArray =  ["EmergencyVoiceSegue","VoiceMessageSegue","TextMessageSegue","NoticeBoardSegue","TextMessageSegue","TextMessageSegue","TextMessageSegue","TextMessageSegue","TextMessageSegue","TextMessageSegue","TextMessageSegue","TextMessageSegue","TextMessageSegue","TextMessageSegue","TextMessageSegue","TextMessageSegue","TextMessageSegue","TextMessageSegue","OfferMessageSegue","","VideoMessageSegue","OfferMessageSegue","","CreateAssignmentSegue","UploadVimeoVideoSegue","studentChatSegue","","",""]
     
     var mainSchoolAdminSegueArray = ["NoticeBoardSegue","NoticeBoardSegue","NoticeBoardSegue","NoticeBoardSegue","AttendanceMessageSegue","AttendanceMessageSegue","AttendanceMessageSegue","AttendanceMessageSegue","AttendanceMessageSegue","AttendanceMessageSegue","AttendanceMessageSegue","AttendanceMessageSegue","AttendanceMessageSegue","MsgMgmtSegue","AttendanceMessageSegue","AttendanceMessageSegue","AttendanceMessageSegue","AttendanceMessageSegue","","","","","UploadVimeoVideoSegue","UploadVimeoVideoSegue","studentChatSegue"]
-    
-    
-    
-    
+
     var mainSchoolPrincipalSegueArray : [String] = []
-    
-    
-    
     var mainSchoolStaffSegueArray : [String] = []
-    
-   
-    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         print("didFinishLaunchingWithOptions11",isPasswordBind)
@@ -160,10 +152,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate,UNUserNo
         if #available(iOS 13.0, *) {
             window?.overrideUserInterfaceStyle = UIUserInterfaceStyle.light
         }
-        
-        
-       
-        
+     
         let deviceid = UIDevice.current.identifierForVendor?.uuidString
         print("deviceiddeviceid",deviceid)
         if #available(iOS 10.0, *) {
@@ -269,6 +258,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate,MessagingDelegate,UNUserNo
         Messaging.messaging().apnsToken = deviceToken
         let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
         print("APNs device token: \(deviceTokenString)")
+        
+        
         strDeviceToken = Util.checkNil(deviceTokenString) as String
         
         if(strDeviceToken.count == 0) {

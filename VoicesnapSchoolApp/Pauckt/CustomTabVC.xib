@@ -28,24 +28,25 @@
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="36P-qY-ob4">
-                    <rect key="frame" x="20" y="748" width="353" height="70"/>
+                    <rect key="frame" x="20" y="763" width="353" height="55"/>
                     <subviews>
                         <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="enU-60-k5j">
-                            <rect key="frame" x="20" y="5" width="313" height="60"/>
+                            <rect key="frame" x="20" y="5" width="313" height="45"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="l9P-wg-wLm">
-                                    <rect key="frame" x="0.0" y="0.0" width="156.66666666666666" height="60"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="156.66666666666666" height="45"/>
                                     <color key="tintColor" systemColor="systemBlueColor"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                    <state key="normal" image="house.fill" catalog="system"/>
+                                    <state key="normal" image="house" catalog="system"/>
                                     <connections>
                                         <action selector="changeIndex:" destination="-1" eventType="touchUpInside" id="Ej1-ps-vbD"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g2f-xr-02B">
-                                    <rect key="frame" x="156.66666666666663" y="0.0" width="156.33333333333337" height="60"/>
+                                    <rect key="frame" x="156.66666666666663" y="0.0" width="156.33333333333337" height="45"/>
+                                    <color key="tintColor" red="0.047058824450000002" green="0.047058824450000002" blue="0.047058824450000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                    <state key="normal" image="history"/>
+                                    <state key="normal" image="ticket.fill" catalog="system"/>
                                     <connections>
                                         <action selector="changeIndex:" destination="-1" eventType="touchUpInside" id="dr3-s8-mX5"/>
                                     </connections>
@@ -55,7 +56,7 @@
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="70" id="75e-Td-57O"/>
+                        <constraint firstAttribute="height" constant="55" id="75e-Td-57O"/>
                         <constraint firstItem="enU-60-k5j" firstAttribute="leading" secondItem="36P-qY-ob4" secondAttribute="leading" constant="20" id="CFI-Uj-OFq"/>
                         <constraint firstAttribute="bottom" secondItem="enU-60-k5j" secondAttribute="bottom" constant="5" id="XIT-Kw-Val"/>
                         <constraint firstAttribute="trailing" secondItem="enU-60-k5j" secondAttribute="trailing" constant="20" id="hU6-R2-dYp"/>
@@ -78,13 +79,13 @@
         </view>
     </objects>
     <resources>
-        <image name="history" width="24" height="24"/>
-        <image name="house.fill" catalog="system" width="128" height="104"/>
+        <image name="house" catalog="system" width="128" height="104"/>
+        <image name="ticket.fill" catalog="system" width="128" height="86"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

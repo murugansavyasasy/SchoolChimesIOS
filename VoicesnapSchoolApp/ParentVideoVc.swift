@@ -657,6 +657,7 @@ class ParentVideoVc: UIViewController,UITableViewDataSource,UITableViewDelegate,
             let segueid = segue.destination as! VimeoVideoDetailVC
             segueid.strVideoUrl = strSelectedVideoUrl
             segueid.videoId = strSelectedVideoId
+            segueid.Html = iframeURL
             segueid.downloadVideoID = getVideoId
             segueid.getDownloadShowID = downloadShowID
             

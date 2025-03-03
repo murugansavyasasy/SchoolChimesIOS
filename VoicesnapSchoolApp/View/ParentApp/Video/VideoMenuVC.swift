@@ -62,6 +62,7 @@ class VideoMenuVC: UITableViewController ,Apidelegate,UISearchBarDelegate {
     var menuId : String!
     var popupLoading : KLCPopup = KLCPopup()
     var getDownloadShowID : Int!
+    var ifram : String?
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Video3")
@@ -233,11 +234,19 @@ class VideoMenuVC: UITableViewController ,Apidelegate,UISearchBarDelegate {
      
         print("GETVIDEOID1\(detailsDictionary["VideoId"])")
       
-        print("GEVimeoUrl1\(detailsDictionary["VimeoUrl"])")
+        print("GEVimeoUrl1Iframe\(detailsDictionary["Iframe"])")
+        
         strSelectedVideoUrl = String(describing: detailsDictionary["VimeoUrl"]!)
+        ifram = String(describing: detailsDictionary["Iframe"]!)
         strSelectedVideoId = String(describing: detailsDictionary["VimeoId"]!)
         getDownloadShowID = Int(String(describing:detailsDictionary["isDownload"]!))
-        
+        if let vimeoURLString = detailsDictionary["VimeoUrl"] as? String,
+           let vimeoURL = URL(string: vimeoURLString),
+           vimeoURL.host?.contains("vimeo.com") == true {
+            print("Valid Vimeo URL: \(vimeoURLString)")
+        } else {
+            print("Invalid or missing Vimeo URL")
+        }
         if let questionMarkIndex = strSelectedVideoId.firstIndex(of: "?") {
             let result = String(strSelectedVideoId[..<questionMarkIndex]) // Extract substring before "?"
             print("Digits before '?': \(result)")
@@ -426,6 +435,7 @@ class VideoMenuVC: UITableViewController ,Apidelegate,UISearchBarDelegate {
             let segueid = segue.destination as! VimeoVideoDetailVC
             segueid.strVideoUrl = strSelectedVideoUrl
             segueid.videoId = strSelectedVideoId
+//            segueid.Html = ifram
             segueid.downloadVideoID = getVideoId
             segueid.getDownloadShowID = getDownloadShowID
            
@@ -549,9 +559,6 @@ class VideoMenuVC: UITableViewController ,Apidelegate,UISearchBarDelegate {
                 //
                 menuId = AdConstant.getMenuId as String
                 print("menu_id:\(AdConstant.getMenuId)")
-                
-                
-                
                 let AdModal = AdvertismentModal()
                 AdModal.MemberId = ChildId
                 AdModal.MemberType = "student"
@@ -560,44 +567,22 @@ class VideoMenuVC: UITableViewController ,Apidelegate,UISearchBarDelegate {
                 }
                 AdModal.MenuId = menuId
                 AdModal.SchoolId = SchoolId
-                
-                
                 let admodalStr = AdModal.toJSONString()
-                
-                
                 print("admodalStr2222",admodalStr)
                 AdvertismentRequest.call_request(param: admodalStr!) { [self]
-                    
                     (res) in
-                    
                     let adModalResponse : [AdvertismentResponse] = Mapper<AdvertismentResponse>().mapArray(JSONString: res)!
-                    
-                    
-                    
-                    //            var adDataList : [MenuData] = []
                     for i in adModalResponse {
                         if i.Status.elementsEqual("1") {
                             print("AdConstantadDataListtt",AdConstant.adDataList.count)
-                            
-                            
-                            
-                            
                             AdConstant.adDataList.removeAll()
                             AdConstant.adDataList = i.data
-                            
                             startTimer()
-                            
                         }else{
                             
                         }
-                        
                     }
-                    
                     print("admodalStr_count", AdConstant.adDataList .count)
-                    
-                    
-                    
-                    //
                 }
                 
                 
@@ -605,25 +590,18 @@ class VideoMenuVC: UITableViewController ,Apidelegate,UISearchBarDelegate {
                 print("Error fetching data: \(error)")
             }
         }
-        
-        
+      
         self.TextDetailstableview.backgroundView = noview
-        
-        
-        
-        
+  
     }
     
     func startTimer() {
         if AdConstant.adDataList.count > 0 {
-            
-            
             let url : String =  AdConstant.adDataList[0].contentUrl!
             self.imgaeURl = AdConstant.adDataList[0].redirectUrl!
             self.AdName = AdConstant.adDataList[0].advertisementName!
             self.getadID = AdConstant.adDataList[0].id!
             self.imgView.sd_setImage(with: URL(string: url), placeholderImage: UIImage(named: ""))
-            
             AdView.isHidden = false
             adViewHeight.constant = 80
             

@@ -23,14 +23,24 @@ class CustomTabVC: UIViewController {
     @IBOutlet weak var tabView: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        tabView.layer.cornerRadius = 35
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = [
+            UIColor(red: 1.0, green: 0.9, blue: 0.9, alpha: 1.0).cgColor,
+            UIColor.white.cgColor
+        ]
+        gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
+        gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
+        
+        gradientLayer.frame = UIScreen.main.bounds
+        view.layer.insertSublayer(gradientLayer, at: 0)
+        tabView.layer.cornerRadius = 28
         tabView.layer.shadowColor = UIColor.black.cgColor
         tabView.layer.shadowOffset = CGSize(width: 0, height: 2)
         tabView.layer.shadowRadius = 5
         tabView.layer.shadowOpacity = 0.3
         rewardsBtn.tintColor = .black
-        hoemBtn.layer.cornerRadius = 30
-        rewardsBtn.layer.cornerRadius = 30
+        hoemBtn.layer.cornerRadius = 22
+        rewardsBtn.layer.cornerRadius = 22
         hoemBtn.backgroundColor = selectColor
         switchToTab(index: 0) // Default to first tab
     }

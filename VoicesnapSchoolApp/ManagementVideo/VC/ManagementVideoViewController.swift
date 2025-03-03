@@ -141,16 +141,10 @@ class ManagementVideoViewController: UIViewController,UITableViewDataSource,UITa
             let vc = ManagementVimeoViewController(nibName: nil, bundle: nil)
             vc.Id = messgae.ID
             cell.newLblHight.constant = 0
-            
             vc.strVideoUrl = messgae.URL
-           
             vc.downloadId = messgae.ID
             vc.getDownloadShowID = messgae.isDownload
-            
             var  strSelectedVideoId = messgae.VimeoId
-         
-         
-         
             if let questionMarkIndex = strSelectedVideoId?.firstIndex(of: "?") {
                 let result = String(strSelectedVideoId![..<questionMarkIndex]) // Extract substring before "?"
              print("Digits before '?': \(result)")

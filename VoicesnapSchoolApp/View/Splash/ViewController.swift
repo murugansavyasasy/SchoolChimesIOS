@@ -8,6 +8,7 @@
 
 import UIKit
 import ObjectMapper
+import WebKit
 
 
 extension UIViewController {
@@ -38,14 +39,15 @@ extension UIViewController {
     }
 }
 
-class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,Apidelegate                        ,UIWebViewDelegate,UITextFieldDelegate{
+class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,Apidelegate                        ,UIWebViewDelegate,UITextFieldDelegate,WKNavigationDelegate{
     @IBOutlet weak var myLoginTableView: UITableView!
     @IBOutlet weak var PopupChooseLogin: UIView!
     @IBOutlet weak var CountryTable: UITableView!
     @IBOutlet var ChooseCountryPopupView: UIView!
     @IBOutlet weak var TermsConditionView: UIView!
-    @IBOutlet weak var myWebView: UIWebView!
+   
     
+    @IBOutlet weak var myWebView: WKWebView!
     @IBOutlet var PopupChangePassword: UIView!
     @IBOutlet weak var ShowExistingPswdButton: UIButton!
     @IBOutlet weak var ShowNewPswdButton: UIButton!
@@ -108,7 +110,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         super.viewDidLoad()
         checkCountry = "yes"
         let userDefaults = UserDefaults.standard
-        
+        myWebView.navigationDelegate = self
         
         appDelegate.isPasswordBind =
         String(describing: 1)
@@ -125,9 +127,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         
         
      
-        
-        
-        
         isAppAlreadyLaunchedOnce()
         
         
@@ -535,13 +534,13 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
 
         let url = URL(string: TERMS_AND_CONDITION)
         print("urlurlurl",url)
-        myWebView.loadRequest(URLRequest(url: url!))
-        
+        myWebView.load(URLRequest(url: url!))
+     
     }
     
-    func webViewDidFinishLoad(_ webView: UIWebView) {
-        hideLoading()
-    }
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+            self.hideLoading()
+        }
     
     //MARK: BUTTON ACTION
     
@@ -790,8 +789,15 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                         UserDefaults.standard.set(MobilelengthStr, forKey: MOBILE_LENGTH)
                         
                         
+//                        if String(describing: dict["mobile_no_hint"]!) != ""{
+//                            let MobilePlaceholder = String(describing: dict["mobile_no_hint"]!)
+//                            UserDefaults.standard.set(MobilePlaceholder, forKey: Mobile_Place_holder)
+//                            
+//                        }
+                        
                         let MobilePlaceholder = String(describing: dict["mobile_no_hint"]!)
                         UserDefaults.standard.set(MobilePlaceholder, forKey: Mobile_Place_holder)
+                        
                         strBaseUrl = dict["BaseUrl"] as! NSString
                         //Get Parent and Staff Ids
                         assignParentStaffIDS(selectedDict: dict)

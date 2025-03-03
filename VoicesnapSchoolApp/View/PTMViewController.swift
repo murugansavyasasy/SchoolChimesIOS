@@ -447,26 +447,16 @@ print("studentId",studentId)
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if segment1.backgroundColor == UIColor(named: "CheckBoxSelectColor") {
             let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "TimeHeader") as! TimeHeader
-
-
-
-        
-
             headerView.meetingLbl.text = exNames[section].eventName
             headerView.modeLbl.text = exNames[section].event_mode
-
             headerView.nameAndSubjectLbl.text = exNames[section].subjectName + " - " + exNames[section].staff_name
-            
-            
-            
             headerView.holeView.layer.cornerRadius = 8
-                       
-                        headerView.holeView.layer.masksToBounds = true
-                        headerView.holeView.layer.shadowColor = UIColor.black.cgColor
-                        headerView.holeView.layer.shadowOpacity = 0.5
-                        headerView.holeView.layer.shadowOffset = CGSize(width: 4, height: 4)
-                         headerView.holeView.layer.shadowRadius = 5
-                        headerView.holeView.layer.masksToBounds = false
+            headerView.holeView.layer.masksToBounds = true
+            headerView.holeView.layer.shadowColor = UIColor.black.cgColor
+            headerView.holeView.layer.shadowOpacity = 0.5
+            headerView.holeView.layer.shadowOffset = CGSize(width: 4, height: 4)
+            headerView.holeView.layer.shadowRadius = 5
+            headerView.holeView.layer.masksToBounds = false
             
             return headerView
         }else{

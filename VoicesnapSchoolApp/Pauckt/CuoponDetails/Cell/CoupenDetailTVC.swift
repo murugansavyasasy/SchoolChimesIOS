@@ -9,6 +9,7 @@ import UIKit
 
 class CoupenDetailTVC: UITableViewCell, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
+   
     @IBOutlet weak var collectView: UICollectionView!
 
     override func awakeFromNib() {

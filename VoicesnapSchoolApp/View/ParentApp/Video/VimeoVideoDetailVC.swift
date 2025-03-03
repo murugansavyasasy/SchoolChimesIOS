@@ -12,9 +12,10 @@ import AVFoundation
 import PlayerKit
 import WebKit
 
-class VimeoVideoDetailVC: UIViewController,UIWebViewDelegate {
+class VimeoVideoDetailVC: UIViewController,UIWebViewDelegate, WKNavigationDelegate {
    
     
+   
     @IBOutlet weak var fullView: UIView!
     @IBOutlet weak var downloadLbl: UILabel!
     @IBOutlet weak var gifImg: UIImageView!
@@ -26,6 +27,9 @@ class VimeoVideoDetailVC: UIViewController,UIWebViewDelegate {
     
     @IBOutlet weak var videoDownloadView: UIView!
     @IBOutlet weak var webKitView: WKWebView!
+    
+    
+    
     var strVideoUrl = String()
     var videoId = String()
     let player = RegularPlayer()
@@ -38,24 +42,29 @@ class VimeoVideoDetailVC: UIViewController,UIWebViewDelegate {
     var getVideoPath : String!
     var downloadVideoID : String!
     var getDownloadShowID : Int!
+    var Html : String?
     override func viewDidLoad(){
         
         super.viewDidLoad()
-        //
-        
-        
-        
+        webKitView.navigationDelegate = self
         progressView.isHidden = true
-      
         progressShowView.isHidden = true
-
         progressCountLbl.isHidden = true
         
         gifImg.isHidden = true
         
-        print("ManageVideo")
+        print("ManageVideo",Html)
         print("Video4",downloadVideoID)
         print("getDownloadShowID",getDownloadShowID)
+        
+        
+        WKWebsiteDataStore.default().removeData(ofTypes: [WKWebsiteDataTypeCookies, WKWebsiteDataTypeDiskCache], modifiedSince: Date.distantPast)
+                       {
+            print("Cache and cookies cleared") }
+        
+        
+        URLCache.shared.removeAllCachedResponses()
+        HTTPCookieStorage.shared.cookies?.forEach { HTTPCookieStorage.shared.deleteCookie($0) }
         
         videoPlayer()
         videoDownloadView.isHidden = true
@@ -72,36 +81,26 @@ class VimeoVideoDetailVC: UIViewController,UIWebViewDelegate {
         }
         let downloadGesture = UITapGestureRecognizer(target: self, action: #selector(getVideoDownload))
         videoDownloadView.addGestureRecognizer(downloadGesture)
-                    
-      
-      
-      
-        
-        
+ 
     }
     
     func videoPlayer(){
+        self.showLoading()
         let videoid = videoId.components(separatedBy:"/")
-        print("videoid",videoid)
-        if let yourVimeoLink = URL(string: "https://player.vimeo.com/video/\(videoid[0])")  {
-            print("yourVimeoLink",yourVimeoLink)
-            self.showLoading()
-            self.webKitView.backgroundColor = UIColor.black
-            self.webKitView.isOpaque = false
-            webKitView.contentMode = UIView.ContentMode.scaleToFill
-            webKitView.load(URLRequest(url:yourVimeoLink))
-            webKitView.contentMode = UIView.ContentMode.scaleToFill
-            
-//
-            
-           
+        self.webKitView.configuration.allowsInlineMediaPlayback = true
+        self.webKitView.backgroundColor = UIColor.black
+        self.webKitView.isOpaque = false
+        self.webKitView.configuration.mediaTypesRequiringUserActionForPlayback = []
+        if let url = URL(string: Html ?? "") {
+            self.webKitView.load(URLRequest(url: url))
         }
     }
     
     
+    
+    
     func videoPlayer2(){
         let player = RegularPlayer()
-        
         view.addSubview(player.view) // RegularPlayer conforms to `ProvidesView`, so we can add its view
         if let yourVimeoLink = URL(string: "https://player.vimeo.com/video/423522889")  {
             player.set(AVURLAsset(url: yourVimeoLink))
@@ -126,12 +125,16 @@ class VimeoVideoDetailVC: UIViewController,UIWebViewDelegate {
         }
     }
     
-    func webViewDidFinishLoad(_ webView: UIWebView) {
-        self.hideLoading()
-    }
+//    func webViewDidFinishLoad(_ webView: UIWebView) {
+//        self.hideLoading()
+//    }
+//    
     
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+            self.hideLoading()
+        }
     func showLoading() -> Void {
-        //  self.view.window?.userInteractionEnabled = false
+//          self.view.window?.userInteractionEnabled = false
         hud = MBProgressHUD.showAdded(to: self.view, animated: true)
         hud.animationType = MBProgressHUDAnimationFade
         hud.labelText = "Loading"
@@ -153,7 +156,7 @@ class VimeoVideoDetailVC: UIViewController,UIWebViewDelegate {
     
     @objc func getVideoDownload () {
        
-        btnStart()
+       
            
         let urlString = bsaeUrl +  downloadVideoID
         
@@ -207,16 +210,8 @@ class VimeoVideoDetailVC: UIViewController,UIWebViewDelegate {
                                    downloadVideo(from: url) { savedURL in
                                        if let savedURL = savedURL {
                                            
-                                           
-                                         
-                                           
-                                           
-                                           
-                                           
-                                           
                                            print("Downloaded video saved at: \(savedURL)")
                                            getVideoPath = savedURL.absoluteString
-                                           
                                            
                                            // Use the saved URL as needed
                                        } else {
@@ -240,6 +235,8 @@ class VimeoVideoDetailVC: UIViewController,UIWebViewDelegate {
 
            // Start the request
            task.resume()
+        
+        btnStart()
    }
    
     

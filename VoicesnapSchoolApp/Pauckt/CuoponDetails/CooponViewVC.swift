@@ -7,7 +7,7 @@
 //
 
 import UIKit
-
+import ObjectMapper
 class CooponViewVC: UIViewController,UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate,UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var stackView: UIStackView!
@@ -18,6 +18,7 @@ class CooponViewVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
     var currentIndex = 0
     var autoScrollTimer: Timer?
     var timer: Timer?
+    var source_Link : String?
     override func viewDidLoad() {
         super.viewDidLoad()
         shareBtn.layer.cornerRadius = 15
@@ -105,4 +106,7 @@ class CooponViewVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width, height:collectionView.frame.height)
     }
+    
+    
+   
 }

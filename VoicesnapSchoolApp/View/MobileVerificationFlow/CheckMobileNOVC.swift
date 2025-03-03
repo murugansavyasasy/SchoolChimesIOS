@@ -38,7 +38,7 @@ class CheckMobileNOVC: UIViewController,UITextFieldDelegate,Apidelegate{
         view.addGestureRecognizer(tap)
         let MobileLenghtStr : String = UserDefaults.standard.object(forKey: MOBILE_LENGTH) as! String
         
-        let MobilePlaceHolderStr : String = UserDefaults.standard.object(forKey: Mobile_Place_holder) as! String
+        let MobilePlaceHolderStr : String = UserDefaults.standard.object(forKey: Mobile_Place_holder) as? String ?? ""
 
         ApiMobileLength = Int(MobileLenghtStr)! + 1
         

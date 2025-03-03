@@ -44,17 +44,12 @@ class ManagementVimeoViewController: UIViewController,UIWebViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         progressView.isHidden = true
-      
         progressShowView.isHidden = true
-
         progressCountLbl.isHidden = true
         gifImg.isHidden = true
-        
         videoView.isHidden = true
         downloadLbl.isHidden = true
-        
         videoPlayer()
-        
         CallReadStatusUpdateApi(Id, VideoType)
         
         let backGesture = UITapGestureRecognizer(target: self, action: #selector(back))
@@ -70,6 +65,15 @@ class ManagementVimeoViewController: UIViewController,UIWebViewDelegate {
             downloadLbl.isHidden = true
             overAllView.isHidden = true
         }
+        
+        WKWebsiteDataStore.default().removeData(ofTypes: [WKWebsiteDataTypeCookies, WKWebsiteDataTypeDiskCache], modifiedSince: Date.distantPast)
+                       {
+            print("Cache and cookies cleared") }
+        
+        URLCache.shared.removeAllCachedResponses()
+        HTTPCookieStorage.shared.cookies?.forEach { HTTPCookieStorage.shared.deleteCookie($0) }
+        
+        
         
         let videoGest = UITapGestureRecognizer(target: self, action: #selector(getVideoDownload))
         videoView.addGestureRecognizer(videoGest)
