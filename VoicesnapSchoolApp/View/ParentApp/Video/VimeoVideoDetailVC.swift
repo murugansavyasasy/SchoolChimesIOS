@@ -156,7 +156,10 @@ class VimeoVideoDetailVC: UIViewController,UIWebViewDelegate, WKNavigationDelega
     
     @objc func getVideoDownload () {
        
-       
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [self] in
+            btnStart()
+            
+        }
            
         let urlString = bsaeUrl +  downloadVideoID
         
@@ -236,7 +239,7 @@ class VimeoVideoDetailVC: UIViewController,UIWebViewDelegate, WKNavigationDelega
            // Start the request
            task.resume()
         
-        btnStart()
+       
    }
    
     
@@ -271,12 +274,8 @@ class VimeoVideoDetailVC: UIViewController,UIWebViewDelegate, WKNavigationDelega
             print("getVideoPath", getVideoPath)
             if progressView.progress*100 == 100 {
                 progressShowView.isHidden = true
-                
-                
                 progressCountLbl.isHidden = true
                 gifImg.isHidden = true
-                
-                
                 _ = SweetAlert().showAlert("", subTitle: getVideoPath, style: .none, buttonTitle: "Ok", buttonColor: .black){
                     (okClick) in
                     if okClick{
@@ -286,13 +285,12 @@ class VimeoVideoDetailVC: UIViewController,UIWebViewDelegate, WKNavigationDelega
                     }
                 }
             }
-
-
             print("progressView progressView", progressView.progress)
                progressView.setProgress(progressView.progress, animated: true)
                if(progressView.progress == 1.0)
                {
                    
+
                    print(" progressView progressView 34444444", progressView.progress)
                    progressBarTimer.invalidate()
                    isRunning = false

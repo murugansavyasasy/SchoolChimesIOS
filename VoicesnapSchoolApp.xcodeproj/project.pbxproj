@@ -3086,9 +3086,9 @@
 			isa = PBXGroup;
 			children = (
 				84D278C92C88635F00914E61 /* CheckBox.swift */,
+				846666692C7748E2008E7F24 /* ParentSide */,
 				841ED6312C8F4AB100A65EEA /* StaffSide */,
 				846666702C774C8B008E7F24 /* BothStaffParentTv */,
-				846666692C7748E2008E7F24 /* ParentSide */,
 			);
 			name = PTMVc;
 			path = View;
