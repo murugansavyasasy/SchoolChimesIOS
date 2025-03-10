@@ -17,6 +17,7 @@ class cancelTableViewCell: UITableViewCell,UICollectionViewDelegate,UICollection
     
     @IBOutlet weak var backView: UIView!
     
+    @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
     @IBOutlet weak var frontView: UIView!
     @IBOutlet weak var holeview: UIViewX!
     @IBOutlet weak var lineview: UIViewX!
@@ -73,7 +74,13 @@ class cancelTableViewCell: UITableViewCell,UICollectionViewDelegate,UICollection
             cell.timeHoleView.backgroundColor = .white      // Default to white in case of unexpected values
             cell.isUserInteractionEnabled = true
         }
-
+        if indexPath.item == availableSlot.count - 1 {  // Update height after last cell loads
+            DispatchQueue.main.async {
+                self.collectionViewHeight.constant = collectionView.collectionViewLayout.collectionViewContentSize.height
+                self.layoutIfNeeded() // Refresh layout
+            }
+        }
+            
         return cell
     }
 

@@ -396,13 +396,7 @@ class CheckAviableViewController: UIViewController,UITableViewDelegate,UITableVi
                    cell.deleteAction = { [weak self] indexPath in
                        self?.deleteTimeSlot(at: indexPath)
                    }
-                   
-        
         }else{
-            
-            
-
-            
             cell.statusLbl.isHidden = false
             cell.timeLbl.text = validatedata[indexPath.section].slots[indexPath.row].from_time + "-" + validatedata[indexPath.section].slots[indexPath.row].to_time
             
@@ -412,7 +406,7 @@ class CheckAviableViewController: UIViewController,UITableViewDelegate,UITableVi
             if validatedata[indexPath.section].slots[indexPath.row].slot_Availablity == "Not Available"{
                 
                 cell.deleteView.isHidden = true
-                checkAviablityView.isHidden = true
+                checkAviablityView.isHidden = false
                  
                 cell.statusLbl.textColor = .red
                 

@@ -36,6 +36,18 @@ struct GetTeachData  {
 class PTMViewController: UIViewController ,UITableViewDelegate,UITableViewDataSource,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout, sloSlectionDataDelegate{
     func getSelectedSlot(selectedIndexPath: [AvailableSlot]?) {
         self.availableSlot = selectedIndexPath ?? []
+        var ids = [Int]()
+        for i in 0..<availableSlot.count {  // Corrected to iterate `availableSlots`
+            for j in 0..<availableSlot[i].slots.count {
+                if availableSlot[i]
+                    .slots[j].select == 1 && availableSlot[i].isBooked != true {
+                    ids.append(availableSlot[i].slots[j].SoltId)  // Correct property name
+                }
+            }
+        }
+        
+        DefaultsKeys.bookingSlotId = ids
+        bookSlotBtn.isHidden = DefaultsKeys.bookingSlotId.isEmpty
         tv.reloadData()
         
     }
@@ -338,19 +350,14 @@ class PTMViewController: UIViewController ,UITableViewDelegate,UITableViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // Deselect the previously selected cell
-        
         
         dropDownLbl.text = "All subjects"
-        
-         
+        DefaultsKeys.bookingSlotId.removeAll()
+        bookSlotBtn.isHidden = true 
         getSubjectId = 0
         ClassTeacherId = 0
-        
         ClickID = indexPath.row
-        
         let selectedDate = dates[indexPath.item]
-        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd/MM/yyyy" // Set your desired format
         let dateString = dateFormatter.string(from: selectedDate)
@@ -657,11 +664,11 @@ class PTMViewController: UIViewController ,UITableViewDelegate,UITableViewDataSo
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let selectedSlotCount = availableSlot[indexPath.section].slots.count
         
-        if segment1.backgroundColor == UIColor(named: "CheckBoxSelectColor") {
-            return CGFloat(selectedSlotCount * 34)
-        } else {
+//        if segment1.backgroundColor == UIColor(named: "CheckBoxSelectColor") {
+//            return CGFloat(selectedSlotCount * 34)
+//        } else {
             return UITableView.automaticDimension
-        }
+//        }
     }
     
     func groupSlotsByStaffEventSubject(apiResponse: GetTeacherwiseSlotAvailabilityResponse) -> [Event] {
@@ -747,7 +754,6 @@ class PTMViewController: UIViewController ,UITableViewDelegate,UITableViewDataSo
             
             availableSlot.removeAll()
             if teacherWiseSlotResponse.Status == 1  {
-                
                 let groupedEvents = groupSlotsByStaffEventSubject(apiResponse: teacherWiseSlotResponse)
                 for i in 0..<groupedEvents.count {
                     var times = [SlotTime]()  // Correct type for SlotTime array
@@ -772,6 +778,7 @@ class PTMViewController: UIViewController ,UITableViewDelegate,UITableViewDataSo
                 tv.reloadData()
                 cv.reloadData()
             }else{
+                bookSlotBtn.isHidden = true
                 noRecordsView.isHidden = false
                 noRecordsLbl.isHidden =  false
                 noRecordsLbl.text = teacherWiseSlotResponse.Message
@@ -840,7 +847,7 @@ class PTMViewController: UIViewController ,UITableViewDelegate,UITableViewDataSo
             let teacherWiseSlotResponse : SubjectListForStudentResponse = Mapper<SubjectListForStudentResponse>().map(JSONString: res)!
             if teacherWiseSlotResponse.Status == 1  {
                 dropDownData = teacherWiseSlotResponse.data
-
+                bookSlotBtn.isHidden = false
                 tv.dataSource = self
                 tv.delegate = self
                 tv.reloadData()
@@ -870,6 +877,7 @@ class PTMViewController: UIViewController ,UITableViewDelegate,UITableViewDataSo
                 
                 
                 studSlotData = slotAvailabilityResponse.data
+                
                 cv.dataSource = self
                 cv.delegate = self
                 cv.reloadData()
@@ -1043,15 +1051,6 @@ class PTMViewController: UIViewController ,UITableViewDelegate,UITableViewDataSo
     
     
     @IBAction func bookSlotAct(_ sender: Any) {
-        var ids = [Int]()
-        for i in 0..<availableSlot.count {  // Corrected to iterate `availableSlots`
-            for j in 0..<availableSlot[i].slots.count {
-                if availableSlot[i].slots[j].select == 1 {
-                    ids.append(availableSlot[i].slots[j].SoltId)  // Correct property name
-                }
-            }
-        }
-        DefaultsKeys.bookingSlotId = ids
         if DefaultsKeys.bookingSlotId.count == 0{
             
             let refreshAlert = UIAlertController(title: "", message: "Select time", preferredStyle: UIAlertController.Style.alert)
