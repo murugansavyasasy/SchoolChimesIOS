@@ -37,6 +37,7 @@ class PTMViewController: UIViewController ,UITableViewDelegate,UITableViewDataSo
     func getSelectedSlot(selectedIndexPath: [AvailableSlot]?) {
         self.availableSlot = selectedIndexPath ?? []
         var ids = [Int]()
+        var indexPathsToReload = [IndexPath]()
         for i in 0..<availableSlot.count {  // Corrected to iterate `availableSlots`
             for j in 0..<availableSlot[i].slots.count {
                 if availableSlot[i]
@@ -44,12 +45,16 @@ class PTMViewController: UIViewController ,UITableViewDelegate,UITableViewDataSo
                     ids.append(availableSlot[i].slots[j].SoltId)  // Correct property name
                 }
             }
+            indexPathsToReload.append(IndexPath(row: 0, section: i))
         }
         
         DefaultsKeys.bookingSlotId = ids
         bookSlotBtn.isHidden = DefaultsKeys.bookingSlotId.isEmpty
-        tv.reloadData()
-        
+        // Reload only the required rows
+        if !indexPathsToReload.isEmpty {
+            tv.reloadRows(at: indexPathsToReload, with: .automatic)
+            
+        }
     }
     
     
@@ -239,25 +244,25 @@ class PTMViewController: UIViewController ,UITableViewDelegate,UITableViewDataSo
             print("Selected item: \(item) at index: \(index)")
             dropDownLbl.text = item
             if item == "All subjects"{
-             
-            getSubjectId = 0
-            ClassTeacherId = 0
+                
+                getSubjectId = 0
+                ClassTeacherId = 0
             }
             else if item == "Class Teacher"{
-             
-            getSubjectId = 0
-            ClassTeacherId = dropDownData.first?.classTeacherId ?? 0
-             
+                
+                getSubjectId = 0
+                ClassTeacherId = dropDownData.first?.classTeacherId ?? 0
+                
             }
             else{
-             
-            if index < getSubjectIdArr.count {
-            getSubjectId = getSubjectIdArr[index-1]
-            ClassTeacherId = 0
+                
+                if index < getSubjectIdArr.count {
+                    getSubjectId = getSubjectIdArr[index-1]
+                    ClassTeacherId = 0
+                }
+                
             }
-             
-            }
-           
+            
             teacherWiseSlotAvailable(eventDate: getEventDate)
         }
         drop_down.dataSource = sub_names
@@ -353,7 +358,7 @@ class PTMViewController: UIViewController ,UITableViewDelegate,UITableViewDataSo
         
         dropDownLbl.text = "All subjects"
         DefaultsKeys.bookingSlotId.removeAll()
-        bookSlotBtn.isHidden = true 
+        bookSlotBtn.isHidden = true
         getSubjectId = 0
         ClassTeacherId = 0
         ClickID = indexPath.row
@@ -662,13 +667,21 @@ class PTMViewController: UIViewController ,UITableViewDelegate,UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let selectedSlotCount = availableSlot[indexPath.section].slots.count
         
-//        if segment1.backgroundColor == UIColor(named: "CheckBoxSelectColor") {
-//            return CGFloat(selectedSlotCount * 34)
-//        } else {
+        if segment1.backgroundColor == UIColor(named: "CheckBoxSelectColor") {
+            let items = availableSlot[indexPath.section].slots.count
+            
+            // Ensure totalHeight is even
+            var totalHeight = items / 2
+            if items % 2 != 0 {  // If items count is odd, add 1 to make it even
+                totalHeight += 1
+            }
+            
+            return CGFloat(totalHeight*50)+10 // Extra padding for aesthetics
+        } else {
             return UITableView.automaticDimension
-//        }
+        }
+
     }
     
     func groupSlotsByStaffEventSubject(apiResponse: GetTeacherwiseSlotAvailabilityResponse) -> [Event] {
