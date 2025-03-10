@@ -11,13 +11,12 @@ import UIKit
 protocol sloSlectionDataDelegate {
     func getSelectedSlot(selectedIndexPath:[AvailableSlot]?)
 }
+
 class cancelTableViewCell: UITableViewCell,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
     
     @IBOutlet weak var cv: UICollectionView!
     
     @IBOutlet weak var backView: UIView!
-    
-    @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
     @IBOutlet weak var frontView: UIView!
     @IBOutlet weak var holeview: UIViewX!
     @IBOutlet weak var lineview: UIViewX!
@@ -46,6 +45,7 @@ class cancelTableViewCell: UITableViewCell,UICollectionViewDelegate,UICollection
         self.availableSlot = slots[selectedIndex].slots
         self.selectedIndex = selectedIndex
         cv.reloadData()
+ 
     }
 
     // MARK: - CollectionView DataSource
@@ -54,7 +54,9 @@ class cancelTableViewCell: UITableViewCell,UICollectionViewDelegate,UICollection
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as! TimeCollectionViewCell
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifier, for: indexPath) as? TimeCollectionViewCell else {
+            fatalError("Unable to dequeue TimeCollectionViewCell")
+        }
 
         let slotTime = availableSlot[indexPath.item]
         cell.timelbl.text = slotTime.time
@@ -62,28 +64,21 @@ class cancelTableViewCell: UITableViewCell,UICollectionViewDelegate,UICollection
         // Background color logic based on `select` value
         switch slotTime.select {
         case 0:
-            cell.timeHoleView.backgroundColor = .white    // Not selected
+            cell.timeHoleView.backgroundColor = .white
             cell.isUserInteractionEnabled = true
         case 1:
-            cell.timeHoleView.backgroundColor = .systemOrange  // Selected slot
+            cell.timeHoleView.backgroundColor = .systemOrange
             cell.isUserInteractionEnabled = true
         case 2:
-            cell.timeHoleView.backgroundColor = .systemGray5 // Overlapping slot
-            cell.isUserInteractionEnabled = false           // Disable interaction for overlapping slots
+            cell.timeHoleView.backgroundColor = .systemGray5
+            cell.isUserInteractionEnabled = false
         default:
-            cell.timeHoleView.backgroundColor = .white      // Default to white in case of unexpected values
+            cell.timeHoleView.backgroundColor = .white
             cell.isUserInteractionEnabled = true
         }
-        if indexPath.item == availableSlot.count - 1 {  // Update height after last cell loads
-            DispatchQueue.main.async {
-                self.collectionViewHeight.constant = collectionView.collectionViewLayout.collectionViewContentSize.height
-                self.layoutIfNeeded() // Refresh layout
-            }
-        }
-            
+
         return cell
     }
-
     // MARK: - CollectionView Layout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 150, height: 50)
