@@ -4,7 +4,7 @@
 //
 //  Created by Shenll-Mac-04 on 18/07/17.
 //  Copyright © 2017 Shenll-Mac-04. All rights reserved.
-////  
+////
 
 import UIKit
 import AVFoundation
@@ -16,61 +16,34 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
     @IBOutlet weak var cv: UICollectionView!
     
     @IBOutlet weak var InitiateCallOnLbl: UILabel!
-    
-    @IBOutlet weak var sendBtnBottom: NSLayoutConstraint!
     @IBOutlet weak var cvconstant: NSLayoutConstraint!
-    
     @IBOutlet weak var showSheduleInstantCallHeight: NSLayoutConstraint!
-    
-    @IBOutlet weak var tvconstant: NSLayoutConstraint!
-    @IBOutlet weak var dateLbl: UILabel!
     @IBOutlet weak var fsCaleView: FSCalendar!
     
     @IBOutlet weak var calendarView: UIView!
-    
-    @IBOutlet weak var viewRecordTop: NSLayoutConstraint!
-    
     @IBOutlet weak var addFileDefaultLbl: UILabel!
     @IBOutlet weak var doneView: UIView!
-    
-    
     @IBOutlet weak var doNotCallLbl: UILabel!
     
     @IBOutlet weak var selectDateView: UIView!
-    
     @IBOutlet weak var initiateCallLbl: UILabel!
-    
-    
     @IBOutlet weak var initiateCallView: UIView!
     
     @IBOutlet weak var doNotCallView: UIView!
-    @IBOutlet weak var scheduleCallHeight: NSLayoutConstraint!
     @IBOutlet weak var sheduleCallListView: UIView!
-    
-    @IBOutlet weak var tv: UITableView!
-    
-    
     @IBOutlet weak var showScheduleInstantCallView: UIView!
     @IBOutlet weak var selectedDatesLbl: UILabel!
     
-    
     @IBOutlet weak var pathImg: UIImageView!
-    
     @IBOutlet weak var pathLbl: UILabel!
-    
     @IBOutlet weak var instantImg: UIImageView!
-    
     @IBOutlet weak var voiceView: UIView!
     @IBOutlet weak var scheduleView: UIImageView!
-    
     @IBOutlet weak var scheduleCallView: UIView!
     
     @IBOutlet weak var instantCallView: UIView!
-    
     @IBOutlet weak var groupHeadSelectStandardBtn: UIButton!
     @IBOutlet weak var durationLabel: UILabel!
-    @IBOutlet weak var PlayVoiceMsgViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var headerViewHeight: NSLayoutConstraint!
     @IBOutlet weak var TimeTitleLabel: UILabel!
     @IBOutlet weak var TitleLabel: UILabel!
     @IBOutlet weak var ListenVoiceMsglabel: UILabel!
@@ -85,10 +58,10 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
     @IBOutlet weak var sendButton: UIButton!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var VoiceRecordView: UIView!
-    
     @IBOutlet weak var scheduleCallLbl: UILabel!
-    
+    @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
     @IBOutlet weak var instantCallHeadLbl: UILabel!
+    
     //MARK: Voice History
     @IBOutlet var voiceHistoryTableView: UITableView!
     @IBOutlet weak var voiceHistoryView: UIView!
@@ -97,7 +70,6 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
     @IBOutlet weak var NewVoiceRecordingLabel: UILabel!
     @IBOutlet weak var SelectFromVoiceHistoryLabel: UILabel!
     
-    @IBOutlet weak var voiceHistoryViewTop: NSLayoutConstraint!
     var ApiHomeWorkSecondInt = Int()
     var timer = Timer()
     var audioPlayer : AVAudioPlayer!
@@ -120,6 +92,7 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
     var selectedSchoolDictionary = NSMutableDictionary()
     var MaxMinutes = Int()
     var MaxSeconds = Int()
+    var SelectHistory:Bool = false
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var CallerTyepString = String()
     var selectedSchoolsArray = NSMutableArray()
@@ -166,20 +139,11 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
     let rowId = "ScheduleCallCollectionViewCell"
     var SchoolDetailDict = NSDictionary()
     var school_type : String!
-    
-    
-    
-    
-    
-    override func viewDidLoad()
-    {
+    override func viewDidLoad() {
         super.viewDidLoad()
         view.isOpaque = false
         let userDefaults = UserDefaults.standard
-        
         DefaultsKeys.dateArr.removeAll()
-        viewRecordTop.constant = 5
-        cvconstant.constant = 0
         pathLbl.text = ""
         pathImg.isHidden = true
         pathLbl.isHidden = true
@@ -196,11 +160,7 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
         DefaultsKeys.SelectInstantSchedule = 0
         SchoolDetailDict = appDelegate.LoginSchoolDetailArray[0] as! NSDictionary
         school_type = userDefaults.string(forKey: DefaultsKeys.school_type)
-        print("schooltypedd",school_type)
-        print("SchoolDetailDictSchoolDetailDict",SchoolDetailDict)
         cv.isHidden  = true
-        
-        
         cv.register(UINib(nibName: rowId, bundle: nil), forCellWithReuseIdentifier: rowId)
         
         if school_type == "2" {
@@ -220,33 +180,23 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
         fsCaleView.dataSource = self
         
         fsCaleView.allowsMultipleSelection = true
-        scheduleCallHeight.constant = 0
         pathImg.isHidden = true
-        print("VocieMessageVCVocieMessageVC")
         var staffDisplayRole : String!
         staffDisplayRole = userDefaults.string(forKey: DefaultsKeys.staffDisplayRole)
         groupHeadRole = userDefaults.string(forKey: DefaultsKeys.getgroupHeadRole)
-        print("groupHeadRole",groupHeadRole)
-        print("staffDisplayRole",staffDisplayRole)
-        
         
         let doNotCallGes = deleteGesture(target: self, action: #selector(doNotCallAction))
         doNotCallGes.id = 2
         doNotCallView.addGestureRecognizer(doNotCallGes)
-        
-        
-        
         
         let initiateCallGes = deleteGesture(target: self, action: #selector(initiateCallAction))
         initiateCallGes.id = 1
         initiateCallView.addGestureRecognizer(initiateCallGes)
         
         let calendarGes = UITapGestureRecognizer(target: self, action: #selector(calendarAction))
-        
         selectDateView.addGestureRecognizer(calendarGes)
         
         let doneGes = UITapGestureRecognizer(target: self, action: #selector(doneActionVc))
-        
         doneView.addGestureRecognizer(doneGes)
         
         groupHeadSelectStandardBtn.isHidden = true
@@ -255,132 +205,55 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
             
         }
         
-        
-        
         if staffDisplayRole == "Principal" {
             strFromVC = "Principal"
         }
-        
-        
-        
         
         let nc = NotificationCenter.default
         nc.addObserver(self,selector: #selector(VocieMessageVC.catchNotification), name: NSNotification.Name(rawValue: "comeBackMenu"), object:nil)
         sendButton.layer.cornerRadius = 5
         sendButton.layer.masksToBounds = true
         
-        if checkMultipleType == "1" {
-            //            strSchoolID
-            print("viewstrStaffID",strStaffID)
-            print("viewstrSchoolID",strSchoolID)
-        }else{
-            
+        if checkMultipleType != "1" {
             let defaults = UserDefaults.standard
             strStaffID = userDefaults.string(forKey: DefaultsKeys.StaffID)!
             strSchoolID = userDefaults.string(forKey: DefaultsKeys.SchoolD)!
-            print("viewstrStaffID",strStaffID)
-            print("viewstrSchoolID",strSchoolID)
         }
-        
-        
         
         let instantGes  = UITapGestureRecognizer(target: self, action: #selector(instantAction))
         instantCallView.addGestureRecognizer(instantGes)
-        
-        
         let scheduleGes  = UITapGestureRecognizer(target: self, action: #selector(scheduleAction))
         scheduleCallView.addGestureRecognizer(scheduleGes)
-        
-        
         let voiceGes  = UITapGestureRecognizer(target: self, action: #selector(addFileAct))
         voiceView.addGestureRecognizer(voiceGes)
-        
-        
     }
     
-    
-    
-    
-    
     @IBAction func doNotCallAction() {
-        
         timeId = "2"
         timeSS()
     }
     
     @IBAction func instantAction() {
-        
-        
-        print("urlDataInstant",urlData)
         instantImg.image = UIImage(named: "PurpleRadioSelect")
         scheduleView.image = UIImage(named: "RadioNormal")
         DefaultsKeys.SelectInstantSchedule = 0
-        
-        
-        sheduleCallListView.isHidden = true
-        scheduleCallHeight.constant = 0
-        
-        viewRecordTop.constant = 5
-        
         initiateCallView.isHidden = true
         doNotCallView.isHidden = true
-        
+        sheduleCallListView.isHidden = true
         cv.isHidden = true
         selectDateView.isHidden = true
         cvconstant.constant = 0
         calendarView.isHidden  = true
         doneView.isHidden  = true
         fsCaleView.isHidden  = true
-        if  self.fromView == "History" {
-            print("urlDataVoiceHistory",urlData)
-            scheduleCallHeight.constant = 0
-            voiceHistoryViewTop.constant = 100
-            cvconstant.constant = 0
-            
-            
-            //           
-        }else{
-            
-            
-        }
-        
-        
-        
-        
-        
+        checkHistoryArray()
     }
     
     @IBAction func scheduleAction() {
-        
-        print("urlDataurlData11111",urlData)
-        
-        if initiateCallLbl.text != "Time" && doNotCallLbl.text != "Time"  && urlData != nil{
-            
-            
-            
-            
-            if dateArr.count != 0 {
-                enableButton()
-            }else{
-                disableButton()
-            }
-        }else{
-            disableButton()
-            
-        }
-        
-        
-        
-        print("this is schedule")
-        
-        viewRecordTop.constant = 30
+        ValidateField()
         instantImg.image = UIImage(named: "RadioNormal")
         scheduleView.image = UIImage(named: "PurpleRadioSelect")
-        
-        sendBtnBottom.constant = 90
-        
         sheduleCallListView.isHidden = false
-        scheduleCallHeight.constant = 135
         initiateCallView.isHidden = false
         doNotCallView.isHidden = false
         DefaultsKeys.SelectInstantSchedule = 1
@@ -390,35 +263,12 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
         fsCaleView.isHidden  = true
         selectDateView.isHidden = false
         cv.isHidden = false
-        
-        
-        
-        if  self.fromView == "History" {
-            scheduleCallHeight.constant = 135
-            voiceHistoryViewTop.constant = 300
-            cvconstant.constant = 0
-            sendBtnBottom.constant = 90
+        if dateArr.count >= 6{
+            cvconstant.constant = 200
         }else{
-            
-            sendBtnBottom.constant = 50
-            scheduleCallHeight.constant = 135
-            if dateArr.count >= 6{
-                
-                cvconstant.constant = 200
-            }else{
-                
-                cvconstant.constant = CGFloat(30*dateArr.count)
-                
-            }
-            
+            cvconstant.constant = CGFloat(30*dateArr.count)
         }
-        
-        
     }
-    
-    
-    
-    
     override func didReceiveMemoryWarning(){
         super.didReceiveMemoryWarning()
         
@@ -429,7 +279,7 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
     }
     override func viewWillAppear(_ animated: Bool){
         print("viewWillAppeaeeeefrsfsfsfsr",TitleLabel.text)
-//        TitleLabel.text?.translated()
+        //        TitleLabel.text?.translated()
         strCountryCode = UserDefaults.standard.object(forKey: COUNTRY_CODE) as! String
         
         self.callSelectedLanguage()
@@ -564,18 +414,6 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
             self.TitleForStopRecord()
             self.VocieRecordButton.setBackgroundImage(UIImage(named:"VoiceRecordSelect"), for: UIControl.State.normal)
             playVoiceMessageView.isHidden = true
-            PlayVoiceMsgViewHeight.constant = 0
-            if(UIDevice.current.userInterfaceIdiom == .pad){
-                if(headerViewHeight.constant >= 448)
-                {
-                    headerViewHeight.constant = headerViewHeight.constant - 300
-                }
-            }else{
-                if(headerViewHeight.constant >= 348)
-                {
-                    headerViewHeight.constant = headerViewHeight.constant - 110
-                }
-            }
             count = 0
             self.startRecording()
             
@@ -599,40 +437,15 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
         playVoiceMessageView.isHidden = false
         calucalteDuration()
         if(UIDevice.current.userInterfaceIdiom == .pad){
-            
-            PlayVoiceMsgViewHeight.constant = 200
-            if(headerViewHeight.constant <= 558)
-            {
-                headerViewHeight.constant = headerViewHeight.constant + 300
-            }
             count = appDelegate.LoginSchoolDetailArray.count
             self.durationLabel.text = TotaldurationFormat
             self.currentPlayTimeLabel.text = "00.00"
         }else{
-            PlayVoiceMsgViewHeight.constant = 110
-            if(headerViewHeight.constant <= 358)
-            {
-                headerViewHeight.constant = headerViewHeight.constant + 110
-            }
             count = appDelegate.LoginSchoolDetailArray.count
             self.durationLabel.text = TotaldurationFormat
             self.currentPlayTimeLabel.text = "00.00"
         }
-        
-        
-        if DefaultsKeys.SelectInstantSchedule == 0 {
-            self.ValidateField()
-        }else{
-            if initiateCallLbl.text != "Time" &&  doNotCallLbl.text != "Time"  && urlData != nil{
-                
-                self.ValidateField()
-            }else{
-                disableButton()
-                
-            }
-        }
-        
-        
+        self.ValidateField()
         
     }
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
@@ -918,13 +731,6 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
     }
     
     @IBAction func actionSendButton (_ sender: UIButton) {
-        
-        
-        
-        print("durationStcdcfvring",durationString)
-        
-        print("actionSendButtonactionSendButton")
-        print("Princ \(strSchoolID) \(strStaffID)")
         if(Util .isNetworkConnected()){
             if( durationString != "0")
             {
@@ -935,9 +741,6 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
                         self.performSegue(withIdentifier: "VoiceMessageToSchoolSelectionSegue", sender: self)
                     }
                 }else {
-                    
-                    print("strFromVC12",strFromVC)
-                    print("strFromVCdcewcwfw12",urlData)
                     if(strFromVC == "Principal"){
                         if(self.fromView == "Record"){
                             print("THIS23")
@@ -972,6 +775,7 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
     }
     
     @IBAction func actionNewVoiceRecording(){
+        SelectHistory = false
         self.fromView = "Record"
         self.VoiceRecordView.isHidden = false
         self.voiceHistoryView.isHidden = true
@@ -983,7 +787,11 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
     }
     
     @IBAction func actionVoiceRecordingHistory(){
-        disableButton()
+        
+        if DefaultsKeys.SelectInstantSchedule == 0{
+            checkHistoryArray()
+        }
+        SelectHistory = true
         urlData = nil
         calendarView.isHidden  = true
         doneView.isHidden  = true
@@ -996,45 +804,15 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
         self.NewVoicerecordImage.image = UIImage(named: "RadioNormal")
         self.VoiceHistoryImage.image = UIImage(named: "PurpleRadioSelect")
         self.callVoiceHistoryApi()
-        print("DefaultsKeys.SelectInstantScheduleDefaultsKeys.SelectInstantSchedule",DefaultsKeys.SelectInstantSchedule)
-        if DefaultsKeys.SelectInstantSchedule == 0 {
-            scheduleCallHeight.constant = 0
-            voiceHistoryViewTop.constant = 100
-            cvconstant.constant = 0
-            sendBtnBottom.constant = 80
-            
-        }else{
-            
-            if DefaultsKeys.SelectInstantSchedule == 0 {
-                self.ValidateField()
-            }else{
-                if initiateCallLbl.text != "Time" &&  doNotCallLbl.text != "Time"  && urlData != nil{
-                    
-                    self.ValidateField()
-                }else{
-                    disableButton()
-                    
-                }
-            }
-            
-            
-            sendBtnBottom.constant = 10
-            
-            scheduleCallHeight.constant = 135
+        if DefaultsKeys.SelectInstantSchedule != 0 {
+            self.ValidateField()
             scheduleAction()
             if dateArr.count >= 6{
-                
                 cvconstant.constant = 200
             }else{
-                
                 cvconstant.constant = CGFloat(30*dateArr.count)
-                
             }
-            
         }
-        
-        
-        
     }
     
     func checkRecordAction(){
@@ -1044,7 +822,6 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
             
         }else{
             playVoiceMessageView.isHidden = true
-            PlayVoiceMsgViewHeight.constant = 0
             self.disableButton()
         }
     }
@@ -1072,44 +849,30 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
     
     func ValidateField()
     {
-        print("durationString1",durationString)
-        
         if DefaultsKeys.SelectInstantSchedule == 1 {
-            
-            if initiateCallLbl.text == "Time" && initiateCallLbl.text == "Time"  && durationString == "0"{
-                
-                if dateArr.count == 0{
+            if SelectHistory == true{
+                if initiateCallLbl.text != "Time" && doNotCallLbl.text != "Time"  && durationString != "0" && dateArr.count != 0 && self.SelectedVoiceHistoryArray.count > 0 {
+                    enableButton()
+                    
+                }else{
                     disableButton()
                 }
-                else{
+            }else{
+                if initiateCallLbl.text != "Time" && doNotCallLbl.text != "Time"  && durationString != "0" && dateArr.count != 0 && urlData != nil {
                     
                     enableButton()
+                    
+                }else{
+                    disableButton()
                 }
-                
             }
-            
-            else{
+        }else{
+            if durationString != "0" && initiateCallLbl.text != "Time" && doNotCallLbl.text != "Time" && urlData != nil{
                 enableButton()
-                
-            }
-        }
-        else{
-            if durationString == "0" {
-                
-                
-                disableButton()
-                
             }else{
-                
-                enableButton()
-                
+                disableButton()
             }
-            
         }
-        
-        
-        
-        
     }
     
     @objc func actionVoiceHistoryCheckboxButton(sender: UIButton){
@@ -1122,13 +885,21 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
             self.SelectedVoiceHistoryArray.add(dict)
         }
         self.voiceHistoryTableView.reloadData()
-        checkHistoryArray()
+        
+        if DefaultsKeys.SelectInstantSchedule != 0{
+            if initiateCallLbl.text != "Time" && doNotCallLbl.text != "Time"  && durationString != "0" && dateArr.count != 0 && self.SelectedVoiceHistoryArray.count > 0 {
+                self.enableButton()
+            }else{
+                self.disableButton()
+            }
+        }else{
+            checkHistoryArray()
+        }
+        
     }
     
     @objc func actionplayAudioButton(sender: UIButton){
-        // utilObj.printLogKey(printKey: "Sender Tag", printingValue: sender.tag)
         self.SelectedVoiceDict = self.voiceHistoryArray[sender.tag] as! NSDictionary
-        print(self.SelectedVoiceDict)
         DispatchQueue.main.async {
             self.performSegue(withIdentifier: "VoiceMessageToDetailSeg", sender: self)
         }
@@ -1223,41 +994,24 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
             return 190
         }else{
             return 175
-            //                        }
-            
-            
         }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        
         return self.voiceHistoryArray.count
-        
     }
-    
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if dateArr.count == 0{
-            
             return 0
         }else{
-            
             return dateArr.count
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        
-        print("tableViewtableViewtableView")
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: rowId, for: indexPath) as! ScheduleCallCollectionViewCell
         cell.dateLbl.text = dateArr[indexPath.row]
-        
-        
-        print("dateAre3r",dateArr)
-        
-        
-        
         let deleteGes = deleteGesture(target: self, action: #selector(deleteAction))
         deleteGes.id = indexPath.row
         deleteGes.datestring = dateArr[indexPath.row]
@@ -1267,15 +1021,9 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
         
     }
     
-    
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.size.width / 2, height: 100)
     }
-    
-    
-    
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell{
         
@@ -1302,15 +1050,10 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
     
     //MARK: Prepare for Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
-        print("1231212121212")
         if (segue.identifier == "VoiceToPrincipalGroupSegue"){
-            print("checkSchoolId",checkSchoolId)
             if checkSchoolId == "1" {
-                
-                
                 let segueid = segue.destination as! PrincipalGroupSelectionVC
                 segueid.fromViewController = "VoiceToParents"
-                
                 segueid.SchoolID = strSchoolID as NSString
                 segueid.StaffID = strStaffID as NSString
                 segueid.urlData = urlData
@@ -1321,10 +1064,6 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
             }else{
                 let segueid = segue.destination as! PrincipalGroupSelectionVC
                 segueid.fromViewController = "VoiceToParents"
-                
-                
-                print("strSchoolID",strSchoolID)
-                print("strStaff",strStaffID)
                 segueid.SchoolID = strSchoolID as! NSString
                 segueid.StaffID = strStaffID as NSString
                 segueid.urlData = urlData
@@ -1335,7 +1074,6 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
             }
             
         }else if (segue.identifier == "VoiceMessageToSchoolSelectionSegue"){
-            print("SelectedVoiceHistoryArray",SelectedVoiceHistoryArray)
             let segueid = segue.destination as! SchoolSelectionVC
             segueid.urlData = urlData
             segueid.fromView = self.fromView
@@ -1362,12 +1100,9 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
         let defaults = UserDefaults.standard
         var initialTime = DefaultsKeys.initialDisplayDate
         var doNotDial =  DefaultsKeys.doNotDialDisplayDate
-        print("initialTime",initialTime)
-        print("doNotDial",doNotDial)
         
         if DefaultsKeys.SelectInstantSchedule == 0 {
             let requestStringer = baseUrlString! + SendVoiceToEntireSchools
-            print("requestStringerOL56ty44444",requestStringer)
             
             let arrUserData : NSMutableArray = []
             let requestString = requestStringer.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
@@ -1377,15 +1112,12 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
                                               "isEmergency":"0",
                                               "School" : selectedSchoolsArray, COUNTRY_CODE: strCountryCode]
             arrUserData.add(myDict)
-            print("myDictmyDict",myDict)
             let apiCall = API_call.init()
             apiCall.delegate = self;
             let myString = Util.convertDictionary(toString: myDict)
-            print("myStringmyString",myString)
             apiCall.callPassVoiceParms(requestString, myString, "EmergencyVoice", VoiceData as Data?)
         }else{
             let requestStringer = baseUrlString! + ScheduleSendVoiceToEntireSchools
-            print("rdfrfrfequestStringerOL56ty",requestStringer)
             
             let arrUserData : NSMutableArray = []
             let requestString = requestStringer.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
@@ -1396,29 +1128,24 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
                                               "School" : selectedSchoolsArray, COUNTRY_CODE: strCountryCode, "StartTime" : initialTime , "EndTime" : doNotDial , "Dates" : DefaultsKeys.dateArr ]
             
             arrUserData.add(myDict)
-            print("myDictmyDict",myDict)
             let apiCall = API_call.init()
             apiCall.delegate = self;
             let myString = Util.convertDictionary(toString: myDict)
-            print("myStringmyString",myString)
             apiCall.callPassVoiceParms(requestString, myString, "EmergencyVoice", VoiceData as Data?)
         }
     }
     
     func callVoiceHistoryApi(){
         showLoading()
-        
         strApiFrom = "VoiceHistoryApi"
         let baseUrlString = UserDefaults.standard.object(forKey:BASEURL) as? String
         var requestStringer = baseUrlString! + GetVoiceHistory
         let baseReportUrlString = UserDefaults.standard.object(forKey:NEWLINKREPORTBASEURL) as? String
-        print("URL \(baseReportUrlString)")
         
         if(appDelegate.isPasswordBind == "1"){
             requestStringer = baseReportUrlString! + GetVoiceHistory
         }
         
-        print("URL \(requestStringer)")
         let requestString = requestStringer.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
         
         let idArray : NSMutableArray = NSMutableArray()
@@ -1441,14 +1168,12 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
         let apiCall = API_call.init()
         apiCall.delegate = self;
         let myString = Util.convertDictionary(toString: myDict)
-        print("REQ Voicemessage hist\(myString)")
         apiCall.nsurlConnectionFunction(requestString, myString, "VoiceHistoryApi")
     }
     
     //MARK: Api Response
     @objc func responestring(_ csData: NSMutableArray?, _ pagename: String!){
         hideLoading()
-        print("REQ Voicemessage \(csData) \(pagename)")
         if(csData != nil){
             if((csData?.count)! > 0){
                 if(self.strApiFrom == "VoiceHistoryApi"){
@@ -1573,8 +1298,6 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
     func loadViewData(){
         TitleForListenVoice()
         playVoiceMessageView.isHidden = true
-        PlayVoiceMsgViewHeight.constant = 0
-        headerViewHeight.constant = headerViewHeight.constant - 110
         count = 0
         HomeWorkSecondStr = Int(appDelegate.MaxGeneralVoiceDuartionString)!
         let strSeconRecord : String = commonStringNames.teacher_txt_general_title.translated() as? String ?? "You can record general voice message upto "
@@ -1596,14 +1319,10 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
         self.TitleForStartRecord()
         let idGroupHead = appDelegate.idGroupHead as NSString
         let isPrincipal = appDelegate.isPrincipal as NSString
-        print("isPrincipalVoice",isPrincipal)
-        print("isPrincipalisEqual",isPrincipal .isEqual(to: "true"))
         if(isPrincipal .isEqual(to: "true")){
             CallerTyepString = "M"
             strSchoolID = String(describing: SchoolDict["SchoolID"]!)
             strStaffID =  String(describing: SchoolDict["StaffID"]!)
-            print("Princ \(strSchoolID) \(strStaffID)")
-            
         }
         else if(idGroupHead .isEqual(to: "true")){
             CallerTyepString = "A"
@@ -1683,69 +1402,21 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
         let documentsDirectoryURL =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         var destinationUrl = documentsDirectoryURL.appendingPathComponent(audioUrl.lastPathComponent)
         var str = destinationUrl.lastPathComponent
-        
-        
         destinationUrl.deleteLastPathComponent()
         destinationUrl.appendPathComponent("sample.mp4")
-        
-        
-        
-        print("hegwd",destinationUrl)
-        
-        
-        
         pathImg.isHidden = false
         pathLbl.text = destinationUrl.path
         pathLbl.isHidden = false
         
-        
-        
-        
-        if DefaultsKeys.SelectInstantSchedule == 0 {
-            self.ValidateField()
-            sendBtnBottom.constant = 120
-            
-        }else{
-            sendBtnBottom.constant = -10
-            
-            if initiateCallLbl.text != "Time" &&  doNotCallLbl.text != "Time" && urlData != nil {
-                
-                if dateArr.count == 0 {
-                    
-                    
-                    disableButton()
-                }
-                
-                
-                else{
-                    
-                    enableButton()
-                    
-                }
-            }else{
-                disableButton()
-            }
-        }
-        
+        self.ValidateField()
         playerDidFinishPlaying()
         playVoiceMessageView.isHidden = false
         calucalteDuration()
         if(UIDevice.current.userInterfaceIdiom == .pad){
-            //calucalteDuration()
-            PlayVoiceMsgViewHeight.constant = 200
-            if(headerViewHeight.constant <= 558)
-            {
-                headerViewHeight.constant = headerViewHeight.constant + 300
-            }
             count = appDelegate.LoginSchoolDetailArray.count
             self.durationLabel.text = TotaldurationFormat
             self.currentPlayTimeLabel.text = "00.00"
         }else{
-            PlayVoiceMsgViewHeight.constant = 110
-            if(headerViewHeight.constant <= 358)
-            {
-                headerViewHeight.constant = headerViewHeight.constant + 110
-            }
             count = appDelegate.LoginSchoolDetailArray.count
             self.durationLabel.text = TotaldurationFormat
             self.currentPlayTimeLabel.text = "00.00"
@@ -1757,12 +1428,6 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
     
     
     @IBAction func selectSchoolAction(_ sender: UIButton) {
-        
-        print("234567")
-        SelectedVoiceHistoryArray
-        print("SelectedVoiceHistoryArray",SelectedVoiceHistoryArray)
-        print("voiceHistoryArray",voiceHistoryArray)
-        
         let schoolVC  = self.storyboard?.instantiateViewController(withIdentifier: "SchoolSelectionVC") as! SchoolSelectionVC
         
         schoolVC.typeList = "1"
@@ -1772,9 +1437,6 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
         schoolVC.duration = durationString
         schoolVC.desc =  descriptionTextField.text
         schoolVC.voiceHistoryArray = SelectedVoiceHistoryArray
-        
-        
-        
         schoolVC.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         self.present(schoolVC, animated: true, completion: nil)
     }
@@ -1791,24 +1453,14 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
     
     
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
-        viewRecordTop.constant = 100
-
-
         let formatter = DateFormatter()
         formatter.dateFormat = "dd-MM-yyyy"
         let result = formatter.string(from: date)
         
         if !dateArr.contains(result) {
-
-
             dateArr.append(result)
             DefaultsKeys.dateArr.append(result)
-            
-            
-            
         }
-        
-        
     }
     
     func calendar(_ calendar: FSCalendar, didDeselect date: Date, at monthPosition: FSCalendarMonthPosition) {
@@ -1816,26 +1468,12 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
         let formatter = DateFormatter()
         formatter.dateFormat = "dd-MM-yyyy"
         let result = formatter.string(from: date)
-        print("didDeselect",result)
-
         if let index = dateArr.firstIndex(of: result) {
-
+            
             dateArr.remove(at: index)
-            print("didDeselectDate",result)
-            print("index",index)
             DefaultsKeys.dateArr.remove(at: index)
-
-            print("DefaultsKeysdateArrAfter",DefaultsKeys.dateArr)
         }
-        
-        
-        
-        
     }
-    
-    
-    
-    
     
     func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
         let today = Date()
@@ -1863,220 +1501,146 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
     
     
     @IBAction func selectDateAct() {
-        
         calendarView.isHidden  = false
         doneView.isHidden  = false
         fsCaleView.isHidden  = false
-        
     }
     
     @IBAction func calendarAction() {
-        
         fsCaleView.isHidden = false
         calendarView.isHidden = false
         doneView.isHidden = false
-        
-        
     }
     
     
     @IBAction func initiateCallAction(ges : dateGesture) {
         
         timeId = "1"
-        
         timeSS()
         
     }
     
     
-    func timeSS(){
+//    func timeSS(){
+//        
+//        let calendar = Calendar.current
+//        let now = Date()
+//        let todayStart = calendar.startOfDay(for: now)
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "HH:mm"
+//        let minimumTime = calendar.date(byAdding: .hour, value: 4, to: todayStart) // 4:00 AM
+//        let maximumTime = calendar.date(byAdding: .hour, value: 22, to: todayStart) // 5:00 PM
+//        print("timeId1",timeId)
+//        RPickerTwo.selectDate(title: "Select time", cancelText: "Cancel", datePickerMode: .time, minDate:minimumTime,maxDate: maximumTime, style: .Wheel, didSelectDate: {[weak self] (today_date) in
+//            
+//            self?.display_date = today_date.dateString("HH:mm")
+//            self?.url_time = today_date.dateString("a:mm:hh")
+//            
+//            if self!.timeId == "1"{
+//                self?.initiateCallLbl.text = self!.display_date
+//                DefaultsKeys.initialDisplayDate = self!.display_date
+//                self?.ValidateField()
+//            }else if self!.timeId == "2"{
+//                
+//                self?.doNotCallLbl.text = self!.display_date
+//                DefaultsKeys.doNotDialDisplayDate = self!.display_date
+//                var start1 = self?.initiateCallLbl.text
+//                var end1 = self?.doNotCallLbl.text
+//                
+//                if start1! > end1! {
+//                    Util.showAlert(commonStringNames.Alert.translated(), msg:  "Please select dial beyond time is after the initial call time")
+//                    self?.doNotCallLbl.text = "Time"
+//                    print("futureTime is greater than currentTime")
+//                }else{
+//                    self?.ValidateField()
+//                }
+//            }
+//        })
+//    }
+    
+    func timeSS() {
+        print("timeId1", timeId)
         
-        let calendar = Calendar.current
-         let now = Date()
-         let todayStart = calendar.startOfDay(for: now)
-         let formatter = DateFormatter()
-         formatter.dateFormat = "HH:mm"
-         let minimumTime = calendar.date(byAdding: .hour, value: 4, to: todayStart) // 4:00 AM
-         let maximumTime = calendar.date(byAdding: .hour, value: 22, to: todayStart) // 5:00 PM
-         print("timeId1",timeId)
-         RPickerTwo.selectDate(title: "Select time", cancelText: "Cancel", datePickerMode: .time, minDate:minimumTime,maxDate: maximumTime, style: .Wheel, didSelectDate: {[weak self] (today_date) in
-       // print("timeId1",timeId)
-        //RPickerTwo.selectDate(title: "Select time", cancelText: "Cancel", datePickerMode: .time, style: .Wheel, didSelectDate: {[weak self] (today_date) in
+        RPickerTwo.selectDate(title: "Select time", cancelText: "Cancel", datePickerMode: .time, style: .Wheel, didSelectDate: { [weak self] (today_date) in
+            guard let self = self else { return }
             
+            self.display_date = today_date.dateString("HH:mm")
+            self.url_time = today_date.dateString("a:mm:hh")
             
-            self?.display_date = today_date.dateString("HH:mm")
-            self?.url_time = today_date.dateString("a:mm:hh")
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "HH:mm"
             
-            if self!.timeId == "1"{
-                self?.initiateCallLbl.text = self!.display_date
-                DefaultsKeys.initialDisplayDate = self!.display_date
+            if self.timeId == "1" {
+                // Initial Call Time Selection
+                self.initiateCallLbl.text = self.display_date
+                DefaultsKeys.initialDisplayDate = self.display_date
+                self.ValidateField()
                 
-                if self?.initiateCallLbl.text != "Time" &&  self?.doNotCallLbl.text != "Time" && self?.urlData != nil {
-                    
-                    if self!.dateArr.count == 0 {
-                        
-                        
-                        self?.disableButton()
-                    }
-                    
-                    
-                    else{
-                        
-                        self!.enableButton()
-                        
-                    }
-                }else{
-                    self?.disableButton()
+            } else if self.timeId == "2" {
+                // Do Not Call Time Selection (Should be at least 5 mins greater than start time)
+                guard let startTimeString = self.initiateCallLbl.text, startTimeString != "Time",
+                      let startTime = dateFormatter.date(from: startTimeString),
+                      let selectedTime = dateFormatter.date(from: self.display_date) else {
+                    Util.showAlert(commonStringNames.Alert.translated(), msg: "Please select the initial call time first.")
+                    return
                 }
                 
-            }
-            else if self!.timeId == "2"{
+                let minEndTime = startTime.addingTimeInterval(5 * 60) // 5 minutes in seconds
                 
-                self?.doNotCallLbl.text = self!.display_date
-                DefaultsKeys.doNotDialDisplayDate = self!.display_date
-                
-                
-                var start1 = self?.initiateCallLbl.text
-                var end1 = self?.doNotCallLbl.text
-                
-                if start1! > end1! {
-                    Util.showAlert(commonStringNames.Alert.translated(), msg:  "Please select dial beyond time is after the initial call time")
-                    self?.doNotCallLbl.text = "Time"
-                    print("futureTime is greater than currentTime")
-                }else{
-                    
-                    
-                    if self?.initiateCallLbl.text != "Time" &&  self?.doNotCallLbl.text != "Time"  && self?.urlData != nil {
-                        
-                        if self!.dateArr.count == 0 {
-                            
-                            
-                            self?.disableButton()
-                        }
-                        
-                        
-                        else{
-                            
-                            self!.enableButton()
-                            
-                        }
-                    }else{
-                        self?.disableButton()
-                    }
+                if selectedTime < minEndTime {
+                    Util.showAlert(commonStringNames.Alert.translated(), msg: "End time must be at least 5 minutes after the initial call time.")
+                    self.doNotCallLbl.text = "Time"
+                } else {
+                    self.doNotCallLbl.text = self.display_date
+                    DefaultsKeys.doNotDialDisplayDate = self.display_date
+                    self.ValidateField()
                 }
-                
-                
             }
-            
         })
-        
-        
     }
-    
-    
+
     @IBAction func closeAction() {
         
         sheduleCallListView.isHidden = true
         initiateCallView.isHidden = true
         doNotCallView.isHidden = true
         selectDateView.isHidden = true
-        
-        scheduleCallHeight.constant = 0
     }
     
     
     @IBAction func deleteAction(ges: deleteGesture) {
-        
-        
-        viewRecordTop.constant = 100
-        
-        print("DefaultsKeys.dateArr",DefaultsKeys.dateArr)
         dateArr.remove(at: ges.id )
         DefaultsKeys.dateArr.remove(at: ges.id)
-        print("DefaultsKeys.dateArrAfterDE",DefaultsKeys.dateArr)
-
+        
         var dateFormat = "dd-MM-yyyy"
-        
-        
-        
         let dateString = ges.datestring
-        
-        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = dateFormat
-        
-        
         if let dates = dateFormatter.date(from: dateString!) {
             print("Converted Date:", dates)
             self.fsCaleView.deselect(dates)
-        } else {
-            print("Failed to convert string to date.")
         }
         
         fsCaleView.isHidden  = true
-        
-        if DefaultsKeys.dateArr.count < 1 {
+        if DefaultsKeys.dateArr.isEmpty {
             
-            if initiateCallLbl.text != "Time" &&  doNotCallLbl.text != "Time" {
-                
-                self.ValidateField()
-            }else{
-                disableButton()
-            }
-        }else{
             disableButton()
+        } else {
+            self.ValidateField()
         }
         
         if dateArr.count >= 6{
-            
-            cvconstant.constant = 200
+            collectionViewHeight.constant = 200
         }else{
-            
-            cvconstant.constant = CGFloat(30*dateArr.count)
-            
+            collectionViewHeight.constant = CGFloat(30*dateArr.count)
         }
-        
         cv.isHidden  = false
         cv.delegate = self
         cv.dataSource = self
         cv.reloadData()
-        //
     }
     @IBAction func doneActionVc(_ sender: Any) {
-        viewRecordTop.constant = 95
-        
-        if  self.fromView == "History" {
-            sendBtnBottom.constant = 85
-        }else{
-            sendBtnBottom.constant = 45
-        }
-        
-        print("urlData?????",urlData)
-        print("urlData?initiateCallLbl.text???",initiateCallLbl.text)
-        print("doNotCallLbl.text?????",doNotCallLbl.text)
-        if urlData == nil{
-            
-            if initiateCallLbl.text != "Time" && doNotCallLbl.text != "Time" && urlData != nil{
-                
-                enableButton()
-            }else{
-                disableButton()
-                
-            }
-            
-            
-        }else{
-            if initiateCallLbl.text != "Time" && doNotCallLbl.text != "Time" && urlData != nil{
-                
-                enableButton()
-            }else{
-                
-                disableButton()
-            }
-            
-        }
-        
-        
+        ValidateField()
         if dateArr.count == 0{
             calendarView.isHidden  = true
             cv.isHidden  = true
@@ -2086,27 +1650,15 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
             calendarView.isHidden  = true
             cv.isHidden  = false
             if dateArr.count >= 6{
-                
                 cvconstant.constant = 200
             }else{
-                
                 cvconstant.constant = CGFloat(30*dateArr.count)
-                
             }
-            
-            
             cv.delegate = self
             cv.dataSource = self
             cv.reloadData()
         }
-        
-        
     }
-    
-    
-    
-    
-    
 }
 
 class dateGesture : UITapGestureRecognizer {

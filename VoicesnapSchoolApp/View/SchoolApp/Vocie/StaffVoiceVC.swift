@@ -157,7 +157,7 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         super.viewDidLoad()
         
         DefaultsKeys.dateArr.removeAll()
-
+        
         DefaultsKeys.SelectInstantSchedule = 0
         addFileDefaultLbl.text = commonStringNames.AddMp3File.translated()
         InstantCallLbl.text = commonStringNames.instantCall.translated()
@@ -167,7 +167,7 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         selectedDatesLbl.text = commonStringNames.SelectedDates.translated()
         print("commonStringNames.teacher_txt_start_record.translated()",commonStringNames.teacher_txt_start_record.translated())
         StaffGroupButton.setTitle(commonStringNames.ToGroups.translated(), for: .normal)
-      
+        
         TitleLabel.text = commonStringNames.teacher_txt_start_record.translated()
         print("StaffVoiceVCStaffVoiceVC",TitleLabel.text)
         TitleForStartRecord()
@@ -299,12 +299,12 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
     func checkRecordAction(){
         let strDurationString : NSString = durationString as NSString
         if(strDurationString.integerValue > 0){
-            self.enableButtonAction()
+//            self.enableButtonAction()
             
         }else{
             playVoiceMessageView.isHidden = true
             PlayVoiceMsgViewHeight.constant = 0
-            self.disableButtonAction()
+//            self.disableButtonAction()
         }
     }
     
@@ -397,9 +397,9 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         
         pathImg.isHidden = true
         pathLbl.isHidden = true
-        disableButtonAction()
+        //        disableButtonAction()
         if audioRecorder == nil {
-            self.disableButtonAction()
+            //            self.disableButtonAction()
             self.TitleForStopRecord()
             self.VocieRecordButton.setBackgroundImage(UIImage(named:"VoiceRecordSelect"), for: UIControl.State.normal)
             playVoiceMessageView.isHidden = true
@@ -434,12 +434,10 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         if DefaultsKeys.SelectInstantSchedule == 0 {
             self.ValidateField()
         }else{
-            if initiateCallLbl.text != "Time" &&  doNotCallLbl.text != "Time"  && urlData != nil{
-                
+            if (durationString != "0") && dateArr.count != 0 && initiateCallLbl.text != "Time" &&  doNotCallLbl.text != "Time" && urlData != nil{
                 self.ValidateField()
             }else{
                 disableButtonAction()
-                
             }
         }
     }
@@ -920,7 +918,6 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
     @objc func responestring(_ csData: NSMutableArray?, _ pagename: String!){
         hideLoading()
         if(csData != nil){
-            print(csData)
             if(strApiFrom == "VoiceHistoryApi"){
                 if((csData?.count)! > 0){
                     let dicUser : NSDictionary = csData!.object(at: 0) as! NSDictionary
@@ -939,9 +936,7 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
                         Util.showAlert("", msg: strSomething )
                     }
                 }else{
-                    print("strSomethingstrSomething",strSomething)
                     Util.showAlert("", msg: strSomething)
-                    print("strSomethingstrSomething",strSomething)
                 }
                 voiceHistoryTableView.dataSource = self
                 voiceHistoryTableView.delegate = self
@@ -1245,13 +1240,6 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         destinationUrl.deleteLastPathComponent()
         destinationUrl.appendPathComponent("sample.mp4")
         
-        
-        
-        print("hegwd",destinationUrl)
-        
-        self.ValidateField()
-        
-        print("The file already exists at path")
         VoiceRecordTimeLabel.text = "00:00"
         pathImg.isHidden = false
         pathLbl.text = destinationUrl.path
@@ -1264,27 +1252,14 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
             self.ValidateField()
         }else{
             staffGroupBtnTop.constant = 695
-            if initiateCallLbl.text != "Time" &&  doNotCallLbl.text != "Time" && urlData != nil {
-                
-                if dateArr.count == 0 {
-                    
-                    
-                    disableButtonAction()
-                }
-                
-                
-                else{
-                    
-                    enableButtonAction()
-                    
-                }
+            if initiateCallLbl.text != "Time" &&  doNotCallLbl.text != "Time" && urlData != nil && dateArr.count != 0{
+                self.ValidateField()
             }else{
                 disableButtonAction()
             }
         }
         
         playVoiceMessageView.isHidden = false
-        
         calucalteDuration()
         if(UIDevice.current.userInterfaceIdiom == .pad){
             PlayVoiceMsgViewHeight.constant = 210
@@ -1297,15 +1272,10 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
             self.currentPlayTimeLabel.text = "00.00"
         }
         
-        print("PlayVoif4f4f4ceMsgViewHeightconstant",PlayVoiceMsgViewHeight.constant)
-        self.ValidateField()
-        
-        
     }
     
     func ValidateField()
     {
-        
         if(durationString != "0")
         {
             enableButtonAction()
@@ -1332,12 +1302,11 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         let result = formatter.string(from: date)
         if !dateArr.contains(result) {
             dateArr.append(result)
-
+            
             DefaultsKeys.dateArr.append(result)
             viewTopCon.constant = -60
             
             if initiateCallLbl.text != "Time" &&  doNotCallLbl.text != "Time" {
-                
                 self.ValidateField()
             }else{
                 disableButtonAction()
@@ -1357,13 +1326,7 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
             print("didDeselectDate",result)
             print("index",index)
             DefaultsKeys.dateArr.remove(at: index)
-
-            print("DefaultsKeysdateArrAfter",DefaultsKeys.dateArr)
         }
-        
-
-        
-        
     }
     
     
@@ -1414,88 +1377,104 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
     
     
     @IBAction func initiateCallAction(ges : StaffDateGesture) {
-        
         timeId = "1"
-        
         timeSS()
-        
     }
-    
-    
-    func timeSS(){
+    func timeSS() {
+        print("timeId1", timeId)
         
-        print("timeId1",timeId)
-        RPickerTwo.selectDate(title: "Select time", cancelText: "Cancel", datePickerMode: .time, style: .Wheel, didSelectDate: {[weak self] (today_date) in
+        RPickerTwo.selectDate(title: "Select time", cancelText: "Cancel", datePickerMode: .time, style: .Wheel, didSelectDate: { [weak self] (today_date) in
+            guard let self = self else { return }
             
+            self.display_date = today_date.dateString("HH:mm")
+            self.url_time = today_date.dateString("a:mm:hh")
             
-            self?.display_date = today_date.dateString("HH:mm")
-            self?.url_time = today_date.dateString("a:mm:hh")
-            
-            if self!.timeId == "1" {
+            if self.timeId == "1" {
+                self.initiateCallLbl.text = self.display_date
+                DefaultsKeys.initialDisplayDate = self.display_date
                 
-                self?.initiateCallLbl.text = self!.display_date
-                DefaultsKeys.initialDisplayDate = self!.display_date
-                
-                
-                if self?.initiateCallLbl.text != "Time" &&  self?.doNotCallLbl.text != "Time" && self?.urlData != nil {
-                    
-                    if self!.dateArr.count == 0 {
-                        
-                        
-                        self?.disableButtonAction()
-                    }
-                    
-                    
-                    else{
-                        
-                        self!.enableButtonAction()
-                        
-                    }
-                }else{
-                    self?.disableButtonAction()
+                if self.initiateCallLbl.text != "Time" && self.doNotCallLbl.text != "Time" && self.urlData != nil && self.dateArr.count != 0 {
+                    self.enableButtonAction()
+                } else {
+                    self.disableButtonAction()
+                }
+            } else if self.timeId == "2" {
+                guard let startTimeString = self.initiateCallLbl.text, startTimeString != "Time" else {
+                    Util.showAlert(commonStringNames.Alert.translated(), msg: "Please select the initial call time first.")
+                    return
                 }
                 
-            }
-            else if self!.timeId == "2"{
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "HH:mm"
                 
-                self?.doNotCallLbl.text = self!.display_date
-                DefaultsKeys.doNotDialDisplayDate = self!.display_date
-                
-                var start1 = self?.initiateCallLbl.text
-                var end1 = self?.doNotCallLbl.text
-                
-                if start1! > end1! {
-                    Util.showAlert(commonStringNames.Alert.translated(), msg:  "Please select dial beyond time is after the initial call time")
-                    self?.doNotCallLbl.text = "Time"
-                    print("futureTime is greater than currentTime")
-                }else{
+                if let startTime = dateFormatter.date(from: startTimeString),
+                   let selectedTime = dateFormatter.date(from: self.display_date) {
                     
+                    // Check if selected time is at least 10 minutes after start time
+                    let minEndTime = startTime.addingTimeInterval(300) // 10 minutes = 600 seconds
                     
-                    if self?.initiateCallLbl.text != "Time" &&  self?.doNotCallLbl.text != "Time"  && self?.urlData != nil {
+                    if selectedTime < minEndTime {
+                        Util.showAlert(commonStringNames.Alert.translated(), msg: "End time must be at least 5 minutes after the initial call time.")
+                        self.doNotCallLbl.text = "Time"
+                    } else {
+                        self.doNotCallLbl.text = self.display_date
+                        DefaultsKeys.doNotDialDisplayDate = self.display_date
                         
-                        if self!.dateArr.count == 0 {
-                            
-                            
-                            self?.disableButtonAction()
+                        if self.initiateCallLbl.text != "Time" && self.doNotCallLbl.text != "Time" && self.urlData != nil && self.dateArr.count != 0 {
+                            self.enableButtonAction()
+                        } else {
+                            self.disableButtonAction()
                         }
-                        
-                        
-                        else{
-                            
-                            self!.enableButtonAction()
-                            
-                        }
-                    }else{
-                        self?.disableButtonAction()
                     }
                 }
-                
             }
-            
         })
-        
-        
     }
+
+    
+//    func timeSS(){
+//        
+//        print("timeId1",timeId)
+//        RPickerTwo.selectDate(title: "Select time", cancelText: "Cancel", datePickerMode: .time, style: .Wheel, didSelectDate: {[weak self] (today_date) in
+//            
+//            
+//            self?.display_date = today_date.dateString("HH:mm")
+//            self?.url_time = today_date.dateString("a:mm:hh")
+//            
+//            if self!.timeId == "1" {
+//                
+//                self?.initiateCallLbl.text = self!.display_date
+//                DefaultsKeys.initialDisplayDate = self!.display_date
+//                
+//                
+//                if self?.initiateCallLbl.text != "Time" &&  self?.doNotCallLbl.text != "Time" && self?.urlData != nil && self?.dateArr.count != 0 {
+//                    self!.enableButtonAction()
+//                }else{
+//                    self?.disableButtonAction()
+//                }
+//                
+//            }else if self!.timeId == "2"{
+//                
+//                self?.doNotCallLbl.text = self!.display_date
+//                DefaultsKeys.doNotDialDisplayDate = self!.display_date
+//                
+//                var start1 = self?.initiateCallLbl.text
+//                var end1 = self?.doNotCallLbl.text
+//                
+//                if start1! > end1! {
+//                    Util.showAlert(commonStringNames.Alert.translated(), msg:  "Please select dial beyond time is after the initial call time")
+//                    self?.doNotCallLbl.text = "Time"
+//                    print("futureTime is greater than currentTime")
+//                }else{
+//                    if self?.initiateCallLbl.text != "Time" &&  self?.doNotCallLbl.text != "Time"  && self?.urlData != nil &&  self!.dateArr.count != 0 {
+//                        self!.enableButtonAction()
+//                    }else{
+//                        self?.disableButtonAction()
+//                    }
+//                }
+//            }
+//        })
+//    }
     
     
     @IBAction func closeAction() {
@@ -1504,13 +1483,11 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         initiateCallView.isHidden = true
         doNotCallView.isHidden = true
         selectDateView.isHidden = true
-        
         scheduleCallHeight.constant = 0
     }
     
     
     @IBAction func deleteAction(ges: deleteGesture) {
-        print("DefaultsKeys.dateArr",DefaultsKeys.dateArr)
         dateArr.remove(at: ges.id )
         DefaultsKeys.dateArr.remove(at: ges.id)
         print("DefaultsKeys.dateArrAfterDE",DefaultsKeys.dateArr)
@@ -1518,7 +1495,6 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         
         
         let dateString = ges.datestring
-        
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = dateFormat
         
@@ -1532,7 +1508,7 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         fsCaleView.isHidden  = true
         
         
-        if DefaultsKeys.dateArr.count < 1 {
+        if DefaultsKeys.dateArr.count != 0 {
             
             if initiateCallLbl.text != "Time" &&  doNotCallLbl.text != "Time" {
                 
@@ -1554,14 +1530,10 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
             
         }
         
-
-
-
         cv.isHidden  = false
         cv.delegate = self
         cv.dataSource = self
         cv.reloadData()
-        //
     }
     @IBAction func doneActionVc(_ sender: Any) {
         
@@ -1569,33 +1541,12 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
             calendarView.isHidden  = true
             cv.isHidden  = true
             cvTopConstain.constant = 0
-        }
-        else{
-            
-            print("urlDataertryu",urlData)
-            
-            if urlData == nil{
-                
-                if initiateCallLbl.text != "Time" && doNotCallLbl.text != "Time" && urlData != nil{
-                    
-                    enableButtonAction()
-                }else{
-                    disableButtonAction()
-                    
-                }
-                
-                
+        }else{
+            if initiateCallLbl.text != "Time" && doNotCallLbl.text != "Time" && urlData != nil{
+                enableButtonAction()
             }else{
-                if initiateCallLbl.text != "Time" && doNotCallLbl.text != "Time" && urlData != nil{
-                    
-                    enableButtonAction()
-                }else{
-                    
-                    disableButtonAction()
-                }
-                
+                disableButtonAction()
             }
-            
             
             calendarView.isHidden  = true
             cv.isHidden  = false
@@ -1608,22 +1559,15 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
             }
             viewTopCon.constant = 10
             if dateArr.count >= 6{
-                
                 cvTopConstain.constant = 200
             }else{
-                
                 cvTopConstain.constant = CGFloat(30*dateArr.count)
-                
             }
             
             cv.delegate = self
             cv.dataSource = self
             cv.reloadData()
         }
-        
-        
-        
-        
     }
     
     
@@ -1658,7 +1602,11 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         
         voiceHistoryHeight.constant = 400
         selectDateView.isHidden = true
-        
+        if self.urlData != nil{
+            self.enableButtonAction()
+        } else {
+            self.disableButtonAction()
+        }
     }
     
     @IBAction func scheduleAction() {
@@ -1680,23 +1628,11 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         viewTopCon.constant = -80
         cv.isHidden = false
         
-        if initiateCallLbl.text != "Time" && doNotCallLbl.text != "Time"  && urlData != nil{
-            
-            
-            
-            
-            if dateArr.count != 0 {
-                enableButtonAction()
-            }else{
-                disableButtonAction()
-            }
-        }else{
-            disableButtonAction()
-            
+        if self.initiateCallLbl.text != "Time" && self.doNotCallLbl.text != "Time" && self.urlData != nil && self.dateArr.count != 0 {
+            self.enableButtonAction()
+        } else {
+            self.disableButtonAction()
         }
-        
-        
-        
         if  self.fromView == "History" {
             
             staffGroupBtnTop.constant = 540
@@ -1706,9 +1642,6 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         }
         
     }
-    
-    
-    
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -1723,15 +1656,8 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        
-        print("tableViewtableViewtableView")
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: rowId, for: indexPath) as! ScheduleCallCollectionViewCell
         cell.dateLbl.text = dateArr[indexPath.row]
-        
-        
-        print("dateAre3r",dateArr)
-        
-        
         
         let deleteGes = deleteGesture(target: self, action: #selector(deleteAction))
         deleteGes.id = indexPath.row
@@ -1741,15 +1667,9 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         
     }
     
-    
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.size.width / 2, height: 100)
     }
-    
-    
-    
-    
     
 }
 

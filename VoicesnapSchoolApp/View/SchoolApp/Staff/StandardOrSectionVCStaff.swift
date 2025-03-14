@@ -858,7 +858,6 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
             let myDict:NSMutableDictionary = ["SchoolID" : SchoolId,"StaffID" : StaffId,"Description" : HomeTitleText,"Duration": durationString ,"Seccode" : ChoosenSectionIDArray, COUNTRY_CODE: strCountryCode , "StartTime" : initialTime , "EndTime" : doNotDial , "Dates" : DefaultsKeys.dateArr  ]
             UtilObj.printLogKey(printKey: "myDict", printingValue: myDict)
             
-            UtilObj.printLogKey(printKey: "myDict", printingValue: myDict)
             let myString = Util.convertDictionary(toString: myDict)
             apiCall.callPassVoiceParms(requestString, myString, "SendStaffVoiceMessageApi", VoiceData as Data?)
         }

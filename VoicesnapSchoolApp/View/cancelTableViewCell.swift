@@ -105,7 +105,6 @@ class cancelTableViewCell: UITableViewCell,UICollectionViewDelegate,UICollection
               let selectedTo = convertToDate(selectedTimeRange.last ?? "") else {
             return
         }
-
         // Step 4: Detect and mark overlapping slots in ENTIRE availableSlots array
         for (sectionIndex, slots) in availableSlots.enumerated() {
             for (rowIndex, slot) in slots.slots.enumerated() {
@@ -115,18 +114,12 @@ class cancelTableViewCell: UITableViewCell,UICollectionViewDelegate,UICollection
                       let slotTo = convertToDate(slotTimeRange.last ?? "") else {
                     continue
                 }
-
-                // Skip marking the selected slot itself
-                if slot.time == selectedSlot.time {
-                    continue
-                }
-
-                // Overlapping condition
-                if (slotFrom < selectedTo) && (slotTo > selectedFrom) {
-                    if availableSlots[sectionIndex].isBooked != true{
+                if (slotFrom < selectedTo && slotTo > selectedFrom) || (slotFrom == selectedFrom) {
+                    
+                    if availableSlots[sectionIndex].isBooked != true {
                         availableSlots[sectionIndex].isBooked = false
                         availableSlots[sectionIndex].slots[rowIndex].select = 2
-                    }else{
+                    } else {
                         availableSlots[sectionIndex].isBooked = true
                     }
                 } else if availableSlots[sectionIndex].slots[rowIndex].select == 2 {
@@ -141,18 +134,59 @@ class cancelTableViewCell: UITableViewCell,UICollectionViewDelegate,UICollection
                 availableSlots[index] = AvailableSlot(id: index, isBooked: availableSlots[index].isBooked, slots: availableSlot)
             }
         }
-
-        // Step 6: Inform delegate and update UI
         sloSlectionDataDelegate?.getSelectedSlot(selectedIndexPath: availableSlots)
     }
-    
-    // Convert Time String to Date
-    func convertToDate(_ timeString: String) -> Date? {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "hh:mm a"
-        return formatter.date(from: timeString)
+    func updateSelectedSlot(id: Int, selectedTime: String, availableSlots: [AvailableSlot]) -> [AvailableSlot] {
+        var updatedSlots = availableSlots
+
+        // Identify previously selected slot and clear it
+        for (sectionIndex, slots) in updatedSlots.enumerated() {
+            for (rowIndex, slot) in slots.slots.enumerated() {
+                if slot.select == 1 {
+                    updatedSlots[sectionIndex].slots[rowIndex].select = 0
+                }
+            }
+        }
+
+        // Update new selected slot and mark overlaps
+        for (sectionIndex, slots) in updatedSlots.enumerated() {
+            for (rowIndex, slot) in slots.slots.enumerated() {
+                if slot.time == selectedTime {
+                    updatedSlots[sectionIndex].slots[rowIndex].select = 1 // Selected slot
+                } else {
+                    let slotTimeRange = slot.time.components(separatedBy: " - ")
+                    let selectedTimeRange = selectedTime.components(separatedBy: " - ")
+
+                    if let slotFrom = convertToDate(slotTimeRange.first ?? ""),
+                       let slotTo = convertToDate(slotTimeRange.last ?? ""),
+                       let selectedFrom = convertToDate(selectedTimeRange.first ?? ""),
+                       let selectedTo = convertToDate(selectedTimeRange.last ?? "") {
+
+                        if (slotFrom < selectedTo && slotTo > selectedFrom) || slot.time == selectedTime {
+                            updatedSlots[sectionIndex].slots[rowIndex].select = 2 // Overlapping slot
+                        } else {
+                            updatedSlots[sectionIndex].slots[rowIndex].select = 0 // Non-overlapping slot
+                        }
+                    }
+                }
+            }
+        }
+        return updatedSlots
+    }
+
+    func convertToDate(_ time: String) -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "hh:mm a"
+        return dateFormatter.date(from: time)
     }
     
+//    // Convert Time String to Date
+//    func convertToDate(_ timeString: String) -> Date? {
+//        let formatter = DateFormatter()
+//        formatter.dateFormat = "hh:mm a"
+//        return formatter.date(from: timeString)
+//    }
+//    
 
     
 }

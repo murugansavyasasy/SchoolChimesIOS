@@ -37,24 +37,21 @@ class PTMViewController: UIViewController ,UITableViewDelegate,UITableViewDataSo
     func getSelectedSlot(selectedIndexPath: [AvailableSlot]?) {
         self.availableSlot = selectedIndexPath ?? []
         var ids = [Int]()
-        var indexPathsToReload = [IndexPath]()
         for i in 0..<availableSlot.count {  // Corrected to iterate `availableSlots`
+            print("row:",i)
             for j in 0..<availableSlot[i].slots.count {
                 if availableSlot[i]
                     .slots[j].select == 1 && availableSlot[i].isBooked != true {
                     ids.append(availableSlot[i].slots[j].SoltId)  // Correct property name
+                }else{
+                    print(availableSlot[i]
+                        .slots[j].select)
                 }
             }
-            indexPathsToReload.append(IndexPath(row: 0, section: i))
         }
-        
         DefaultsKeys.bookingSlotId = ids
         bookSlotBtn.isHidden = DefaultsKeys.bookingSlotId.isEmpty
-        // Reload only the required rows
-        if !indexPathsToReload.isEmpty {
-            tv.reloadRows(at: indexPathsToReload, with: .automatic)
-            
-        }
+        tv.reloadData()
     }
     
     
@@ -98,7 +95,6 @@ class PTMViewController: UIViewController ,UITableViewDelegate,UITableViewDataSo
     var screenSize : CGRect!
     var screenWidth : CGFloat!
     var screenHeight : CGFloat!
-    
     var currentYear: Int = Calendar.current.component(.year, from: Date())
     var currentMonth: Int = Calendar.current.component(.month, from: Date())
     var segmentId = 1
@@ -295,8 +291,7 @@ class PTMViewController: UIViewController ,UITableViewDelegate,UITableViewDataSo
             cell.dateLbl.textColor = .white
             cell.slotCountLbl.textColor = .white
             
-        }
-        else{
+        }else{
             cell.caleView.backgroundColor = UIColor(named: "NoDataColor")
             cell.dayLbl.textColor = .black
             cell.dateLbl.textColor = .black
@@ -490,7 +485,6 @@ class PTMViewController: UIViewController ,UITableViewDelegate,UITableViewDataSo
         return times
     }
     func numberOfSections(in tableView: UITableView) -> Int {
-        
         if segment1.backgroundColor == UIColor(named: "CheckBoxSelectColor") {
             return  exNames.count
             
@@ -511,6 +505,9 @@ class PTMViewController: UIViewController ,UITableViewDelegate,UITableViewDataSo
         }else{
             return slotHistoryForParentData.count
         }
+    }
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        print(indexPath.section)
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
@@ -607,13 +604,10 @@ class PTMViewController: UIViewController ,UITableViewDelegate,UITableViewDataSo
             }else{
                 
                 cell.eventLink.isHidden = false
-                
                 cell.eventLink.isUserInteractionEnabled = true
                 let click = LinkSClicks(target: self, action: #selector(linkClickVC))
                 click.link = slotHistort.event_link
                 cell.eventLink.addGestureRecognizer(click)
-                
-                
             }
             
             
