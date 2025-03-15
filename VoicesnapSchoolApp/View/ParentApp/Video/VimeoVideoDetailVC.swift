@@ -156,10 +156,10 @@ class VimeoVideoDetailVC: UIViewController,UIWebViewDelegate, WKNavigationDelega
     
     @objc func getVideoDownload () {
        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [self] in
+      
             btnStart()
             
-        }
+        
            
         let urlString = bsaeUrl +  downloadVideoID
         
@@ -276,7 +276,7 @@ class VimeoVideoDetailVC: UIViewController,UIWebViewDelegate, WKNavigationDelega
                 progressShowView.isHidden = true
                 progressCountLbl.isHidden = true
                 gifImg.isHidden = true
-                _ = SweetAlert().showAlert("", subTitle: getVideoPath, style: .none, buttonTitle: "Ok", buttonColor: .black){
+                _ = SweetAlert().showAlert("Successfully Downloaded", subTitle: getVideoPath, style: .none, buttonTitle: "Ok", buttonColor: .black){
                     (okClick) in
                     if okClick{
                         self.dismiss(animated: true)
@@ -360,12 +360,7 @@ class VimeoVideoDetailVC: UIViewController,UIWebViewDelegate, WKNavigationDelega
                    if let topController = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.rootViewController {
                        topController.present(refreshAlert, animated: true, completion: nil)
                    }
-                
-                
-               
-            
-                
-                
+             
                 completion(savedURL)
             } catch {
                 print("File error: \(error.localizedDescription)")
