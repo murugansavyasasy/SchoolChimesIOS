@@ -140,9 +140,8 @@ class CheckAviableViewController: UIViewController,UITableViewDelegate,UITableVi
                 
                 if cancelSlotsForStudRes.Status == 1 {
                     
-                    
                         validatedata = cancelSlotsForStudRes.data
-
+                    tv.isScrollEnabled = true
                         checkAvilbDefltLbl.text = "Submit"
                         tv.dataSource = self
                         tv.delegate = self
@@ -165,7 +164,7 @@ class CheckAviableViewController: UIViewController,UITableViewDelegate,UITableVi
     
     @IBAction func chechVc(){
         
-        
+        tv.isScrollEnabled = false
         if  checkAvilbDefltLbl.text == "Check slot avilibality"{
             checkAviable()
             
@@ -325,7 +324,8 @@ class CheckAviableViewController: UIViewController,UITableViewDelegate,UITableVi
 
                         headerView.dateLbl.text = formattedDate
 
-                        print(formattedDate)
+//                        print("formattedDateformattedDate",formattedDate)
+                        
                     } else {
                         print("Invalid date format")
                     } // date converstion End
@@ -400,45 +400,31 @@ class CheckAviableViewController: UIViewController,UITableViewDelegate,UITableVi
             cell.statusLbl.isHidden = false
             cell.timeLbl.text = validatedata[indexPath.section].slots[indexPath.row].from_time + "-" + validatedata[indexPath.section].slots[indexPath.row].to_time
             
-            
             cell.statusLbl.text = validatedata[indexPath.section].slots[indexPath.row].slot_Availablity
            
             if validatedata[indexPath.section].slots[indexPath.row].slot_Availablity == "Not Available"{
-                
                 cell.deleteView.isHidden = true
                 checkAviablityView.isHidden = false
-                 
                 cell.statusLbl.textColor = .red
-                
-                
             }else{
-                
+            
                 cell.statusLbl.textColor = UIColor(named: "checkColor")
                 cell.deleteView.isHidden = false
                 checkAviablityView.isHidden = false
                 cell.indexPath = indexPath
-                       
-                       // Set the delete action closure
-                       cell.deleteAction = { [weak self] indexPath in
-                           self?.deleteTimeSlot(at: indexPath)
-                       }
-                
+                // Set the delete action closure
+                cell.deleteAction = { [weak self] indexPath in
+                    self?.deleteTimeSlot(at: indexPath)
+                }
             }
-                
-            
-            
-           
         }
-       
-        
-      
         return cell
-
-
     }
     
     
 
+    
+    
    
     func deleteTimeSlot(at indexPath: IndexPath) {
         // Safety check: ensure the section and row exist before attempting deletion
