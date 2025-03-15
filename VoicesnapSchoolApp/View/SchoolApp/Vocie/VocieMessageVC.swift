@@ -250,6 +250,8 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
     }
     
     @IBAction func scheduleAction() {
+        self.SelectedVoiceHistoryArray.removeAllObjects()
+        self.voiceHistoryTableView.reloadData()
         ValidateField()
         instantImg.image = UIImage(named: "RadioNormal")
         scheduleView.image = UIImage(named: "PurpleRadioSelect")
