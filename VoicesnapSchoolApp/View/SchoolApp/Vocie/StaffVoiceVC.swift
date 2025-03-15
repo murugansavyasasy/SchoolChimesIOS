@@ -148,7 +148,7 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
     var display_date : String!
     
     var url_time: String!
-    
+    var SelectHistory:Bool = false
     var dateArr : [String] = []
     var timeId  = ""
     let rowId = "ScheduleCallCollectionViewCell"
@@ -430,15 +430,15 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
             self.currentPlayTimeLabel.text = "00.00"
         }
         
-        
+//        self.ValidateField()
         if DefaultsKeys.SelectInstantSchedule == 0 {
-            self.ValidateField()
-        }else{
-            if (durationString != "0") && dateArr.count != 0 && initiateCallLbl.text != "Time" &&  doNotCallLbl.text != "Time" && urlData != nil{
-                self.ValidateField()
+            if durationString != "0" && urlData != nil {
+                enableButtonAction()
             }else{
                 disableButtonAction()
             }
+        }else{
+            self.ValidateField()
         }
     }
     
@@ -810,6 +810,7 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
     }
     
     @IBAction func actionNewVoiceRecording(){
+        SelectHistory = false
         self.fromView = "Record"
         voiceRecordingVieww.isHidden = false
         
@@ -822,6 +823,10 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
     }
     
     @IBAction func actionVoiceRecordingHistory(){
+        if DefaultsKeys.SelectInstantSchedule == 0{
+            checkHistoryArray()
+        }
+        SelectHistory = true
         self.fromView = "History"
         pathImg.isHidden = true
         voiceRecordingVieww.isHidden = true
@@ -1014,7 +1019,15 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
             self.SelectedVoiceHistoryArray.add(dict)
         }
         self.voiceHistoryTableView.reloadData()
-        checkHistoryArray()
+        if DefaultsKeys.SelectInstantSchedule != 0{
+            if initiateCallLbl.text != "Time" && doNotCallLbl.text != "Time"  && durationString != "0" && dateArr.count != 0 && self.SelectedVoiceHistoryArray.count > 0 {
+                self.enableButtonAction()
+            }else{
+                self.disableButtonAction()
+            }
+        }else{
+            checkHistoryArray()
+        }
     }
     
     func checkHistoryArray(){
@@ -1252,11 +1265,7 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
             self.ValidateField()
         }else{
             staffGroupBtnTop.constant = 695
-            if initiateCallLbl.text != "Time" &&  doNotCallLbl.text != "Time" && urlData != nil && dateArr.count != 0{
-                self.ValidateField()
-            }else{
-                disableButtonAction()
-            }
+            self.ValidateField()
         }
         
         playVoiceMessageView.isHidden = false
@@ -1273,15 +1282,31 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         }
         
     }
-    
     func ValidateField()
     {
-        if(durationString != "0")
-        {
-            enableButtonAction()
-        }
-        else{
-            disableButtonAction()
+        if DefaultsKeys.SelectInstantSchedule == 1 {
+            if SelectHistory == true{
+                if initiateCallLbl.text != "Time" && doNotCallLbl.text != "Time"  && durationString != "0" && dateArr.count != 0 && self.SelectedVoiceHistoryArray.count > 0 {
+                    enableButtonAction()
+                    
+                }else{
+                    disableButtonAction()
+                }
+            }else{
+                if initiateCallLbl.text != "Time" && doNotCallLbl.text != "Time"  && durationString != "0" && dateArr.count != 0 && urlData != nil {
+                    
+                    enableButtonAction()
+                    
+                }else{
+                    disableButtonAction()
+                }
+            }
+        }else{
+            if durationString != "0" && initiateCallLbl.text != "Time" && doNotCallLbl.text != "Time" && urlData != nil{
+                enableButtonAction()
+            }else{
+                disableButtonAction()
+            }
         }
     }
     
@@ -1305,12 +1330,8 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
             
             DefaultsKeys.dateArr.append(result)
             viewTopCon.constant = -60
+            self.ValidateField()
             
-            if initiateCallLbl.text != "Time" &&  doNotCallLbl.text != "Time" {
-                self.ValidateField()
-            }else{
-                disableButtonAction()
-            }
         }
         
     }
@@ -1610,6 +1631,8 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
     }
     
     @IBAction func scheduleAction() {
+        self.SelectedVoiceHistoryArray.removeAllObjects()
+        self.voiceHistoryTableView.reloadData()
         instantImg.image = UIImage(named: "RadioNormal")
         scheduleView.image = UIImage(named: "PurpleRadioSelect")
         voiceHistoryTop.constant = 80
@@ -1628,17 +1651,10 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         viewTopCon.constant = -80
         cv.isHidden = false
         
-        if self.initiateCallLbl.text != "Time" && self.doNotCallLbl.text != "Time" && self.urlData != nil && self.dateArr.count != 0 {
-            self.enableButtonAction()
-        } else {
-            self.disableButtonAction()
-        }
+        ValidateField()
         if  self.fromView == "History" {
             
             staffGroupBtnTop.constant = 540
-        }else{
-            
-            
         }
         
     }
