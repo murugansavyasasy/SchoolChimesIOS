@@ -434,36 +434,6 @@
             endingLineNumber = "1431"
             landmarkName = "selectSchoolAction(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "32BE5A4B-88B3-4A7E-AF3B-C1CCA748B980 - 875f82646d62131d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VoicesnapSchoolApp.VocieMessageVC.responestring(Swift.Optional&lt;__C.NSMutableArray&gt;, Swift.Optional&lt;Swift.String&gt;) -&gt; ()"
-                  moduleName = "VoicesnapSchoolApp.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/admin/Downloads/SchoolChimesIOS%202/VoicesnapSchoolApp/View/SchoolApp/Vocie/VocieMessageVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1431"
-                  endingLineNumber = "1431">
-               </Location>
-               <Location
-                  uuid = "32BE5A4B-88B3-4A7E-AF3B-C1CCA748B980 - fab3b320d1edd198"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "VoicesnapSchoolApp.VocieMessageVC.minimumDate(for: __C.FSCalendar) -&gt; Foundation.Date"
-                  moduleName = "VoicesnapSchoolApp.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/admin/Downloads/SchoolChimesIOS%202/VoicesnapSchoolApp/View/SchoolApp/Vocie/VocieMessageVC.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "1432"
-                  endingLineNumber = "1432">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
