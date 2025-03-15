@@ -21,7 +21,7 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
     
     @IBOutlet weak var DonotDialBeyondLbl: UILabel!
     @IBOutlet weak var InitiateCallOnLbl: UILabel!
-    @IBOutlet weak var staffGroupBtnTop: NSLayoutConstraint!
+  
     
     @IBOutlet weak var addFileDefaultLbl: UILabel!
     
@@ -34,7 +34,6 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
     @IBOutlet weak var dateLbl: UILabel!
     @IBOutlet weak var fsCaleView: FSCalendar!
     
-    @IBOutlet weak var tvTopConstain: NSLayoutConstraint!
     @IBOutlet weak var calendarView: UIView!
     
     
@@ -106,7 +105,6 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
     @IBOutlet weak var SelectFromVoiceHistoryLabel: UILabel!
     
     
-    @IBOutlet weak var voiceHistoryTop: NSLayoutConstraint!
     var timer = Timer()
     var audioPlayer : AVAudioPlayer!
     var playerItem: AVPlayerItem?
@@ -191,11 +189,9 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         scheduleCallHeight.constant = 0
         
         viewTopCon.constant = -180
-        voiceHistoryTop.constant = -100
         calendarView.isHidden  = true
         doneView.isHidden  = true
         fsCaleView.isHidden  = true
-        staffGroupBtnTop.constant = 450
         cvTopConstain.constant = 0
         
         
@@ -841,8 +837,7 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
             scheduleCallHeight.constant = 0
             cvTopConstain.constant = 0
         }else{
-            
-            staffGroupBtnTop.constant = 540
+        
             scheduleCallHeight.constant = 135
             scheduleAction()
             if dateArr.count >= 6{
@@ -1248,10 +1243,10 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         
         
         if DefaultsKeys.SelectInstantSchedule == 0 {
-            staffGroupBtnTop.constant = 520
+          
             self.ValidateField()
         }else{
-            staffGroupBtnTop.constant = 695
+           
             if initiateCallLbl.text != "Time" &&  doNotCallLbl.text != "Time" && urlData != nil && dateArr.count != 0{
                 self.ValidateField()
             }else{
@@ -1551,12 +1546,7 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
             calendarView.isHidden  = true
             cv.isHidden  = false
             cvTopConstain.constant = 200
-            if  self.fromView == "History" {
-                
-                staffGroupBtnTop.constant = 580
-            }else{
-                staffGroupBtnTop.constant = 695
-            }
+           
             viewTopCon.constant = 10
             if dateArr.count >= 6{
                 cvTopConstain.constant = 200
@@ -1594,8 +1584,7 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         cv.isHidden = true
         
         viewTopCon.constant = -190
-        voiceHistoryTop.constant = -100
-        staffGroupBtnTop.constant = 510
+       
         calendarView.isHidden  = true
         doneView.isHidden  = true
         fsCaleView.isHidden  = true
@@ -1612,14 +1601,14 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
     @IBAction func scheduleAction() {
         instantImg.image = UIImage(named: "RadioNormal")
         scheduleView.image = UIImage(named: "PurpleRadioSelect")
-        voiceHistoryTop.constant = 80
+       
         voiceHistoryHeight.constant = 250
         sheduleCallListView.isHidden = false
         scheduleCallHeight.constant = 165
         initiateCallView.isHidden = false
         doNotCallView.isHidden = false
         DefaultsKeys.SelectInstantSchedule = 1
-        staffGroupBtnTop.constant = 600
+        
         
         calendarView.isHidden  = true
         doneView.isHidden  = true
@@ -1635,7 +1624,6 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         }
         if  self.fromView == "History" {
             
-            staffGroupBtnTop.constant = 540
         }else{
             
             
