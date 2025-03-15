@@ -13,7 +13,7 @@ import FSCalendar
 class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDelegate,UITextFieldDelegate,Apidelegate, UITableViewDelegate, UITableViewDataSource,UIDocumentPickerDelegate, FSCalendarDataSource, FSCalendarDelegate,FSCalendarDelegateAppearance,UICollectionViewDataSource,UICollectionViewDelegate,UICollectionViewDelegateFlowLayout{
     
     
-    @IBOutlet weak var voiceHistoryHeight: NSLayoutConstraint!
+   
     
     @IBOutlet weak var InstantCallLbl: UILabel!
     
@@ -51,7 +51,7 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
     @IBOutlet weak var initiateCallView: UIView!
     
     @IBOutlet weak var doNotCallView: UIView!
-    @IBOutlet weak var scheduleCallHeight: NSLayoutConstraint!
+   
     @IBOutlet weak var sheduleCallListView: UIView!
     
     @IBOutlet weak var tv: UITableView!
@@ -186,9 +186,9 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         
         fsCaleView.delegate = self
         fsCaleView.dataSource = self
-        scheduleCallHeight.constant = 0
+       
         
-        viewTopCon.constant = -180
+       
         calendarView.isHidden  = true
         doneView.isHidden  = true
         fsCaleView.isHidden  = true
@@ -246,10 +246,9 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         print("schooltypedd",school_type)
         if school_type == "2" {
             scheduleCallView.isHidden = false
-            scheduleCallHeight.constant = 40
+           
         }else{
             scheduleCallView.isHidden = true
-            scheduleCallHeight.constant  = 0
             
         }
         
@@ -299,7 +298,7 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
             
         }else{
             playVoiceMessageView.isHidden = true
-            PlayVoiceMsgViewHeight.constant = 0
+           
 //            self.disableButtonAction()
         }
     }
@@ -373,11 +372,8 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         
         
         if DefaultsKeys.SelectInstantSchedule == 0 {
-            scheduleCallHeight.constant = 0
             cvTopConstain.constant = 0
-            
             sheduleCallListView.isHidden = true
-            scheduleCallHeight.constant = 0
             calendarView.isHidden  = true
             doneView.isHidden  = true
             fsCaleView.isHidden  = true
@@ -399,7 +395,6 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
             self.TitleForStopRecord()
             self.VocieRecordButton.setBackgroundImage(UIImage(named:"VoiceRecordSelect"), for: UIControl.State.normal)
             playVoiceMessageView.isHidden = true
-            PlayVoiceMsgViewHeight.constant = 0
             self.startRecording()
             self.meterTimer = Timer.scheduledTimer(timeInterval: 0.1, target:self, selector:#selector(self.updateAudioMeter(_:)), userInfo:nil, repeats:true)
         }else{
@@ -415,12 +410,12 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         calucalteDuration()
         if(UIDevice.current.userInterfaceIdiom == .pad){
             
-            PlayVoiceMsgViewHeight.constant = 180
+           
             
             self.durationLabel.text = TotaldurationFormat
             self.currentPlayTimeLabel.text = "00.00"
         }else{
-            PlayVoiceMsgViewHeight.constant = 120
+            
             
             self.durationLabel.text = TotaldurationFormat
             self.currentPlayTimeLabel.text = "00.00"
@@ -834,11 +829,10 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         self.callVoiceHistoryApi()
         
         if DefaultsKeys.SelectInstantSchedule == 0 {
-            scheduleCallHeight.constant = 0
-            cvTopConstain.constant = 0
+                        cvTopConstain.constant = 0
         }else{
         
-            scheduleCallHeight.constant = 135
+           
             scheduleAction()
             if dateArr.count >= 6{
                 
@@ -940,7 +934,7 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
                 print("voicehistoryArrayCount :", self.voiceHistoryArray.count)
                 
                 if voiceHistoryArray.count == 0 {
-                    scheduleCallHeight.constant = 0
+                    
                 }
                 print("voicehistoryArray :", self.voiceHistoryArray)
             }
@@ -1126,7 +1120,7 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         }
         self.VoiceRecordTimeLabel.text = "00:00"
         playVoiceMessageView.isHidden = true
-        PlayVoiceMsgViewHeight.constant = 0
+        
         
         UtilObj.printLogKey(printKey: "ApiHomeWorkSecondInt", printingValue: ApiHomeWorkSecondInt)
         
@@ -1137,7 +1131,7 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
             playVoiceMessageView.isHidden = false
         }else{
             playVoiceMessageView.isHidden = true
-            PlayVoiceMsgViewHeight.constant = 0
+         
             ChooseStandardSectionButton.layer.cornerRadius = 5
             ChooseStandardSectionButton.layer.masksToBounds = true
             StaffGroupButton.layer.cornerRadius = 5
@@ -1257,11 +1251,11 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         playVoiceMessageView.isHidden = false
         calucalteDuration()
         if(UIDevice.current.userInterfaceIdiom == .pad){
-            PlayVoiceMsgViewHeight.constant = 210
+           
             self.durationLabel.text = TotaldurationFormat
             self.currentPlayTimeLabel.text = "00.00"
         }else{
-            PlayVoiceMsgViewHeight.constant = 180
+           
             
             self.durationLabel.text = TotaldurationFormat
             self.currentPlayTimeLabel.text = "00.00"
@@ -1299,7 +1293,7 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
             dateArr.append(result)
             
             DefaultsKeys.dateArr.append(result)
-            viewTopCon.constant = -60
+          
             
             if initiateCallLbl.text != "Time" &&  doNotCallLbl.text != "Time" {
                 self.ValidateField()
@@ -1478,7 +1472,7 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         initiateCallView.isHidden = true
         doNotCallView.isHidden = true
         selectDateView.isHidden = true
-        scheduleCallHeight.constant = 0
+        
     }
     
     
@@ -1547,7 +1541,7 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
             cv.isHidden  = false
             cvTopConstain.constant = 200
            
-            viewTopCon.constant = 10
+           
             if dateArr.count >= 6{
                 cvTopConstain.constant = 200
             }else{
@@ -1578,18 +1572,16 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         DefaultsKeys.SelectInstantSchedule = 0
         
         sheduleCallListView.isHidden = true
-        scheduleCallHeight.constant = 0
+        
         initiateCallView.isHidden = true
         doNotCallView.isHidden = true
         cv.isHidden = true
         
-        viewTopCon.constant = -190
+       
        
         calendarView.isHidden  = true
         doneView.isHidden  = true
         fsCaleView.isHidden  = true
-        
-        voiceHistoryHeight.constant = 400
         selectDateView.isHidden = true
         if self.urlData != nil{
             self.enableButtonAction()
@@ -1601,10 +1593,9 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
     @IBAction func scheduleAction() {
         instantImg.image = UIImage(named: "RadioNormal")
         scheduleView.image = UIImage(named: "PurpleRadioSelect")
-       
-        voiceHistoryHeight.constant = 250
         sheduleCallListView.isHidden = false
-        scheduleCallHeight.constant = 165
+        
+        
         initiateCallView.isHidden = false
         doNotCallView.isHidden = false
         DefaultsKeys.SelectInstantSchedule = 1
@@ -1614,7 +1605,7 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         doneView.isHidden  = true
         fsCaleView.isHidden  = true
         selectDateView.isHidden = false
-        viewTopCon.constant = -80
+        
         cv.isHidden = false
         
         if self.initiateCallLbl.text != "Time" && self.doNotCallLbl.text != "Time" && self.urlData != nil && self.dateArr.count != 0 {
