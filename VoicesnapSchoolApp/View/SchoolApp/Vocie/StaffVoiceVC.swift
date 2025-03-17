@@ -1253,7 +1253,6 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
           
             self.ValidateField()
         }else{
-            staffGroupBtnTop.constant = 695
             self.ValidateField()
         }
         
@@ -1402,12 +1401,7 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
             if self.timeId == "1" {
                 self.initiateCallLbl.text = self.display_date
                 DefaultsKeys.initialDisplayDate = self.display_date
-                
-                if self.initiateCallLbl.text != "Time" && self.doNotCallLbl.text != "Time" && self.urlData != nil && self.dateArr.count != 0 {
-                    self.enableButtonAction()
-                } else {
-                    self.disableButtonAction()
-                }
+                self.ValidateField()
             } else if self.timeId == "2" {
                 guard let startTimeString = self.initiateCallLbl.text, startTimeString != "Time" else {
                     Util.showAlert(commonStringNames.Alert.translated(), msg: "Please select the initial call time first.")
@@ -1426,66 +1420,19 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
                     if selectedTime < minEndTime {
                         Util.showAlert(commonStringNames.Alert.translated(), msg: "End time must be at least 5 minutes after the initial call time.")
                         self.doNotCallLbl.text = "Time"
+                        self.ValidateField()
                     } else {
                         self.doNotCallLbl.text = self.display_date
                         DefaultsKeys.doNotDialDisplayDate = self.display_date
-                        
-                        if self.initiateCallLbl.text != "Time" && self.doNotCallLbl.text != "Time" && self.urlData != nil && self.dateArr.count != 0 {
-                            self.enableButtonAction()
-                        } else {
-                            self.disableButtonAction()
-                        }
+                        self.ValidateField()
                     }
+                    
                 }
             }
         })
+        
     }
 
-    
-//    func timeSS(){
-//        
-//        print("timeId1",timeId)
-//        RPickerTwo.selectDate(title: "Select time", cancelText: "Cancel", datePickerMode: .time, style: .Wheel, didSelectDate: {[weak self] (today_date) in
-//            
-//            
-//            self?.display_date = today_date.dateString("HH:mm")
-//            self?.url_time = today_date.dateString("a:mm:hh")
-//            
-//            if self!.timeId == "1" {
-//                
-//                self?.initiateCallLbl.text = self!.display_date
-//                DefaultsKeys.initialDisplayDate = self!.display_date
-//                
-//                
-//                if self?.initiateCallLbl.text != "Time" &&  self?.doNotCallLbl.text != "Time" && self?.urlData != nil && self?.dateArr.count != 0 {
-//                    self!.enableButtonAction()
-//                }else{
-//                    self?.disableButtonAction()
-//                }
-//                
-//            }else if self!.timeId == "2"{
-//                
-//                self?.doNotCallLbl.text = self!.display_date
-//                DefaultsKeys.doNotDialDisplayDate = self!.display_date
-//                
-//                var start1 = self?.initiateCallLbl.text
-//                var end1 = self?.doNotCallLbl.text
-//                
-//                if start1! > end1! {
-//                    Util.showAlert(commonStringNames.Alert.translated(), msg:  "Please select dial beyond time is after the initial call time")
-//                    self?.doNotCallLbl.text = "Time"
-//                    print("futureTime is greater than currentTime")
-//                }else{
-//                    if self?.initiateCallLbl.text != "Time" &&  self?.doNotCallLbl.text != "Time"  && self?.urlData != nil &&  self!.dateArr.count != 0 {
-//                        self!.enableButtonAction()
-//                    }else{
-//                        self?.disableButtonAction()
-//                    }
-//                }
-//            }
-//        })
-//    }
-    
     
     @IBAction func closeAction() {
         
@@ -1632,11 +1579,7 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         cv.isHidden = false
         
         ValidateField()
-        if  self.fromView == "History" {
-            
-            staffGroupBtnTop.constant = 540
-        }
-        
+       
     }
     
     

@@ -420,21 +420,5 @@
             landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "0D97A0C9-CDD0-4F12-AE70-B9CEBCDFD922"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VoicesnapSchoolApp/View/SchoolApp/Vocie/StaffVoiceVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "900"
-            endingLineNumber = "900"
-            landmarkName = "callVoiceHistoryApi()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
