@@ -1599,6 +1599,7 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
         }else{
             collectionViewHeight.constant = CGFloat(30*dateArr.count)
         }
+
         cv.isHidden  = false
         cv.delegate = self
         cv.dataSource = self
