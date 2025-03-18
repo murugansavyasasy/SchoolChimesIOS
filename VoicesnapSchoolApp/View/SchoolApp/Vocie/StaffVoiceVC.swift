@@ -839,14 +839,6 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         
            
             scheduleAction()
-            if dateArr.count >= 6{
-                
-                cvTopConstain.constant = 200
-            }else{
-                
-                cvTopConstain.constant = CGFloat(30*dateArr.count)
-                
-            }
             
         }
         
@@ -1476,22 +1468,19 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         }else{
             disableButtonAction()
         }
-        
-        
-        if dateArr.count >= 6{
-            
-            cvTopConstain.constant = 200
+        if dateArr.count <= 2 {
+            cvTopConstain.constant = 80
+        }else if dateArr.count <= 4{
+            cvTopConstain.constant = 150
         }else{
-            
-            cvTopConstain.constant = CGFloat(30*dateArr.count)
-            
+            cvTopConstain.constant = 200
         }
-        
         cv.isHidden  = false
         cv.delegate = self
         cv.dataSource = self
         cv.reloadData()
     }
+ 
     @IBAction func doneActionVc(_ sender: Any) {
         
         if dateArr.count == 0{
@@ -1499,23 +1488,18 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
             cv.isHidden  = true
             cvTopConstain.constant = 0
         }else{
-            if initiateCallLbl.text != "Time" && doNotCallLbl.text != "Time" && urlData != nil{
-                enableButtonAction()
-            }else{
-                disableButtonAction()
-            }
+            self.ValidateField()
             
             calendarView.isHidden  = true
             cv.isHidden  = false
-            cvTopConstain.constant = 200
-           
-           
-            if dateArr.count >= 6{
-                cvTopConstain.constant = 200
+
+            if dateArr.count <= 2 {
+                cvTopConstain.constant = 80
+            }else if dateArr.count <= 4{
+                cvTopConstain.constant = 150
             }else{
-                cvTopConstain.constant = CGFloat(30*dateArr.count)
+                cvTopConstain.constant = 200
             }
-            
             cv.delegate = self
             cv.dataSource = self
             cv.reloadData()
