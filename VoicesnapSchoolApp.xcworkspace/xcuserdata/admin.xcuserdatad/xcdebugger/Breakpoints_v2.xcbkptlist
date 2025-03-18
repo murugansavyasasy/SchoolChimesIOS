@@ -344,7 +344,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "1AA7E7AC-16DB-4373-AC32-F14E9DE7F973"
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VoicesnapSchoolApp/View/SchoolApp/Staff/StaffAddNewClassVC.swift"
@@ -408,7 +408,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "7D6FB5EF-53DF-427F-A01A-B01CFD053ABA"
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "VoicesnapSchoolApp/View/ParentApp/ExamTestVc/NewParentExamTestTVCell.swift"

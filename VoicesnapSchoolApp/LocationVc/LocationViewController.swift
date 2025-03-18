@@ -147,24 +147,17 @@ class LocationViewController: UIViewController,UITableViewDelegate,UITableViewDa
             
             
         }else{
-            
-          
-            
+
             instituteId = userDefaults.integer(forKey: DefaultsKeys.SchoolD)
             staffId = userDefaults.integer(forKey: DefaultsKeys.StaffID)
             bioMatricEnable = userDefaults.integer(forKey: DefaultsKeys.biometricEnable)
-            
         }
         
         
         
         if  bioMatricEnable == 1{
-            //
             plusview.isHidden = false
-            //
         }else{
-            
-            
             plusview.isHidden = true
         }
         
@@ -173,8 +166,6 @@ class LocationViewController: UIViewController,UITableViewDelegate,UITableViewDa
         for i in 0..<21 {
             let year = currentYear - i
             years.append(String(year))
-            
-            
         }
         
         selectYearsLbl.text = years[0]
@@ -213,7 +204,6 @@ class LocationViewController: UIViewController,UITableViewDelegate,UITableViewDa
         
         let history = UITapGestureRecognizer(target: self, action: #selector(history))
         histroyView.addGestureRecognizer(history)
-        
         let punch = UITapGestureRecognizer(target: self, action: #selector(punch))
         punchView.addGestureRecognizer(punch)
         let punchbttn = UITapGestureRecognizer(target: self, action: #selector(punchButtonss))
@@ -231,6 +221,7 @@ class LocationViewController: UIViewController,UITableViewDelegate,UITableViewDa
     }
     
     
+   
     func getDeviceModelName() -> String {
         var systemInfo = utsname()
         uname(&systemInfo)

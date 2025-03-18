@@ -108,6 +108,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     var staffRole : String!
     override func viewDidLoad(){
         super.viewDidLoad()
+        
+        print("ViewController")
         checkCountry = "yes"
         let userDefaults = UserDefaults.standard
         myWebView.navigationDelegate = self
@@ -116,17 +118,11 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         String(describing: 1)
         print("appDelegatePASS",appDelegate.isPasswordBind)
         staffRole = userDefaults.string(forKey: DefaultsKeys.StaffRole)
-        print("staffRole",staffRole)
-        print("stSchoolIdaffRole",SchoolId)
-        print("VIEW1")
-        
         StaffId = userDefaults.string(forKey: DefaultsKeys.StaffID)
-        print("DefaultsKeys.StaffID",StaffId)
         let nc = NotificationCenter.default
         nc.addObserver(self,selector: #selector(ViewController.callNotification), name: NSNotification.Name(rawValue: "PushNotification"), object:nil)
         
         
-     
         isAppAlreadyLaunchedOnce()
         
         
@@ -531,7 +527,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     func loadWebURl(){
         showLoading()
-
         let url = URL(string: TERMS_AND_CONDITION)
         print("urlurlurl",url)
         myWebView.load(URLRequest(url: url!))
@@ -787,13 +782,6 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                         
                         let MobilelengthStr = String(describing: dict["MobileNumberLength"]!)
                         UserDefaults.standard.set(MobilelengthStr, forKey: MOBILE_LENGTH)
-                        
-                        
-//                        if String(describing: dict["mobile_no_hint"]!) != ""{
-//                            let MobilePlaceholder = String(describing: dict["mobile_no_hint"]!)
-//                            UserDefaults.standard.set(MobilePlaceholder, forKey: Mobile_Place_holder)
-//                            
-//                        }
                         
                         let MobilePlaceholder = String(describing: dict["mobile_no_hint"]!)
                         UserDefaults.standard.set(MobilePlaceholder, forKey: Mobile_Place_holder)
