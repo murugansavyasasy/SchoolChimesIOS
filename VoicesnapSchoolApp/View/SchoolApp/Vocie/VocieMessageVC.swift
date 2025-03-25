@@ -246,20 +246,21 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
         calendarView.isHidden  = true
         doneView.isHidden  = true
         fsCaleView.isHidden  = true
-        checkHistoryArray()
+//        checkHistoryArray()
+        ValidateField()
     }
     
     @IBAction func scheduleAction() {
         self.SelectedVoiceHistoryArray.removeAllObjects()
         self.voiceHistoryTableView.reloadData()
-        ValidateField()
+       
         instantImg.image = UIImage(named: "RadioNormal")
         scheduleView.image = UIImage(named: "PurpleRadioSelect")
         sheduleCallListView.isHidden = false
         initiateCallView.isHidden = false
         doNotCallView.isHidden = false
         DefaultsKeys.SelectInstantSchedule = 1
-        
+        ValidateField()
         calendarView.isHidden  = true
         doneView.isHidden  = true
         fsCaleView.isHidden  = true
@@ -348,7 +349,6 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
         PlayVocieButton.isSelected = false
         AudioSlider.value = 0
         currentPlayTimeLabel.text = formatTime(time: 0)
-        
     }
     func audioPlayerDecodeErrorDidOccur(_ player: AVAudioPlayer, error: Error?){
         
@@ -793,8 +793,8 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
         if DefaultsKeys.SelectInstantSchedule == 0{
             checkHistoryArray()
         }
+        
         SelectHistory = true
-        urlData = nil
         calendarView.isHidden  = true
         doneView.isHidden  = true
         fsCaleView.isHidden  = true
@@ -852,15 +852,16 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
     func ValidateField()
     {
         if DefaultsKeys.SelectInstantSchedule == 1 {
+            
             if SelectHistory == true{
-                if initiateCallLbl.text != "Time" && doNotCallLbl.text != "Time"  && durationString != "0" && dateArr.count != 0 && self.SelectedVoiceHistoryArray.count > 0 {
+                if initiateCallLbl.text != "Time" && doNotCallLbl.text != "Time" && durationString != "0" && dateArr.count != 0 && self.SelectedVoiceHistoryArray.count > 0 {
                     enableButton()
                     
                 }else{
                     disableButton()
                 }
             }else{
-                if initiateCallLbl.text != "Time" && doNotCallLbl.text != "Time"  && durationString != "0" && dateArr.count != 0 && urlData != nil {
+                if initiateCallLbl.text != "Time" && doNotCallLbl.text != "Time" && durationString != "0" && dateArr.count != 0 && urlData != nil {
                     
                     enableButton()
                     
@@ -869,11 +870,22 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
                 }
             }
         }else{
-            if durationString != "0" && initiateCallLbl.text != "Time" && doNotCallLbl.text != "Time" && urlData != nil{
-                enableButton()
+            if SelectHistory == true{
+                if self.SelectedVoiceHistoryArray.count > 0 {
+                    enableButton()
+                    
+                }else{
+                    disableButton()
+                }
             }else{
-                disableButton()
+                
+                if durationString != "0" && urlData != nil{
+                    enableButton()
+                }else{
+                    disableButton()
+                }
             }
+            
         }
     }
     
@@ -1394,13 +1406,14 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
             print("Your music is Not Composible")
             return
         }
+        VoiceRecordTimeLabel.text = "00:00"
         urlData = url
         addAudio(audioUrl: url)
     }
     
     func addAudio(audioUrl: URL) {
         
-        
+       
         let documentsDirectoryURL =  FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
         var destinationUrl = documentsDirectoryURL.appendingPathComponent(audioUrl.lastPathComponent)
         var str = destinationUrl.lastPathComponent
@@ -1431,8 +1444,9 @@ class VocieMessageVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDel
     
     @IBAction func selectSchoolAction(_ sender: UIButton) {
         let schoolVC  = self.storyboard?.instantiateViewController(withIdentifier: "SchoolSelectionVC") as! SchoolSelectionVC
-        
+        print("urlDataurlData",urlData)
         schoolVC.typeList = "1"
+        
         schoolVC.urlData = urlData
         schoolVC.selectedSchoolDictionary = selectedSchoolDictionary
         schoolVC.fromView = fromView

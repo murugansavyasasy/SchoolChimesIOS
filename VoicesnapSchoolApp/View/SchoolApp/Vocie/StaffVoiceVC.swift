@@ -337,6 +337,7 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
     }
     
     func startRecording() {
+        disableButtonAction()
         let audioSession = AVAudioSession.sharedInstance()
         do{
             audioRecorder = try AVAudioRecorder(url: self.directoryURL()! as URL, settings: settings)
@@ -1262,18 +1263,48 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
         }
         
     }
+//    func ValidateField()
+//    {
+//        if DefaultsKeys.SelectInstantSchedule == 1 {
+//            if SelectHistory == true{
+//                if initiateCallLbl.text != "Time" && doNotCallLbl.text != "Time"  && durationString != "0" && dateArr.count != 0 && self.SelectedVoiceHistoryArray.count > 0 {
+//                    enableButtonAction()
+//                    
+//                }else{
+//                    disableButtonAction()
+//                }
+//            }else{
+//                if initiateCallLbl.text != "Time" && doNotCallLbl.text != "Time"  && durationString != "0" && dateArr.count != 0 && urlData != nil {
+//                    
+//                    enableButtonAction()
+//                    
+//                }else{
+//                    disableButtonAction()
+//                }
+//            }
+//        }else{
+//            if durationString != "0" && initiateCallLbl.text != "Time" && doNotCallLbl.text != "Time" && urlData != nil{
+//                enableButtonAction()
+//            }else{
+//                disableButtonAction()
+//            }
+//        }
+//    }
+    
+    
     func ValidateField()
     {
         if DefaultsKeys.SelectInstantSchedule == 1 {
+            
             if SelectHistory == true{
-                if initiateCallLbl.text != "Time" && doNotCallLbl.text != "Time"  && durationString != "0" && dateArr.count != 0 && self.SelectedVoiceHistoryArray.count > 0 {
+                if initiateCallLbl.text != "Time" && doNotCallLbl.text != "Time" && durationString != "0" && dateArr.count != 0 && self.SelectedVoiceHistoryArray.count > 0 {
                     enableButtonAction()
                     
                 }else{
                     disableButtonAction()
                 }
             }else{
-                if initiateCallLbl.text != "Time" && doNotCallLbl.text != "Time"  && durationString != "0" && dateArr.count != 0 && urlData != nil {
+                if initiateCallLbl.text != "Time" && doNotCallLbl.text != "Time" && durationString != "0" && dateArr.count != 0 && urlData != nil {
                     
                     enableButtonAction()
                     
@@ -1282,11 +1313,22 @@ class StaffVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDeleg
                 }
             }
         }else{
-            if durationString != "0" && initiateCallLbl.text != "Time" && doNotCallLbl.text != "Time" && urlData != nil{
-                enableButtonAction()
+            if SelectHistory == true{
+                if self.SelectedVoiceHistoryArray.count > 0 {
+                    enableButtonAction()
+                    
+                }else{
+                    disableButtonAction()
+                }
             }else{
-                disableButtonAction()
+                
+                if durationString != "0" && urlData != nil{
+                    enableButtonAction()
+                }else{
+                    disableButtonAction()
+                }
             }
+            
         }
     }
     

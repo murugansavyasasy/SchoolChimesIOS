@@ -1261,14 +1261,23 @@ class StaffAddNewClassVC: UIViewController,Apidelegate,UIPickerViewDelegate,UIPi
                                 if(stdName != "" && stdName != "0")
                                 {
                                     StandardNameArray.append(stdName!)
-                                    DetailofSectionArray.append(dicResponse["Sections"] as! [Any])
-                                    DetailedSubjectArray.append(dicResponse["Subjects"] as! [Any])
+                                    
+                                    if let sections = dicResponse["Sections"] as? [Any] {
+                                        DetailofSectionArray.append(sections)
+                                    }
+                                    
+                                    if let Subject = dicResponse["Subjects"] as? [Any] {
+                                        DetailedSubjectArray.append(Subject)
+                                    }
+                                   
+                                  
+                                    
                                     UtilObj.printLogKey(printKey: "DetailofSectionArray", printingValue: DetailofSectionArray)
                                     UtilObj.printLogKey(printKey: "DetailedSubjectArray", printingValue: DetailedSubjectArray)
                                     pickerStandardArray = StandardNameArray
                                     
                                     
-                                    if let sectionarray = DetailofSectionArray[0] as? NSArray
+                                    if let sectionarray = DetailofSectionArray.first as? NSArray
                                     {
                                         SectionArray = NSMutableArray(array: sectionarray)
                                         
@@ -1300,6 +1309,11 @@ class StaffAddNewClassVC: UIViewController,Apidelegate,UIPickerViewDelegate,UIPi
                                     Util.showAlert("", msg: AlertString)
                                     dismiss(animated: false, completion: nil)
                                 }
+                            }
+                            
+                            if DetailedSubjectArray.isEmpty && DetailofSectionArray.isEmpty{
+                                Util.showAlert("", msg: "No record found")
+                                dismiss(animated: false, completion: nil)
                             }
                         }
                         else

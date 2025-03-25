@@ -753,6 +753,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             deviceToken = "1234"
         }
         let myDict:NSMutableDictionary = ["MobileNumber" : loginusername,"DeviceToken": deviceToken,"DeviceType": DEVICE_TYPE ,COUNTRY_CODE : strCountryCode]
+        print("myDictdeviceToken",myDict)
         Constants.printLogKey("Device myDict", printValue: myDict)
         let myString = Util.convertNSDictionary(toString: myDict)
         apiCall.nsurlConnectionFunction(requestString, myString, "deviceToken")

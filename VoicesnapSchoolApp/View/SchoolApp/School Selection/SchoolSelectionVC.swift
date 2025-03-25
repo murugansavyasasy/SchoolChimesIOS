@@ -65,6 +65,7 @@ class SchoolSelectionVC: UIViewController ,UITableViewDelegate,UITableViewDataSo
         print("typeListselectedSchoolDictionary",selectedSchoolDictionary)
         
         print("SCHOOLSELECTIONSEGUE11112")
+        print("URLDATA",urlData)
 
         
         
@@ -175,10 +176,8 @@ class SchoolSelectionVC: UIViewController ,UITableViewDelegate,UITableViewDataSo
                         cell.SchoolNameRegionalLbl.text = schoolNameReg
                         cell.SchoolNameRegionalLbl.isHidden = false
 
-    //                        cell.locationTop.constant = 4
                     }else{
                         cell.SchoolNameRegionalLbl.isHidden = true
-            //            cell.SchoolNameRegional.backgroundColor = .red
                         cell.schoolNameTop.constant = 20
 
                     }

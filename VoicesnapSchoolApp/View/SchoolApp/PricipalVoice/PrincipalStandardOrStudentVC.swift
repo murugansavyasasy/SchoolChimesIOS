@@ -481,12 +481,19 @@ class PrincipalStandardOrStudentVC: UIViewController,Apidelegate,UIPickerViewDel
                                     if(stdName != "" && stdName != "0")
                                     {
                                         StandardNameArray.append(stdName!)
-                                        DetailofSectionArray.append(dicResponse["Sections"] as! [Any])
-                                        DetailedSubjectArray.append(dicResponse["Subjects"] as! [Any])
+                                        if let sections = dicResponse["Sections"] as? [Any] {
+                                            DetailofSectionArray.append(sections)
+                                        }
+                                        
+                                        if let Subject = dicResponse["Subjects"] as? [Any] {
+                                            DetailedSubjectArray.append(Subject)
+                                        }
+                                       
                                         pickerStandardArray = StandardNameArray
                                         StandardNameLbl.text = pickerStandardArray[0]
                                         SelectedClassIDString = String(StandarCodeArray[0])
-                                        let sectionarray:Array = DetailofSectionArray[0] as! [Any]
+                                        let sectionarray:Array = DetailofSectionArray.first as? [Any] ?? []
+                                        
                                         var sectionNameArray :Array = [String]()
                                         for  i in 0..<sectionarray.count
                                         {
@@ -494,18 +501,36 @@ class PrincipalStandardOrStudentVC: UIViewController,Apidelegate,UIPickerViewDel
                                             sectionNameArray.append(String(describing: dicResponse["SectionName"]!))
                                             SectionCodeArray.append(String(describing: dicResponse["SectionId"]!))
                                         }
-                                        SelectedSectionIDString = String(SectionCodeArray[0])
+                                        
+                                        if let firstSectionID = SectionCodeArray.first {
+                                            SelectedSectionIDString = String(firstSectionID)
+                                        } else {
+                                            SelectedSectionIDString = "" // Assign a default value or handle it as needed
+                                        }
                                         pickerSectionArray = sectionNameArray
-                                        let dicResponse :NSDictionary = sectionarray[0] as! NSDictionary
-                                        SelectedSectionDeatil = dicResponse
-                                        let SectionString = dicResponse["SectionName"] as! String
-                                        SectionNameLbl.text = SectionString
+                                        if let firstElement = sectionarray.first as? NSDictionary {
+                                            SelectedSectionDeatil = firstElement
+                                        } else {
+                                            SelectedSectionDeatil = [:] // Assign an empty dictionary or handle accordingly
+                                        }
+//                                      
+                                        if let sectionString = dicResponse["SectionName"] as? String {
+                                            SectionNameLbl.text = sectionString
+                                        } else {
+                                            SectionNameLbl.text = "" // Provide a default value or handle accordingly
+                                        }
+                                        
                                     }
                                     else
                                     {
                                         Util.showAlert("", msg: AlertString)
                                         dismiss(animated: false, completion: nil)
                                     }
+                                }
+                                
+                                if DetailedSubjectArray.isEmpty && DetailofSectionArray.isEmpty{
+                                    Util.showAlert("", msg: "No record found")
+                                    dismiss(animated: false, completion: nil)
                                 }
                             }
                         }

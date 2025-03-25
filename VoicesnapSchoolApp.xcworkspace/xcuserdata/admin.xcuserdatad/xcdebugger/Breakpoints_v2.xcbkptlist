@@ -311,54 +311,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "BEDE13A8-3374-49A5-857C-CA68818C5613"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VoicesnapSchoolApp/View/SchoolApp/Staff/StaffAddNewClassVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "309"
-            endingLineNumber = "309"
-            landmarkName = "tableView(_:cellForRowAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "DA39F118-642A-460E-8E80-B90D835A5C3F"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VoicesnapSchoolApp/View/SchoolApp/Staff/StaffAddNewClassVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "310"
-            endingLineNumber = "310"
-            landmarkName = "tableView(_:cellForRowAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "1AA7E7AC-16DB-4373-AC32-F14E9DE7F973"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VoicesnapSchoolApp/View/SchoolApp/Staff/StaffAddNewClassVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "331"
-            endingLineNumber = "331"
-            landmarkName = "tableView(_:cellForRowAt:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "034586B0-38AB-4356-95EC-D0B55F289888"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -418,22 +370,92 @@
             endingLineNumber = "16"
             landmarkName = "NewParentExamTestTVCell"
             landmarkType = "3">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "2B4C1886-8C19-4285-826C-DD2E862C7B01"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "VoicesnapSchoolApp/View/SchoolApp/Vocie/StaffVoiceVC.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "837"
-            endingLineNumber = "837"
-            landmarkName = "actionVoiceRecordingHistory()"
-            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "7D6FB5EF-53DF-427F-A01A-B01CFD053ABA - 6f164155977053dd"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "VoicesnapSchoolApp.NewParentExamTestTVCell.SessionLabel.getter : Swift.Optional&lt;__C.UILabel&gt;"
+                  moduleName = "VoicesnapSchoolApp.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/Desktop/School_Live/SchoolChimesIOS%203/VoicesnapSchoolApp/View/ParentApp/ExamTestVc/NewParentExamTestTVCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0">
+               </Location>
+               <Location
+                  uuid = "7D6FB5EF-53DF-427F-A01A-B01CFD053ABA - 9e24d3c23f560fd1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "VoicesnapSchoolApp.NewParentExamTestTVCell.SessionLabel.setter : Swift.Optional&lt;__C.UILabel&gt;"
+                  moduleName = "VoicesnapSchoolApp.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/Desktop/School_Live/SchoolChimesIOS%203/VoicesnapSchoolApp/View/ParentApp/ExamTestVc/NewParentExamTestTVCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0">
+               </Location>
+               <Location
+                  uuid = "7D6FB5EF-53DF-427F-A01A-B01CFD053ABA - 8c7bc010733208d2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "VoicesnapSchoolApp.NewParentExamTestTVCell.SessionLabel.modify : Swift.Optional&lt;__C.UILabel&gt;"
+                  moduleName = "VoicesnapSchoolApp.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/Desktop/School_Live/SchoolChimesIOS%203/VoicesnapSchoolApp/View/ParentApp/ExamTestVc/NewParentExamTestTVCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16">
+               </Location>
+               <Location
+                  uuid = "7D6FB5EF-53DF-427F-A01A-B01CFD053ABA - d608dc55110e2103"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "VoicesnapSchoolApp.NewParentExamTestTVCell.SessionLabel.modify : Swift.Optional&lt;__C.UILabel&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "VoicesnapSchoolApp.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///%3Ccompiler-generated%3E"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0">
+               </Location>
+               <Location
+                  uuid = "7D6FB5EF-53DF-427F-A01A-B01CFD053ABA - 6f650960826af8d3"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "VoicesnapSchoolApp.NewParentExamTestTVCell.init(style: __C.UITableViewCellStyle, reuseIdentifier: Swift.Optional&lt;Swift.String&gt;) -&gt; VoicesnapSchoolApp.NewParentExamTestTVCell"
+                  moduleName = "VoicesnapSchoolApp.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/Desktop/School_Live/SchoolChimesIOS%203/VoicesnapSchoolApp/View/ParentApp/ExamTestVc/NewParentExamTestTVCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16">
+               </Location>
+               <Location
+                  uuid = "7D6FB5EF-53DF-427F-A01A-B01CFD053ABA - a0d0dcc65c2f171b"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "VoicesnapSchoolApp.NewParentExamTestTVCell.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;VoicesnapSchoolApp.NewParentExamTestTVCell&gt;"
+                  moduleName = "VoicesnapSchoolApp.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/admin/Desktop/School_Live/SchoolChimesIOS%203/VoicesnapSchoolApp/View/ParentApp/ExamTestVc/NewParentExamTestTVCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

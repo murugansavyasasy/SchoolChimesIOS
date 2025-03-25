@@ -757,7 +757,7 @@ class EmergencyVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerD
                                           "isEmergency": "1"]
         
         
-        
+        print("myDictmyDict",myDict)
         let apiCall = API_call.init()
         apiCall.delegate = self;
         let myString = Util.convertDictionary(toString: myDict)

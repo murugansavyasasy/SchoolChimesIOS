@@ -92,8 +92,6 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
         super.viewDidLoad()
         view.isOpaque = false
         print("test11")
-        
-        SchoolId
         print("viewDidLoad SchoolId",SchoolId)
         print("GetvimeoVideoURL",vimeoVideoURL)
         countryCoded =  UserDefaults.standard.object(forKey: COUNTRY_ID) as! String
@@ -413,40 +411,55 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
 //
 
     @IBAction func actionOk(_ sender: UIButton) {
+
         PopupChoosePickerView.isHidden = true
-        if(TableString == "Standard")
-        {
-            SectionCodeArray.removeAll()
-            SelectedSectionCodeArray.removeAllObjects()
-            SelectedStandardString = pickerStandardArray[selectedStandardRow]
-            UpdateStandardValue(StandardName: SelectedStandardString)
-            
-            let sectionarray:Array = DetailofSectionArray[selectedStandardRow] as! [Any]
-            
-            UtilObj.printLogKey(printKey: "sectionarray", printingValue: sectionarray)
-            
-            var sectionNameArray :Array = [String]()
-            if(sectionarray.count > 0)
-            {
-                for var i in 0..<sectionarray.count
-                {
-                    let dicResponse :NSDictionary = sectionarray[i] as! NSDictionary
-                    sectionNameArray.append(dicResponse["SectionName"] as! String)
-                    SectionCodeArray.append(String(describing: dicResponse["SectionId"]!))
-                }
-                pickerSectionArray = sectionNameArray
-                
-            }else{
-                pickerSectionArray = []
-                
-            }
-            MyTableView.reloadData()
-        }
-        else if(TableString == "Section")
-        {
-            
-        }
-        popupChooseStandard.dismiss(true)
+
+           if TableString == "Standard" {
+               // Clear previous selections
+               SectionCodeArray.removeAll()
+               SelectedSectionCodeArray.removeAllObjects()
+
+               // Ensure the selected row is within bounds
+               guard selectedStandardRow < pickerStandardArray.count else {
+                   print("Error: selectedStandardRow is out of bounds")
+                   return
+               }
+
+               SelectedStandardString = pickerStandardArray[selectedStandardRow]
+               UpdateStandardValue(StandardName: SelectedStandardString)
+
+               // Ensure DetailofSectionArray is not out of bounds
+               guard selectedStandardRow < DetailofSectionArray.count,
+                     let sectionArray = DetailofSectionArray[selectedStandardRow] as? [[String: Any]] else {
+                   print("Error: DetailofSectionArray is empty or invalid")
+                   pickerSectionArray = []
+                   MyTableView.reloadData()
+                   return
+               }
+
+               UtilObj.printLogKey(printKey: "sectionarray", printingValue: sectionArray)
+
+               // Extract section names and section IDs safely
+               var sectionNameArray: [String] = []
+               for section in sectionArray {
+                   if let sectionName = section["SectionName"] as? String {
+                       sectionNameArray.append(sectionName)
+                   }
+                   if let sectionId = section["SectionId"] {
+                       SectionCodeArray.append("\(sectionId)")
+                   }
+                   
+               }
+
+               pickerSectionArray = sectionNameArray
+               MyTableView.reloadData()
+           }
+           else if TableString == "Section" {
+               // Handle Section case if needed
+           }
+
+           popupChooseStandard.dismiss(true)
+        
         
     }
     @IBAction func actionCancel(_ sender: UIButton) {
@@ -828,7 +841,7 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
         showLoading()
         strApiFrom = "SendStaffVoiceMessageApi"
         let VoiceData = NSData(contentsOf: self.VoiceurlData!)
-        
+        print("VoiceurlData",VoiceurlData)
         let apiCall = API_call.init()
         apiCall.delegate = self;
         let baseUrlString = UserDefaults.standard.object(forKey:BASEURL) as? String
@@ -922,6 +935,7 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
     {
         showLoading()
         strApiFrom = "SendPrincipalVoiceMessageApi"
+        print("VoiceurlDataVoiceurlData",VoiceurlData)
         let VoiceData = NSData(contentsOf: self.VoiceurlData!)
         let apiCall = API_call.init()
         apiCall.delegate = self;
@@ -1103,12 +1117,21 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
                                 if(stdName != "" && stdName != "0")
                                 {
                                     StandardNameArray.append(stdName!)
-                                    DetailofSectionArray.append(dicResponse["Sections"] as! [Any])
-                                    DetailedSubjectArray.append(dicResponse["Subjects"] as! [Any])
+                                    
+                                    if let sections = dicResponse["Sections"] as? [Any] {
+                                        DetailofSectionArray.append(sections)
+                                    }
+                                    
+                                    if let Subject = dicResponse["Subjects"] as? [Any] {
+                                        
+                                        DetailedSubjectArray.append(Subject)
+                                    }
+                                    
+                                   
                                     
                                     pickerStandardArray = StandardNameArray
                                     
-                                    if let sectionarray = DetailofSectionArray[0] as? NSArray
+                                    if let sectionarray = DetailofSectionArray.first as? NSArray
                                     {
                                         
                                         var sectionNameArray :Array = [String]()
@@ -1127,7 +1150,7 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
                                         
                                         
                                     }
-                                    if let SubjectArray = DetailedSubjectArray[0] as? NSArray
+                                    if let SubjectArray = DetailedSubjectArray.first as? NSArray
                                     {
                                         
                                         var SubjectNameArray :Array = [String]()
@@ -1160,6 +1183,10 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
                                     Util.showAlert("", msg: AlertString)
                                     dismiss(animated: false, completion: nil)
                                 }
+                            }
+                            if DetailedSubjectArray.isEmpty && DetailofSectionArray.isEmpty{
+                                Util.showAlert("", msg: "No record found")
+                                dismiss(animated: false, completion: nil)
                             }
                         }
                         else

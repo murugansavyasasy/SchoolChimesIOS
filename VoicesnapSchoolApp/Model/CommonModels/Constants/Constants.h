@@ -236,10 +236,9 @@
 #define GETCONFRENCELIST_TYPE @"getConferenceList"
 #define APPVERSION @"4"
 #define CHECK_UPDATE @"VersionCheck"
-#define VERSION_VALUE @"86"
+#define VERSION_VALUE @"88"
 #define IMAGE_COUNT @"ImageCount"
 #define UPLOAD_YOUTUBE_VIDEO @"UploadVideostoYoutube"
-
 #define GET_PAYMENT_URL @"GetPaymentGatewayLink"
 
 

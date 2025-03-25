@@ -2356,14 +2356,26 @@ class TextHomeWorkVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UI
 
             Standar.append(contentsOf: addLocationResp)
             
-            standardTextFld.text = Standar[0].standard
-        
-            SectiondId = Standar[0].sections[0].sectionId
+            
+            if Standar[0].standard == "No records found"{
+                Util.showAlert("", msg: "No record found")
+                dismiss(animated: false, completion: nil)
+              
+            }else{
+                
+               
+                standardTextFld.text = Standar[0].standard
+                SectiondId = Standar[0].sections[0].sectionId
+                sectionTextfld.text = Standar[0].sections[0].sectionName
+                homeworkReport()
+            }
+           
+          
 //
 
-            sectionTextfld.text = Standar[0].sections[0].sectionName
+           
 
-            homeworkReport()
+            
 
         }
 

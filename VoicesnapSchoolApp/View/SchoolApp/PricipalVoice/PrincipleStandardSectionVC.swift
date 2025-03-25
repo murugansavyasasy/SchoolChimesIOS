@@ -511,12 +511,21 @@ class PrincipleStandardSectionVC: UIViewController ,Apidelegate,UIPickerViewDele
                                 if(stdName != "" && stdName != "0")
                                 {
                                     StandardNameArray.append(stdName!)
-                                    DetailofSectionArray.append(dicResponse["Sections"] as! [Any])
-                                    DetailedSubjectArray.append(dicResponse["Subjects"] as! [Any])
+                                    
+                                    
+                                    
+                                    if let sections = dicResponse["Sections"] as? [Any] {
+                                        DetailofSectionArray.append(sections)
+                                    }
+                                    
+                                    if let Subject = dicResponse["Subjects"] as? [Any] {
+                                        DetailedSubjectArray.append(Subject)
+                                    }
+                                   
                                     
                                     pickerStandardArray = StandardNameArray
                                     
-                                    if let sectionarray = DetailofSectionArray[0] as? NSArray
+                                    if let sectionarray = DetailofSectionArray.first as? NSArray
                                     {
                                         
                                         var sectionNameArray :Array = [String]()
@@ -535,7 +544,7 @@ class PrincipleStandardSectionVC: UIViewController ,Apidelegate,UIPickerViewDele
                                         
                                         
                                     }
-                                    if let SubjectArray = DetailedSubjectArray[0] as? NSArray
+                                    if let SubjectArray = DetailedSubjectArray.first as? NSArray
                                     {
                                         
                                         var SubjectNameArray :Array = [String]()
@@ -570,6 +579,11 @@ class PrincipleStandardSectionVC: UIViewController ,Apidelegate,UIPickerViewDele
                                     Util.showAlert("", msg: AlertString)
                                     dismiss(animated: false, completion: nil)
                                 }
+                            }
+                            
+                            if DetailedSubjectArray.isEmpty && DetailofSectionArray.isEmpty{
+                                Util.showAlert("", msg: "No record found")
+                                dismiss(animated: false, completion: nil)
                             }
                         }
                         else
