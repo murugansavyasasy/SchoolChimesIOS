@@ -841,7 +841,9 @@ class AttendanceMessageVC: UIViewController,Apidelegate,UIPickerViewDelegate ,UI
                                     
                                     if(stdName != "" && stdName != "0"){
                                         StandardNameArray.append(stdName!)
+                                        
                                         DetailofSectionArray.append(dicResponse["Sections"] as! [Any])
+                                        
                                         pickerStandardArray = StandardNameArray
                                         StandardNameTextField.text = pickerStandardArray[0]
                                         SelectedClassIDString = String(StandarCodeArray[0])

@@ -1449,7 +1449,7 @@ print("schoolNameReg",schoolNameReg)
             arryMut.insert("MainToSchoolSelectionSegue_100" , at: 0)
             print("afteradd",arryMut)
             parentLabelArray =  arryMut as NSArray
-//            arryMut.add("Pauckt_27")
+            arryMut.add("Pauckt_27")
             print("afteraddchildIndexArray",parentLabelArray)
             Constants.printLogKey("parentLabelArray", printValue: parentLabelArray)
             print("afteraddchildIndexArray",childIndexArray)
