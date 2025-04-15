@@ -842,27 +842,76 @@ class AttendanceMessageVC: UIViewController,Apidelegate,UIPickerViewDelegate ,UI
                                     if(stdName != "" && stdName != "0"){
                                         StandardNameArray.append(stdName!)
                                         
-                                        DetailofSectionArray.append(dicResponse["Sections"] as! [Any])
-                                        
-                                        pickerStandardArray = StandardNameArray
-                                        StandardNameTextField.text = pickerStandardArray[0]
-                                        SelectedClassIDString = String(StandarCodeArray[0])
-                                        let sectionarray:Array = DetailofSectionArray[0] as! [Any]
-                                        var sectionNameArray :Array = [String]()
-                                        for  i in 0..<sectionarray.count{
-                                            let dicResponse : NSDictionary = sectionarray[i] as! NSDictionary
-                                            sectionNameArray.append(String(describing: dicResponse["SectionName"]!))
-                                            SectionCodeArray.append(String(describing: dicResponse["SectionId"]!))
+                                        if let sections = dicResponse["Sections"] as? [Any] {
+                                            DetailofSectionArray.append(sections)
+                                        } else {
+                                            print("❌ No 'Sections' key or wrong type")
                                         }
-                                        SelectedSectionIDString = String(SectionCodeArray[0])
-                                        pickerSectionArray = sectionNameArray
-                                        let dicResponse :NSDictionary = sectionarray[0] as! NSDictionary
-                                        SelectedSectionDeatil = dicResponse
-                                        let SectionString = dicResponse["SectionName"] as! String
-                                        SectionNameTextField.text = SectionString
-                                    }else{
-                                        Util.showAlert("", msg: AlertString)
-                                        dismiss(animated: false, completion: nil)
+                                        
+                                        if !StandardNameArray.isEmpty && !StandarCodeArray.isEmpty {
+                                            pickerStandardArray = StandardNameArray
+                                            StandardNameTextField.text = pickerStandardArray[0]
+                                            SelectedClassIDString = String(StandarCodeArray[0])
+                                        } else {
+                                            print("❌ StandardNameArray or StandarCodeArray is empty")
+                                        }
+                                        
+                                        //                                        DetailofSectionArray.append(dicResponse["Sections"] as! [Any])
+                                        //
+                                        if !DetailofSectionArray.isEmpty, let sectionArray = DetailofSectionArray[0] as? [Any] {
+                                            // Use sectionArray safely here
+                                        } else {
+                                            print("❌ DetailofSectionArray is empty or not [Any]")
+                                        }
+                                        if let sectionList = DetailofSectionArray.first as? [[String: Any]],
+                                           !StandardNameArray.isEmpty,
+                                           !StandarCodeArray.isEmpty {
+                                            
+                                            // Setup standard picker
+                                            pickerStandardArray = StandardNameArray
+                                            StandardNameTextField.text = pickerStandardArray[0]
+                                            SelectedClassIDString = String(describing: StandarCodeArray[0])
+                                            
+                                            // Setup section arrays
+                                            var sectionNameArray: [String] = []
+                                            SectionCodeArray.removeAll()
+                                            
+                                            for section in sectionList {
+                                                if let sectionName = section["SectionName"] as? String,
+                                                   let sectionId = section["SectionId"] {
+                                                    sectionNameArray.append(sectionName)
+                                                    SectionCodeArray.append(String(describing: sectionId))
+                                                }
+                                            }
+                                            
+                                            // Select first section
+                                            if let firstSection = sectionList.first,
+                                               let firstSectionName = firstSection["SectionName"] as? String,
+                                               let firstSectionId = firstSection["SectionId"] {
+                                                
+                                                SelectedSectionIDString = String(describing: firstSectionId)
+                                                pickerSectionArray = sectionNameArray
+                                                SelectedSectionDeatil = firstSection as NSDictionary
+                                                SectionNameTextField.text = firstSectionName
+                                                
+                                            } else {
+                                                Util.showAlert("", msg: "No valid section data found.")
+                                                dismiss(animated: false, completion: nil)
+                                            }
+                                            
+                                        } else {
+                                            
+                                           
+                                            _ = SweetAlert().showAlert(commonStringNames.Alert.translated(), subTitle: "No standard and section assigned", style: .none, buttonTitle: commonStringNames.OK.translated()) { isOtherButton in
+                                                
+                                                if isOtherButton {
+                                                    self.dismiss(
+                                                        animated: false,
+                                                        completion: nil
+                                                    )
+                                                }
+                                            }
+                                        }
                                     }
                                 }
                             }
