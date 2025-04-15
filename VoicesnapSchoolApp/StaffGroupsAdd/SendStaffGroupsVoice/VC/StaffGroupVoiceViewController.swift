@@ -9,6 +9,7 @@
 import UIKit
 import ObjectMapper
 import Alamofire
+import KRProgressHUD
 
 
 class StaffGroupVoiceViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,Apidelegate {
@@ -109,12 +110,149 @@ class StaffGroupVoiceViewController: UIViewController,UITableViewDelegate,UITabl
         groupsList()
     }
     
+//    
+//    func CallUploadVideoToVimeoServer() {
+//        self.showLoading()
+//        strApiFrom = "VimeoVidoUpload"
+//        
+//        let vimeoAccessToken = appDelegate.VimeoToken
+//        
+//        print("vimeoVideoURL!",vimeoVideoURL)
+//        print("VimeoTokenVimeoToken",appDelegate.VimeoToken)
+//        createVimeoUploadURL(authToken: vimeoAccessToken, videoFilePath: vimeoVideoURL) { [self] result in
+//            switch result {
+//            case .success(let uploadLink):
+//                uploadVideoToVimeo(uploadLink: uploadLink, videoFilePath: vimeoVideoURL, authToken: vimeoAccessToken) { [self] result in
+//                    switch result {
+//                    case .success:
+//                        print("Video uploaded successfully!")
+//                        
+//                        
+//                    case .failure(let error):
+//                        print("Failed to upload video: \(error)")
+//                        
+//                        let refreshAlert = UIAlertController(title: "", message: "Failed to upload video", preferredStyle: UIAlertController.Style.alert)
+//                        
+//                        refreshAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [self] (action: UIAlertAction!) in
+//                            
+//                            
+//                        }))
+//                        
+//                        
+//                        present(refreshAlert, animated: true, completion: nil)
+//                        
+//                        
+//                    }
+//                }
+//            case .failure(let error):
+//                print("Failed to create upload URL: \(error)")
+//                
+//                let refreshAlert = UIAlertController(title: "", message: "Failed to upload video", preferredStyle: UIAlertController.Style.alert)
+//                
+//                refreshAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [self] (action: UIAlertAction!) in
+//                }))
+//                
+//                
+//                present(refreshAlert, animated: true, completion: nil)
+//                
+//                
+//            }
+//        }
+//        
+//    }
+//    
+//    
+//    
+//    enum UploadResult {
+//        case success(String)
+//        case failure(Error)
+//    }
+//    
+//    func getFileSize(at url: URL) -> UInt64? {
+//        do {
+//            let attributes = try FileManager.default.attributesOfItem(atPath: url.path)
+//            if let fileSize = attributes[FileAttributeKey.size] as? UInt64 {
+//                return fileSize
+//            }
+//        } catch {
+//            print("Error: \(error)")
+//        }
+//        return nil
+//    }
+//    
+  
+//    
+//    func uploadVideoToVimeo(uploadLink: String, videoFilePath: URL, authToken: String, chunkSize: Int = 5 * 1024 * 1024, completion: @escaping (UploadResult) -> Void) {
+//        guard let fileHandle = try? FileHandle(forReadingFrom: videoFilePath) else {
+//            completion(.failure(NSError(domain: "com.vimeo", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unable to read video file"])))
+//            return
+//        }
+//        print("fileHandleBefore",fileHandle)
+//        var offset: Int = 0
+//        let fileSize = fileHandle.seekToEndOfFile()
+//        fileHandle.seek(toFileOffset: 0)
+//        
+//        print("fileHandleBefore",fileHandle)
+//        func uploadNextChunk() {
+//            let chunkData = fileHandle.readData(ofLength: chunkSize)
+//            
+//            if chunkData.isEmpty {
+//                fileHandle.closeFile()
+//                completion(.success(("")))
+//                return
+//            }
+//            
+//            var request = URLRequest(url: URL(string: uploadLink)!)
+//            request.httpMethod = "PATCH"
+//            request.setValue("Bearer \(authToken)", forHTTPHeaderField: "Authorization")
+//            request.setValue("application/offset+octet-stream", forHTTPHeaderField: "Content-Type")
+//            request.setValue("\(offset)", forHTTPHeaderField: "Upload-Offset")
+//            request.setValue("1.0.0", forHTTPHeaderField: "Tus-Resumable")
+//            request.httpBody = chunkData
+//            
+//            let uploadTask = URLSession.shared.uploadTask(with: request, from: chunkData) { (data, response, error) in
+//                if let error = error {
+//                    completion(.failure(error))
+//                    return
+//                }
+//                
+//                if let httpResponse = response as? HTTPURLResponse {
+//                    if httpResponse.statusCode == 204 {
+//                        offset += chunkSize
+//                        uploadNextChunk()
+//                    } else if httpResponse.statusCode == 412 {
+//                        // Handle 412 error (precondition failed), retry or get correct offset from server
+//                        if let rangeHeader = httpResponse.value(forHTTPHeaderField: "Upload-Offset"), let serverOffset = Int(rangeHeader) {
+//                            offset = serverOffset
+//                            uploadNextChunk()
+//                        } else {
+//                            let error = NSError(domain: "com.vimeo", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to upload chunk: Precondition Failed"])
+//                            completion(.failure(error))
+//                        }
+//                    } else {
+//                        let error = NSError(domain: "com.vimeo", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to upload chunk, status code: \(httpResponse.statusCode)"])
+//                        completion(.failure(error))
+//                    }
+//                }
+//            }
+//            
+//            uploadTask.resume()
+//        }
+//        
+//        uploadNextChunk()
+//    }
+//    
+//    
+    
     
     func CallUploadVideoToVimeoServer() {
         self.showLoading()
         strApiFrom = "VimeoVidoUpload"
         
-        let vimeoAccessToken = appDelegate.VimeoToken
+        //
+        let vimeoAccessToken =  appDelegate.VimeoToken
+        print("vimeoVideoURL!",vimeoVideoURL)
+        print("vimeoAccessToken!",vimeoAccessToken)
         
         createVimeoUploadURL(authToken: vimeoAccessToken, videoFilePath: vimeoVideoURL) { [self] result in
             switch result {
@@ -122,12 +260,13 @@ class StaffGroupVoiceViewController: UIViewController,UITableViewDelegate,UITabl
                 uploadVideoToVimeo(uploadLink: uploadLink, videoFilePath: vimeoVideoURL, authToken: vimeoAccessToken) { [self] result in
                     switch result {
                     case .success:
-                        print("Video uploaded successfully!")
+                        print("")
+                        
                         
                         
                     case .failure(let error):
                         print("Failed to upload video: \(error)")
-                        
+                        hideLoading()
                         let refreshAlert = UIAlertController(title: "", message: "Failed to upload video", preferredStyle: UIAlertController.Style.alert)
                         
                         refreshAlert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [self] (action: UIAlertAction!) in
@@ -156,6 +295,7 @@ class StaffGroupVoiceViewController: UIViewController,UITableViewDelegate,UITabl
             }
         }
         
+        
     }
     
     
@@ -180,11 +320,6 @@ class StaffGroupVoiceViewController: UIViewController,UITableViewDelegate,UITabl
     func createVimeoUploadURL(authToken: String, videoFilePath: URL, completion: @escaping (UploadResult) -> Void) {
         
         
-        guard let fileSize = getFileSize(at: videoFilePath) else {
-            completion(.failure(NSError(domain: "com.vimeo", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unable to get file size"])))
-            return
-        }
-        
         var TitleGet =  vimeoVideoDict["Title"] as! String
         var TitleDescriotion = vimeoVideoDict["Description"] as! String
         if TitleGet != "" && TitleGet != nil {
@@ -199,50 +334,60 @@ class StaffGroupVoiceViewController: UIViewController,UITableViewDelegate,UITabl
             TitleDescriotion =  "Test Description"
         }
         
+        
+        
+        guard let fileSize = getFileSize(at: videoFilePath) else {
+            completion(.failure(NSError(domain: "com.vimeo", code: -1, userInfo: [NSLocalizedDescriptionKey: "Unable to get file size"])))
+            return
+        }
+        
         let headers: HTTPHeaders = [
             "Authorization": "Bearer \(authToken)",
             "Content-Type": "application/json",
             "Accept": "application/vnd.vimeo.*+json;version=3.4"
         ]
-        
+        let userDefaults = UserDefaults.standard
+        let getDownload = UserDefaults.standard.value(forKey: DefaultsKeys.allowVideoDownload) as? Bool ?? false
         let parameters: [String: Any] = [
             "upload": [
                 "approach": "tus",
-                "size": "\(fileSize)" // Use the actual video file size
+                "size": "\(fileSize)"
             ],
             "privacy":[
-                "view":"unlisted"
+                "view":"unlisted",
+                "download": true
             ],
             "embed":[
                 "buttons":[
                     "share":"false"
                 ]
             ],
-            "name": TitleGet, // Replace with actual video name
-            "description": TitleDescriotion // Replace with actual video description
+            "name": TitleGet,
+            "description": TitleDescriotion
         ]
         
         AF.request("https://api.vimeo.com/me/videos", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
             .responseJSON { [self] response in
                 switch response.result {
                 case .success(let value):
-                    print("Vimeo API Response: \(value)") // Print the full JSON
+                    print("Vimeo API Response: \(value)")
                     if let json = value as? [String: Any],
-                       let upload = json["link"] as? [String: Any],
+                       let upload = json["upload"] as? [String: Any],
                        let uploadLink = upload["upload_link"] as? String {
                         
                         let embedUrl = json["player_embed_url"] as! String
-                        let LinkGet  = json["link"] as! String
                         let IFrameLink : String!
                         let embed = json["embed"]! as AnyObject
                         IFrameLink = embed["html"]! as! String
                         
+                        let LinkGet  = json["link"] as! String
                         vimeoVideoDict["URL"] = LinkGet
                         vimeoVideoDict["Iframe"] = embed["html"]!
+                        vimeoVideoDict["videoFileSize"] = DefaultsKeys.videoFilesize
+                        
                         print(vimeoVideoDict)
-                        vimeoVideoDictURL = LinkGet
-                        vimeoVideoDictIframe = embed["html"]!
                         hideLoading()
+                       VideoUpload()
                         print("videe=embedUrl",IFrameLink)
                         //                        print("IFrameLink",IFrameLink)
                         completion(.success(uploadLink))
@@ -369,17 +514,15 @@ class StaffGroupVoiceViewController: UIViewController,UITableViewDelegate,UITabl
     
     
     override func viewWillAppear(_ animated: Bool) {
-        self.getImageURL(images: self.imagesArrayGet as! [UIImage])
         print("pdfDataType",pdfDataType)
         if pdfDataType == "1" {
-            self.uploadPDFFileToAWS(pdfData: pdfData!)
-            print("uploadPDFFileToAWS",uploadPDFFileToAWS)
+           
         }
         
-        else if pdfDataType == "Video" {
-            SendedScreenNameStr = "VimeoVideoToParents"
-            CallUploadVideoToVimeoServer()
-        }
+//        else if pdfDataType == "Video" {
+//            SendedScreenNameStr = "VimeoVideoToParents"
+//            CallUploadVideoToVimeoServer()
+//        }
     }
     @IBAction func cancelVC(){
         dismiss(animated: true, completion: nil)
@@ -396,21 +539,30 @@ class StaffGroupVoiceViewController: UIViewController,UITableViewDelegate,UITabl
         groupModal.StaffId = StaffId
         
         let groupModalStr = groupModal.toJSONString()
-        print("groupModalStr",groupModalStr)
+        print("groupModalStr",groupModal.toJSON())
         SendStaffGroupsVoiceRequest.call_request(param: groupModalStr!) {
             [self]   (res) in
             
-            
-            
-            
-            
             let groupResponse : [SendStaffGroupsVoiceResponse] = Mapper<SendStaffGroupsVoiceResponse>().mapArray(JSONString: res)!
-            
-            getGroupList = groupResponse
-            tv.dataSource = self
-            tv.delegate = self
-            tv.reloadData()
-            
+        
+            if groupResponse.count > 0 {
+                getGroupList = groupResponse
+                tv.dataSource = self
+                tv.delegate = self
+                tv.reloadData()
+            }else{
+                
+                _ = SweetAlert().showAlert(commonStringNames.Alert.translated(), subTitle: "No group found", style: .none, buttonTitle: commonStringNames.OK.translated()) { isOtherButton in
+                                            
+                                            if isOtherButton {
+                                                
+                                                self.dismiss(animated: true)
+                                                
+                                            }
+                                        }
+               
+                
+            }
         }
     }
     
@@ -469,198 +621,197 @@ class StaffGroupVoiceViewController: UIViewController,UITableViewDelegate,UITabl
     }
     
     
-    
     //    AWS Upload
+    func getImageURL(images: [UIImage]) {
     
-    
-    func getImageURL(images : [UIImage]){
         self.originalImagesArray = images
         self.totalImageCount = images.count
-        if currentImageCount < images.count{
-            self.uploadAWS(image: images[currentImageCount])
-            print("uploadAWS",self.uploadAWS)
-        }
+            if currentImageCount < images.count {
+               
+                self.uploadAWS(image: images[currentImageCount])
+            } else {
+                print("All images uploaded. Final URLs: \("")")
+                // Handle final uploaded URLs (e.g., send them to the server or update the UI)
+            }
     }
-    
-    func uploadAWS(image : UIImage){
-        
-        var bucketName = ""
-        if countryCoded == "1" {
-           
-            bucketName = DefaultsKeys.bucketNameIndia
-        }else  {
-             bucketName = DefaultsKeys.bucketNameBangkok
-        }
-        let CognitoPoolID = DefaultsKeys.CognitoPoolID
-        let Region = AWSRegionType.APSouth1
-        
-        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:Region,identityPoolId:CognitoPoolID)
-        let configuration = AWSServiceConfiguration(region:Region, credentialsProvider:credentialsProvider)
-        AWSServiceManager.default().defaultServiceConfiguration = configuration
-        
-        let currentTimeStamp = NSString.init(format: "%ld",Date() as CVarArg)
-        let imageNameWithoutExtension = NSString.init(format: "vc_%@",currentTimeStamp)
-        let imageName = NSString.init(format: "%@%@",imageNameWithoutExtension, ".png")
-        
-        
+
+    func uploadAWS(image: UIImage) {
+        let currentTimeStamp = NSString.init(format: "%ld", Date() as CVarArg)
+        let imageNameWithoutExtension = NSString.init(format: "vc_%@", currentTimeStamp)
+        let imageName = NSString.init(format: "%@%@", imageNameWithoutExtension, ".png")
         let ext = imageName as String
-        
-        let fileName = imageNameWithoutExtension
-        let fileType = ".png"
-        
         let imageURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(ext)
-        let data = image.jpegData(compressionQuality: 0.9)
-        do {
-            try data?.write(to: imageURL)
-        }
-        catch {}
-        
-        print(imageURL)
-        let dateFormatter = DateFormatter()
-               
-               dateFormatter.dateFormat = "yyyy-MM-dd"
-               
-               let  currentDate =   dateFormatter.string(from: Date())
-        let uploadRequest = AWSS3TransferManagerUploadRequest()
-        uploadRequest?.body = imageURL
-        uploadRequest?.key = "communication" + "/" + currentDate +  "/" + ext
-        uploadRequest?.bucket = bucketName
-        uploadRequest?.contentType = "image/" + ext
-        uploadRequest?.acl = .publicRead
-        // upload
-        
-        let transferManager = AWSS3TransferManager.default()
-        transferManager.upload(uploadRequest!).continueWith { [self] (task) -> AnyObject? in
-            
-            if let error = task.error {
-                print("Upload failed : (\(error))")
+
+        if let data = image.jpegData(compressionQuality: 0.9) {
+            do {
+                try data.write(to: imageURL)
+            } catch {
+                print("Error writing image data to file: \(error)")
+                return
             }
-            
-            if task.result != nil {
-                
-                let url = AWSS3.default().configuration.endpoint.url
-                let publicURL = url?.appendingPathComponent((uploadRequest?.bucket!)!).appendingPathComponent((uploadRequest?.key!)!)
-                if  let absoluteString = publicURL?.absoluteString {
-                    print("Uploaded to:\(absoluteString)")
-                    imgPdfType = "1"
-                    absoluteStringImg = absoluteString
-                    let imageDict = NSMutableDictionary()
-                    imageDict["FileName"] = absoluteString
-                    self.imageUrlArray.add(imageDict)
-                    self.currentImageCount = self.currentImageCount + 1
-                    if self.currentImageCount < self.totalImageCount{
-                        DispatchQueue.main.async {
-                            self.getImageURL(images: self.originalImagesArray)
-                        }
-                    }else{
-                        self.convertedImagesUrlArray = self.imageUrlArray
+        }
+        
+        
+        let currentDate = AWSPreSignedURL.shared.getCurrentDateString()
+        var bucketName = ""
+        var bucketPath = ""
+        if countryCoded == "4" {
+            bucketName = DefaultsKeys.THAI_SCHOOL_CHIMES_COMMUNICATION
+            bucketPath = currentDate+"/"+String(SchoolId)
+        }
+        else
+        {
+            bucketName = DefaultsKeys.SCHOOL_CHIMES_COMMUNICATION
+            bucketPath = currentDate+"/"+String(SchoolId)
+
+        }
+                       
+        
+        AWSPreSignedURL.shared.fetchPresignedURL(
+            bucket: bucketName,
+            fileName: imageURL,
+            bucketPath: bucketPath,
+            fileType: "image/png"
+        ) { [self] result in
+            switch result {
+            case .success(let awsResponse):
+                print("Presigned URL fetched: \(awsResponse.data?.presignedUrl ?? "")")
+                let presignedURL = awsResponse.data?.presignedUrl
+                let Uploadimages = awsResponse.data?.fileUrl
+              
+                AWSUploadManager.shared.uploadImageToAWS(image: image, presignedURL: presignedURL!) { [self] result in
+                    switch result {
+                    case .success(let uploadedURL):
+                        print("Image uploaded successfully: \(uploadedURL)")
                         
-                        
+                      
+                    case .failure(let error):
+                        print("Failed to upload image: \(error.localizedDescription)")
                     }
-                }
+        
+//                    let imageDict = NSMutableDictionary()
+//                    imageDict["FileName"] = Uploadimages
+//                    imageUrlArray.add(imageDict)
+                    self.currentImageCount += 1
+                      if self.currentImageCount < self.totalImageCount {
+                          
+                          DispatchQueue.main.async {
+                              self.getImageURL(images: self.originalImagesArray)
+                              print("getImageURL",self.getImageURL)
+                          }
+                       } else {
+                           print("All images uploaded. Final URLs: \(imageUrlArray)")
+                           // Handle final uploaded URLs (e.g., send them to the server or update the UI
+                         
+                           
+                           imgPdfType = "1"
+                           absoluteStringImg = Uploadimages
+                           imgPdfUpload()
+                           let imageDict = NSMutableDictionary()
+                           imageDict["FileName"] = Uploadimages
+                           self.imageUrlArray.add(imageDict)
+                           self.currentImageCount = self.currentImageCount + 1
+                           if self.currentImageCount < self.totalImageCount{
+                               DispatchQueue.main.async {
+                                   self.getImageURL(images: self.originalImagesArray)
+                               }
+                           }else{
+                               self.convertedImagesUrlArray = self.imageUrlArray
+                               
+                               
+                           }
+                           }
+                    
+                    
+                    
+                          }
+           
+            case .failure(let error):
+                print("Error fetching presigned URL: \(error.localizedDescription)")
             }
-            else {
-                print("Unexpected empty result.")
-            }
-            return nil
         }
+        
+   
+       
     }
     
     
-    //    Pdf Upload
     
-    
-    
-    
+
     func uploadPDFFileToAWS(pdfData : NSData){
-        //        self.showLoading()
-        
-        
-        var bucketName = ""
-        if countryCoded == "1" {
-           
-            bucketName = DefaultsKeys.bucketNameIndia
-        }else  {
-             bucketName = DefaultsKeys.bucketNameBangkok
-        }
-        
-      
-        let CognitoPoolID = DefaultsKeys.CognitoPoolID
-        let Region = AWSRegionType.APSouth1
-        
-        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:Region,identityPoolId:CognitoPoolID)
-        let configuration = AWSServiceConfiguration(region:Region, credentialsProvider:credentialsProvider)
-        AWSServiceManager.default().defaultServiceConfiguration = configuration
-        
-        // url for image in the bundle
-        
+//        self.showLoading()
         let currentTimeStamp = NSString.init(format: "%ld",Date() as CVarArg)
         let imageNameWithoutExtension = NSString.init(format: "vc_%@",currentTimeStamp)
         let imageName = NSString.init(format: "%@%@",imageNameWithoutExtension, ".pdf")
-        
-        // signatureImageName = imageName as String
-        
         let ext = imageName as String
-        //  let imageURL = Bundle.main.url(forResource: "lock_icon", withExtension: ext)!
-        
         let fileName = imageNameWithoutExtension
         let fileType = ".pdf"
-        
         let imageURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(ext)
-        
         do {
             try pdfData.write(to: imageURL)
         }
         catch {}
-        
         print(imageURL)
+       
+      
         
-        let dateFormatter = DateFormatter()
-               
-               dateFormatter.dateFormat = "yyyy-MM-dd"
-               
-               let  currentDate =   dateFormatter.string(from: Date())
-        let uploadRequest = AWSS3TransferManagerUploadRequest()
-        uploadRequest?.body = imageURL
-        uploadRequest?.key = "communication" + "/" + currentDate +  "/" + ext
-        uploadRequest?.bucket = bucketName
-        // uploadRequest?.contentType = "pdf/" + ext
-        uploadRequest?.contentType = "application/pdf"
-        uploadRequest?.acl = .publicRead
-        // upload
         
-        let transferManager = AWSS3TransferManager.default()
-        transferManager.upload(uploadRequest!).continueWith { [self] (task) -> AnyObject? in
-            
-            if let error = task.error {
-                print("Upload failed : (\(error))")
-                //                self.hideLoading()
-            }
-            
-            if task.result != nil {
-                let url = AWSS3.default().configuration.endpoint.url
-                let publicURL = url?.appendingPathComponent((uploadRequest?.bucket!)!).appendingPathComponent((uploadRequest?.key!)!)
-                if let absoluteString = publicURL?.absoluteString {
-                    print("Uploaded to:\(absoluteString)")
+        let currentDate = AWSPreSignedURL.shared.getCurrentDateString()
+        var bucketName = ""
+        var bucketPath = ""
+        if countryCoded == "4" {
+            bucketName = DefaultsKeys.THAI_SCHOOL_CHIMES_COMMUNICATION
+            bucketPath = currentDate+"/"+String(SchoolId)
+        }
+        else
+        {
+            bucketName = DefaultsKeys.SCHOOL_CHIMES_COMMUNICATION
+            bucketPath = currentDate+"/"+String(SchoolId)
+
+        }
+                       
+        
+        AWSPreSignedURL.shared.fetchPresignedURL(
+            bucket: bucketName,
+            fileName: imageURL,
+            bucketPath: bucketPath,
+            fileType: "application/pdf"
+        ) { [self] result in
+            switch result {
+            case .success(let awsResponse):
+                print("Presigned URL fetched: \(awsResponse.data?.presignedUrl ?? "")")
+                let presignedURL = awsResponse.data?.presignedUrl
+                let UploadPDf = awsResponse.data?.fileUrl
+              
+                AWSUploadManager.shared.uploadPDFAWSUsingPresignedURL(pdfData: pdfData as Data, presignedURL:presignedURL! ){ [self] result in
+                    
+                    switch result {
+                    case .success(let uploadedURL):
+                        print("Image uploaded successfully: \(uploadedURL)")
+                      
+                    case .failure(let error):
+                        print("Failed to upload image: \(error.localizedDescription)")
+                    }
+        
+                   
+                    
                     imgPdfType = "2"
-                    absoluteStringPdf = absoluteString
+                    absoluteStringPdf = UploadPDf
+                    imgPdfUpload()
                     let imageDict = NSMutableDictionary()
-                    imageDict["FileName"] = absoluteString
+                    imageDict["FileName"] = UploadPDf
                     self.imageUrlArray.add(imageDict)
                     self.convertedImagesUrlArray = self.imageUrlArray
-                    
-                    
-                }
+                          }
+           
+            case .failure(let error):
+                print("Error fetching presigned URL: \(error.localizedDescription)")
             }
-            else {
-                //                self.hideLoading()
-                print("Unexpected empty result.")
-            }
-            return nil
         }
+        
     }
     
-    
+
     
     @IBAction func SendAction(_ sender: UIButton) {
         
@@ -719,7 +870,7 @@ class StaffGroupVoiceViewController: UIViewController,UITableViewDelegate,UITabl
                     if i.Status.elementsEqual("1") {
                         
                         
-                        _ = SweetAlert().showAlert("Alert", subTitle: i.Message, style: .none, buttonTitle: "OK") { isOtherButton in
+                        _ = SweetAlert().showAlert(commonStringNames.Alert.translated(), subTitle: i.Message, style: .none, buttonTitle: commonStringNames.OK.translated()) { isOtherButton in
                             
                             if isOtherButton {
                                 
@@ -735,90 +886,15 @@ class StaffGroupVoiceViewController: UIViewController,UITableViewDelegate,UITabl
         }else if selectType == "Image" {
             
             
-            
-            print("get",self.getImageURL)
-            var idNameArr : [String] = []
-            
-            var idList : String!
-            
-            for listItem in getGroupList {
-                if listItem.isSelected == true{
-                    
-                    
-                    let shortNames = listItem.GroupID.filter { _ in listItem.isSelected == true   }
-                    
-                    
-                    idList = listItem.GroupID
-                    
-                    
-                    
-                    idNameArr.append(idList)
-                    print("idNameArr",idNameArr)
-                }
-            }
-            
-            let imageModalGrpCode = StaffGroupsImagePdfGrpCode()
-            for i in idNameArr {
-                imageModalGrpCode.TargetCode = i
-            }
-            
-            
-            print("smsModalGrpCode.TargetCode",imageModalGrpCode.TargetCode)
-            ImageTargetListArr.append(imageModalGrpCode)
-            
-            
-            let imageModalFilePath = StaffGroupsImagePdfFileNameArray()
             if imgPdfType == "1" {
-                imageModalFilePath.FileName = absoluteStringImg
-                print("imageModalFilePath.FileName",  imageModalFilePath.FileName)
-            }else {
-                imageModalFilePath.FileName = absoluteStringPdf
-            }
-            ImageFileNameArrayArr.append(imageModalFilePath)
-            
-            
-            let imageModal = SendImageStaffModal()
-            
-            imageModal.SchoolID = SchoolId
-            imageModal.StaffID = StaffId
-            
-            imageModal.Description = imgDesc
-            imageModal.Message = MessageStr
-            imageModal.GrpCode = ImageTargetListArr
-            imageModal.Duration = "0"
-            
-            print("imgPdfType",imgPdfType)
-            if imgPdfType == "1" {
-                imageModal.FileType = "IMG"
-                imageModal.isMultiple = "1"
+                self.getImageURL(images: self.imagesArrayGet as! [UIImage])
+
             }else{
-                imageModal.FileType = ".pdf"
-                imageModal.isMultiple = "0"
+                self.uploadPDFFileToAWS(pdfData: pdfData!)
+                print("uploadPDFFileToAWS",uploadPDFFileToAWS)
             }
-            imageModal.FileNameArray = ImageFileNameArrayArr
-            print("imageModal.FileNameArray", imageModal.FileNameArray)
-            let imageModalStr = imageModal.toJSONString()
-            print("SmsModalStr",imageModalStr)
-            SendImagePdfRequest.call_request(param: imageModalStr!) {
-                [self]   (res) in
-                
-                let imageResponse : [StaffImagePdfResponse] = Mapper<StaffImagePdfResponse>().mapArray(JSONString: res)!
-                
-                for i in imageResponse {
-                    if i.Status.elementsEqual("1") {
-                        
-                        
-                        _ = SweetAlert().showAlert("Alert", subTitle: i.Message, style: .none, buttonTitle: "OK") { isOtherButton in
-                            
-                            if isOtherButton {
-                                
-                                self.presentingViewController?.presentingViewController?.dismiss(animated: false, completion: nil)
-                            }
-                        }
-                    }
-                    
-                }
-            }
+            
+           
             
         }else if selectType == "Voice" {
             
@@ -863,72 +939,166 @@ class StaffGroupVoiceViewController: UIViewController,UITableViewDelegate,UITabl
         }
         else if selectType == "Video" {
             print("Video")
-            
-            var idNameArr : [String] = []
-            
-            var idList : String!
-            
-            for listItem in getGroupList {
-                if listItem.isSelected == true{
-                    
-                    
-                    let shortNames = listItem.GroupID.filter { _ in listItem.isSelected == true   }
-                    
-                    
-                    idList = listItem.GroupID
-                    idNameArr.append(idList)
-                    print("idNameArr",idNameArr)
-                }
-            }
-            
-            let videoModalGrpCode = StaffGroupsVideoGrpCode()
-            for i in idNameArr {
-                videoModalGrpCode.TargetCode = i
-            }
-            
-            
-            VideoTargetListArr.append(videoModalGrpCode)
-            
-            
-            print("MessageStr",MessageStr)
-            let videoModal = SendVideoStaffToGroupsModal()
-            
-            videoModal.SchoolId = SchoolId
-            videoModal.Title = videoTitle
-            
-            videoModal.Description = videoDesc
-            videoModal.Iframe = vimeoVideoDictIframe
-            videoModal.URL = vimeoVideoDictURL
-            videoModal.ProcessBy = videoProcessBy
-            videoModal.GrpCode = VideoTargetListArr
-            videoModal.videoFileSize = DefaultsKeys.videoFilesize
-            let videoModalStr = videoModal.toJSONString()
-            print("videoModalStr",videoModalStr)
-            SendStaffGroupsVideoRequest.call_request(param: videoModalStr!) {
-                [self]   (res) in
+            SendedScreenNameStr = "VimeoVideoToParents"
+            CallUploadVideoToVimeoServer()
+           
+        }
+    }
+    
+    func imgPdfUpload() {
+        print("get",self.getImageURL)
+        var idNameArr : [String] = []
+        
+        var idList : String!
+        
+        for listItem in getGroupList {
+            if listItem.isSelected == true{
                 
-                let videoResponse : [StaffVideoResponse] = Mapper<StaffVideoResponse>().mapArray(JSONString: res)!
                 
-                for i in videoResponse {
-                    if i.result.elementsEqual("1") {
+                let shortNames = listItem.GroupID.filter { _ in listItem.isSelected == true   }
+                
+                
+                idList = listItem.GroupID
+                
+                
+                
+                idNameArr.append(idList)
+                print("idNameArr",idNameArr)
+            }
+        }
+        
+        let imageModalGrpCode = StaffGroupsImagePdfGrpCode()
+        for i in idNameArr {
+            imageModalGrpCode.TargetCode = i
+        }
+        
+        
+        print("smsModalGrpCode.TargetCode",imageModalGrpCode.TargetCode)
+        ImageTargetListArr.append(imageModalGrpCode)
+        
+        
+        let imageModalFilePath = StaffGroupsImagePdfFileNameArray()
+        if imgPdfType == "1" {
+            imageModalFilePath.FileName = absoluteStringImg
+            print("imageModalFilePath.FileName",  imageModalFilePath.FileName)
+        }else {
+            imageModalFilePath.FileName = absoluteStringPdf
+        }
+        ImageFileNameArrayArr.append(imageModalFilePath)
+        
+        
+        let imageModal = SendImageStaffModal()
+        
+        imageModal.SchoolID = SchoolId
+        imageModal.StaffID = StaffId
+        
+        imageModal.Description = imgDesc
+        imageModal.Message = MessageStr
+        imageModal.GrpCode = ImageTargetListArr
+        imageModal.Duration = "0"
+        
+        print("imgPdfType",imgPdfType)
+        if imgPdfType == "1" {
+            imageModal.FileType = "IMG"
+            imageModal.isMultiple = "1"
+        }else{
+            imageModal.FileType = ".pdf"
+            imageModal.isMultiple = "0"
+        }
+        imageModal.FileNameArray = ImageFileNameArrayArr
+        print("imageModal.FileNameArray", imageModal.FileNameArray)
+        let imageModalStr = imageModal.toJSONString()
+        print("SmsModalStr",imageModalStr)
+        SendImagePdfRequest.call_request(param: imageModalStr!) {
+            [self]   (res) in
+            
+            let imageResponse : [StaffImagePdfResponse] = Mapper<StaffImagePdfResponse>().mapArray(JSONString: res)!
+            
+            for i in imageResponse {
+                if i.Status.elementsEqual("1") {
+                    
+                    
+                    _ = SweetAlert().showAlert(commonStringNames.Alert.translated(), subTitle: i.Message, style: .none, buttonTitle: commonStringNames.OK.translated()) { isOtherButton in
                         
-                        
-                        _ = SweetAlert().showAlert("Alert", subTitle: i.Message, style: .none, buttonTitle: "OK") { isOtherButton in
+                        if isOtherButton {
                             
-                            if isOtherButton {
-                                
-                                self.presentingViewController?.presentingViewController?.dismiss(animated: false, completion: nil)
-                            }
+                            self.presentingViewController?.presentingViewController?.dismiss(animated: false, completion: nil)
                         }
                     }
-                    
                 }
+                
             }
-            
         }
     }
     
     
+    func VideoUpload() {
+        
+        
+        var idNameArr : [String] = []
+        
+        var idList : String!
+        
+        for listItem in getGroupList {
+            if listItem.isSelected == true{
+                
+                
+                let shortNames = listItem.GroupID.filter { _ in listItem.isSelected == true   }
+                
+                
+                idList = listItem.GroupID
+                idNameArr.append(idList)
+                print("idNameArr",idNameArr)
+            }
+        }
+        
+        let videoModalGrpCode = StaffGroupsVideoGrpCode()
+        for i in idNameArr {
+            videoModalGrpCode.TargetCode = i
+        }
+        
+        
+        VideoTargetListArr.append(videoModalGrpCode)
+        
+        
+        print("MessageStr",MessageStr)
+        let videoModal = SendVideoStaffToGroupsModal()
+        
+        videoModal.SchoolId = SchoolId
+        videoModal.Title = videoTitle
+        
+        videoModal.Description = videoDesc
+        videoModal.Iframe = vimeoVideoDictIframe
+        videoModal.URL = vimeoVideoDictURL
+        videoModal.ProcessBy = videoProcessBy
+        videoModal.GrpCode = VideoTargetListArr
+        videoModal.videoFileSize = DefaultsKeys.videoFilesize
+        let videoModalStr = videoModal.toJSONString()
+        print("videoModalStr",videoModalStr)
+        SendStaffGroupsVideoRequest.call_request(param: videoModalStr!) {
+            [self]   (res) in
+            
+            let videoResponse : [StaffVideoResponse] = Mapper<StaffVideoResponse>().mapArray(JSONString: res)!
+            
+            for i in videoResponse {
+                if i.result.elementsEqual("1") {
+                    
+                    
+                    _ = SweetAlert().showAlert(commonStringNames.Alert.translated(), subTitle: i.Message, style: .none, buttonTitle: commonStringNames.OK.translated()) { isOtherButton in
+                        
+                        if isOtherButton {
+                            
+                            self.presentingViewController?.presentingViewController?.dismiss(animated: false, completion: nil)
+                        }
+                    }
+                }
+                
+            }
+        }
+        
+        
+        
+    }
     
     
     func showLoading() -> Void {

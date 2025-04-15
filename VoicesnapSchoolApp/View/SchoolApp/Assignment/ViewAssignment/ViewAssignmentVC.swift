@@ -43,6 +43,7 @@ class ViewAssignmentVC: UIViewController ,UITableViewDataSource,UITableViewDeleg
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        titleLabel.text = commonStringNames.Assignment.translated()
         HiddenLabel.isHidden = true
         assignmentTableview.estimatedRowHeight = 50
         assignmentTableview.rowHeight = UITableView.automaticDimension
@@ -398,9 +399,9 @@ class ViewAssignmentVC: UIViewController ,UITableViewDataSource,UITableViewDeleg
     func AlertMessage(strAlert : String)
     {
         
-        let alertController = UIAlertController(title: languageDictionary["alert"] as? String, message: strAlert, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.alert.translated() as? String, message: strAlert, preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             print("Okaction")
             self.dismiss(animated: true, completion: nil)
@@ -438,9 +439,9 @@ class ViewAssignmentVC: UIViewController ,UITableViewDataSource,UITableViewDeleg
             self.navigationController?.navigationBar.semanticContentAttribute = .forceLeftToRight
             self.view.semanticContentAttribute = .forceLeftToRight
         }
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Records Found.."
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Records Found.."
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

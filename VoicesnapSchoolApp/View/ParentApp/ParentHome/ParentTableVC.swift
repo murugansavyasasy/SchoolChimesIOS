@@ -38,7 +38,6 @@ class ParentTableVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     var strPopOverFrom = String()
     let UtilObj = UtilClass()
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    
 
 
     @IBOutlet weak var remainingCharactersLabel: UILabel!
@@ -69,7 +68,8 @@ class ParentTableVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     var SelSchool = String()
     var  QuestionData : [UpdateDetailsData]! = []
     
-    
+    var languageCode : String!
+    var changeLanguage = 1
     
     @IBOutlet weak var PrincipalView: UIView!
     
@@ -84,32 +84,72 @@ class ParentTableVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     var arrMembersData = NSMutableArray()
     var staffRole : String!
     var SchoolIDString = String()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        print("1VC")
-        self.navigationItem.setHidesBackButton(true, animated:true)
-        
-        UtilObj.printLogKey(printKey: "ArrayChildData", printingValue: ArrayChildData)
-        ParentTableView.reloadData()
-        helpText()
-        addShadow(MenuView)
-        
-        
-        let userDefaults = UserDefaults.standard
-        
-        staffRole = userDefaults.string(forKey: DefaultsKeys.StaffRole)!
-        
-        
-        
-        
-        UserMobileNo = UserDefaults.standard.object(forKey: USERNAME) as! String
-        
-        UserPassword =  UserDefaults.standard.object(forKey:USERPASSWORD) as? String ?? ""
-        appDelegate.strMobileNumber = UserMobileNo
+        print("1VC",SelectedLoginIndexInt)
+//        if changeLanguage == 2 {
+//            self.navigationItem.setHidesBackButton(true, animated:true)
+//            UtilObj.printLogKey(printKey: "ArrayChildData", printingValue: ArrayChildData)
+//            ParentTableView.reloadData()
+//            let userDefaults = UserDefaults.standard
+//            
+//            staffRole = userDefaults.string(forKey: DefaultsKeys.StaffRole)!
+//            
+//            
+//            
+//            
+//            UserMobileNo = UserDefaults.standard.object(forKey: USERNAME) as! String
+//            
+//            UserPassword =  UserDefaults.standard.object(forKey:USERPASSWORD) as? String ?? ""
+//            appDelegate.strMobileNumber = UserMobileNo
+//        }else{
+            self.navigationItem.setHidesBackButton(true, animated:true)
+            
+            UtilObj.printLogKey(printKey: "ArrayChildData", printingValue: ArrayChildData)
+            ParentTableView.reloadData()
+            helpText()
+            addShadow(MenuView)
+            
+            
+            let userDefaults = UserDefaults.standard
+            
+            staffRole = userDefaults.string(forKey: DefaultsKeys.StaffRole)!
+            
+            
+            
+            
+            UserMobileNo = UserDefaults.standard.object(forKey: USERNAME) as! String
+            
+            UserPassword =  UserDefaults.standard.object(forKey:USERPASSWORD) as? String ?? ""
+            appDelegate.strMobileNumber = UserMobileNo
+//        }
         
     }
     override func viewWillAppear(_ animated: Bool) {
+        
+        
+//        // 3. Set Custom Right Button (Image + Text)
+//            let customButton = UIButton(type: .custom)
+//            customButton.setImage(UIImage(systemName: "globe"), for: .normal)
+//            customButton.setTitle("Language", for: .normal)
+//            customButton.setTitleColor(.white, for: .normal) // Set text color to white
+//            customButton.tintColor = .white // Set image color to white
+//
+//            // Adjust spacing and alignment
+//            customButton.semanticContentAttribute = .forceRightToLeft // Image on the right, text on the left
+//            customButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: -8)
+//
+//            // Add action
+//            customButton.addTarget(self, action: #selector(barLanguageButtonTapped), for: .touchUpInside)
+//
+//            // Create bar button item with custom view
+//            let rightBarButtonItem = UIBarButtonItem(customView: customButton)
+//
+//            // Assign to navigation item
+//            navigationItem.rightBarButtonItem = rightBarButtonItem
+        
         let nc = NotificationCenter.default
         nc.addObserver(self,selector: #selector(ParentTableVC.UpdateFAQSelection), name: NSNotification.Name(rawValue: "FAQNotification"), object:nil)
         nc.addObserver(self,selector: #selector(ParentTableVC.UpdateLogoutSelection), name: NSNotification.Name(rawValue: "SettingNotification"), object:nil)
@@ -119,10 +159,16 @@ class ParentTableVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         strCountryID = UserDefaults.standard.object(forKey: COUNTRY_ID) as! String
         self.callSelectedLanguage()
         
-        //      
-        
         
     }
+    
+    @objc func barLanguageButtonTapped() {
+        print("Language button tapped!")
+        // Your action here
+        
+        callLanguageVc()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         
         self.navigationController?.navigationBar.barTintColor =  UIColor (red:0.0/255.0, green:96.0/255.0, blue: 100.0/255.0, alpha: 1)
@@ -269,7 +315,7 @@ class ParentTableVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     
     // MARK: - TableView Delegate
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
+        print("numberOfRowsInSectionCOUNT",ArrayChildData.count)
         if(ArrayChildData.count > 0)
         {
             MenuPopupView.isHidden = true
@@ -333,10 +379,10 @@ class ParentTableVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
 
         cell.SchoolLogoImage.sd_setImage(with: URL(string: String(describing: (dicChilddetail["SchoolLogoUrl"]!))), placeholderImage: UIImage(named: "placeHolder.png"))
         
-        cell.FloatRollNoLabel.text = languageDictionary["child_roll_no"] as? String
-        cell.FlaotClassLabel.text = languageDictionary["child_class"] as? String
-        cell.FloatLabel.text = languageDictionary["childname"] as? String
-        cell.noteLabel.text = languageDictionary["note"] as? String
+        cell.FloatRollNoLabel.text = commonStringNames.child_roll_no.translated() as? String
+        cell.FlaotClassLabel.text = commonStringNames.child_class.translated() as? String
+        cell.FloatLabel.text = commonStringNames.childname.translated() as? String
+        cell.noteLabel.text = commonStringNames.note.translated() as? String
         let isNotv = dicChilddetail["IsNotAllow"] as? String ?? "0"
         
         
@@ -686,23 +732,31 @@ class ParentTableVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     {
         print("PTable")
         
+        print("SDetails")
+      
         var selectString = notification.object as? String ?? ""
+        print("SDetails23",selectString)
         selectString = selectString.lowercased()
-        let log = languageDictionary["txt_menu_logout"] as? String ?? ""
-        if(selectString == log.lowercased()){
+        let log = commonStringNames.logout.translated() as? String ?? ""
+        if(selectString == log){
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() )
             {
                 self.showLogoutAlert()
+                
             }
-        }else if(selectString.contains("Edit")){
+        }else if(selectString.contains("edit")){
             callEditProfile()
-        }else if(selectString.contains("help")){
+        }else if(selectString.contains(commonStringNames.help.translated())){
             callhelp()
+        }else if (selectString.contains(commonStringNames.language_change.translated())){
+            callLanguageVc()
         }
-        
-        
     }
-    
+    func callLanguageVc(){
+        let vc = ChangeLanguageViewController(nibName: nil, bundle: nil)
+        vc.modalPresentationStyle = .formSheet
+        present(vc, animated: true)
+    }
     func callEditProfile(){
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let newViewController = storyBoard.instantiateViewController(withIdentifier: "EditProfileVC") as! EditProfileVC
@@ -715,22 +769,16 @@ class ParentTableVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         newViewController.strPageFrom = "help"
         self.navigationController?.pushViewController(newViewController, animated: true)
     }
-    func callUploadDocumentView(){
-        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let newViewController = storyBoard.instantiateViewController(withIdentifier: "UploadDocPhotosVC") as! UploadDocPhotosVC
-        self.navigationController?.pushViewController(newViewController, animated: true)
-    }
-    
     
     func showLogoutAlert(){
-        let alertController = UIAlertController(title: languageDictionary["txt_menu_logout"] as? String, message: languageDictionary["want_to_logut"] as? String, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.txt_menu_logout.translated() as? String, message: commonStringNames.want_to_logut.translated() as? String, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             self.moveToLogInScreen(strFromStaff: "Child")
         }
-        let cancelAction = UIAlertAction(title: languageDictionary["teacher_cancel"] as? String, style: UIAlertAction.Style.cancel) {
+        let cancelAction = UIAlertAction(title: commonStringNames.teacher_cancel.translated() as? String, style: UIAlertAction.Style.cancel) {
             UIAlertAction in
             
         }
@@ -1000,14 +1048,15 @@ class ParentTableVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         // titleLabel.textColor = UIColor (red:128.0/255.0, green:205.0/255.0, blue: 244.0/255.0, alpha: 1)
         titleLabel.textColor = UIColor (red:0.0/255.0, green:183.0/255.0, blue: 190.0/255.0, alpha: 1)
         titleLabel.textColor = .white
-        let secondWord : String =   languageDictionary["choose"] as? String ?? "Choose"
+        let secondWord : String = commonStringNames.choose.translated() as? String ?? "Choose"
         let thirdWord : String  = strTitleName
         let comboWord = secondWord + " " + thirdWord
+        print("comboWordcomboWord",comboWord)
         let attributedText = NSMutableAttributedString(string:comboWord)
         let attrs = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 22), NSAttributedString.Key.foregroundColor: UIColor.white]
         let range = NSString(string: comboWord).range(of: secondWord)
         attributedText.addAttributes(attrs, range: range)
-        
+        print("attributedTextattributedText",attributedText)
         titleLabel.attributedText = attributedText
         if(strLanguage == "ar"){
             titleLabel.textAlignment = .right
@@ -1057,6 +1106,10 @@ class ParentTableVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         {
             let segueid = segue.destination as! StudentDetailViewController
             segueid.selectedDictionary = selectedDictionary
+            
+            DefaultsKeys.selectedDictionary = selectedDictionary
+            DefaultsKeys.stralerMsg = stralerMsg
+            DefaultsKeys.QuestionData = QuestionData
             print("segueid.selectedDictionary",selectedDictionary)
             segueid.stralerMsg = stralerMsg
             segueid.QuestionData = QuestionData
@@ -1103,18 +1156,22 @@ class ParentTableVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             self.navigationController?.navigationBar.semanticContentAttribute = .forceRightToLeft
             
         }else{
-            UIView.appearance().semanticContentAttribute = .forceLeftToRight
-            self.ParentTableView.semanticContentAttribute = .forceLeftToRight
-            self.PrincipalView.semanticContentAttribute = .forceLeftToRight
-            self.BottomView.semanticContentAttribute = .forceLeftToRight
-            self.navigationController?.navigationBar.semanticContentAttribute = .forceLeftToRight
-            
+            if changeLanguage == 2 {
+            }else{
+                UIView.appearance().semanticContentAttribute = .forceLeftToRight
+                self.ParentTableView.semanticContentAttribute = .forceLeftToRight
+                self.PrincipalView.semanticContentAttribute = .forceLeftToRight
+                self.BottomView.semanticContentAttribute = .forceLeftToRight
+                self.navigationController?.navigationBar.semanticContentAttribute = .forceLeftToRight
+                
+                FAQLabel.text = commonStringNames.faq.translated() as? String
+                PasswordLabel.text = commonStringNames.txt_password.translated() as? String
+                LogoutLabel.text = commonStringNames.txt_menu_setting.translated() as? String
+                
+                self.loadViewData()
+            }
         }
-        FAQLabel.text = LangDict["faq"] as? String
-        PasswordLabel.text = LangDict["txt_password"] as? String
-        LogoutLabel.text = LangDict["txt_menu_setting"] as? String
         
-        self.loadViewData()
         
     }
     
@@ -1131,7 +1188,7 @@ class ParentTableVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         if(strLoginAs == "Parent"){
             PrincipalView.isHidden = true
             PrincipalHeightConst.constant = 0
-            strTitleName = languageDictionary["your_child"] as? String ??  "Your Child"
+            strTitleName = commonStringNames.your_child.translated() as? String ??  "Your Child"
             
         }
         else if(strcombination == "Yes")
@@ -1148,9 +1205,15 @@ class ParentTableVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             let loginAs : String = languageDictionary[strLoginAs] as? String ??  strLoginAs
             let floatValue : String = languageDictionary["login_as"] as? String ??  "Login As "
             
-            LoginAsLabel.text = loginAs
             
-            strTitleName = languageDictionary["role"] as? String ?? "Your Roll"
+        
+            
+            let display_name = UserDefaults.standard.object(forKey: DefaultsKeys.role_display_name) as! String
+
+            
+            LoginAsLabel.text = display_name
+            
+            strTitleName = commonStringNames.role.translated() as? String ?? "Your Roll"
         }
         
         else
@@ -1164,10 +1227,13 @@ class ParentTableVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
                 PrincipalHeightConst.constant = 110
             }
             let loginAs : String = languageDictionary[strLoginAs] as? String ??  strLoginAs
-            let floatValue : String = languageDictionary["login_as"] as? String ??  "Login As "
+            let floatValue : String = commonStringNames.login_as.translated() as? String ??  "Login As "
             
-            LoginAsLabel.text = loginAs
-            strTitleName = languageDictionary["role"] as? String ??  "Your Roll"
+            
+            let display_name = UserDefaults.standard.object(forKey: DefaultsKeys.role_display_name) as! String
+
+            LoginAsLabel.text = display_name
+            strTitleName = commonStringNames.role.translated() as? String ??  "Your Roll"
             
         }
         

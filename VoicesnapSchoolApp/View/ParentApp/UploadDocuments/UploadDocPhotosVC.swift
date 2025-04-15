@@ -37,6 +37,12 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
     @IBOutlet weak var browseView: UIView!
     @IBOutlet weak var browseLabel: UILabel!
     
+    @IBOutlet weak var BrowseFileLbl: UILabel!
+    @IBOutlet weak var FilenameLbl: UILabel!
+    @IBOutlet weak var MaximumUploadSizeLbl: UILabel!
+    @IBOutlet weak var SupportedFormatsLbl: UILabel!
+    @IBOutlet weak var uploadStudntDocOrFeeReceipt: UILabel!
+    @IBOutlet weak var uploadPhotoMaximumSize: UIButton!
     @IBOutlet weak var profileImageView: UIImageView!
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var filenameTF: UITextField!
@@ -64,12 +70,22 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
     
     var browseFileType = 0
     var instuteId : String!
+    var countryCoded : String!
+    var browseFile = ""
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        countryCoded =  UserDefaults.standard.object(forKey: COUNTRY_ID) as! String
         let strProfile = "\(appDelegate.strUploadPhotoTitle)"
         
-        self.title = strProfile
+        self.title = commonStringNames.uploadDocumentandPhoto.translated()
+        uploadPhotoMaximumSize.setTitle(commonStringNames.UploadStudentPhoto.translated(), for: .normal)
+        uploadStudntDocOrFeeReceipt.text = commonStringNames.UploadStudentDocsOrFeeReceipt.translated()
+        SupportedFormatsLbl.text = commonStringNames.SupportedFormats.translated()
+        MaximumUploadSizeLbl.text = commonStringNames.MaxUploadSize20MB.translated()
+        FilenameLbl.text = commonStringNames.FileName.translated()
+        FilenameLbl.text = commonStringNames.FileName.translated()
+        BrowseFileLbl.text = commonStringNames.BrowseFile.translated()
+        filenameTF.placeholder = commonStringNames.EnterFileName.translated()
         
         filenameTF.delegate = self
         
@@ -92,7 +108,7 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
         browseView.addGestureRecognizer(tap)
         
         callSelectedLanguage()
-        strSomething = LanguageDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         
     }
     
@@ -130,7 +146,7 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
 
 
             browseFileType = 1
-
+            browseFile = "Gallery"
 
             print("gallery")
 //
@@ -140,7 +156,7 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
         }else if ((action.title!.elementsEqual("Files"))){
 
 
-
+            browseFileType = 1
             FromPDF()
 
         }
@@ -152,19 +168,20 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
 
     func fileSelection(){
         
+        
         if(UIDevice.current.userInterfaceIdiom == .pad){
-            let alertController = UIAlertController(title: LanguageDict["upload_image"] as? String, message: LanguageDict["choose_option"] as? String, preferredStyle: .alert)
+            let alertController = UIAlertController(title: commonStringNames.upload_image.translated() as? String, message: commonStringNames.choose_option.translated() as? String, preferredStyle: .alert)
             // Initialize Actions
-            let yesAction = UIAlertAction(title: LanguageDict["choose_from_gallery"] as? String, style: .default) { (action) -> Void in
+            let yesAction = UIAlertAction(title: commonStringNames.choose_from_gallery.translated() as? String, style: .default) { (action) -> Void in
                 self.FromLibrary()
             }
             
-            let cameraAction = UIAlertAction(title:  LanguageDict["compose_camera"] as? String, style: .default) {
+                                          let cameraAction = UIAlertAction(title:  commonStringNames.compose_camera.translated() as? String, style: .default) {
                 (action) -> Void in
                 self.FromLibrary()
                 
             }
-            let CancelAction = UIAlertAction(title: LanguageDict["teacher_cancel"] as? String, style: .default) { (action) -> Void in
+                                                                           let CancelAction = UIAlertAction(title: commonStringNames.teacher_cancel.translated() as? String, style: .default) { (action) -> Void in
                 alertController.dismiss(animated: true, completion: nil)
             }
             
@@ -178,17 +195,17 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
         }
         else{
             
-            let alert = UIAlertController(title:  LanguageDict["upload_image"] as? String, message: LanguageDict["choose_option"] as? String, preferredStyle: .actionSheet)
+            let alert = UIAlertController(title:  commonStringNames.upload_image.translated() as? String, message: commonStringNames.choose_option.translated() as? String, preferredStyle: .actionSheet)
             
-            alert.addAction(UIAlertAction(title: LanguageDict["choose_from_gallery"] as? String, style: .default , handler:{ (UIAlertAction)in
+                                              alert.addAction(UIAlertAction(title: commonStringNames.choose_from_gallery.translated() as? String, style: .default , handler:{ (UIAlertAction)in
                 self.FromLibrary()
             }))
             
-            alert.addAction(UIAlertAction(title:  LanguageDict["compose_camera"] as? String, style: .default , handler:{ (UIAlertAction)in
+                                              alert.addAction(UIAlertAction(title:  commonStringNames.compose_camera.translated() as? String, style: .default , handler:{ (UIAlertAction)in
                 self.FromPhoto()
             }))
             
-            alert.addAction(UIAlertAction(title: LanguageDict["teacher_cancel"] as? String, style: .cancel, handler:{ (UIAlertAction)in
+                                              alert.addAction(UIAlertAction(title: commonStringNames.teacher_cancel.translated() as? String, style: .cancel, handler:{ (UIAlertAction)in
                 print("User click Dismiss button")
             }))
             
@@ -282,7 +299,8 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        let chosenImage = info[UIImagePickerController.InfoKey.editedImage] as! UIImage
+        
+        let chosenImage = info[UIImagePickerController.InfoKey.originalImage] as! UIImage
         
         if browseFileType == 1 {
 
@@ -397,9 +415,9 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
             
             let urlString: String = urlPath.absoluteString
             self.addBrowseFile(strPath: urlString)
-            print("urlStringurlString",urlString)
+            print("urlStringurlStringsdzxfghj",urlString)
             print("addBrowseFile11",addBrowseFile)
-            self.uploadTableView.reloadData()
+//            self.uploadTableView.reloadData()
 
         } catch {
             print("set PDF filer error : ", error)
@@ -407,114 +425,121 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
         
         
     }
-    func uploadAWS(image : UIImage){
-        showLoading()
-//        let S3BucketName = "school-master-documents"
-        
-        
-        var  bucket = ""
-        if browseFileType == 1 {
-            
-            bucket = DefaultsKeys.uploadprofileBrowes
-            
-        }else{
-            
-            bucket = DefaultsKeys.UploadProfileBucket
-        }
-        
-        let S3BucketName = bucket
-        let CognitoPoolID = DefaultsKeys.CognitoPoolID
-        let Region = AWSRegionType.APSouth1
-        
-        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:Region,identityPoolId:CognitoPoolID)
-        let configuration = AWSServiceConfiguration(region:Region, credentialsProvider:credentialsProvider)
-        AWSServiceManager.default().defaultServiceConfiguration = configuration
-        
-        // url for image in the bundle
-        
-        let currentTimeStamp = NSString.init(format: "%ld",Date() as CVarArg)
-        let imageNameWithoutExtension = NSString.init(format: "vc_%@",currentTimeStamp)
-        let imageName = NSString.init(format: "%@%@",imageNameWithoutExtension, ".png")
-        
-        // signatureImageName = imageName as String
-        
+    
+    
+    
+    
+    
+    func uploadAWS(image: UIImage) {
+        let currentTimeStamp = NSString.init(format: "%ld", Date() as CVarArg)
+        let imageNameWithoutExtension = NSString.init(format: "vc_%@", currentTimeStamp)
+        let imageName = NSString.init(format: "%@%@", imageNameWithoutExtension, ".png")
         let ext = imageName as String
-        //  let imageURL = Bundle.main.url(forResource: "lock_icon", withExtension: ext)!
-        
-        let fileName = imageNameWithoutExtension
-        let fileType = ".png"
-        
         let imageURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(ext)
-        //            let image = UIImage(named: "test")
-        let data = image.jpegData(compressionQuality: 0.9)
-        do {
-            try data?.write(to: imageURL)
+
+        if let data = image.jpegData(compressionQuality: 0.9) {
+            do {
+                try data.write(to: imageURL)
+            } catch {
+                print("Error writing image data to file: \(error)")
+                return
+            }
         }
-        catch {}
         
-        print("IMG",imageURL)
-
+        
+        print("browseFileType",browseFileType)
+        
+        
+        var bucketName = ""
+        var bucketPath = ""
         if browseFileType == 1 {
-
-            urlPath = imageURL
-            self.setPDFFile()
-            DispatchQueue.main.async {
-                self.hideLoading()
+            
+            if countryCoded == "4" {
+                bucketName = DefaultsKeys.THAI_SCHOOL_DOCS
+                bucketPath = String(instuteId)
             }
+            else
+            {
+                bucketName = DefaultsKeys.SCHOOL_DOCS
+                bucketPath = String(instuteId)
+
+            }
+            
         }else{
-
-
-
             
-            
-            let uploadRequest = AWSS3TransferManagerUploadRequest()
-            uploadRequest?.body = imageURL
-            
-            if  browseFileType == 1{
-              
-                uploadRequest?.key = "student-documents" + "/" + instuteId + "/" + ext
-            }else{
-                uploadRequest?.key = "student_photos" + "/" + instuteId + "/" + ext
+            if countryCoded == "4" {
+                bucketName = DefaultsKeys.THAI_SCHOOL_PHOTOS
+                bucketPath = String(instuteId)+"/"+"profile"
             }
-//            uploadRequest?.key =  ext
-            uploadRequest?.bucket = S3BucketName
-            uploadRequest?.contentType = ".jpg"
-            uploadRequest?.acl = .publicRead
+            else
+            {
+                bucketName = DefaultsKeys.SCHOOL_PHOTOS
+                bucketPath = String(instuteId)+"/"+"profile"
 
-            // upload
-
-            let transferManager = AWSS3TransferManager.default()
-            transferManager.upload(uploadRequest!).continueWith { [self] (task) -> AnyObject? in
-
-                if let error = task.error {
-                    print("Upload failed : (\(error))")
-                }
-
-                if task.result != nil {
-                    let url = AWSS3.default().configuration.endpoint.url
-                    let publicURL = url?.appendingPathComponent((uploadRequest?.bucket!)!).appendingPathComponent((uploadRequest?.key!)!)
-                    if let absoluteString = publicURL?.absoluteString {
-                        print("Uploaded to:\(absoluteString)")
-
-
-
-                        self.profileImgeUrl = absoluteString
-
-
-
-                    }
-                    DispatchQueue.main.async {
-                        self.hideLoading()
-                    }
-                }
-                else {
-                    print("Unexpected empty result.")
-                }
-                return nil
             }
         }
+                       
+        
+        AWSPreSignedURL.shared.fetchPresignedURL(
+            bucket: bucketName,
+            fileName: imageURL,
+            bucketPath: bucketPath,
+            fileType: "image/png"
+        ) { [self] result in
+            switch result {
+            case .success(let awsResponse):
+                print("Presigned URL fetched: \(awsResponse.data?.presignedUrl ?? "")")
+                let presignedURL = awsResponse.data?.presignedUrl
+                let Uploadimages = awsResponse.data?.fileUrl
+              
+                AWSUploadManager.shared.uploadImageToAWS(image: image, presignedURL: presignedURL!) { [self] result in
+                    switch result {
+                    case .success(let uploadedURL):
+                        print("Image uploaded successfully: \(uploadedURL)")
+                        print("browseFileType",browseFileType)
+                        print("imageURL",uploadedURL)
+                        if browseFileType == 1 {
+
+                            urlPath = URL(string: uploadedURL)
+                            
+//                            if browseFile == "Gallery" {
+//                            }
+//                            else{
+                                self.setPDFFile()
+//                            }
+                            
+                            self.arrSectionBrowseFile.add(selectDict)
+                            DispatchQueue.main.async {
+                                self.hideLoading()
+                            }
+                        }else{
+
+
+                            self.profileImgeUrl = Uploadimages!
+
+                           
+                        }
+                        
+                    case .failure(let error):
+                        print("Failed to upload image: \(error.localizedDescription)")
+                      
+                    }
+                  
+                    
+                    
+                    
+                          }
+           
+            case .failure(let error):
+                print("Error fetching presigned URL: \(error.localizedDescription)")
+            }
+        }
+        
+   
+       
     }
     
+
     func addBrowseFile(strPath : String){
         
         bIsTitle = false
@@ -522,89 +547,102 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
         let currentTimeStamp = NSString.init(format: "%ld",Date() as CVarArg)
         let imageNameWithoutExtension = NSString.init(format: "School_Upload_Doc_%@",currentTimeStamp)
         let imageName = NSString.init(format: "%@%@",imageNameWithoutExtension, ".pdf")
-        
+        var getFileName  = ""
+        getFileName = filenameTF.text!
         let myDict:NSMutableDictionary = [
             "documentPath" :strPath,
             "documentName" : imageName,
-            "documentDisplayName" : self.filenameTF.text ?? "",
+            "documentDisplayName" : getFileName
         ]
         self.arrBrowseFile.add(myDict)
-        self.uploadTableView.reloadData()
+        
+        DispatchQueue.main.async() {
+            self.uploadTableView.reloadData()
+        }
+      
         //  callSplitSections()
     }
     
     
   
-    
     func uploadPDFFileToAWS(pdfData : NSData){
-        showLoading()
-        var  bucket = ""
-        if browseFileType == 1 {
-            
-            bucket = DefaultsKeys.uploadprofileBrowes
-            
-        }else{
-            
-            bucket = DefaultsKeys.UploadProfileBucket
-        }
-        let S3BucketName = bucket
-        let CognitoPoolID = DefaultsKeys.CognitoPoolID
-        let Region = AWSRegionType.APSouth1
-        
-        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:Region,identityPoolId:CognitoPoolID)
-        let configuration = AWSServiceConfiguration(region:Region, credentialsProvider:credentialsProvider)
-        AWSServiceManager.default().defaultServiceConfiguration = configuration
-        
-        // url for image in the bundle
-        
+//        self.showLoading()
         let currentTimeStamp = NSString.init(format: "%ld",Date() as CVarArg)
-        let imageNameWithoutExtension = NSString.init(format: "School_Upload_Doc_%@",currentTimeStamp)
+        let imageNameWithoutExtension = NSString.init(format: "vc_%@",currentTimeStamp)
         let imageName = NSString.init(format: "%@%@",imageNameWithoutExtension, ".pdf")
-        
-        // signatureImageName = imageName as String
-        
         let ext = imageName as String
-        //  let imageURL = Bundle.main.url(forResource: "lock_icon", withExtension: ext)!
-        
         let fileName = imageNameWithoutExtension
         let fileType = ".pdf"
-        
         let imageURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(ext)
-        
         do {
             try pdfData.write(to: imageURL)
         }
         catch {}
-        
         print(imageURL)
+       
+      
         
-        let uploadRequest = AWSS3TransferManagerUploadRequest()
-        uploadRequest?.body = imageURL
-        uploadRequest?.key = "student-documents" + "/" + instuteId + "/" + ext
-//        uploadRequest?.key =  ext
-        uploadRequest?.bucket = S3BucketName
-        uploadRequest?.contentType =  ext
-        uploadRequest?.acl = .publicRead
         
-        // upload
-        
-        let transferManager = AWSS3TransferManager.default()
-        transferManager.upload(uploadRequest!).continueWith { [self] (task) -> AnyObject? in
+        var bucketName = ""
+        var bucketPath = ""
+        if browseFileType == 1 {
             
-            if let error = task.error {
-                print("Upload failed : (\(error))")
+            if countryCoded == "4" {
+                bucketName = DefaultsKeys.THAI_SCHOOL_DOCS
+                bucketPath = String(instuteId)
+            }
+            else
+            {
+                bucketName = DefaultsKeys.SCHOOL_DOCS
+                bucketPath = String(instuteId)
+
             }
             
-            if task.result != nil {
-                let url = AWSS3.default().configuration.endpoint.url
-                let publicURL = url?.appendingPathComponent((uploadRequest?.bucket!)!).appendingPathComponent((uploadRequest?.key!)!)
-                if let absoluteString = publicURL?.absoluteString {
-                    print("Uploaded to:\(absoluteString)")
+        }else{
+            
+            if countryCoded == "4" {
+                bucketName = DefaultsKeys.THAI_SCHOOL_PHOTOS
+                bucketPath = String(instuteId)+"/"+"profile"
+            }
+            else
+            {
+                bucketName = DefaultsKeys.SCHOOL_PHOTOS
+                bucketPath = String(instuteId)+"/"+"profile"
+
+            }
+        }
+                       
+        
+        AWSPreSignedURL.shared.fetchPresignedURL(
+            bucket: bucketName,
+            fileName: imageURL,
+            bucketPath: bucketPath,
+            fileType: "application/pdf"
+        ) { [self] result in
+            switch result {
+            case .success(let awsResponse):
+                print("Presigned URL fetched: \(awsResponse.data?.presignedUrl ?? "")")
+                let presignedURL = awsResponse.data?.presignedUrl
+                let UploadPDf = awsResponse.data?.fileUrl
+              
+                AWSUploadManager.shared.uploadPDFAWSUsingPresignedURL(pdfData: pdfData as Data, presignedURL:presignedURL! ){ [self] result in
+                    
+                    switch result {
+                    case .success(let uploadedURL):
+                        print("Pdf uploaded successfully: \(uploadedURL)")
+                      
+                    case .failure(let error):
+                        
+                        print("Failed to upload Pdf: \(error.localizedDescription)")
+                    }
+        
+                   
+                    
                     let imageDict = NSMutableDictionary()
-                    imageDict["FileName"] = absoluteString
+                    imageDict["FileName"] = UploadPDf
                     
 
-                        self.selectDict["documentPath"] = absoluteString
+                        self.selectDict["documentPath"] = UploadPDf
                         self.selectDict["documentName"] = fileName
 
 
@@ -618,14 +656,17 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
                         self.hideLoading()
                         self.uploadTableView.reloadData()
                     }
-                }
+                          }
+           
+            case .failure(let error):
+                print("Error fetching presigned URL: \(error.localizedDescription)")
             }
-            else {
-                print("Unexpected empty result.")
-            }
-            return nil
         }
+        
     }
+    
+    
+   
     
     func callAPIsubmitFiles(){
         showLoading()
@@ -762,23 +803,28 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
                     
                     // cell.titleLbl.text = dicStores.object(forKey: "name") as? String
                     let strP = dicStores.object(forKey: "documentPath") as? String ?? ""
-                    cell.pathLbl.text = strP
+                    let components = strP.components(separatedBy: "/")
+                    if let vcString = components.last?.components(separatedBy: ".").first {
+                        cell.pathLbl.text = vcString
+                        print(vcString) // Output: vc_-8285773687839968195
+                    }
+                    print("strPstrPget",strP)
                     if(strP.contains("amazonaws.com")){
-                        cell.uploadBtn.setTitle("Delete", for: .normal)
-                        
+                        cell.uploadBtn.setTitle(commonStringNames.Delete.translated(), for: .normal)
+                      
                         if(!bIsuploadTitle){
                             bIsuploadTitle = true
-                            cell.titleLbl.text = "Uploaded Documents : (Only these documents will be sent for approval )"
+                            cell.titleLbl.text = commonStringNames.UploadedDocumentsInfo.translated()
                         }else{
                             cell.titleLbl.text = ""
                         }
                         
                     }else{
-                        cell.uploadBtn.setTitle("Upload", for: .normal)
+                        cell.uploadBtn.setTitle(commonStringNames.UploadButton.translated(), for: .normal)
                         
                         if(!bIsTitle){
                             bIsTitle = true
-                            cell.titleLbl.text = "( Click upload for each document to upload )"
+                            cell.titleLbl.text = commonStringNames.ClickUploadForEachDocument.translated()
                             
                         }else{
                             cell.titleLbl.text = ""
@@ -806,13 +852,17 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
                     
                     // cell.titleLbl.text = dicStores.object(forKey: "name") as? String
                     let strP = dicStores.object(forKey: "documentPath") as? String ?? ""
-                    cell.pathLbl.text = strP
+                    let components = strP.components(separatedBy: "/")
+                    if let vcString = components.last?.components(separatedBy: ".").first {
+                        cell.pathLbl.text = vcString
+                        print(vcString) // Output: vc_-8285773687839968195
+                    }
                     if(strP.contains("amazonaws.com")){
                         cell.uploadBtn.setTitle("Delete", for: .normal)
                         
                         if(!bIsuploadTitle){
                             bIsuploadTitle = true
-                            cell.titleLbl.text = "Uploaded Documents : (Only these documents will be sent for approval )"
+                            cell.titleLbl.text = commonStringNames.UploadedDocumentsInfo.translated()
                         }else{
                             cell.titleLbl.text = ""
                         }
@@ -887,7 +937,7 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
             let strP = dicStores.object(forKey: "documentPath") as? String ?? ""
             print("SelPath: \(strP)")
             if(strP.contains("amazonaws.com")){
-                
+                print("filenamstrP.contains",iIndex)
                 if(iIndex <= arrBrowseFile.count){
                     bIsTitle = false
                     arrBrowseFile.remove(selectDict)
@@ -897,6 +947,7 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
                 }
                 
             }else{
+                print("filenameTFfilenameTF",filenameTF)
                 if(filenameTF.text!.count > 0){
                     selectDict["documentDisplayName"] = self.filenameTF.text
                     
@@ -918,7 +969,8 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
     }
     
     @objc func callDeleteAction(sender: UIButton){
-        print("delete")
+        print("delete",sender.tag)
+        print("arrSectionBrowseFile",arrSectionBrowseFile)
         let iIndex = sender.tag
         
         if let dicStores = arrSectionBrowseFile.object(at: iIndex) as? NSDictionary {
@@ -931,7 +983,7 @@ class UploadDocPhotosVC: UIViewController, UIActionSheetDelegate,
             bIsuploadTitle = false
             
             let strP = dicStores.object(forKey: "documentPath") as? String ?? ""
-            print("SelPath: \(strP)")
+            print("SelPath12: \(strP)")
             if(strP.contains("amazonaws.com")){
                 
                 if(iIndex <= arrBrowseFile.count){

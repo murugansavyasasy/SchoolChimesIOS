@@ -16,7 +16,10 @@ class StaffLessonTableViewCell: UITableViewCell {
     @IBOutlet weak var OverAllview: UIView!
     @IBOutlet weak var staffNameLbl: UILabel!
     
+    @IBOutlet weak var StaffNameDefLbl: UILabel!
     
+    @IBOutlet weak var ViewLbl: UILabel!
+    @IBOutlet weak var CompletedItemsDefLbl: UILabel!
     @IBOutlet weak var completedItemLbl: UILabel!
     @IBOutlet weak var classNameLbl: UILabel!
     
@@ -35,7 +38,9 @@ class StaffLessonTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        StaffNameDefLbl.text = commonStringNames.staffname.translated() + " :"
+        CompletedItemsDefLbl.text = commonStringNames.CompletedItems.translated() + " :"
+        ViewLbl.text = commonStringNames.view.translated()
         linProgressView.translatesAutoresizingMaskIntoConstraints = false
 
     }

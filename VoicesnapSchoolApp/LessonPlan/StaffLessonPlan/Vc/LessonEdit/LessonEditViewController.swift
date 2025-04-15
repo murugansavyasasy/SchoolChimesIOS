@@ -25,6 +25,8 @@ class LessonEditViewController: UIViewController,UITableViewDataSource,UITableVi
     @IBOutlet weak var closeView: UIView!
     @IBOutlet weak var updateView: UIView!
     
+    @IBOutlet weak var CloseLbl: UILabel!
+    @IBOutlet weak var UpdateLbl: UILabel!
     
     var getEditData : [ParticularDataEditData] = []
     var fieldData : [ParticularEditFieldData] = []
@@ -67,7 +69,8 @@ class LessonEditViewController: UIViewController,UITableViewDataSource,UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        CloseLbl.text = commonStringNames.Close.translated()
+        UpdateLbl.text = commonStringNames.pop_password_btnUpdate.translated()
         print("passParticularId",passParticularId)
         tv.dataSource = self
         tv.delegate = self
@@ -524,9 +527,7 @@ class LessonEditViewController: UIViewController,UITableViewDataSource,UITableVi
     
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("index",indexPath.row)
-        
-        
+     
         
     }
     

@@ -13,7 +13,13 @@ import ObjectMapper
 class NewDailyCollectionViewController: UIViewController,UITableViewDataSource,UITableViewDelegate {
     
     
+    @IBOutlet weak var toDateHeadLBl: UILabel!
+    @IBOutlet weak var fromDateHeadLBl: UILabel!
+    @IBOutlet weak var modeHeadLbl: UILabel!
+    @IBOutlet weak var classHEadLBl: UILabel!
+    @IBOutlet weak var categoryHeadLbl: UILabel!
     
+    @IBOutlet weak var actHEadLbl: UILabel!
     @IBOutlet weak var datePicker: UIDatePicker!
     
     @IBOutlet weak var caleView: UIView!
@@ -62,6 +68,13 @@ class NewDailyCollectionViewController: UIViewController,UITableViewDataSource,U
         super.viewDidLoad()
         
         
+        
+        actHEadLbl.text = commonStringNames.DailyCollection.translated()
+        categoryHeadLbl.text = commonStringNames.dailyCategory.translated()
+        classHEadLBl.text = commonStringNames.dailyClass.translated()
+        modeHeadLbl.text = commonStringNames.dailyMode.translated()
+        fromDateHeadLBl.text = commonStringNames.FromDate.translated()
+        toDateHeadLBl.text = commonStringNames.ToDate.translated()
         
         let userDefaults = UserDefaults.standard
         print("Schooltype",type)

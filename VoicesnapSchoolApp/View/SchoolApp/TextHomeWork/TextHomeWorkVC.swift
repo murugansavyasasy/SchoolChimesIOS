@@ -200,6 +200,9 @@ class TextHomeWorkVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        attachmentBtn.setTitle(commonStringNames.AddAttachments.translated(), for: .normal)
+        homeWorkDefaultLbl.text = commonStringNames.HomeWork.translated()
+        homeWorkreportLbl.text = commonStringNames.HomeworkReport.translated()
         view.isOpaque = false
         Fullview.isHidden = true
         
@@ -237,7 +240,7 @@ class TextHomeWorkVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UI
         
         
         imgPdfAttachBtn.isHidden = true
-        attachmentViewTop.constant = -190
+        attachmentViewTop.constant = -240
         imagePicker.delegate = self
         
         voicePlayView.isHidden = true
@@ -513,10 +516,12 @@ class TextHomeWorkVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UI
     
     @IBAction func VoiceCloseViewVc() {
         
-        
-        
+        print("VoiceCloseViewVc")
+        attachmentViewTop.constant = 10
+
+        voiceRecordHeight1.constant = 0
         voiceRecordView.isHidden = true
-        attacTopView1.constant = -60
+//        attacTopView1.constant = -60
         
     }
     
@@ -604,7 +609,7 @@ class TextHomeWorkVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UI
     }
     func actionSelectCategory(){
         TableString = "category"
-        selectCategorylbl.text = LanguageDict["select_category"] as? String
+        selectCategorylbl.text = commonStringNames.select_category.translated() as? String
         self.CategorypickerView.reloadAllComponents()
         if(UIDevice.current.userInterfaceIdiom == .pad)
         {
@@ -900,6 +905,7 @@ class TextHomeWorkVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UI
     }
     
     @IBAction func actionCloseView(_ sender: UIButton) {
+        
         dismiss(animated: false, completion: nil)
     }
     
@@ -1047,24 +1053,25 @@ class TextHomeWorkVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UI
             TextMessageView.textAlignment = .left
         }
         if(strFrom == "Assignment"){
-            ComposeTitleLabel.text  =  LangDict["teacher_txt_composemsg"] as? String
-            SubmissionDateLabel.text = LangDict["subission_date"] as? String
+            ComposeTitleLabel.text  =  commonStringNames.teacher_txt_composemsg.translated() as? String
+            SubmissionDateLabel.text = commonStringNames.subission_date.translated() as? String
             
-            TitleText.placeholder  =  LangDict["assignment_title"] as? String
-            ToStandardSection.setTitle("Choose Recipients", for: .normal)
-            textViewPlaceholder =  LangDict["teacher_txt_typemsg"] as? String ?? "Content?"
+            TitleText.placeholder  =  commonStringNames.assignment_title.translated() as? String
+            ToStandardSection.setTitle(commonStringNames.teacher_choose_recipient.translated(), for: .normal)
+            textViewPlaceholder =  commonStringNames.teacher_txt_typemsg.translated() as? String ?? "Content?"
         }else{
-            ComposeTitleLabel.text  = LangDict["teacher_txt_compose_hwmsg"] as? String
-            TitleText.placeholder  = LangDict["teacher_txt_hw_title"] as? String
+            ComposeTitleLabel.text  = commonStringNames.teacher_txt_compose_hwmsg.translated() as? String
+            TitleText.placeholder  = commonStringNames.teacher_txt_hw_title.translated() as? String
             if (strCountryName.uppercased() == SELECT_COUNTRY){
-                ToStandardSection.setTitle(LangDict["teacher_staff_to_sections_usa"] as? String, for: .normal) // Dhanush Aug-2022
+                ToStandardSection.setTitle(commonStringNames.teacher_staff_to_sections_usa.translated() as? String, for: .normal) // Dhanush Aug-2022
             }
             else{
-                ToStandardSection.setTitle(LangDict["teacher_staff_to_sections"] as? String, for: .normal)
+                ToStandardSection.setTitle(commonStringNames.teacher_staff_to_sections.translated() as? String, for: .normal)
             }
-            textViewPlaceholder =  LangDict["teacher_txt_typemsg"] as? String ?? "Content?"
+            textViewPlaceholder =  commonStringNames.teacher_txt_typemsg.translated() as? String ?? "Content?"
         }
-        TextMessageView.text = textViewPlaceholder
+        
+       TextMessageView.text = textViewPlaceholder
         TextMessageView.textColor = UIColor.lightGray
         ToStandardSection.isUserInteractionEnabled = false
         attachmentBtn.isUserInteractionEnabled = false
@@ -1083,9 +1090,9 @@ class TextHomeWorkVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UI
     func loadViewData(){
         HomeWorkSecondStr = Int(appDelegate.MaxHWVoiceDurationString)!
         
-        let strSeconRecord : String = languageDictionary["teacher_txt_general_title"] as? String ?? "You can record upto "
-        let strSeconds : String = languageDictionary["seconds"] as? String ?? " seconds "
-        let strminutes : String = languageDictionary["minutes"] as? String ?? " minutes "
+        let strSeconRecord : String = commonStringNames.teacher_txt_general_title.translated() as? String ?? "You can record upto "
+        let strSeconds : String = commonStringNames.seconds.translated() as? String ?? " seconds "
+        let strminutes : String = commonStringNames.minutes.translated() as? String ?? " minutes "
         if(HomeWorkSecondStr < 60)
         {
             UtilObj.printLogKey(printKey: "", printingValue: HomeWorkSecondStr)
@@ -1318,7 +1325,7 @@ class TextHomeWorkVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UI
         
         imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
         imagePicker.allowsEditing = false
-        
+//        imagePicker.
         self.present(imagePicker, animated: true, completion: nil)
         
         
@@ -1376,7 +1383,8 @@ class TextHomeWorkVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UI
     
     
     func ImagePickerGallery() {
-        attacTopView1.constant = 100
+//        attacTopView1.constant = 100
+        attachmentViewTop.constant = -240
         
         
         let config = ImagePickerConfiguration()
@@ -1404,7 +1412,7 @@ class TextHomeWorkVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UI
     
     
     func voiceAction() {
-        attachmentViewTop.constant = 60
+        attachmentViewTop.constant = 30
         voicePlayView.isHidden = true
         voiceRecordView.isHidden = false
         imgShowView.isHidden = true
@@ -1457,7 +1465,7 @@ class TextHomeWorkVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UI
         
         self.finishRecording(success: true)
         voicePlayView.isHidden = false
-        attachmentViewTop.constant = 30
+        attachmentViewTop.constant = 10
         voiceRecordHeight1.constant = 260
         calucalteDuration()
         if(UIDevice.current.userInterfaceIdiom == .pad)
@@ -1547,47 +1555,47 @@ class TextHomeWorkVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UI
         
     }
     
-    func Awws3Voice(URLPath : URL) {
-        
-        
-        
-        let audioUrl = URL(fileURLWithPath: URLPath.path)
-        
-        AWSS3Manager.shared.uploadAudio(audioUrl: audioUrl, progress: { [weak self] (progress) in
-            
-            
-            
-            
-            
-            
-            
-            print("audioUrl!",audioUrl)
-            
-            guard let strongSelf = self else { return }
-            
-            
-            
-        }) { [weak self] (uploadedFileUrl, error) in
-            
-            
-            guard let strongSelf = self else { return }
-            
-            if let finalPath = uploadedFileUrl as? String {
-                
-                self!.urlData = URL(string: finalPath)
-                print("finalPath123!",finalPath)
-                
-                
-            } else {
-                
-                print("\(String(describing: error?.localizedDescription))")
-                
-            }
-            
-        }
-        
-        
-    }
+//    func Awws3Voice(URLPath : URL) {
+//        
+//        
+//        
+//        let audioUrl = URL(fileURLWithPath: URLPath.path)
+//        
+//        AWSS3Manager.shared.uploadAudio(audioUrl: audioUrl, progress: { [weak self] (progress) in
+//                
+//            
+//            
+//            
+//            
+//            
+//            
+//            print("audioUrl!",audioUrl)
+//            
+//            guard let strongSelf = self else { return }
+//            
+//            
+//            
+//        }) { [weak self] (uploadedFileUrl, error) in
+//            
+//            
+//            guard let strongSelf = self else { return }
+//            
+//            if let finalPath = uploadedFileUrl as? String {
+//                
+//                self!.urlData = URL(string: finalPath)
+//                print("finalPath123!",finalPath)
+//                
+//                
+//            } else {
+//                
+//                print("\(String(describing: error?.localizedDescription))")
+//                
+//            }
+//            
+//        }
+//        
+//        
+//    }
     func directoryURL() -> NSURL? {
         print("urlData12",urlData)
         let fileManager = FileManager.default
@@ -1712,47 +1720,7 @@ class TextHomeWorkVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UI
         
         let audioUrl = URL(fileURLWithPath: filePath!.path)
         
-        AWSS3Manager.shared.uploadAudio(audioUrl: audioUrl, progress: { [weak self] (progress) in
-            
-            
-            
-            
-            
-            
-            
-            print("audioUrl!",audioUrl)
-            
-            guard let strongSelf = self else { return }
-            
-            
-            
-        }) { [weak self] (uploadedFileUrl, error) in
-            
-            
-            
-            guard let strongSelf = self else { return }
-            
-            if let finalPath = uploadedFileUrl as? String {
-                
-                self!.urlData = URL(string: finalPath)
-                print("finalPath123!",finalPath)
-                
-                
-                
-            } else {
-                
-                print("\(String(describing: error?.localizedDescription))")
-                
-            }
-            
-        }
-        
-        
-        
-        
-        
-        
-        
+        urlData = filePath
         return filePath!
         
     }
@@ -1882,10 +1850,12 @@ class TextHomeWorkVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UI
     
     
     
+    
+    
     func TitleForStopRecord()
     {
-        let firstword : String =  languageDictionary["teacher_txt_start_record"] as? String ?? "Press the button to"
-        let secondWord  : String =  languageDictionary["stop_record"] as? String ?? " STOP RECORD"
+        let firstword : String =  commonStringNames.teacher_txt_start_record.translated() as? String ?? "Press the button to"
+        let secondWord  : String =  commonStringNames.stop_record.translated() as? String ?? " STOP RECORD"
         let comboWord = firstword + secondWord
         let attributedText = NSMutableAttributedString(string:comboWord)
         var attrs =  [NSAttributedString.Key : NSObject]()
@@ -1909,8 +1879,8 @@ class TextHomeWorkVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UI
     
     func TitleForStartRecord()
     {
-        let firstword : String =  languageDictionary["teacher_txt_start_record"] as? String ?? "Press the button to"
-        let secondWord : String  =  languageDictionary["record"] as? String ?? " RECORD"
+        let firstword : String =  commonStringNames.teacher_txt_start_record.translated() as? String ?? "Press the button to"
+        let secondWord : String  =  commonStringNames.record.translated() as? String ?? " RECORD"
         let comboWord = firstword + secondWord
         let attributedText = NSMutableAttributedString(string:comboWord)
         var attrs =  [NSAttributedString.Key : NSObject]()
@@ -2387,14 +2357,26 @@ class TextHomeWorkVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UI
 
             Standar.append(contentsOf: addLocationResp)
             
-            standardTextFld.text = Standar[0].standard
-        
-            SectiondId = Standar[0].sections[0].sectionId
+            
+            if Standar[0].standard == "No records found"{
+                Util.showAlert("", msg: "No record found")
+                dismiss(animated: false, completion: nil)
+              
+            }else{
+                
+               
+                standardTextFld.text = Standar[0].standard
+                SectiondId = Standar[0].sections[0].sectionId
+                sectionTextfld.text = Standar[0].sections[0].sectionName
+                homeworkReport()
+            }
+           
+          
 //
 
-            sectionTextfld.text = Standar[0].sections[0].sectionName
+           
 
-            homeworkReport()
+            
 
         }
 

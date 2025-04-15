@@ -14,6 +14,7 @@ import ObjectMapper
 
 class PdfVcViewController: UIViewController {
     
+    @IBOutlet weak var DownloadLbl: UILabel!
     @IBOutlet weak var adViewHeight: NSLayoutConstraint!
     @IBOutlet weak var Adview: UIView!
     @IBOutlet weak var imgView: UIImageView!
@@ -38,7 +39,8 @@ class PdfVcViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        titleLbl.text = CertificateName
+        titleLbl.text = commonStringNames.CertificateOnly.translated()//CertificateName
+        DownloadLbl.text = commonStringNames.Download.translated()
         
         print("webViewUrl",webViewUrl)
         let url = URL (string: webViewUrl)

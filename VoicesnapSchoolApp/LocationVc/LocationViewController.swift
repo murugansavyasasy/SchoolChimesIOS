@@ -13,6 +13,15 @@
     import LocalAuthentication
 class LocationViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,CLLocationManagerDelegate {
     
+    
+    @IBOutlet weak var PunchLbl: UILabel!
+    @IBOutlet weak var tapPunchtorecordAttend: UILabel!
+    @IBOutlet weak var EnableLocationLbl: UILabel!
+    @IBOutlet weak var ToenhanceMsgLbl: UILabel!
+    @IBOutlet weak var AllowLocationMsgLbl: UILabel!
+    
+    @IBOutlet weak var addNewPunchLocationLbl: UILabel!
+    @IBOutlet weak var MarkAttendanceHeaderLbl: UILabel!
     @IBOutlet weak var plusViewHeight: NSLayoutConstraint!
     @IBOutlet weak var markAttendDfltLbl: UILabel!
     @IBOutlet weak var attendanceDefltLbl: UILabel!
@@ -66,16 +75,28 @@ class LocationViewController: UIViewController,UITableViewDelegate,UITableViewDa
     var bioMatricEnable  : Int!
     var staus : Bool!
     
-    let firstParagraph = "Note : You are outside the institutes boundary. you will not be able to mark your attendanc"
+    let firstParagraph = commonStringNames.AttendanceOutsideBoundaryNote.translated()
     
-    let secondParagraph = "Please try again when you are within the designated area."
+    let secondParagraph = commonStringNames.RetryWithinDesignatedArea.translated()
     
     var device = UIDevice.current.name
     var punch_type = 1
     var secureId  = ""
-    
+    var currentDistanceForPuchCheck : Double!
+    var apiDistanceForPuchCheck :  Int!
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        MarkAttendanceHeaderLbl.text = commonStringNames.MarkAttendance.translated()
+        markAttendDfltLbl.text = commonStringNames.MarkAttendance.translated()
+        attendanceDefltLbl.text = commonStringNames.YourAttendanceDetails.translated()
+        addNewPunchLocationLbl.text = commonStringNames.AddNewPunchLocation.translated()
+        AllowLocationMsgLbl.text = commonStringNames.AllowLocationToMarkAttendance.translated()
+        ToenhanceMsgLbl.text = commonStringNames.EnableGPSForBetterFeatures.translated()
+        EnableLocationLbl.text = commonStringNames.EnableLocation.translated()
+        tapPunchtorecordAttend.text = commonStringNames.PunchAttendanceInstruction.translated()
+        PunchLbl.text = commonStringNames.Punch.translated()
+        
         switchBtn.isHidden = true
         faceIdDefaultLbl.isHidden = true
 //        locationAlertFullView.isHidden = true
@@ -126,24 +147,17 @@ class LocationViewController: UIViewController,UITableViewDelegate,UITableViewDa
             
             
         }else{
-            
-          
-            
+
             instituteId = userDefaults.integer(forKey: DefaultsKeys.SchoolD)
             staffId = userDefaults.integer(forKey: DefaultsKeys.StaffID)
             bioMatricEnable = userDefaults.integer(forKey: DefaultsKeys.biometricEnable)
-            
         }
         
         
         
         if  bioMatricEnable == 1{
-            //
             plusview.isHidden = false
-            //
         }else{
-            
-            
             plusview.isHidden = true
         }
         
@@ -152,8 +166,6 @@ class LocationViewController: UIViewController,UITableViewDelegate,UITableViewDa
         for i in 0..<21 {
             let year = currentYear - i
             years.append(String(year))
-            
-            
         }
         
         selectYearsLbl.text = years[0]
@@ -192,7 +204,6 @@ class LocationViewController: UIViewController,UITableViewDelegate,UITableViewDa
         
         let history = UITapGestureRecognizer(target: self, action: #selector(history))
         histroyView.addGestureRecognizer(history)
-        
         let punch = UITapGestureRecognizer(target: self, action: #selector(punch))
         punchView.addGestureRecognizer(punch)
         let punchbttn = UITapGestureRecognizer(target: self, action: #selector(punchButtonss))
@@ -210,6 +221,7 @@ class LocationViewController: UIViewController,UITableViewDelegate,UITableViewDa
     }
     
     
+   
     func getDeviceModelName() -> String {
         var systemInfo = utsname()
         uname(&systemInfo)
@@ -453,7 +465,27 @@ class LocationViewController: UIViewController,UITableViewDelegate,UITableViewDa
     
     @IBAction func punchButtonss(){
         
-        punchAPi()
+        
+        locationVc()
+        
+        // Check if the distance is smaller
+        if currentDistanceForPuchCheck <= Double(apiDistanceForPuchCheck) {
+          
+            punchFullView.isHidden = false
+            errorLabel.isHidden = true
+            ErrorLablelView.isHidden = true
+            punchAPi()
+          
+            
+        } else {
+           
+            
+            errorLabel.isHidden = false
+            punchFullView.isHidden = true
+            ErrorLablelView.isHidden = false
+        }
+        
+        
     }
     
     func checkLocationAuthorization() {
@@ -823,6 +855,9 @@ class LocationViewController: UIViewController,UITableViewDelegate,UITableViewDa
     
     func punchAPi(){
         
+       
+        
+        
         
         let punchModal = punchModal()
         
@@ -981,10 +1016,12 @@ class LocationViewController: UIViewController,UITableViewDelegate,UITableViewDa
                 for i in getattendace.data{
                     var distanceInt = Int(i.distance)
                     let distance = haversineDistance(lat1: Double(i.latitude)!, lon1: Double(i.longitude)!, lat2: Double(currentLatitute)!, lon2: Double(curentLogittude)!)
+                    currentDistanceForPuchCheck = distance
+                    apiDistanceForPuchCheck = distanceInt
                     
                     // Check if the distance is smaller
                     if distance <= Double(distanceInt!) {
-                        print("The existing are within 5 meters of the current location.")
+                      
                         punchFullView.isHidden = false
                         errorLabel.isHidden = true
                         ErrorLablelView.isHidden = true
@@ -992,7 +1029,7 @@ class LocationViewController: UIViewController,UITableViewDelegate,UITableViewDa
                         break
                         
                     } else {
-                        print("The existing are more than 5 meters away.")
+                       
                         
                         errorLabel.isHidden = false
                         punchFullView.isHidden = true

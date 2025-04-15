@@ -36,6 +36,7 @@ class NewProductOfferVC: UIViewController,UIWebViewDelegate {
         }
         
         showLoading()
+        print("strURLstrURL",strURL)
         let url = URL(string: strURL)
         myWebView.loadRequest(URLRequest(url: url!))
         
@@ -81,10 +82,10 @@ class NewProductOfferVC: UIViewController,UIWebViewDelegate {
             UIView.appearance().semanticContentAttribute = .forceLeftToRight
         }
         if(viewFromString == "p21"){
-            self.title = LangDict["special_offer"] as? String
-            self.title = "Important Info"
+            self.title = commonStringNames.special_offer.translated() as? String
+            self.title = commonStringNames.ImportantInfo.translated()
         }else{
-            self.title = "New Products"
+            self.title = commonStringNames.NewProducts.translated()
         }
         
     }

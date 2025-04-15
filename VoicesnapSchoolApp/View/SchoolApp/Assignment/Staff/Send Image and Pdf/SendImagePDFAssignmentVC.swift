@@ -121,7 +121,7 @@ class SendImagePDFAssignmentVC: UIViewController , UIActionSheetDelegate, UIImag
     }
     func actionSelectCategory(){
         TableString = "category"
-        selectCategorylbl.text = LanguageDict["select_category"] as? String
+        selectCategorylbl.text = commonStringNames.select_category.translated() as? String
         self.CategorypickerView.reloadAllComponents()
         if(UIDevice.current.userInterfaceIdiom == .pad)
         {
@@ -272,18 +272,18 @@ class SendImagePDFAssignmentVC: UIViewController , UIActionSheetDelegate, UIImag
             self.FromPDF()
         }else{
             if(UIDevice.current.userInterfaceIdiom == .pad){
-                let alertController = UIAlertController(title: LanguageDict["upload_image"] as? String, message: LanguageDict["choose_option"] as? String, preferredStyle: .alert)
+                let alertController = UIAlertController(title: commonStringNames.upload_image.translated() as? String, message: commonStringNames.choose_option.translated() as? String, preferredStyle: .alert)
                 // Initialize Actions
-                let yesAction = UIAlertAction(title: LanguageDict["choose_from_gallery"] as? String, style: .default) { (action) -> Void in
+                let yesAction = UIAlertAction(title: commonStringNames.choose_from_gallery.translated() as? String, style: .default) { (action) -> Void in
                     self.openGallery()
                 }
                 
-                let cameraAction = UIAlertAction(title:  LanguageDict["compose_camera"] as? String, style: .default) {
+                                              let cameraAction = UIAlertAction(title:  commonStringNames.compose_camera.translated() as? String, style: .default) {
                     (action) -> Void in
                     self.FromPhoto()
                     
                 }
-                let CancelAction = UIAlertAction(title: LanguageDict["teacher_cancel"] as? String, style: .default) { (action) -> Void in
+                                                                               let CancelAction = UIAlertAction(title: commonStringNames.teacher_cancel.translated() as? String, style: .default) { (action) -> Void in
                     alertController.dismiss(animated: true, completion: nil)
                 }
                 
@@ -296,17 +296,17 @@ class SendImagePDFAssignmentVC: UIViewController , UIActionSheetDelegate, UIImag
                 self.present(alertController, animated: true, completion: nil)
             }
             else{
-                let alert = UIAlertController(title:  LanguageDict["upload_image"] as? String, message: LanguageDict["choose_option"] as? String, preferredStyle: .actionSheet)
+                    let alert = UIAlertController(title:  commonStringNames.upload_image.translated() as? String, message: commonStringNames.choose_option.translated() as? String, preferredStyle: .actionSheet)
                 
-                alert.addAction(UIAlertAction(title: LanguageDict["choose_from_gallery"] as? String, style: .default , handler:{ (UIAlertAction)in
+                                                  alert.addAction(UIAlertAction(title: commonStringNames.choose_from_gallery.translated() as? String, style: .default , handler:{ (UIAlertAction)in
                     self.openGallery()
                 }))
                 
-                alert.addAction(UIAlertAction(title:  LanguageDict["compose_camera"] as? String, style: .default , handler:{ (UIAlertAction)in
+                                                  alert.addAction(UIAlertAction(title:  commonStringNames.compose_camera.translated() as? String, style: .default , handler:{ (UIAlertAction)in
                     self.FromPhoto()
                 }))
                 
-                alert.addAction(UIAlertAction(title: LanguageDict["teacher_cancel"] as? String, style: .cancel, handler:{ (UIAlertAction)in
+                                                  alert.addAction(UIAlertAction(title: commonStringNames.teacher_cancel.translated() as? String, style: .cancel, handler:{ (UIAlertAction)in
                     print("User click Dismiss button")
                 }))
                 
@@ -468,7 +468,10 @@ class SendImagePDFAssignmentVC: UIViewController , UIActionSheetDelegate, UIImag
         ]
         utilObj.printLogKey(printKey: "assignmentDict", printingValue: assignmentDict)
         let AddCV = self.storyboard?.instantiateViewController(withIdentifier: "StaffAddNewClassVC") as! StaffAddNewClassVC
+        print("SendImagePDFAssignmentVC SchoolDetailDict",SchoolDetailDict)
         AddCV.SchoolDetailDict = SchoolDetailDict
+        AddCV.checkSchoolID = "1"
+//        AddCV.SchoolId = SchoolId
         AddCV.sendAssignmentDict = self.assignmentDict
         AddCV.assignmentType = "StaffAssignment"
         AddCV.pdfData = self.pdfData
@@ -631,20 +634,20 @@ class SendImagePDFAssignmentVC: UIViewController , UIActionSheetDelegate, UIImag
         
         if(assignmentType == "pdf"){
             titleImageIcon.image = UIImage(named: "pdfImage")
-            ClickHereButton.setTitle(LangDict["click_here_pdf"] as? String, for: .normal)
-            ClickImageCaptureButton.setTitle(LangDict["change_pdf"] as? String, for: .normal)
-            SendImageLabel.text = LangDict["compose_pdf"] as? String
-            descriptionTextField.placeholder = LangDict["assignment_title"] as? String
+            ClickHereButton.setTitle(commonStringNames.click_here_pdf.translated() as? String, for: .normal)
+                                     ClickImageCaptureButton.setTitle(commonStringNames.change_pdf.translated() as? String, for: .normal)
+                                                                      SendImageLabel.text = commonStringNames.compose_pdf.translated() as? String
+                                                                      descriptionTextField.placeholder = commonStringNames.assignment_title.translated() as? String
         }else{
             titleImageIcon.image = UIImage(named: "ImageIcon")
-            ClickHereButton.setTitle(LangDict["click_here_image"] as? String, for: .normal)
-            ClickImageCaptureButton.setTitle(LangDict["change_image"] as? String, for: .normal)
-            SendImageLabel.text = LangDict["teacher_txt_compose_Img"] as? String
-            descriptionTextField.placeholder = LangDict["assignment_title"] as? String
+                ClickHereButton.setTitle(commonStringNames.click_here_image as? String, for: .normal)
+                                         ClickImageCaptureButton.setTitle(commonStringNames.change_image.translated() as? String, for: .normal)
+                                                                          SendImageLabel.text = commonStringNames.teacher_txt_compose_Img.translated() as? String
+                                                                          descriptionTextField.placeholder = commonStringNames.assignment_title.translated() as? String
         }
-        SubmissionDateLabel.text = LangDict["subission_date"] as? String
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
-        SendButton.setTitle(LangDict["teacher_choose_recipient"] as? String, for: .normal)
+                                                                          SubmissionDateLabel.text = commonStringNames.subission_date.translated() as? String
+                                                                          strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
+                                                                          SendButton.setTitle(commonStringNames.teacher_choose_recipient.translated() as? String, for: .normal)
         
     }
     

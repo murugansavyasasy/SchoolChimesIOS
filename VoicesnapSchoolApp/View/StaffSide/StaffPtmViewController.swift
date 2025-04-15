@@ -10,6 +10,12 @@ import UIKit
 import ObjectMapper
 class StaffPtmViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
 
+    
+    @IBOutlet weak var allSlotHeadLbl: UILabel!
+    @IBOutlet weak var todayBookHeadLbl: UILabel!
+    
+    @IBOutlet weak var actHeadLbl: UILabel!
+    
     @IBOutlet weak var createView: UIView!
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var nodatalabl: UILabel!
@@ -19,6 +25,7 @@ class StaffPtmViewController: UIViewController,UITableViewDelegate,UITableViewDa
     @IBOutlet weak var dateLbl: UILabel!
     @IBOutlet weak var tv: UITableView!
     
+    @IBOutlet weak var openNewHeadLbl: UILabel!
     let cvRowIdentifier = "SlotsCollectionViewCell"
 //    var sectiondeatils : [sectionDetails] = []
     var tvcellIdentifier = "StaffPtmTableViewCell"
@@ -47,7 +54,11 @@ class StaffPtmViewController: UIViewController,UITableViewDelegate,UITableViewDa
         // Do any additional setup after loading the view.
         
         let currentDate = Date()
+        actHeadLbl.text = commonStringNames.PTM.translated()
+        todayBookHeadLbl.text = commonStringNames.TodaysBookedSlots.translated()
+        allSlotHeadLbl.text = commonStringNames.AllSlots.translated()
         
+        openNewHeadLbl.text = commonStringNames.OpenNewSlots.translated()
         let dateFormatter = DateFormatter()
 //        dateFormatter.dateFormat = "MMM d, yyyy"
         dateFormatter.dateFormat = "dd/MM/yyyy"
@@ -84,6 +95,7 @@ class StaffPtmViewController: UIViewController,UITableViewDelegate,UITableViewDa
             //        StaffId = userDefaults.string(forKey: DefaultsKeys.StaffID)
             SchoolId = userDefaults.string(forKey: (DefaultsKeys.SchoolD))!
             staffId = userDefaults.integer(forKey: DefaultsKeys.StaffID)
+            instituteId = userDefaults.integer(forKey: DefaultsKeys.SchoolD)
         }
         
         print("SchoolId",SchoolId)
@@ -178,7 +190,7 @@ class StaffPtmViewController: UIViewController,UITableViewDelegate,UITableViewDa
     @IBAction func  TodaySlotVC (){
         
         createView.isHidden = false
-        dateLbl.text = "--- Select Date ---"
+        dateLbl.text = commonStringNames.SelectDatePlaceholder.translated()
         slotView.backgroundColor = .lightGray
         todaSlotView.backgroundColor = UIColor(named: CustomOrange)
         dateWiseSlot()
@@ -187,7 +199,7 @@ class StaffPtmViewController: UIViewController,UITableViewDelegate,UITableViewDa
         createView.isHidden = true
         todaSlotView.backgroundColor = .lightGray
         slotView.backgroundColor = UIColor(named: CustomOrange)
-        dateLbl.text = "--- Select Date ---"
+        dateLbl.text = commonStringNames.SelectDatePlaceholder.translated()
         display_date = "ALL"
         StaffDetailsForStaff()
         
@@ -737,9 +749,9 @@ class StaffPtmViewController: UIViewController,UITableViewDelegate,UITableViewDa
    
     func dateWiseSlot(){
        
-        if  dateLbl.text == "--- Select Date ---"{
+        if  dateLbl.text == commonStringNames.SelectDatePlaceholder.translated(){
             
-            nodatalabl.text = "Select date to start"
+            nodatalabl.text = commonStringNames.SelectDateToStart.translated()
             nodatalabl.isHidden = false
             tv.isHidden = true
             

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23094" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23084"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -12,13 +12,16 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PTMViewController" customModule="VoicesnapSchoolApp" customModuleProvider="target">
             <connections>
+                <outlet property="actionTitleLbl" destination="eDf-RE-GjI" id="bls-XB-AvU"/>
                 <outlet property="bookSlotBtn" destination="SQn-Rg-CGq" id="sK1-mW-AXd"/>
                 <outlet property="calanderHeightCon" destination="YzJ-QI-abT" id="KRU-6J-IaV"/>
                 <outlet property="calendarView" destination="PsC-9c-Ci0" id="s7v-nh-CYv"/>
                 <outlet property="cv" destination="7u6-04-jpa" id="kfJ-Kx-DMf"/>
                 <outlet property="dropDownLbl" destination="TVt-O8-gcV" id="z1Q-mM-CRR"/>
+                <outlet property="meetLbl" destination="rUi-4L-8Jb" id="pDh-zY-XWt"/>
                 <outlet property="noRecordsLbl" destination="1hp-HM-QQw" id="gyw-qA-Jgf"/>
                 <outlet property="noRecordsView" destination="Tcn-Vc-DNb" id="Mxg-yz-AbC"/>
+                <outlet property="scheduleLbl" destination="IXi-H7-pBy" id="gB4-2I-7qt"/>
                 <outlet property="segment1" destination="WBy-Wt-b7Z" id="Tkn-yA-3Hb"/>
                 <outlet property="segment2" destination="c1H-vp-yH1" id="IEb-NG-GZY"/>
                 <outlet property="subView" destination="gA7-as-Xvq" id="vLe-08-Db7"/>
@@ -283,8 +286,8 @@
                         <constraint firstAttribute="width" constant="130" id="cQa-qp-WBW"/>
                     </constraints>
                     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" title="book slot"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal" title="book slot"/>
                     <connections>
                         <action selector="bookSlotAct:" destination="-1" eventType="touchUpInside" id="on9-Cg-8XH"/>
                     </connections>
@@ -313,13 +316,13 @@
             <color red="0.0" green="0.37599998712539673" blue="0.3919999897480011" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="opaqueSeparatorColor">
-            <color red="0.77647058820000003" green="0.77647058820000003" blue="0.7843137255" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.77647058823529413" green="0.77647058823529413" blue="0.78431372549019607" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray4Color">
-            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

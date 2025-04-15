@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -12,11 +12,15 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CreateLocationViewController" customModule="VoicesnapSchoolApp" customModuleProvider="target">
             <connections>
+                <outlet property="DropDistanceLbl" destination="rsW-fA-Xb2" id="MFc-e2-zkH"/>
                 <outlet property="ImpoartPaghLbl" destination="RHe-fO-Y9v" id="LLI-T6-0hL"/>
+                <outlet property="ImportantLbl" destination="p3N-8c-GuH" id="aFh-xX-6rg"/>
+                <outlet property="MetersLbl" destination="Ha4-1y-TfI" id="fjD-DU-an7"/>
                 <outlet property="addressLbl" destination="nTO-nc-WMb" id="vY9-Gd-L4H"/>
                 <outlet property="adressStackview" destination="eaX-LX-cr5" id="CnN-67-0Pn"/>
                 <outlet property="backView" destination="VwO-uL-q9c" id="ALC-J5-AQE"/>
                 <outlet property="bottomViewHeight" destination="MM7-tl-SDM" id="H3y-ZN-KTq"/>
+                <outlet property="clickTogetLattiandLongitute" destination="CEz-UL-21G" id="qZg-lB-0Qi"/>
                 <outlet property="currentlatAndlongDefltLbl" destination="HdW-Xf-gRX" id="CNj-aP-6FR"/>
                 <outlet property="cvHeight" destination="08d-Q8-iPU" id="gpz-Y3-gf6"/>
                 <outlet property="distanceDropDownView" destination="RH2-e7-5iV" id="JFI-dE-4Iy"/>
@@ -28,9 +32,12 @@
                 <outlet property="latLongLbl" destination="ySf-kh-Ux3" id="i3C-NA-Lrd"/>
                 <outlet property="latiAndLongiView" destination="CKQ-QM-xFi" id="qXB-ee-Kgl"/>
                 <outlet property="loactiontextfiled" destination="n0L-hg-M6N" id="keq-xI-X2j"/>
+                <outlet property="pinLocationNameLbl" destination="Y28-SN-dsa" id="aPF-vb-56H"/>
+                <outlet property="submit" destination="fxz-C8-tGA" id="DJm-vf-ozg"/>
                 <outlet property="submitview" destination="ouX-e6-lWY" id="xzD-cQ-tLP"/>
                 <outlet property="tapToView" destination="kuJ-Av-Oee" id="emw-Vu-3YN"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="yourAdressLbl" destination="5Gx-7r-jts" id="hgV-by-DTG"/>
                 <outlet property="yuouraddressHeight" destination="gBZ-De-Xyk" id="htz-RZ-Kwx"/>
             </connections>
         </placeholder>
@@ -424,10 +431,10 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="viewFlipsideBackgroundColor">
             <color red="0.12156862745098039" green="0.12941176470588237" blue="0.14117647058823529" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

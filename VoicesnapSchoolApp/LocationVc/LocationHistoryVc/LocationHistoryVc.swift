@@ -11,6 +11,7 @@ import ObjectMapper
 import DropDown
 class LocationHistoryVc: UIViewController, UITableViewDataSource, UITableViewDelegate,UISearchBarDelegate {
    
+    @IBOutlet weak var HeaderLbl: UILabel!
     @IBOutlet weak var seachHeight: NSLayoutConstraint!
     @IBOutlet weak var todayDefaultLbl: UILabel!
     @IBOutlet weak var staffWiseDefaultLbl: UILabel!
@@ -59,10 +60,18 @@ class LocationHistoryVc: UIViewController, UITableViewDataSource, UITableViewDel
   
     override func viewDidLoad() {
         super.viewDidLoad()
+        HeaderLbl.text = commonStringNames.AttendanceReport.translated()
+        todayDefaultLbl.text = commonStringNames.TodaysReport.translated()
+        staffWiseDefaultLbl.text = commonStringNames.StaffWiseReport.translated()
+        staffDefaultsLbl.text = commonStringNames.SelectStaffName.translated()
+        
+        
+        
         noRecordLbl.isHidden = true
         yearsView.isHidden = true
         monthView.isHidden = true
         searchbar.delegate = self
+        searchbar.placeholder = commonStringNames.Search.translated()
         staffDropViewHeight.constant = 0
         selectYrHeight.constant = 0
         selctStaffHeight.constant = 0
@@ -670,7 +679,7 @@ class LocationHistoryVc: UIViewController, UITableViewDataSource, UITableViewDel
                 
             }else{
                 noRecordLbl.isHidden = false
-                noRecordLbl.text = "No record found"
+                noRecordLbl.text = commonStringNames.NoRecordsFound.translated()
                 tv.alpha = 0
                 
             }

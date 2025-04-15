@@ -9,8 +9,26 @@
 import UIKit
 
 import Alamofire
-class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableViewDataSource {
+class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate {
     
+    @IBOutlet weak var normlImageView: UIImageView!
+    @IBOutlet weak var sortBigViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var sortBigView: UIView!
+    @IBOutlet weak var searchHeight: NSLayoutConstraint!
+    @IBOutlet weak var setTitleLbl: UILabel!
+    @IBOutlet weak var searchView: UISearchBar!
+    @IBOutlet weak var SetTitleBtnHeight: NSLayoutConstraint!
+    @IBOutlet weak var sortBtnName: UIButton!
+    @IBOutlet weak var sortBtnHeight: NSLayoutConstraint!
+    @IBOutlet weak var desendingImgView: UIImageView!
+    @IBOutlet weak var assendingImgView: UIImageView!
+    @IBOutlet weak var ZtoAImgView: UIImageView!
+    @IBOutlet weak var AtoZImgView: UIImageView!
+    @IBOutlet weak var DesendingView: UIView!
+    @IBOutlet weak var ascendingView: UIView!
+    @IBOutlet weak var ZtoAView: UIView!
+    @IBOutlet weak var AtoZView: UIView!
+    @IBOutlet weak var sortByFullView: UIView!
     @IBOutlet weak var OkButton: UIButton!
     @IBOutlet weak var CancelButton: UIButton!
     @IBOutlet weak var SectionLabel: UILabel!
@@ -21,6 +39,7 @@ class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableV
     @IBOutlet weak var SelectImage: UIImageView!
     @IBOutlet weak var SectionNameLabel: UILabel!
     
+  
     var sessionType : String!
     var attendanceType : String!
     
@@ -34,13 +53,16 @@ class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableV
     var SchoolId = String()
     var StudentDetailDictionary:NSDictionary = [String:Any]() as NSDictionary
     var StudentNameArray : Array = [String]()
+    var SearchStudentNameArray : Array = [String]()
     var SelectedStudentIDArray : Array = [String]()
+    var filteredStudentIDArray : Array = [String]()
     var ChoosenStudentIDArray : Array = [Any]()
     var SelectedStudentNameArray : Array = [String]()
     var StudentIDArray : Array = [String]()
     var StudentCount = Int()
     var SenderNameString = String()
     var StudentAdmissionNoArray : Array = [String]()
+    var StudentRollNumberNoArray : Array = [String]()
     var SelectedStudentAdmissionNoArray : Array = [String]()
     var SectionStandardName = String()
     var SelectedDictforApi = [String:Any]() as NSDictionary
@@ -79,12 +101,26 @@ class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableV
     var vimeoVideoURL : URL!
     
     var attendacePassType : Int!
+    var  FilterarrayDatas: NSArray = []
     
     @IBOutlet weak var SelectAllButton: UIButton!
     
     @IBOutlet weak var TotalPresentedStudentLabel: UILabel!
+    
+    var clkickId : Int!
     override func viewDidLoad() {
         super.viewDidLoad()
+        sortByFullView.isHidden = true
+        searchView.delegate = self
+        sortBtnHeight.constant = 0
+        searchHeight.constant = 0
+       
+        sortBigViewHeight.constant = 0
+        sortBtnName.isHidden = true
+        setTitleLbl.isHidden = true
+        sortBigView.isHidden = true
+        SetTitleBtnHeight.constant = 0
+        normlImageView.isHidden = true
         strCountryCode = UserDefaults.standard.object(forKey: COUNTRY_CODE) as! String
         self.callSelectedLanguage()
         let nc = NotificationCenter.default
@@ -95,15 +131,45 @@ class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableV
         SectionNameLabel.text = SectionStandardName
         //
         if(SenderNameString == "StudentExamTextVC"){
+            
+            print("StudentExamTextVC",SenderNameString)
             SelectedSectionCode = String(describing: ExamTestApiDict["SectionCode"]!)
             print(SelectedSectionCode)
         }else if(SenderNameString == "ExamTextVC"){
+            print("ExamTextVC",SenderNameString)
             
             SelectedSectionCode = String(describing: SectionDetailDictionary["SectionId"]!)
             SubjectCodeStr = String(describing: SelectedSubjectDict["SubjectId"]!)
         } else if(SenderNameString == "StaffAssignment" || SenderNameString == "SendAssignment"){
             
-        }else{
+            print("SendAssignment",SenderNameString)
+            
+        }
+        else if (SenderNameString == "AttendanceVC"){
+            
+         
+            MyTableView.separatorStyle = .singleLine
+            sortBtnHeight.constant = 35
+            searchHeight.constant = 55
+            SetTitleBtnHeight.constant = 35
+            sortBtnName.isHidden = false
+            setTitleLbl.isHidden = false
+            normlImageView.isHidden = false
+            let nib = UINib(nibName: "AttendTvCell", bundle: nil)
+            MyTableView.register(nib, forCellReuseIdentifier: "AttendTvCell")
+            
+            MyTableView.rowHeight = UITableView.automaticDimension
+            MyTableView.estimatedRowHeight = 44.0
+            print("AttendaceVcccc",SenderNameString)
+            
+            SelectedSectionCode = String(describing: SectionDetailDictionary["SectionId"]!)
+        }
+        else{
+            
+           
+            
+           
+            print("AttendaceVcccc",SenderNameString)
             
             SelectedSectionCode = String(describing: SectionDetailDictionary["SectionId"]!)
         }
@@ -115,8 +181,354 @@ class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableV
                 Util.showAlert("", msg:strNoInternet )
             }
         }
+        
+        let Atoz = UITapGestureRecognizer(target: self, action: #selector(AtoZClick))
+        AtoZView.addGestureRecognizer(Atoz)
+        let ZtoA = UITapGestureRecognizer(target: self, action: #selector(ZtoAClick))
+        ZtoAView.addGestureRecognizer(ZtoA)
+        let Assendings = UITapGestureRecognizer(target: self, action: #selector(AsendingClick))
+        ascendingView.addGestureRecognizer(Assendings)
+        let desendings = UITapGestureRecognizer(target: self, action: #selector(DesendingClick))
+        DesendingView.addGestureRecognizer(desendings)
+        
+        sortByFullView.layer.cornerRadius = 10
+        sortByFullView.clipsToBounds = true
+        
+//        let defaults = UserDefaults.standard
+//        print(" defaults.string(forKey:DefaultsKeys.sortName)", defaults.string(forKey:DefaultsKeys.sortName))
+      
+//            userDefault.set(name, forKey: DefaultsKeys.sortName)
+       
     }
     
+    
+    
+    
+    
+
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText.isEmpty {
+            // Reset both arrays when the search is empty
+            StudentNameArray = SearchStudentNameArray
+            StudentIDArray = filteredStudentIDArray
+        } else {
+            // Filter both the name and ID arrays based on the search text
+            StudentNameArray = []
+            StudentIDArray = []
+            
+            for (index, name) in SearchStudentNameArray.enumerated() {
+                if name.lowercased().contains(searchText.lowercased()) {
+                    StudentNameArray.append(name)
+                    StudentIDArray.append(filteredStudentIDArray[index])
+                }
+            }
+        }
+        // Reload the table view with filtered data
+        MyTableView.reloadData()
+    }
+
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        
+        print("scrollViewWillBeginDragging")
+        searchView.endEditing(true)
+        
+    }
+
+
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        print("searchBarSearchButtonClicked")
+        searchView.resignFirstResponder()
+        
+    }
+
+
+
+
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        
+        
+       
+            
+            
+            searchBar.resignFirstResponder()
+            
+            
+            
+            MyTableView.alpha = 1
+            
+           
+            
+            self.MyTableView.reloadData()
+       
+        
+        
+        
+    }
+
+    
+    @IBAction func cancelFilterBtn(_ sender: Any) {
+        sortBtnName.isHidden = false
+        sortByFullView.isHidden = true
+        sortBtnName.isHidden = false
+                setTitleLbl.isHidden = false
+        searchView.isHidden = false
+        sortBigView.isHidden = true
+        SetTitleBtnHeight.constant = 0
+        normlImageView.isHidden = false
+       
+    }
+    
+   
+    @IBAction func doneFiltrBtn(_ sender: Any) {
+        
+        sortBtnName.isHidden = false
+                setTitleLbl.isHidden = false
+        searchView.isHidden = false
+        sortBigView.isHidden = true
+        SetTitleBtnHeight.constant = 35
+        normlImageView.isHidden = false
+       
+      
+        if clkickId == 1{
+            
+            sortByFullView.isHidden = true
+            
+          
+          
+            
+          
+            let atozSortedArray = sortFilterArrayByName(ascending: true)
+            print("A-to-Z Order:")
+            atozSortedArray.forEach { item in
+                if let dict = item as? [String: Any],
+                  
+                   let rollNo = dict["RollNO"] as? String,
+                   let studentName = dict["StudentName"] as? String,
+                   let studentId = dict["StudentID"]as? String,
+                   let admissionNo = dict["StudentAdmissionNo"] as? String {
+                    print("RollNO:vgbhjnkm.n,m \(rollNo), Student Name: \(studentName), Admission No: \(admissionNo)")
+                    StudentNameArray.append(studentName)
+                    StudentAdmissionNoArray.append(admissionNo)
+                    StudentRollNumberNoArray.append(rollNo)
+                    StudentIDArray.append(studentId)
+                    MyTableView.reloadData()
+                }
+            }
+        }else if clkickId == 2{
+            sortByFullView.isHidden = true
+            
+           
+           
+            let ztoaSortedArray = sortFilterArrayByName(ascending: false)
+            print("Z-to-A Order:")
+            ztoaSortedArray.forEach { item in
+                if let dict = item as? [String: Any],
+                   let rollNo = dict["RollNO"] as? String,
+                   let studentName = dict["StudentName"] as? String,
+                   let studentId = dict["StudentID"]as? String,
+                   let admissionNo = dict["StudentAdmissionNo"] as? String {
+                    print("RollNO: \(rollNo), Student Name: \(studentName), Admission No: \(admissionNo)")
+                    StudentNameArray.append(studentName)
+                    StudentAdmissionNoArray.append(admissionNo)
+                    StudentRollNumberNoArray.append(rollNo)
+                    StudentIDArray.append(studentId)
+                  
+                    MyTableView.reloadData()
+                }
+            }
+            
+            
+        }else if clkickId == 3{
+            
+            sortByFullView.isHidden = true
+            
+           
+            
+            let ascendingSortedArray = sortFilterArrayByRollNO(ascending: true)
+            print("Ascending Order:")
+            ascendingSortedArray.forEach { item in
+                if let dict = item as? [String: Any],
+                   let rollNo = dict["RollNO"] as? String,
+                   let studentName = dict["StudentName"] as? String,
+                   let studentId = dict["StudentID"]as? String,
+                   let admissionNo = dict["StudentAdmissionNo"] as? String {
+                    print("RollNO: \(rollNo), Student Name: \(studentName), Admission No: \(admissionNo)","Student Id: \(studentId)")
+                    
+                    StudentNameArray.append(studentName)
+                    StudentAdmissionNoArray.append(admissionNo)
+                    StudentRollNumberNoArray.append(rollNo)
+                    StudentIDArray.append(studentId)
+                   
+                    MyTableView.reloadData()
+                    
+                }
+            }
+            
+            
+        }else if clkickId == 4{
+            
+            sortByFullView.isHidden = true
+            
+           
+            
+
+            let descendingSortedArray = sortFilterArrayByRollNO(ascending: false)
+            print("\nDescending Order:")
+            descendingSortedArray.forEach { item in
+                if let dict = item as? [String: Any],
+                   let rollNo = dict["RollNO"] as? String,
+                   let studentName = dict["StudentName"] as? String,
+                   let studentId = dict["StudentID"] as? String,
+                   let admissionNo = dict["StudentAdmissionNo"] as? String {
+                    print("RollNO: \(rollNo), Student Name: \(studentName), Admission No: \(admissionNo)")
+                    
+                    StudentNameArray.append(studentName)
+                    StudentAdmissionNoArray.append(admissionNo)
+                    StudentRollNumberNoArray.append(rollNo)
+                    StudentIDArray.append(studentId)
+                    MyTableView.reloadData()
+                }
+            }
+            
+        }
+        
+    }
+    
+    
+    @IBAction func AtoZClick(){
+        
+        clkickId = 1
+        
+     
+            
+        setTitleLbl.text = "Sort Alphabetically (A → Z)"
+      
+        var name : String = "Sort Alphabetically (A → Z)"
+        
+        let userDefault = UserDefaults.standard
+        userDefault.set(name, forKey: DefaultsKeys.sortName)
+        
+        StudentNameArray.removeAll()
+        StudentAdmissionNoArray.removeAll()
+        StudentRollNumberNoArray.removeAll()
+        StudentIDArray.removeAll()
+        
+        AtoZImgView.image = UIImage(named: "CheckBoximage")
+        ZtoAImgView.image = UIImage(named: "UnCheckBoxIcon")
+        assendingImgView.image = UIImage(named: "UnCheckBoxIcon")
+        desendingImgView.image = UIImage(named: "UnCheckBoxIcon")
+        
+        
+    }
+    @IBAction func ZtoAClick(){
+        clkickId = 2
+        
+//
+                setTitleLbl.text = "Sort Alphabetically (Z → A)"
+       
+        
+        var name : String = setTitleLbl.text!
+        
+        let userDefault = UserDefaults.standard
+        userDefault.set(name, forKey: DefaultsKeys.sortName)
+        StudentNameArray.removeAll()
+        StudentAdmissionNoArray.removeAll()
+        StudentRollNumberNoArray.removeAll()
+        StudentIDArray.removeAll()
+        
+        AtoZImgView.image = UIImage(named: "UnCheckBoxIcon")
+        ZtoAImgView.image = UIImage(named: "CheckBoximage")
+        assendingImgView.image = UIImage(named: "UnCheckBoxIcon")
+        desendingImgView.image = UIImage(named: "UnCheckBoxIcon")
+        
+        
+    }
+    @IBAction func AsendingClick(){
+        
+        clkickId = 3
+       
+        
+               
+        setTitleLbl.text = "Sort by Roll Number (Low → High)"
+      
+        var name : String = setTitleLbl.text!
+        
+        let userDefault = UserDefaults.standard
+        userDefault.set(name, forKey: DefaultsKeys.sortName)
+        StudentNameArray.removeAll()
+        StudentAdmissionNoArray.removeAll()
+        StudentRollNumberNoArray.removeAll()
+        StudentIDArray.removeAll()
+        
+        AtoZImgView.image = UIImage(named: "UnCheckBoxIcon")
+        ZtoAImgView.image = UIImage(named: "UnCheckBoxIcon")
+        assendingImgView.image = UIImage(named: "CheckBoximage")
+        desendingImgView.image = UIImage(named: "UnCheckBoxIcon")
+    
+        
+        
+    }
+    @IBAction func DesendingClick(){
+       
+        clkickId = 4
+       
+
+        setTitleLbl.text = "Sort by Roll Number (High → Low)"
+        var name : String = setTitleLbl.text!
+        
+        let userDefault = UserDefaults.standard
+        userDefault.set(name, forKey: DefaultsKeys.sortName)
+        StudentNameArray.removeAll()
+        StudentAdmissionNoArray.removeAll()
+        StudentRollNumberNoArray.removeAll()
+        StudentIDArray.removeAll()
+        
+        AtoZImgView.image = UIImage(named: "UnCheckBoxIcon")
+        ZtoAImgView.image = UIImage(named: "UnCheckBoxIcon")
+        assendingImgView.image = UIImage(named: "UnCheckBoxIcon")
+        desendingImgView.image = UIImage(named: "CheckBoximage")
+        
+        
+        
+        
+        
+    }
+    @IBAction func filterBtn(_ sender: Any) {
+        
+        sortByFullView.isHidden = false
+        sortBtnName.isHidden = true
+        sortBtnName.isHidden = true
+                setTitleLbl.isHidden = true
+        searchView.isHidden = true
+        sortBigView.isHidden = false
+        SetTitleBtnHeight.constant = 759
+        normlImageView.isHidden = true
+        
+        
+        
+    }
+//    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+//        self.dismiss(animated: true, completion: nil)
+//    }
+    func sortFilterArrayByName(ascending: Bool) -> NSArray {
+        let sortedArray = FilterarrayDatas.sorted { (obj1, obj2) -> Bool in
+            guard
+                let dict1 = obj1 as? [String: Any],
+                let dict2 = obj2 as? [String: Any],
+                let name1 = dict1["StudentName"] as? String,
+                let name2 = dict2["StudentName"] as? String
+            else {
+                return false
+            }
+            
+            return ascending ? (name1 < name2) : (name1 > name2)
+        }
+        return sortedArray as NSArray
+    }
+   
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         
@@ -128,41 +540,92 @@ class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableV
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return StudentNameArray.count
+        if SenderNameString == "AttendanceVC"{
+            
+            return StudentNameArray.count
+        }else{
+            
+            return StudentNameArray.count
+            
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SelectStudentTVC", for: indexPath) as! SelectStudentTVC
         
         
-        cell.attendendanceType = attendacePassType
-        cell.StudentNameLabel.text = StudentNameArray[indexPath.row]
-        
-        cell.StudentIdLabel.text = StudentAdmissionNoArray[indexPath.row]
-        
-        if(SelectedStudentIDArray.count > 0){
-            if(SelectedStudentIDArray.contains(StudentIDArray[indexPath.row])){
-                self.MyTableView.selectRow(at: indexPath, animated: false, scrollPosition:UITableView.ScrollPosition.none)
+        if SenderNameString == "AttendanceVC"{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "AttendTvCell", for: indexPath) as! AttendTvCell
+            
+            //        AttendTvCell
+            cell.attendendanceType = attendacePassType
+            
+            cell.StudentNameLabel.text = StudentNameArray[indexPath.row]
+            
+            if StudentRollNumberNoArray[indexPath.row] == ""{
+                
+                cell.RollNumLbl.isHidden = true
+                cell.defaultRollLbl.isHidden = true
+                cell.DefaultrollColun.isHidden = true
             }else{
-                self.MyTableView.deselectRow(at: indexPath, animated: false)
+                
+                cell.RollNumLbl.isHidden = false
+                cell.defaultRollLbl.isHidden = false
+                cell.DefaultrollColun.isHidden = false
+                cell.RollNumLbl.text = StudentRollNumberNoArray[indexPath.row]
+                
             }
+            
+            cell.StudentIdLabel.text =  StudentAdmissionNoArray[indexPath.row]
+          
+            
+            
+            if(SelectedStudentIDArray.count > 0){
+                if(SelectedStudentIDArray.contains(StudentIDArray[indexPath.row])){
+                    self.MyTableView.selectRow(at: indexPath, animated: false, scrollPosition:UITableView.ScrollPosition.none)
+                }else{
+                    self.MyTableView.deselectRow(at: indexPath, animated: false)
+                }
+            }
+            
+            
+            
+            return cell
+        }else{
+            let cell = tableView.dequeueReusableCell(withIdentifier: "SelectStudentTVC", for: indexPath) as! SelectStudentTVC
+            
+            //        AttendTvCell
+            cell.attendendanceType = attendacePassType
+            
+            cell.StudentNameLabel.text = StudentNameArray[indexPath.row]
+            
+            cell.StudentIdLabel.text = StudentAdmissionNoArray[indexPath.row]
+            
+            if(SelectedStudentIDArray.count > 0){
+                if(SelectedStudentIDArray.contains(StudentIDArray[indexPath.row])){
+                    self.MyTableView.selectRow(at: indexPath, animated: false, scrollPosition:UITableView.ScrollPosition.none)
+                }else{
+                    self.MyTableView.deselectRow(at: indexPath, animated: false)
+                }
+            }
+            return cell
         }
-        return cell
     }
-    
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        OkButton.isUserInteractionEnabled = true
-        SelectedStudentIDArray.append(StudentIDArray[indexPath.row])
-        SelectedStudentNameArray.append(StudentNameArray[indexPath.row])
-        StudentCount = SelectedStudentIDArray.count
-        TotalPresentedStudentLabel.text = String(StudentCount)
-        
-        if(StudentCount == 0){
-            SelectImage.image = UIImage(named: "UnChechBoxImage")
-            SelectAllButton.isSelected = true
-        }
-        
+
+            OkButton.isUserInteractionEnabled = true
+            SelectedStudentIDArray.append(StudentIDArray[indexPath.row])
+            
+            print("SelectedStudentIDArray",SelectedStudentIDArray)
+            SelectedStudentNameArray.append(StudentNameArray[indexPath.row])
+            StudentCount = SelectedStudentIDArray.count
+            TotalPresentedStudentLabel.text = String(StudentCount)
+            
+            if(StudentCount == 0){
+                SelectImage.image = UIImage(named: "UnChechBoxImage")
+                SelectAllButton.isSelected = true
+            }
+
     }
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         let deselecteddata = StudentIDArray[indexPath.row]
@@ -192,10 +655,10 @@ class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableV
     func showOkAlert(){
         
         
-        let alertController = UIAlertController(title: LanguageDict["alert"] as? String, message:  LanguageDict["submission_alert"] as? String, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.alert.translated() as? String, message:  commonStringNames.submission_alert.translated() as? String, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: LanguageDict["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             if(self.SenderNameString == "SendAssignment"){
                 let mutableArray = NSMutableArray(array: self.SelectedStudentIDArray)
@@ -218,7 +681,7 @@ class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableV
             
             
         }
-        let cancelAction = UIAlertAction(title: LanguageDict["teacher_cancel"] as? String, style: UIAlertAction.Style.cancel) {
+                                     let cancelAction = UIAlertAction(title: commonStringNames.teacher_cancel.translated() as? String, style: UIAlertAction.Style.cancel) {
             UIAlertAction in
             
         }
@@ -231,16 +694,16 @@ class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableV
     func showSendVimeoAlert(){
         
         
-        let alertController = UIAlertController(title: LanguageDict["alert"] as? String, message:  "Are you sure you want to send the Video?", preferredStyle: .alert)
+            let alertController = UIAlertController(title: commonStringNames.alert.translated() as? String, message:  "Are you sure you want to send the Video?", preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: LanguageDict["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+                                                    let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             self.vimeoVideoDict["IDS"] = self.ChoosenStudentIDArray
             self.CallUploadVideoToVimeoServer()
             
         }
-        let cancelAction = UIAlertAction(title: LanguageDict["teacher_cancel"] as? String, style: UIAlertAction.Style.cancel) {
+                                                                                 let cancelAction = UIAlertAction(title: commonStringNames.teacher_cancel.translated() as? String, style: UIAlertAction.Style.cancel) {
             UIAlertAction in
             
         }
@@ -417,14 +880,16 @@ class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableV
         }else{
             TitleDescriotion =  "Test Description"
         }
-        
+        let userDefaults = UserDefaults.standard
+        let getDownload = UserDefaults.standard.value(forKey: DefaultsKeys.allowVideoDownload) as? Bool ?? false
         let parameters: [String: Any] = [
             "upload": [
                 "approach": "tus",
                 "size": "\(fileSize)"
             ],
             "privacy":[
-                "view":"unlisted"
+                "view":"unlisted",
+                "download": true
             ],
             "embed":[
                 "buttons":[
@@ -615,7 +1080,12 @@ class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableV
         let myDict:NSMutableDictionary = ["SchoolId" : SchoolId, "TargetCode" : SelectedSectionCode, "StaffID": StaffId]
         UtilObj.printLogKey(printKey: "requestString", printingValue: requestString)
         
+        
+        
+        
         UtilObj.printLogKey(printKey: "myDict", printingValue: myDict)
+        
+        print("myDictmyDictmyDictmyDict",myDict)
         let myString = Util.convertDictionary(toString: myDict)
         apiCall.nsurlConnectionFunction(requestString, myString, "GetStudentDetail")
     }
@@ -726,8 +1196,17 @@ class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableV
                 StudentAdmissionNoArray.removeAll()
                 if let CheckedArray = arrayDatas as? NSArray{
                     
+                    FilterarrayDatas = arrayDatas
+                    
+                    
+                    print("FilterarrayDatas",FilterarrayDatas)
+                    
+                    
+                    
                     for var i in 0..<arrayDatas.count
                     {
+                        
+                    
                         dicResponse = arrayDatas[i] as! NSDictionary
                         if(dicResponse != nil){
                             if(dicResponse["StudentID"] != nil){
@@ -739,9 +1218,41 @@ class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableV
                                 if(!studentId.isEmpty && studentId != "0" )
                                 {
                                     StudentIDArray.append(String(describing: dicResponse["StudentID"]!))
+                                    filteredStudentIDArray.append(String(describing: dicResponse["StudentID"]!))
+                                    
+                                    
                                     StudentNameArray.append(String(describing: dicResponse["StudentName"]!))
                                     StudentAdmissionNoArray.append(String(describing: dicResponse["StudentAdmissionNo"]!))
+                                    StudentRollNumberNoArray.append(String(describing: dicResponse["RollNO"]!))
+                                    SearchStudentNameArray.append(String(describing: dicResponse["StudentName"]!))
                                     MyTableView.reloadData()
+                                    
+                                    let defaults = UserDefaults.standard
+                                    
+                                  
+                                    
+                                    if defaults.string(forKey:DefaultsKeys.sortName) == "Sort Alphabetically (A → Z)" {
+                                        
+                                        clkickId = 1
+                                        AtoZClick()
+                                        
+                                        doneFiltrBtn(self)
+                                        
+                                    }else if  defaults.string(forKey:DefaultsKeys.sortName) == "Sort Alphabetically (Z → A)"{
+                                        
+                                        clkickId = 2
+                                        ZtoAClick()
+                                        doneFiltrBtn(self)
+                                    }else if  defaults.string(forKey:DefaultsKeys.sortName) == "Sort by Roll Number (Low → High)"{
+                                      
+                                        clkickId = 3
+                                        AsendingClick()
+                                        doneFiltrBtn(self)
+                                    }else if  defaults.string(forKey:DefaultsKeys.sortName) == "Sort by Roll Number (High → Low)"{
+                                        clkickId = 4
+                                        DesendingClick()
+                                        doneFiltrBtn(self)
+                                    }
                                     
                                 }
                                 else
@@ -832,6 +1343,104 @@ class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableV
         
     }
     
+    
+    
+//    func extractNumericRollNO(_ rollNO: String) -> Int {
+//        let digits = rollNO.compactMap { $0.isNumber ? Int(String($0)) : nil }
+//        return digits.isEmpty ? Int.max : Int(digits.reduce(0, { $0 * 10 + $1 }))
+//    }
+
+    
+    func extractNumericRollNO(_ rollNO: String) -> Int {
+        // Extract digits from the string
+        let digits = rollNO.compactMap { $0.isNumber ? Int(String($0)) : nil }
+        // Combine the digits into a single number
+        return digits.isEmpty ? Int.max : digits.reduce(0) { $0 * 10 + $1 }
+    }
+    // Sorting function
+//    func sortFilterArrayByRollNO(ascending: Bool) -> NSArray {
+//        let sortedArray = FilterarrayDatas.sorted { (obj1, obj2) -> Bool in
+//            guard
+//                let dict1 = obj1 as? [String: Any],
+//                let dict2 = obj2 as? [String: Any],
+//                let rollNo1 = dict1["RollNO"] as? String,
+//                let rollNo2 = dict2["RollNO"] as? String
+//            else {
+//                return false
+//            }
+//            
+//            let rollNo1Value = rollNo1.isEmpty ? Int.max : extractNumericRollNO(rollNo1)
+//            let rollNo2Value = rollNo2.isEmpty ? Int.max : extractNumericRollNO(rollNo2)
+//            
+//            return ascending ? (rollNo1Value < rollNo2Value) : (rollNo1Value > rollNo2Value)
+//        }
+//        return sortedArray as NSArray
+//    }
+//    
+//
+//    \
+    
+    
+    
+    func sortFilterArrayByRollNO(ascending: Bool) -> NSArray {
+        let sortedArray = FilterarrayDatas.sorted { (obj1, obj2) -> Bool in
+            guard
+                let dict1 = obj1 as? [String: Any],
+                let dict2 = obj2 as? [String: Any]
+            else {
+                return false
+            }
+            
+            let rollNo1 = dict1["RollNO"] as? String ?? ""
+            let rollNo2 = dict2["RollNO"] as? String ?? ""
+
+            // Handle empty RollNO by assigning a very high or low value
+            if rollNo1.isEmpty && rollNo2.isEmpty {
+                return false // Keep original order if both are empty
+            } else if rollNo1.isEmpty {
+                return false // Push empty to the bottom
+            } else if rollNo2.isEmpty {
+                return true // Push empty to the bottom
+            }
+
+            // Extract numeric value from RollNO
+            let rollNo1Value = extractNumericRollNO(rollNo1)
+            let rollNo2Value = extractNumericRollNO(rollNo2)
+
+            // Sort numerically, ascending or descending
+            return ascending ? (rollNo1Value < rollNo2Value) : (rollNo1Value > rollNo2Value)
+        }
+        return sortedArray as NSArray
+    }
+
+   
+
+//    func sortFilterArrayByRollNO(ascending: Bool) -> NSArray {
+//        let sortedArray = FilterarrayDatas.sorted { (obj1, obj2) -> Bool in
+//            guard
+//                let dict1 = obj1 as? [String: Any],
+//                let dict2 = obj2 as? [String: Any]
+//            else {
+//                return false
+//            }
+//            
+//            let rollNo1 = dict1["RollNO"] as? String ?? ""
+//            let rollNo2 = dict2["RollNO"] as? String ?? ""
+//
+//            // Assign a high value for empty RollNO to push it to the bottom
+//            let rollNo1Value = rollNo1.isEmpty ? Int.max : extractNumericRollNO(rollNo1)
+//            let rollNo2Value = rollNo2.isEmpty ? Int.max : extractNumericRollNO(rollNo2)
+//            
+//            // Sort based on ascending or descending
+//            return ascending ? (rollNo1Value < rollNo2Value) : (rollNo1Value > rollNo2Value)
+//        }
+//        return sortedArray as NSArray
+//    }
+//
+//    
+    
+    
+    
     // MARK: Language Selection
     
     func callSelectedLanguage(){
@@ -873,205 +1482,208 @@ class SelectstudentVC: UIViewController,Apidelegate,UITableViewDelegate,UITableV
             TotalNumberOfStudentsLabel.textAlignment = .left
             SectionNameLabel.textAlignment = .left
         }
-        SelectAllLabel.text = LangDict["teacher_txt_select"] as? String
-        SelectStudentLabel.text = LangDict["teacher_txt_selectStudents"] as? String
-        SectionLabel.text = LangDict["teacher_txt_section"] as? String
+        SelectAllLabel.text = commonStringNames.teacher_txt_select.translated() as? String
+        SelectStudentLabel.text = commonStringNames.teacher_txt_selectStudents.translated() as? String
+        SectionLabel.text = commonStringNames.teacher_txt_section.translated() as? String
         
-        OkButton.setTitle(LangDict["teacher_btn_ok"] as? String, for: .normal)
-        CancelButton.setTitle(LangDict["teacher_cancel"] as? String, for: .normal)
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Records Found.."
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        OkButton.setTitle(commonStringNames.teacher_btn_ok.translated() as? String, for: .normal)
+        CancelButton.setTitle(commonStringNames.teacher_cancel.translated() as? String, for: .normal)
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Records Found.."
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         
     }
     
     
     //MARK: AWS Upload
     
-    func getImageURL(images : [UIImage]){
-        showLoading()
+    
+    
+    
+    
+    func getImageURL(images: [UIImage]) {
+    
         self.originalImagesArray = images
         self.totalImageCount = images.count
-        if currentImageCount < images.count{
-            self.uploadAWS(image: images[currentImageCount])
-        }
-    }
-    
-    func uploadAWS(image : UIImage){
-        
-        
-        var bucketName = ""
-               print("countryCoded",strCountryCode)
-               if strCountryCode == "1" {
-                  
-                   bucketName = DefaultsKeys.bucketNameIndia
-               }else  {
-                    bucketName = DefaultsKeys.bucketNameBangkok
-               }
+            if currentImageCount < images.count {
                
-        
-        let S3BucketName = bucketName
-        let CognitoPoolID = DefaultsKeys.CognitoPoolID
-        let Region = AWSRegionType.APSouth1
-        
-        
-        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:Region,identityPoolId:CognitoPoolID)
-        let configuration = AWSServiceConfiguration(region:Region, credentialsProvider:credentialsProvider)
-        AWSServiceManager.default().defaultServiceConfiguration = configuration
-        
-        
-        let currentTimeStamp = NSString.init(format: "%ld",Date() as CVarArg)
-        let imageNameWithoutExtension = NSString.init(format: "vc_%@",currentTimeStamp)
-        let imageName = NSString.init(format: "%@%@",imageNameWithoutExtension, ".png")
-        
-        
+                self.uploadAWS(image: images[currentImageCount])
+            } else {
+                print("All images uploaded. Final URLs: \("")")
+                // Handle final uploaded URLs (e.g., send them to the server or update the UI)
+            }
+    }
+
+    func uploadAWS(image: UIImage) {
+        let currentTimeStamp = NSString.init(format: "%ld", Date() as CVarArg)
+        let imageNameWithoutExtension = NSString.init(format: "vc_%@", currentTimeStamp)
+        let imageName = NSString.init(format: "%@%@", imageNameWithoutExtension, ".png")
         let ext = imageName as String
-        
-        let fileName = imageNameWithoutExtension
-        let fileType = ".png"
-        
         let imageURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(ext)
-        let data = image.jpegData(compressionQuality: 0.9)
-        do {
-            try data?.write(to: imageURL)
-        }
-        catch {}
-        
-        print(imageURL)
-        
-        let dateFormatter = DateFormatter()
-              
-              dateFormatter.dateFormat = "yyyy-MM-dd"
-              
-              let  currentDate =   dateFormatter.string(from: Date())
-        let uploadRequest = AWSS3TransferManagerUploadRequest()
-        uploadRequest?.body = imageURL
-        uploadRequest?.key =   "communication" + "/" + currentDate +  "/" + ext
-        uploadRequest?.bucket = S3BucketName
-        uploadRequest?.contentType = "image/" + ext
-        uploadRequest?.acl = .publicRead
-        
-        
-        let transferManager = AWSS3TransferManager.default()
-        transferManager.upload(uploadRequest!).continueWith { (task) -> AnyObject? in
-            
-            if let error = task.error {
-                self.hideLoading()
-                print("Upload failed : (\(error))")
+
+        if let data = image.jpegData(compressionQuality: 0.9) {
+            do {
+                try data.write(to: imageURL)
+            } catch {
+                print("Error writing image data to file: \(error)")
+                return
             }
-            
-            if task.result != nil {
-                let url = AWSS3.default().configuration.endpoint.url
-                let publicURL = url?.appendingPathComponent((uploadRequest?.bucket!)!).appendingPathComponent((uploadRequest?.key!)!)
-                if let absoluteString = publicURL?.absoluteString {
-                    print("Uploaded to:\(absoluteString)")
-                    let imageDict = NSMutableDictionary()
-                    imageDict["FileName"] = absoluteString
-                    self.imageUrlArray.add(imageDict)
-                    self.currentImageCount = self.currentImageCount + 1
-                    if self.currentImageCount < self.totalImageCount{
-                        DispatchQueue.main.async {
-                            self.getImageURL(images: self.originalImagesArray)
-                        }
-                    }else{
-                        self.convertedImagesUrlArray = self.imageUrlArray
-                        self.SendImageAssignmentApi()
-                        
+        }
+        
+        
+        
+        let currentDate = AWSPreSignedURL.shared.getCurrentDateString()
+        var bucketName = ""
+        var bucketPath = ""
+        if strCountryCode == "4" {
+            bucketName = DefaultsKeys.THAI_SCHOOL_CHIMES_COMMUNICATION
+            bucketPath = currentDate+"/"+String(SchoolId)
+        }
+        else
+        {
+            bucketName = DefaultsKeys.SCHOOL_CHIMES_COMMUNICATION
+            bucketPath = currentDate+"/"+String(SchoolId)
+
+        }
+                       
+        
+        AWSPreSignedURL.shared.fetchPresignedURL(
+            bucket: bucketName,
+            fileName: imageURL,
+            bucketPath: bucketPath,
+            fileType: "image/png"
+        ) { [self] result in
+            switch result {
+            case .success(let awsResponse):
+                print("Presigned URL fetched: \(awsResponse.data?.presignedUrl ?? "")")
+                let presignedURL = awsResponse.data?.presignedUrl
+                let Uploadimages = awsResponse.data?.fileUrl
+              
+                AWSUploadManager.shared.uploadImageToAWS(image: image, presignedURL: presignedURL!) { [self] result in
+                    switch result {
+                    case .success(let uploadedURL):
+                        print("Image uploaded successfully: \(uploadedURL)")
+                      
+                    case .failure(let error):
+                        print("Failed to upload image: \(error.localizedDescription)")
                     }
-                }
+        
+                    let imageDict = NSMutableDictionary()
+                    imageDict["FileName"] = Uploadimages
+                    imageUrlArray.add(imageDict)
+                    self.currentImageCount += 1
+                      if self.currentImageCount < self.totalImageCount {
+                          
+                          DispatchQueue.main.async {
+                              self.getImageURL(images: self.originalImagesArray)
+                              print("getImageURL",self.getImageURL)
+                          }
+                       } else {
+                           print("All images uploaded. Final URLs: \(imageUrlArray)")
+                           // Handle final uploaded URLs (e.g., send them to the server or update the UI
+                         
+                           
+                          
+                           self.currentImageCount = self.currentImageCount + 1
+                           if self.currentImageCount < self.totalImageCount{
+                               DispatchQueue.main.async {
+                                   self.getImageURL(images: self.originalImagesArray)
+                               }
+                           }else{
+                               self.convertedImagesUrlArray = self.imageUrlArray
+                               self.SendImageAssignmentApi()
+                           }
+                           }
+                    
+                    
+                    
+                          }
+           
+            case .failure(let error):
+                print("Error fetching presigned URL: \(error.localizedDescription)")
             }
-            else {
-                self.hideLoading()
-                print("Unexpected empty result.")
-            }
-            return nil
         }
+        
+   
+       
     }
     
     
+    
+
     func uploadPDFFileToAWS(pdfData : NSData){
-        self.showLoading()
-        
-        var bucketName = ""
-               print("countryCoded",strCountryCode)
-               if strCountryCode == "1" {
-                  
-                   bucketName = DefaultsKeys.bucketNameIndia
-               }else  {
-                    bucketName = DefaultsKeys.bucketNameBangkok
-               }
-        let S3BucketName = bucketName
-        let CognitoPoolID = DefaultsKeys.CognitoPoolID
-        let Region = AWSRegionType.APSouth1
-        
-        
-        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:Region,identityPoolId:CognitoPoolID)
-        let configuration = AWSServiceConfiguration(region:Region, credentialsProvider:credentialsProvider)
-        AWSServiceManager.default().defaultServiceConfiguration = configuration
-        
-        
+//        self.showLoading()
         let currentTimeStamp = NSString.init(format: "%ld",Date() as CVarArg)
         let imageNameWithoutExtension = NSString.init(format: "vc_%@",currentTimeStamp)
         let imageName = NSString.init(format: "%@%@",imageNameWithoutExtension, ".pdf")
-        
-        
         let ext = imageName as String
-        
         let fileName = imageNameWithoutExtension
         let fileType = ".pdf"
-        
         let imageURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(ext)
-        
         do {
             try pdfData.write(to: imageURL)
         }
         catch {}
-        
         print(imageURL)
+       
+      
         
-        let dateFormatter = DateFormatter()
+        
+        
+        let currentDate = AWSPreSignedURL.shared.getCurrentDateString()
+        var bucketName = ""
+        var bucketPath = ""
+        if strCountryCode == "4" {
+            bucketName = DefaultsKeys.THAI_SCHOOL_CHIMES_COMMUNICATION
+            bucketPath = currentDate+"/"+String(SchoolId)
+        }
+        else
+        {
+            bucketName = DefaultsKeys.SCHOOL_CHIMES_COMMUNICATION
+            bucketPath = currentDate+"/"+String(SchoolId)
+
+        }
+                       
+        
+        AWSPreSignedURL.shared.fetchPresignedURL(
+            bucket: bucketName,
+            fileName: imageURL,
+            bucketPath: bucketPath,
+            fileType: "application/pdf"
+        ) { [self] result in
+            switch result {
+            case .success(let awsResponse):
+                print("Presigned URL fetched: \(awsResponse.data?.presignedUrl ?? "")")
+                let presignedURL = awsResponse.data?.presignedUrl
+                let UploadPDf = awsResponse.data?.fileUrl
               
-              dateFormatter.dateFormat = "yyyy-MM-dd"
-              
-              let  currentDate =   dateFormatter.string(from: Date())
-        let uploadRequest = AWSS3TransferManagerUploadRequest()
-        uploadRequest?.body = imageURL
-        uploadRequest?.key =   "communication" + "/" + currentDate +  "/" + ext
-        uploadRequest?.bucket = S3BucketName
+                AWSUploadManager.shared.uploadPDFAWSUsingPresignedURL(pdfData: pdfData as Data, presignedURL:presignedURL! ){ [self] result in
+                    
+                    switch result {
+                    case .success(let uploadedURL):
+                        print("Image uploaded successfully: \(uploadedURL)")
+                      
+                    case .failure(let error):
+                        print("Failed to upload image: \(error.localizedDescription)")
+                    }
         
-        uploadRequest?.contentType = "application/pdf"
-        uploadRequest?.acl = .publicRead
-        
-        
-        let transferManager = AWSS3TransferManager.default()
-        transferManager.upload(uploadRequest!).continueWith { (task) -> AnyObject? in
-            
-            if let error = task.error {
-                print("Upload failed : (\(error))")
-                self.hideLoading()
-            }
-            
-            if task.result != nil {
-                let url = AWSS3.default().configuration.endpoint.url
-                let publicURL = url?.appendingPathComponent((uploadRequest?.bucket!)!).appendingPathComponent((uploadRequest?.key!)!)
-                if let absoluteString = publicURL?.absoluteString {
-                    print("Uploaded to:\(absoluteString)")
+                    
                     let imageDict = NSMutableDictionary()
-                    imageDict["FileName"] = absoluteString
+                    imageDict["FileName"] = UploadPDf
                     self.imageUrlArray.add(imageDict)
                     self.convertedImagesUrlArray = self.imageUrlArray
                     self.SendPdfAssignmentApi()
-                    
-                }
+                   
+                          }
+           
+            case .failure(let error):
+                print("Error fetching presigned URL: \(error.localizedDescription)")
             }
-            else {
-                self.hideLoading()
-                print("Unexpected empty result.")
-            }
-            return nil
         }
+        
     }
     
+
     
 }
 

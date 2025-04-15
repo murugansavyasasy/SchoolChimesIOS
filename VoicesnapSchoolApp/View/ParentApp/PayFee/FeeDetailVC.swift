@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import WebKit
+@preconcurrency import WebKit
 import ObjectMapper
 
 extension String {
@@ -28,7 +28,9 @@ extension String {
 
 
 
-class FeeDetailVC: UIViewController,Apidelegate,UITableViewDelegate,UITableViewDataSource {
+class FeeDetailVC: UIViewController,Apidelegate,UITableViewDelegate,UITableViewDataSource,WKNavigationDelegate, WKUIDelegate,UITextFieldDelegate {
+    
+
     
     @IBOutlet weak var feeDetailReceiptTv: UITableView!
     
@@ -128,100 +130,49 @@ class FeeDetailVC: UIViewController,Apidelegate,UITableViewDelegate,UITableViewD
     weak var timer: Timer?
     
     var menuId : String!
-    
-    
+    var newWebView: WKWebView?
+    let hiddenTextField = UITextField()
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Fee Details"
+        adViewHeight.constant = 0
+        self.title = commonStringNames.FeeDetails.translated()
+        segmentedControl.setTitle(commonStringNames.PAYMENT.translated(), forSegmentAt: 0)
+        segmentedControl.setTitle(commonStringNames.RECEIPT.translated(), forSegmentAt: 1)
+      
+            
         
+        newWebView = nil
         loadWebView()
+       
+               
         
         feeDetailReceiptTv.delegate = self
         feeDetailReceiptTv.dataSource = self
         ChildIDString = String(describing: appDelegate.SchoolDetailDictionary["ChildID"]!)
         SchoolIDString = String(describing: appDelegate.SchoolDetailDictionary["SchoolID"]!)
-    
-        async {
-            do {
-                //               
-                menuId = AdConstant.getMenuId as String
-                print("menu_id:\(AdConstant.getMenuId)")
-                
-                
-                
-                let AdModal = AdvertismentModal()
-                AdModal.MemberId = ChildIDString
-                AdModal.MemberType = "student"
-                
-                
-                AdModal.MenuId = menuId
-                AdModal.SchoolId = SchoolIDString
-                
-                
-                let admodalStr = AdModal.toJSONString()
-                
-                
-                print("admodalStr2222",admodalStr)
-                AdvertismentRequest.call_request(param: admodalStr!) { [self]
-                    
-                    (res) in
-                    
-                    let adModalResponse : [AdvertismentResponse] = Mapper<AdvertismentResponse>().mapArray(JSONString: res)!
-                    
-                    
-                    
-                    for i in adModalResponse {
-                        if i.Status.elementsEqual("1") {
-                            print("AdConstantadDataListtt",AdConstant.adDataList.count)
-                            
-                            
-                            
-                            
-                            AdConstant.adDataList.removeAll()
-                            AdConstant.adDataList = i.data
-                            
-                            startTimer()
-                            
-                        }else{
-                            
-                        }
-                        
-                    }
-                    
-                    print("admodalStr_count", AdConstant.adDataList .count)
-                    
-                }
-                
-                
-            } catch {
-                print("Error fetching data: \(error)")
-            }
-        }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+
         self.initialLoad()
-        
-        
-        
         let imgTap = AdGesture (target: self, action: #selector(viewTapped))
         AdView.addGestureRecognizer(imgTap)
-        
-        
         let rowNib = UINib(nibName: rowIdentifier, bundle: nil)
         feeDetailReceiptTv.register(rowNib, forCellReuseIdentifier: rowIdentifier)
         
         
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+            NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
         
     }
-    
+        
+    @objc func keyboardWillShow(notification: Notification) {
+        if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            self.view.frame.origin.y = -keyboardSize.height / 2 // Move up by half keyboard height
+        }
+    }
+
+    @objc func keyboardWillHide(notification: Notification) {
+        self.view.frame.origin.y = 0 // Reset view position
+    }
     func startTimer() {
         
         print("AdConstant1adDataListcount",AdConstant.adDataList.count)
@@ -234,7 +185,7 @@ class FeeDetailVC: UIViewController,Apidelegate,UITableViewDelegate,UITableViewD
             self.imgView.sd_setImage(with: URL(string: url), placeholderImage: UIImage(named: ""))
             
             AdView.isHidden = false
-            adViewHeight.constant = 80
+//            adViewHeight.constant = 80
             
             if(self.firstImage == 0){
                 self.imageCount =  1
@@ -256,14 +207,12 @@ class FeeDetailVC: UIViewController,Apidelegate,UITableViewDelegate,UITableViewD
                     self!.imageCount = 0
                     self!.firstImage = 1
                 }
-                
+            
                 self!.imageCount = self!.imageCount + 1
-                
                 let url : String =  AdConstant.adDataList[self!.imageCount-1].contentUrl!
                 self!.imgaeURl = AdConstant.adDataList[self!.imageCount-1].redirectUrl!
                 self!.AdName = AdConstant.adDataList[self!.imageCount-1].advertisementName!
                 self!.getadID = AdConstant.adDataList[self!.imageCount-1].id!
-                //                
                 self!.imgView.sd_setImage(with: URL(string: url), placeholderImage: UIImage(named: ""))
             }
         }else {
@@ -284,24 +233,18 @@ class FeeDetailVC: UIViewController,Apidelegate,UITableViewDelegate,UITableViewD
         
         if imgaeURl.isEmpty != true {
             let vc = AdRedirectViewController(nibName: nil, bundle: nil)
-            
-            
             vc.advertisement_Name = AdName
             vc.redirect_urls = imgaeURl
             vc.adIdget = getadID
-            
             vc.getMenuID = menuId
             vc.modalPresentationStyle = .fullScreen
             present(vc, animated: true, completion: nil)
-            
-            
-            
         }else{
             print("isEmpty")
         }
     }
     override func viewDidDisappear(_ animated: Bool) {
-        stopTimer()
+//        stopTimer()
     }
     
     
@@ -310,35 +253,87 @@ class FeeDetailVC: UIViewController,Apidelegate,UITableViewDelegate,UITableViewD
         return false
     }
     override func viewDidAppear(_ animated: Bool) {
-        startTimer()
+//        startTimer()
     }
     
     
     func loadWebView() {
+       
         ChildIDString = String(describing: appDelegate.SchoolDetailDictionary["ChildID"]!)
         SchoolIDString = String(describing: appDelegate.SchoolDetailDictionary["SchoolID"]!)
-        
-        var studId = ChildIDString
-        var schoolId = SchoolIDString
-        
-        print("studId\(studId)")
-        print("schoolId\(schoolId)")
+        let studId = ChildIDString
+        let schoolId = SchoolIDString
         appDelegate.FeePaymentGateway =  appDelegate.FeePaymentGateway.replacingOccurrences(of: ":student_id/:school_id", with: "")
         let str_url = appDelegate.FeePaymentGateway + "\(studId)" + "/" + "\(schoolId)"
-        print("WebURL",str_url)
-        let url: URL = URL(string: str_url)!
-        //    http://testing.schoolchimes.com/#/online-fee-payment/7783339/5512/details
-        paymentWebView.load(URLRequest(url: url))
+        paymentWebView.uiDelegate = self
+        paymentWebView.navigationDelegate = self
+        
+    if let url = URL(string: str_url) {
+            paymentWebView.load(URLRequest(url: url))
+        }
+      
         
     }
     
+    
+
+    func webView(_ webView: WKWebView, createWebViewWith configuration: WKWebViewConfiguration, for navigationAction: WKNavigationAction, windowFeatures: WKWindowFeatures) -> WKWebView? {
+            let newWebView = WKWebView(frame: self.view.bounds, configuration: configuration)
+            newWebView.uiDelegate = self
+            newWebView.navigationDelegate = self
+            self.view.addSubview(newWebView)
+            self.newWebView = newWebView
+            return newWebView
+        }
+        
+        // Handle closing the new tab
+        func webViewDidClose(_ webView: WKWebView) {
+            if webView == newWebView {
+                webView.removeFromSuperview()
+                newWebView = nil
+            }
+        }
+    
+    
+
+   
+    
+    func webView(_ webView: WKWebView,
+                            decidePolicyFor navigationAction: WKNavigationAction,
+                            decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
+            
+            
+                   if let url = navigationAction.request.url,
+                      url.absoluteString.contains("upi://") ||
+                      url.absoluteString.contains("tez://") ||
+                      url.absoluteString.contains("phonepe://") ||
+                      url.absoluteString.contains("paytmmp://") ||
+                      url.absoluteString.contains("credpay://") {
+                       
+                       let appUrl = URL(string: url.absoluteString)
+                       
+                       if UIApplication.shared.canOpenURL(appUrl! as URL) {
+                           UIApplication.shared.open(appUrl!)
+                       }else{
+                           print("could not open the app");
+                       }
+                       
+                       // Cancel the request (handled by UIApplication).
+                       decisionHandler(.cancel)
+                   }
+                   else {
+                       // Allow the request.
+                       decisionHandler(.allow)
+                   }
+               }
+                      
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = false
     }
     
     func initialLoad(){
-        self.title = "Fee Details"
+        self.title = commonStringNames.FeeDetails.translated()
         //
         self.alertView.isHidden = true
         strChildName = String(describing: appDelegate.SchoolDetailDictionary["ChildName"]!)
@@ -391,6 +386,8 @@ class FeeDetailVC: UIViewController,Apidelegate,UITableViewDelegate,UITableViewD
     }
     
     
+    
+    
     @objc func actionTermRadioButton(sender: UIButton){
         let buttonTag : String = sender.accessibilityIdentifier!
         let SectionRow = buttonTag.components(separatedBy: ":")
@@ -413,13 +410,10 @@ class FeeDetailVC: UIViewController,Apidelegate,UITableViewDelegate,UITableViewD
         for i in 0..<section{
             
             let sectionDict : NSDictionary =  self.termFeeSectionArray[i] as! NSDictionary
-            
             let cellArray : NSArray = sectionDict["FeesDetails"] as! NSArray
-            
             let dueResultPredicate = NSPredicate(format: "%K CONTAINS[c] %@ AND %K != %@","IsPaid" ,"No","FeeName","VSTotal")
             
             let dueArray1 = cellArray.filter { dueResultPredicate.evaluate(with: $0) } as NSArray
-            
             if(!self.selectedTermFeeArray.contains(i) && dueArray1.count > 0){
                 notContainArray.add("1")
             }
@@ -454,9 +448,7 @@ class FeeDetailVC: UIViewController,Apidelegate,UITableViewDelegate,UITableViewD
                         if(self.selectedTermFeeRowArray.contains(sectionRow1)){
                             self.selectedTermFeeRowArray.remove(sectionRow1)
                         }
-                        
                     }
-                    
                 }
             }else{
                 self.selectedTermFeeRowArray.add(buttonTag)
@@ -467,18 +459,13 @@ class FeeDetailVC: UIViewController,Apidelegate,UITableViewDelegate,UITableViewD
                     if(self.selectedTermFeeRowArray.contains(sectionRow1)){
                         selectedRowCount.add("1")
                     }
-                    
                 }
                 if(selectedRowCount.count == dueArray.count){
                     if(!self.selectedTermFeeArray.contains(section)){
                         self.selectedTermFeeArray.add(section)
                     }
                 }
-                
-                
             }
-            
-            //
         }
         
     }
@@ -1346,10 +1333,10 @@ class FeeDetailVC: UIViewController,Apidelegate,UITableViewDelegate,UITableViewD
     func AlertWithCloseView(strAlert : String)
     {
         
-        let alertController = UIAlertController(title: languageDictionary["alert"] as? String, message: strAlert, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.alert.translated() as? String, message: strAlert, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             print("Okaction")
             self.navigationController?.popViewController(animated: true)
@@ -1409,7 +1396,7 @@ class FeeDetailVC: UIViewController,Apidelegate,UITableViewDelegate,UITableViewD
             
         }
         
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         
     }
     

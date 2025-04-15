@@ -12,6 +12,8 @@ import WebKit
 import KRProgressHUD
 class FeeReceiptPdfDownloadViewController: UIViewController,UIWebViewDelegate {
     
+    @IBOutlet weak var DownloadLbl: UILabel!
+    @IBOutlet weak var ReciptLbl: UILabel!
     @IBOutlet weak var viewBack: UIView!
     @IBOutlet weak var feeReceiptWebView: WKWebView!
     @IBOutlet weak var downloadView: UIView!
@@ -24,7 +26,8 @@ class FeeReceiptPdfDownloadViewController: UIViewController,UIWebViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        ReciptLbl.text = commonStringNames.Receipt.translated()
+        DownloadLbl.text = commonStringNames.Download.translated()
         //        feeReceiptWebView.del
         
         print("getInvoiceId",getInvoiceId)

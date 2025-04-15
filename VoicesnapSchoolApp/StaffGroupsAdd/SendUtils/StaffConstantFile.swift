@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import AVFAudio
 
 
 class StaffConstantFile {
@@ -17,18 +18,15 @@ class StaffConstantFile {
 //    static let BaseUrl : String = "http://reporting.schoolchimes.com/nodejs/api/MergedApi/"
     
     
-       // REPOTING : BaseUrl
-       // VOICESNAP : SmsBaseUrl
+       // REPOTING : BaseUrl parent side
+       // VOICESNAP : SmsBaseUrl sender side
     
     
 //    static let demoSmsBaseUrl : String = "https://vss.voicesnapforschools.com/nodejs/api/"
     static  let SmsBaseUrl  = UserDefaults.standard.object(forKey:BASEURL)
+    static  let PaucktBaseUrl  = "https://stage-api.pauket.com/api/partner/voicesnaps/"
     
-    static let demoAlumni   = "http://106.51.127.215:8061/api/"
-    
-    
-//    let defaults = UserDefaults.standard
-//    static let SmsBaseUrl : String = defaults.string(forKey: BASEURL)!
+
     
 }
 
@@ -51,6 +49,7 @@ struct DefaultsKeys {
     static let LessonSecId = "LessonSecId"
     static let getSecId = "getSecId"
     static let getgroupHeadRole = "getgroupHeadRole"
+    static let role_display_name = "role_display_name"
     static let updateTime = "86400"
     static let lastUpdateList = "lastUpdateList"
     static let updateListCount = "updateListCount"
@@ -66,21 +65,36 @@ struct DefaultsKeys {
     static var SchoolNameRegional = "SchoolNameRegional"
     static var biometricEnable = "biometricEnable"
     static var SelectedDAte = ""
+    static var allowVideoDownload = "allowVideoDownload"
     
-    static var bucketNameIndia = "schoolchimes-files-india"
+//    schoolchimes-communication
     
-    static var bucketNameBangkok = "schoolchimes-files-bangkok"
+    static var SCHOOL_CHIMES_LMS = "schoolchimes-lms"
+    static var SCHOOL_DOCS = "schoolchimes-schooldocs"
+    static var SCHOOL_PHOTOS = "schoolchimes-studentphotos"
+    static var SCHOOL_CHIMES_COMMUNICATION = "schoolchimes-communication"
+
+    static var   THAI_SCHOOL_CHIMES_LMS = "thai-schoolchimes-lms"
+    static var  THAI_SCHOOL_DOCS = "thai-schoolchimes-schooldocs"
+    static var   THAI_SCHOOL_PHOTOS = "thai-schoolchimes-studentphotos"
+    static var  THAI_SCHOOL_CHIMES_COMMUNICATION = "thai-schoolchimes-communication"
     
-    static var UploadProfileBucket = "schoolchimes-student-images"
-    static var uploadprofileBrowes = "schoolchimes-docs"
-    static var CognitoPoolID = "ap-south-1:a8650d2e-79d6-4668-85db-110e9917583f"
+    
+   static var ParentSelectedLoginIndex = 0
     static var bookingSlotId : [Int] = []
     static var date : [String] = []
     static var timesarr : [String] = []
     static var ClickID : Int!
     static var coutData : [countResponce] = []
     static var failedErrorCode : Int!
+    static var sortName = "Sort Alphabetically (A → Z)"
+    static var arrUserData: NSArray = []
+    static var audioPlayer: AVAudioPlayer?
+    static var Language = ""
+    static  var selectedDictionary = NSDictionary()
+    static  var stralerMsg = String()
 
-    
+    static   var  QuestionData : [UpdateDetailsData]! = []
+    //static   var languageCode = ""
+    static let languageCode = "languageCode"
 }
-

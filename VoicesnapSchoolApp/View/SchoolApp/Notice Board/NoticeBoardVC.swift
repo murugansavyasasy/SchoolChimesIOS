@@ -14,6 +14,8 @@ class NoticeBoardVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UIT
     
     @IBOutlet weak var noticeBoardTop: NSLayoutConstraint!
     
+    @IBOutlet weak var ToDateDefLbl: UILabel!
+    @IBOutlet weak var FromdateDefLbl: UILabel!
     
     @IBOutlet weak var schoolDropDownHeight: NSLayoutConstraint!
     
@@ -116,8 +118,11 @@ class NoticeBoardVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UIT
         ConfirmButton.layer.cornerRadius = 5
         ConfirmButton.layer.masksToBounds = true
         
-        btnOne.setTitle("Compose Notice Board", for: .normal)
-        btnTwo.setTitle("Notice Board", for: .normal)
+        btnOne.setTitle(commonStringNames.ComposeNoticeBoard.translated(), for: .normal)
+        btnTwo.setTitle(commonStringNames.NoticeBoard.translated(), for: .normal)
+        schoolNameLbl.text = commonStringNames.teacher_select_school.translated()
+        FromdateDefLbl.text = commonStringNames.FromDate.translated()
+        ToDateDefLbl.text = commonStringNames.ToDate.translated()
 
 
         let FromDateGuesture = UITapGestureRecognizer(target: self, action: #selector(FromDateAction))
@@ -144,7 +149,7 @@ class NoticeBoardVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UIT
             listTv.dataSource = self
                 listTv.delegate = self
             search_bar.delegate = self
-
+            search_bar.placeholder = commonStringNames.Search.translated()
             segmentViewHeight.constant = 0
             CallDetailNoticeMessageApi()
             noticeBoardTop.constant = 100
@@ -569,8 +574,8 @@ print("tableView",tableView)
 
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-print("schoolsArray",schoolsArray)
-        print("selectedSchoolsArray",selectedSchoolsArray)
+print("schoolsArrayfvfvfv",schoolsArray)
+        print("selectedSchoolsArrayfvfvfvf",selectedSchoolsArray)
 
         if btnOne.backgroundColor == UIColor(named: "CustomOrange"){
             if(selectedSchoolsArray .contains(schoolsArray.object(at: indexPath.row)))
@@ -584,6 +589,8 @@ print("schoolsArray",schoolsArray)
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        
+        print("didDeselectRowAt",selectedSchoolsArray)
         if btnOne.backgroundColor == UIColor(named: "CustomOrange"){
             if(selectedSchoolsArray .contains(schoolsArray.object(at: indexPath.row)))
             {
@@ -657,6 +664,8 @@ print("schoolsArray",schoolsArray)
         
         print("FromDate",fromdate)
         print("ToDate",todate)
+        
+        print("SchoolsSchools",selectedSchoolsArray)
         let apiCall = API_call.init()
         apiCall.delegate = self;
         let myString = Util.convertDictionary(toString: myDict)
@@ -867,12 +876,12 @@ print("schoolsArray",schoolsArray)
             topicHeadingTextField.textAlignment = .left
             TextMessageView.textAlignment = .left
         }
-        strTextViewPlaceholder = LangDict["teacher_nb_hint_msg"] as? String ?? "Type content here"
-        ConfirmButton.setTitle(LangDict["teacher_txt_send"] as? String, for: .normal)
-        topicHeadingTextField.placeholder = LangDict["teacher_nb_hint_title"] as? String ?? "Type News Topic?"
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        strTextViewPlaceholder = commonStringNames.teacher_nb_hint_msg.translated() as? String ?? "Type content here"
+        ConfirmButton.setTitle(commonStringNames.teacher_txt_send.translated() as? String, for: .normal)
+        topicHeadingTextField.placeholder = commonStringNames.teacher_nb_hint_title.translated() as? String ?? "Type News Topic?"
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         self.Config()
         
     }
@@ -939,6 +948,7 @@ print("schoolsArray",schoolsArray)
     listTv.dataSource = self
         listTv.delegate = self
     search_bar.delegate = self
+        search_bar.placeholder = commonStringNames.Search.translated()
 //        CallDetailNoticeMessageApi()
         btnTwo.backgroundColor = UIColor(named: "CustomOrange")
         btnOne.backgroundColor = .white
@@ -1026,7 +1036,7 @@ print("schoolsArray",schoolsArray)
         noview.addSubview(noDataLabel)
 
         let button = UIButton(frame: CGRect(x: self.listTv.bounds.size.width - 108, y: noDataLabel.frame.height + 30, width: 100, height: 32))
-        button.setTitle(SEE_MORE_TITLE, for: .normal)
+        button.setTitle(commonStringNames.SeeMore.translated(), for: .normal)
         button.backgroundColor = .white
         button.setTitleColor(utilObj.PARENT_NAV_BAR_COLOR, for: .normal)
         button.addTarget(self, action: #selector(self.seeMoreButtonTapped), for: .touchUpInside)

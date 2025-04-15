@@ -11,6 +11,7 @@ import ObjectMapper
 
 class SectionViewController: UIViewController,UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegate,UITableViewDataSource {
     
+    @IBOutlet weak var HeaderLbl: UILabel!
     
     @IBOutlet weak var noRecordView: UIView!
     
@@ -32,7 +33,7 @@ class SectionViewController: UIViewController,UICollectionViewDelegate,UICollect
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        HeaderLbl.text = commonStringNames.AbsenteesStudents.translated()
         cv.register(UINib(nibName: cvIconRowId, bundle: nil), forCellWithReuseIdentifier: cvIconRowId)
         cv.dataSource = self
         cv.delegate = self

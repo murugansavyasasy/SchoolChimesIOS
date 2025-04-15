@@ -30,7 +30,7 @@ class FAQVC: UIViewController,Apidelegate,UIWebViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         webView.delegate = self
-        self.title = "FAQ"
+        self.title = commonStringNames.FAQ.translated()
         self.callSelectedLanguage()
         if(fromVC == "Parent"){
             if(appDelegate.SchoolDetailDictionary["ChildID"] != nil){
@@ -157,10 +157,10 @@ class FAQVC: UIViewController,Apidelegate,UIWebViewDelegate {
     func AlerMessage()
     {
         
-        let alertController = UIAlertController(title: languageDictionary["alert"] as? String, message: AlertString, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.alert.translated() as? String, message: AlertString, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             print("Okaction")
             self.navigationController?.popViewController(animated: true)
@@ -195,9 +195,9 @@ class FAQVC: UIViewController,Apidelegate,UIWebViewDelegate {
         }else{
             UIView.appearance().semanticContentAttribute = .forceLeftToRight
         }
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         
     }
 }

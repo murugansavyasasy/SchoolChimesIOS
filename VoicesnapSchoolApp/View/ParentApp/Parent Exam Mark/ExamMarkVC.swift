@@ -62,7 +62,7 @@ class ExamMarkVC: UIViewController , UITableViewDelegate, UITableViewDataSource,
         
         
         search_bar.delegate = self
-        
+        search_bar.placeholder = commonStringNames.Search.translated()
         
         SchoolIDString = String(describing: appDelegate.SchoolDetailDictionary["SchoolID"]!)
         
@@ -289,9 +289,7 @@ class ExamMarkVC: UIViewController , UITableViewDelegate, UITableViewDataSource,
         return cell
         
     }
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("select")
-    }
+   
     
     @objc func examClicked(sender:UIButton) {
         
@@ -371,23 +369,61 @@ class ExamMarkVC: UIViewController , UITableViewDelegate, UITableViewDataSource,
     
     @objc func UpdateLogoutSelection(notification:Notification) -> Void
     {
-        print("EXMark")
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now())
-        {
-            self.showLogoutAlert()
-        }
+//        print("EXMark")
+//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now())
+//        {
+//            self.showLogoutAlert()
+//        }
         
+        print("SDetails")
+      
+        var selectString = notification.object as? String ?? ""
+        print("SDetails23",selectString)
+        selectString = selectString.lowercased()
+        let log = commonStringNames.logout.translated() as? String ?? ""
+        if(selectString == log){
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() )
+            {
+                self.showLogoutAlert()
+                
+            }
+        }else if(selectString.contains("edit")){
+            callEditProfile()
+        }else if(selectString.contains(commonStringNames.help.translated())){
+            callhelp()
+        }else if (selectString.contains(commonStringNames.language_change.translated())){
+            callLanguageVc()
+        }
+    }
+    func callLanguageVc(){
+        let vc = ChangeLanguageViewController(nibName: nil, bundle: nil)
+        vc.modalPresentationStyle = .formSheet
+        present(vc, animated: true)
+    }
+    
+    
+    func callEditProfile(){
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "EditProfileVC") as! EditProfileVC
+        newViewController.strPageFrom = "edit"
+        self.navigationController?.pushViewController(newViewController, animated: true)
+    }
+    func callhelp(){
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "EditProfileVC") as! EditProfileVC
+        newViewController.strPageFrom = "help"
+        self.navigationController?.pushViewController(newViewController, animated: true)
     }
     
     func showLogoutAlert(){
-        let alertController = UIAlertController(title: languageDictionary["txt_menu_logout"] as? String, message: languageDictionary["want_to_logut"] as? String, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.txt_menu_logout.translated() as? String, message: commonStringNames.want_to_logut.translated() as? String, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             self.moveToLogInScreen(strFromStaff: "Child")
         }
-        let cancelAction = UIAlertAction(title: languageDictionary["teacher_cancel"] as? String, style: UIAlertAction.Style.cancel) {
+        let cancelAction = UIAlertAction(title: commonStringNames.teacher_cancel.translated() as? String, style: UIAlertAction.Style.cancel) {
             UIAlertAction in
             
         }
@@ -595,10 +631,10 @@ class ExamMarkVC: UIViewController , UITableViewDelegate, UITableViewDataSource,
     func AlerMessage(alrtStr : String)
     {
         
-        let alertController = UIAlertController(title: "Alert", message: alrtStr, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.Alert.translated(), message: alrtStr, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.OK.translated(), style: UIAlertAction.Style.default) {
             UIAlertAction in
             print("Okaction")
             self.navigationController?.popViewController(animated: true)
@@ -672,22 +708,22 @@ class ExamMarkVC: UIViewController , UITableViewDelegate, UITableViewDataSource,
             TitleLabel.textAlignment = .left
             
         }
-        HomeLabel.text = LangDict["home"] as? String
-        TitleLabel.text = LangDict["list_of_exams"] as? String
-        //        LanguageLabel.text = LangDict["txt_language"] as? String
-        FAQLabel.text = LangDict["faq"] as? String
-        PasswordLabel.text = LangDict["txt_password"] as? String
-        LogoutLabel.text = LangDict["txt_menu_setting"] as? String
-        strNoRecordAlert = LangDict["no_exams"] as? String ?? "No Exams Found.."
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        HomeLabel.text = commonStringNames.home.translated() as? String
+        TitleLabel.text = commonStringNames.list_of_exams.translated() as? String
+        FAQLabel.text = commonStringNames.faq.translated() as? String
+        PasswordLabel.text = commonStringNames.txt_password.translated() as? String
+        LogoutLabel.text = commonStringNames.txt_menu_setting.translated() as? String
+        strNoRecordAlert = commonStringNames.no_exams.translated() as? String ?? "No Exams Found.."
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         
         self.loadViewData()
         
     }
     
     func loadViewData(){
-        self.title = languageDictionary["exams"] as? String
+        //self.title = languageDictionary["exams"] as? String
+        self.title = commonStringNames.exam_marks.translated() as? String
         ChildIDString = String(describing: appDelegate.SchoolDetailDictionary["ChildID"]!)
         SchoolIDString = String(describing: appDelegate.SchoolDetailDictionary["SchoolID"]!)
         if(Util .isNetworkConnected()){

@@ -8,19 +8,25 @@
 
 import UIKit
 import ObjectMapper
-
+import DropDown
 
 class StudentReportViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,UISearchBarDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
+    @IBOutlet weak var OkBtn: UIButton!
+    @IBOutlet weak var cancelBtn: UIButton!
+    @IBOutlet weak var getAllStudHeadLbl: UILabel!
+    @IBOutlet weak var selSecHeadLbl: UILabel!
+    @IBOutlet weak var selStdHeadLbl: UILabel!
+    @IBOutlet weak var actStudRepLbl: UILabel!
     
     @IBOutlet weak var alertLbl: UILabel!
     @IBOutlet weak var alertView: UIView!
     @IBOutlet weak var selSecLbl: UILabel!
-    @IBOutlet weak var getAllStudentTop: NSLayoutConstraint!
+    
     @IBOutlet weak var selectStandardFullView: UIView!
     @IBOutlet weak var standardLbl: UILabel!
     @IBOutlet weak var sectionLbl: UILabel!
-    @IBOutlet weak var selectSectionFullView: UIView!
+   
     @IBOutlet weak var secFullView: UIView!
     @IBOutlet weak var getAllSectionView: UIView!
     @IBOutlet weak var PopupChooseStandardPickerView: UIView!
@@ -52,7 +58,7 @@ class StudentReportViewController: UIViewController,UITableViewDataSource,UITabl
     var standardGetType : String!
     var secStdType : String!
     var intialstandardType : String!
-    
+    var dropDown = DropDown()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,10 +69,19 @@ class StudentReportViewController: UIViewController,UITableViewDataSource,UITabl
         
         alertView.isHidden = true
         alertLbl.isHidden = true
-        
+        actStudRepLbl.text = commonStringNames.StudentReport.translated()
+        selSecLbl.text = commonStringNames.Section.translated()
+            .translated()
+        selStdHeadLbl.text = commonStringNames.Standard.translated()
+        getAllStudHeadLbl.text = commonStringNames.GetAllStudent.translated()
+        search_bar.placeholder = commonStringNames.Search.translated()
+        cancelBtn.setTitle(commonStringNames.Cancel.translated(), for: .normal)
+        OkBtn.setTitle(commonStringNames.OK.translated(), for: .normal)
+        sectionLbl.text = commonStringNames.select_section.translated()
+        standardLbl.text = commonStringNames.select_standard.translated()
         
         intialstandardType = "1"
-        getAllStudentTop.constant = -60
+      
         
         pickerView.delegate = self
         pickerView.dataSource = self
@@ -95,6 +110,7 @@ class StudentReportViewController: UIViewController,UITableViewDataSource,UITabl
         //        self.performSegue(withIdentifier: "MainToSchoolSelectionSegue", sender: self)
         
         search_bar.delegate = self
+        search_bar.placeholder = commonStringNames.Search.translated()
         
         getDataList ()
         getStandardList ()
@@ -121,11 +137,11 @@ class StudentReportViewController: UIViewController,UITableViewDataSource,UITabl
         
         
         
-        let getAllStudentListGesture = UITapGestureRecognizer(target: self, action: #selector(pickerViewListDatas))
+        let getAllStudentListGesture = UITapGestureRecognizer(target: self, action: #selector(SelectStandardDropDown))
         selectStandardFullView.addGestureRecognizer(getAllStudentListGesture)
         
         
-        let getAllSectionListGesture = UITapGestureRecognizer(target: self, action: #selector(pickerViewListSection))
+        let getAllSectionListGesture = UITapGestureRecognizer(target: self, action: #selector(SelectSectionDropDown))
         secFullView.addGestureRecognizer(getAllSectionListGesture)
         
         
@@ -137,7 +153,70 @@ class StudentReportViewController: UIViewController,UITableViewDataSource,UITabl
     
     
     
+    @IBAction func SelectStandardDropDown() {
+        print("mark")
+        
+        //        get_location_Meeting
+        standardGetType = "1"
+//        secFullView.isHidden = true
+//        sectionLbl.isHidden = true
+        
+        var IdArry: [Int] = []
+        var itemAryy: [String] = []
+        
+        GetStandardList.forEach {(arrType)  in
+            IdArry.append((arrType.StandardId ?? 0))
+            itemAryy.append(arrType.Standard ?? "")
+            
+        }
+        dropDown.anchorView = selectStandardFullView
+        dropDown.dataSource = itemAryy
+        dropDown.show()
+        dropDown.bottomOffset = CGPoint(x: 0, y: selectStandardFullView.bounds.height)
+        dropDown.selectionAction = { [weak self] (index: Int, item: String) in
+            print("Selected item: \(item) at index: \(index)")
+            // Update the label inside the UIView
+                self!.secFullView.isHidden = false
+              
+            self!.sectionLbl.text = "Select Section"
+            self!.getSectionID = ""
+            self!.standardLbl.text = item
+            self!.getSection = self!.GetStandardList[index].SectionNameData
+            self!.getClassID = IdArry[index]
+            self!.getDataList()
+        }
+    }
     
+    
+    
+    
+    
+    @IBAction func SelectSectionDropDown() {
+        print("mark")
+        
+       
+        standardGetType = "1"
+        var IdArry: [Int] = []
+        var itemAryy: [String] = []
+        
+        getSection.forEach {(arrType)  in
+            IdArry.append((arrType.SectionId ?? 0))
+            itemAryy.append(arrType.SectionName ?? "")
+            
+        }
+        dropDown.anchorView = secFullView
+        dropDown.dataSource = itemAryy
+        dropDown.show()
+        dropDown.bottomOffset = CGPoint(x: 0, y: secFullView.bounds.height)
+        dropDown.selectionAction = { [weak self] (index: Int, item: String) in
+            print("Selected item: \(item) at index: \(index)")
+
+            self!.sectionLbl.text = item
+            self!.getSectionID = String(IdArry[index])
+            
+            self!.getDataList()
+        }
+    }
     
     
     
@@ -150,8 +229,11 @@ class StudentReportViewController: UIViewController,UITableViewDataSource,UITabl
     
     
     @IBAction func okAction(_ sender: UIButton) {
-        
-        
+        print("standardGetType,okAction",standardGetType)
+        standardGetType
+        standardGetType = "1"
+        secFullView.isHidden = false
+        sectionLbl.isHidden = false
         getDataList ()
         pickerView.isHidden = true
         pickerLbl.isHidden = true
@@ -196,12 +278,15 @@ class StudentReportViewController: UIViewController,UITableViewDataSource,UITabl
     
     
     @IBAction func pickerViewListDatas() {
+        secFullView.isHidden = true
+        selSecLbl.isHidden = true
+        
         pickerView.tag = 0
         pickerView.delegate = self
         pickerView.dataSource = self
         getStandardList ()
         pickerLbl.isHidden = false
-        getAllStudentTop.constant = 15
+       
         PopupChooseStandardPickerView.isHidden = false
         pickerView.isHidden = false
         
@@ -213,14 +298,14 @@ class StudentReportViewController: UIViewController,UITableViewDataSource,UITabl
         
         
         
-        if pickerLbl.text != "Select Standard" {
-            secFullView.isHidden = false
-            selSecLbl.isHidden = false
-            
-        }else{
-            secFullView.isHidden = true
-            selSecLbl.isHidden = true
-        }
+//        if pickerLbl.text != commonStringNames.SelectStandard.translated() {
+//            secFullView.isHidden = false
+//            selSecLbl.isHidden = false
+//            
+//        }else{
+//            secFullView.isHidden = true
+//            selSecLbl.isHidden = true
+//        }
         
     }
     
@@ -309,7 +394,9 @@ class StudentReportViewController: UIViewController,UITableViewDataSource,UITabl
         if  standardGetType == "1" {
             studentReportModal.class_id = String(getClassID)
             studentReportModal.section_id =  String(getSectionID)
-        }else{
+        }
+        
+        else{
             studentReportModal.class_id = ""
             studentReportModal.section_id = ""
         }
@@ -382,10 +469,7 @@ class StudentReportViewController: UIViewController,UITableViewDataSource,UITabl
             
             GetStandardList = GetAllStandardsAndGroupsResponse
             
-            for i in GetStandardList {
-                
-                
-            }
+        
             tv.dataSource = self
             tv.delegate = self
             tv.reloadData()
@@ -427,16 +511,17 @@ class StudentReportViewController: UIViewController,UITableViewDataSource,UITabl
             print("stad.Standard",stad.Standard)
             print("stad.Standard",stad.StandardId)
             stad.StandardId
-            pickerLbl.text = "Select Standard"
-            
+            pickerLbl.text = commonStringNames.SelectStandard.translated()
+          
             getSection = stad.SectionNameData
             standardLbl.text = stad.Standard
             return stad.Standard
             
         }else {
             let sec : SectionNameDataList = getSection[row]
-            pickerLbl.text = "Select Section "
+            pickerLbl.text = commonStringNames.select_section.translated()
             print("didSelectstad.getSection.count",sec.SectionName)
+//
             sectionLbl.text = sec.SectionName
             return sec.SectionName
         }
@@ -450,7 +535,7 @@ class StudentReportViewController: UIViewController,UITableViewDataSource,UITabl
         
         
         if pickerView.tag == 0 {
-            pickerLbl.text = "Select Standard"
+            pickerLbl.text = commonStringNames.SelectStandard.translated()
             let stad : GetAllStandardsAndGroupsList = GetStandardList[row]
             standardLbl.text = stad.Standard
             

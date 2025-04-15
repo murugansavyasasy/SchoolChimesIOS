@@ -70,6 +70,8 @@ class ParentExamTestVC: UIViewController, UITableViewDataSource,UITableViewDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        print("ParentExamTestVC")
+        
         ChildId = String(describing: appDelegate.SchoolDetailDictionary["ChildID"]!)
         SchoolId = String(describing: appDelegate.SchoolDetailDictionary["SchoolID"]!)
         ExamTestTable.reloadData()
@@ -324,22 +326,62 @@ class ParentExamTestVC: UIViewController, UITableViewDataSource,UITableViewDeleg
     
     @objc func UpdateLogoutSelection(notification:Notification) -> Void
     {
-        print("ParentExam")
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() )
-        {
-            self.showLogoutAlert()
-        }
+//        print("ParentExam")
+//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() )
+//        {
+//            self.showLogoutAlert()
+//        }
         
+        print("SDetails")
+      
+        var selectString = notification.object as? String ?? ""
+        print("SDetails23",selectString)
+        selectString = selectString.lowercased()
+        let log = commonStringNames.logout.translated() as? String ?? ""
+        if(selectString == log){
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() )
+            {
+                self.showLogoutAlert()
+                
+            }
+        }else if(selectString.contains("edit")){
+            callEditProfile()
+        }else if(selectString.contains(commonStringNames.help.translated())){
+            callhelp()
+        }else if (selectString.contains(commonStringNames.language_change.translated())){
+            callLanguageVc()
+        }
     }
     
+    func callLanguageVc(){
+        let vc = ChangeLanguageViewController(nibName: nil, bundle: nil)
+        vc.modalPresentationStyle = .formSheet
+        present(vc, animated: true)
+    }
+    
+    
+    func callEditProfile(){
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "EditProfileVC") as! EditProfileVC
+        newViewController.strPageFrom = "edit"
+        self.navigationController?.pushViewController(newViewController, animated: true)
+    }
+    func callhelp(){
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "EditProfileVC") as! EditProfileVC
+        newViewController.strPageFrom = "help"
+        self.navigationController?.pushViewController(newViewController, animated: true)
+    }
+    
+    
     func showLogoutAlert(){
-        let alertController = UIAlertController(title: languageDictionary["txt_menu_logout"] as? String, message: languageDictionary["want_to_logut"] as? String, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.txt_menu_logout.translated() as? String, message: commonStringNames.want_to_logut.translated() as? String, preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             self.moveToLogInScreen(strFromStaff: "Child")
         }
-        let cancelAction = UIAlertAction(title: languageDictionary["teacher_cancel"] as? String, style: UIAlertAction.Style.cancel) {
+        let cancelAction = UIAlertAction(title: commonStringNames.teacher_cancel.translated() as? String, style: UIAlertAction.Style.cancel) {
             UIAlertAction in
             
         }
@@ -587,7 +629,9 @@ class ParentExamTestVC: UIViewController, UITableViewDataSource,UITableViewDeleg
         
         if(SelectedSectionArray.contains(Sectiondict))
         {
-            Height = 125
+            
+            print("ifif")
+            Height = CFloat(UITableView.automaticDimension)
         }else{
             Height = 0
         }
@@ -778,9 +822,9 @@ class ParentExamTestVC: UIViewController, UITableViewDataSource,UITableViewDeleg
     
     func AlertMessage(alrString:String){
         
-        let alertController = UIAlertController(title: languageDictionary["alert"] as? String, message: alrString, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.alert.translated() as? String, message: alrString, preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             self.navigationController?.popViewController(animated: true)
             
@@ -794,8 +838,8 @@ class ParentExamTestVC: UIViewController, UITableViewDataSource,UITableViewDeleg
         let titleLabel = UILabel()
         titleLabel.frame = CGRect(x: 0, y: 0, width: self.view.frame.width , height: 45)
         titleLabel.textColor = UIColor (red:0.0/255.0, green:183.0/255.0, blue: 190.0/255.0, alpha: 1)
-        let secondWord  : String =  languageDictionary["exam_test"] as? String ?? "Exam Test"
-        let thirdWord  : String =  languageDictionary["circulars"] as? String ?? "Circulars"
+        let secondWord  : String =  commonStringNames.exam_test.translated()
+        let thirdWord  : String =  commonStringNames.circulars.translated() 
         let comboWord = secondWord + " " + thirdWord
         let attributedText = NSMutableAttributedString(string:comboWord)
         let attrs = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 22), NSAttributedString.Key.foregroundColor: UIColor.white]
@@ -895,22 +939,21 @@ class ParentExamTestVC: UIViewController, UITableViewDataSource,UITableViewDeleg
             self.BottomView.semanticContentAttribute = .forceLeftToRight
             // self.searchBar.makeTextWritingDirectionLeftToRight(AnyClass.self)
         }
-        HomeLabel.text = LangDict["home"] as? String
-        //        LanguageLabel.text = LangDict["txt_language"] as? String
-        FAQLabel.text = LangDict["faq"] as? String
-        PasswordLabel.text = LangDict["txt_password"] as? String
-        LogoutLabel.text = LangDict["txt_menu_setting"] as? String
-        searchBar.placeholder = LangDict["search_exams"] as? String
+        HomeLabel.text = commonStringNames.home.translated() as? String
+        FAQLabel.text = commonStringNames.faq.translated() as? String
+        PasswordLabel.text = commonStringNames.txt_password.translated() as? String
+        LogoutLabel.text = commonStringNames.txt_menu_setting.translated() as? String
+        searchBar.placeholder = commonStringNames.search_exams.translated() as? String
         
-        strExamName = LangDict["teacher_txt_exam_title"] as? String ?? "Exam Name"
-        strSyllabus = LangDict["teacher_txt_exam_typemsg"] as? String ?? "Exam Syllabus"
-        strSubject = LangDict["subject_title"] as? String ?? "Subject :"
-        strMark = LangDict["max_mark"] as? String ?? "Date :"
-        strDate = LangDict["subject_date"] as? String ?? "Max Mark :"
-        strSession = LangDict["subject_session"] as? String ?? "Session :"
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        strExamName = commonStringNames.teacher_txt_exam_title.translated() as? String ?? "Exam Name"
+        strSyllabus = commonStringNames.teacher_txt_exam_typemsg.translated() as? String ?? "Exam Syllabus"
+        strSubject = commonStringNames.subject_title.translated() as? String ?? "Subject :"
+        strMark = commonStringNames.max_mark.translated() as? String ?? "Date :"
+        strDate = commonStringNames.subject_date.translated() as? String ?? "Max Mark :"
+        strSession = commonStringNames.subject_session.translated() as? String ?? "Session :"
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         self.loadViewData()
         
     }

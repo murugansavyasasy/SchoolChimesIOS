@@ -65,7 +65,7 @@ class QuizExamMenuViewController: UIViewController,UITableViewDataSource,UITable
         tv.delegate = self
         
         search_bar.delegate = self
-        
+        search_bar.placeholder = commonStringNames.Search.translated()
         
         getTimeTable()
         
@@ -377,7 +377,7 @@ class QuizExamMenuViewController: UIViewController,UITableViewDataSource,UITable
             }
             else {
                 //                tv.reloadData()
-                _ = SweetAlert().showAlert("Alert", subTitle: quizRespose.Message, style: .none, buttonTitle: "OK")
+                _ = SweetAlert().showAlert(commonStringNames.Alert.translated(), subTitle: quizRespose.Message, style: .none, buttonTitle: commonStringNames.OK.translated())
                 //                      (isOkClick) in
                 //                     if isOkClick {
                 //                         dismiss(animated: true)

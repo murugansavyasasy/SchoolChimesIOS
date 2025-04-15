@@ -76,10 +76,10 @@ class LibraryVC: UIViewController, UITableViewDelegate, UITableViewDataSource,Ap
         cell.backgroundColor = UIColor.clear
         let dict:NSDictionary = arrLibraryData[indexPath.row] as! NSDictionary
         
-        cell.FloatBookIdLbl.text = languageDictionary["book_id"] as? String
-        cell.FloatBookNameLbl.text = languageDictionary["bookname"] as? String
-        cell.FloatDueDateLbl.text = languageDictionary["due_date"] as? String
-        cell.FloatIssueDateLbl.text = languageDictionary["issued_date"] as? String
+        cell.FloatBookIdLbl.text = commonStringNames.book_id.translated() as? String
+        cell.FloatBookNameLbl.text = commonStringNames.bookname.translated() as? String
+        cell.FloatDueDateLbl.text = commonStringNames.due_date.translated() as? String
+        cell.FloatIssueDateLbl.text = commonStringNames.issued_date.translated() as? String
         if(strLanguage == "ar"){
             cell.MainView.semanticContentAttribute = .forceRightToLeft
             cell.BookIdLbl.textAlignment = .right
@@ -174,23 +174,61 @@ class LibraryVC: UIViewController, UITableViewDelegate, UITableViewDataSource,Ap
     
     @objc func UpdateLogoutSelection(notification:Notification) -> Void
     {
-        print("lib")
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() )
-        {
-            self.showLogoutAlert()
+//        print("lib")
+//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() )
+//        {
+//            self.showLogoutAlert()
+//        }
+        print("SDetails")
+      
+        var selectString = notification.object as? String ?? ""
+        print("SDetails23",selectString)
+        selectString = selectString.lowercased()
+        let log = commonStringNames.logout.translated() as? String ?? ""
+        if(selectString == log){
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() )
+            {
+                self.showLogoutAlert()
+                
+            }
+        }else if(selectString.contains("edit")){
+            callEditProfile()
+        }else if(selectString.contains(commonStringNames.help.translated())){
+            callhelp()
+        }else if (selectString.contains(commonStringNames.language_change.translated())){
+            callLanguageVc()
         }
-        
+    }
+    
+    func callLanguageVc(){
+        let vc = ChangeLanguageViewController(nibName: nil, bundle: nil)
+        vc.modalPresentationStyle = .formSheet
+        present(vc, animated: true)
+    }
+    
+    
+    func callEditProfile(){
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "EditProfileVC") as! EditProfileVC
+        newViewController.strPageFrom = "edit"
+        self.navigationController?.pushViewController(newViewController, animated: true)
+    }
+    func callhelp(){
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "EditProfileVC") as! EditProfileVC
+        newViewController.strPageFrom = "help"
+        self.navigationController?.pushViewController(newViewController, animated: true)
     }
     
     func showLogoutAlert(){
-        let alertController = UIAlertController(title: languageDictionary["txt_menu_logout"] as? String, message: languageDictionary["want_to_logut"] as? String, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.txt_menu_logout.translated() as? String, message: commonStringNames.want_to_logut.translated() as? String, preferredStyle: .alert)
         
        
-        let okAction = UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             self.moveToLogInScreen(strFromStaff: "Child")
         }
-        let cancelAction = UIAlertAction(title: languageDictionary["teacher_cancel"] as? String, style: UIAlertAction.Style.cancel) {
+        let cancelAction = UIAlertAction(title: commonStringNames.teacher_cancel.translated() as? String, style: UIAlertAction.Style.cancel) {
             UIAlertAction in
             
         }
@@ -272,7 +310,7 @@ class LibraryVC: UIViewController, UITableViewDelegate, UITableViewDataSource,Ap
         let alertController = UIAlertController(title: languageDictionary["alert"] as? String, message: alrtMessage, preferredStyle: .alert)
         
         
-        let okAction = UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             print("Okaction")
             self.navigationController?.popViewController(animated: true)
@@ -359,13 +397,13 @@ class LibraryVC: UIViewController, UITableViewDelegate, UITableViewDataSource,Ap
             BottomView.semanticContentAttribute = .forceLeftToRight
             
         }
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
-        HomeLabel.text = LangDict["home"] as? String
-        FAQLabel.text = LangDict["faq"] as? String
-        PasswordLabel.text = LangDict["txt_password"] as? String
-        LogoutLabel.text = LangDict["txt_menu_setting"] as? String
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
+        HomeLabel.text = commonStringNames.home.translated() as? String
+        FAQLabel.text = commonStringNames.faq.translated() as? String
+        PasswordLabel.text = commonStringNames.txt_password.translated() as? String
+        LogoutLabel.text = commonStringNames.txt_menu_setting.translated() as? String
         self.loadViewData()
         
     }

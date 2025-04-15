@@ -303,10 +303,10 @@ class TotalAssignmentVC: UIViewController,UITableViewDataSource,UITableViewDeleg
     
     func AlertMessage(strAlert : String){
         
-        let alertController = UIAlertController(title: languageDictionary["alert"] as? String, message: strAlert, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.alert.translated() as? String, message: strAlert, preferredStyle: .alert)
         
         
-        let okAction = UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             print("Okaction")
             self.dismiss(animated: true, completion: nil)
@@ -368,12 +368,12 @@ class TotalAssignmentVC: UIViewController,UITableViewDataSource,UITableViewDeleg
             self.navigationController?.navigationBar.semanticContentAttribute = .forceLeftToRight
             self.view.semanticContentAttribute = .forceLeftToRight
         }
-        chooseLabel.text = LangDict["choose"] as? String ?? "Choose"
-        popupPdfButton.setTitle(LangDict["choose_pdf"] as? String ?? "Choose Pdf", for: .normal)
-        popupImageButton.setTitle(LangDict["choose_image"] as? String ?? "Choose Image", for: .normal)
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Records Found.."
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        chooseLabel.text = commonStringNames.choose.translated() as? String ?? "Choose"
+        popupPdfButton.setTitle(commonStringNames.choose_pdf.translated() as? String ?? "Choose Pdf", for: .normal)
+                                popupImageButton.setTitle(commonStringNames.choose_image.translated() as? String ?? "Choose Image", for: .normal)
+                                                          strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Records Found.."
+                                                          strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+                                                          strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
     }
     
 }

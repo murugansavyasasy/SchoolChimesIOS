@@ -195,15 +195,15 @@ class PrincipalAddRemoveSubjectVC: UIViewController,UITableViewDataSource,UITabl
         cell.AddTimeButton.addTarget(self, action: #selector(CellADDTimeButtonTapped(_sender:)), for: .touchUpInside)
         cell.AddTimeButton.tag = indexPath.row
         
-        cell.FloatAddMarkTxt.text = LanguageDict["enter_maximum_mark"] as? String
-        cell.FloatAddDateLbl.text = LanguageDict["select_date"] as? String
-        cell.FloatAddTimeLbl.text = LanguageDict["select_session"] as? String
+        cell.FloatAddMarkTxt.text = commonStringNames.enter_maximum_mark.translated() as? String
+        cell.FloatAddDateLbl.text = commonStringNames.select_date.translated() as? String
+        cell.FloatAddTimeLbl.text = commonStringNames.select_session.translated() as? String
         
-        cell.FloatRemoveMarkLbl.text = LanguageDict["max_mark"] as? String
-        cell.FloatRemoveDateLbl.text = LanguageDict["subject_date"] as? String
-        cell.FlaotRemoveTimeLbl.text = LanguageDict["subject_session"] as? String
-        cell.AddButton.setTitle(LanguageDict["add"] as? String, for: .normal)
-        cell.RemoveButton.setTitle(LanguageDict["remove"] as? String, for: .normal)
+        cell.FloatRemoveMarkLbl.text = commonStringNames.max_mark.translated() as? String
+        cell.FloatRemoveDateLbl.text = commonStringNames.subject_date.translated() as? String
+        cell.FlaotRemoveTimeLbl.text = commonStringNames.subject_session.translated() as? String
+        cell.AddButton.setTitle(commonStringNames.add.translated() as? String, for: .normal)
+                                cell.RemoveButton.setTitle(commonStringNames.remove.translated() as? String, for: .normal)
         
         if(SelectedSubjectArray.count > 0)
         {
@@ -267,16 +267,16 @@ class PrincipalAddRemoveSubjectVC: UIViewController,UITableViewDataSource,UITabl
         let Dict: NSDictionary = DetailedSubjectArray[_sender.tag] as! NSDictionary
         if(cell.AddMarkTxt.text == "" || cell.AddMarkTxt.text!.count == 0){
             
-            Util.showAlert("", msg: LanguageDict["enter_mark_alert"] as? String)
+            Util.showAlert("", msg: commonStringNames.enter_mark_alert.translated() as? String)
             
             
         }else if ((cell.AddMarkTxt.text!.trimmingCharacters(in: .whitespaces).count) == 0){
             
-            Util.showAlert("", msg: LanguageDict["enter_mark_alert"] as? String)
+                Util.showAlert("", msg: commonStringNames.enter_mark_alert.translated() as? String)
             
         }else if(cell.AddDateLbl.text == "" || cell.AddMarkTxt.text!.count == 0){
             
-            Util.showAlert("", msg: LanguageDict["select_date_alert"] as? String)
+                    Util.showAlert("", msg: commonStringNames.select_date_alert.translated() as? String)
             
             
         }
@@ -455,7 +455,7 @@ class PrincipalAddRemoveSubjectVC: UIViewController,UITableViewDataSource,UITabl
                 
             }
             else{
-                Util.showAlert("", msg:LanguageDict["select_subject_alert"] as? String )
+                Util.showAlert("", msg:commonStringNames.select_subject_alert.translated() as? String )
             }
             
         }
@@ -491,7 +491,7 @@ class PrincipalAddRemoveSubjectVC: UIViewController,UITableViewDataSource,UITabl
                 
             }
             else{
-                Util.showAlert("", msg:LanguageDict["select_subject_alert"] as? String )
+                Util.showAlert("", msg:commonStringNames.select_subject_alert.translated() as? String )
             }
             
         }
@@ -538,7 +538,7 @@ class PrincipalAddRemoveSubjectVC: UIViewController,UITableViewDataSource,UITabl
                 
             }
             else{
-                Util.showAlert("", msg:LanguageDict["select_subject_alert"] as? String )
+                Util.showAlert("", msg:commonStringNames.select_subject_alert.translated() as? String )
             }
             
         }
@@ -825,22 +825,22 @@ class PrincipalAddRemoveSubjectVC: UIViewController,UITableViewDataSource,UITabl
             self.navigationController?.navigationBar.semanticContentAttribute = .forceLeftToRight
             self.view.semanticContentAttribute = .forceLeftToRight
         }
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         
         PickerTitleLabel.textAlignment = .center
-        PickerTitleLabel.text =  LangDict["select_session"] as? String
+        PickerTitleLabel.text =  commonStringNames.select_session.translated() as? String
         DatePickerTitleLabel.textAlignment = .center
-        DatePickerTitleLabel.text =  LangDict["select_date"] as? String
-        self.SelectStudentButton.setTitle(LangDict["select_student_attedance"] as? String, for: .normal)
-        self.SendButton.setTitle(LangDict["teacher_txt_send"] as? String, for: .normal)
-        self.StudentSendButton.setTitle(LangDict["teacher_txt_send"] as? String, for: .normal)
+        DatePickerTitleLabel.text =  commonStringNames.select_date.translated() as? String
+        self.SelectStudentButton.setTitle(commonStringNames.select_student_attedance.translated() as? String, for: .normal)
+        self.SendButton.setTitle(commonStringNames.teacher_txt_send.translated() as? String, for: .normal)
+        self.StudentSendButton.setTitle(commonStringNames.teacher_txt_send.translated() as? String, for: .normal)
         
-        datePickerOkButton.setTitle(LangDict["teacher_btn_ok"] as? String, for: .normal)
-        datePickerCancelButton.setTitle(LangDict["teacher_cancel"] as? String, for: .normal)
-        pickerOkButton.setTitle(LangDict["teacher_btn_ok"] as? String, for: .normal)
-        pickerCancelButton.setTitle(LangDict["teacher_cancel"] as? String, for: .normal)
+        datePickerOkButton.setTitle(commonStringNames.teacher_btn_ok.translated() as? String, for: .normal)
+        datePickerCancelButton.setTitle(commonStringNames.teacher_cancel.translated() as? String, for: .normal)
+        pickerOkButton.setTitle(commonStringNames.teacher_btn_ok.translated() as? String, for: .normal)
+        pickerCancelButton.setTitle(commonStringNames.teacher_cancel.translated() as? String, for: .normal)
         
     }
     

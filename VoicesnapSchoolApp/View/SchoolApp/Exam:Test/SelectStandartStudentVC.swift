@@ -177,7 +177,7 @@ class SelectStandartStudentVC: UIViewController,Apidelegate,UIPickerViewDelegate
         }
         else
         {
-            Util.showAlert("Alert", msg: STANDARD_FIRST)
+            Util.showAlert(commonStringNames.Alert.translated(), msg: STANDARD_FIRST)
         }
         
         
@@ -218,7 +218,7 @@ class SelectStandartStudentVC: UIViewController,Apidelegate,UIPickerViewDelegate
         }
         else
         {
-            Util.showAlert("Alert", msg: NO_STUDENT_FOUND)
+            Util.showAlert(commonStringNames.Alert.translated(), msg: NO_STUDENT_FOUND)
             
         }
     }
@@ -420,7 +420,7 @@ class SelectStandartStudentVC: UIViewController,Apidelegate,UIPickerViewDelegate
         }
         else
         {
-            Util.showAlert("Alert", msg: "No subject found")
+            Util.showAlert(commonStringNames.Alert.translated(), msg: "No subject found")
         }
     }
     

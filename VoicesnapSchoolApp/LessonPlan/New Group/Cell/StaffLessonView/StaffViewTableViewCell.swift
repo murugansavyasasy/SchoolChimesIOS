@@ -71,7 +71,9 @@ class StaffViewTableViewCell: UITableViewCell, UITableViewDataSource , UITableVi
     override func awakeFromNib() {
         super.awakeFromNib()
    
-        
+        YettostartLbl.text = commonStringNames.yetToStart.translated()
+        InProgressLbl.text = commonStringNames.inProgress.translated()
+        CompletedLbl.text = commonStringNames.Completed.translated()
        
         print("demoKey",demoKey)
         print("demoValue",demoValue)

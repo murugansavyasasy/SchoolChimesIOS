@@ -585,8 +585,8 @@ class VoiceHomeWorkVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDe
     // MARK: TITLE FOR START AND STOP RECORD
     func TitleForStartRecord()
     {
-        let firstword : String =  languageDictionary["teacher_txt_start_record"] as? String ?? "Press the button to"
-        let secondWord : String  =  languageDictionary["record"] as? String ?? " RECORD"
+        let firstword : String =  commonStringNames.teacher_txt_start_record.translated() as? String ?? "Press the button to"
+        let secondWord : String  =  commonStringNames.record.translated() as? String ?? " RECORD"
         let comboWord = firstword + secondWord
         let attributedText = NSMutableAttributedString(string:comboWord)
         var attrs =  [NSAttributedString.Key : NSObject]()
@@ -611,8 +611,8 @@ class VoiceHomeWorkVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDe
     
     func TitleForStopRecord()
     {
-        let firstword : String =  languageDictionary["teacher_txt_start_record"] as? String ?? "Press the button to"
-        let secondWord  : String =  languageDictionary["stop_record"] as? String ?? " STOP RECORD"
+        let firstword : String =  commonStringNames.teacher_txt_start_record.translated() as? String ?? "Press the button to"
+        let secondWord  : String =  commonStringNames.stop_record.translated() as? String ?? " STOP RECORD"
         let comboWord = firstword + secondWord
         let attributedText = NSMutableAttributedString(string:comboWord)
         var attrs =  [NSAttributedString.Key : NSObject]()
@@ -676,26 +676,26 @@ class VoiceHomeWorkVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDe
             self.ListenVoiceMessageLabel.textAlignment = .left
         }
         if(strFrom == "Assignment"){
-            ComposeVoiceLabel.text  = LangDict["compose_voice_msg"] as? String
+            ComposeVoiceLabel.text  = commonStringNames.compose_voice_msg.translated() as? String
             ChooseStandardSectionButton.setTitle("Choose Recipients", for: .normal)
-            SubmissionDateLabel.text = LangDict["subission_date"] as? String
+            SubmissionDateLabel.text = commonStringNames.subission_date.translated() as? String
             
-            DescriptionText.placeholder  =  LangDict["assignment_title"] as? String
+            DescriptionText.placeholder  = commonStringNames.assignment_title.translated() as? String
             
         }else{
-            self.ComposeVoiceLabel.text = LangDict["teacher_txt_Recordvoice"] as? String
-            self.DescriptionText.placeholder =  LangDict["teacher_txt_onwhat"] as? String
+            self.ComposeVoiceLabel.text = commonStringNames.teacher_txt_Recordvoice.translated() as? String
+            self.DescriptionText.placeholder =  commonStringNames.teacher_txt_onwhat.translated() as? String
             
             if (strCountryName.uppercased() == SELECT_COUNTRY){
-                self.ChooseStandardSectionButton.setTitle( LangDict["teacher_staff_to_sections_usa"] as? String, for: .normal)
+                self.ChooseStandardSectionButton.setTitle(commonStringNames.teacher_staff_to_sections_usa.translated() as? String, for: .normal)
             } // Dhanush_Aug 2002
             else{
-                self.ChooseStandardSectionButton.setTitle( LangDict["teacher_staff_to_sections"] as? String, for: .normal)
+                self.ChooseStandardSectionButton.setTitle(commonStringNames.teacher_staff_to_sections.translated() as? String, for: .normal)
             }
         }
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Records Found.."
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Records Found.."
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         
         self.loadViewData()
         
@@ -703,9 +703,9 @@ class VoiceHomeWorkVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDe
     
     func loadViewData(){
         HomeWorkSecondStr = Int(appDelegate.MaxHWVoiceDurationString)!
-        let strSeconRecord : String = languageDictionary["teacher_txt_general_title"] as? String ?? "You can record upto "
-        let strSeconds : String = languageDictionary["seconds"] as? String ?? " seconds "
-        let strminutes : String = languageDictionary["minutes"] as? String ?? " minutes "
+        let strSeconRecord : String = commonStringNames.teacher_txt_general_title.translated() as? String ?? "You can record upto "
+        let strSeconds : String = commonStringNames.seconds.translated() as? String ?? " seconds "
+        let strminutes : String = commonStringNames.minutes.translated() as? String ?? " minutes "
         if(HomeWorkSecondStr < 60)
         {
             UtilObj.printLogKey(printKey: "", printingValue: HomeWorkSecondStr)

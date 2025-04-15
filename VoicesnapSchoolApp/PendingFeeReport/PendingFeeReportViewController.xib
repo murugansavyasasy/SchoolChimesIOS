@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -13,8 +13,11 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PendingFeeReportViewController" customModule="VoicesnapSchoolApp" customModuleProvider="target">
             <connections>
                 <outlet property="AcadamidropDown" destination="NoI-7y-6zR" id="kXr-sC-0ss"/>
+                <outlet property="actHeadLbl" destination="LBa-MW-uiU" id="t5B-sZ-xkQ"/>
                 <outlet property="backView" destination="8Fr-km-cbr" id="6iU-bd-mAt"/>
+                <outlet property="catHeadLbl" destination="jBg-aW-ahb" id="0Xk-np-fXt"/>
                 <outlet property="categoryWiseView" destination="gAM-10-XmE" id="TSa-i4-2Wo"/>
+                <outlet property="classHEadLbl" destination="kfL-Bb-InP" id="Ugb-wj-7eq"/>
                 <outlet property="classWiseView" destination="lfy-PM-hwD" id="VRt-Gq-bRL"/>
                 <outlet property="dropDownTextLbl" destination="8g9-6i-55Y" id="dxr-gN-ktn"/>
                 <outlet property="noRecordsView" destination="jmA-Co-SWq" id="2yt-vF-bri"/>

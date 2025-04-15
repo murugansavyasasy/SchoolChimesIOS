@@ -12,6 +12,8 @@ import DropDown
 
 class CertificateRequestViewController: UIViewController,UITableViewDataSource,UITableViewDelegate ,UITextViewDelegate{
     
+    @IBOutlet weak var selUrgLbl: UILabel!
+    @IBOutlet weak var selCertLbl: UILabel!
     @IBOutlet weak var noRecordLbl: UILabel!
     
     @IBOutlet weak var noRecordVieww: UIView!
@@ -24,6 +26,7 @@ class CertificateRequestViewController: UIViewController,UITableViewDataSource,U
     
     @IBOutlet weak var urgencyLbl: UILabel!
     
+    @IBOutlet weak var reqCetLbl: UILabel!
     @IBOutlet weak var viewBack: UIView!
     @IBOutlet weak var tv: UITableView!
     @IBOutlet weak var segControl: UISegmentedControl!
@@ -33,7 +36,9 @@ class CertificateRequestViewController: UIViewController,UITableViewDataSource,U
     @IBOutlet weak var requestCertificateView: UIView!
     @IBOutlet weak var selectUrgencyView: UIView!
     
+    @IBOutlet weak var actionCertiLbl: UILabel!
     
+    @IBOutlet weak var actReqLBl: UILabel!
     var  paraentRequestList : [ParentRequestListData] = []
     let rowIdentifier =  "CertificatesTableViewCell"
     var certificate_data : [certificateData] = []
@@ -43,7 +48,7 @@ class CertificateRequestViewController: UIViewController,UITableViewDataSource,U
     
     var drop_down = DropDown()
     var SchoolIDString = String()
-    let placeholder = "Reason for Certificate"
+    let placeholder = commonStringNames.ReasonForCertificate.translated()
     var ChildIDString = String()
     var getadID : Int!
     
@@ -55,12 +60,21 @@ class CertificateRequestViewController: UIViewController,UITableViewDataSource,U
     var ChildId  = String()
     var SchoolId  = String()
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
-    
+    var certificateName = ""
     
     var menuId : String!
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        actReqLBl.text = commonStringNames.RequestOnly.translated()
+        actionCertiLbl.text = commonStringNames.CertificateOnly.translated()
+        reqCetLbl.text = commonStringNames.RequestCertificate.translated()
+        selCertLbl.text = commonStringNames.SelectCertificate.translated()
+        selUrgLbl.text = commonStringNames.SelectUrgencyLevel.translated()
+        segControl.setTitle(commonStringNames.Request.translated(), forSegmentAt: 0)
+        segControl.setTitle(commonStringNames.Certificates.translated(), forSegmentAt: 1)
+
         SchoolId = String(describing: appDelegate.SchoolDetailDictionary["SchoolID"]!)
         
         ChildId = String(describing: appDelegate.SchoolDetailDictionary["ChildID"]!)
@@ -292,7 +306,7 @@ class CertificateRequestViewController: UIViewController,UITableViewDataSource,U
         
         
         let list : ParentRequestListData = paraentRequestList[indexPath.row]
-        
+        certificateName = list.requested_for
         cell.conductTypeLbl.text = list.requested_for
         cell.createdOnLbl.text = list.created_on
         cell.statusLbl.text = list.is_issued_on_app
@@ -325,7 +339,7 @@ class CertificateRequestViewController: UIViewController,UITableViewDataSource,U
         vc.webViewUrl = ges.pdfUrl
         vc.schoolId = SchoolId
         vc.childId = ChildId
-        
+        vc.CertificateName = certificateName
         vc.modalPresentationStyle = .fullScreen
         present(vc, animated: true)
     }
@@ -428,7 +442,7 @@ class CertificateRequestViewController: UIViewController,UITableViewDataSource,U
             if paraentRequestList.count == 0 {
                 noRecordVieww.isHidden = false
                 noRecordLbl.isHidden = false
-                noRecordLbl.text = "No Records"
+                noRecordLbl.text = commonStringNames.NoRecordsFound.translated()
             }else{
                 noRecordVieww.isHidden = true
                 noRecordLbl.isHidden = true
@@ -450,8 +464,8 @@ class CertificateRequestViewController: UIViewController,UITableViewDataSource,U
         
         if text_view.text.isEmpty == true || text_view.text == "Reason for Certificate" {
             
-            let alert = UIAlertController(title: "Alert", message: "Please Enter the Reason", preferredStyle: UIAlertController.Style.alert)
-            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+            let alert = UIAlertController(title: commonStringNames.Alert.translated(), message: "Please Enter the Reason", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: commonStringNames.OK.translated(), style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             
         }else{

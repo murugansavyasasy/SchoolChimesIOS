@@ -200,7 +200,7 @@ class StandardOrStudentsStaff : UIViewController,Apidelegate,UIPickerViewDelegat
                 SelectedSectionIDString = String(describing: SelectedSectionDeatil["SectionId"]!)
             }
             else{
-                Util.showAlert("", msg: languageDict["no_section"] as? String)
+                Util.showAlert("", msg: commonStringNames.no_section.translated() as? String)
                 SectionNameLbl.text = ""
                 pickerSectionArray = []
                 SelectedSectionIDString = ""
@@ -241,7 +241,7 @@ class StandardOrStudentsStaff : UIViewController,Apidelegate,UIPickerViewDelegat
     
     @IBAction func actionChooseStandardButton(_ sender: UIButton) {
         TableString = "Standard"
-        PickerTitleLabel.text = languageDict["select_standard"] as? String//"Select Standard"
+                    PickerTitleLabel.text = commonStringNames.select_standard.translated() as? String//"Select Standard"
         self.MyPickerView.reloadAllComponents()
         if(pickerStandardArray.count > 0)
         {
@@ -276,7 +276,7 @@ class StandardOrStudentsStaff : UIViewController,Apidelegate,UIPickerViewDelegat
         }
         else
         {
-            Util.showAlert("", msg: languageDict["no_students"] as? String)
+            Util.showAlert("", msg: commonStringNames.no_students.translated() as? String)
             
         }
         
@@ -285,7 +285,7 @@ class StandardOrStudentsStaff : UIViewController,Apidelegate,UIPickerViewDelegat
     // MARK: CHOOSE SECTION BUTTON ACTION
     @IBAction func actionChooseSectionButton(_ sender: UIButton) {
         TableString = "Section"
-        PickerTitleLabel.text = languageDict["select_section"] as? String //"Select Section"
+                PickerTitleLabel.text = commonStringNames.select_section.translated() as? String //"Select Section"
         self.MyPickerView.reloadAllComponents()
         if((StandardNameLbl.text?.count)! > 0){
             if(UIDevice.current.userInterfaceIdiom == .pad){
@@ -308,7 +308,7 @@ class StandardOrStudentsStaff : UIViewController,Apidelegate,UIPickerViewDelegat
             
             print("StandardOrStudentStaff1222")
         }else{
-            Util.showAlert("", msg: languageDict["standard_first"] as? String)
+            Util.showAlert("", msg: commonStringNames.standard_first.translated() as? String)
         }
         
     }
@@ -355,7 +355,7 @@ class StandardOrStudentsStaff : UIViewController,Apidelegate,UIPickerViewDelegat
             
             
         }else{
-            Util.showAlert("", msg: languageDict["select_standard_section_alert"] as? String)
+            Util.showAlert("", msg: commonStringNames.select_standard_section_alert.translated() as? String)
         }
     }
     
@@ -386,7 +386,7 @@ class StandardOrStudentsStaff : UIViewController,Apidelegate,UIPickerViewDelegat
                 Util.showAlert("", msg:strNoInternet )
             }
         }else{
-            Util.showAlert("", msg: languageDict["select_standard_section_alert"] as? String)
+            Util.showAlert("", msg: commonStringNames.select_standard_section_alert.translated() as? String)
             
         }
     }
@@ -490,14 +490,16 @@ class StandardOrStudentsStaff : UIViewController,Apidelegate,UIPickerViewDelegat
             "Content-Type": "application/json",
             "Accept": "application/vnd.vimeo.*+json;version=3.4"
         ]
-        
+        let userDefaults = UserDefaults.standard
+        let getDownload = UserDefaults.standard.value(forKey: DefaultsKeys.allowVideoDownload) as? Bool ?? false
         let parameters: [String: Any] = [
             "upload": [
                 "approach": "tus",
                 "size": "\(fileSize)"
             ],
             "privacy":[
-                "view":"unlisted"
+                "view":"unlisted",
+                "download": true
             ],
             "embed":[
                 "buttons":[
@@ -607,6 +609,7 @@ class StandardOrStudentsStaff : UIViewController,Apidelegate,UIPickerViewDelegat
     
     func SendVimeoVideoToSection()
     {
+        print("SendVimeoVideoToSectionSendVimeoVideoToSection")
         showLoading()
         strApiFrom = "sendVimeoVideo"
         let apiCall = API_call.init()
@@ -615,10 +618,12 @@ class StandardOrStudentsStaff : UIViewController,Apidelegate,UIPickerViewDelegat
         let requestStringer = baseUrlString! + SEND_VIMEO_VIDEO_ENTIRE_SECTION
         let requestString = requestStringer.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
         let SectionID = String(describing: SelectedSectionDeatil["SectionId"]!)
-        self.vimeoVideoDict["Seccode"] = SectionID
+        self.vimeoVideoDict["Seccode"] = [["TargetCode":SectionID]]
         self.vimeoVideoDict[COUNTRY_CODE] = strCountryCode
+//        "Seccode":
         
         let myString = Util.convertDictionary(toString: vimeoVideoDict)
+        print("SendVimeoVideoToSectionSectionmyString",myString)
         UtilObj.printLogKey(printKey: "myDict", printingValue: vimeoVideoDict)
         apiCall.nsurlConnectionFunction(requestString, myString, "sendVimeoVideo")
     }
@@ -795,6 +800,7 @@ class StandardOrStudentsStaff : UIViewController,Apidelegate,UIPickerViewDelegat
         if(csData != nil)        {
             UtilObj.printLogKey(printKey: "csData", printingValue: csData!)
             
+            print("SECTION",strApiFrom)
             if(strApiFrom.isEqual(to:"sendVimeoVideo"))
             {
                 UtilObj.printLogKey(printKey: "csdata", printingValue: csData!)
@@ -1051,201 +1057,205 @@ class StandardOrStudentsStaff : UIViewController,Apidelegate,UIPickerViewDelegat
             SectionNameLbl.textAlignment = .left
             StandardNameLbl.textAlignment = .left
         }
-        self.SendButton.setTitle(LangDict["teacher_pop_response_btn_send"] as? String, for: .normal)
-        self.SelectStudentButton.setTitle(LangDict["select_student_attedance"] as? String, for: .normal)
-        self.pickerOkButton.setTitle(LangDict["teacher_btn_ok"] as? String, for: .normal)
-        self.pickerCancelButton.setTitle(LangDict["teacher_cancel"] as? String, for: .normal)
-        FloatStandardNameLabel.text = LangDict["teacher_atten_standard"] as? String
-        FloatSectionLabel.text = LangDict["teacher_atten_sections"] as? String
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        self.SendButton.setTitle(commonStringNames.teacher_pop_response_btn_send.translated() as? String, for: .normal)
+        self.SelectStudentButton.setTitle(commonStringNames.select_student_attedance.translated() as? String, for: .normal)
+        self.pickerOkButton.setTitle(commonStringNames.teacher_btn_ok.translated() as? String, for: .normal)
+        self.pickerCancelButton.setTitle(commonStringNames.teacher_cancel.translated() as? String, for: .normal)
+        FloatStandardNameLabel.text = commonStringNames.teacher_atten_standard.translated() as? String
+        FloatSectionLabel.text = commonStringNames.teacher_atten_sections.translated() as? String
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
     }
     
     //MARK: AWS Upload
     
-    func getImageURL(images : [UIImage]){
-        showLoading()
+    
+    
+    
+    func getImageURL(images: [UIImage]) {
+    
         self.originalImagesArray = images
         self.totalImageCount = images.count
-        if currentImageCount < images.count{
-            self.uploadAWS(image: images[currentImageCount])
-        }
+            if currentImageCount < images.count {
+               
+                self.uploadAWS(image: images[currentImageCount])
+            } else {
+                print("All images uploaded. Final URLs: \("")")
+                // Handle final uploaded URLs (e.g., send them to the server or update the UI)
+            }
     }
-    
-    func uploadAWS(image : UIImage){
-      
-        var bucketName = ""
-                print("countryCoded",countryCoded)
-                if countryCoded == "1" {
-                   
-                    bucketName = DefaultsKeys.bucketNameIndia
-                }else  {
-                     bucketName = DefaultsKeys.bucketNameBangkok
-                }
-                
-        
-        let S3BucketName = bucketName
-        let CognitoPoolID = DefaultsKeys.CognitoPoolID
-        let Region = AWSRegionType.APSouth1
-        
-        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:Region,identityPoolId:CognitoPoolID)
-        let configuration = AWSServiceConfiguration(region:Region, credentialsProvider:credentialsProvider)
-        AWSServiceManager.default().defaultServiceConfiguration = configuration
-        
-        
-        let currentTimeStamp = NSString.init(format: "%ld",Date() as CVarArg)
-        let imageNameWithoutExtension = NSString.init(format: "vc_%@",currentTimeStamp)
-        let imageName = NSString.init(format: "%@%@",imageNameWithoutExtension, ".png")
-        
-        
+
+    func uploadAWS(image: UIImage) {
+        let currentTimeStamp = NSString.init(format: "%ld", Date() as CVarArg)
+        let imageNameWithoutExtension = NSString.init(format: "vc_%@", currentTimeStamp)
+        let imageName = NSString.init(format: "%@%@", imageNameWithoutExtension, ".png")
         let ext = imageName as String
-        
-        let fileName = imageNameWithoutExtension
-        let fileType = ".png"
-        
         let imageURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(ext)
-        let data = image.jpegData(compressionQuality: 0.9)
-        do {
-            try data?.write(to: imageURL)
-        }
-        catch {}
-        
-        print(imageURL)
-        let dateFormatter = DateFormatter()
-              
-              dateFormatter.dateFormat = "yyyy-MM-dd"
-              
-              let  currentDate =   dateFormatter.string(from: Date())
-        let uploadRequest = AWSS3TransferManagerUploadRequest()
-        uploadRequest?.body = imageURL
-        uploadRequest?.key = "communication" + "/" + currentDate +  "/" + ext
-        uploadRequest?.bucket = S3BucketName
-        uploadRequest?.contentType = "image/" + ext
-        uploadRequest?.acl = .publicRead
-        print("ext",ext)
-        
-        let transferManager = AWSS3TransferManager.default()
-        transferManager.upload(uploadRequest!).continueWith { (task) -> AnyObject? in
-            
-            if let error = task.error {
-                self.hideLoading()
-                print("Upload failed : (\(error))")
+
+        if let data = image.jpegData(compressionQuality: 0.9) {
+            do {
+                try data.write(to: imageURL)
+            } catch {
+                print("Error writing image data to file: \(error)")
+                return
             }
-            
-            if task.result != nil {
-                let url = AWSS3.default().configuration.endpoint.url
-                let publicURL = url?.appendingPathComponent((uploadRequest?.bucket!)!).appendingPathComponent((uploadRequest?.key!)!)
-                if let absoluteString = publicURL?.absoluteString {
-                    print("Uploaded to:\(absoluteString)")
-                    let imageDict = NSMutableDictionary()
-                    imageDict["FileName"] = absoluteString
-                    self.imageUrlArray.add(imageDict)
-                    self.currentImageCount = self.currentImageCount + 1
-                    if self.currentImageCount < self.totalImageCount{
-                        DispatchQueue.main.async {
-                            self.getImageURL(images: self.originalImagesArray)
-                        }
-                        
-                    }else{
-                        self.convertedImagesUrlArray = self.imageUrlArray
-                        
-                        self.StaffMultipleImage()
-                        
+        }
+        
+        
+        
+        let currentDate = AWSPreSignedURL.shared.getCurrentDateString()
+        var bucketName = ""
+        var bucketPath = ""
+        if countryCoded == "4" {
+            bucketName = DefaultsKeys.THAI_SCHOOL_CHIMES_COMMUNICATION
+            bucketPath = currentDate+"/"+String(SchoolId)
+        }
+        else
+        {
+            bucketName = DefaultsKeys.SCHOOL_CHIMES_COMMUNICATION
+            bucketPath = currentDate+"/"+String(SchoolId)
+
+        }
+        
+        AWSPreSignedURL.shared.fetchPresignedURL(
+            bucket: bucketName,
+            fileName: imageURL,
+            bucketPath: bucketPath,
+            fileType: "image/png"
+        ) { [self] result in
+            switch result {
+            case .success(let awsResponse):
+                print("Presigned URL fetched: \(awsResponse.data?.presignedUrl ?? "")")
+                let presignedURL = awsResponse.data?.presignedUrl
+                let Uploadimages = awsResponse.data?.fileUrl
+              
+                AWSUploadManager.shared.uploadImageToAWS(image: image, presignedURL: presignedURL!) { [self] result in
+                    switch result {
+                    case .success(let uploadedURL):
+                        print("Image uploaded successfully: \(uploadedURL)")
+                      
+                    case .failure(let error):
+                        print("Failed to upload image: \(error.localizedDescription)")
                     }
-                }
+        
+                    let imageDict = NSMutableDictionary()
+                    imageDict["FileName"] = Uploadimages
+                    imageUrlArray.add(imageDict)
+                    self.currentImageCount += 1
+                      if self.currentImageCount < self.totalImageCount {
+                          
+                          DispatchQueue.main.async {
+                              self.getImageURL(images: self.originalImagesArray)
+                              print("getImageURL",self.getImageURL)
+                          }
+                       } else {
+                           print("All images uploaded. Final URLs: \(imageUrlArray)")
+                           // Handle final uploaded URLs (e.g., send them to the server or update the UI
+                         
+                           
+                          
+                           self.currentImageCount = self.currentImageCount + 1
+                           if self.currentImageCount < self.totalImageCount{
+                               DispatchQueue.main.async {
+                                   self.getImageURL(images: self.originalImagesArray)
+                               }
+                           }else{
+                               self.convertedImagesUrlArray = self.imageUrlArray
+                               self.StaffMultipleImage()
+                           }
+                           }
+                    
+                    
+                    
+                          }
+           
+            case .failure(let error):
+                print("Error fetching presigned URL: \(error.localizedDescription)")
             }
-            else {
-                self.hideLoading()
-                print("Unexpected empty result.")
-            }
-            return nil
         }
+        
+   
+       
     }
     
     
+    
+
     func uploadPDFFileToAWS(pdfData : NSData){
-        self.showLoading()
-        
-        var bucketName = ""
-                print("countryCoded",countryCoded)
-                if countryCoded == "1" {
-                   
-                    bucketName = DefaultsKeys.bucketNameIndia
-                }else  {
-                     bucketName = DefaultsKeys.bucketNameBangkok
-                }
-        let S3BucketName = bucketName
-        let CognitoPoolID = DefaultsKeys.CognitoPoolID
-        let Region = AWSRegionType.APSouth1
-        
-        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:Region,identityPoolId:CognitoPoolID)
-        let configuration = AWSServiceConfiguration(region:Region, credentialsProvider:credentialsProvider)
-        AWSServiceManager.default().defaultServiceConfiguration = configuration
-        
-        
+//        self.showLoading()
         let currentTimeStamp = NSString.init(format: "%ld",Date() as CVarArg)
         let imageNameWithoutExtension = NSString.init(format: "vc_%@",currentTimeStamp)
         let imageName = NSString.init(format: "%@%@",imageNameWithoutExtension, ".pdf")
-        
-        
         let ext = imageName as String
-        
         let fileName = imageNameWithoutExtension
         let fileType = ".pdf"
-        
         let imageURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(ext)
-        
         do {
             try pdfData.write(to: imageURL)
         }
         catch {}
-        
         print(imageURL)
+       
+      
         
-        let dateFormatter = DateFormatter()
+        
+        
+        let currentDate = AWSPreSignedURL.shared.getCurrentDateString()
+        var bucketName = ""
+        var bucketPath = ""
+        if countryCoded == "4" {
+            bucketName = DefaultsKeys.THAI_SCHOOL_CHIMES_COMMUNICATION
+            bucketPath = currentDate+"/"+String(SchoolId)
+        }
+        else
+        {
+            bucketName = DefaultsKeys.SCHOOL_CHIMES_COMMUNICATION
+            bucketPath = currentDate+"/"+String(SchoolId)
+
+        }
+                       
+        
+        AWSPreSignedURL.shared.fetchPresignedURL(
+            bucket: bucketName,
+            fileName: imageURL,
+            bucketPath: bucketPath,
+            fileType: "application/pdf"
+        ) { [self] result in
+            switch result {
+            case .success(let awsResponse):
+                print("Presigned URL fetched: \(awsResponse.data?.presignedUrl ?? "")")
+                let presignedURL = awsResponse.data?.presignedUrl
+                let UploadPDf = awsResponse.data?.fileUrl
               
-              dateFormatter.dateFormat = "yyyy-MM-dd"
-              
-              let  currentDate =   dateFormatter.string(from: Date())
+                AWSUploadManager.shared.uploadPDFAWSUsingPresignedURL(pdfData: pdfData as Data, presignedURL:presignedURL! ){ [self] result in
+                    
+                    switch result {
+                    case .success(let uploadedURL):
+                        print("Image uploaded successfully: \(uploadedURL)")
+                      
+                    case .failure(let error):
+                        print("Failed to upload image: \(error.localizedDescription)")
+                    }
         
-        let uploadRequest = AWSS3TransferManagerUploadRequest()
-        uploadRequest?.body = imageURL
-        uploadRequest?.key = "communication" + "/" + currentDate +  "/" + ext
-        uploadRequest?.bucket = S3BucketName
-        uploadRequest?.contentType = "application/pdf"
-        uploadRequest?.acl = .publicRead
-        
-        
-        let transferManager = AWSS3TransferManager.default()
-        transferManager.upload(uploadRequest!).continueWith { (task) -> AnyObject? in
-            
-            if let error = task.error {
-                print("Upload failed : (\(error))")
-                self.hideLoading()
-            }
-            
-            if task.result != nil {
-                let url = AWSS3.default().configuration.endpoint.url
-                let publicURL = url?.appendingPathComponent((uploadRequest?.bucket!)!).appendingPathComponent((uploadRequest?.key!)!)
-                if let absoluteString = publicURL?.absoluteString {
-                    print("Uploaded to:\(absoluteString)")
+                    
                     let imageDict = NSMutableDictionary()
-                    imageDict["FileName"] = absoluteString
+                    imageDict["FileName"] = UploadPDf
                     self.imageUrlArray.add(imageDict)
                     self.convertedImagesUrlArray = self.imageUrlArray
                     self.StaffPdfImageSend()
-                    
-                }
+                   
+                          }
+           
+            case .failure(let error):
+                print("Error fetching presigned URL: \(error.localizedDescription)")
             }
-            else {
-                self.hideLoading()
-                print("Unexpected empty result.")
-            }
-            return nil
         }
+        
     }
     
+
+
     
 }
 

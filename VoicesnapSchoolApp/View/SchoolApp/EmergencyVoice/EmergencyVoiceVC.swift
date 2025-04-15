@@ -12,6 +12,7 @@ import AVFoundation
 
 class EmergencyVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerDelegate,UITextFieldDelegate,UIScrollViewDelegate,UITableViewDelegate,UITableViewDataSource,Apidelegate,UIDocumentPickerDelegate{
     
+    @IBOutlet weak var addFileHeadLbl: UILabel!
     @IBOutlet weak var pathImg: UIImageView!
     @IBOutlet weak var pathLbl: UILabel!
     @IBOutlet weak var addFileView: UIViewX!
@@ -96,6 +97,9 @@ class EmergencyVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerD
     override func viewDidLoad(){
         super.viewDidLoad()
         
+        
+        addFileHeadLbl.text = commonStringNames.AddMp3File.translated()
+        TitleLabel.text = commonStringNames.PressToRecord.translated()
         pathLbl.text = ""
         pathLbl.isHidden = true
         pathImg.isHidden = true
@@ -539,8 +543,8 @@ class EmergencyVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerD
     
     // MARK: TITLE FOR START AND STOP RECORD
     func TitleForStartRecord(){
-        let firstword : String =  languageDictionary["teacher_txt_start_record"] as? String ?? "Press the button to"
-        let secondWord : String  =  languageDictionary["record"] as? String ?? " RECORD"
+        let firstword : String =  commonStringNames.teacher_txt_start_record.translated() as? String ?? "Press the button to"
+        let secondWord : String  =  commonStringNames.record.translated() as? String ?? " RECORD"
         let comboWord = firstword + secondWord
         let attributedText = NSMutableAttributedString(string:comboWord)
         var attrs =  [NSAttributedString.Key : NSObject]()
@@ -562,13 +566,13 @@ class EmergencyVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerD
         attributedText.addAttributes(attrfirst, range: range2)
         TitleLabel.attributedText = attributedText
         TitleLabel.textAlignment = .center
-        
+        print("attributedTextattributedText",attributedText)
     }
     
     func TitleForStopRecord(){
         
-        let firstword : String =  languageDictionary["teacher_txt_start_record"] as? String ?? "Press the button to"
-        let secondWord  : String =  languageDictionary["stop_record"] as? String ?? " STOP RECORD"
+        let firstword : String =  commonStringNames.teacher_txt_start_record.translated() as? String ?? "Press the button to"
+        let secondWord  : String =  commonStringNames.stop_record.translated() as? String ?? " STOP RECORD"
         let comboWord = firstword + secondWord
         let attributedText = NSMutableAttributedString(string:comboWord)
         var attrs =  [NSAttributedString.Key : NSObject]()
@@ -592,9 +596,9 @@ class EmergencyVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerD
     }
     
     func TitleForListenVoice(){
-        let firstword : String = languageDictionary["listen"] as? String ??  "Listen"
-        let secondWord : String  = languageDictionary["voice"] as? String ?? " Voice "
-        let thirdWord  : String = languageDictionary["message"] as? String ?? "Message"
+        let firstword : String = commonStringNames.listen.translated()
+        let secondWord : String  = commonStringNames.voice.translated()
+        let thirdWord  : String = commonStringNames.message.translated()
         let comboWord = firstword  + secondWord  + thirdWord
         let attributedText = NSMutableAttributedString(string:comboWord)
         var attrs =  [NSAttributedString.Key : NSObject]()
@@ -617,6 +621,7 @@ class EmergencyVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerD
         }else{
             ListenVoiceMsglabel.textAlignment = .left
         }
+        print("attributedTextattributedText",attributedText)
         ListenVoiceMsglabel.attributedText = attributedText
         
     }
@@ -645,8 +650,8 @@ class EmergencyVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerD
         cell.SubjectLbl.text = String(describing: dict["Description"]!)
         cell.playAudioButton.addTarget(self, action: #selector(actionplayAudioButton(sender:)), for: .touchUpInside)
         cell.playAudioButton.tag = indexPath.row
-        cell.PressThePlayButtonLabel.text = languageDictionary["hint_play_voice"] as? String
-        cell.playAudioButton.setTitle(languageDictionary["teacher_btn_voice_play"] as? String, for: .normal)
+        cell.PressThePlayButtonLabel.text = commonStringNames.hint_play_voice.translated() as? String
+        cell.playAudioButton.setTitle(commonStringNames.teacher_btn_voice_play.translated() as? String, for: .normal)
         cell.audioCheckBoxButton.tag = indexPath.row
         cell.audioCheckBoxButton.addTarget(self, action: #selector(actionVoiceHistoryCheckboxButton(sender:)), for: .touchUpInside)
         
@@ -752,7 +757,7 @@ class EmergencyVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerD
                                           "isEmergency": "1"]
         
         
-        
+        print("myDictmyDict",myDict)
         let apiCall = API_call.init()
         apiCall.delegate = self;
         let myString = Util.convertDictionary(toString: myDict)
@@ -916,7 +921,7 @@ class EmergencyVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerD
     
     func alertWithAction(strAlert : String){
         let alertController = UIAlertController(title: "", message: strAlert, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Ok", style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.OK.translated(), style: UIAlertAction.Style.default) {
             UIAlertAction in
             self.actionNewVoiceRecording()
         }
@@ -961,14 +966,15 @@ class EmergencyVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerD
             self.descriptionTextField.textAlignment = .left
             self.ListenVoiceMsglabel.textAlignment = .left
         }
-        self.NewVoiceRecordingLabel.text =  LangDict["record_new_voice_msg"] as? String
-        self.SelectFromVoiceHistoryLabel.text =  LangDict["record_voice_history"] as? String
-        self.VoiceMessageLabel.text = LangDict["voice_compose_msg"] as? String
-        self.descriptionTextField.placeholder =  LangDict["teacher_txt_onwhat"] as? String
-        self.SelectSchoolButton.setTitle( LangDict["teacher_Select_school"] as? String, for: .normal)
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        self.NewVoiceRecordingLabel.text = commonStringNames.record_new_voice_msg.translated() as? String
+        print("EmerDefaultsKeys",DefaultsKeys.languageCode)
+        self.SelectFromVoiceHistoryLabel.text = commonStringNames.record_voice_history.translated() as? String
+        self.VoiceMessageLabel.text = commonStringNames.voice_compose_msg.translated() as? String
+        self.descriptionTextField.placeholder =  commonStringNames.teacher_txt_onwhat.translated() as? String
+        self.SelectSchoolButton.setTitle( commonStringNames.teacher_Select_school.translated() as? String, for: .normal)
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         self.loadViewData()
         
     }
@@ -976,9 +982,9 @@ class EmergencyVoiceVC: UIViewController,AVAudioRecorderDelegate, AVAudioPlayerD
     func loadViewData(){
         TitleForListenVoice()
         
-        let strSeconRecord : String = languageDictionary["teacher_txt_emergency_title"] as? String ?? "You can record emergency voice message upto "
-        let strSeconds : String = languageDictionary["seconds"] as? String ?? " seconds "
-        let strminutes : String = languageDictionary["minutes"] as? String ?? " minutes "
+        let strSeconRecord : String = commonStringNames.teacher_txt_emergency_title.translated() as? String ?? "You can record emergency voice message upto "
+        let strSeconds : String = commonStringNames.seconds.translated() as? String ?? " seconds "
+        let strminutes : String = commonStringNames.minutes.translated() as? String ?? " minutes "
         
         if(HomeWorkSecondStr < 60)
         {

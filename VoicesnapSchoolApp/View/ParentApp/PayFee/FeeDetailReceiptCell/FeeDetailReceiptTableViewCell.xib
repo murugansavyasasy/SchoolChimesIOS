@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21507" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21505"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
@@ -125,6 +125,10 @@
                 <outlet property="InvoiceAmountLbl" destination="Ewu-Sl-A2u" id="uTe-lu-0WS"/>
                 <outlet property="InvoiceDateLbl" destination="fNs-HW-m62" id="0yG-3I-iqH"/>
                 <outlet property="InvoiceNumberLbl" destination="eWQ-Hb-AKm" id="N3J-BE-kSr"/>
+                <outlet property="ViewReceipt" destination="U0M-fZ-qCZ" id="a6C-iz-Ga1"/>
+                <outlet property="receiptAmountLbl" destination="FDL-LN-rWx" id="TsJ-BK-NmK"/>
+                <outlet property="receiptDateDefLbl" destination="NyJ-G7-cUZ" id="3KX-0a-zLS"/>
+                <outlet property="receiptNumberDefLbl" destination="2rc-8W-yaB" id="pUC-ZW-nfh"/>
                 <outlet property="viewInvoice" destination="lyi-D5-Pin" id="iig-2r-ysU"/>
             </connections>
             <point key="canvasLocation" x="23.664122137404579" y="-50.70422535211268"/>
@@ -132,7 +136,7 @@
     </objects>
     <resources>
         <namedColor name="serach_color">
-            <color red="0.0" green="0.37599998712539673" blue="0.3919999897480011" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.37254901960784315" blue="0.38823529411764707" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

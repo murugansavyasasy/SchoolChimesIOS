@@ -86,6 +86,7 @@ class ParentNoticeBoardVC: UIViewController,UITableViewDataSource,UITableViewDel
         
         
         search_bar.delegate = self
+        search_bar.placeholder = commonStringNames.Search.translated()
         if(appDelegate.isPasswordBind == "0"){
             bIsSeeMore = true
         }
@@ -624,10 +625,10 @@ class ParentNoticeBoardVC: UIViewController,UITableViewDataSource,UITableViewDel
     func AlertMessage(strAlert : String)
     {
         
-        let alertController = UIAlertController(title: languageDictionary["alert"] as? String, message: strAlert, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.alert.translated() as? String, message: strAlert, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             print("Okaction")
             self.dismiss(animated: true, completion: nil)
@@ -676,10 +677,10 @@ class ParentNoticeBoardVC: UIViewController,UITableViewDataSource,UITableViewDel
             self.navigationController?.navigationBar.semanticContentAttribute = .forceLeftToRight
             self.view.semanticContentAttribute = .forceLeftToRight
         }
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Records Found.."
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
-        TextDateLabel.text = LangDict["home_notice_board"] as? String
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Records Found.."
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
+        TextDateLabel.text = commonStringNames.home_notice_board.translated() as? String
     }
     //Mark:- SeeMore Feature
     func emptyView(){
@@ -696,7 +697,7 @@ class ParentNoticeBoardVC: UIViewController,UITableViewDataSource,UITableViewDel
         noview.addSubview(noDataLabel)
         
         let button = UIButton(frame: CGRect(x: self.NoticeBoardTableview.bounds.size.width - 108, y: noDataLabel.frame.height + 30, width: 100, height: 32))
-        button.setTitle(SEE_MORE_TITLE, for: .normal)
+        button.setTitle(commonStringNames.SeeMore.translated(), for: .normal)
         button.backgroundColor = .white
         button.setTitleColor(utilObj.PARENT_NAV_BAR_COLOR, for: .normal)
         button.addTarget(self, action: #selector(self.seeMoreButtonTapped), for: .touchUpInside)

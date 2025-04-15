@@ -44,6 +44,8 @@ class AssignmentListVC: UIViewController ,UITableViewDataSource,UITableViewDeleg
     var MainDetailTextArray: NSMutableArray = NSMutableArray()
     var SelectedSectionArray : NSMutableArray = NSMutableArray()
     
+    @IBOutlet weak var AssignmentHeaderLbl: UILabel!
+    
     @IBOutlet weak var AdView: UIView!
     
     @IBOutlet weak var imageView: UIImageView!
@@ -70,10 +72,10 @@ class AssignmentListVC: UIViewController ,UITableViewDataSource,UITableViewDeleg
         super.viewDidLoad()
         bIsSeeMore = false
         print("Assignment456")
+        AssignmentHeaderLbl.text = commonStringNames.Assignment.translated()
         
         
-        
-        
+        search_bar.placeholder = commonStringNames.Search.translated()
         search_bar.delegate = self
         if(appDelegate.isPasswordBind == "0"){
             bIsSeeMore = true
@@ -393,14 +395,14 @@ class AssignmentListVC: UIViewController ,UITableViewDataSource,UITableViewDeleg
                 
                 
             }
-            cell.subjectLabelLang.text = languageDictionary["teacher_atten_subject"] as? String
-            cell.dueLabelLang.text = languageDictionary["subission_due"] as? String
-            cell.countLabelLang.text = languageDictionary["subission_count"] as? String
-            cell.sendByLabelLang.text = languageDictionary["send_by"] as? String
-            cell.categoryLabelLang.text = languageDictionary["category"] as? String
-            cell.viewButton.setTitle(languageDictionary["view"] as? String, for: .normal)
-            cell.submitButton.setTitle(languageDictionary["btn_sign_submit"] as? String, for: .normal)
-            cell.submissionButton.setTitle(languageDictionary["submissions"] as? String, for: .normal)
+            cell.subjectLabelLang.text = commonStringNames.teacher_atten_subject.translated() as? String
+            cell.dueLabelLang.text = commonStringNames.subission_due.translated() as? String
+            cell.countLabelLang.text = commonStringNames.subission_count.translated() as? String
+            cell.sendByLabelLang.text = commonStringNames.send_by.translated() as? String
+            cell.categoryLabelLang.text = commonStringNames.category.translated() as? String
+            cell.viewButton.setTitle(commonStringNames.view.translated() as? String, for: .normal)
+            cell.submitButton.setTitle(commonStringNames.btn_sign_submit.translated() as? String, for: .normal)
+            cell.submissionButton.setTitle(commonStringNames.submissions.translated() as? String, for: .normal)
             return cell
         }else{
             let cell = tableView.dequeueReusableCell(withIdentifier: "SeeMoreTVCell", for: indexPath) as! SeeMoreTVCell
@@ -614,10 +616,10 @@ class AssignmentListVC: UIViewController ,UITableViewDataSource,UITableViewDeleg
     func AlertMessage(strAlert : String)
     {
         
-        let alertController = UIAlertController(title: languageDictionary["alert"] as? String, message: strAlert, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.alert.translated() as? String, message: strAlert, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             print("Okaction")
             self.dismiss(animated: true, completion: nil)
@@ -678,13 +680,13 @@ class AssignmentListVC: UIViewController ,UITableViewDataSource,UITableViewDeleg
             self.view.semanticContentAttribute = .forceLeftToRight
         }
         
-        chooseLabel.text = LangDict["choose"] as? String ?? "Choose"
-        popupPdfButton.setTitle(LangDict["choose_pdf"] as? String ?? "Choose Pdf", for: .normal)
-        popupImageButton.setTitle(LangDict["choose_image"] as? String ?? "Choose Image", for: .normal)
+        chooseLabel.text = commonStringNames.choose.translated() as? String ?? "Choose"
+        popupPdfButton.setTitle(commonStringNames.choose_pdf.translated() as? String ?? "Choose Pdf", for: .normal)
+                                popupImageButton.setTitle(commonStringNames.choose_image.translated() as? String ?? "Choose Image", for: .normal)
         
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Records Found.."
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+                                                          strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Records Found.."
+                                                          strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+                                                          strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
     }
     
     @objc func reloadApiData(notification:Notification) -> Void {
@@ -696,7 +698,7 @@ class AssignmentListVC: UIViewController ,UITableViewDataSource,UITableViewDeleg
         let noview : UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.assignmentTableview.bounds.size.width, height: self.assignmentTableview.bounds.size.height))
         
         let noDataLabel: UILabel = UILabel(frame: CGRect(x: 0, y:  8, width: self.assignmentTableview.bounds.size.width, height: 60))
-        noDataLabel.text = "No messages for the day.Click \("See More") for previous messages."
+        noDataLabel.text = commonStringNames.NoMessagesForDay.translated()
         noDataLabel.textColor = .red
         noDataLabel.backgroundColor = UIColor(named: "NoDataColor")
         
@@ -707,7 +709,7 @@ class AssignmentListVC: UIViewController ,UITableViewDataSource,UITableViewDeleg
         noview.addSubview(noDataLabel)
         
         let button = UIButton(frame: CGRect(x: self.assignmentTableview.bounds.size.width - 108, y: noDataLabel.frame.height + 30, width: 100, height: 32))
-        button.setTitle(SEE_MORE_TITLE, for: .normal)
+        button.setTitle(commonStringNames.SeeMore.translated(), for: .normal)
         button.backgroundColor = .white
         button.setTitleColor(utilObj.PARENT_NAV_BAR_COLOR, for: .normal)
         button.addTarget(self, action: #selector(self.seeMoreButtonTapped), for: .touchUpInside)

@@ -11,6 +11,7 @@ import ObjectMapper
 
 class NewAbsenteesViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout,UITableViewDelegate,UITableViewDataSource {
     
+    @IBOutlet weak var HeaderLbl: UILabel!
     @IBOutlet weak var Tv: UITableView!
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var cvIcon: UICollectionView!
@@ -29,6 +30,7 @@ class NewAbsenteesViewController: UIViewController, UICollectionViewDelegate, UI
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        HeaderLbl.text = commonStringNames.AbsenteesReport.translated()
         Id = "1"
         cvIcon.register(UINib(nibName: cvIconRowId, bundle: nil), forCellWithReuseIdentifier: cvIconRowId)
         abestApi()
@@ -116,7 +118,7 @@ class NewAbsenteesViewController: UIViewController, UICollectionViewDelegate, UI
             monthFormatter.dateFormat = "MMMM"
             let monthName = monthFormatter.string(from: date)
             print(monthName)  // Output: March
-            cell.MnthLbl.text = monthName
+            cell.MnthLbl.text = monthName.translated()
         } else {
             print("Invalid date format")
         }
@@ -133,7 +135,7 @@ class NewAbsenteesViewController: UIViewController, UICollectionViewDelegate, UI
             print("Invalid date format")
         }
         
-        cell.dayLbl.text = abesents.Day
+        cell.dayLbl.text = abesents.Day.translated()
         if abesents.TotalAbsentees == "0"{
             
             cell.countView.isHidden = true

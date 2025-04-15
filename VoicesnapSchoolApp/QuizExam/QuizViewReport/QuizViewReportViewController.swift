@@ -193,7 +193,7 @@ class QuizViewReportViewController: UIViewController,UITableViewDataSource,UITab
             }
             else {
                 //                tv.reloadData()
-                _ = SweetAlert().showAlert("Alert", subTitle: quizViewRespose.message, style: .none, buttonTitle: "OK")
+                _ = SweetAlert().showAlert(commonStringNames.Alert.translated(), subTitle: quizViewRespose.message, style: .none, buttonTitle: commonStringNames.OK.translated())
                 //
                 
                 

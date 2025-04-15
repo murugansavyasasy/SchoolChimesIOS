@@ -149,12 +149,12 @@ class ParentChangePasswordVC: UIViewController ,UITextFieldDelegate,UITextViewDe
             }
             else
             {
-                Util.showAlert("", msg: LanguageDict["password_missmatch"] as? String)
+                Util.showAlert("", msg: commonStringNames.password_missmatch.translated() as? String)
             }
         }
         else
         {
-            Util.showAlert("", msg: LanguageDict["teacher_pop_password_hint_exist"] as? String)
+                    Util.showAlert("", msg: commonStringNames.teacher_pop_password_hint_exist.translated() as? String)
         }
     }
     
@@ -204,14 +204,14 @@ class ParentChangePasswordVC: UIViewController ,UITextFieldDelegate,UITextViewDe
     }
     
     func showLogoutAlert(){
-        let alertController = UIAlertController(title: LanguageDict["txt_menu_logout"] as? String, message: LanguageDict["want_to_logut"] as? String, preferredStyle: .alert)
+                        let alertController = UIAlertController(title: commonStringNames.txt_menu_logout.translated() as? String, message: commonStringNames.want_to_logut.translated() as? String, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: LanguageDict["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+                                                                let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             self.logoutAction()
         }
-        let cancelAction = UIAlertAction(title: LanguageDict["teacher_cancel"] as? String, style: UIAlertAction.Style.cancel) {
+                                                                                             let cancelAction = UIAlertAction(title: commonStringNames.teacher_cancel.translated() as? String, style: UIAlertAction.Style.cancel) {
             UIAlertAction in
             self.actionClose(self)
         }
@@ -357,15 +357,15 @@ class ParentChangePasswordVC: UIViewController ,UITextFieldDelegate,UITextViewDe
             VerifyNewPasswordText.textAlignment = .left
         }
         
-        TitleLabel.text = LangDict["pop_password_title"] as? String
-        FloatExistingLabel.text = LangDict["pop_password_txt_exist"] as? String
-        FloatVerifyLabel.text = LangDict["pop_password_txt_repeat"] as? String
-        FloatNewLabel.text = LangDict["pop_password_txt_new"] as? String
-        CancelButton.setTitle(LangDict["pop_password_btnCancel"] as? String, for: .normal)
-        UpdateButton.setTitle(LangDict["pop_password_btnUpdate"] as? String, for: .normal)
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        TitleLabel.text = commonStringNames.pop_password_title.translated()
+        FloatExistingLabel.text = commonStringNames.pop_password_txt_exist.translated()
+        FloatVerifyLabel.text = commonStringNames.pop_password_txt_repeat.translated() 
+        FloatNewLabel.text = commonStringNames.pop_password_txt_new.translated() as? String
+        CancelButton.setTitle(commonStringNames.pop_password_btnCancel.translated() as? String, for: .normal)
+                              UpdateButton.setTitle(commonStringNames.pop_password_btnUpdate.translated() as? String, for: .normal)
+                                                    strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+                                                    strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+                                                    strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
     }
     
 }

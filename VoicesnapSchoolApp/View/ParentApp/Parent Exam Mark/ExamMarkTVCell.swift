@@ -21,6 +21,8 @@ class ExamMarkTVCell: UITableViewCell {
         ExamView.layer.borderWidth = 0.3
         ExamView.layer.borderColor = UIColor.lightGray.cgColor
         ExamView.layer.cornerRadius = 2
+        ViewExamBtn.setTitle(commonStringNames.ViewMarks.translated(), for: .normal)
+        ViewProgressBtn.setTitle(commonStringNames.ViewProgress.translated(), for: .normal)
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

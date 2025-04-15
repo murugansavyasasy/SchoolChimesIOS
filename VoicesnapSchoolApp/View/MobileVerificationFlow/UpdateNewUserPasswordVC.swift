@@ -369,6 +369,9 @@ class UpdateNewUserPasswordVC: UIViewController,Apidelegate,UITextFieldDelegate 
                                 staffDisplayRole = String(describing: dicUser["staff_display_role"]!)
                                 
                                 defaults.set(staffDisplayRole as String, forKey: DefaultsKeys.getgroupHeadRole)
+                                
+                               
+                                defaults.set(staffDisplayRole as String, forKey: DefaultsKeys.role_display_name)
                                 appDelegate.isParent = String(describing: dicUser["is_parent"]!)
                                 appDelegate.isStaff = String(describing: dicUser["is_staff"]!)
                                 UserDefaults.standard.set(String(describing: dicUser[IMAGE_COUNT]!), forKey: IMAGE_COUNT)
@@ -415,14 +418,14 @@ class UpdateNewUserPasswordVC: UIViewController,Apidelegate,UITextFieldDelegate 
                                     }
                                     
                                     
-                                    else if (appDelegate.staffDisplayRole == "Group Head"){
+                                    else if (appDelegate.staffRole == "p1"){
                                         appDelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                         UserDefaults.standard.set("GroupHead", forKey: LOGINASNAME)
                                         UserDefaults.standard.set("No", forKey: COMBINATION)
                                         self.SelectedLoginAsIndexInt = 0
                                         self.updateDeviceToken()
                                     }
-                                    else if (appDelegate.staffDisplayRole == "Principal"){
+                                    else if (appDelegate.staffRole == "p2"){
                                         
                                         appDelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                         UserDefaults.standard.set("Principal", forKey: LOGINASNAME)
@@ -430,14 +433,14 @@ class UpdateNewUserPasswordVC: UIViewController,Apidelegate,UITextFieldDelegate 
                                         self.SelectedLoginAsIndexInt = 1
                                         self.updateDeviceToken()
                                     }
-                                    else if (appDelegate.staffDisplayRole == "Teaching Staff"){
+                                    else if (appDelegate.staffRole == "p3"){
                                         appDelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                         UserDefaults.standard.set("Staff", forKey: LOGINASNAME)
                                         UserDefaults.standard.set("No", forKey: COMBINATION)
                                         self.SelectedLoginAsIndexInt = 2
                                         self.updateDeviceToken()
                                     }
-                                    else if (appDelegate.staffDisplayRole == "Office Staff"){
+                                    else if (appDelegate.staffRole == "p4"){
                                         
                                         appDelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                         UserDefaults.standard.set("OfficeStaff", forKey: LOGINASNAME)
@@ -446,7 +449,7 @@ class UpdateNewUserPasswordVC: UIViewController,Apidelegate,UITextFieldDelegate 
                                         self.updateDeviceToken()
                                         
                                     }
-                                    else if (appDelegate.staffDisplayRole == "Non Office Staff"){
+                                    else if (appDelegate.staffRole == "p5"){
                                         appDelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                         UserDefaults.standard.set("NonOfficeStaff", forKey: LOGINASNAME)
                                         UserDefaults.standard.set("No", forKey: COMBINATION)
@@ -582,10 +585,10 @@ class UpdateNewUserPasswordVC: UIViewController,Apidelegate,UITextFieldDelegate 
     func AlerMessage(alrtString : String)
     {
         
-        let alertController = UIAlertController(title: "Alert", message: alrtString, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.Alert.translated(), message: alrtString, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.OK.translated(), style: UIAlertAction.Style.default) {
             UIAlertAction in
             print("Okaction")
             
@@ -819,11 +822,11 @@ class UpdateNewUserPasswordVC: UIViewController,Apidelegate,UITextFieldDelegate 
         }else{
             self.view.semanticContentAttribute = .forceLeftToRight
         }
-        CreatePswdLabel.text = LangDict["create_new_password"] as? String
-        ConfirmPswdLabel.text = LangDict["confirm_password"] as? String
-        PasswordText.placeholder = LangDict["hint_password"] as? String
-        ConfirmPasswordText.placeholder = LangDict["hint_password"] as? String
-        SubmitButton.setTitle(LangDict["btn_sign_submit"] as? String, for: .normal)
+        CreatePswdLabel.text = commonStringNames.create_new_password.translated() as? String
+        ConfirmPswdLabel.text = commonStringNames.confirm_password.translated() as? String
+        PasswordText.placeholder = commonStringNames.hint_password.translated() as? String
+        ConfirmPasswordText.placeholder = commonStringNames.hint_password.translated() as? String
+        SubmitButton.setTitle(commonStringNames.btn_sign_submit.translated() as? String, for: .normal)
         
     }
     

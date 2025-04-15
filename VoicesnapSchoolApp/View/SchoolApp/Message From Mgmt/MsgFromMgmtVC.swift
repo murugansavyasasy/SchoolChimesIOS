@@ -182,7 +182,7 @@ class MsgFromMgmtVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             cell.DateLbl.text = String(describing: dict["Date"]!)
             cell.DayLbl.text = String(describing: dict["Day"]!)
             
-            passDate = String(describing: dict["Date"]!)
+          
             let TextCount : String = String(describing: dict["TotalSMS"]!)
             let VoiceCount : String = String(describing: dict["TotalVOICE"]!)
             let PdfCount : String = String(describing: dict["TotalPDF"]!)
@@ -226,11 +226,11 @@ class MsgFromMgmtVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             }else{
                 cell.UnreadVideoCountLabel.isHidden = true
             }
-            let strVoice = languageDictionary ["teacher_txt_voice"] as? String ?? "Voice"
-            let strText = languageDictionary ["teacher_txt_text"] as? String ?? "Text"
-            let strImage = languageDictionary ["teacher_txt_Image"] as? String ?? "Image"
-            let strpdf = languageDictionary ["pdf_1"] as? String ?? "PDF"
-            let strvideo = languageDictionary ["videoName"] as? String ?? "PDF"
+            let strVoice = commonStringNames.teacher_txt_voice.translated() as? String ?? "Voice"
+            let strText = commonStringNames.teacher_txt_text.translated() as? String ?? "Text"
+            let strImage = commonStringNames.teacher_txt_Image.translated() as? String ?? "Image"
+            let strpdf = commonStringNames.pdf_1.translated() as? String ?? "PDF"
+            let strvideo = commonStringNames.videoName.translated() as? String ?? "PDF"
             
             cell.VoiceCountLbl.text =  strVoice + "(" + VoiceCount + ")"
             cell.ImageCountLbl.text = strImage + "(" + ImageCount  + ")"
@@ -348,14 +348,19 @@ class MsgFromMgmtVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     @objc func actionVideoButton(sender: UIButton)
     {
         SelectedDict = arrMgmtData[sender.tag] as! NSDictionary
-        let vc = ManagementVideoViewController(nibName: nil, bundle: nil)
+//        performSegue(withIdentifier: "StaffMgmtVideoSegue", sender: self)
         
+        
+        let vc = ManagementVideoViewController(nibName: nil, bundle: nil)
+        vc.videoSelectedDict = SelectedDict
         vc.modalPresentationStyle = .fullScreen
         vc.SchoolID = strSchoolID
-        print("passpassDate",passDate)
-        vc.getDate = passDate
+        let dict : NSDictionary = arrMgmtData[sender.tag] as! NSDictionary
+        vc.getDate = dict["Date"] as! String
+        print("passpas1sDate",passDate)
+     
         vc.chilId = strStaffID
-        vc.getDate = passDate
+        vc.getTag = sender.tag
         vc.getMsgFromMgnt = 1
         vc.getArchive = isArchieveGet
         vc.countryCode = strCountryCode
@@ -522,7 +527,7 @@ class MsgFromMgmtVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         
         
         
-        let okAction = UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             print("Okaction")
             self.navigationController?.popViewController(animated: true)
@@ -613,6 +618,23 @@ print("SelectedDict34",SelectedDict)
         
         else if (segue.identifier == "StaffMgmtVideoSegue")
         {
+            
+            
+            
+//            let segueid = segue.destination as! ParentVideoVc
+////            segueid.PDFSelectedDict = SelectedDict
+//            
+////            segueid.getArchive = isArchieveGet
+//            segueid.getMsgFromMgnt = 1
+//            segueid.SchoolId = strSchoolID
+//            segueid.ChildId = strStaffID
+////            segueid.bIsArchive = true
+////            segueid.strSenderType = "FromStaff"
+            
+            
+            
+            
+            
             let vc = ManagementVideoViewController(nibName: nil, bundle: nil)
             vc.modalPresentationStyle = .fullScreen
             vc.videoSelectedDict = SelectedDict
@@ -660,8 +682,8 @@ print("SelectedDict34",SelectedDict)
         let titleLabel = UILabel()
         titleLabel.frame = CGRect(x: 0, y: 0, width: self.view.frame.width , height: 45)
         titleLabel.textColor = UIColor (red:166.0/255.0, green: 114.0/255.0, blue: 155.0/255.0, alpha: 1)
-        let secondWord : String  = languageDictionary["messages"] as? String ?? "Messages"
-        let thirdWord   : String  = languageDictionary["from_management"] as? String ?? "from Management"
+        let secondWord : String  = commonStringNames.messages.translated() as? String ?? "Messages"
+        let thirdWord   : String  = commonStringNames.from_management.translated() as? String ?? "from Management"
         let comboWord = secondWord + " " + thirdWord
         let attributedText = NSMutableAttributedString(string:comboWord)
         if(UIDevice.current.userInterfaceIdiom == .pad){
@@ -713,9 +735,9 @@ print("SelectedDict34",SelectedDict)
         }else{
             UIView.appearance().semanticContentAttribute = .forceLeftToRight
         }
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         navTitle()
     }
     
@@ -734,7 +756,7 @@ print("SelectedDict34",SelectedDict)
         noview.addSubview(noDataLabel)
         
         let button = UIButton(frame: CGRect(x: self.MgmtTableView.bounds.size.width - 108, y: noDataLabel.frame.height + 10, width: 100, height: 32))
-        button.setTitle(SEE_MORE_TITLE, for: .normal)
+        button.setTitle(commonStringNames.SeeMore.translated(), for: .normal)
         button.backgroundColor = .white
         button.setTitleColor(utilObj.PARENT_NAV_BAR_COLOR, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 12)

@@ -59,6 +59,7 @@ class StaffnoticeBoardVcViewController: UIViewController, Apidelegate,UITableVie
         NoticeBoardTableview.dataSource = self
         NoticeBoardTableview.delegate = self
         search_bar.delegate = self
+        search_bar.placeholder = commonStringNames.Search.translated()
         
 //        NoticeBoardTableview.reloadData()
       
@@ -187,10 +188,10 @@ class StaffnoticeBoardVcViewController: UIViewController, Apidelegate,UITableVie
     func AlertMessage(strAlert : String)
     {
         
-        let alertController = UIAlertController(title: "Alert", message: strAlert, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.Alert.translated(), message: strAlert, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: "ok", style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.OK.translated(), style: UIAlertAction.Style.default) {
             UIAlertAction in
             print("Okaction")
             self.dismiss(animated: true, completion: nil)
@@ -310,7 +311,7 @@ class StaffnoticeBoardVcViewController: UIViewController, Apidelegate,UITableVie
         noview.addSubview(noDataLabel)
         
         let button = UIButton(frame: CGRect(x: self.NoticeBoardTableview.bounds.size.width - 108, y: noDataLabel.frame.height + 30, width: 100, height: 32))
-        button.setTitle(SEE_MORE_TITLE, for: .normal)
+        button.setTitle(commonStringNames.SeeMore.translated(), for: .normal)
         button.backgroundColor = .white
         button.setTitleColor(utilObj.PARENT_NAV_BAR_COLOR, for: .normal)
         button.addTarget(self, action: #selector(self.seeMoreButtonTapped), for: .touchUpInside)

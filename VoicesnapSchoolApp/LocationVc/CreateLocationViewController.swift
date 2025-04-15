@@ -11,6 +11,13 @@ import DropDown
 import ObjectMapper
 class CreateLocationViewController: UIViewController, UITextFieldDelegate {
 
+    @IBOutlet weak var clickTogetLattiandLongitute: UILabel!
+    @IBOutlet weak var submit: UILabel!
+    @IBOutlet weak var MetersLbl: UILabel!
+    @IBOutlet weak var yourAdressLbl: UILabel!
+    @IBOutlet weak var DropDistanceLbl: UILabel!
+    @IBOutlet weak var pinLocationNameLbl: UILabel!
+    @IBOutlet weak var ImportantLbl: UILabel!
     @IBOutlet weak var backView: UIView!
    
     @IBOutlet weak var distancetxtFldHeight: NSLayoutConstraint!
@@ -39,13 +46,9 @@ class CreateLocationViewController: UIViewController, UITextFieldDelegate {
     var refrenceAddress = ""
     var userId : Int!
     
-    let firstParagraph = """
-    Accurate location settings are crucial for ensuring that attendance is only marked when users are within the designated area of the institute. Please double-check the location before submitting.
-    """
+    let firstParagraph = commonStringNames.AccurateLocationSettingsMessage.translated()
 
-    let secondParagraph = """
-    Once saved, this location will be used to verify the proximity of users when they mark their attendance. Ensure that the location is correct as it will directly impact attendance functionality.
-    """
+    let secondParagraph = commonStringNames.SavedLocationUsageMessage.translated()
     
 
     
@@ -56,6 +59,15 @@ class CreateLocationViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        ImportantLbl.text = commonStringNames.ImportantNote.translated()
+        pinLocationNameLbl.text = commonStringNames.PinYourLocationName.translated()
+        DropDistanceLbl.text = commonStringNames.DropDistanceInMeter.translated()
+        MetersLbl.text = commonStringNames.Meters.translated()
+        yourAdressLbl.text = commonStringNames.YourAddress.translated()
+        clickTogetLattiandLongitute.text = commonStringNames.Getlattitude.translated()
+        currentlatAndlongDefltLbl.text = commonStringNames.currentLatitude.translated()
+        tapToView.text = commonStringNames.TapToViewPunchLocations.translated()
+        submit.text = commonStringNames.Submit.translated()
         
         addDoneButtonOnKeyboard()
        
@@ -142,7 +154,7 @@ class CreateLocationViewController: UIViewController, UITextFieldDelegate {
         var textConver  = Int(distanceTextfiled.text!)
 //        var a = 10
 //        print("textConver",textConver)
-        if loactiontextfiled.text == "Pin your loaction name" || loactiontextfiled.text == ""{
+        if loactiontextfiled.text == commonStringNames.PinYourLocationName.translated() || loactiontextfiled.text == ""{
             
             let refreshAlert = UIAlertController(title: "", message: "Enter your location", preferredStyle: UIAlertController.Style.alert)
            
@@ -196,7 +208,7 @@ class CreateLocationViewController: UIViewController, UITextFieldDelegate {
     @IBAction func latlong(){
         
         print("hiiiii")
-        if loactiontextfiled.text == "Pin your loaction name" || loactiontextfiled.text == ""{
+        if loactiontextfiled.text == commonStringNames.PinYourLocationName.translated() || loactiontextfiled.text == ""{
             
             let refreshAlert = UIAlertController(title: "", message: "Enter your location", preferredStyle: UIAlertController.Style.alert)
            

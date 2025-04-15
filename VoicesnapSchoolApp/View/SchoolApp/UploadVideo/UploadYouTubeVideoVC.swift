@@ -148,7 +148,7 @@ class UploadYouTubeVideoVC: UIViewController, UIImagePickerControllerDelegate, U
                 self.performSegue(withIdentifier: "PrincipalVideoVCToSelectionSegue", sender: self)
             }
         }else{
-            Util.showAlert("", msg: LanguageDict["fill_all_alert"] as? String)
+            Util.showAlert("", msg: commonStringNames.fill_all_alert.translated() as? String)
         }
         
     }
@@ -230,11 +230,11 @@ class UploadYouTubeVideoVC: UIViewController, UIImagePickerControllerDelegate, U
             self.view.semanticContentAttribute = .forceLeftToRight
             descriptionTextField.textAlignment = .left
         }
-        composeVideoLabel.text = LangDict["teacher_txt_composeImg"] as? String
-        descriptionTextField.placeholder = LangDict["teacher_image_hint_title"] as? String
-        titleTextField.placeholder = LangDict["teacher_image_hint_title"] as? String
-        ChangeVideoButton.setTitle(LangDict["teacher_txt_chgimg"] as? String, for: .normal)
-        ChooseVideoFromGalleryButton.setTitle(LangDict["teacher_txt_chgimg"] as? String, for: .normal)
+        composeVideoLabel.text = commonStringNames.teacher_txt_composeImg.translated() as? String
+        descriptionTextField.placeholder = commonStringNames.teacher_image_hint_title.translated() as? String
+        titleTextField.placeholder = commonStringNames.teacher_image_hint_title.translated() as? String
+        ChangeVideoButton.setTitle(commonStringNames.teacher_txt_chgimg.translated() as? String, for: .normal)
+                                   ChooseVideoFromGalleryButton.setTitle(commonStringNames.teacher_txt_chgimg.translated() as? String, for: .normal)
         
     }
     

@@ -181,7 +181,7 @@ class PrincipalStandardOrStudentVC: UIViewController,Apidelegate,UIPickerViewDel
                 pickerSectionArray = []
                 SectionNameLbl.text = ""
                 SelectedSectionIDString = ""
-                Util.showAlert("", msg: LanguageDict["no_section"] as? String)
+                Util.showAlert("", msg: commonStringNames.no_section.translated() as? String)
             }
             
             SelectedClassIDString = String(StandarCodeArray[selectedStandardRow])
@@ -222,7 +222,7 @@ class PrincipalStandardOrStudentVC: UIViewController,Apidelegate,UIPickerViewDel
         print("PopupChooseStandardPickerViewWorking")
         TableString = "Standard"
         
-        PickerTitleLabel.text = LanguageDict["select_standard"] as? String
+                    PickerTitleLabel.text = commonStringNames.select_standard.translated() as? String
         self.MyPickerView.reloadAllComponents()
         if(pickerStandardArray.count > 0)
         {
@@ -242,7 +242,7 @@ class PrincipalStandardOrStudentVC: UIViewController,Apidelegate,UIPickerViewDel
         }
         else
         {
-            Util.showAlert("", msg: LanguageDict["no_students"] as? String)
+            Util.showAlert("", msg: commonStringNames.no_students.translated() as? String)
             
         }
         
@@ -252,7 +252,7 @@ class PrincipalStandardOrStudentVC: UIViewController,Apidelegate,UIPickerViewDel
     @IBAction func actionChooseSectionButton(_ sender: UIButton) {
         PopupChooseStandardPickerView.isHidden = false
         TableString = "Section"
-        PickerTitleLabel.text = LanguageDict["select_section"] as? String
+                PickerTitleLabel.text = commonStringNames.select_section.translated() as? String
         self.MyPickerView.reloadAllComponents()
         if((StandardNameLbl.text?.count)! > 0)
         {
@@ -271,7 +271,7 @@ class PrincipalStandardOrStudentVC: UIViewController,Apidelegate,UIPickerViewDel
         }
         else
         {
-            Util.showAlert("", msg: LanguageDict["standard_first"] as? String)
+            Util.showAlert("", msg: commonStringNames.standard_first.translated() as? String)
         }
         
     }
@@ -310,7 +310,7 @@ class PrincipalStandardOrStudentVC: UIViewController,Apidelegate,UIPickerViewDel
         }
         else
         {
-            Util.showAlert("", msg: LanguageDict["select_standard_section_alert"] as? String)
+            Util.showAlert("", msg: commonStringNames.select_standard_section_alert.translated() as? String)
             
         }
         
@@ -345,7 +345,7 @@ class PrincipalStandardOrStudentVC: UIViewController,Apidelegate,UIPickerViewDel
         }
         else
         {
-            Util.showAlert("", msg: LanguageDict["select_standard_section_alert"] as? String)
+            Util.showAlert("", msg: commonStringNames.select_standard_section_alert.translated() as? String)
             
         }
     }
@@ -423,6 +423,8 @@ class PrincipalStandardOrStudentVC: UIViewController,Apidelegate,UIPickerViewDel
             let requestString = requestStringer.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
             let SectionID = String(describing: SelectedSectionDeatil["SecCode"]!)
             let myDict:NSMutableDictionary = ["SchoolID" : SchoolId,"StaffID" : StaffId, COUNTRY_CODE: strCountryCode,"Description" : HomeTitleText,"Duration": durationString ,"Seccode" : [["TargetCode":SectionID]] , "StartTime" : initialTime , "EndTime" : doNotDial , "Dates" : DefaultsKeys.dateArr ]
+            
+            print()
             UtilObj.printLogKey(printKey: "myDict", printingValue: myDict)
             let myString = Util.convertDictionary(toString: myDict)
             apiCall.callPassVoiceParms(requestString, myString, "VoiceToParents", VoiceData as Data?)
@@ -481,12 +483,19 @@ class PrincipalStandardOrStudentVC: UIViewController,Apidelegate,UIPickerViewDel
                                     if(stdName != "" && stdName != "0")
                                     {
                                         StandardNameArray.append(stdName!)
-                                        DetailofSectionArray.append(dicResponse["Sections"] as! [Any])
-                                        DetailedSubjectArray.append(dicResponse["Subjects"] as! [Any])
+                                        if let sections = dicResponse["Sections"] as? [Any] {
+                                            DetailofSectionArray.append(sections)
+                                        }
+                                        
+                                        if let Subject = dicResponse["Subjects"] as? [Any] {
+                                            DetailedSubjectArray.append(Subject)
+                                        }
+                                       
                                         pickerStandardArray = StandardNameArray
                                         StandardNameLbl.text = pickerStandardArray[0]
                                         SelectedClassIDString = String(StandarCodeArray[0])
-                                        let sectionarray:Array = DetailofSectionArray[0] as! [Any]
+                                        let sectionarray:Array = DetailofSectionArray.first as? [Any] ?? []
+                                        
                                         var sectionNameArray :Array = [String]()
                                         for  i in 0..<sectionarray.count
                                         {
@@ -494,18 +503,36 @@ class PrincipalStandardOrStudentVC: UIViewController,Apidelegate,UIPickerViewDel
                                             sectionNameArray.append(String(describing: dicResponse["SectionName"]!))
                                             SectionCodeArray.append(String(describing: dicResponse["SectionId"]!))
                                         }
-                                        SelectedSectionIDString = String(SectionCodeArray[0])
+                                        
+                                        if let firstSectionID = SectionCodeArray.first {
+                                            SelectedSectionIDString = String(firstSectionID)
+                                        } else {
+                                            SelectedSectionIDString = "" // Assign a default value or handle it as needed
+                                        }
                                         pickerSectionArray = sectionNameArray
-                                        let dicResponse :NSDictionary = sectionarray[0] as! NSDictionary
-                                        SelectedSectionDeatil = dicResponse
-                                        let SectionString = dicResponse["SectionName"] as! String
-                                        SectionNameLbl.text = SectionString
+                                        if let firstElement = sectionarray.first as? NSDictionary {
+                                            SelectedSectionDeatil = firstElement
+                                        } else {
+                                            SelectedSectionDeatil = [:] // Assign an empty dictionary or handle accordingly
+                                        }
+//                                      
+                                        if let sectionString = dicResponse["SectionName"] as? String {
+                                            SectionNameLbl.text = sectionString
+                                        } else {
+                                            SectionNameLbl.text = "" // Provide a default value or handle accordingly
+                                        }
+                                        
                                     }
                                     else
                                     {
                                         Util.showAlert("", msg: AlertString)
                                         dismiss(animated: false, completion: nil)
                                     }
+                                }
+                                
+                                if DetailedSubjectArray.isEmpty && DetailofSectionArray.isEmpty{
+                                    Util.showAlert("", msg: "No record found")
+                                    dismiss(animated: false, completion: nil)
                                 }
                             }
                         }
@@ -674,14 +701,14 @@ class PrincipalStandardOrStudentVC: UIViewController,Apidelegate,UIPickerViewDel
             
         }
         PickerTitleLabel.textAlignment = .center
-        self.SelectSubjectButton.setTitle(LangDict["select_subjects"] as? String, for: .normal)
-        StandardLabel.text = LangDict["teacher_atten_standard"] as? String
-        SectionLabel.text = LangDict["teacher_atten_sections"] as? String
-        pickerOkButton.setTitle(LangDict["teacher_btn_ok"] as? String, for: .normal)
-        pickerCancelButton.setTitle(LangDict["teacher_cancel"] as? String, for: .normal)
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        self.SelectSubjectButton.setTitle(commonStringNames.select_subjects.translated() as? String, for: .normal)
+        StandardLabel.text = commonStringNames.teacher_atten_standard.translated() as? String
+        SectionLabel.text = commonStringNames.teacher_atten_sections.translated() as? String
+        pickerOkButton.setTitle(commonStringNames.teacher_btn_ok.translated() as? String, for: .normal)
+        pickerCancelButton.setTitle(commonStringNames.teacher_cancel.translated() as? String, for: .normal)
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
     }
     
     

@@ -64,6 +64,7 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
     @IBOutlet weak var SchoolImg: UIImageView!
     @IBOutlet weak var lblscrollView: UILabel!
     
+    @IBOutlet weak var barLanguageClick: UIBarButtonItem!
     @IBOutlet weak var nextView: UIView!
     
     @IBOutlet weak var cv: UICollectionView!
@@ -131,12 +132,37 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
     var rowSelected : Int?
     var coutData : [countResponce] = []
     var OverAllCountValue  = 0;
+    
+    let deviceName = UIDevice.current.model
     override func viewDidLoad()
     {
         super.viewDidLoad()
         
         
         print("MAINVC")
+        
+        
+//        let customButton = UIButton(type: .custom)
+//            customButton.setImage(UIImage(systemName: "globe"), for: .normal)
+//            customButton.setTitle("Language", for: .normal)
+//            customButton.setTitleColor(.white, for: .normal)
+////            customButton.setTitleColor(.systemBlue, for: .normal)
+//
+//            // Adjust layout to have image on the left, label on the right
+//        customButton.semanticContentAttribute = .forceRightToLeft
+//            customButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: -8, bottom: 0, right: 8)
+//
+//            // Optional: Set button size if needed
+//            customButton.sizeToFit()
+//
+//            // Add target action
+//            customButton.addTarget(self, action: #selector(barLanguageButtonTapped), for: .touchUpInside)
+//
+//            // Assign the custom view to your IBOutlet UIBarButtonItem
+//            barLanguageClick.customView = customButton
+        
+        
+        
         let userDefaults = UserDefaults.standard
         
         staffRole = userDefaults.string(forKey: DefaultsKeys.StaffRole)!
@@ -169,15 +195,21 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
         
         UserPassword = UserDefaults.standard.object(forKey:USERPASSWORD) as? String ?? ""
         
-        strLoggedAS = UserDefaults.standard.object(forKey: LOGINASNAME) as? String ?? ""
+        strLoggedAS = UserDefaults.standard.object(forKey: DefaultsKeys.role_display_name) as? String ?? ""
         
+        print("strLoggedAS23456",strLoggedAS)
         self.ButtonCornerDesign()
-        callSelectedLanguage()
+//        callSelectedLanguage()
 
         coutApi()
     }
     
-    
+    @objc func barLanguageButtonTapped() {
+        print("Language button tapped!")
+        // Your action here
+        
+        callLanguageVc()
+    }
     
     
     override func didReceiveMemoryWarning()
@@ -227,9 +259,13 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
             let mainvc = UpdateDetailViewController(nibName: nil, bundle: nil)
             mainvc.memeberArrayString = memeberArrayString
             mainvc.schoolArrayString  = schoolArrayString
+            
+            mainvc.skipType = 2
             mainvc.type = "School"
             mainvc.modalPresentationStyle = .formSheet
             present(mainvc, animated: true)
+            
+           
         }
         
         
@@ -398,11 +434,10 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
         return 1
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        
-        
-        return CGSize(width: (self.CollectionViewGrid.frame.size.width/3) - 10, height: (self.CollectionViewGrid.frame.size.height/4) - 12)
-        
+
+        return CGSize(width: (self.CollectionViewGrid.frame.size.width/3) - 10, height: 80)
+
+
     }
     
     
@@ -433,7 +468,7 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
         cell.backgroundColor = UIColor.clear
         cell.countView.isHidden = true
         
-        print("CellIconsImgArray",CellIconsArray)
+//        print("CellIconsImgArray",CellIconsArray)
         if(CellIconsArray.count > indexPath.row) {
             if((UIImage(named: CellIconsArray[indexPath.row] as? String ?? "")) != nil) {
                 print("Image existing")
@@ -464,13 +499,13 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
         }
         
         
-        print("CellIndexIdsArrayrow",CellIndexIdsArray)
+//        print("CellIndexIdsArrayrow",CellIndexIdsArray)
         
         
         if(self.CellIndexIdsArray[indexPath.row] as! String == "100"){
             print("RippleInside")
             if indexPath.row == 0 {
-                cell.cellIconTopCnstraints.constant = 5
+                cell.cellIconTopCnstraints.constant = -5
                 cell.iconWidth.constant = 100
                 cell.iconHeight.constant = 100
 //                cell.CellIcon.contentMode = .scaleAspectFill
@@ -480,6 +515,11 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
             }
         }else{
 //
+            
+            cell.iconHeight.constant = 35
+            cell.iconWidth.constant = 35
+            cell.cellIconTopCnstraints.constant = 13
+            
         }
         
         if(self.CellIndexIdsArray[indexPath.row] as! String == "13"){
@@ -530,7 +570,10 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
         
         
         print("indexPath\(indexPath.row)")
-        print("12",CellSegueArray)
+//        print("12",CellSegueArray)
+//        print("bookIndexbookIndex",bookIndex)
+        print("MenuNamess",CellSegueArray[indexPath.row])
+        print("CellIndexIdsArray",CellIndexIdsArray)
         if(indexPath.row == bookIndex){
             if(strBookenabled == "1")
             {
@@ -543,6 +586,7 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
                     }
                 }
                 
+               
                 
             }
         }else{
@@ -657,7 +701,7 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
 
 
                     let vc = StaffPtmViewController(nibName: nil, bundle: nil)
-
+                   
                     vc.modalPresentationStyle = .fullScreen
                     present(vc, animated: true)
                 }else  if(self.CellIndexIdsArray[indexPath.row] as! String == "35"){
@@ -695,7 +739,7 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
                     
                     
                     
-                    Util .showAlert("", msg: "Coming Soon!!!")
+                    Util .showAlert("", msg: commonStringNames.ComingSoon.translated())
                     
                 }
                 
@@ -1047,6 +1091,21 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
         }
         let requestString = requestStringer.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
         
+        print("Languagecode",DefaultsKeys.languageCode)
+        
+        if let languagecode = UserDefaults.standard.string(forKey: DefaultsKeys.languageCode) {
+            print("Username: \(languagecode)")
+            
+            var LangId = 1
+            if languagecode == "th"{
+                LangId = 2
+                
+            }else if languagecode == "hi"{
+                LangId = 3
+            }else {
+                LangId = 1
+            }
+        }
         
         let myDict:NSMutableDictionary = ["MemberData" : arrMembersData,"LanguageId": "1",COUNTRY_ID : strCountryCode]
         print(requestString)
@@ -1123,9 +1182,10 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
                     return
                     
                 }
-                print("RES : \(responseArray)")
+                print("RESefddgbdgbdg : \(responseArray)")
                 arrayForgetChangeDatas = responseArray
                 
+                print("arrayForgetChangeDatas.count",arrayForgetChangeDatas.count)
                 for i in 0..<arrayForgetChangeDatas.count
                 {
                     dicResponse = arrayForgetChangeDatas[i] as! NSDictionary
@@ -1143,7 +1203,7 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
                 }
                 print("loadCellArrayData1ResponString")
                 
-                loadCellArrayData()
+//                loadCellArrayData()
                 
             }else  if(strApiFrom.isEqual(to: "ChangePassword"))
             {
@@ -1202,17 +1262,9 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
         titleLabel.textColor = .white
         
         var strLogged : String = String()
-        if(strLoggedAS == "Staff"){
-            strLogged = LanguageDict["as_staff"] as? String ?? "Staff"
-        }else  if(strLoggedAS == "Admin"){
-            strLogged = LanguageDict["as_admin"] as? String ?? "Admin"
-        }else  if(strLoggedAS == "Principal"){
-            strLogged = LanguageDict["as_principal"] as? String ?? "Principal"
-        }else  if(strLoggedAS == "GroupHead"){
-            strLogged = LanguageDict["as_grouphead"] as? String ?? "GroupHead"
-        }else{
-            strLogged = appDelegate.staffDisplayRole
-        }
+
+        strLogged = strLoggedAS.translated()
+     
         
         let thirdWord :String  = strLogged + "    "
         let comboWord = thirdWord
@@ -1306,14 +1358,19 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
     func callSelectedLanguage(){
         if(Util .isNetworkConnected())
         {
+            
+            print("isNetworkConnectedisNetworkConnected")
             self.CallLanguageChangeApi()
         }
         strLanguage = UserDefaults.standard.object(forKey: SELECTED_LANGUAGE) as! String
+        
+        print("strLanguagestrLanguage",strLanguage)
         let bundle = Bundle(for: type(of: self))
         if let theURL = bundle.url(forResource: strLanguage, withExtension: "json") {
             do {
                 let data = try Data(contentsOf: theURL)
                 if let parsedData = try? JSONSerialization.jsonObject(with: data) as AnyObject {
+                    print("loadLanguageDataloadLanguageDataparsedData")
                     self.loadLanguageData(LangDict: parsedData as! NSDictionary, Language: strLanguage)
                 }else{
                     print("loadCellArrayData1CallSelectedLanguage")
@@ -1344,22 +1401,24 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
             
         }
         
-        FAQLabel.text = LangDict["faq"] as? String
-        PasswordLabel.text = LangDict["txt_password"] as? String
-        LogoutLabel.text = LangDict["txt_menu_setting"] as? String
+        FAQLabel.text = commonStringNames.faq.translated() as? String
+        PasswordLabel.text = commonStringNames.txt_password.translated() as? String
+        LogoutLabel.text = commonStringNames.txt_menu_setting.translated() as? String
         
-        CHomeLabel.text = LangDict["home"] as? String
-        CFAQLabel.text = LangDict["faq"] as? String
-        CPasswordLabel.text = LangDict["txt_password"] as? String
-        CLogoutLabel.text = LangDict["txt_menu_setting"] as? String
+        CHomeLabel.text = commonStringNames.home.translated() as? String
+        CFAQLabel.text = commonStringNames.faq.translated() as? String
+        CPasswordLabel.text = commonStringNames.txt_password.translated() as? String
+        CLogoutLabel.text = commonStringNames.txt_menu_setting.translated() as? String
         print("loadCellArrayData1LoadLanguage")
         
-        self.loadCellArrayData()
+//        self.loadCellArrayData()
         
     }
     
     
     func loadCellArrayData(){
+        
+        print("chcking for calling times")
         self.TitleForNavigation()
         let strcombination : String  = UserDefaults.standard.object(forKey: COMBINATION) as! String
         if(strcombination == "Yes"){
@@ -1396,12 +1455,10 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
             //
             let arryMut : NSMutableArray = NSMutableArray(array: schoolLabelArray)
             //                arryMut.removeAllObjects()
-            if QuestionData.count > 0 {
+            if schoolLabelArray.count > 0 {
                 arryMut.insert("update_100" , at: 0)
                 print("LoadCondition")
-
 //
-
             }
                        
 //            arryMut.add("PTM_34")
@@ -1485,6 +1542,7 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
             print("iddddtrftrtrr")
             //            }
             print("empty.sCellSegueArray23456",CellSegueArray)
+            print("schoolLabelArray.countschoolLabelArray.count",schoolLabelArray)
             for idd in 0..<schoolLabelArray.count{
                 
                 
@@ -2106,6 +2164,7 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
         NewPasswordText.keyboardType = UIKeyboardType.numbersAndPunctuation
         VerifyNewPasswordText.keyboardType = UIKeyboardType.numbersAndPunctuation
         
+        print("End==================================")
     }
     
     
@@ -2151,7 +2210,17 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
             print("DefaultsKeys.Dict[SchoolID]",Dict["SchoolID"])
             print("DefaultsKeys.Dict[StaffID]",Dict["StaffID"])
             print("DefaultsKeys.biometricEnable",Dict["biometricEnable"])
+            print("DefaultallowVideoDownload",Dict["allowVideoDownload"])
             userDefaults.set(biometricEnable, forKey: DefaultsKeys.biometricEnable)
+            
+            
+           
+                                            var getvalue = Dict["allowVideoDownload"]
+                                           
+            userDefaults.set(getvalue, forKey: DefaultsKeys.allowVideoDownload)
+                                            
+//                                            print("downloadNodeRole", DefaultsKeys.biometricEnable)
+            //                                }
             let dicMembers = ["type" : "staff",
                               "id" : String(describing: Dict["StaffID"]!),
                               "schoolid" : String(describing: Dict["SchoolID"]!)
@@ -2216,22 +2285,27 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
         print("Main")
         var selectString = notification.object as? String ?? ""
         selectString = selectString.lowercased()
-        let log = LanguageDict["txt_menu_logout"] as? String ?? ""
-        if(selectString == log.lowercased()){
+        let log = commonStringNames.logout.translated() as? String ?? ""
+        if(selectString == log){
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() )
             {
                 self.showLogoutAlert()
+                
             }
         }else if(selectString.contains("edit")){
             callEditProfile()
-        }else if(selectString.contains("help")){
+        }else if(selectString.contains(commonStringNames.help.translated())){
             callhelp()
+        }else if (selectString.contains(commonStringNames.language_change.translated())){
+            callLanguageVc()
         }
-        else{
-            callUploadDocumentView()
-        }
-        
-        
+        print("selectStringselectString",selectString)
+    }
+    func callLanguageVc(){
+        let vc = ChangeLanguageViewController(nibName: nil, bundle: nil)
+        vc.languagePriority = "Staff"
+        vc.modalPresentationStyle = .formSheet
+        present(vc, animated: true)
     }
     
     func callEditProfile(){
@@ -2254,13 +2328,13 @@ class MainVC: UIViewController,UICollectionViewDelegate,UICollectionViewDataSour
     }
     
     func showLogoutAlert(){
-        let alertController = UIAlertController(title: LanguageDict["txt_menu_logout"] as? String, message: LanguageDict["want_to_logut"] as? String, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.txt_menu_logout.translated() as? String, message: commonStringNames.want_to_logut.translated() as? String, preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: LanguageDict["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             self.moveToLogInScreen(strFromStaff: "Staff")
         }
-        let cancelAction = UIAlertAction(title: LanguageDict["teacher_cancel"] as? String, style: UIAlertAction.Style.cancel) {
+        let cancelAction = UIAlertAction(title: commonStringNames.teacher_cancel.translated() as? String, style: UIAlertAction.Style.cancel) {
             UIAlertAction in
             
         }

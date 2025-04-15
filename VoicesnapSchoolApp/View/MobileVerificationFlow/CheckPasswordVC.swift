@@ -434,7 +434,9 @@ class CheckPasswordVC: UIViewController ,Apidelegate,UITextFieldDelegate,UITable
         let baseUrlString = UserDefaults.standard.object(forKey:BASEURL) as? String
         let requestStringer = baseUrlString! + FORGOTPSWD_METHOD_BY_COUNTRYID
         let requestString = requestStringer.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
+        print("requestString",requestString)
         let myDict:NSMutableDictionary = ["MobileNumber" : strMobileNo ,COUNTRY_CODE : strCountryCode,COUNTRY_ID : strCountryID]
+        print("myDictmyDict",myDict)
         let myString = Util.convertDictionary(toString: myDict)
         apiCall.nsurlConnectionFunction(requestString, myString, "ForgotPassword")
     }
@@ -498,6 +500,9 @@ class CheckPasswordVC: UIViewController ,Apidelegate,UITextFieldDelegate,UITable
                                 staffDisplayRole = String(describing: dicUser["staff_display_role"]!)
                                 
                                 defaults.set(staffDisplayRole as String, forKey: DefaultsKeys.getgroupHeadRole)
+                                
+                                defaults.set(staffDisplayRole as String, forKey: DefaultsKeys.role_display_name)
+                                
                                 appDelegate.isParent = String(describing: dicUser["is_parent"]!)
                                 appDelegate.isStaff = String(describing: dicUser["is_staff"]!)
                                 UserDefaults.standard.set(String(describing: dicUser[IMAGE_COUNT]!), forKey: IMAGE_COUNT)
@@ -545,14 +550,14 @@ class CheckPasswordVC: UIViewController ,Apidelegate,UITextFieldDelegate,UITable
                                     self.LoadParentDetail()
                                 }
                                 
-                                else if (appDelegate.staffDisplayRole == "Group Head"){
+                                else if (appDelegate.staffRole == "p1"){
                                     appDelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                     UserDefaults.standard.set("GroupHead", forKey: LOGINASNAME)
                                     UserDefaults.standard.set("No", forKey: COMBINATION)
                                     self.SelectedLoginAsIndexInt = 0
                                     self.updateDeviceToken()
                                 }
-                                else if (appDelegate.staffDisplayRole == "Principal"){
+                                else if (appDelegate.staffRole == "p2"){
                                     
                                     appDelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                     UserDefaults.standard.set("Principal", forKey: LOGINASNAME)
@@ -560,14 +565,14 @@ class CheckPasswordVC: UIViewController ,Apidelegate,UITextFieldDelegate,UITable
                                     self.SelectedLoginAsIndexInt = 1
                                     self.updateDeviceToken()
                                 }
-                                else if (appDelegate.staffDisplayRole == "Teaching Staff"){
+                                else if (appDelegate.staffRole == "p3"){
                                     appDelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                     UserDefaults.standard.set("Staff", forKey: LOGINASNAME)
                                     UserDefaults.standard.set("No", forKey: COMBINATION)
                                     self.SelectedLoginAsIndexInt = 2
                                     self.updateDeviceToken()
                                 }
-                                else if (appDelegate.staffDisplayRole == "Office Staff"){
+                                else if (appDelegate.staffRole == "p4"){
                                     
                                     appDelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                     UserDefaults.standard.set("OfficeStaff", forKey: LOGINASNAME)
@@ -576,13 +581,15 @@ class CheckPasswordVC: UIViewController ,Apidelegate,UITextFieldDelegate,UITable
                                     self.updateDeviceToken()
 
                                 }
-                                else if (appDelegate.staffDisplayRole == "Non Office Staff"){
+                                else if (appDelegate.staffRole == "p5"){
                                     
                                     UserDefaults.standard.set("NonOfficeStaff", forKey: LOGINASNAME)
                                     UserDefaults.standard.set("No", forKey: COMBINATION)
                                     
                                     self.updateDeviceToken()
                                 }
+                                    
+
                                 }
                                 
                                
@@ -631,6 +638,7 @@ class CheckPasswordVC: UIViewController ,Apidelegate,UITextFieldDelegate,UITable
                 UserDefaults.standard.set(strMobileNo as NSString, forKey: USERNAME)
                 UserDefaults.standard.set(UserPassWordText.text! as NSString, forKey: USERPASSWORD)
                 let strCombination : String = UserDefaults.standard.object(forKey: COMBINATION) as! String
+                print("isParentisParent",LOGINASNAME)
                 let isParent : String = UserDefaults.standard.object(forKey: LOGINASNAME) as! String
                 
                 if(strCombination == "No"){
@@ -734,8 +742,8 @@ class CheckPasswordVC: UIViewController ,Apidelegate,UITextFieldDelegate,UITable
         }
     }
     func AlerMessage(alrtStr : String){
-        let alertController = UIAlertController(title: "Alert", message: alrtStr, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
+        let alertController = UIAlertController(title: commonStringNames.Alert.translated(), message: alrtStr, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: commonStringNames.OK.translated(), style: UIAlertAction.Style.default) {
             UIAlertAction in
             self.ChangePasswordPopup(sender: self)
         }
@@ -784,17 +792,17 @@ class CheckPasswordVC: UIViewController ,Apidelegate,UITextFieldDelegate,UITable
         }else{
             self.view.semanticContentAttribute = .forceLeftToRight
         }
-        PasswordLabel.text = LangDict["enter_your_passworddd"] as? String
-        UserPassWordText.placeholder = LangDict["hint_password"] as? String
-        SubmitButton.setTitle(LangDict["btn_sign_submit"] as? String, for: .normal)
-        CancelButton.setTitle(LangDict["teacher_pop_password_btnCancel"] as? String, for: .normal)
-        UpdateButton.setTitle(LangDict["teacher_pop_password_btnUpdate"] as? String, for: .normal)
+        PasswordLabel.text = commonStringNames.enter_your_passworddd.translated() as? String
+        UserPassWordText.placeholder = commonStringNames.hint_password.translated() as? String
+        SubmitButton.setTitle(commonStringNames.btn_sign_submit.translated() as? String, for: .normal)
+                              CancelButton.setTitle(commonStringNames.teacher_pop_password_btnCancel.translated() as? String, for: .normal)
+                                                    UpdateButton.setTitle(commonStringNames.teacher_pop_password_btnUpdate.translated() as? String, for: .normal)
         
-        EnterOTPLabel.text = LangDict["enter_your_otp"] as? String
-        NewPasswordLabel.text = LangDict["teacher_pop_password_txt_new"] as? String
-        VerifyPasswordLabel.text = LangDict["teacher_pop_password_txt_repeat"] as? String
-        TitleChangePswdLabel.text = LangDict["reset_password"] as? String
-        self.passwordBindLabel.text = LangDict["password_bind"] as? String
+                                                                          EnterOTPLabel.text = commonStringNames.enter_your_otp.translated() as? String
+                                                                          NewPasswordLabel.text = commonStringNames.teacher_pop_password_txt_new.translated() as? String
+                                                                          VerifyPasswordLabel.text = commonStringNames.teacher_pop_password_txt_repeat.translated() as? String
+                                                                          TitleChangePswdLabel.text = commonStringNames.reset_password.translated() as? String
+                                                                          self.passwordBindLabel.text = commonStringNames.password_bind.translated() as? String
         
     }
     

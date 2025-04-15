@@ -8,6 +8,7 @@
 
 import UIKit
 import ObjectMapper
+import WebKit
 
 
 extension UIViewController {
@@ -38,14 +39,15 @@ extension UIViewController {
     }
 }
 
-class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,Apidelegate                        ,UIWebViewDelegate,UITextFieldDelegate{
+class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,Apidelegate                        ,UIWebViewDelegate,UITextFieldDelegate,WKNavigationDelegate{
     @IBOutlet weak var myLoginTableView: UITableView!
     @IBOutlet weak var PopupChooseLogin: UIView!
     @IBOutlet weak var CountryTable: UITableView!
     @IBOutlet var ChooseCountryPopupView: UIView!
     @IBOutlet weak var TermsConditionView: UIView!
-    @IBOutlet weak var myWebView: UIWebView!
+   
     
+    @IBOutlet weak var myWebView: WKWebView!
     @IBOutlet var PopupChangePassword: UIView!
     @IBOutlet weak var ShowExistingPswdButton: UIButton!
     @IBOutlet weak var ShowNewPswdButton: UIButton!
@@ -74,6 +76,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     var SelectedCountryID = String()
     var SelectedCountryCode = String()
     var selectCountryName = String()
+    var Mobile_placeholder = String()
     var popupCountrySelection : KLCPopup  = KLCPopup()
     var strCountryCode = String()
     var strCountryID = String()
@@ -105,24 +108,19 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     var staffRole : String!
     override func viewDidLoad(){
         super.viewDidLoad()
+        
+        print("ViewController")
         checkCountry = "yes"
         let userDefaults = UserDefaults.standard
-        
+        myWebView.navigationDelegate = self
         
         appDelegate.isPasswordBind =
         String(describing: 1)
         print("appDelegatePASS",appDelegate.isPasswordBind)
         staffRole = userDefaults.string(forKey: DefaultsKeys.StaffRole)
-        print("staffRole",staffRole)
-        print("stSchoolIdaffRole",SchoolId)
-        print("VIEW1")
-        
         StaffId = userDefaults.string(forKey: DefaultsKeys.StaffID)
-        print("DefaultsKeys.StaffID",StaffId)
         let nc = NotificationCenter.default
         nc.addObserver(self,selector: #selector(ViewController.callNotification), name: NSNotification.Name(rawValue: "PushNotification"), object:nil)
-        
-        
         
         
         isAppAlreadyLaunchedOnce()
@@ -366,6 +364,13 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         let MobilelengthStr = String(describing: dicCountryUrl["MobileNumberLength"]!)
         UserDefaults.standard.set(MobilelengthStr, forKey: MOBILE_LENGTH)
         
+        if String(describing: dicCountryUrl["mobile_no_hint"]!) != ""{
+            let MobilePlaceholder = String(describing: dicCountryUrl["mobile_no_hint"]!)
+            UserDefaults.standard.set(MobilePlaceholder, forKey: Mobile_Place_holder)
+            
+        }
+        
+        
         strBaseUrl = dicCountryUrl["BaseUrl"] as! NSString
         assignParentStaffIDS(selectedDict: dicCountryUrl)
         
@@ -504,24 +509,33 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
     
     func callAppStore ()
     {
+        
+        
         UserDefaults.standard.set(true, forKey: ACCEPT_TERMS_CONDITION)
         UserDefaults.standard.set("No" as NSString, forKey: COUNTRYFIRST)
-        UIApplication.shared.openURL(NSURL(string: LIVE_ITUNES)! as URL)
+      
+        let myUrl = LIVE_ITUNES
+        if let url = URL(string: "\(myUrl)"), !url.absoluteString.isEmpty {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+        guard let url = URL(string: "\(myUrl)"), !url.absoluteString.isEmpty else {
+        return
+        }
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     //MARK: Webview delegate
     
     func loadWebURl(){
         showLoading()
-
         let url = URL(string: TERMS_AND_CONDITION)
         print("urlurlurl",url)
-        myWebView.loadRequest(URLRequest(url: url!))
-        
+        myWebView.load(URLRequest(url: url!))
+     
     }
     
-    func webViewDidFinishLoad(_ webView: UIWebView) {
-        hideLoading()
-    }
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+            self.hideLoading()
+        }
     
     //MARK: BUTTON ACTION
     
@@ -584,6 +598,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         UserDefaults.standard.set(adminIDArray, forKey: ADMIN_ARRAY_INDEX)
         UserDefaults.standard.set(groupHeadIDArray, forKey: GROUPHEAD_ARRAY_INDEX)
         UserDefaults.standard.set(menuIDArray, forKey: MENU_ARRAY_INDEX)
+//        UserDefaults.standard.set(Mobile_placeholder, forKey: Mobile_Place_holder)
         
         if(CountrySelect == "CountrySelected")
         {
@@ -635,7 +650,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         strApiFrom = "CountryList"
         let apiCall = API_call.init()
         apiCall.delegate = self;
-        let requestStringer = LIVE_COUNTRY_LIST
+        let requestStringer = LIVE_DOMAIN  + "GetCountryList"
         let requestString = requestStringer.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
         let myCountryDict:NSMutableDictionary = ["AppID":"3",COUNTRY_CODE : strCountryCode]
         print("my country Dictionary data : \(requestStringer)")
@@ -738,6 +753,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             deviceToken = "1234"
         }
         let myDict:NSMutableDictionary = ["MobileNumber" : loginusername,"DeviceToken": deviceToken,"DeviceType": DEVICE_TYPE ,COUNTRY_CODE : strCountryCode]
+        print("myDictdeviceToken",myDict)
         Constants.printLogKey("Device myDict", printValue: myDict)
         let myString = Util.convertNSDictionary(toString: myDict)
         apiCall.nsurlConnectionFunction(requestString, myString, "deviceToken")
@@ -764,8 +780,13 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                         let dict = arrayCountryDatas[0] as! NSDictionary
                         SelectedCountryID = String(describing: dict[COUNTRY_ID]!)
                         selectCountryName = String(describing: dict[COUNTRY_Name]!)
+                        
                         let MobilelengthStr = String(describing: dict["MobileNumberLength"]!)
                         UserDefaults.standard.set(MobilelengthStr, forKey: MOBILE_LENGTH)
+                        
+                        let MobilePlaceholder = String(describing: dict["mobile_no_hint"]!)
+                        UserDefaults.standard.set(MobilePlaceholder, forKey: Mobile_Place_holder)
+                        
                         strBaseUrl = dict["BaseUrl"] as! NSString
                         //Get Parent and Staff Ids
                         assignParentStaffIDS(selectedDict: dict)
@@ -906,6 +927,9 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                             UserDefaults.standard.set(arraylanguage, forKey: LANGUAGE_ARRAY)
                         }
                         let updateAvail = String(describing: dict.object(forKey: "UpdateAvailable")!)
+                        let VersionAlertContent = String(describing: dict.object(forKey: "VersionAlertContent")!)
+                        
+                        let VersionAlertTitle = String(describing: dict.object(forKey: "VersionAlertTitle")!)
                         let forceUpdate = String(describing: dict.object(forKey: "ForceUpdate")!)
                         let isAlertAvailable = String(describing: dict.object(forKey: "isAlertAvailable")!)
                         let strAlertContent = String(describing: dict.object(forKey: "AlertContent")!)
@@ -939,7 +963,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { action in
                                 if(updateAvail .isEqual("1") && forceUpdate .isEqual("0"))
                                 {
-                                    let alert = UIAlertController(title: UPDATE_TITLE, message: UPDATE_AVAIL_MESSAGE, preferredStyle: UIAlertController.Style.alert)
+                                    let alert = UIAlertController(title: VersionAlertTitle, message: VersionAlertContent, preferredStyle: UIAlertController.Style.alert)
                                     alert.addAction(UIAlertAction(title: "Not Now", style: UIAlertAction.Style.default, handler: { action in self.callNormalFlow()}))
                                     alert.addAction(UIAlertAction(title: "Update", style: UIAlertAction.Style.default, handler: { action in self.callAppStore()}))
                                     
@@ -949,7 +973,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                                 }
                                 else if(forceUpdate .isEqual("1") )
                                 {
-                                    let alert = UIAlertController(title: UPDATE_TITLE, message: FORCE_UPDATE_AVAIL_MESSAGE , preferredStyle: UIAlertController.Style.alert)
+                                   
+                                    let alert = UIAlertController(title: VersionAlertTitle, message: VersionAlertContent , preferredStyle: UIAlertController.Style.alert)
                                     
                                     alert.addAction(UIAlertAction(title: "Update", style: .default, handler: { action in self.callAppStore()}))
                                     
@@ -972,7 +997,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                         }else{
                             if(updateAvail .isEqual("1") && forceUpdate .isEqual("0"))
                             {
-                                let alert = UIAlertController(title: UPDATE_TITLE, message: UPDATE_AVAIL_MESSAGE, preferredStyle: UIAlertController.Style.alert)
+                                let alert = UIAlertController(title: VersionAlertTitle, message: VersionAlertContent, preferredStyle: UIAlertController.Style.alert)
                                 alert.addAction(UIAlertAction(title: "Not Now", style: UIAlertAction.Style.default, handler: { action in self.callNormalFlow()}))
                                 alert.addAction(UIAlertAction(title: "Update", style: UIAlertAction.Style.default, handler: { action in self.callAppStore()}))
                                 
@@ -982,7 +1007,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                             }
                             else if(forceUpdate .isEqual("1") )
                             {
-                                let alert = UIAlertController(title: UPDATE_TITLE, message: FORCE_UPDATE_AVAIL_MESSAGE , preferredStyle: UIAlertController.Style.alert)
+                                let alert = UIAlertController(title: VersionAlertTitle, message: VersionAlertContent , preferredStyle: UIAlertController.Style.alert)
                                 
                                 alert.addAction(UIAlertAction(title: "Update", style: .default, handler: { action in self.callAppStore()}))
                                 
@@ -1056,6 +1081,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                                 let defaults = UserDefaults.standard
                                 defaults.set(appDelegate.staffRole, forKey: DefaultsKeys.StaffRole)
                                 //
+                              
+                                defaults.set(staffDisplayRole as String, forKey: DefaultsKeys.role_display_name)
                                 
                                 defaults.set(staffDisplayRole as String, forKey: DefaultsKeys.getgroupHeadRole)
                                 print("DefaultsKeys.DefaultsKeys.StaffRole", DefaultsKeys.StaffRole)
@@ -1104,26 +1131,26 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                                         self.LoadParentDetail()
                                     }
                                     
-                                    else if (appDelegate.staffDisplayRole == "Group head"){
+                                    else if (appDelegate.staffRole == "p1"){
                                         appDelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                         UserDefaults.standard.set("GroupHead", forKey: LOGINASNAME)
                                         self.SelectedLoginAsIndexInt = 0
                                         self.performSegue(withIdentifier: "DirectToMainViewSegue", sender: self)
                                     }
-                                    else if (appDelegate.staffDisplayRole == "Principal"){
+                                    else if (appDelegate.staffRole == "p2"){
                                         
                                         appDelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                         UserDefaults.standard.set("Principal", forKey: LOGINASNAME)
                                         self.SelectedLoginAsIndexInt = 1
                                         self.performSegue(withIdentifier: "DirectToMainViewSegue", sender: self)
                                     }
-                                    else if (appDelegate.staffDisplayRole == "Teaching Staff"){
+                                    else if (appDelegate.staffRole == "p3"){
                                         appDelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                         UserDefaults.standard.set("Staff", forKey: LOGINASNAME)
                                         self.SelectedLoginAsIndexInt = 2
                                         self.performSegue(withIdentifier: "DirectToMainViewSegue", sender: self)
                                     }
-                                    else if (appDelegate.staffDisplayRole == "Office Staff"){
+                                    else if (appDelegate.staffRole == "p4"){
                                         
                                         appDelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                         UserDefaults.standard.set("OfficeStaff", forKey: LOGINASNAME)
@@ -1131,7 +1158,7 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
                                         self.performSegue(withIdentifier: "DirectToMainViewSegue", sender: self)
                                         
                                     }
-                                    else if (appDelegate.staffDisplayRole == "Non Office Staff"){
+                                    else if (appDelegate.staffRole == "p5"){
                                         appDelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                         self.SelectedLoginAsIndexInt = 4
                                         UserDefaults.standard.set("NonOfficeStaff", forKey: LOGINASNAME)
@@ -1163,8 +1190,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             {
                 if(csData == nil)
                 {
-                    let alertController = UIAlertController(title: "Alert", message: SERVER_ERROR, preferredStyle: .alert)
-                    let yesAction = UIAlertAction(title: "Ok", style: .default) { (action) -> Void in
+                    let alertController = UIAlertController(title: commonStringNames.Alert.translated(), message: SERVER_ERROR, preferredStyle: .alert)
+                    let yesAction = UIAlertAction(title: commonStringNames.OK.translated(), style: .default) { (action) -> Void in
                         exit(0)
                     }
                     alertController.addAction(yesAction)
@@ -1207,6 +1234,8 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
         {
             let segueid = segue.destination as! ParentTableVC
             segueid.ArrayChildData = arrUserData
+            DefaultsKeys.arrUserData = arrUserData
+            DefaultsKeys.ParentSelectedLoginIndex = ParentSelectedLoginIndex
             segueid.SelectedLoginIndexInt = ParentSelectedLoginIndex
         }
     }                                                                                                                                                                                                                                                                                                                           
@@ -1450,12 +1479,12 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             PopupChangePassword.semanticContentAttribute = .forceLeftToRight
         }
         
-        EnterOTPLabel.text = LangDict["enter_your_otp"] as? String
-        NewPasswordLabel.text = LangDict["teacher_pop_password_txt_new"] as? String
-        VerifyPasswordLabel.text = LangDict["teacher_pop_password_txt_repeat"] as? String
-        TitleChangePswdLabel.text = LangDict["reset_password"] as? String
-        CancelButton.setTitle(LangDict["teacher_pop_password_btnCancel"] as? String, for: .normal)
-        UpdateButton.setTitle(LangDict["teacher_pop_password_btnUpdate"] as? String, for: .normal)
+        EnterOTPLabel.text = commonStringNames.enter_your_otp.translated() as? String
+        NewPasswordLabel.text = commonStringNames.teacher_pop_password_txt_new.translated() as? String
+        VerifyPasswordLabel.text = commonStringNames.teacher_pop_password_txt_repeat.translated() as? String
+        TitleChangePswdLabel.text = commonStringNames.reset_password.translated() as? String
+        CancelButton.setTitle(commonStringNames.teacher_pop_password_btnCancel.translated() as? String, for: .normal)
+                              UpdateButton.setTitle(commonStringNames.teacher_pop_password_btnUpdate.translated() as? String, for: .normal)
         
     }
     

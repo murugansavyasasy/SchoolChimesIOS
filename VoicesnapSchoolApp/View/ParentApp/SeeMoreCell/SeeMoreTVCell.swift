@@ -27,10 +27,11 @@ class SeeMoreTVCell: UITableViewCell {
         SeeMoreBtn.layer.cornerRadius = 5
         SeeMoreBtn.layer.borderWidth = 2
         SeeMoreBtn.layer.borderColor = utilObj.PARENT_NAV_BAR_COLOR.cgColor
-        SeeMoreBtn.setTitle(SEE_MORE_TITLE, for: .normal)
+        SeeMoreBtn.setTitle(commonStringNames.SeeMore.translated(), for: .normal)
         SeeMoreBtn.backgroundColor = .white
         SeeMoreBtn.setTitleColor(utilObj.PARENT_NAV_BAR_COLOR, for: .normal)
         SeeMoreBtn.titleLabel?.font = .systemFont(ofSize: 12)
+        
         
     }
 

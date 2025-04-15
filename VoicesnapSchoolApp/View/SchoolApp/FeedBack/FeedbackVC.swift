@@ -130,26 +130,26 @@ class FeedbackVC: UIViewController,UIPopoverPresentationControllerDelegate,UITex
         let ContactNo : String = ContactMobileNoText.text!
         if(SchoolNameLbl.text == "")
         {
-            Util.showAlert("", msg: languageDict["select_school"] as? String)
+            Util.showAlert("", msg: commonStringNames.select_school.translated() as? String)
         }else if(ContactPersonText.text == "")
         {
-            Util.showAlert("", msg: languageDict["contact_person"] as? String)
+                Util.showAlert("", msg: commonStringNames.contact_person.translated() as? String)
         }
         else if(ContactMobileNoText.text == "")
         {
-            Util.showAlert("", msg:  languageDict["contact_mobile"] as? String)
+                    Util.showAlert("", msg:  commonStringNames.contact_mobile.translated() as? String)
         }
         
         else if(ContactNo.count != (ApiMobileLength - 1))
         {
-            Util.showAlert("", msg: languageDict["enter_valid_mobile"] as? String)
+                        Util.showAlert("", msg: commonStringNames.enter_valid_mobile.translated() as? String)
         }
         else if(EmailIDText.text == "")
         {
-            Util.showAlert("", msg: languageDict["contact_mail_id"] as? String)
+                            Util.showAlert("", msg: commonStringNames.contact_mail_id.translated() as? String)
         }
         else if(!Util .validEmailAddress(EmailIDText.text!)){
-            Util.showAlert("", msg: languageDict["valid_email_id"] as? String)
+                                Util.showAlert("", msg: commonStringNames.valid_email_id.translated() as? String)
             
         }
         else{
@@ -217,8 +217,8 @@ class FeedbackVC: UIViewController,UIPopoverPresentationControllerDelegate,UITex
         titleLabel.frame = CGRect(x: 0, y: 0, width: self.view.frame.width , height: 45)
         // titleLabel.textColor = UIColor (red:243.0/255.0, green: 191.0/255.0, blue: 145.0/255.0, alpha: 1)
         titleLabel.textColor = UIColor (red:166.0/255.0, green: 114.0/255.0, blue: 155.0/255.0, alpha: 1)
-        let secondWord : String =  languageDict["feedback"] as? String ?? "Feedback"//"Feedback "
-        let thirdWord : String  =  languageDict["to_voicesnap"] as? String ?? "to voicesnap"//"to voicesnap"
+                                    let secondWord : String =  commonStringNames.feedback.translated() as? String ?? "Feedback"//"Feedback "
+                                    let thirdWord : String  =  commonStringNames.to_voicesnap.translated() as? String ?? "to voicesnap"//"to voicesnap"
         let comboWord = secondWord + " " + thirdWord
         let attributedText = NSMutableAttributedString(string:comboWord)
         let attrs = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 22), NSAttributedString.Key.foregroundColor: UIColor.white]
@@ -274,14 +274,14 @@ class FeedbackVC: UIViewController,UIPopoverPresentationControllerDelegate,UITex
             ContactMobileNoText.textAlignment = .left
             EmailIDText.textAlignment = .left
         }
-        FloatNameLabel.text = LangDict["yourname"] as? String
-        FloatSchoolNameLabel.text = LangDict["schoolname"] as? String
-        FloatMobileNoLabel.text = LangDict["alternate_mobile_number"] as? String
-        FlaotEmailLabel.text = LangDict["email_id"] as? String
-        NextButton.setTitle(LangDict["btn_next"] as? String, for: .normal)
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        FloatNameLabel.text = commonStringNames.yourname.translated() as? String
+        FloatSchoolNameLabel.text = commonStringNames.schoolname.translated() as? String
+        FloatMobileNoLabel.text = commonStringNames.alternate_mobile_number.translated() as? String
+        FlaotEmailLabel.text = commonStringNames.email_id.translated() as? String
+        NextButton.setTitle(commonStringNames.btn_next.translated() as? String, for: .normal)
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         navTitle()
     }
 }

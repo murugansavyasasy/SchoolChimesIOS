@@ -9,7 +9,11 @@
 import UIKit
 
 class FeeDetailReceiptTableViewCell: UITableViewCell {
-
+    @IBOutlet weak var receiptNumberDefLbl: UILabel!
+    
+    @IBOutlet weak var ViewReceipt: UILabel!
+    @IBOutlet weak var receiptAmountLbl: UILabel!
+    @IBOutlet weak var receiptDateDefLbl: UILabel!
     @IBOutlet weak var InvoiceNumberLbl: UILabel!
     
     @IBOutlet weak var InvoiceDateLbl: UILabel!
@@ -19,6 +23,10 @@ class FeeDetailReceiptTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        receiptNumberDefLbl.text = commonStringNames.ReceiptNumber.translated()
+        receiptDateDefLbl.text = commonStringNames.ReceiptDate.translated()
+        receiptAmountLbl.text = commonStringNames.ReceiptAmount.translated()
+        ViewReceipt.text = commonStringNames.ViewReceipt.translated()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

@@ -155,34 +155,15 @@
 /**************************************************************************************************************************************************/
 
 
-/*
-#define TERMS_AND_CONDITION @"http://vs3.voicesnapforschools.com/School/TermsConditions"
 
-#define LIVE_DOMAIN @"https://vs3.voicesnapforschools.com/api/MergedApi/"
-#define LIVE_COUNTRY_LIST @"https://vs3.voicesnapforschools.com/api/MergedApi/GetCountryListV4"
-#define ACCEPT_TERMS_AND_CONDITION @"https://vs3.voicesnapforschools.com/api/MergedApi/AgreeTermsAndConditions"
-*/
-
-//#define TERMS_AND_CONDITION @"https://gradit.voicesnap.com/School/SchoolTermsConditions"
-//
 
 #define TERMS_AND_CONDITION @"https://schoolchimes.com/vs_web/terms_conditions/"
-//#define TERMS_AND_CONDITION@"https://gradit.voicesnap.com/School/SchoolTermsConditions" Old
 
-#define LIVE_DOMAIN @"https://vss.voicesnapforschools.com/nodejs/api/MergedApi/"
-#define LIVE_COUNTRY_LIST @"https://vss.voicesnapforschools.com/nodejs/api/MergedApi/GetCountryList"
-
-//#define LIVE_DOMAIN @"https://vstest3.voicesnapforschools.com/nodejs/api/MergedApi/"
-//#define LIVE_COUNTRY_LIST @"https://vstest3.voicesnapforschools.com/nodejs/api/MergedApi/GetCountryListV4"
-
-#define ACCEPT_TERMS_AND_CONDITION @"https://vss.voicesnapforschools.com/nodejs/api/MergedApi/AgreeTermsAndConditions"
+#define LIVE_DOMAIN @"https://api.schoolchimes.com/nodejs/api/MergedApi/"
 
 
-//#define LIVE_COUNTRY_LIST @"http://202.21.35.54/nodejs/api/MergedApi/GetCountryListV4"
+#define ACCEPT_TERMS_AND_CONDITION @"https://api.schoolchimes.com/nodejs/api/MergedApi/AgreeTermsAndConditions"
 
-//#define LIVE_DOMAIN @"http://202.21.35.54/nodejs/api/MergedApi/"
-//#define LIVE_COUNTRY_LIST @"http://202.21.35.54/nodejs/api/MergedApi/GetCountryListV4"
-//#define ACCEPT_TERMS_AND_CONDITION @"http://202.21.35.54/nodejs/api/MergedApi/AgreeTermsAndConditions"
 
 /*****************************************************************************************************************************/
 #define FORCE_UPDATE_AVAIL_MESSAGE @"The developer of this app needs to update it to improve its compatibility"
@@ -255,33 +236,9 @@
 #define GETCONFRENCELIST_TYPE @"getConferenceList"
 #define APPVERSION @"4"
 #define CHECK_UPDATE @"VersionCheck"
-#define VERSION_VALUE @"77"
-//74Oct20
-//73
-//"72"
-
-//already 69 (aug 20)
-//already 70 (aug 22)
-//already 68 (aug 19)
-//already 67 (july 30)
-//already 66 (july 17)
-//already 65 (july 8)
-//already 63 (jun 17)
-//already 59 n(jun 4)
-//already 62 n(jun 10)
-
-//already 61 n(jun 7)
-//already 60 n(jun 6)
-//already version value 54 (Jan2)
-//already version value 55 (Jan11)
-//alreadyText message crash  version value 56 (Jan24)
-//already Kh school GetAds  crash  version value 57 (Jan30)
-//already GET MENU DETAILS ,Ad,Img size width  version value 58 irunthathu ippo 59(Apr6)
-
- 
+#define VERSION_VALUE @"90"
 #define IMAGE_COUNT @"ImageCount"
 #define UPLOAD_YOUTUBE_VIDEO @"UploadVideostoYoutube"
-
 #define GET_PAYMENT_URL @"GetPaymentGatewayLink"
 
 
@@ -455,7 +412,7 @@
 #define COMBINATION @"Combination"
 #define SELECT_FEEDBACK @"Please select the feedback"
 #define SAVE_ERROR @"Save Error"
-#define SAVE_SUCCESS @"Your image has been saved to your photos"
+#define SAVE_SUCCESS @"Your image has been download to your photos"
 #define SERVER_ERROR @"Something went wrong!"
 #define SERVER_CONNECTION_FAILED @"Something went wrong!"
 #define MOBILE_NOT_EXIST @"Mobile number does not exists"
@@ -468,6 +425,7 @@
 #define COUNTRY_CODE @"CountryID"
 #define COUNTRY_ID @"CountryID"
 #define COUNTRY_Name @"CountryName"
+#define Mobile_Place_holder @"MobilePlaceHoder"
 #define OLD_BASE_URL @"OldBaseURl"
 #define LANGUAGE_NOTIFICATION @"Language Notification"
 #define SCHOOLIID @"SchoolID"

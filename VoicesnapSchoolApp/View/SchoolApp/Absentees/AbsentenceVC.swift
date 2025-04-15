@@ -141,6 +141,13 @@ class AbsentenceVC: UIViewController,UITableViewDataSource,UITableViewDelegate {
             return 50
         }
     }
+    
+//    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+//        return UITableView.automaticDimension
+//    }
+//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+//        return UITableView.automaticDimension
+//    }
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int{
         
         return appDelegate.LoginSchoolDetailArray.count
@@ -215,6 +222,9 @@ class AbsentenceVC: UIViewController,UITableViewDataSource,UITableViewDelegate {
             performSegue(withIdentifier: SegueString, sender: self)
         }
     }
+    
+    
+
     //MARK: BUTTON ACTION
     
     @IBAction func actionCloseView(_ sender: UIButton) {

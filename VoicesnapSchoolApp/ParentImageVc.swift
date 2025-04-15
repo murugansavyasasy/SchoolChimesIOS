@@ -71,9 +71,9 @@ class ParentImageVc: UIViewController,UITableViewDataSource,Apidelegate,UITableV
         TextDetailstableview.dataSource = self
         TextDetailstableview.delegate = self
         
-        
+        TextDateLabel.text = commonStringNames.Images.translated()
         search_bar.delegate = self
-
+        search_bar.placeholder = commonStringNames.Search.translated()
         self.view.backgroundColor = UIColor(named: "serach_color")
         bIsSeeMore = false
         if(appDelegate.isPasswordBind == "0"){
@@ -88,7 +88,7 @@ class ParentImageVc: UIViewController,UITableViewDataSource,Apidelegate,UITableV
         if getMsgFromMgnt == 1 {
             let defaults = UserDefaults.standard
             print("SchoolId",SchoolId)
-            
+            bIsSeeMore = true
 //
 
         }else{
@@ -372,8 +372,8 @@ class ParentImageVc: UIViewController,UITableViewDataSource,Apidelegate,UITableV
             }
         }
        
-        cell1.ViewFullImageButton.setTitle(languageDict["hint_save_image"] as? String, for: .normal)
-        cell1.SaveButton.setTitle(languageDict["btn_save_image"] as? String, for: .normal)
+            cell1.ViewFullImageButton.setTitle(commonStringNames.hint_save_image.translated() as? String, for: .normal)
+                                               cell1.SaveButton.setTitle(commonStringNames.btn_save_image.translated() as? String, for: .normal)
         
         cell1.MyImageView?.isUserInteractionEnabled = true
         cell1.MyImageView?.tag = indexPath.row
@@ -730,6 +730,7 @@ class ParentImageVc: UIViewController,UITableViewDataSource,Apidelegate,UITableV
     func CallStaffImageMessageApi() {
         showLoading()
         strApiFrom = "CallStaffImageMessageApi"
+        print("CallStaffImageMessageApi")
         let apiCall = API_call.init()
         apiCall.delegate = self;
         
@@ -746,6 +747,7 @@ class ParentImageVc: UIViewController,UITableViewDataSource,Apidelegate,UITableV
         print("SCHOOL",SchoolId)
         print("MEMEBER",ChildId)
         let myDict:NSMutableDictionary = ["SchoolId": SchoolId,"MemberId" : ChildId,"CircularDate" : TextDateLabel.text!,"Type" : "IMAGE", COUNTRY_CODE: strCountryCode]
+        print("myDictmyDictCallStaffImageMessageApi",myDict)
         utilObj.printLogKey(printKey: "myDict", printingValue: myDict)
         let myString = Util.convertNSDictionary(toString: myDict)
         utilObj.printLogKey(printKey: "myString", printingValue: myString!)
@@ -1026,9 +1028,9 @@ class ParentImageVc: UIViewController,UITableViewDataSource,Apidelegate,UITableV
     func AlerMessage()
     {
         
-        let alertController = UIAlertController(title: languageDict["alert"] as? String, message: strNoRecordAlert, preferredStyle: .alert)
+                let alertController = UIAlertController(title: commonStringNames.alert.translated() as? String, message: strNoRecordAlert, preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: languageDict["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+                let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             self.dismiss(animated: true, completion: nil)
         }
@@ -1073,9 +1075,9 @@ class ParentImageVc: UIViewController,UITableViewDataSource,Apidelegate,UITableV
             self.navigationController?.navigationBar.semanticContentAttribute = .forceLeftToRight
             self.view.semanticContentAttribute = .forceLeftToRight
         }
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         loadViewData()
     }
     
@@ -1148,7 +1150,7 @@ class ParentImageVc: UIViewController,UITableViewDataSource,Apidelegate,UITableV
         noview.addSubview(noDataLabel)
         
         let button = UIButton(frame: CGRect(x: self.TextDetailstableview.bounds.size.width - 108, y: noDataLabel.frame.height + 55, width: 100, height: 32))
-         button.setTitle(SEE_MORE_TITLE, for: .normal)
+         button.setTitle(commonStringNames.SeeMore.translated(), for: .normal)
          button.backgroundColor = .white
         button.setTitleColor(utilObj.PARENT_NAV_BAR_COLOR, for: .normal)
          button.addTarget(self, action: #selector(self.seeMoreButtonTapped), for: .touchUpInside)
@@ -1172,10 +1174,10 @@ class ParentImageVc: UIViewController,UITableViewDataSource,Apidelegate,UITableV
         
         if(SenderType == "FromStaff"){
             CallSeeMoreStaffImageMessageApi()
-            
+          
         }
         else{
-            
+            bIsSeeMore = true
             CallSeeMoreImageDetailApi()
         }
        

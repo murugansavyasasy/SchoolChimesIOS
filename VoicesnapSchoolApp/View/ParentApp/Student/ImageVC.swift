@@ -93,10 +93,7 @@ class ImageVC: UIViewController,UITableViewDataSource,UITableViewDelegate,Apidel
     }
     
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        
-    }
+   
     
     
     func ViewFullImage(sender: UIButton)

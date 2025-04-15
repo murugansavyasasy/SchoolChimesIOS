@@ -39,6 +39,19 @@ class StaffViewAssignmentTVCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        subjectLabelLang.text = commonStringNames.Subject.translated()
+        dueLabelLang.text = commonStringNames.subission_due.translated()
+        countLabelLang.text = commonStringNames.SubmissionCount.translated()
+        totalLabelLang.text = commonStringNames.TotalCount.translated()
+        categoryLabelLang.text = commonStringNames.Category.translated()
+        
+        viewButton.setTitle(commonStringNames.View.translated(), for: .normal)
+        forwardButton.setTitle(commonStringNames.Forward.translated(), for: .normal)
+        deleteButton.setTitle(commonStringNames.Delete.translated(), for: .normal)
+        submissionButton.setTitle(commonStringNames.submissions.translated(), for: .normal)
+        totalButton.setTitle(commonStringNames.total.translated(), for: .normal)
+        
+        
         buttonBorder(view: viewButton)
         buttonBorder(view: forwardButton)
         buttonBorder(view: deleteButton)

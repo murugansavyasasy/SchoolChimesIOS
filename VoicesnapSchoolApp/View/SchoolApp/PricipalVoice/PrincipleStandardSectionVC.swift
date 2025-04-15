@@ -203,6 +203,7 @@ class PrincipleStandardSectionVC: UIViewController ,Apidelegate,UIPickerViewDele
             cell.SubjectView.layer.shadowRadius = 4
             cell.SubjectView.layer.shadowColor = UIColor.black.cgColor
             cell.SelectionImage.image = UIImage(named: "Downarrow")
+          
         }
         return cell
     }
@@ -303,7 +304,7 @@ class PrincipleStandardSectionVC: UIViewController ,Apidelegate,UIPickerViewDele
     func actionSelectStandard()
     {
         TableString = "Standard"
-        PickerTitleLabel.text =  LanguageDict["select_standard"] as? String//"Select Standard"
+        PickerTitleLabel.text =  commonStringNames.select_standard.translated() as? String//"Select Standard"
         
         self.MyPickerView.reloadAllComponents()
         
@@ -321,7 +322,7 @@ class PrincipleStandardSectionVC: UIViewController ,Apidelegate,UIPickerViewDele
         }
         else
         {
-            Util.showAlert("Alert", msg: LanguageDict["no_students"] as? String)
+            Util.showAlert(commonStringNames.Alert.translated(), msg: commonStringNames.no_students.translated() as? String)
         }
         
     }
@@ -357,7 +358,7 @@ class PrincipleStandardSectionVC: UIViewController ,Apidelegate,UIPickerViewDele
                 self.present(studentVC, animated: false, completion: nil)
                 
             }else{
-                Util.showAlert("", msg: LanguageDict["alert_section"] as? String)
+                Util.showAlert("", msg: commonStringNames.alert_section.translated() as? String)
             }
         }else{
             
@@ -388,7 +389,7 @@ class PrincipleStandardSectionVC: UIViewController ,Apidelegate,UIPickerViewDele
                 
                 
             }else{
-                Util.showAlert("", msg: LanguageDict["alert_section"] as? String)
+                Util.showAlert("", msg: commonStringNames.alert_section.translated() as? String)
             }
         }
         
@@ -510,12 +511,21 @@ class PrincipleStandardSectionVC: UIViewController ,Apidelegate,UIPickerViewDele
                                 if(stdName != "" && stdName != "0")
                                 {
                                     StandardNameArray.append(stdName!)
-                                    DetailofSectionArray.append(dicResponse["Sections"] as! [Any])
-                                    DetailedSubjectArray.append(dicResponse["Subjects"] as! [Any])
+                                    
+                                    
+                                    
+                                    if let sections = dicResponse["Sections"] as? [Any] {
+                                        DetailofSectionArray.append(sections)
+                                    }
+                                    
+                                    if let Subject = dicResponse["Subjects"] as? [Any] {
+                                        DetailedSubjectArray.append(Subject)
+                                    }
+                                   
                                     
                                     pickerStandardArray = StandardNameArray
                                     
-                                    if let sectionarray = DetailofSectionArray[0] as? NSArray
+                                    if let sectionarray = DetailofSectionArray.first as? NSArray
                                     {
                                         
                                         var sectionNameArray :Array = [String]()
@@ -534,7 +544,7 @@ class PrincipleStandardSectionVC: UIViewController ,Apidelegate,UIPickerViewDele
                                         
                                         
                                     }
-                                    if let SubjectArray = DetailedSubjectArray[0] as? NSArray
+                                    if let SubjectArray = DetailedSubjectArray.first as? NSArray
                                     {
                                         
                                         var SubjectNameArray :Array = [String]()
@@ -569,6 +579,11 @@ class PrincipleStandardSectionVC: UIViewController ,Apidelegate,UIPickerViewDele
                                     Util.showAlert("", msg: AlertString)
                                     dismiss(animated: false, completion: nil)
                                 }
+                            }
+                            
+                            if DetailedSubjectArray.isEmpty && DetailofSectionArray.isEmpty{
+                                Util.showAlert("", msg: "No record found")
+                                dismiss(animated: false, completion: nil)
                             }
                         }
                         else
@@ -661,20 +676,20 @@ class PrincipleStandardSectionVC: UIViewController ,Apidelegate,UIPickerViewDele
             self.view.semanticContentAttribute = .forceLeftToRight
             
         }
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         PickerTitleLabel.textAlignment = .center
-        self.SubjectButtonButton.setTitle(LangDict["select_student_attedance"] as? String, for: .normal)
+        self.SubjectButtonButton.setTitle(commonStringNames.select_student_attedance.translated() as? String, for: .normal)
         
-        self.StudentButtonButton.setTitle(LangDict["select_subjects"] as? String, for: .normal)
-        self.SendButton.setTitle(LangDict["teacher_confirm"] as? String, for: .normal)
-        self.SendAssignmentButton.setTitle(LangDict["teacher_confirm"] as? String, for: .normal)
+        self.StudentButtonButton.setTitle(commonStringNames.select_subjects.translated() as? String, for: .normal)
+        self.SendButton.setTitle(commonStringNames.teacher_confirm.translated() as? String, for: .normal)
+        self.SendAssignmentButton.setTitle(commonStringNames.teacher_confirm.translated() as? String, for: .normal)
         
-        let strSection : String = LangDict["teacher_atten_sections"] as? String ?? "Section(s)"
-        let strStandard : String = LangDict["teacher_atten_standard"] as? String ?? "Standard"
-        pickerOkButton.setTitle(LangDict["teacher_btn_ok"] as? String, for: .normal)
-        pickerCancelButton.setTitle(LangDict["teacher_cancel"] as? String, for: .normal)
+        let strSection : String = commonStringNames.teacher_atten_sections.translated() as? String ?? "Section(s)"
+        let strStandard : String = commonStringNames.teacher_atten_standard.translated() as? String ?? "Standard"
+        pickerOkButton.setTitle(commonStringNames.teacher_btn_ok.translated() as? String, for: .normal)
+        pickerCancelButton.setTitle(commonStringNames.teacher_cancel.translated() as? String, for: .normal)
         SectionTitleArray = [strStandard,strSection]
         if(StandardSectionSubjectArray.count == 0){
             if(UtilObj.IsNetworkConnected()){

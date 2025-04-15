@@ -388,10 +388,10 @@ class StudentMarkVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
     func AlerMessage(alertStr: String)
     {
         
-        let alertController = UIAlertController(title: "Alert", message: alertStr, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.Alert.translated(), message: alertStr, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: "OK", style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.OK.translated(), style: UIAlertAction.Style.default) {
             UIAlertAction in
             //    print("Okaction")
             self.navigationController?.popViewController(animated: true)
@@ -424,8 +424,8 @@ class StudentMarkVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
         titleLabel.frame = CGRect(x: 0, y: 0, width: self.view.frame.width , height: 45)
         //titleLabel.textColor = UIColor (red:128.0/255.0, green:205.0/255.0, blue: 244.0/255.0, alpha: 1)
         titleLabel.textColor = UIColor (red:0.0/255.0, green:183.0/255.0, blue: 190.0/255.0, alpha: 1)
-        let secondWord : String =  languageDictionary["student"] as? String ?? "Student"//"Student "
-        let thirdWord  : String =  languageDictionary["marksss"] as? String ?? "Marks" //"Marks"
+        let secondWord : String =  commonStringNames.student.translated() as? String ?? "Student"//"Student "
+        let thirdWord  : String =  commonStringNames.marksss.translated() as? String ?? "Marks" //"Marks"
         let comboWord = secondWord  + " " + thirdWord
         let attributedText = NSMutableAttributedString(string:comboWord)
         let attrs = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 22), NSAttributedString.Key.foregroundColor: UIColor.white]
@@ -466,9 +466,9 @@ class StudentMarkVC: UIViewController, UITableViewDelegate, UITableViewDataSourc
             
         }
         
-        strNoRecordAlert = LangDict["no_exams"] as? String ?? "No Exams Found.."
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        strNoRecordAlert = commonStringNames.no_exams.translated() as? String ?? "No Exams Found.."
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         self.navTitle()
         
     }

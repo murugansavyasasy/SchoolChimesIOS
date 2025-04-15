@@ -76,7 +76,7 @@ class StudentDetailViewController: UIViewController ,Apidelegate ,UICollectionVi
     var firstImage : Int  = 0
     weak var timer: Timer?
     var image_choose: Bool = false
-    
+    var languageCode : String!
     var SelectedAssets = [PHAsset]()
     
     //    var updateTime = Int!
@@ -114,10 +114,11 @@ class StudentDetailViewController: UIViewController ,Apidelegate ,UICollectionVi
     
     var ChildId : String!
     
+    let deviceName = UIDevice.current.model
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        print("11VC")
+        print("11VClanguageCode",languageCode)
+        print("11VC",stralerMsg)
         let userDefaults = UserDefaults.standard
         
         staffRole = userDefaults.string(forKey: DefaultsKeys.StaffRole)!
@@ -133,7 +134,8 @@ class StudentDetailViewController: UIViewController ,Apidelegate ,UICollectionVi
         
         print("SchoolIDString",SchoolIDString)
         
-        
+       
+        print("Device name: \(deviceName)")
 
 
         var schoolNameReg  = userDefaults.string(forKey: DefaultsKeys.SchoolNameRegional)!
@@ -237,10 +239,7 @@ print("schoolNameReg",schoolNameReg)
                     }
                     
                     print("admodalStr_count", AdConstant.adDataList .count)
-                    
-                    
-                    
-                    //
+                   
                 }
                 
                 
@@ -340,10 +339,13 @@ print("schoolNameReg",schoolNameReg)
         }
     }
     override func viewDidDisappear(_ animated: Bool) {
+        print("viewDidDisappear")
         stopTimer()
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        print("viewDidAppear")
+        
         startTimer()
     }
     
@@ -352,6 +354,8 @@ print("schoolNameReg",schoolNameReg)
         return false
     }
     override func viewWillAppear(_ animated: Bool) {
+        
+
         
         let nc = NotificationCenter.default
         nc.addObserver(self,selector: #selector(StudentDetailViewController.catchNotification), name: NSNotification.Name(rawValue: "comeBack"), object:nil)
@@ -423,6 +427,12 @@ print("schoolNameReg",schoolNameReg)
         
     }
     
+    @objc func barLanguageButtonTapped() {
+        print("Language button tapped!")
+        // Your action here
+        
+        callLanguageVc()
+    }
     
     func setTopViewInitial() -> Void {
         
@@ -464,6 +474,28 @@ print("schoolNameReg",schoolNameReg)
         self.navigationItem.leftBarButtonItem = backButton
         
         self.title = String(describing: selectedDictionary["ChildName"]!)
+        
+        
+//        // 3. Set Custom Right Button (Image + Text)
+//            let customButton = UIButton(type: .custom)
+//            customButton.setImage(UIImage(systemName: "globe"), for: .normal)
+//            customButton.setTitle("Language", for: .normal)
+//            customButton.setTitleColor(.white, for: .normal) // Set text color to white
+//            customButton.tintColor = .white // Set image color to white
+//
+//            // Adjust spacing and alignment
+//            customButton.semanticContentAttribute = .forceRightToLeft // Image on the right, text on the left
+//            customButton.imageEdgeInsets = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: -8)
+//
+//            // Add action
+//            customButton.addTarget(self, action: #selector(barLanguageButtonTapped), for: .touchUpInside)
+//
+//            // Create bar button item with custom view
+//            let rightBarButtonItem = UIBarButtonItem(customView: customButton)
+//
+//            // Assign to navigation item
+//            navigationItem.rightBarButtonItem = rightBarButtonItem
+        
     }
     @objc func BackAction(sender : UIButton) {
         self.navigationController?.popViewController(animated: true)
@@ -515,7 +547,13 @@ print("schoolNameReg",schoolNameReg)
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: (self.CollectionViewGrid.frame.size.width/3) - 10, height: (self.CollectionViewGrid.frame.size.height/4) - 12)
+//        if deviceName == "iPhone 8" || deviceName == "iPhone" {
+//            return CGSize(width: (self.CollectionViewGrid.frame.size.width/3) - 10, height: (self.CollectionViewGrid.frame.size.height/3) - 12)
+//        }
+//        else{
+            return CGSize(width: (self.CollectionViewGrid.frame.size.width/3) - 10, height: 75)
+//                            (self.CollectionViewGrid.frame.size.height/3) - 12)
+//        }
     }
     
     
@@ -554,7 +592,7 @@ print("schoolNameReg",schoolNameReg)
             }
             else {
 //
-
+             
             }
         }
         
@@ -581,7 +619,9 @@ print("schoolNameReg",schoolNameReg)
             }
         } else{
 
-           
+            cell.iconHeight.constant = 35
+            cell.iconWidth.constant = 35
+            cell.cellIconTop1.constant = 10
 
         }
         print("UnreadCountArrayCountCell",UnreadCountArray)
@@ -667,6 +707,12 @@ print("schoolNameReg",schoolNameReg)
                     vc.modalPresentationStyle = .fullScreen
                     present(vc, animated: true)
                 }
+                else if(self.CellIndexIdsArray[indexPath.row] as! String == "22"){
+                    let vc = LsrwListShowViewController(nibName: nil, bundle: nil)
+//                   
+                    vc.modalPresentationStyle = .fullScreen
+                    present(vc, animated: true)
+                }
 
                 else if(self.CellIndexIdsArray[indexPath.row] as! String == "100"){
                     
@@ -681,9 +727,18 @@ print("schoolNameReg",schoolNameReg)
                 }
                 
                 
+                else if (self.CellIndexIdsArray[indexPath.row] as! String == "27"){
+                    
+                    let vc = CustomTabVC(nibName: nil, bundle: nil)
+                    vc.modalPresentationStyle = .fullScreen
+                    present(vc, animated: true)
+                    
+                }
+                
+                
                 else{
                     
-                    Util .showAlert("", msg: "Coming Soon!!!")
+                    Util .showAlert("", msg: commonStringNames.ComingSoon.translated())
                     
                 }
                 
@@ -697,8 +752,6 @@ print("schoolNameReg",schoolNameReg)
                 print("appDelegate.mainParentSegueArray[indexPath.row]",appDelegate.mainParentSegueArray[indexPath.row])
                 
             }
-            
-            
             
             print("CellSegueArray.count",CellSegueArray.count)
             print("indexPath.row",indexPath.row)
@@ -861,25 +914,35 @@ print("schoolNameReg",schoolNameReg)
     @objc func UpdateLogoutSelection(notification:Notification) -> Void
     {
         print("SDetails")
-        
+      
         var selectString = notification.object as? String ?? ""
+        print("SDetails23",selectString)
         selectString = selectString.lowercased()
-        let log = languageDictionary["txt_menu_logout"] as? String ?? ""
-        if(selectString == log.lowercased()){
+        let log = commonStringNames.logout.translated() as? String ?? ""
+        if(selectString == log){
             DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() )
             {
                 self.showLogoutAlert()
+                
             }
         }else if(selectString.contains("edit")){
             callEditProfile()
-        }else if(selectString.contains("help")){
+        }else if(selectString.contains(commonStringNames.help.translated())){
             callhelp()
-        }
-        else{
+        }else if (selectString.contains(commonStringNames.language_change.translated())){
+            callLanguageVc()
+        }else if (selectString.contains(commonStringNames.uploaddocumentandphoto.translated())){
             callUploadDocumentView()
         }
-        
     }
+    
+    func callLanguageVc(){
+        let vc = ChangeLanguageViewController(nibName: nil, bundle: nil)
+        vc.modalPresentationStyle = .formSheet
+        present(vc, animated: true)
+    }
+    
+    
     func callEditProfile(){
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let newViewController = storyBoard.instantiateViewController(withIdentifier: "EditProfileVC") as! EditProfileVC
@@ -892,7 +955,6 @@ print("schoolNameReg",schoolNameReg)
         newViewController.strPageFrom = "help"
         self.navigationController?.pushViewController(newViewController, animated: true)
     }
-    
     func callUploadDocumentView(){
         let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
         let newViewController = storyBoard.instantiateViewController(withIdentifier: "UploadDocPhotosVC") as! UploadDocPhotosVC
@@ -900,14 +962,15 @@ print("schoolNameReg",schoolNameReg)
         self.navigationController?.pushViewController(newViewController, animated: true)
     }
     
+    
     func showLogoutAlert(){
-        let alertController = UIAlertController(title: languageDictionary["txt_menu_logout"] as? String, message: languageDictionary["want_to_logut"] as? String, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.txt_menu_logout.translated() as? String, message: commonStringNames.want_to_logut.translated() as? String, preferredStyle: .alert)
         
-        let okAction = UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             self.moveToLogInScreen(strFromStaff: "Child")
         }
-        let cancelAction = UIAlertAction(title: languageDictionary["teacher_cancel"] as? String, style: UIAlertAction.Style.cancel) {
+        let cancelAction = UIAlertAction(title: commonStringNames.teacher_cancel.translated() as? String, style: UIAlertAction.Style.cancel) {
             UIAlertAction in
             
         }
@@ -1175,7 +1238,7 @@ print("schoolNameReg",schoolNameReg)
     
     func showAlertInView(message: NSString) -> Void {
         let alertView = UIAlertController(title: "", message: message as String, preferredStyle: .alert)
-        let action = UIAlertAction(title: "OK", style: .default, handler: { (alert) in
+        let action = UIAlertAction(title: commonStringNames.OK.translated(), style: .default, handler: { (alert) in
             
         })
         alertView.addAction(action)
@@ -1254,6 +1317,7 @@ print("schoolNameReg",schoolNameReg)
         
     }
     func CallLanguageChangeApi(){
+        print("DefaultsKeys.languageCodeParent",DefaultsKeys.languageCode)
         memberArray()
         strApiFrom = "changeLang"
         let apiCall = API_call.init()
@@ -1262,6 +1326,21 @@ print("schoolNameReg",schoolNameReg)
         var requestStringer = baseUrlString! + POST_LANGUAGE_CHANGE
         let baseReportUrlString = UserDefaults.standard.object(forKey:NEWLINKREPORTBASEURL) as? String
         print("StudentDetailViewControllerrequestStringer",requestStringer)
+        
+        if let languagecode = UserDefaults.standard.string(forKey: DefaultsKeys.languageCode) {
+            print("Username: \(languagecode)")
+            
+            var LangId = 1
+            if languagecode == "th"{
+                LangId = 2
+                
+            }else if languagecode == "hi"{
+                LangId = 3
+            }else {
+                LangId = 1
+            }
+        }
+        
         if(appDelegate.isPasswordBind == "1"){
         }
         let requestString = requestStringer.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
@@ -1316,21 +1395,21 @@ print("schoolNameReg",schoolNameReg)
             self.SchoolLocationLabel.textAlignment = .left
             
         }
-        HomeLabel.text = LangDict["home"] as? String
-        FAQLabel.text = LangDict["faq"] as? String
-        PasswordLabel.text = LangDict["txt_password"] as? String
-        LogoutLabel.text = LangDict["txt_menu_setting"] as? String
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        HomeLabel.text = commonStringNames.home.translated() as? String
+        FAQLabel.text = commonStringNames.faq.translated() as? String
+        PasswordLabel.text = commonStringNames.txt_password.translated() as? String
+        LogoutLabel.text = commonStringNames.txt_menu_setting.translated() as? String
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         //
-        self.loadCellArrayData()
+//        self.loadCellArrayData()
     }
     
     func loadCellArrayData(){
         //
         
-        
+        print("loadCellArrayData11111")
         
         strBookenabled  = String(describing: selectedDictionary["isBooksEnabled"]!)
         strBookURL = String(describing: selectedDictionary["OnlineBooksLink"]!)
@@ -1370,7 +1449,7 @@ print("schoolNameReg",schoolNameReg)
             arryMut.insert("MainToSchoolSelectionSegue_100" , at: 0)
             print("afteradd",arryMut)
             parentLabelArray =  arryMut as NSArray
-//            arryMut.add("PTM_26")
+//            arryMut.add("Pauckt_27")
             print("afteraddchildIndexArray",parentLabelArray)
             Constants.printLogKey("parentLabelArray", printValue: parentLabelArray)
             print("afteraddchildIndexArray",childIndexArray)
@@ -1681,16 +1760,5 @@ print("schoolNameReg",schoolNameReg)
         setInitialViews()
         
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+ 
 }

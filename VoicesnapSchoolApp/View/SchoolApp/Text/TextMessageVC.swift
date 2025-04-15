@@ -104,11 +104,11 @@ class TextMessageVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UIT
                 schoolsArray.add(schoolDic)
                 selectedSchoolsArray.add(schoolDic)
             }
-            sendButton.setTitle(languageDict["teacher_Select_school"] as? String  , for: .normal)
+            sendButton.setTitle(commonStringNames.teacher_Select_school.translated() as? String  , for: .normal)
             self.enableButtonAction()
         }
         else{
-            sendButton.setTitle(languageDict["select_reciepients"] as? String, for: .normal)
+                sendButton.setTitle(commonStringNames.select_reciepients.translated() as? String, for: .normal)
         }
         
         if(schoolsArray.count > 0){
@@ -562,14 +562,14 @@ class TextMessageVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UIT
             TextMessageView.textAlignment = .left
             descriptionTextField.textAlignment = .left
         }
-        ComposeTextLabel.text = LangDict["text_new_msg"] as? String
-        TextMessageTitle.text = LangDict["teacher_txt_composehwmsg"] as? String
-        SelectFromTextHistoryLabel.text = LangDict["text_compose_history"] as? String
-        descriptionTextField.placeholder = LangDict["teacher_txt_onwhat"] as? String
-        strTextViewPlaceholder = LangDict["teacher_txt_typemsg"] as? String ?? "Content?"
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        ComposeTextLabel.text = commonStringNames.text_new_msg.translated() as? String
+        TextMessageTitle.text = commonStringNames.teacher_txt_composehwmsg.translated() as? String
+        SelectFromTextHistoryLabel.text = commonStringNames.text_compose_history.translated() as? String
+        descriptionTextField.placeholder = commonStringNames.teacher_txt_onwhat.translated() as? String
+        strTextViewPlaceholder = commonStringNames.teacher_txt_typemsg.translated() as? String ?? "Content?"
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         self.loadViewData()
     }
     func loadViewData(){

@@ -532,8 +532,8 @@ class StaffChatDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSou
     
     func AlerMessage(alrtStr : String){
         
-        let alertController = UIAlertController(title: languageDictionary["alert"] as? String, message: alrtStr, preferredStyle: .alert)
-        let okAction = UIAlertAction(title:languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let alertController = UIAlertController(title: commonStringNames.alert.translated() as? String, message: alrtStr, preferredStyle: .alert)
+        let okAction = UIAlertAction(title:commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             print("Okaction")
             self.navigationController?.popViewController(animated: true)
@@ -595,9 +595,9 @@ class StaffChatDetailVC: UIViewController,UITableViewDelegate,UITableViewDataSou
         }
         
         
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Records Found.."
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Records Found.."
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         GetStaffChatApiCalling()
     }
     

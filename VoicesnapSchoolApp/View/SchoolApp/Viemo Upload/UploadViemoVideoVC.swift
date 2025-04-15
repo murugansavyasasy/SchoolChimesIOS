@@ -142,6 +142,7 @@ class UploadViemoVideoVC: UIViewController, UIActionSheetDelegate, UIImagePicker
         SendButton.isEnabled = false
         StandardSectionButton.layer.cornerRadius = 5
         StandardSectionButton.isEnabled = false
+        StaffGroupButton.setTitle(commonStringNames.ToGroups.translated(), for: .normal)
         StaffGroupButton.layer.cornerRadius = 5
         StaffGroupButton.isEnabled = false
         StandardStudentButton.layer.cornerRadius = 5
@@ -237,14 +238,14 @@ class UploadViemoVideoVC: UIViewController, UIActionSheetDelegate, UIImagePicker
         
         
         if(UIDevice.current.userInterfaceIdiom == .pad){
-            let alertController = UIAlertController(title: LanguageDict["upload_image"] as? String, message: LanguageDict["choose_option"] as? String, preferredStyle: .alert)
+            let alertController = UIAlertController(title: commonStringNames.upload_image.translated() as? String, message: commonStringNames.choose_option.translated() as? String, preferredStyle: .alert)
             // Initialize Actions
-            let yesAction = UIAlertAction(title: LanguageDict["choose_from_gallery"] as? String, style: .default) { (action) -> Void in
+            let yesAction = UIAlertAction(title: commonStringNames.choose_from_gallery.translated() as? String, style: .default) { (action) -> Void in
                 self.FromGallery()
             }
             
             
-            let CancelAction = UIAlertAction(title: LanguageDict["teacher_cancel"] as? String, style: .default) { (action) -> Void in
+                                          let CancelAction = UIAlertAction(title: commonStringNames.teacher_cancel.translated() as? String, style: .default) { (action) -> Void in
                 alertController.dismiss(animated: true, completion: nil)
             }
             
@@ -256,13 +257,13 @@ class UploadViemoVideoVC: UIViewController, UIActionSheetDelegate, UIImagePicker
             self.present(alertController, animated: true, completion: nil)
         }
         else{
-            let alert = UIAlertController(title:  LanguageDict["upload_image"] as? String, message: LanguageDict["choose_option"] as? String, preferredStyle: .actionSheet)
+                let alert = UIAlertController(title:  commonStringNames.upload_image.translated() as? String, message: commonStringNames.choose_option.translated() as? String, preferredStyle: .actionSheet)
             
-            alert.addAction(UIAlertAction(title: LanguageDict["choose_from_gallery"] as? String, style: .default , handler:{ (UIAlertAction)in
+                                              alert.addAction(UIAlertAction(title: commonStringNames.choose_from_gallery.translated() as? String, style: .default , handler:{ (UIAlertAction)in
                 self.FromGallery()
             }))
             
-            alert.addAction(UIAlertAction(title: LanguageDict["teacher_cancel"] as? String, style: .cancel, handler:{ (UIAlertAction)in
+                                              alert.addAction(UIAlertAction(title: commonStringNames.teacher_cancel.translated() as? String, style: .cancel, handler:{ (UIAlertAction)in
                 print("User click Dismiss button")
             }))
             
@@ -546,21 +547,21 @@ class UploadViemoVideoVC: UIViewController, UIActionSheetDelegate, UIImagePicker
             aboutTextField.textAlignment = .left
         }
         if (strCountryName.uppercased() == SELECT_COUNTRY){
-            StandardSectionButton.setTitle(LangDict["teacher_staff_to_sections_usa"] as? String, for: .normal)
-            StandardStudentButton.setTitle(LangDict["teacher_staff_to_students"] as? String, for: .normal)
+            StandardSectionButton.setTitle(commonStringNames.teacher_staff_to_sections_usa.translated() as? String, for: .normal)
+                                           StandardStudentButton.setTitle(commonStringNames.teacher_staff_to_students.translated() as? String, for: .normal)
         }
         else{
-            StandardSectionButton.setTitle(LangDict["teacher_staff_to_sections"] as? String, for: .normal)
-            StandardStudentButton.setTitle(LangDict["teacher_staff_to_students"] as? String, for: .normal)
+                StandardSectionButton.setTitle(commonStringNames.teacher_staff_to_sections.translated() as? String, for: .normal)
+                                               StandardStudentButton.setTitle(commonStringNames.teacher_staff_to_students.translated() as? String, for: .normal)
         }
-        ClickHereButton.setTitle(LangDict["choose_gallery_video"] as? String, for: .normal)
-        ClickImageCaptureButton.setTitle(LangDict["change_video"] as? String, for: .normal)
-        SendImageLabel.text = LangDict["compose_video"] as? String
-        titleTextField.placeholder = LangDict["title"] as? String
-        aboutTextField.placeholder = LangDict["about_video"] as? String
+                                                                              ClickHereButton.setTitle(commonStringNames.choose_gallery_video.translated() as? String, for: .normal)
+                                                                                                       ClickImageCaptureButton.setTitle(commonStringNames.change_video.translated() as? String, for: .normal)
+                                                                                                                                        SendImageLabel.text = commonStringNames.compose_video.translated() as? String
+                                                                                                                                        titleTextField.placeholder = commonStringNames.title.translated() as? String
+                                                                                                                                        aboutTextField.placeholder = commonStringNames.about_video.translated() as? String
         
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
-        SendButton.setTitle(LangDict["teacher_choose_recipient"] as? String, for: .normal)
+                                                                                                                                        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
+                                                                                                                                        SendButton.setTitle(commonStringNames.teacher_choose_recipient.translated() as? String, for: .normal)
         
     }
     
@@ -682,14 +683,16 @@ class UploadViemoVideoVC: UIViewController, UIActionSheetDelegate, UIImagePicker
             TitleDescriotion =  "Test Description"
         }
         
-        
+        let userDefaults = UserDefaults.standard
+        let getDownload = UserDefaults.standard.value(forKey: DefaultsKeys.allowVideoDownload) as? Bool ?? false
         let parameters: [String: Any] = [
             "upload": [
                 "approach": "tus",
                 "size": "\(fileSize)" // Use the actual video file size
             ],
             "privacy":[
-                "view":"unlisted"
+                "view":"unlisted",
+                "download": true
             ],
             "embed":[
                 "buttons":[

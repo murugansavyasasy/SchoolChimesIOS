@@ -116,10 +116,14 @@ class StaffAddNewClassVC: UIViewController,Apidelegate,UIPickerViewDelegate,UIPi
     {
         
         print("HomeWorkImage :",HomeWorkPdf)
+        print("checkSchoolIDcheckSchoolID :",checkSchoolID)
         super.viewDidLoad()
         view.isOpaque = false
+        print("schoolIddfgfdsfgfds",SchoolId)
         SendButton.layer.cornerRadius = 5
         SendButton.layer.masksToBounds = true
+        assigmentSendButton.setTitle(commonStringNames.SEND.translated(), for: .normal)
+        assigmentStudentButton.setTitle(commonStringNames.teacher_txt_selectStudents.translated(), for: .normal)
         assigmentSendButton.layer.cornerRadius = 5
         assigmentSendButton.layer.masksToBounds = true
         assigmentStudentButton.layer.cornerRadius = 5
@@ -141,12 +145,25 @@ class StaffAddNewClassVC: UIViewController,Apidelegate,UIPickerViewDelegate,UIPi
             
             
             
-            let userDefaults = UserDefaults.standard
-            
-            SchoolId = userDefaults.string(forKey: DefaultsKeys.SchoolD)!
-            StaffId = userDefaults.string(forKey: DefaultsKeys.StaffID)!
+            if checkSchoolID == "1" {
+                
+                SchoolId =   String(describing: SchoolDetailDict["SchoolID"]!)
+                StaffId = String(describing: SchoolDetailDict["StaffID"]!)
+                
+                print("checkSchoolIdifif",SchoolId)
+            }else{
+                
+               
+                
+                let userDefaults = UserDefaults.standard
+                
+                SchoolId = userDefaults.string(forKey: DefaultsKeys.SchoolD)!
+                StaffId = userDefaults.string(forKey: DefaultsKeys.StaffID)!
+            }
             
         }
+        
+        
         countryCoded =  UserDefaults.standard.object(forKey: COUNTRY_ID) as! String
         print("URLDATA:",voiceURl)
         
@@ -286,6 +303,7 @@ class StaffAddNewClassVC: UIViewController,Apidelegate,UIPickerViewDelegate,UIPi
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "StaffAddNewClassTVCell", for: indexPath) as! StaffAddNewClassTVCell
         cell.SubjectView.backgroundColor = UIColor.white
+        cell.getSubjectButton.setTitle( commonStringNames.GetSubject.translated(), for: .normal)
         if(indexPath.section == 1)
         {
             cell.getSubjectButton.isHidden = true
@@ -468,7 +486,7 @@ class StaffAddNewClassVC: UIViewController,Apidelegate,UIPickerViewDelegate,UIPi
                 Util.showAlert("", msg:strNoInternet )
             }
         }else{
-            Util.showAlert("", msg: LanguageDict["alert_section"] as? String)
+            Util.showAlert("", msg: commonStringNames.alert_section.translated() as? String)
         }
         
     }
@@ -477,7 +495,7 @@ class StaffAddNewClassVC: UIViewController,Apidelegate,UIPickerViewDelegate,UIPi
     
     func actionSelectCategory(){
         TableString = "Category"
-        PickerTitleLabel.text = LanguageDict["select_category"] as? String
+                PickerTitleLabel.text = commonStringNames.select_category.translated() as? String
         self.MyPickerView.reloadAllComponents()
         if(UIDevice.current.userInterfaceIdiom == .pad)
         {
@@ -509,7 +527,7 @@ class StaffAddNewClassVC: UIViewController,Apidelegate,UIPickerViewDelegate,UIPi
     func actionSelectSection()
     {
         TableString = "Section"
-        PickerTitleLabel.text = LanguageDict["select_section"] as? String
+                PickerTitleLabel.text = commonStringNames.select_section.translated() as? String
         self.MyPickerView.reloadAllComponents()
         if(UIDevice.current.userInterfaceIdiom == .pad)
         {
@@ -524,7 +542,7 @@ class StaffAddNewClassVC: UIViewController,Apidelegate,UIPickerViewDelegate,UIPi
     func actionSelectStandard()
     {
         TableString = "Standard"
-        PickerTitleLabel.text = LanguageDict["select_standard"] as? String
+                PickerTitleLabel.text = commonStringNames.select_standard.translated() as? String
         
         self.MyPickerView.reloadAllComponents()
         
@@ -542,14 +560,14 @@ class StaffAddNewClassVC: UIViewController,Apidelegate,UIPickerViewDelegate,UIPi
         }
         else
         {
-            Util.showAlert(LanguageDict["alert"] as? String, msg: LanguageDict["no_students"] as? String)
+            Util.showAlert(commonStringNames.alert.translated() as? String, msg: commonStringNames.no_students.translated() as? String)
         }
         
     }
     
     func actionSelectSubject() {
         TableString = "Subject"
-        PickerTitleLabel.text = LanguageDict["select_subject"] as? String
+                PickerTitleLabel.text = commonStringNames.select_subject.translated() as? String
         self.ChooseSubject()
     }
     func UpdateStandardValue(StandardName : String)
@@ -601,12 +619,12 @@ class StaffAddNewClassVC: UIViewController,Apidelegate,UIPickerViewDelegate,UIPi
             }
             else
             {
-                Util.showAlert("", msg: LanguageDict["no_subject"] as? String)
+                Util.showAlert("", msg: commonStringNames.no_subject.translated() as? String)
             }
             
         }else
         {
-            Util.showAlert("", msg: LanguageDict["alert_subject"] as? String)
+                    Util.showAlert("", msg: commonStringNames.alert_subject.translated() as? String)
         }
         
         
@@ -657,7 +675,7 @@ class StaffAddNewClassVC: UIViewController,Apidelegate,UIPickerViewDelegate,UIPi
             
         }
         else{
-            Util.showAlert("", msg: LanguageDict["alert_section"] as? String)
+            Util.showAlert("", msg:commonStringNames.alert_section.translated() as? String)
         }
         
     }
@@ -774,7 +792,7 @@ class StaffAddNewClassVC: UIViewController,Apidelegate,UIPickerViewDelegate,UIPi
                 }
             }
         }else{
-            Util.showAlert("", msg: LanguageDict["alert_section"] as? String)
+            Util.showAlert("", msg: commonStringNames.alert_section.translated() as? String)
         }
         
     }
@@ -832,7 +850,7 @@ class StaffAddNewClassVC: UIViewController,Apidelegate,UIPickerViewDelegate,UIPi
                 UpdateSubjectValue(SubjectName: SelectedSubjectString)
                 PopupChoosePickerView.isHidden = true
             }else{
-                Util.showAlert("", msg: LanguageDict["no_subject"] as? String)
+                Util.showAlert("", msg: commonStringNames.no_subject.translated() as? String)
             }
             
         }
@@ -1243,14 +1261,23 @@ class StaffAddNewClassVC: UIViewController,Apidelegate,UIPickerViewDelegate,UIPi
                                 if(stdName != "" && stdName != "0")
                                 {
                                     StandardNameArray.append(stdName!)
-                                    DetailofSectionArray.append(dicResponse["Sections"] as! [Any])
-                                    DetailedSubjectArray.append(dicResponse["Subjects"] as! [Any])
+                                    
+                                    if let sections = dicResponse["Sections"] as? [Any] {
+                                        DetailofSectionArray.append(sections)
+                                    }
+                                    
+                                    if let Subject = dicResponse["Subjects"] as? [Any] {
+                                        DetailedSubjectArray.append(Subject)
+                                    }
+                                   
+                                  
+                                    
                                     UtilObj.printLogKey(printKey: "DetailofSectionArray", printingValue: DetailofSectionArray)
                                     UtilObj.printLogKey(printKey: "DetailedSubjectArray", printingValue: DetailedSubjectArray)
                                     pickerStandardArray = StandardNameArray
                                     
                                     
-                                    if let sectionarray = DetailofSectionArray[0] as? NSArray
+                                    if let sectionarray = DetailofSectionArray.first as? NSArray
                                     {
                                         SectionArray = NSMutableArray(array: sectionarray)
                                         
@@ -1282,6 +1309,11 @@ class StaffAddNewClassVC: UIViewController,Apidelegate,UIPickerViewDelegate,UIPi
                                     Util.showAlert("", msg: AlertString)
                                     dismiss(animated: false, completion: nil)
                                 }
+                            }
+                            
+                            if DetailedSubjectArray.isEmpty && DetailofSectionArray.isEmpty{
+                                Util.showAlert("", msg: "No record found")
+                                dismiss(animated: false, completion: nil)
                             }
                         }
                         else
@@ -1632,15 +1664,15 @@ class StaffAddNewClassVC: UIViewController,Apidelegate,UIPickerViewDelegate,UIPi
             self.view.semanticContentAttribute = .forceLeftToRight
         }
         
-        let strStandard : String = LangDict["teacher_atten_standard"] as? String ?? "Standard"
-        let strSection : String = LangDict["teacher_atten_sections"] as? String ?? "Section(s)"
-        let strSubject : String = LangDict["teacher_atten_subject"] as? String ?? "Subject"
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Records Found.."
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
-        SendButton.setTitle(LangDict["teacher_txt_send"] as? String, for: .normal)
-        pickerCancelButton.setTitle(LangDict["teacher_cancel"] as? String, for: .normal)
-        pickerOkButton.setTitle(LangDict["teacher_btn_ok"] as? String, for: .normal)
+        let strStandard : String = commonStringNames.teacher_atten_standard.translated() as? String ?? "Standard"
+        let strSection : String = commonStringNames.teacher_atten_sections.translated() as? String ?? "Section(s)"
+        let strSubject : String = commonStringNames.teacher_atten_subject.translated() as? String ?? "Subject"
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Records Found.."
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
+        SendButton.setTitle(commonStringNames.teacher_txt_send.translated() as? String, for: .normal)
+        pickerCancelButton.setTitle(commonStringNames.teacher_cancel.translated() as? String, for: .normal)
+        pickerOkButton.setTitle(commonStringNames.teacher_btn_ok.translated() as? String, for: .normal)
         SectionTitleArray = [strStandard,strSection,"",strSubject]
         MyTableView.reloadData()
     }
@@ -1665,229 +1697,226 @@ class StaffAddNewClassVC: UIViewController,Apidelegate,UIPickerViewDelegate,UIPi
     
     //MARK: AWS Upload
     
-    func getImageURL(images : [UIImage]){
-        showLoading()
+    
+    
+    
+    
+    func getImageURL(images: [UIImage]) {
+    
         self.originalImagesArray = images
         self.totalImageCount = images.count
-        if currentImageCount < images.count{
-            self.uploadAWS(image: images[currentImageCount])
-        }
-    }
-    
-    func uploadAWS(image : UIImage){
-        
-        self.showLoading()
-        
-        var bucketName = ""
-        print("countryCoded",countryCoded)
-        if countryCoded == "1" {
-           
-            bucketName = DefaultsKeys.bucketNameIndia
-        }else  {
-            bucketName = DefaultsKeys.bucketNameBangkok
-        }
-//        let S3BucketName = "schoolchimes-india"
-        let CognitoPoolID = DefaultsKeys.CognitoPoolID
-        let Region = AWSRegionType.APSouth1
-        
-        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:Region,identityPoolId:CognitoPoolID)
-        let configuration = AWSServiceConfiguration(region:Region, credentialsProvider:credentialsProvider)
-        AWSServiceManager.default().defaultServiceConfiguration = configuration
-        
-        
-        
-        let currentTimeStamp = NSString.init(format: "%ld",Date() as CVarArg)
-        let imageNameWithoutExtension = NSString.init(format: "vc_%@",currentTimeStamp)
-        let imageName = NSString.init(format: "%@%@",imageNameWithoutExtension, ".png")
-        
-        let ext = imageName as String
-        
-        let fileName = imageNameWithoutExtension
-        let fileType = ".png"
-        
-        let imageURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(ext)
-        
-        let data = image.jpegData(compressionQuality: 0.9)
-        do {
-            try data?.write(to: imageURL)
-        }
-        catch {}
-        
-        print("awsimageURL",imageURL)
-        
-        let dateFormatter = DateFormatter()
-        
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        
-        let  currentDate =   dateFormatter.string(from: Date())
-        
-        print("currentDate",currentDate)
-        let uploadRequest = AWSS3TransferManagerUploadRequest()
-        uploadRequest?.body = imageURL
-        uploadRequest?.key = "communication" + "/" + currentDate +  "/" + ext
-        uploadRequest?.bucket = bucketName
-        uploadRequest?.contentType = "image/" + ext
-        uploadRequest?.acl = .publicRead
-        
-        
-        let transferManager = AWSS3TransferManager.default()
-        transferManager.upload(uploadRequest!).continueWith { [self] (task) -> AnyObject? in
-            
-            if let error = task.error {
-                self.hideLoading()
-                print("Upload failed : (\(error))")
+            if currentImageCount < images.count {
+               
+                self.uploadAWS(image: images[currentImageCount])
+            } else {
+                print("All images uploaded. Final URLs: \("")")
+                // Handle final uploaded URLs (e.g., send them to the server or update the UI)
             }
-            var imageFilePath = NSMutableArray()
-            if task.result != nil {
-                let url = AWSS3.default().configuration.endpoint.url
-                let publicURL = url?.appendingPathComponent((uploadRequest?.bucket!)!).appendingPathComponent((uploadRequest?.key!)!)
-                if let absoluteString = publicURL?.absoluteString {
-                    print("Uploaded to:\(absoluteString)")
+    }
+
+    func uploadAWS(image: UIImage) {
+        let currentTimeStamp = NSString.init(format: "%ld", Date() as CVarArg)
+        let imageNameWithoutExtension = NSString.init(format: "vc_%@", currentTimeStamp)
+        let imageName = NSString.init(format: "%@%@", imageNameWithoutExtension, ".png")
+        let ext = imageName as String
+        let imageURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(ext)
+
+        if let data = image.jpegData(compressionQuality: 0.9) {
+            do {
+                try data.write(to: imageURL)
+            } catch {
+                print("Error writing image data to file: \(error)")
+                return
+            }
+        }
+        
+        
+        
+        let currentDate = AWSPreSignedURL.shared.getCurrentDateString()
+        var bucketName = ""
+        var bucketPath = ""
+        if countryCoded == "4" {
+            bucketName = DefaultsKeys.THAI_SCHOOL_CHIMES_COMMUNICATION
+            bucketPath = currentDate+"/"+String(SchoolId)
+        }
+        else
+        {
+            bucketName = DefaultsKeys.SCHOOL_CHIMES_COMMUNICATION
+            bucketPath = currentDate+"/"+String(SchoolId)
+
+        }
+                       
+        
+        AWSPreSignedURL.shared.fetchPresignedURL(
+            bucket: bucketName,
+            fileName: imageURL,
+            bucketPath: bucketPath,
+            fileType: "image/png"
+        ) { [self] result in
+            switch result {
+            case .success(let awsResponse):
+                print("Presigned URL fetched: \(awsResponse.data?.presignedUrl ?? "")")
+                let presignedURL = awsResponse.data?.presignedUrl
+                let Uploadimages = awsResponse.data?.fileUrl
+              
+                AWSUploadManager.shared.uploadImageToAWS(image: image, presignedURL: presignedURL!) { [self] result in
+                    switch result {
+                    case .success(let uploadedURL):
+                        print("Image uploaded successfully: \(uploadedURL)")
+                      
+                    case .failure(let error):
+                        print("Failed to upload image: \(error.localizedDescription)")
+                    }
+        
+//                    let imageDict = NSMutableDictionary()
+//                    imageDict["FileName"] = Uploadimages
+//                    imageUrlArray.add(imageDict)
+//                    
+                    
+                    var imageFilePath = NSMutableArray()
                     let imageDicthome = NSMutableDictionary()
-                    imageDicthome["path"] = absoluteString
+                    imageDicthome["path"] = Uploadimages
                     imageDicthome["type"] = "PDF"
                     let imageDict = NSMutableDictionary()
                     var emptyDictionary = [String: String]()
                     if HomeWorkPdf == "Image" {
-                        imageDict["path"] = absoluteString
+                        imageDict["path"] = Uploadimages
                         imageDict["type"] = "IMAGE"
                         
-                        yourArray1["path"] = absoluteString
+                        yourArray1["path"] = Uploadimages
                         yourArray1["type"] = "IMAGE"
-                        FilePathArrayPath = absoluteString
+                        FilePathArrayPath = Uploadimages
                         FilePathArrayType = "IMAGE"
                     }else{
                         
-                        imageDict["FileName"] = absoluteString
+                        imageDict["FileName"] = Uploadimages
                     }
-                    imageFilePath.add(imageDicthome)
                     
+                    imageFilePath.add(imageDicthome)
+                   
                     
                     
                     self.imageUrlArray.add(imageDict)
+                    self.currentImageCount += 1
+                      if self.currentImageCount < self.totalImageCount {
+                          
+                          DispatchQueue.main.async {
+                              self.getImageURL(images: self.originalImagesArray)
+                              print("getImageURL",self.getImageURL)
+                          }
+                       } else {
+                           print("All images uploaded. Final URLs: \(imageUrlArray)")
+                           // Handle final uploaded URLs (e.g., send them to the server or update the UI
+                         
+                           
+                          
+                           self.currentImageCount = self.currentImageCount + 1
+                           if self.currentImageCount < self.totalImageCount{
+                               DispatchQueue.main.async {
+                                   self.getImageURL(images: self.originalImagesArray)
+                               }
+                           }else{
+                               self.convertedImagesUrlArray = self.imageUrlArray
+                               
+                               
+                               filepathArray.removeAllObjects()
+                               if HomeWorkType == "1" {
+                                   
+                                   
+                                   filepathArray.add(imageUrlArray)
+                                   print("SelectedSectionCodeArray12rr : ",imageUrlArray)
+                                   print("yourArray1 : ",yourArray1)
+                                   
+                                   SendTextHomeWorkApi()
+                                   print("convertedImagesUrlArray",convertedImagesUrlArray)
+                                   print("HomeWorkPdfType",HomeWorkPdf)
+                               }else{
+                                   
+                                   self.SendImageAssignmentApi()
+                               }
+                           }
+                           }
                     
                     
-                    self.currentImageCount = self.currentImageCount + 1
-                    if self.currentImageCount < self.totalImageCount{
-                        DispatchQueue.main.async {
-                            self.getImageURL(images: self.originalImagesArray)
-                        }
-                    }else{
-                        self.convertedImagesUrlArray = self.imageUrlArray
-                        
-                        filepathArray.removeAllObjects()
-                        if HomeWorkType == "1" {
-                            
-                            
-                            filepathArray.add(imageUrlArray)
-                            print("SelectedSectionCodeArray12rr : ",imageUrlArray)
-                            print("yourArray1 : ",yourArray1)
-                            
-                            SendTextHomeWorkApi()
-                            print("convertedImagesUrlArray",convertedImagesUrlArray)
-                            print("HomeWorkPdfType",HomeWorkPdf)
-                        }else{
-                            
-                            self.SendImageAssignmentApi()
-                        }
-                    }
-                }
+                    
+                          }
+           
+            case .failure(let error):
+                print("Error fetching presigned URL: \(error.localizedDescription)")
             }
-            
-            return nil
         }
+        
+   
+       
     }
     
     
+    
+
     func uploadPDFFileToAWS(pdfData : NSData){
-        self.showLoading()
-        var bucketName = ""
-        if countryCoded == "1" {
-               
-                bucketName = DefaultsKeys.bucketNameIndia
-            }else  {
-                 bucketName = DefaultsKeys.bucketNameBangkok
-            }
-        
-        let S3BucketName = bucketName
-                   
-        let CognitoPoolID = DefaultsKeys.CognitoPoolID
-        let Region = AWSRegionType.APSouth1
-        
-        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:Region,identityPoolId:CognitoPoolID)
-        let configuration = AWSServiceConfiguration(region:Region, credentialsProvider:credentialsProvider)
-        AWSServiceManager.default().defaultServiceConfiguration = configuration
-        
-        let currentTimeStamp = Date().currentTimeMillis()
-        let imageNameWithoutExtension = "VC-\(currentTimeStamp)"
-        let imageName = "\(imageNameWithoutExtension).pdf"
-        
+//        self.showLoading()
+        let currentTimeStamp = NSString.init(format: "%ld",Date() as CVarArg)
+        let imageNameWithoutExtension = NSString.init(format: "vc_%@",currentTimeStamp)
+        let imageName = NSString.init(format: "%@%@",imageNameWithoutExtension, ".pdf")
         let ext = imageName as String
-        
         let fileName = imageNameWithoutExtension
-        var fileTypeAws = ".pdf"
-        
+        let fileType = ".pdf"
         let imageURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(ext)
-        
         do {
             try pdfData.write(to: imageURL)
         }
         catch {}
-        
         print(imageURL)
-        let dateFormatter = DateFormatter()
-        
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        
-        let  currentDate =   dateFormatter.string(from: Date())
+       
+      
         
         
-        let uploadRequest = AWSS3TransferManagerUploadRequest()
-        uploadRequest?.body = imageURL
-        uploadRequest?.key = "communication" + "/" + currentDate +  "/" + ext
-        uploadRequest?.bucket = bucketName
-        uploadRequest?.contentType = "application/pdf"
-       uploadRequest?.acl = .publicRead
-        let expression = AWSS3TransferUtilityUploadExpression()
-        expression.progressBlock = { (task, progress) in
-            DispatchQueue.main.async(execute: {
-            })
+        
+        let currentDate = AWSPreSignedURL.shared.getCurrentDateString()
+        var bucketName = ""
+        var bucketPath = ""
+        if countryCoded == "4" {
+            bucketName = DefaultsKeys.THAI_SCHOOL_CHIMES_COMMUNICATION
+            bucketPath = currentDate+"/"+String(SchoolId)
         }
-        
-        var completionHandler: AWSS3TransferUtilityUploadCompletionHandlerBlock?
-        completionHandler = { (task, error) -> Void in
-            DispatchQueue.main.async(execute: {
-                
-            })
+        else
+        {
+            bucketName = DefaultsKeys.SCHOOL_CHIMES_COMMUNICATION
+            bucketPath = currentDate+"/"+String(SchoolId)
+
         }
+                       
         
-        let transferUtility = AWSS3TransferUtility.default()
-        transferUtility.uploadData(pdfData as Data,
-                                   bucket: S3BucketName,
-                                   key: ext,
-                                   contentType: "application/pdf" ,
-                                   expression: expression, completionHandler: completionHandler).continueWith { [self] (task) -> Any? in
-            if let error = task.error {
-                print("Error : \(error.localizedDescription)")
-            }
-            
-            if task.result != nil {
-                let url = AWSS3.default().configuration.endpoint.url
-                print("task URL : ",url)
-                
-                let publicURL = url?.appendingPathComponent(S3BucketName).appendingPathComponent(ext)
-                if let absoluteString = publicURL?.absoluteString {
+        AWSPreSignedURL.shared.fetchPresignedURL(
+            bucket: bucketName,
+            fileName: imageURL,
+            bucketPath: bucketPath,
+            fileType: "application/pdf"
+        ) { [self] result in
+            switch result {
+            case .success(let awsResponse):
+                print("Presigned URL fetched: \(awsResponse.data?.presignedUrl ?? "")")
+                let presignedURL = awsResponse.data?.presignedUrl
+                let UploadPDf = awsResponse.data?.fileUrl
+              
+                AWSUploadManager.shared.uploadPDFAWSUsingPresignedURL(pdfData: pdfData as Data, presignedURL:presignedURL! ){ [self] result in
                     
-                    print("Image URL : ",absoluteString)
+                    switch result {
+                    case .success(let uploadedURL):
+                        print("Image uploaded successfully: \(uploadedURL)")
+                      
+                    case .failure(let error):
+                        print("Failed to upload image: \(error.localizedDescription)")
+                    }
+        
                     
-                    print("HomeWorkType",HomeWorkType)
                     if HomeWorkType == "1" {
                         filepathArray.removeAllObjects()
                         var pdftype : String!
                         pdftype = "PDF"
-                        let StudentDic:NSDictionary = ["path" : absoluteString,"type" : pdftype ]
+                        let StudentDic:NSDictionary = ["path" : UploadPDf,"type" : pdftype ]
                         filepathArray.add(StudentDic)
-                        FilePathArrayPath = absoluteString
+                        FilePathArrayPath = UploadPDf
                         FilePathArrayType = pdftype
                         
                         self.imageUrlArray.add(StudentDic)
@@ -1902,111 +1931,116 @@ class StaffAddNewClassVC: UIViewController,Apidelegate,UIPickerViewDelegate,UIPi
                         
                         
                         let imageDict = NSMutableDictionary()
-                        imageDict["FileName"] = absoluteString
+                        imageDict["FileName"] = UploadPDf
                         self.imageUrlArray.add(imageDict)
                         self.convertedImagesUrlArray = self.imageUrlArray
                         self.SendPdfAssignmentApi()
                     }
-                }
-            }else {
-                self.hideLoading()
-                print("Unexpected empty result.")
-            }
-            
-            return nil
-        }
-    }
-    
-    
-    func multipartAudio() {
-        
-        
-        
-        
-        var urlString : String!
-        urlString  = voiceURl.absoluteString
-        print("urlStringurlString",urlString!)
-        
-        
-        let audioUrl = URL(fileURLWithPath: urlString)
-        AWSS3Manager.shared.uploadAudio(audioUrl: audioUrl, progress: { [weak self] (progress) in
-            
-            guard let strongSelf = self else { return }
-            
-        }) { [weak self] (uploadedFileUrl, error) in
-            
-            guard let strongSelf = self else { return }
-            if let finalPath = uploadedFileUrl as? String {
-                print("finalPath",finalPath)
-            } else {
-                print("\(String(describing: error?.localizedDescription))")
+                    
+                    
+                    
+                          }
+           
+            case .failure(let error):
+                print("Error fetching presigned URL: \(error.localizedDescription)")
             }
         }
         
-        
-        
-        
     }
     
+    
+ 
+    
+
     func Awws3Voice(URLPath : URL) {
         
         
         
         let audioUrl = URL(fileURLWithPath: URLPath.path)
         
-        AWSS3Manager.shared.uploadAudio(audioUrl: audioUrl, progress: { [weak self] (progress) in
-            
-            
-            
-            print("audioUrl!",audioUrl)
-            
-            guard let strongSelf = self else { return }
-            
-            
-            
-        }) { [weak self] (uploadedFileUrl, error) in
-            
-            
-            
-            guard let strongSelf = self else { return }
-            
-            if let finalPath = uploadedFileUrl as? String {
-                
-                self!.voiceURl = URL(string: finalPath)
-                print("finalPath123!",finalPath)
-                var pdftype : String!
-                pdftype = "VOICE"
-                
-                self!.filepathArray.removeAllObjects()
-                let imageDict = NSMutableDictionary()
-                
-                imageDict["path"] = self!.voiceURl
-                
-                
-                
-                imageDict["type"] = "VOICE"
-                
-                
-                self!.voicePathUrl = self!.voiceURl.absoluteString
-                self!.voiceType = "VOICE"
-                
-                print("voiceURl.path",self!.voiceURl.absoluteString)
-                
-                
-                
-                self!.filepathArray.add(imageDict)
-                self!.imageUrlArray.add(imageDict)
-                self!.SendTextHomeWorkApi()
-                
-                
-            } else {
-                
-                print("\(String(describing: error?.localizedDescription))")
-                
-            }
-            
+      
+        
+        
+        let currentDate = AWSPreSignedURL.shared.getCurrentDateString()
+        var bucketName = ""
+        var bucketPath = ""
+        if countryCoded == "4" {
+            bucketName = DefaultsKeys.THAI_SCHOOL_CHIMES_COMMUNICATION
+            bucketPath = currentDate+"/"+String(SchoolId)
+        }
+        else
+        {
+            bucketName = DefaultsKeys.SCHOOL_CHIMES_COMMUNICATION
+            bucketPath = currentDate+"/"+String(SchoolId)
+
         }
         
+        
+     
+       
+        
+        
+        AWSPreSignedURL.shared.fetchPresignedURL(
+            bucket: bucketName,
+            fileName: URLPath,
+            bucketPath: bucketPath,
+            fileType: "application/pdf"
+        ) { [self] result in
+            switch result {
+            case .success(let awsResponse):
+                print("Presigned URL fetched: \(awsResponse.data?.presignedUrl ?? "")")
+                let presignedURL = awsResponse.data?.presignedUrl
+                let voice = awsResponse.data?.fileUrl
+                
+                
+                
+                
+                AWSUploadManager.shared.uploadVoiceToAWS(audioFileURL: URLPath, presignedURL: presignedURL!) { result in
+                    switch result {
+                    case .success(let url):
+                        print("File uploaded successfully to: \(url)")
+                    case .failure(let error):
+                        print("Failed to upload file:", error.localizedDescription)
+                    }
+                    
+                    self.voiceURl = URL(string: voice!)
+                                    print("finalPath123!",voice)
+                                    var pdftype : String!
+                                    pdftype = "VOICE"
+                                    
+                    self.filepathArray.removeAllObjects()
+                                    let imageDict = NSMutableDictionary()
+                                    
+                    imageDict["path"] = self.voiceURl
+                                    
+                                    
+                                    
+                                    imageDict["type"] = "VOICE"
+                                    
+                                    
+                    self.voicePathUrl = self.voiceURl.absoluteString
+                    self.voiceType = "VOICE"
+                                    
+                    print("voiceURl.path",self.voiceURl.absoluteString)
+                                    
+                                    
+                                    
+                    self.filepathArray.add(imageDict)
+                                    self.imageUrlArray.add(imageDict)
+                                    self.SendTextHomeWorkApi()
+                    
+                    
+                }
+                
+                
+                
+                
+            case .failure(_):
+                ""
+            }
+            
+            
+        }
         
     }
     

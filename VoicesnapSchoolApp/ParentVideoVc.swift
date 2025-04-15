@@ -36,6 +36,8 @@ class ParentVideoVc: UIViewController,UITableViewDataSource,UITableViewDelegate,
     var SenderType = NSString ()
     var Screenheight = CFloat()
     
+    var getVideoId : String!
+    var downloadShowID : Int!
     var MainDetailTextArray: NSMutableArray = NSMutableArray()
     var SelectedSectionArray : NSMutableArray = NSMutableArray()
    
@@ -73,7 +75,9 @@ class ParentVideoVc: UIViewController,UITableViewDataSource,UITableViewDelegate,
         super.viewDidLoad()
         print("SearchBarVideo")
         search_bar.delegate = self
-        
+        search_bar.placeholder = commonStringNames.Search.translated()
+        TextDateLabel.text = commonStringNames.Videos.translated()
+
         TextDetailstableview.dataSource = self
         TextDetailstableview.delegate = self
         
@@ -89,7 +93,7 @@ class ParentVideoVc: UIViewController,UITableViewDataSource,UITableViewDelegate,
         
         self.view.backgroundColor = UIColor(named: "serach_color")
         if getMsgFromMgnt == 1 {
-            
+            CallStaffVideoApi()
         }else{
             let defaults = UserDefaults.standard
             print("SchoolId",SchoolId)
@@ -325,6 +329,28 @@ class ParentVideoVc: UIViewController,UITableViewDataSource,UITableViewDelegate,
         strSelectedVideoUrl = String(describing: detailsDictionary["VimeoUrl"]!)
          iframeURL = String(describing: detailsDictionary["Iframe"]!)
             strSelectedVideoId = String(describing: detailsDictionary["VimeoId"]!)
+         
+         
+         
+         if let questionMarkIndex = strSelectedVideoId.firstIndex(of: "?") {
+             let result = String(strSelectedVideoId[..<questionMarkIndex]) // Extract substring before "?"
+             print("Digits before '?': \(result)")
+             getVideoId = String(result)
+         } else {
+             print("No '?' found in the string.")
+         }
+         
+         
+         
+         
+         
+         
+         
+         
+         
+         
+      
+         downloadShowID = Int(String(describing:detailsDictionary["isDownload"]!))
         DispatchQueue.main.async() {
             self.performSegue(withIdentifier: "VdieoDetailSegue", sender: self)
         }
@@ -361,6 +387,68 @@ class ParentVideoVc: UIViewController,UITableViewDataSource,UITableViewDelegate,
         let myString = Util.convertNSDictionary(toString: myDict)
         
         apiCall.nsurlConnectionFunction(requestString, myString, "UpdateReadStatus")
+    }
+    
+    
+    
+    
+    func CallStaffVideoApi() {
+        showLoading()
+        strApiFrom = "CallStaffVideoApi"
+        print("CallStaffVideoApiCallStaffVideoApiCallStaffVideoApi")
+        let apiCall = API_call.init()
+        apiCall.delegate = self;
+        
+        let baseUrlString = UserDefaults.standard.object(forKey:BASEURL) as? String
+        var requestStringer = baseUrlString! + GET_FILES_STAFF
+        let baseReportUrlString = UserDefaults.standard.object(forKey:NEWLINKREPORTBASEURL) as? String
+
+                if(appDelegate.isPasswordBind == "1"){
+                    requestStringer = baseReportUrlString! + GET_FILES_STAFF
+                }
+        
+        let requestString = requestStringer.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
+        //{"SchoolId":"1235","MemberId":"112712","CircularDate":"20-05-2018","Type":"VOICE"}
+        print("SCHOOL",SchoolId)
+        print("MEMEBER",ChildId)
+        let myDict:NSMutableDictionary = ["SchoolId": SchoolId,"MemberId" : ChildId,"CircularDate" : TextDateLabel.text!,"Type" : "VIDEO", COUNTRY_CODE: strCountryCode]
+        
+        print("myDictmyDict",myDict)
+        utilObj.printLogKey(printKey: "myDict", printingValue: myDict)
+        let myString = Util.convertNSDictionary(toString: myDict)
+        utilObj.printLogKey(printKey: "myString", printingValue: myString!)
+        
+        apiCall.nsurlConnectionFunction(requestString, myString, "CallStaffVideoApi")
+        
+       
+        
+    }
+    
+    func CallSeeMoreStaffVideoApi() {
+        showLoading()
+        strApiFrom = "CallSeeMoreStaffVideoApi"
+        let apiCall = API_call.init()
+        apiCall.delegate = self;
+        
+        let baseUrlString = UserDefaults.standard.object(forKey:BASEURL) as? String
+        var requestStringer = baseUrlString! + GET_FILES_STAFF_ARCHIVE
+        let baseReportUrlString = UserDefaults.standard.object(forKey:NEWLINKREPORTBASEURL) as? String
+
+                       if(appDelegate.isPasswordBind == "1"){
+                           requestStringer = baseReportUrlString! + GET_FILES_STAFF_ARCHIVE
+                       }
+        let requestString = requestStringer.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
+        
+        print("requestString",requestString)
+        //{"SchoolId":"1235","MemberId":"112712","CircularDate":"20-05-2018","Type":"VOICE"}
+        let myDict:NSMutableDictionary = ["SchoolId": SchoolId,"MemberId" : ChildId,"CircularDate" : TextDateLabel.text!,"Type" : "VIDEO", COUNTRY_CODE: strCountryCode]
+        utilObj.printLogKey(printKey: "myDict", printingValue: myDict)
+        let myString = Util.convertNSDictionary(toString: myDict)
+        utilObj.printLogKey(printKey: "myString", printingValue: myString!)
+        
+        apiCall.nsurlConnectionFunction(requestString, myString, "CallSeeMoreStaffVideoApi")
+        
+     
     }
     
     func CallVideoDetailApi() {
@@ -481,6 +569,68 @@ class ParentVideoVc: UIViewController,UITableViewDataSource,UITableViewDelegate,
                 else{
                     Util.showAlert("", msg: strSomething)
                 }
+            }else if(strApiFrom == "CallStaffVideoApi")
+            {
+                typesArray.removeAllObjects()
+                MainDetailTextArray.removeAllObjects()
+                if let CheckedArray = csData as? NSArray
+                {
+                    let arrayData = CheckedArray
+                    for i in 0..<arrayData.count
+                    {
+                        let dict = CheckedArray[i] as! NSDictionary
+                        let Status = String(describing: dict["result"]!)
+                        let Message =  dict["Message"] as? String ?? ""
+                        altSting = Message
+                        if(Status == "1"){
+                            typesArray.add(dict)
+                            MainDetailTextArray.add(dict)
+                        }else{
+                            if(appDelegate.isPasswordBind == "0"){
+                                    //emptyView()
+                                AlerMessage()
+
+                            }
+                        }
+                    }
+                    utilObj.printLogKey(printKey: "typesArray", printingValue: typesArray)
+                    TextDetailstableview.reloadData()
+                    
+                }
+                else{
+                    Util.showAlert("", msg: strSomething)
+                }
+            }else if(strApiFrom == "CallSeeMoreStaffVideoApi")
+            {
+                typesArray.removeAllObjects()
+                MainDetailTextArray.removeAllObjects()
+                if let CheckedArray = csData as? NSArray
+                {
+                    let arrayData = CheckedArray
+                    for i in 0..<arrayData.count
+                    {
+                        let dict = CheckedArray[i] as! NSDictionary
+                        let Status = String(describing: dict["result"]!)
+                        let Message =  dict["Message"] as? String ?? ""
+                        altSting = Message
+                        if(Status == "1"){
+                            typesArray.add(dict)
+                            MainDetailTextArray.add(dict)
+                        }else{
+                            if(appDelegate.isPasswordBind == "0"){
+                                    //emptyView()
+                                AlerMessage()
+
+                            }
+                        }
+                    }
+                    utilObj.printLogKey(printKey: "typesArray", printingValue: typesArray)
+                    TextDetailstableview.reloadData()
+                    
+                }
+                else{
+                    Util.showAlert("", msg: strSomething)
+                }
             }
             
         }
@@ -507,6 +657,10 @@ class ParentVideoVc: UIViewController,UITableViewDataSource,UITableViewDelegate,
             let segueid = segue.destination as! VimeoVideoDetailVC
             segueid.strVideoUrl = strSelectedVideoUrl
             segueid.videoId = strSelectedVideoId
+            segueid.Html = iframeURL
+            segueid.downloadVideoID = getVideoId
+            segueid.getDownloadShowID = downloadShowID
+            
         }
     }
     
@@ -525,10 +679,10 @@ class ParentVideoVc: UIViewController,UITableViewDataSource,UITableViewDelegate,
     func AlerMessage()
     {
         
-        let alertController = UIAlertController(title: languageDict["alert"] as? String, message: strNoRecordAlert, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.alert.translated() as? String, message: strNoRecordAlert, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: languageDict["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+                                                let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             // print("Okaction")
             self.dismiss(animated: true, completion: nil)
@@ -569,9 +723,9 @@ class ParentVideoVc: UIViewController,UITableViewDataSource,UITableViewDelegate,
             self.navigationController?.navigationBar.semanticContentAttribute = .forceLeftToRight
             self.view.semanticContentAttribute = .forceLeftToRight
         }
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         loadViewData()
     }
     
@@ -592,7 +746,7 @@ class ParentVideoVc: UIViewController,UITableViewDataSource,UITableViewDelegate,
         let noview : UIView = UIView(frame: CGRect(x: 0, y: 10, width: self.TextDetailstableview.bounds.size.width, height: self.TextDetailstableview.bounds.size.height))
 
         let noDataLabel: UILabel = UILabel(frame: CGRect(x: 0, y:  30, width: self.TextDetailstableview.bounds.size.width, height: 60))
-        noDataLabel.text = "No messages for the day. Click See More for previous messages."
+        noDataLabel.text = commonStringNames.NoMessagesForDay.translated()
         noDataLabel.textColor = .red
         noDataLabel.backgroundColor = UIColor(named: "NoDataColor")
 
@@ -604,7 +758,7 @@ class ParentVideoVc: UIViewController,UITableViewDataSource,UITableViewDelegate,
         
 
         let button = UIButton(frame: CGRect(x: self.TextDetailstableview.bounds.size.width - 108, y: noDataLabel.frame.height + 40, width: 100, height: 32))
-         button.setTitle(SEE_MORE_TITLE, for: .normal)
+         button.setTitle(commonStringNames.SeeMore.translated(), for: .normal)
          button.backgroundColor = .white
         button.setTitleColor(utilObj.PARENT_NAV_BAR_COLOR, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 12)

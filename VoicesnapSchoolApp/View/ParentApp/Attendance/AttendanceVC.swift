@@ -66,6 +66,7 @@ class AttendanceVC: UIViewController,UITableViewDelegate, UITableViewDataSource,
         
         
         search_bar.delegate = self
+        search_bar.placeholder = commonStringNames.Search.translated()
         HiddenLabel.isHidden = true
         bIsSeeMore = false
         if(appDelegate.isPasswordBind == "0"){
@@ -269,7 +270,7 @@ class AttendanceVC: UIViewController,UITableViewDelegate, UITableViewDataSource,
         let dict = DetailAttendanceArray[indexPath.row] as! NSDictionary
         cell.DayLbl.text = String(describing: dict["Day"]!)
         cell.DateLbl.text = String(describing: dict["Date"]!)
-        cell.AbsentLbl.text = languageDictionary["absent"] as? String
+        cell.AbsentLbl.text = commonStringNames.absent.translated() as? String
         if(strLanguage == "ar"){
             cell.MainView.semanticContentAttribute = .forceRightToLeft
             cell.DayLbl.textAlignment = .right
@@ -347,23 +348,61 @@ class AttendanceVC: UIViewController,UITableViewDelegate, UITableViewDataSource,
     
     @objc func UpdateLogoutSelection(notification:Notification) -> Void
     {
-        print("Attan")
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now())
-        {
-            self.showLogoutAlert()
+//        print("Attan")
+//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now())
+//        {
+//            self.showLogoutAlert()
+//        }
+        print("SDetails")
+      
+        var selectString = notification.object as? String ?? ""
+        print("SDetails23",selectString)
+        selectString = selectString.lowercased()
+        let log = commonStringNames.logout.translated() as? String ?? ""
+        if(selectString == log){
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() )
+            {
+                self.showLogoutAlert()
+                
+            }
+        }else if(selectString.contains("edit")){
+            callEditProfile()
+        }else if(selectString.contains(commonStringNames.help.translated())){
+            callhelp()
+        }else if (selectString.contains(commonStringNames.language_change.translated())){
+            callLanguageVc()
         }
-        
+    }
+    
+    func callLanguageVc(){
+        let vc = ChangeLanguageViewController(nibName: nil, bundle: nil)
+        vc.modalPresentationStyle = .formSheet
+        present(vc, animated: true)
+    }
+    
+    
+    func callEditProfile(){
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "EditProfileVC") as! EditProfileVC
+        newViewController.strPageFrom = "edit"
+        self.navigationController?.pushViewController(newViewController, animated: true)
+    }
+    func callhelp(){
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "EditProfileVC") as! EditProfileVC
+        newViewController.strPageFrom = "help"
+        self.navigationController?.pushViewController(newViewController, animated: true)
     }
     
     func showLogoutAlert(){
-        let alertController = UIAlertController(title: languageDictionary["txt_menu_logout"] as? String, message: languageDictionary["want_to_logut"] as? String, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.txt_menu_logout.translated() as? String, message: commonStringNames.want_to_logut.translated() as? String, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             self.moveToLogInScreen(strFromStaff: "Child")
         }
-        let cancelAction = UIAlertAction(title: languageDictionary["teacher_cancel"] as? String, style: UIAlertAction.Style.cancel) {
+        let cancelAction = UIAlertAction(title: commonStringNames.teacher_cancel.translated() as? String, style: UIAlertAction.Style.cancel) {
             UIAlertAction in
             
         }
@@ -526,10 +565,10 @@ class AttendanceVC: UIViewController,UITableViewDelegate, UITableViewDataSource,
     func AlertMessage(alrString:String)
     {
         
-        let alertController = UIAlertController(title: languageDictionary["alert"] as? String, message: alrString, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.alert.translated() as? String, message: alrString, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             print("Okaction")
             self.navigationController?.popViewController(animated: true)
@@ -571,20 +610,21 @@ class AttendanceVC: UIViewController,UITableViewDelegate, UITableViewDataSource,
             self.DescriptionLabel.textAlignment = .left
             self.BottomView.semanticContentAttribute = .forceLeftToRight
         }
-        HomeLabel.text = LangDict["home"] as? String
-        FAQLabel.text = LangDict["faq"] as? String
-        PasswordLabel.text = LangDict["txt_password"] as? String
-        LogoutLabel.text = LangDict["txt_menu_setting"] as? String
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        HomeLabel.text = commonStringNames.home.translated() as? String
+        FAQLabel.text = commonStringNames.faq.translated() as? String
+        PasswordLabel.text = commonStringNames.txt_password.translated() as? String
+        LogoutLabel.text = commonStringNames.txt_menu_setting.translated() as? String
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated()as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         self.loadViewData()
         
     }
     
     func loadViewData(){
-        self.title = languageDictionary["attedance"] as? String
-        self.DescriptionLabel.text = languageDictionary["hint_attendance"] as? String
+        //self.title = languageDictionary["attedance"] as? String
+        self.title = commonStringNames.AttendanceReport.translated()
+        self.DescriptionLabel.text = commonStringNames.hint_attendance.translated() as? String
         if(Util .isNetworkConnected()){
             self.CallAttendanceDetailMessageApi()
         }else{
@@ -618,7 +658,7 @@ class AttendanceVC: UIViewController,UITableViewDelegate, UITableViewDataSource,
         noview.addSubview(noDataLabel)
         
         let button = UIButton(frame: CGRect(x: self.AttendanceTableView.bounds.size.width - 108, y: noDataLabel.frame.height + 10, width: 100, height: 32))
-        button.setTitle(SEE_MORE_TITLE, for: .normal)
+        button.setTitle(commonStringNames.SeeMore.translated(), for: .normal)
         button.backgroundColor = .white
         button.setTitleColor(utilObj.PARENT_NAV_BAR_COLOR, for: .normal)
         button.addTarget(self, action: #selector(self.seeMoreButtonTapped), for: .touchUpInside)

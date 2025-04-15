@@ -16,6 +16,7 @@ class MessageFromManagentVideoRequestGetFilesStaff_Archive {
     
     static func call_request(param :  String, completion_handler : @escaping(String)->()) {
         KRProgressHUD.show()
+        print("MessageFromManagentVideoRequestGetFilesStaff_Archive",get_url())
         BaseRequest.raw_post(url: get_url(), param: param).success {
             //        BaseRequest.post(url: get_url(), param: param).success {
             (res) in
@@ -39,6 +40,8 @@ class MessageFromManagentVideoRequestGetFilesStaff {
     
     static func call_request(param :  String, completion_handler : @escaping(String)->()) {
         KRProgressHUD.show()
+        print("MessageFromManagentVideoRequestGetFilesStaff",get_url())
+
         BaseRequest.raw_post(url: get_url(), param: param).success {
             //        BaseRequest.post(url: get_url(), param: param).success {
             (res) in

@@ -22,6 +22,7 @@ class ViewAssignmentTVCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        saveImage.setTitle(commonStringNames.DownloadImage.translated(), for: .normal)
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {

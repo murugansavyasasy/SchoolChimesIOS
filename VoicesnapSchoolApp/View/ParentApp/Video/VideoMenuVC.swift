@@ -45,7 +45,7 @@ class VideoMenuVC: UITableViewController ,Apidelegate,UISearchBarDelegate {
     var firstImage : Int  = 0
     
     var ArrayData = NSMutableArray()
-    
+    var getVideoId : String!
     weak var timer: Timer?
     
     
@@ -61,6 +61,8 @@ class VideoMenuVC: UITableViewController ,Apidelegate,UISearchBarDelegate {
     var getadID : Int!
     var menuId : String!
     var popupLoading : KLCPopup = KLCPopup()
+    var getDownloadShowID : Int!
+    var ifram : String?
     override func viewDidLoad() {
         super.viewDidLoad()
         print("Video3")
@@ -229,8 +231,31 @@ class VideoMenuVC: UITableViewController ,Apidelegate,UISearchBarDelegate {
         
         bIsArchive = detailsDictionary["is_Archive"] as? Bool ?? false
         self.CallReadStatusUpdateApi(String(describing: detailsDictionary["DetailID"]!), "VIDEO")
+     
+        print("GETVIDEOID1\(detailsDictionary["VideoId"])")
+      
+        print("GEVimeoUrl1Iframe\(detailsDictionary["Iframe"])")
+        
         strSelectedVideoUrl = String(describing: detailsDictionary["VimeoUrl"]!)
+        ifram = String(describing: detailsDictionary["Iframe"]!)
         strSelectedVideoId = String(describing: detailsDictionary["VimeoId"]!)
+        getDownloadShowID = Int(String(describing:detailsDictionary["isDownload"]!))
+        if let vimeoURLString = detailsDictionary["VimeoUrl"] as? String,
+           let vimeoURL = URL(string: vimeoURLString),
+           vimeoURL.host?.contains("vimeo.com") == true {
+            print("Valid Vimeo URL: \(vimeoURLString)")
+        } else {
+            print("Invalid or missing Vimeo URL")
+        }
+        if let questionMarkIndex = strSelectedVideoId.firstIndex(of: "?") {
+            let result = String(strSelectedVideoId[..<questionMarkIndex]) // Extract substring before "?"
+            print("Digits before '?': \(result)")
+            getVideoId = String(result)
+        } else {
+            print("No '?' found in the string.")
+        }
+        
+        
         DispatchQueue.main.async() {
             self.performSegue(withIdentifier: "VdieoDetailSegue", sender: self)
         }
@@ -410,6 +435,10 @@ class VideoMenuVC: UITableViewController ,Apidelegate,UISearchBarDelegate {
             let segueid = segue.destination as! VimeoVideoDetailVC
             segueid.strVideoUrl = strSelectedVideoUrl
             segueid.videoId = strSelectedVideoId
+//            segueid.Html = ifram
+            segueid.downloadVideoID = getVideoId
+            segueid.getDownloadShowID = getDownloadShowID
+           
         }
     }
     
@@ -428,10 +457,10 @@ class VideoMenuVC: UITableViewController ,Apidelegate,UISearchBarDelegate {
     func AlerMessage()
     {
         
-        let alertController = UIAlertController(title: languageDict["alert"] as? String, message: strNoRecordAlert, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.alert.translated() as? String, message: strNoRecordAlert, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: languageDict["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+                                                let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             // print("Okaction")
             self.dismiss(animated: true, completion: nil)
@@ -472,9 +501,9 @@ class VideoMenuVC: UITableViewController ,Apidelegate,UISearchBarDelegate {
             self.navigationController?.navigationBar.semanticContentAttribute = .forceLeftToRight
             self.view.semanticContentAttribute = .forceLeftToRight
         }
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         loadViewData()
     }
     
@@ -508,7 +537,7 @@ class VideoMenuVC: UITableViewController ,Apidelegate,UISearchBarDelegate {
         //
         
         let button = UIButton(frame: CGRect(x: self.TextDetailstableview.bounds.size.width - 108, y: noDataLabel.frame.height + 200, width: 100, height: 32))
-        button.setTitle(SEE_MORE_TITLE, for: .normal)
+        button.setTitle(commonStringNames.SeeMore.translated(), for: .normal)
         button.backgroundColor = .white
         button.setTitleColor(utilObj.PARENT_NAV_BAR_COLOR, for: .normal)
         button.titleLabel?.font = .systemFont(ofSize: 12)
@@ -530,9 +559,6 @@ class VideoMenuVC: UITableViewController ,Apidelegate,UISearchBarDelegate {
                 //
                 menuId = AdConstant.getMenuId as String
                 print("menu_id:\(AdConstant.getMenuId)")
-                
-                
-                
                 let AdModal = AdvertismentModal()
                 AdModal.MemberId = ChildId
                 AdModal.MemberType = "student"
@@ -541,44 +567,22 @@ class VideoMenuVC: UITableViewController ,Apidelegate,UISearchBarDelegate {
                 }
                 AdModal.MenuId = menuId
                 AdModal.SchoolId = SchoolId
-                
-                
                 let admodalStr = AdModal.toJSONString()
-                
-                
                 print("admodalStr2222",admodalStr)
                 AdvertismentRequest.call_request(param: admodalStr!) { [self]
-                    
                     (res) in
-                    
                     let adModalResponse : [AdvertismentResponse] = Mapper<AdvertismentResponse>().mapArray(JSONString: res)!
-                    
-                    
-                    
-                    //            var adDataList : [MenuData] = []
                     for i in adModalResponse {
                         if i.Status.elementsEqual("1") {
                             print("AdConstantadDataListtt",AdConstant.adDataList.count)
-                            
-                            
-                            
-                            
                             AdConstant.adDataList.removeAll()
                             AdConstant.adDataList = i.data
-                            
                             startTimer()
-                            
                         }else{
                             
                         }
-                        
                     }
-                    
                     print("admodalStr_count", AdConstant.adDataList .count)
-                    
-                    
-                    
-                    //
                 }
                 
                 
@@ -586,25 +590,18 @@ class VideoMenuVC: UITableViewController ,Apidelegate,UISearchBarDelegate {
                 print("Error fetching data: \(error)")
             }
         }
-        
-        
+      
         self.TextDetailstableview.backgroundView = noview
-        
-        
-        
-        
+  
     }
     
     func startTimer() {
         if AdConstant.adDataList.count > 0 {
-            
-            
             let url : String =  AdConstant.adDataList[0].contentUrl!
             self.imgaeURl = AdConstant.adDataList[0].redirectUrl!
             self.AdName = AdConstant.adDataList[0].advertisementName!
             self.getadID = AdConstant.adDataList[0].id!
             self.imgView.sd_setImage(with: URL(string: url), placeholderImage: UIImage(named: ""))
-            
             AdView.isHidden = false
             adViewHeight.constant = 80
             
@@ -703,6 +700,9 @@ class VideoMenuVC: UITableViewController ,Apidelegate,UISearchBarDelegate {
         
         CallSeeMoreVideoDetailApi()
     }
+    
+    
+   
     
     
     

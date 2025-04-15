@@ -15,6 +15,7 @@ class PrincipalLessonPlanViewController: UIViewController,UITableViewDelegate,UI
         print("viewupd",upd)
     }
     
+    @IBOutlet weak var actLsnPlnLbl: UILabel!
     
     @IBOutlet weak var viewEmpty: UIView!
     @IBOutlet weak var search_bar: UISearchBar!
@@ -47,9 +48,12 @@ class PrincipalLessonPlanViewController: UIViewController,UITableViewDelegate,UI
         
         tv.dataSource = self
         tv.delegate = self
-        
+        search_bar.placeholder = commonStringNames.Search.translated()
+        classHandleBtn.setTitle(commonStringNames.ClassesYouHandle.translated(), for: .normal)
+        actLsnPlnLbl.text = commonStringNames.LessonPlan.translated()
+        allClassBtn.setTitle(commonStringNames.AllClasses.translated(), for: .normal)
         search_bar.delegate = self
-        
+        search_bar.placeholder = commonStringNames.Search.translated()
         viewEmpty.alpha = 0
         emptyLbl.alpha = 0
         allClassBtn.layer.borderColor = UIColor.red.cgColor
@@ -202,9 +206,9 @@ class PrincipalLessonPlanViewController: UIViewController,UITableViewDelegate,UI
                 tv.reloadData()
             }else{
                 tv.isHidden = true
-                let alert = UIAlertController(title: "Alert", message: lessonPlan.message, preferredStyle: UIAlertController.Style.alert)
+                let alert = UIAlertController(title: commonStringNames.Alert.translated(), message: lessonPlan.message, preferredStyle: UIAlertController.Style.alert)
                 
-                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                alert.addAction(UIAlertAction(title: commonStringNames.OK.translated(), style: UIAlertAction.Style.default, handler: nil))
                 self.present(alert, animated: true, completion: nil)
             }
             
@@ -243,8 +247,8 @@ class PrincipalLessonPlanViewController: UIViewController,UITableViewDelegate,UI
                 tv.delegate = self
                 tv.reloadData()
             }else{
-                let alert = UIAlertController(title: "Alert", message: lessonPlan.message, preferredStyle: UIAlertController.Style.alert)
-                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                let alert = UIAlertController(title: commonStringNames.Alert.translated(), message: lessonPlan.message, preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: commonStringNames.OK.translated(), style: UIAlertAction.Style.default, handler: nil))
                 self.present(alert, animated: true, completion:{
                     //
                     

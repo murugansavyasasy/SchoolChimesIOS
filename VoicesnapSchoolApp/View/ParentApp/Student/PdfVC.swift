@@ -14,6 +14,7 @@ import KRProgressHUD
 class PdfVC: UIViewController,UITableViewDataSource,UITableViewDelegate,Apidelegate,UIGestureRecognizerDelegate ,URLSessionDownloadDelegate,UISearchBarDelegate, WKNavigationDelegate{
     
     
+    @IBOutlet weak var circularHeaderLbl: UILabel!
     @IBOutlet weak var adViewHeight: NSLayoutConstraint!
     
     @IBOutlet weak var search_bar: UISearchBar!
@@ -75,7 +76,7 @@ class PdfVC: UIViewController,UITableViewDataSource,UITableViewDelegate,Apideleg
         super.viewDidLoad()
         HiddenLabel.isHidden = true
         bIsSeeMore = false
-        
+        circularHeaderLbl.text = commonStringNames.Circulars.translated()
         print("Circular123")
         
         print("getMsgFromMgnt",getMsgFromMgnt)
@@ -105,6 +106,7 @@ class PdfVC: UIViewController,UITableViewDataSource,UITableViewDelegate,Apideleg
             
             
             search_bar.delegate = self
+            search_bar.placeholder = commonStringNames.Search.translated()
             if(appDelegate.isPasswordBind == "0"){
                 bIsSeeMore = true
             }
@@ -333,9 +335,9 @@ class PdfVC: UIViewController,UITableViewDataSource,UITableViewDelegate,Apideleg
             cell1.ViewFileButton.tag = indexPath.row
             cell1.DownloadButton.addTarget(self, action: #selector(PdfVC.SavePdfFileButton(sender:)), for: .touchUpInside)
             cell1.DownloadButton.tag = indexPath.row
-            cell1.ViewFileButton.setTitle(languageDictionary["btn_pdf_view"] as? String, for: .normal)
-            cell1.DownloadButton.setTitle(languageDictionary["btn_pdf_save"] as? String, for: .normal)
-            cell1.DiscriptionLabel.text = languageDictionary["hint_view_pdf"] as? String
+            cell1.ViewFileButton.setTitle(commonStringNames.btn_pdf_view.translated() as? String, for: .normal)
+            cell1.DownloadButton.setTitle(commonStringNames.btn_pdf_save.translated() as? String, for: .normal)
+            cell1.DiscriptionLabel.text = commonStringNames.hint_view_pdf.translated() as? String
             cell1.descLbl.isHidden = true
             let iReadVoice : Int? = Int((detailsDictionary["AppReadStatus"] as? String)!)
 
@@ -791,10 +793,10 @@ class PdfVC: UIViewController,UITableViewDataSource,UITableViewDelegate,Apideleg
     func AlertMessage(strAlert : String)
     {
         
-        let alertController = UIAlertController(title: languageDictionary["alert"] as? String, message: strAlert, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.alert.translated() as? String, message: strAlert, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             self.dismiss(animated: true, completion: nil)
         }
@@ -843,9 +845,9 @@ class PdfVC: UIViewController,UITableViewDataSource,UITableViewDelegate,Apideleg
         }else{
             UIView.appearance().semanticContentAttribute = .forceLeftToRight
         }
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         self.loadViewData()
         
     }
@@ -898,7 +900,7 @@ class PdfVC: UIViewController,UITableViewDataSource,UITableViewDelegate,Apideleg
                     ChildId = String(describing: appDelegate.SchoolDetailDictionary["ChildID"]!)
                     SchoolId = String(describing: appDelegate.SchoolDetailDictionary["SchoolID"]!)
                 }
-                TextDateLabel.text =  languageDictionary["recent_files"] as? String
+                TextDateLabel.text =  commonStringNames.recent_files.translated() as? String
                 self.CallPdfMessageApi()
             }
             
@@ -935,19 +937,19 @@ class PdfVC: UIViewController,UITableViewDataSource,UITableViewDelegate,Apideleg
                     try FileManager.default.copyItem(at: destinationURL, to: iCloudDocumentsURL)
                 }
             }
-            self.showAlert(message: self.languageDictionary["pdf_saved"] as? String ?? "PDF file saved successfully!")
+            self.showAlert(message: commonStringNames.pdf_saved.translated() as? String ?? "PDF file saved successfully!")
             
         } catch let error {
             
             print("Copy Error: \(error.localizedDescription)")
-            self.showAlert(message: self.languageDictionary["pdf_alreadysaved"] as? String ?? "PDF file already saved!")
+            self.showAlert(message: commonStringNames.pdf_alreadysaved.translated() as? String ?? "PDF file already saved!")
             
         }
     }
     
     func showAlert(message : String){
-        let alert = UIAlertController(title: languageDictionary["alert"] as? String, message: message, preferredStyle: UIAlertController.Style.alert)
-        alert.addAction(UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default, handler: nil))
+        let alert = UIAlertController(title: commonStringNames.alert.translated() as? String, message: message, preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default, handler: nil))
         self.present(alert, animated: true, completion: nil)
     }
     
@@ -956,7 +958,7 @@ class PdfVC: UIViewController,UITableViewDataSource,UITableViewDelegate,Apideleg
         let noview : UIView = UIView(frame: CGRect(x: 0, y: 0, width: self.TextDetailstableview.bounds.size.width, height: self.TextDetailstableview.bounds.size.height))
         
         let noDataLabel: UILabel = UILabel(frame: CGRect(x: 0, y:  8, width: self.TextDetailstableview.bounds.size.width, height: 60))
-        noDataLabel.text = "No messages for the day. Click See More for previous messages."
+        noDataLabel.text = commonStringNames.NoMessagesForDay.translated()
         noDataLabel.textColor = .red
         noDataLabel.backgroundColor = UIColor(named: "NoDataColor")
         
@@ -967,7 +969,7 @@ class PdfVC: UIViewController,UITableViewDataSource,UITableViewDelegate,Apideleg
         noview.addSubview(noDataLabel)
         
         let button = UIButton(frame: CGRect(x: self.TextDetailstableview.bounds.size.width - 108, y: noDataLabel.frame.height + 40, width: 100, height: 32))
-        button.setTitle(SEE_MORE_TITLE, for: .normal)
+        button.setTitle(commonStringNames.SeeMore.translated(), for: .normal)
         button.backgroundColor = .white
         button.setTitleColor(utilObj.PARENT_NAV_BAR_COLOR, for: .normal)
         button.addTarget(self, action: #selector(self.seeMoreButtonTapped), for: .touchUpInside)

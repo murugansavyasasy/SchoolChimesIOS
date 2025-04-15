@@ -13,6 +13,7 @@ import ObjectMapper
 class OnlineViewMeetingVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,
                            UITableViewDelegate,UITableViewDataSource,Apidelegate,UISearchBarDelegate{
     
+    @IBOutlet weak var MeetingsHeaderLbl: UILabel!
     @IBOutlet weak var TextMessageView: UITextView!
     @IBOutlet weak var TitleText: UITextField!
     @IBOutlet weak var SendTextMessageLabel: UILabel!
@@ -78,7 +79,7 @@ class OnlineViewMeetingVC: UIViewController,UITextViewDelegate,UITextFieldDelega
         super.viewDidLoad()
         
         print("OnlineMeeting123")
-        
+        MeetingsHeaderLbl.text = commonStringNames.Meetings.translated()
         
         SchoolId = String(describing: appDelegate.SchoolDetailDictionary["SchoolID"]!)
         ChildIDString = String(describing: appDelegate.SchoolDetailDictionary["ChildID"]!)
@@ -88,6 +89,7 @@ class OnlineViewMeetingVC: UIViewController,UITextViewDelegate,UITextFieldDelega
         
         view.isOpaque = false
         search_bar.delegate = self
+        search_bar.placeholder = commonStringNames.Search.translated()
         //        view.backgroundColor = .white
         
         let nc = NotificationCenter.default
@@ -508,16 +510,16 @@ class OnlineViewMeetingVC: UIViewController,UITextViewDelegate,UITextFieldDelega
             TextMessageView.textAlignment = .left
         }
         if(strFrom == "Assignment"){
-            ComposeTitleLabel.text  =  LangDict["teacher_txt_composemsg"] as? String
-            SubmissionDateLabel.text = LangDict["subission_date"] as? String
+            ComposeTitleLabel.text  =  commonStringNames.teacher_txt_composemsg.translated() as? String
+            SubmissionDateLabel.text = commonStringNames.subission_date.translated() as? String
             
-            TitleText.placeholder  =  LangDict["assignment_title"] as? String
+            TitleText.placeholder  =  commonStringNames.assignment_title.translated() as? String
             ToStandardSection.setTitle("Choose Recipients", for: .normal)
-            textViewPlaceholder =  LangDict["teacher_txt_typemsg"] as? String ?? "Content?"
+            textViewPlaceholder =  commonStringNames.teacher_txt_typemsg.translated() as? String ?? "Content?"
         }else{
-            TitleText.placeholder  = LangDict["teacher_txt_only_title"] as? String
-            ToStandardSection.setTitle(LangDict["teacher_staff_to_sections"] as? String, for: .normal)
-            textViewPlaceholder =  LangDict["teacher_txt_typemsg"] as? String ?? "Content?"
+            TitleText.placeholder  = commonStringNames.teacher_txt_only_title.translated() as? String
+            ToStandardSection.setTitle(commonStringNames.teacher_staff_to_sections.translated() as? String, for: .normal)
+                                       textViewPlaceholder =  commonStringNames.teacher_txt_typemsg.translated() as? String ?? "Content?"
         }
         TextMessageView.text = textViewPlaceholder
         TextMessageView.textColor = UIColor.lightGray
@@ -780,7 +782,7 @@ class OnlineViewMeetingVC: UIViewController,UITextViewDelegate,UITextFieldDelega
                         //  Util.showAlert("", msg: NO_DATA_FOUND)
                         let alert = UIAlertController(title: "", message: NO_DATA_FOUND, preferredStyle: UIAlertController.Style.alert)
                         
-                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: { action in
+                        alert.addAction(UIAlertAction(title: commonStringNames.OK.translated(), style: UIAlertAction.Style.default, handler: { action in
                             self.dismiss(animated: true)
                             
                         }))

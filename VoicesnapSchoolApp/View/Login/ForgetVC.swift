@@ -355,11 +355,11 @@ class ForgetVC: UIViewController,UITextFieldDelegate,Apidelegate,HTTPClientDeleg
             
             else
             {
-                Util.showAlert("", msg: languageDict["password_missmatch"] as? String)
+                Util.showAlert("", msg: commonStringNames.password_missmatch.translated() as? String)
             }
         }else
         {
-            Util.showAlert("", msg: languageDict["hint_password"] as? String)
+                    Util.showAlert("", msg: commonStringNames.hint_password.translated() as? String)
         }
         
         
@@ -382,7 +382,7 @@ class ForgetVC: UIViewController,UITextFieldDelegate,Apidelegate,HTTPClientDeleg
         }
         else
         {
-            Util.showAlert("", msg: languageDict["registered_mobile"] as? String);
+            Util.showAlert("", msg: commonStringNames.registered_mobile.translated() as? String);
         }
     }
     
@@ -737,6 +737,12 @@ class ForgetVC: UIViewController,UITextFieldDelegate,Apidelegate,HTTPClientDeleg
                                 
                                 
                                 appDelegate.staffDisplayRole = String(describing: dicUser["staff_display_role"]!)
+                                
+                                var staffDisplayRole : String!
+                                staffDisplayRole = String(describing: dicUser["staff_display_role"]!)
+                                
+                                defaults.set(staffDisplayRole as String, forKey: DefaultsKeys.role_display_name)
+                                
                                 appDelegate.isParent = String(describing: dicUser["is_parent"]!)
                                 appDelegate.isStaff = String(describing: dicUser["is_staff"]!)
                                 UserDefaults.standard.set(String(describing: dicUser[IMAGE_COUNT]!), forKey: IMAGE_COUNT)
@@ -785,14 +791,14 @@ class ForgetVC: UIViewController,UITextFieldDelegate,Apidelegate,HTTPClientDeleg
                                     }
                                     
                                     
-                                    else if (appDelegate.staffDisplayRole == "Group Head"){
+                                    else if (appDelegate.staffRole == "p1"){
                                         appDelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                         UserDefaults.standard.set("GroupHead", forKey: LOGINASNAME)
                                         UserDefaults.standard.set("No", forKey: COMBINATION)
                                         self.SelectedLoginAsIndexInt = 0
                                         self.updateDeviceToken()
                                     }
-                                    else if (appDelegate.staffDisplayRole == "Principal"){
+                                    else if (appDelegate.staffRole == "p2"){
                                         
                                         appDelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                         UserDefaults.standard.set("Principal", forKey: LOGINASNAME)
@@ -800,14 +806,14 @@ class ForgetVC: UIViewController,UITextFieldDelegate,Apidelegate,HTTPClientDeleg
                                         self.SelectedLoginAsIndexInt = 1
                                         self.updateDeviceToken()
                                     }
-                                    else if (appDelegate.staffDisplayRole == "Teaching Staff"){
+                                    else if (appDelegate.staffRole == "p3"){
                                         appDelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                         UserDefaults.standard.set("Staff", forKey: LOGINASNAME)
                                         UserDefaults.standard.set("No", forKey: COMBINATION)
                                         self.SelectedLoginAsIndexInt = 2
                                         self.updateDeviceToken()
                                     }
-                                    else if (appDelegate.staffDisplayRole == "Office Staff"){
+                                    else if (appDelegate.staffRole == "p4"){
                                         
                                         appDelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                         UserDefaults.standard.set("OfficeStaff", forKey: LOGINASNAME)
@@ -816,7 +822,7 @@ class ForgetVC: UIViewController,UITextFieldDelegate,Apidelegate,HTTPClientDeleg
                                         self.updateDeviceToken()
                                         
                                     }
-                                    else if (appDelegate.staffDisplayRole == "Non Office Staff"){
+                                    else if (appDelegate.staffRole == "p5"){
                                         appDelegate.LoginSchoolDetailArray = (dicUser["StaffDetails"] as? NSArray)!
                                         UserDefaults.standard.set("NonOfficeStaff", forKey: LOGINASNAME)
                                         UserDefaults.standard.set("No", forKey: COMBINATION)
@@ -1068,7 +1074,7 @@ class ForgetVC: UIViewController,UITextFieldDelegate,Apidelegate,HTTPClientDeleg
                             self.performSegue(withIdentifier: "LoginToOTPSegue", sender: self)
                         }
                     }else{
-                        Util.showAlert("", msg: languageDict["mobile_not_available"] as? String)
+                        Util.showAlert("", msg: commonStringNames.mobile_not_available.translated() as? String)
                         
                     }
                 }else{
@@ -1157,24 +1163,24 @@ class ForgetVC: UIViewController,UITextFieldDelegate,Apidelegate,HTTPClientDeleg
             UserPasswordText.textAlignment = .left
         }
         
-        FloatMobileLabel.text = LangDict["txt_mobile"] as? String
-        UserMobileNoText.placeholder = LangDict["hint_mobile"] as? String
-        UserPasswordText.placeholder = LangDict["hint_password"] as? String
-        TitleForgotPswdLabel.text = LangDict["forgot_password"] as? String
-        EnterOTPLabel.text = LangDict["enter_your_otp"] as? String
-        NewPasswordLabel.text = LangDict["teacher_pop_password_txt_new"] as? String
-        VerifyPasswordLabel.text = LangDict["teacher_pop_password_txt_repeat"] as? String
-        TitleChangePswdLabel.text = LangDict["reset_password"] as? String
+        FloatMobileLabel.text = commonStringNames.txt_mobile.translated() as? String
+        UserMobileNoText.placeholder = commonStringNames.hint_mobile.translated()as? String
+        UserPasswordText.placeholder = commonStringNames.hint_password.translated() as? String
+        TitleForgotPswdLabel.text = commonStringNames.forgot_password.translated() as? String
+        EnterOTPLabel.text = commonStringNames.enter_your_otp.translated() as? String
+        NewPasswordLabel.text = commonStringNames.teacher_pop_password_txt_new.translated() as? String
+        VerifyPasswordLabel.text = commonStringNames.teacher_pop_password_txt_repeat.translated() as? String
+        TitleChangePswdLabel.text = commonStringNames.reset_password as? String
         
-        LoginButton.setTitle(LangDict["btn_login"] as? String, for: .normal)
-        ForgotPasswordButton.setTitle(LangDict["btn_forgot_password"] as? String, for: .normal)
-        ForgotPasswordOkButton.setTitle(LangDict["teacher_btn_ok"] as? String, for: .normal)
-        CancelButton.setTitle(LangDict["teacher_pop_password_btnCancel"] as? String, for: .normal)
-        UpdateButton.setTitle(LangDict["teacher_pop_password_btnUpdate"] as? String, for: .normal)
+        LoginButton.setTitle(commonStringNames.btn_login as? String, for: .normal)
+                             ForgotPasswordButton.setTitle(commonStringNames.btn_forgot_password as? String, for: .normal)
+                                                           ForgotPasswordOkButton.setTitle(commonStringNames.teacher_btn_ok.translated() as? String, for: .normal)
+                                                                                           CancelButton.setTitle(commonStringNames.teacher_pop_password_btnCancel.translated() as? String, for: .normal)
+                                                                                                                 UpdateButton.setTitle(commonStringNames.teacher_pop_password_btnUpdate.translated() as? String, for: .normal)
         
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+                                                                                                                                       strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+                                                                                                                                       strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+                                                                                                                                       strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         
     }
     

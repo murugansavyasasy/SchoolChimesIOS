@@ -65,6 +65,7 @@ class ImageTVCTableViewController: UITableViewController,Apidelegate,UISearchBar
         super.viewDidLoad()
         //        TextDetailstableview.backgroundColor = .blue
         search_bar.delegate = self
+        search_bar.placeholder = commonStringNames.Search.translated()
         search_bar.backgroundColor = .white
         search_bar.tintColor = UIColor(named: "serach_color")
         search_bar.placeholder = "Search"
@@ -152,11 +153,13 @@ class ImageTVCTableViewController: UITableViewController,Apidelegate,UISearchBar
         // let vw = UIView()
         tableHeaderView.backgroundColor = UIColor.clear
         search_bar.delegate = self
+        search_bar.placeholder = commonStringNames.Search.translated()
         search_bar.endEditing(true)
         search_bar.backgroundColor = .white
         search_bar.tintColor = UIColor(named: "serach_color")
         search_bar.placeholder = "Search"
         //
+        
         
         return tableHeaderView
     }
@@ -208,8 +211,8 @@ class ImageTVCTableViewController: UITableViewController,Apidelegate,UISearchBar
                 }
             }
             
-            cell1.ViewFullImageButton.setTitle(languageDict["hint_save_image"] as? String, for: .normal)
-            cell1.SaveButton.setTitle(languageDict["btn_save_image"] as? String, for: .normal)
+            cell1.ViewFullImageButton.setTitle(commonStringNames.hint_save_image.translated() as? String, for: .normal)
+                                               cell1.SaveButton.setTitle(commonStringNames.btn_save_image.translated() as? String, for: .normal)
             
             cell1.MyImageView?.isUserInteractionEnabled = true
             cell1.MyImageView?.tag = indexPath.row
@@ -835,10 +838,10 @@ class ImageTVCTableViewController: UITableViewController,Apidelegate,UISearchBar
     func AlerMessage()
     {
         
-        let alertController = UIAlertController(title: languageDict["alert"] as? String, message: strNoRecordAlert, preferredStyle: .alert)
+                let alertController = UIAlertController(title: commonStringNames.alert.translated() as? String, message: strNoRecordAlert, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: languageDict["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+                                                        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             // print("Okaction")
             self.dismiss(animated: true, completion: nil)
@@ -879,9 +882,9 @@ class ImageTVCTableViewController: UITableViewController,Apidelegate,UISearchBar
             self.navigationController?.navigationBar.semanticContentAttribute = .forceLeftToRight
             self.view.semanticContentAttribute = .forceLeftToRight
         }
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         loadViewData()
     }
     
@@ -910,7 +913,7 @@ class ImageTVCTableViewController: UITableViewController,Apidelegate,UISearchBar
                     Util.showAlert("", msg: strNoRecordAlert)
                 }
             }else{
-                TextDateLabel.text = languageDict["recent_photos"] as? String
+                TextDateLabel.text = commonStringNames.recent_photos.translated() as? String
                 ChildId = String(describing: appDelegate.SchoolDetailDictionary["ChildID"]!)
                 SchoolId = String(describing: appDelegate.SchoolDetailDictionary["SchoolID"]!)
                 self.CallImageDetailApi()
@@ -924,7 +927,7 @@ class ImageTVCTableViewController: UITableViewController,Apidelegate,UISearchBar
         let noview : UIView = UIView(frame: CGRect(x: 0, y: 10, width: self.TextDetailstableview.bounds.size.width, height: self.TextDetailstableview.bounds.size.height))
         
         let noDataLabel: UILabel = UILabel(frame: CGRect(x: 10, y:  10, width: self.TextDetailstableview.bounds.size.width, height: 60))
-        noDataLabel.text = "No messages for the day. Click See More for previous messages."
+        noDataLabel.text = commonStringNames.NoMessagesForDay.translated()
         noDataLabel.textColor = .red
         print("noDataLabel.text",noDataLabel.text)
         noDataLabel.backgroundColor = UIColor(named: "NoDataColor")
@@ -936,7 +939,7 @@ class ImageTVCTableViewController: UITableViewController,Apidelegate,UISearchBar
         noview.addSubview(noDataLabel)
         
         let button = UIButton(frame: CGRect(x: self.TextDetailstableview.bounds.size.width - 108, y: noDataLabel.frame.height + 10, width: 100, height: 32))
-        button.setTitle(SEE_MORE_TITLE, for: .normal)
+        button.setTitle(commonStringNames.SeeMore.translated(), for: .normal)
         button.backgroundColor = .white
         button.setTitleColor(utilObj.PARENT_NAV_BAR_COLOR, for: .normal)
         button.addTarget(self, action: #selector(self.seeMoreButtonTapped), for: .touchUpInside)

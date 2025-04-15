@@ -268,7 +268,7 @@ class FeedbackQuesVC: UIViewController,Apidelegate,UITableViewDelegate, UITableV
                 self.CallSendFeedbackApi()
             }else
             {
-                Util.showAlert("", msg: languageDict["select_feedback"] as? String)
+                Util.showAlert("", msg: commonStringNames.select_feedback.translated() as? String)
             }
             
         }
@@ -376,8 +376,8 @@ class FeedbackQuesVC: UIViewController,Apidelegate,UITableViewDelegate, UITableV
         titleLabel.frame = CGRect(x: 0, y: 0, width: self.view.frame.width , height: 45)
         //titleLabel.textColor = UIColor (red:243.0/255.0, green: 191.0/255.0, blue: 145.0/255.0, alpha: 1)
         titleLabel.textColor = UIColor (red:166.0/255.0, green: 114.0/255.0, blue: 155.0/255.0, alpha: 1)
-        let secondWord : String =  languageDict["feedback"] as? String ?? "Feedback"//"Feedback "
-        let thirdWord : String  =  languageDict["to_voicesnap"] as? String ?? "to voicesnap"//"to voicesnap"
+                    let secondWord : String =  commonStringNames.feedback.translated() as? String ?? "Feedback"//"Feedback "
+                    let thirdWord : String  =  commonStringNames.to_voicesnap.translated() as? String ?? "to voicesnap"//"to voicesnap"
         let comboWord = secondWord + " " + thirdWord
         let attributedText = NSMutableAttributedString(string:comboWord)
         let attrs = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 22), NSAttributedString.Key.foregroundColor: UIColor.white]
@@ -426,11 +426,11 @@ class FeedbackQuesVC: UIViewController,Apidelegate,UITableViewDelegate, UITableV
             OthercommentTextview.textAlignment = .left
             
         }
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
-        OthercommentLabel.text = languageDict["other_comments"] as? String
-        SubmitButton.setTitle(languageDict["feedback_submit"] as? String, for: .normal)
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
+                    OthercommentLabel.text = commonStringNames.other_comments.translated() as? String
+                    SubmitButton.setTitle(commonStringNames.feedback_submit.translated() as? String, for: .normal)
         self.navTitle()
     }
     

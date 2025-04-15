@@ -266,7 +266,7 @@ class SchoolEventVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UIT
                 self.performSegue(withIdentifier: "SchoolEventToPrincipalGroupSegue", sender: self)
             }
         }else{
-            Util.showAlert("", msg: LanguageDict["fill_all_alert"] as? String)
+            Util.showAlert("", msg: commonStringNames.fill_all_alert.translated() as? String)
         }
         
     }
@@ -438,12 +438,12 @@ class SchoolEventVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UIT
             topicTextField.textAlignment = .left
             TextMessageView.textAlignment = .left
         }
-        strTextViewPlaceholder = LangDict["teacher_events_hint_msg"] as? String ?? "Type Event content here"
-        topicTextField.placeholder = LangDict["teacher_events_hint_title"] as? String
-        DateTimeLabel.text = LangDict["teacher_event_txt_datetime"] as? String
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        strTextViewPlaceholder = commonStringNames.teacher_events_hint_msg.translated() as? String ?? "Type Event content here"
+        topicTextField.placeholder = commonStringNames.teacher_events_hint_title.translated() as? String
+        DateTimeLabel.text = commonStringNames.teacher_event_txt_datetime.translated() as? String
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         self.Config()
         
     }

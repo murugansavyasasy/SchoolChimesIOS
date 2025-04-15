@@ -24,6 +24,10 @@ class LessonPlanViewController: UIViewController,UITableViewDataSource,UITableVi
     @IBOutlet weak var tv: UITableView!
     @IBOutlet weak var backView: UIView!
     
+    
+    @IBOutlet weak var actlsnPlnLbl: UILabel!
+    
+    
     var getLessonPlanData : [GetLessonPlanStaffReportResponseData] = []
     var  clone_list : [GetLessonPlanStaffReportResponseData] = []
     
@@ -38,6 +42,8 @@ class LessonPlanViewController: UIViewController,UITableViewDataSource,UITableVi
         super.viewDidLoad()
         
         
+        actlsnPlnLbl.text = commonStringNames.LessonPlan.translated()
+        
         tv.dataSource = self
         tv.delegate = self
         
@@ -46,6 +52,7 @@ class LessonPlanViewController: UIViewController,UITableViewDataSource,UITableVi
         emptyLbl.alpha = 0
         
         search_bar.delegate = self
+        search_bar.placeholder = commonStringNames.Search.translated()
         
         
         

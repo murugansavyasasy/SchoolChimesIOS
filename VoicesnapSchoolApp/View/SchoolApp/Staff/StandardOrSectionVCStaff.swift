@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import ObjectMapper
 
 class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegate,UIPickerViewDataSource,UITableViewDataSource,UITableViewDelegate {
     @IBOutlet var PopupChoosePickerView: UIView!
@@ -81,6 +82,9 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
     
     var vimeoVideoURL : URL!
     var countryCoded : String!
+    var UploadImageId = 0
+    
+    var MultipleLoginId : String?
     override func viewDidLoad()
     {
         
@@ -88,12 +92,12 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
         super.viewDidLoad()
         view.isOpaque = false
         print("test11")
-        
+        print("viewDidLoad SchoolId",SchoolId)
         print("GetvimeoVideoURL",vimeoVideoURL)
         countryCoded =  UserDefaults.standard.object(forKey: COUNTRY_ID) as! String
         SendButton.layer.cornerRadius = 5
         SendButton.layer.masksToBounds = true
-        
+
         PopupChoosePickerView.isHidden = true
         
     }
@@ -287,7 +291,7 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
     func actionSelectStandard()
     {
         TableString = "Standard"
-        PickerTitleLabel.text = languageDictionary["select_standard"] as? String
+        PickerTitleLabel.text = commonStringNames.select_standard.translated() as? String
         PopupChoosePickerView.isHidden = false
         self.MyPickerView.reloadAllComponents()
         
@@ -306,7 +310,7 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
         }
         else
         {
-            Util.showAlert(languageDictionary["alert"] as? String, msg: languageDictionary["no_students"] as? String)
+            Util.showAlert(commonStringNames.alert.translated() as? String, msg: commonStringNames.no_students.translated() as? String)
         }
         
     }
@@ -351,7 +355,12 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
                 }else if(self.SendedScreenNameStr .isEqual("StaffMultipleImage"))
                 {
                     if(self.strFrom == "Image"){
+                        print("imagesArrayimagesArray",imagesArray)
+                        print("igesArray",self.imagesArray as! [UIImage])
                         self.getImageURL(images: self.imagesArray as! [UIImage])
+//                        PresignedURL(image: imagesArray[0] as! UIImage)
+                        
+                        
                     }else{
                         self.uploadPDFFileToAWS(pdfData: pdfData!)
                     }
@@ -373,8 +382,14 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
                     }
                 }else if(self.SendedScreenNameStr .isEqual("MultipleImage"))
                 {
+                    print("strFromstrFrom2333",strFrom)
+                    print("strFromsimagesArray",imagesArray as! [UIImage])
                     if(self.strFrom == "Image"){
+                        
+                      
+                        
                         self.getImageURL(images: self.imagesArray as! [UIImage])
+//                        PresignedURL(image:  self.imagesArray[UploadImageId] as! [UIImage])
                     }else{
                         self.uploadPDFFileToAWS(pdfData: pdfData!)
                     }
@@ -385,46 +400,66 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
                 Util.showAlert("", msg:strNoInternet )
             }
         }else{
-            Util.showAlert("", msg: languageDictionary["alert_section"] as? String)
+            Util.showAlert("", msg: commonStringNames.alert_section.translated() as? String)
         }
         
     }
     
+    
+    
+    
+//
+
     @IBAction func actionOk(_ sender: UIButton) {
+
         PopupChoosePickerView.isHidden = true
-        if(TableString == "Standard")
-        {
-            SectionCodeArray.removeAll()
-            SelectedSectionCodeArray.removeAllObjects()
-            SelectedStandardString = pickerStandardArray[selectedStandardRow]
-            UpdateStandardValue(StandardName: SelectedStandardString)
-            
-            let sectionarray:Array = DetailofSectionArray[selectedStandardRow] as! [Any]
-            
-            UtilObj.printLogKey(printKey: "sectionarray", printingValue: sectionarray)
-            
-            var sectionNameArray :Array = [String]()
-            if(sectionarray.count > 0)
-            {
-                for var i in 0..<sectionarray.count
-                {
-                    let dicResponse :NSDictionary = sectionarray[i] as! NSDictionary
-                    sectionNameArray.append(dicResponse["SectionName"] as! String)
-                    SectionCodeArray.append(String(describing: dicResponse["SectionId"]!))
-                }
-                pickerSectionArray = sectionNameArray
-                
-            }else{
-                pickerSectionArray = []
-                
-            }
-            MyTableView.reloadData()
-        }
-        else if(TableString == "Section")
-        {
-            
-        }
-        popupChooseStandard.dismiss(true)
+
+           if TableString == "Standard" {
+               // Clear previous selections
+               SectionCodeArray.removeAll()
+               SelectedSectionCodeArray.removeAllObjects()
+
+               // Ensure the selected row is within bounds
+               guard selectedStandardRow < pickerStandardArray.count else {
+                   print("Error: selectedStandardRow is out of bounds")
+                   return
+               }
+
+               SelectedStandardString = pickerStandardArray[selectedStandardRow]
+               UpdateStandardValue(StandardName: SelectedStandardString)
+
+               // Ensure DetailofSectionArray is not out of bounds
+               guard selectedStandardRow < DetailofSectionArray.count,
+                     let sectionArray = DetailofSectionArray[selectedStandardRow] as? [[String: Any]] else {
+                   print("Error: DetailofSectionArray is empty or invalid")
+                   pickerSectionArray = []
+                   MyTableView.reloadData()
+                   return
+               }
+
+               UtilObj.printLogKey(printKey: "sectionarray", printingValue: sectionArray)
+
+               // Extract section names and section IDs safely
+               var sectionNameArray: [String] = []
+               for section in sectionArray {
+                   if let sectionName = section["SectionName"] as? String {
+                       sectionNameArray.append(sectionName)
+                   }
+                   if let sectionId = section["SectionId"] {
+                       SectionCodeArray.append("\(sectionId)")
+                   }
+                   
+               }
+
+               pickerSectionArray = sectionNameArray
+               MyTableView.reloadData()
+           }
+           else if TableString == "Section" {
+               // Handle Section case if needed
+           }
+
+           popupChooseStandard.dismiss(true)
+        
         
     }
     @IBAction func actionCancel(_ sender: UIButton) {
@@ -532,14 +567,22 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
             "Content-Type": "application/json",
             "Accept": "application/vnd.vimeo.*+json;version=3.4"
         ]
-        
+        let userDefaults = UserDefaults.standard
+        let getDownload = UserDefaults.standard.value(forKey: DefaultsKeys.allowVideoDownload) as? Bool ?? false
+        // Output: true
         print("authToken",authToken)
+        print("DefaultsVideoDownload",DefaultsKeys.allowVideoDownload)
+        print("getDownload",getDownload)
         let parameters: [String: Any] = [
             "upload": [
                 "approach": "tus",
                 "size": "\(fileSize)"
             ],
-            
+            "privacy":[
+                "view":"unlisted",
+                "download": true
+               
+            ],
             
             "name": TitleGet,
             "description": TitleDescriotion
@@ -747,6 +790,8 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
     func callSendMultipleImageToStandardSection()
     
     {
+        
+        print("heloo",convertedImagesUrlArray)
         DispatchQueue.main.async {
             self.strApiFrom = "StaffMultipleImage"
             self.apicalled = "1"
@@ -764,6 +809,8 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
             let apiCall = API_call.init()
             apiCall.delegate = self;
             let myString = Util.convertDictionary(toString: self.selectedSchoolDictionary)
+            
+            print("myStringmyString",myString)
             apiCall.nsurlConnectionFunction(requestString, myString, "SendImageAsPrincipalToSelectedClass")
         }
         
@@ -794,7 +841,7 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
         showLoading()
         strApiFrom = "SendStaffVoiceMessageApi"
         let VoiceData = NSData(contentsOf: self.VoiceurlData!)
-        
+        print("VoiceurlData",VoiceurlData)
         let apiCall = API_call.init()
         apiCall.delegate = self;
         let baseUrlString = UserDefaults.standard.object(forKey:BASEURL) as? String
@@ -824,7 +871,6 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
             let myDict:NSMutableDictionary = ["SchoolID" : SchoolId,"StaffID" : StaffId,"Description" : HomeTitleText,"Duration": durationString ,"Seccode" : ChoosenSectionIDArray, COUNTRY_CODE: strCountryCode , "StartTime" : initialTime , "EndTime" : doNotDial , "Dates" : DefaultsKeys.dateArr  ]
             UtilObj.printLogKey(printKey: "myDict", printingValue: myDict)
             
-            UtilObj.printLogKey(printKey: "myDict", printingValue: myDict)
             let myString = Util.convertDictionary(toString: myDict)
             apiCall.callPassVoiceParms(requestString, myString, "SendStaffVoiceMessageApi", VoiceData as Data?)
         }
@@ -889,6 +935,7 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
     {
         showLoading()
         strApiFrom = "SendPrincipalVoiceMessageApi"
+        print("VoiceurlDataVoiceurlData",VoiceurlData)
         let VoiceData = NSData(contentsOf: self.VoiceurlData!)
         let apiCall = API_call.init()
         apiCall.delegate = self;
@@ -1070,12 +1117,21 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
                                 if(stdName != "" && stdName != "0")
                                 {
                                     StandardNameArray.append(stdName!)
-                                    DetailofSectionArray.append(dicResponse["Sections"] as! [Any])
-                                    DetailedSubjectArray.append(dicResponse["Subjects"] as! [Any])
+                                    
+                                    if let sections = dicResponse["Sections"] as? [Any] {
+                                        DetailofSectionArray.append(sections)
+                                    }
+                                    
+                                    if let Subject = dicResponse["Subjects"] as? [Any] {
+                                        
+                                        DetailedSubjectArray.append(Subject)
+                                    }
+                                    
+                                   
                                     
                                     pickerStandardArray = StandardNameArray
                                     
-                                    if let sectionarray = DetailofSectionArray[0] as? NSArray
+                                    if let sectionarray = DetailofSectionArray.first as? NSArray
                                     {
                                         
                                         var sectionNameArray :Array = [String]()
@@ -1094,7 +1150,7 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
                                         
                                         
                                     }
-                                    if let SubjectArray = DetailedSubjectArray[0] as? NSArray
+                                    if let SubjectArray = DetailedSubjectArray.first as? NSArray
                                     {
                                         
                                         var SubjectNameArray :Array = [String]()
@@ -1127,6 +1183,10 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
                                     Util.showAlert("", msg: AlertString)
                                     dismiss(animated: false, completion: nil)
                                 }
+                            }
+                            if DetailedSubjectArray.isEmpty && DetailofSectionArray.isEmpty{
+                                Util.showAlert("", msg: "No record found")
+                                dismiss(animated: false, completion: nil)
                             }
                         }
                         else
@@ -1400,29 +1460,44 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
             self.view.semanticContentAttribute = .forceLeftToRight
             
         }
-        self.SendButton.setTitle(LangDict["teacher_txt_send"] as? String, for: .normal)
-        self.pickerOkButton.setTitle(LangDict["teacher_btn_ok"] as? String, for: .normal)
-        self.pickerCancelButton.setTitle(LangDict["teacher_cancel"] as? String, for: .normal)
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Record Found"
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        self.SendButton.setTitle(commonStringNames.teacher_txt_send.translated() as? String, for: .normal)
+        self.pickerOkButton.setTitle(commonStringNames.teacher_btn_ok.translated() as? String, for: .normal)
+        self.pickerCancelButton.setTitle(commonStringNames.teacher_cancel.translated() as? String, for: .normal)
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Record Found"
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         self.loadViewData()
         
     }
     
     func loadViewData(){
-        let strStandard : String = languageDictionary["teacher_atten_standard"] as? String ?? "Standard"
-        let strSection : String = languageDictionary["teacher_atten_sections"] as? String ?? "Section(s)"
+        print("loadViewData",SchoolId)
+        let strStandard : String = commonStringNames.teacher_atten_standard.translated() as? String ?? "Standard"
+        let strSection : String = commonStringNames.teacher_atten_sections.translated() as? String ?? "Section(s)"
         SectionTitleArray = [strStandard, strSection]
         print("StandardOrSectionVCStaff SendedScreenNameStr\(SendedScreenNameStr)")
         
         if(SendedScreenNameStr == "TextToParents" || SendedScreenNameStr == "VoiceToParents"){
-            print(SchoolId)
+            
+            print("VoiceToParents",SchoolId)
         }else{
-            SchoolDetailDict = appDelegate.LoginSchoolDetailArray[0] as! NSDictionary
-            SchoolId = String(describing: SchoolDetailDict["SchoolID"]!)
-            StaffId = String(describing: SchoolDetailDict["StaffID"]!)
+            
+            if MultipleLoginId == "1"{
+                
+                
+                
+            }else{
+                
+                SchoolDetailDict = appDelegate.LoginSchoolDetailArray[0] as! NSDictionary
+                SchoolId = String(describing: SchoolDetailDict["SchoolID"]!)
+                StaffId = String(describing: SchoolDetailDict["StaffID"]!)
+                print("VoiceToParentselseelse",SchoolId)
+            }
+           
+          
         }
+        
+        
         if(StandardSectionSubjectArray.count == 0){
             if(UtilObj.IsNetworkConnected()){
                 self.GetAllSectionCodeapi()
@@ -1436,199 +1511,192 @@ class StandardOrSectionVCStaff: UIViewController,Apidelegate,UIPickerViewDelegat
     }
     
     
+
+    
     //MARK: AWS Upload
     
-    func getImageURL(images : [UIImage]){
-        showLoading()
+    func getImageURL(images: [UIImage]) {
+    
         self.originalImagesArray = images
         self.totalImageCount = images.count
-        if currentImageCount < images.count{
-            self.uploadAWS(image: images[currentImageCount])
-        }
+            if currentImageCount < images.count {
+               
+                self.uploadAWS(image: images[currentImageCount])
+            } else {
+                print("All images uploaded. Final URLs: \("")")
+                // Handle final uploaded URLs (e.g., send them to the server or update the UI)
+            }
     }
-    
-    func uploadAWS(image : UIImage){
-        var bucketName = ""
-                print("countryCoded",countryCoded)
-                if countryCoded == "1" {
-                   
-                    bucketName = DefaultsKeys.bucketNameIndia
-                }else  {
-                     bucketName = DefaultsKeys.bucketNameBangkok
-                }
-                
-        let S3BucketName = bucketName
-        let CognitoPoolID = DefaultsKeys.CognitoPoolID
-        let Region = AWSRegionType.APSouth1
-        
-        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:Region,identityPoolId:CognitoPoolID)
-        let configuration = AWSServiceConfiguration(region:Region, credentialsProvider:credentialsProvider)
-        AWSServiceManager.default().defaultServiceConfiguration = configuration
-        
-        
-        let currentTimeStamp = NSString.init(format: "%ld",Date() as CVarArg)
-        let imageNameWithoutExtension = NSString.init(format: "vc_%@",currentTimeStamp)
-        let imageName = NSString.init(format: "%@%@",imageNameWithoutExtension, ".png")
-        
-        
+
+    func uploadAWS(image: UIImage) {
+        print("SchoolIdSchoolId",SchoolId)
+        let currentTimeStamp = NSString.init(format: "%ld", Date() as CVarArg)
+        let imageNameWithoutExtension = NSString.init(format: "vc_%@", currentTimeStamp)
+        let imageName = NSString.init(format: "%@%@", imageNameWithoutExtension, ".png")
         let ext = imageName as String
-        
-        let fileName = imageNameWithoutExtension
-        let fileType = ".png"
-        
         let imageURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(ext)
-        //            let image = UIImage(named: "test")
-        let data = image.jpegData(compressionQuality: 0.9)
-        do {
-            try data?.write(to: imageURL)
-        }
-        catch {}
-        
-        print(imageURL)
-        let dateFormatter = DateFormatter()
-              
-              dateFormatter.dateFormat = "yyyy-MM-dd"
-              
-              let  currentDate =   dateFormatter.string(from: Date())
-        let uploadRequest = AWSS3TransferManagerUploadRequest()
-        uploadRequest?.body = imageURL
-        uploadRequest?.key = "communication" + "/" + currentDate +  "/" + ext
-        uploadRequest?.bucket = S3BucketName
-        uploadRequest?.contentType = "image/" + ext
-        uploadRequest?.acl = .publicRead
-        
-        
-        let transferManager = AWSS3TransferManager.default()
-        transferManager.upload(uploadRequest!).continueWith { (task) -> AnyObject? in
-            
-            if let error = task.error {
-                self.hideLoading()
-                print("Upload failed : (\(error))")
+
+        if let data = image.jpegData(compressionQuality: 0.9) {
+            do {
+                try data.write(to: imageURL)
+            } catch {
+                print("Error writing image data to file: \(error)")
+                return
             }
+        }
+        
+        
+        
+        let currentDate = AWSPreSignedURL.shared.getCurrentDateString()
+        var bucketName = ""
+        var bucketPath = ""
+        if countryCoded == "4" {
+            bucketName = DefaultsKeys.THAI_SCHOOL_CHIMES_COMMUNICATION
+            bucketPath = currentDate+"/"+String(SchoolId)
             
-            if task.result != nil {
-                let url = AWSS3.default().configuration.endpoint.url
-                let publicURL = url?.appendingPathComponent((uploadRequest?.bucket!)!).appendingPathComponent((uploadRequest?.key!)!)
-                if let absoluteString = publicURL?.absoluteString {
-                    print("Uploaded to:\(absoluteString)")
-                    let imageDict = NSMutableDictionary()
-                    imageDict["FileName"] = absoluteString
-                    self.imageUrlArray.add(imageDict)
-                    self.currentImageCount = self.currentImageCount + 1
-                    if self.currentImageCount < self.totalImageCount{
-                        DispatchQueue.main.async {
-                            self.getImageURL(images: self.originalImagesArray)
-                            print("getImageURL",self.getImageURL)
-                        }
-                    }else{
-                        self.convertedImagesUrlArray = self.imageUrlArray
-                        if(self.SendedScreenNameStr .isEqual("MultipleImage")){
-                            self.callSendMultipleImageToStandardSection()
-                        }else{
-                            self.callStaffSendMultipleImage()
-                        }
-                        
-                        
-                        
+        }
+        else
+        {
+            bucketName = DefaultsKeys.SCHOOL_CHIMES_COMMUNICATION
+            bucketPath = currentDate+"/"+String(SchoolId)
+
+        }
+                       
+        
+        AWSPreSignedURL.shared.fetchPresignedURL(
+            bucket: bucketName,
+            fileName: imageURL,
+            bucketPath: bucketPath,
+            fileType: "image/png"
+        ) { [self] result in
+            switch result {
+            case .success(let awsResponse):
+                print("Presigned URL fetched: \(awsResponse.data?.presignedUrl ?? "")")
+                let presignedURL = awsResponse.data?.presignedUrl
+                let Uploadimages = awsResponse.data?.fileUrl
+              
+                AWSUploadManager.shared.uploadImageToAWS(image: image, presignedURL: presignedURL!) { result in
+                    switch result {
+                    case .success(let uploadedURL):
+                        print("Image uploaded successfully: \(uploadedURL)")
+                      
+                    case .failure(let error):
+                        print("Failed to upload image: \(error.localizedDescription)")
                     }
-                }
+        
+                    let imageDict = NSMutableDictionary()
+                    imageDict["FileName"] = Uploadimages
+                    imageUrlArray.add(imageDict)
+                    self.currentImageCount += 1
+                      if self.currentImageCount < self.totalImageCount {
+                          
+                          DispatchQueue.main.async {
+                              self.getImageURL(images: self.originalImagesArray)
+                              print("getImageURL",self.getImageURL)
+                          }
+                       } else {
+                           print("All images uploaded. Final URLs: \(imageUrlArray)")
+                           // Handle final uploaded URLs (e.g., send them to the server or update the UI
+                           self.convertedImagesUrlArray = self.imageUrlArray
+                            if(self.SendedScreenNameStr .isEqual("MultipleImage")){
+                            self.callSendMultipleImageToStandardSection()
+                            }else{
+                            self.callStaffSendMultipleImage()
+                            }
+                           }
+                          }
+           
+            case .failure(let error):
+                print("Error fetching presigned URL: \(error.localizedDescription)")
             }
-            else {
-                self.hideLoading()
-                print("Unexpected empty result.")
-            }
-            return nil
         }
+        
+   
+       
     }
     
     
+    
+
     func uploadPDFFileToAWS(pdfData : NSData){
-        self.showLoading()
-        
-        var bucketName = ""
-                print("countryCoded",countryCoded)
-                if countryCoded == "1" {
-                   
-                    bucketName = DefaultsKeys.bucketNameIndia
-                }else  {
-                     bucketName = DefaultsKeys.bucketNameBangkok
-                }
-                
-        let S3BucketName = bucketName
-        let CognitoPoolID = DefaultsKeys.CognitoPoolID
-        let Region = AWSRegionType.APSouth1
-        
-        let credentialsProvider = AWSCognitoCredentialsProvider(regionType:Region,identityPoolId:CognitoPoolID)
-        let configuration = AWSServiceConfiguration(region:Region, credentialsProvider:credentialsProvider)
-        AWSServiceManager.default().defaultServiceConfiguration = configuration
-        
-        
-        
+//        self.showLoading()
         let currentTimeStamp = NSString.init(format: "%ld",Date() as CVarArg)
         let imageNameWithoutExtension = NSString.init(format: "vc_%@",currentTimeStamp)
         let imageName = NSString.init(format: "%@%@",imageNameWithoutExtension, ".pdf")
-        
-        
         let ext = imageName as String
-        
         let fileName = imageNameWithoutExtension
         let fileType = ".pdf"
-        
         let imageURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(ext)
-        
         do {
             try pdfData.write(to: imageURL)
         }
         catch {}
-        
         print(imageURL)
+       
+      
         
-        let dateFormatter = DateFormatter()
-              
-              dateFormatter.dateFormat = "yyyy-MM-dd"
-              
-              let  currentDate =   dateFormatter.string(from: Date())
-        let uploadRequest = AWSS3TransferManagerUploadRequest()
-        uploadRequest?.body = imageURL
-        uploadRequest?.key = "communication" + "/" + currentDate +  "/" + ext
-        uploadRequest?.bucket = S3BucketName
-        uploadRequest?.contentType = "application/pdf"
-        uploadRequest?.acl = .publicRead
         
-        let transferManager = AWSS3TransferManager.default()
-        transferManager.upload(uploadRequest!).continueWith { (task) -> AnyObject? in
-            
-            if let error = task.error {
-                print("Upload failed : (\(error))")
-                self.hideLoading()
-            }
-            
-            if task.result != nil {
-                let url = AWSS3.default().configuration.endpoint.url
-                let publicURL = url?.appendingPathComponent((uploadRequest?.bucket!)!).appendingPathComponent((uploadRequest?.key!)!)
-                if let absoluteString = publicURL?.absoluteString {
-                    print("Uploaded to:\(absoluteString)")
-                    let imageDict = NSMutableDictionary()
-                    imageDict["FileName"] = absoluteString
-                    self.imageUrlArray.add(imageDict)
-                    self.convertedImagesUrlArray = self.imageUrlArray
-                    if(self.SendedScreenNameStr .isEqual("MultipleImage")){
-                        self.callSendPDFToStandardSection()
-                    }else{
-                        self.callStaffSendPDF()
-                    }
-                    
-                    
-                }
-            }
-            else {
-                self.hideLoading()
-                print("Unexpected empty result.")
-            }
-            return nil
+        
+        let currentDate = AWSPreSignedURL.shared.getCurrentDateString()
+        var bucketName = ""
+        var bucketPath = ""
+        if countryCoded == "4" {
+            bucketName = DefaultsKeys.THAI_SCHOOL_CHIMES_COMMUNICATION
+            bucketPath = currentDate+"/"+String(SchoolId)
         }
+        else
+        {
+            bucketName = DefaultsKeys.SCHOOL_CHIMES_COMMUNICATION
+            bucketPath = currentDate+"/"+String(SchoolId)
+
+        }
+                       
+        
+        AWSPreSignedURL.shared.fetchPresignedURL(
+            bucket: bucketName,
+            fileName: imageURL,
+            bucketPath: bucketPath,
+            fileType: "application/pdf"
+        ) { [self] result in
+            switch result {
+            case .success(let awsResponse):
+                print("Presigned URL fetched: \(awsResponse.data?.presignedUrl ?? "")")
+                let presignedURL = awsResponse.data?.presignedUrl
+                let UploadPDf = awsResponse.data?.fileUrl
+              
+                AWSUploadManager.shared.uploadPDFAWSUsingPresignedURL(pdfData: pdfData as Data, presignedURL:presignedURL! ){ result in
+                    
+                    switch result {
+                    case .success(let uploadedURL):
+                        print("Image uploaded successfully: \(uploadedURL)")
+                      
+                    case .failure(let error):
+                        print("Failed to upload image: \(error.localizedDescription)")
+                    }
+        
+                    let imageDict = NSMutableDictionary()
+                    imageDict["FileName"] = UploadPDf
+                    imageUrlArray.add(imageDict)
+                    
+                       self.convertedImagesUrlArray = self.imageUrlArray
+                              if(self.SendedScreenNameStr .isEqual("MultipleImage")){
+                              self.callSendPDFToStandardSection()
+                              }else{
+                                  self.callStaffSendPDF()
+                                  }
+                   
+                          }
+           
+            case .failure(let error):
+                print("Error fetching presigned URL: \(error.localizedDescription)")
+            }
+        }
+        
     }
     
+    
+    
+  
     
 }
 

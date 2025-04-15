@@ -1,0 +1,252 @@
+/* 
+  Localizable.strings
+  VsSchoolChimes
+
+  Created by admin on 08/11/24.
+  
+*/
+"welcome_message" = "வணக்கம்";
+"Change Language" = "மொழி மாற்றவும்";
+"Home" = "முகப்பு";
+"Help" = "உதவி";
+"Settings" = "அமைப்புகள்";
+"Profile" = "சுயவிவரம";
+
+// MARK: Settings page
+"Notifications" = "அறிவிப்புகள்";
+"FAQ" = "கேள்வி பதில்கள்";
+"Contact Us" = "எங்களை தொடர்பு கொள்ளவும்";
+"Terms and Conditions" = "விதிமுறைகள் மற்றும் நிபந்தனைகள்";
+"Change App Language" = "செயலியின் மொழியை மாற்றவும்";
+"Feedback" = "மறுமொழி";
+"Report a bug" = "பிழையை அறிவிக்கவும்";
+"Send Feedback" = "மறுமொழி அனுப்பவும்";
+"Rate Us" = "எங்களை மதிப்பீடு செய்யவும்";
+"Logout" = "வெளியேறு";
+"GENERAL" = "பொது";
+"FEEDBACK" = "மறுமொழி";
+"Settings" = "அமைப்புகள்";
+
+// MARK: Dashboard
+"discussion" = "சர்ச்சை";
+"SmallIcon" = "சிறிய ஐகான்";
+"drawing-compass" = "வரைவிடு கோணம்";
+"knowledge" = "அறிவு";
+"pencil" = "பெருஞ்சிறுகோள்";
+"scale" = "அளவுகோல்";
+"schoolss" = "பள்ளிகள்";
+"university" = "பல்கலைக்கழகம்";
+"support" = "ஆதரவு";
+"Video" = "வீடியோ";
+
+// MARK: Dashboard
+"Communication" = "தொடர்பு";
+"Image/Pdf" = "படம்/பி.டி.எப்";
+"Video Upload" = "வீடியோ பதிவேற்றம்";
+"Circulars" = "சுற்றறிக்கைகள்";
+"Homework" = "வீட்டுப்பாடம்";
+"Schedule Exam/Test" = "தேர்வு/சோதனை திட்டமிடல்";
+"Notice Board" = "அறிவிப்புப் பலகை";
+"Attendance marking" = "வருகையை குறிக்க";
+"Messages from management" = "மேலாண்மையிலிருந்து செய்திகள்";
+"Leave Requests" = "அனுமதி கோரிக்கைகள்";
+"Assignment" = "கடமைகள்";
+"Interaction with student" = "மாணவர்களுடன் தொடர்பு";
+"Online Meeting" = "ஆன்லைன் கூட்டம்";
+"Lesson Plan" = "பாடத் திட்டம்";
+"PTM" = "பெற்றோர்-ஆசிரியர் கூட்டம்";
+"Mark your attendence" = "உங்கள் வருகையை குறிக்கவும்";
+"Absentees Report" = "வரவில்லைவர்களின் அறிக்கை";
+"School Strength" = "பள்ளியின் மொத்த மாணவர் எண்ணிக்கை";
+"Daily Collection" = "தினசரி வசூல்";
+"Student Report" = "மாணவர் அறிக்கை";
+"Fee Pending Report" = "நிலுவையில் உள்ள கட்டண அறிக்கை";
+"Staff Wise Attendance Report" = "ஊழியர் வாரியாக வருகை அறிக்கை";
+"Events/Holidays" =  "நிகழ்வுகள்/விடுமுறை";
+"Request Leave" = "விடுப்பு கோரிக்கை";
+"Fee Details" = "கட்டண விவரங்கள்";
+"Images" = "படங்கள்";
+"Interaction with Staff" = "பணியாளர்களுடன் தொடர்பு";
+"Quiz Exam" = "வினாடி வினா தேர்வு";
+"LSRW" = "கேட்குதல், பேசுதல், வாசித்தல், எழுதுதல்";
+"Class Timetable" = "வகுப்பு நேர அட்டவணை";
+"Certificate Request" = "சான்றிதழ் கோரிக்கை";
+
+// MARK: profile page
+
+"Family Details" = "குடும்ப விவரங்கள்";
+"Fathername" = "தந்தையின் பெயர்";
+"Mothername" = "தாயின் பெயர்";
+"Father occupation" = "தந்தையின் தொழில்";
+"Mother occupation" = "தாயின் தொழில்";
+"Secondary Phone no" = "இரண்டாம் நிலை தொலைபேசி எண்";
+"About Student" = "மாணவர்கள் பற்றியது";
+"Profile" = "சுயவிவரம்";
+"Register number" = "பதிவு எண்";
+"Standard" = "வகுப்பு";
+"Section" = "பிரிவு";
+"Contact details" = "தொடர்பு விவரங்கள்";
+
+
+
+
+"GENERAL" = "பொது";
+"FEEDBACK" = "மறுமொழி";
+"Settings" = "அமைப்புகள்";
+
+"Cancel" = "ரத்து செய்யவும்";
+"Select" = "தேர்ந்தெடுக்கவும்";
+"Choose an option" = "ஒரு விருப்பத்தை தேர்ந்தெடுக்கவும்";
+//MARK: Image Sender Side
+"Upload Image/Pdf" = "படத்தை/PDF ஐ பதிவேற்றவும்";
+"Camera Not Available" = "கேமரா கிடைக்கவில்லை";
+"This device has no camera." = "இந்த சாதனத்தில் கேமரா இல்லை.";
+"Description" = "விளக்கம்";
+"Camera" = "கேமரா";
+"Gallery" = "காட்சிப்படப்புத்தகம்";
+"Pdf" = "PDF";
+"Upload Attachment" = "இணைப்பு பதிவேற்றவும்";
+//MARK: Common Staff Side
+"Groups" = "குழுக்கள்";
+"Standard or section" = "தரம் அல்லது பிரிவு";
+"Section or student" = "பிரிவு அல்லது மாணவர்";
+"OK" = "சரி";
+"Camera Not Available" = "கேமரா கிடைக்கவில்லை";
+"This device has no camera." = "இந்த சாதனத்தில் கேமரா இல்லை.";
+
+// MARK: Piechart
+
+"School Strength" = "பள்ளியின் மொத்த மாணவர் எண்ணிக்கை";
+"Total Strength" = "மொத்த எண்ணிக்கை";
+"Staff's count" = "பணியாளர் எண்ணிக்கை";
+"Boy's count" = "ஆண் குழந்தைகளின் எண்ணிக்கை";
+"Girl's count" = "பெண் குழந்தைகளின் எண்ணிக்கை";
+"Contact Support" = "ஆதரவை தொடர்பு கொள்ளவும்";
+
+
+// MARK: Logout page
+
+"Are you sure you want to logout?" = "நீங்கள் வெளியேற விரும்புகிறீர்களா?";
+"Cancel" = "ரத்து செய்";
+"Logout" = "வெளியேறு";
+"Tamil" = "தமிழ்";
+
+"Confirm" = "வெளியேறு";
+
+// MARK: Feedback page
+"How satisfied are you with the School Chimes?" = "School Chimes-ல் நீங்கள் எவ்வளவு திருப்தியடைகிறீர்கள்?";
+"Maybe later" = "பிறகு பார்த்துக் கொள்வேன்";
+"Any other suggestions? (optional)" = "மேலும் ஏதேனும் பரிந்துரைகள் உள்ளதா? (விருப்பத்தேர்வு)";
+"SUBMIT" = "சமர்ப்பிக்கவும்";
+"Thank You" = "நன்றி";
+"We appreciate your feedback! Your rating helps us improve." = "உங்கள் கருத்தை நாங்கள் மதிக்கிறோம்! உங்கள் மதிப்பீடு எங்களை மேம்படுத்த உதவும்.";
+"Back to Home <<" = "முகப்புக்கு திரும்பவும் <<";
+
+"Enter Video Title" = "வீடியோ தலைப்பு உள்ளிடவும்";
+"Enter Video Description" = "வீடியோ விவரத்தை உள்ளிடவும்";
+"Choose Video From Gallery" = "கேலரியிலிருந்து வீடியோ தேர்வு செய்யவும்";
+"Change Video" = "வீடியோ மாற்றவும்";
+"Upload Video" = "வீடியோ பதிவேற்றவும்";
+"Send" = "அனுப்ப";
+"Click To Choose Video From File" = "வீடியோவை தேர்ந்தெடுக்க கிளிக் செய்யவும்";
+
+//MARK: Home Work Sender Side
+"Home Work" = "வீட்டு வேலை";
+"Content" = "உள்ளடக்கம்";
+"Home Work Reports" = "வீட்டு வேலை அறிக்கைகள்";
+"Compose Home work Message" = "வீட்டு வேலை செய்தி உருவாக்கு";
+
+
+
+
+// MARK: Reportbugs page
+"Select Module*" = "மொழிபெயர்ப்பு தேர்வு செய்யவும்*";
+"Enter Bugs *" = "பிழைகள் உள்ளிடவும் *";
+"Upload Attachment" = "இணைப்பை பதிவேற்றவும்";
+
+"NoticeBoard" = "அறிவிப்புப் பலகை";
+"Search" = "தேடு";
+"Compose NoticeBoard" = "அறிவிப்புப் பலகையை உருவாக்கவும்";
+"From" = "இருந்து";
+"To" = "க்கு";
+"Upload Attachment" = "இணைப்பை பதிவேற்றவும்";
+"Submit" = "சமர்ப்பிக்கவும்";
+"Image/Pdf" = "படம்/பி.டி.எப்";
+
+
+
+// MARK: Sender Side Assignment
+
+"Select the type in which you want to create the assignment" = "Select the type in which you want to create the assignment";
+"CREATE" = "உருவாக்கு";
+"VIEW" = "பார்வையிடு";
+"Assignment" = "அசைன்மெண்ட்";
+"Compose Assignment" = "அசைன்மெண்ட் உருவாக்கம்";
+"Submission Date" = "சமர்ப்பிக்கும் தேதி";
+"Category" = "வகை";
+"Click here to choose Image" = "படத்தை தேர்வு செய்ய இங்கே கிளிக் செய்யவும்";
+"Subject" = "பாடம்";
+"Category" = "வகை";
+"Submission Due" = "சமர்ப்பிக்கும் கடைசி தேதி";
+"Submission Count" = "சமர்ப்பிப்பு எண்ணிக்கை";
+"Total Count" = "மொத்த எண்ணிக்கை";
+"Forward" = "முன்னோக்கி அனுப்பு";
+"Delete" = "அழிக்க";
+"Submission" = "சமர்ப்பிப்பு";
+"Total" = "மொத்தம்";
+"View" = "பார்வையிடு";
+
+//MARK: Sender side Events
+//MARK: Attendence
+"Name" = "பெயர்";
+"RollNo" = "வரிசை எண்";
+"Status" = "நிலை";
+"LeaveRequests" = "விடுப்புக்களை கோரிக்கைகள்";
+"Section" = "பிரிவு '10வது சி'";
+"RollNo DESC" = "உருட்டு எண் குறையுமாறு";
+"RollNo ASC" = "உருட்டு எண் அதிகரிக்கும்";
+"Name ASC" = "பெயர் அதிகரிக்கும்";
+"Name DESC" = "பெயர் குறையுமாறு";
+"Apsent" = "விலக்கப்பட்டது";
+"Present" = "இருக்கின்றனர்";
+"Filter" = "ஃபில்டர்";
+"Present" = "உள்ளனர்";
+"Absent" = "இல்லை";
+"RollNo_ASC" = "ரோல் எண்ணு ஏறுவரிசை";
+"RollNo_DESC" = "ரோல் எண்ணு இறங்குவரிசை";
+"Name_ASC" = "பெயர் ஏறுவரிசை";
+"Name_DESC" = "பெயர் இறங்குவரிசை";
+"getAllStudent" = "அனைத்து மாணவர்களையும் பெறவும்";
+
+//MARK: Event
+"Circulars" = "சுற்றறிக்கைகள்";
+"EventTitle" = "நிகழ்வின் தலைப்பு";
+"EventDetails" = "நிகழ்வின் விவரங்கள்";
+"AddPhotos1" = "புகைப்படங்கள் சேர்க்க (விருப்பமாக?)";
+"Venue" = "இடம்";
+"From" = "இருந்து";
+"To" = "வரை";
+"CreateEvent" = "நிகழ்வை உருவாக்கவும்";
+"History" = "வரலாறு";
+"Create" = "உருவாக்கவும்";
+"AddPhotos" = "புகைப்படங்கள் சேர்க்க";
+"Optional" = "(விருப்பமாக?)";
+"EnterPlace" = "இடத்தை உள்ளிடவும்";
+"EnterTitle" = "தலைப்பை உள்ளிடவும்";
+"EnterTextHere" = "உங்கள் கருத்தை இங்கு உள்ளிடவும்...";
+"egYogaEvent" = "உதா. யோகா நிகழ்வு";
+"egChennai" = "உதா. சென்னை";
+"completed" = "முடிந்தது";
+"pending" = "நிலுவையில் உள்ளது";
+
+//MARK: Comunication
+"BackToTextMessage" = "உரைச் செய்திக்கு திரும்பு";
+"BackToVoiceMessage" = "குரல் செய்திக்கு திரும்பு";
+"selectedText" = "தேர்ந்தெடுக்கப்பட்ட உரை";
+"invalidSelection" = "தவறான தேர்வு";
+"selectDatesWithinMonth" = "நடப்பு மாதத்தில் காட்சிப்படுத்தப்படும் தேதிகளுக்குள் மட்டுமே நீங்கள் தேதிகளை தேர்வு செய்யலாம்.";
+//MARK: ScheduleExam
+"scheduleExam" = "தேர்வு அட்டவணை அமைக்கவும்";
+
+
+"Parent Teacher Meeting" = "பெற்றோர் ஆசிரியர் கூட்டம்";

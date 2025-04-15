@@ -173,8 +173,8 @@ class CreateViewAssignmentTabViewVC: UIViewController {
             self.navigationController?.navigationBar.semanticContentAttribute = .forceLeftToRight
             self.view.semanticContentAttribute = .forceLeftToRight
         }
-        segmentControl.setTitle(LangDict["create"] as? String, forSegmentAt: 0)
-        segmentControl.setTitle(LangDict["view"] as? String, forSegmentAt: 1)
+        segmentControl.setTitle(commonStringNames.create.translated() as? String, forSegmentAt: 0)
+                                segmentControl.setTitle(commonStringNames.view.translated() as? String, forSegmentAt: 1)
         
     }
 }

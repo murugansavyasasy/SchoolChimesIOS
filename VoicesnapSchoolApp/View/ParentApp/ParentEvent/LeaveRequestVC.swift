@@ -372,13 +372,13 @@ class LeaveRequestVC: UIViewController,UITextViewDelegate,Apidelegate {
         dismissKeyboard()
         if(FromDateLbl.text == "")
         {
-            Util.showAlert("", msg: languageDictionary["date_select"] as? String)
+            Util.showAlert("", msg: commonStringNames.date_select.translated() as? String)
         }else if(ToDateLbl.text == "")
         {
-            Util.showAlert("", msg: languageDictionary["to_date_alert"] as? String)
+            Util.showAlert("", msg: commonStringNames.to_date_alert.translated() as? String)
         }else if(TextMessageView.text == strPlaceholder || TextMessageView.text == " " || TextMessageView.text.count == 0)
         {
-            Util.showAlert("", msg: languageDictionary["choose_reason"] as? String)
+            Util.showAlert("", msg: commonStringNames.choose_reason.translated() as? String)
         }
         
         else{
@@ -540,8 +540,8 @@ class LeaveRequestVC: UIViewController,UITextViewDelegate,Apidelegate {
         
         titleLabel.frame = CGRect(x: 0, y: 0, width: self.view.frame.width , height: 45)
         titleLabel.textColor = UIColor (red:0.0/255.0, green:183.0/255.0, blue: 190.0/255.0, alpha: 1)
-        let secondWord =  languageDictionary["leave"] as? String
-        let thirdWord   = languageDictionary["requesttttt"] as? String
+        let secondWord =  commonStringNames.leave.translated() as? String
+        let thirdWord   = commonStringNames.requesttttt.translated() as? String
         let comboWord = (secondWord ?? "Leave" ) + " " + (thirdWord ?? "Request")
         let attributedText = NSMutableAttributedString(string:comboWord)
         let attrs = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 22), NSAttributedString.Key.foregroundColor: UIColor.white]
@@ -581,18 +581,18 @@ class LeaveRequestVC: UIViewController,UITextViewDelegate,Apidelegate {
             UIView.appearance().semanticContentAttribute = .forceLeftToRight
             TextMessageView.textAlignment = .left
         }
-        strPlaceholder =  LangDict["hint_leave_reason"] as? String ?? "Reason for leave"
-        LeaveHistoryButton.setTitle(LangDict["leave_history"] as? String , for: .normal)
-        ApplyButton.setTitle(LangDict["requesttttt"] as? String , for: .normal)
+        strPlaceholder =  commonStringNames.hint_leave_reason.translated() as? String ?? "Reason for leave"
+                                                                                            LeaveHistoryButton.setTitle(commonStringNames.leave_history.translated() as? String , for: .normal)
+                                                                                                                        ApplyButton.setTitle(commonStringNames.requesttttt.translated() as? String , for: .normal)
         
-        FloatFromLabel.text = LangDict["txt_from"] as? String
-        FloatToLabel.text = LangDict["txt_to"] as? String
-        FloatChooseDate.text = LangDict["choose_date"] as? String
-        CancelButton.setTitle(LangDict["teacher_cancel"] as? String , for: .normal)
-        DoneButton.setTitle(LangDict["teacher_btn_ok"] as? String , for: .normal)
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Records Found.."
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+                                                                                                                        FloatFromLabel.text = commonStringNames.txt_from.translated() as? String
+                                                                                                                        FloatToLabel.text = commonStringNames.txt_to.translated() as? String
+                                                                                                                        FloatChooseDate.text = commonStringNames.choose_date.translated() as? String
+                                                                                                                        CancelButton.setTitle(commonStringNames.teacher_cancel.translated() as? String , for: .normal)
+                                                                                                                                              DoneButton.setTitle(commonStringNames.teacher_btn_ok.translated() as? String , for: .normal)
+                                                                                                                                                                  strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Records Found.."
+                                                                                                                                                                  strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+                                                                                                                                                                  strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         self.loadViewData()
         
     }

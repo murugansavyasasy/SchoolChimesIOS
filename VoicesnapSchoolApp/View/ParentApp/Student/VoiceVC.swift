@@ -100,10 +100,7 @@ class VoiceVC: UIViewController,UITableViewDataSource,UITableViewDelegate,AVAudi
         
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        
-    }
+    
     // MARK: - Button Action
     @IBAction func actionBack(_ sender: Any)
     {

@@ -99,6 +99,7 @@ class StaffChatInteractDetailVC: UIViewController ,UITableViewDelegate,UITableVi
     // MARK: - TableView delegates
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("stdSubjectArray.count")
         return stdSubjectArray.count
     }
     
@@ -160,7 +161,8 @@ class StaffChatInteractDetailVC: UIViewController ,UITableViewDelegate,UITableVi
         let myDict:NSMutableDictionary = ["StaffId" : StaffId,MOBILE_NUMBER : appDelegate.strMobileNumber , SCHOOLIID : SchoolId]
         
         let myString = Util.convertDictionary(toString: myDict)
-        print("myString\(myString)")
+        print("myStringStaffchat\(myString)")
+//        print(<#T##items: Any...##Any#>)
         apiCall.nsurlConnectionFunction(requestString, myString, "GetStaffDetailApi")
     }
     
@@ -179,7 +181,7 @@ class StaffChatInteractDetailVC: UIViewController ,UITableViewDelegate,UITableVi
                     if let Dict = CheckedDict[0] as? NSDictionary{
                         let stdID = String(describing: Dict["StandardId"]!)
                         let alrtMessage = Dict["Standard"] as! String
-                        let getUnreadCount = Dict["unread_count"] as! String
+//                        let getUnreadCount = Dict["unread_count"] as! String
                         if(stdID != "0"){
                             stdSubjectArray = NSMutableArray(array: CheckedDict)
                             myTableView.reloadData()
@@ -211,8 +213,8 @@ class StaffChatInteractDetailVC: UIViewController ,UITableViewDelegate,UITableVi
     
     func AlerMessage(alrtStr : String){
         
-        let alertController = UIAlertController(title: languageDictionary["alert"] as? String, message: alrtStr, preferredStyle: .alert)
-        let okAction = UIAlertAction(title:languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let alertController = UIAlertController(title: commonStringNames.alert.translated() as? String, message: alrtStr, preferredStyle: .alert)
+        let okAction = UIAlertAction(title:commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             print("Okaction")
             self.navigationController?.popViewController(animated: true)
@@ -275,9 +277,9 @@ class StaffChatInteractDetailVC: UIViewController ,UITableViewDelegate,UITableVi
         
         
         
-        strNoRecordAlert = LangDict["no_records"] as? String ?? "No Records Found.."
-        strNoInternet = LangDict["check_internet"] as? String ?? "Check your Internet connectivity"
-        strSomething = LangDict["catch_message"] as? String ?? "Something went wrong.Try Again"
+        strNoRecordAlert = commonStringNames.no_records.translated() as? String ?? "No Records Found.."
+        strNoInternet = commonStringNames.check_internet.translated() as? String ?? "Check your Internet connectivity"
+        strSomething = commonStringNames.catch_message.translated() as? String ?? "Something went wrong.Try Again"
         GetStaffSubiectApiCalling()
     }
     
@@ -352,23 +354,61 @@ class StaffChatInteractDetailVC: UIViewController ,UITableViewDelegate,UITableVi
     
     @objc func UpdateLogoutSelection(notification:Notification) -> Void
     {
-        print("staff")
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() )
-        {
-            self.showLogoutAlert()
+//        print("staff")
+//        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() )
+//        {
+//            self.showLogoutAlert()
+//        }
+        print("SDetails")
+      
+        var selectString = notification.object as? String ?? ""
+        print("SDetails23",selectString)
+        selectString = selectString.lowercased()
+        let log = commonStringNames.logout.translated() as? String ?? ""
+        if(selectString == log){
+            DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() )
+            {
+                self.showLogoutAlert()
+                
+            }
+        }else if(selectString.contains("edit")){
+            callEditProfile()
+        }else if(selectString.contains(commonStringNames.help.translated())){
+            callhelp()
+        }else if (selectString.contains(commonStringNames.language_change.translated())){
+            callLanguageVc()
         }
-        
+    }
+    
+    func callLanguageVc(){
+        let vc = ChangeLanguageViewController(nibName: nil, bundle: nil)
+        vc.modalPresentationStyle = .formSheet
+        present(vc, animated: true)
+    }
+    
+    
+    func callEditProfile(){
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "EditProfileVC") as! EditProfileVC
+        newViewController.strPageFrom = "edit"
+        self.navigationController?.pushViewController(newViewController, animated: true)
+    }
+    func callhelp(){
+        let storyBoard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let newViewController = storyBoard.instantiateViewController(withIdentifier: "EditProfileVC") as! EditProfileVC
+        newViewController.strPageFrom = "help"
+        self.navigationController?.pushViewController(newViewController, animated: true)
     }
     
     func showLogoutAlert(){
-        let alertController = UIAlertController(title: languageDictionary["txt_menu_logout"] as? String, message: languageDictionary["want_to_logut"] as? String, preferredStyle: .alert)
+        let alertController = UIAlertController(title: commonStringNames.txt_menu_logout.translated() as? String, message: commonStringNames.want_to_logut.translated() as? String, preferredStyle: .alert)
         
         // Create the actions
-        let okAction = UIAlertAction(title: languageDictionary["teacher_btn_ok"] as? String, style: UIAlertAction.Style.default) {
+        let okAction = UIAlertAction(title: commonStringNames.teacher_btn_ok.translated() as? String, style: UIAlertAction.Style.default) {
             UIAlertAction in
             self.moveToLogInScreen(strFromStaff: "Child")
         }
-        let cancelAction = UIAlertAction(title: languageDictionary["teacher_cancel"] as? String, style: UIAlertAction.Style.cancel) {
+        let cancelAction = UIAlertAction(title: commonStringNames.teacher_cancel.translated() as? String, style: UIAlertAction.Style.cancel) {
             UIAlertAction in
             
         }
