@@ -667,6 +667,11 @@
 		D6EE64B8210088CB0029351C /* PrincipalAddRemoveSubjectVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EE64B7210088CB0029351C /* PrincipalAddRemoveSubjectVC.swift */; };
 		D6F992D0210318AB00E05B6D /* NewParentExamTestTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F992CF210318AB00E05B6D /* NewParentExamTestTVCell.swift */; };
 		EB799225C321DF2BE8EAFCE2 /* libPods-VoicesnapSchoolApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C88AF2771AD4B62AFC298CFC /* libPods-VoicesnapSchoolApp.a */; };
+		FA02E30B2D9EA4C700B74939 /* activate_coupon_Req.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA02E30A2D9EA4C700B74939 /* activate_coupon_Req.swift */; };
+		FA77270D2D9F9D280025D18F /* my_coupons_Req.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA77270C2D9F9D280025D18F /* my_coupons_Req.swift */; };
+		FA7727112D9FEB3E0025D18F /* ClaimCouponVc.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA7727102D9FEB3E0025D18F /* ClaimCouponVc.xib */; };
+		FA7727122D9FEB3E0025D18F /* ClaimCouponVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA77270F2D9FEB3E0025D18F /* ClaimCouponVc.swift */; };
+		FA7727142D9FED1F0025D18F /* TicketView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7727132D9FED1F0025D18F /* TicketView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1377,6 +1382,11 @@
 		D6DDBD2E20FF337500367B8E /* PrincipalAddSubjectTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrincipalAddSubjectTVCell.swift; sourceTree = "<group>"; };
 		D6EE64B7210088CB0029351C /* PrincipalAddRemoveSubjectVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrincipalAddRemoveSubjectVC.swift; sourceTree = "<group>"; };
 		D6F992CF210318AB00E05B6D /* NewParentExamTestTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewParentExamTestTVCell.swift; sourceTree = "<group>"; };
+		FA02E30A2D9EA4C700B74939 /* activate_coupon_Req.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = activate_coupon_Req.swift; sourceTree = "<group>"; };
+		FA77270C2D9F9D280025D18F /* my_coupons_Req.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = my_coupons_Req.swift; sourceTree = "<group>"; };
+		FA77270F2D9FEB3E0025D18F /* ClaimCouponVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClaimCouponVc.swift; sourceTree = "<group>"; };
+		FA7727102D9FEB3E0025D18F /* ClaimCouponVc.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ClaimCouponVc.xib; sourceTree = "<group>"; };
+		FA7727132D9FED1F0025D18F /* TicketView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TicketView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -1395,6 +1405,7 @@
 		8460883F2D66EA13004814F5 /* CuoponDetails */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = CuoponDetails; sourceTree = "<group>"; };
 		8481DA832D683B3300F5AD9D /* CommonFolder */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = CommonFolder; sourceTree = "<group>"; };
 		84E485CD2CE37DBB0064CB25 /* NotificationServiceExtension */ = {isa = PBXFileSystemSynchronizedRootGroup; exceptions = (84E485D62CE37DBB0064CB25 /* PBXFileSystemSynchronizedBuildFileExceptionSet */, ); explicitFileTypes = {}; explicitFolders = (); path = NotificationServiceExtension; sourceTree = "<group>"; };
+		FA52975A2DA393AA0062C8D2 /* Fonts_gilroy */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Fonts_gilroy; sourceTree = "<group>"; };
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -2671,6 +2682,8 @@
 		8415CFEB2D6475CF0023D9A1 /* Pauckt */ = {
 			isa = PBXGroup;
 			children = (
+				FA52975A2DA393AA0062C8D2 /* Fonts_gilroy */,
+				FA77270E2D9FEB0B0025D18F /* ClaimCoupon */,
 				8467D1FF2D6C7C180099522F /* ReedimHistory */,
 				8481DA832D683B3300F5AD9D /* CommonFolder */,
 				8460883F2D66EA13004814F5 /* CuoponDetails */,
@@ -2876,6 +2889,8 @@
 				8467D0992D684A780099522F /* get_cateorgy_Req.swift */,
 				8467D09C2D684CEF0099522F /* get_campaigns_Req.swift */,
 				8467D3962D6D7CBE0099522F /* Get_campian_details_Req.swift */,
+				FA02E30A2D9EA4C700B74939 /* activate_coupon_Req.swift */,
+				FA77270C2D9F9D280025D18F /* my_coupons_Req.swift */,
 			);
 			path = ApiReq;
 			sourceTree = "<group>";
@@ -4163,6 +4178,16 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		FA77270E2D9FEB0B0025D18F /* ClaimCoupon */ = {
+			isa = PBXGroup;
+			children = (
+				FA77270F2D9FEB3E0025D18F /* ClaimCouponVc.swift */,
+				FA7727102D9FEB3E0025D18F /* ClaimCouponVc.xib */,
+				FA7727132D9FED1F0025D18F /* TicketView.swift */,
+			);
+			path = ClaimCoupon;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -4211,6 +4236,7 @@
 				8415D0632D66090F0023D9A1 /* ApiModal */,
 				8460883F2D66EA13004814F5 /* CuoponDetails */,
 				8481DA832D683B3300F5AD9D /* CommonFolder */,
+				FA52975A2DA393AA0062C8D2 /* Fonts_gilroy */,
 			);
 			name = VoicesnapSchoolApp;
 			packageProductDependencies = (
@@ -4337,6 +4363,7 @@
 				84C499DA2C33DE6100BA6EF4 /* PTMViewController.xib in Resources */,
 				10FFBA1022FED1850002CE52 /* TEST_MESSAGE.wav in Resources */,
 				84B0661E2AFB69D500CEB417 /* ParentHWImagePdfVoiceViewController.xib in Resources */,
+				FA7727112D9FEB3E0025D18F /* ClaimCouponVc.xib in Resources */,
 				84B39EEF2BEB483B00D56819 /* PaymentListTableViewCell.xib in Resources */,
 				8491E4432B0638A000CF858F /* HwImageZoomViewController.xib in Resources */,
 				1873EB832983990D008E30AA /* FeeDetailReceiptTableViewCell.xib in Resources */,
@@ -4632,6 +4659,7 @@
 				B56D6E8F200F5C4D0058F2A5 /* NoticeBoardFooterTVCell.swift in Sources */,
 				04EDB7D4249741980062164B /* StaffChatInteractDetailVC.swift in Sources */,
 				D64EF0F720C7AD1A0051AA89 /* UploadSignatureVC.swift in Sources */,
+				FA7727142D9FED1F0025D18F /* TicketView.swift in Sources */,
 				18F1199629657604002C0A0A /* SendStaffGroupsVoiceRequest.swift in Sources */,
 				18F119AA2965A59C002C0A0A /* SendSMSAsStaffToGroupsRequest.swift in Sources */,
 				18F119B02966CE01002C0A0A /* SendImageStaffModal.swift in Sources */,
@@ -4707,6 +4735,7 @@
 				046E6D23245C364A00BA5E0D /* AssignmentVideoDetailVC.swift in Sources */,
 				D60DA65820CBE37300983C45 /* upcomingFeesTVCell.swift in Sources */,
 				84EF47D72BECCA1D000EBFFD /* ClassTimeTableViewCell.swift in Sources */,
+				FA77270D2D9F9D280025D18F /* my_coupons_Req.swift in Sources */,
 				841ED6CB2C8F50D800A65EEA /* SlotDetailsForStaffRequest.swift in Sources */,
 				D64EF0FD20C7AD1A0051AA89 /* VoiceDetailVC.swift in Sources */,
 				846666622C77466C008E7F24 /* TimeHeader.swift in Sources */,
@@ -4778,7 +4807,9 @@
 				D6DDBD2F20FF337500367B8E /* PrincipalAddSubjectTVCell.swift in Sources */,
 				B5A0911B200885410052AB21 /* GridCVCell.swift in Sources */,
 				1851AE102CEF124A005EC490 /* PreviewLsrwViewController.swift in Sources */,
+				FA7727122D9FEB3E0025D18F /* ClaimCouponVc.swift in Sources */,
 				D68B9C9E20D3E3D200FDA753 /* ExamMarkTVCell.swift in Sources */,
+				FA02E30B2D9EA4C700B74939 /* activate_coupon_Req.swift in Sources */,
 				84B2EC742B199DAD005815AA /* UpdateDetailsModal.swift in Sources */,
 				8415D0522D65B90E0023D9A1 /* HomePaucktVC.swift in Sources */,
 				04EDB7DB249741CB0062164B /* StaffChatDetailTVCell.swift in Sources */,

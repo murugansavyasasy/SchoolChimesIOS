@@ -9,13 +9,26 @@
 import UIKit
 
 class ReedimHistoryCell: UICollectionViewCell {
-
+    @IBOutlet weak var BackgroundImage: UIImageView!
     @IBOutlet weak var ticketViews: UIView!
+    @IBOutlet weak var BrandLogoImage: UIImageView!
+    @IBOutlet weak var CouponStatusView: UIView!
+    @IBOutlet weak var CouponStatusLbl: UILabel!
+    @IBOutlet weak var BrandNameLbl: UILabel!
+    @IBOutlet weak var OfferLbl: UILabel!
+    @IBOutlet weak var ExpireyDateLbl: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         
 //        addScallopedEdge(to: ticketViews)
+        CouponStatusView.isHidden = true
+        CouponStatusLbl.setFont(style: .body, size: 15)
+        BrandNameLbl.setFont(style: .body, size: 17)
+        OfferLbl.setFont(style: .title, size: 20)
+        ExpireyDateLbl.setFont(style: .body, size: 14)
+        
     }
 
     override func layoutSubviews() {

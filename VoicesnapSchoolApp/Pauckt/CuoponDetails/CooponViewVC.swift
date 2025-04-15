@@ -19,6 +19,8 @@ class CooponViewVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
     var autoScrollTimer: Timer?
     var timer: Timer?
     var source_Link : String?
+    var Category : String?
+    var ThumbnailImg : String?
     override func viewDidLoad() {
         super.viewDidLoad()
         shareBtn.layer.cornerRadius = 15
@@ -32,6 +34,9 @@ class CooponViewVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
         view.bringSubviewToFront(backBtn)
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [self] in
             let detailViewController = BottomView()
+            detailViewController.category = Category
+            detailViewController.sourceLink = source_Link
+            
             let nav = UINavigationController(rootViewController: detailViewController)
             
             // 1 - Set modal presentation style
@@ -48,7 +53,6 @@ class CooponViewVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
             
             // 3 - Prevent dismiss on swipe down
             nav.isModalInPresentation = true
-            
             // 4 - Present the bottom sheet
             present(nav, animated: true)
         }
@@ -77,7 +81,7 @@ class CooponViewVC: UIViewController,UICollectionViewDelegate, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CVCell", for: indexPath) as! CVCell
-        
+        cell.BannerImg.sd_setImage(with: URL(string: ThumbnailImg ?? ""), placeholderImage: UIImage(named: ""), options: SDWebImageOptions.refreshCached)
         return cell
     }
     @IBAction func back(_ sender: UIButton) {

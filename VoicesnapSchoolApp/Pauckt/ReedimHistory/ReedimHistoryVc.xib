@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ReedimHistoryVc" customModule="VoicesnapSchoolApp" customModuleProvider="target">
             <connections>
+                <outlet property="Searchbar" destination="Die-X3-4eS" id="qxG-zG-Rp6"/>
                 <outlet property="cv" destination="96e-89-uck" id="hGu-p9-aMa"/>
                 <outlet property="segments" destination="Kfg-gK-BUY" id="wWA-Xs-STj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -49,7 +50,7 @@
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Ii6-cW-c4W">
                             <rect key="frame" x="10" y="62" width="373" height="677"/>
                             <subviews>
-                                <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="Die-X3-4eS">
+                                <searchBar contentMode="redraw" searchBarStyle="minimal" placeholder="Search" translatesAutoresizingMaskIntoConstraints="NO" id="Die-X3-4eS">
                                     <rect key="frame" x="0.0" y="0.0" width="373" height="56"/>
                                     <textInputTraits key="textInputTraits"/>
                                     <connections>
@@ -67,6 +68,9 @@
                                     </segments>
                                     <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="selectedSegmentTintColor" systemColor="systemGreenColor"/>
+                                    <connections>
+                                        <action selector="SegmentAction:" destination="-1" eventType="valueChanged" id="y6O-vn-tb5"/>
+                                    </connections>
                                 </segmentedControl>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="96e-89-uck">
                                     <rect key="frame" x="0.0" y="97" width="373" height="580"/>

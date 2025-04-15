@@ -11,6 +11,7 @@ import ObjectMapper
 
 
 class ParentVoiceMessageVC: UIViewController, UITableViewDelegate, UITableViewDataSource,Apidelegate,UIPopoverPresentationControllerDelegate,UISearchBarDelegate {
+    
     var strApiFrom = NSString()
     var hud : MBProgressHUD = MBProgressHUD()
     var popupLoading : KLCPopup = KLCPopup()
@@ -27,8 +28,6 @@ class ParentVoiceMessageVC: UIViewController, UITableViewDelegate, UITableViewDa
     var altSting = String()
     var bIsSeeMore = Bool()
     var ArrayData = NSMutableArray()
-    
-    
     var MainDetailTextArray: NSMutableArray = NSMutableArray()
     var SelectedSectionArray : NSMutableArray = NSMutableArray()
     
@@ -129,29 +128,17 @@ class ParentVoiceMessageVC: UIViewController, UITableViewDelegate, UITableViewDa
                     
                     print("admodalStr_count", AdConstant.adDataList .count)
                     
-                    
-                    
-                    
                 }
-                
                 
             } catch {
                 print("Error fetching data: \(error)")
             }
         }
         
-        
-        
-        
-        
-        //
         MyTableView.reloadData()
         
-        //
         let imgTap = AdGesture (target: self, action: #selector(viewTapped))
         AdView.addGestureRecognizer(imgTap)
-        
-        
     }
     
     func startTimer() {
@@ -294,11 +281,8 @@ class ParentVoiceMessageVC: UIViewController, UITableViewDelegate, UITableViewDa
                 return 80
             }
         }else{
-            //
             
             return 40
-            
-            
         }
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -330,7 +314,6 @@ class ParentVoiceMessageVC: UIViewController, UITableViewDelegate, UITableViewDa
             cell.SeeMoreBtn.addTarget(self, action: #selector(self.seeMoreButtonTapped), for: .touchUpInside)
             cell.backgroundColor = .clear
             return cell
-            
         }
         
     }
@@ -746,7 +729,6 @@ class ParentVoiceMessageVC: UIViewController, UITableViewDelegate, UITableViewDa
         noDataLabel.textColor = .red
         noDataLabel.backgroundColor = UIColor(named: "NoDataColor")
         
-        
         noDataLabel.numberOfLines = 0
         
         noDataLabel.textAlignment = NSTextAlignment.center
@@ -766,6 +748,7 @@ class ParentVoiceMessageVC: UIViewController, UITableViewDelegate, UITableViewDa
         
         self.MyTableView.backgroundView = noview
     }
+    
     func restoreView(){
         self.MyTableView.backgroundView = nil
     }
@@ -775,9 +758,6 @@ class ParentVoiceMessageVC: UIViewController, UITableViewDelegate, UITableViewDa
         self.MyTableView.reloadData()
         CallSeeMoreDatawiseVoiceApi()
     }
-    
-    
-    
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
@@ -798,32 +778,20 @@ class ParentVoiceMessageVC: UIViewController, UITableViewDelegate, UITableViewDa
             }
             self.MyTableView.reloadData()
         }
-        
-        
     }
-    
-    
-    
-    
     
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         search_bar.endEditing(true)
     }
+    
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        
         
         DateWiseVoiceArray =  MainDetailTextArray
         
         self.MyTableView.reloadData()
         searchBar.resignFirstResponder()
     }
-    
-    
-    
-    
-    
-    
-    
     
 }

@@ -66,9 +66,12 @@ class CampaignPagination: Mappable {
 
 // MARK: - Campaign
 class Campaign: Mappable {
+    var temp_id: Int?
     var sourceLink: String?
     var campaignName: String?
     var campaignType: String?
+    var threshold_amount: String?
+    var offer_text: String?
     var thumbnail: String?
     var expiryDate: String?
     var endDate: String?
@@ -77,14 +80,19 @@ class Campaign: Mappable {
     var merchantName: String?
     var categoryName: String?
     var categoryImage: String?
-    var merchantLogo: String?
+    var merchant_logo: String?
+    var offer_to_show: String?
 
     required init?(map: Map) {}
 
     func mapping(map: Map) {
+        
+        temp_id <- map["temp_id"]
         sourceLink <- map["source_link"]
         campaignName <- map["campaign_name"]
         campaignType <- map["campaign_type"]
+        threshold_amount <- map["threshold_amount"]
+        offer_text <- map["offer_text"]
         thumbnail <- map["thumbnail"]
         expiryDate <- map["expiry_date"]
         endDate <- map["end_date"]
@@ -93,6 +101,7 @@ class Campaign: Mappable {
         merchantName <- map["merchant_name"]
         categoryName <- map["category_name"]
         categoryImage <- map["category_image"]
-        merchantLogo <- map["merchant_logo"]
+        merchant_logo <- map["merchant_logo"]
+        offer_to_show <- map["offer_to_show"]
     }
 }

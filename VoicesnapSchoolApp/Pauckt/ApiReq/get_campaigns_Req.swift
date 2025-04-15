@@ -10,24 +10,16 @@ import Foundation
 import KRProgressHUD
 class Get_campians_Request{
 
-
     static func call_request (param : [String : Any],headers : [String : Any],completion_handler : @escaping(String) -> ()) {
-
-
-        KRProgressHUD.show()
-
         
-        BaseRequest .getAnyHeader(url: get_url(), param: param, header: headers).success {
-       
-
-
-
+        KRProgressHUD.show()
+        
+        BaseRequest .postAnyHeader(url: get_url(), param: param, header: headers).success {
+            
             (res) in
-
+            
             completion_handler(res as! String)
-
         }
-
     }
 
     private static func get_url() -> String {
@@ -35,9 +27,4 @@ class Get_campians_Request{
         return String (format:  "%@get_campaigns",StaffConstantFile.PaucktBaseUrl as! CVarArg )
 
     }
-   
-
 }
-
-
-

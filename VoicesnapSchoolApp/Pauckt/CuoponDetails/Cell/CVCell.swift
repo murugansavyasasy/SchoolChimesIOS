@@ -9,6 +9,7 @@ import UIKit
 
 class CVCell: UICollectionViewCell {
 
+    @IBOutlet weak var BannerImg: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

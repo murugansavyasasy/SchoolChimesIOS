@@ -10,7 +10,7 @@ import UIKit
 
 class CoupenCvCell: UICollectionViewCell {
 
-    @IBOutlet weak var brandImg: UIButton!
+    @IBOutlet weak var brandImg: UIImageView!
     @IBOutlet weak var groupImg: UIButton!
     @IBOutlet weak var containerView: UIView!
       @IBOutlet weak var backgroundImageView: UIImageView!
@@ -32,6 +32,13 @@ class CoupenCvCell: UICollectionViewCell {
         // Allow multiline labels
         titleLabel.numberOfLines = 0
         subtitleLabel.numberOfLines = 0
+        
+        titleLabel.setFont(style: .body, size: 13)
+        discountLabel.setFont(style: .title, size: 17)
+        subtitleLabel.setFont(style: .body, size: 15)
+        locationLabel.setFont(style: .body, size: 13)
+        durationLabel.setFont(style: .body, size: 13)
+        
     }
 
 }

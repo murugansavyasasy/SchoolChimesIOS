@@ -11,9 +11,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomePaucktVC" customModule="VoicesnapSchoolApp" customModuleProvider="target">
             <connections>
+                <outlet property="AllCouponsLbl" destination="Ygn-Oi-er4" id="KIp-nQ-q8D"/>
+                <outlet property="BackBtn" destination="Unq-KH-sR4" id="aSi-Iv-vv4"/>
                 <outlet property="TotalcoinsFullView" destination="Rfa-8x-ub7" id="n3a-9t-pWP"/>
+                <outlet property="UsedCoinsLbl" destination="5KT-a6-HQ6" id="8OX-5S-rZh"/>
                 <outlet property="categoriesCV" destination="6RE-kj-dr1" id="Cb3-i1-Trx"/>
                 <outlet property="collectionView" destination="Ib4-l8-Hdw" id="cmM-Pi-yxA"/>
+                <outlet property="totalCoinsLbl" destination="2Xu-fL-icY" id="pbK-gS-yOt"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -75,7 +79,7 @@
                                     <rect key="frame" x="0.0" y="104" width="383" height="0.0"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 </view>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All Coupons" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ygn-Oi-er4">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="    All Coupons" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ygn-Oi-er4">
                                     <rect key="frame" x="0.0" y="108" width="383" height="20.333333333333343"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                     <nil key="textColor"/>
@@ -84,7 +88,7 @@
                             </subviews>
                         </stackView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rfa-8x-ub7">
-                            <rect key="frame" x="15" y="48" width="231" height="70"/>
+                            <rect key="frame" x="15" y="48" width="280" height="70"/>
                             <subviews>
                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="dollarsign.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Uog-SN-P0G">
                                     <rect key="frame" x="10" y="15.666666666666668" width="41" height="38.666666666666657"/>
@@ -95,19 +99,19 @@
                                     </constraints>
                                 </imageView>
                                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UvL-95-bwF">
-                                    <rect key="frame" x="65.999999999999986" y="15.666666666666668" width="144.66666666666663" height="38.666666666666657"/>
+                                    <rect key="frame" x="66" y="15.666666666666668" width="209" height="38.666666666666657"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="KyM-0e-l34">
-                                            <rect key="frame" x="0.0" y="0.0" width="144.66666666666666" height="38.666666666666664"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="209" height="38.666666666666664"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Coins 2000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Xu-fL-icY">
-                                                    <rect key="frame" x="0.0" y="0.0" width="144.66666666666666" height="19.333333333333332"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="209" height="19.333333333333332"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Used 500  ,  Aviable 1500" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5KT-a6-HQ6">
-                                                    <rect key="frame" x="0.0" y="24.333333333333329" width="144.66666666666666" height="14.333333333333336"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Used 500  ,  Available 1500" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5KT-a6-HQ6">
+                                                    <rect key="frame" x="0.0" y="24.333333333333329" width="209" height="14.333333333333336"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" systemColor="systemGrayColor"/>
                                                     <nil key="highlightedColor"/>
@@ -120,8 +124,9 @@
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
                                 <constraint firstItem="Uog-SN-P0G" firstAttribute="centerY" secondItem="Rfa-8x-ub7" secondAttribute="centerY" id="1th-1z-xGc"/>
-                                <constraint firstAttribute="width" constant="231" id="CZf-6I-obm"/>
+                                <constraint firstAttribute="width" constant="280" id="CZf-6I-obm"/>
                                 <constraint firstAttribute="height" constant="70" id="DYK-82-eCR"/>
+                                <constraint firstAttribute="trailing" secondItem="UvL-95-bwF" secondAttribute="trailing" constant="5" id="JDg-D6-XV8"/>
                                 <constraint firstItem="Uog-SN-P0G" firstAttribute="leading" secondItem="Rfa-8x-ub7" secondAttribute="leading" constant="10" id="LaG-7K-qYJ"/>
                                 <constraint firstItem="UvL-95-bwF" firstAttribute="leading" secondItem="Uog-SN-P0G" secondAttribute="trailing" constant="15" id="g8U-AU-3Wz"/>
                                 <constraint firstItem="UvL-95-bwF" firstAttribute="centerY" secondItem="Rfa-8x-ub7" secondAttribute="centerY" id="wlP-0A-4p6"/>
@@ -275,10 +280,10 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemGrayColor">
-            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemYellowColor">
             <color red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

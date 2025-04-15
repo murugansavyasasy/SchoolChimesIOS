@@ -4,10 +4,13 @@
     class HomePaucktVC: UIViewController
     ,UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate,UICollectionViewDelegateFlowLayout{
 
+        @IBOutlet weak var UsedCoinsLbl: UILabel!
+        @IBOutlet weak var AllCouponsLbl: UILabel!
+        @IBOutlet weak var BackBtn: UIButton!
     @IBOutlet weak var TotalcoinsFullView: UIView!
 
     @IBOutlet weak var reminingCoinsView: UIView!
-    @IBOutlet weak var totalCoinsView: UIView!
+        @IBOutlet weak var totalCoinsLbl: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var categoriesCV: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -40,20 +43,25 @@
     gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
     gradientLayer.frame = collectionView.bounds
 
-    let backgroundView = UIView(frame: collectionView.bounds)
-    backgroundView.layer.insertSublayer(gradientLayer, at: 0)
-    gradientLayer.frame = UIScreen.main.bounds
-    view.layer.insertSublayer(gradientLayer, at: 0)
-    collectionView.backgroundView = backgroundView
-
-    TotalcoinsFullView.layer.cornerRadius = 12
-    TotalcoinsFullView.layer.shadowColor = UIColor.black.cgColor
-    TotalcoinsFullView.layer.shadowOpacity = 0.1
-    TotalcoinsFullView.layer.shadowOffset = CGSize(width: 0, height: 2)
-    TotalcoinsFullView.layer.shadowRadius = 4
-
-    Get_Categories()
-    setupCollectionView()
+        let backgroundView = UIView(frame: collectionView.bounds)
+        backgroundView.layer.insertSublayer(gradientLayer, at: 0)
+        gradientLayer.frame = UIScreen.main.bounds
+        view.layer.insertSublayer(gradientLayer, at: 0)
+        collectionView.backgroundView = backgroundView
+        
+        TotalcoinsFullView.layer.cornerRadius = 12
+        TotalcoinsFullView.layer.shadowColor = UIColor.black.cgColor
+        TotalcoinsFullView.layer.shadowOpacity = 0.1
+        TotalcoinsFullView.layer.shadowOffset = CGSize(width: 0, height: 2)
+        TotalcoinsFullView.layer.shadowRadius = 4
+        
+        BackBtn.setTitleFont(style: .secondary, size: 15)
+        totalCoinsLbl.setFont(style: .title, size: 17)
+        UsedCoinsLbl.setFont(style: .body, size: 15)
+        AllCouponsLbl.setFont(style: .title, size: 17)
+        
+        Get_Categories()
+        setupCollectionView()
     //        fetchCategories()
     fetchCoupen()
 
@@ -117,7 +125,7 @@
     return categories.count
     }else{
 
-    return filteredOffers.count
+        return filteredOffers.count
     }
 
     }
@@ -131,22 +139,43 @@
     cell.configure(with: caterogys)
     return cell
     }else{
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CoupenCvCell", for: indexPath) as! CoupenCvCell
-    //               cell.configure(with: thirdArray[indexPath.item])
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CoupenCvCell", for: indexPath) as! CoupenCvCell
+        //               cell.configure(with: thirdArray[indexPath.item])
+        
+        let offer = filteredOffers[indexPath.row]
+        cell.titleLabel.text = offer.categoryName
+        cell.subtitleLabel.text = offer.merchantName
+        cell.discountLabel.text = offer.offer_to_show
+        cell.locationLabel.text = "10 locations"
+      
+        
+        let futureDateString = offer.endDate
 
-    let offer = filteredOffers[indexPath.row]
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
 
-    cell.titleLabel.text = offer.categoryName
-    cell.subtitleLabel.text = offer.merchantName
-    cell.discountLabel.text = String(offer.discount ?? 0) + "%" + "Off"
-    cell.locationLabel.text = "10location"
-    cell.durationLabel.text = "5 days"
+        if let futureDate = dateFormatter.date(from: futureDateString ?? "") {
+            
+            let currentDate = Date()
+            
+            // Calculate the difference in days using Calendar
+            let calendar = Calendar.current
+            let components = calendar.dateComponents([.day], from: currentDate, to: futureDate)
+            
+            if let daysDifference = components.day {
+                cell.durationLabel.text = String(daysDifference) + " days"
+            } else {
+                print("Couldn't calculate the difference in days.")
+            }
+        } else {
+            print("Invalid date format.")
+        }
 
-
+       
+        
     cell.backgroundImageView.sd_setImage(with: URL(string: offer.thumbnail ?? ""), placeholderImage: UIImage(named: ""))
-    cell.brandImg.setImage(UIImage(named: "saloon_image"), for: .normal)
-    cell.brandImg.imageView?.layer.cornerRadius = 12
-    cell.brandImg.imageView?.layer.masksToBounds = true
+    cell.brandImg.layer.cornerRadius = 12
+        cell.brandImg.sd_setImage(with: URL(string: offer.merchant_logo ?? ""), placeholderImage: UIImage(named: ""))
     return cell
 
     }
@@ -177,6 +206,8 @@
     if collectionView != categoriesCV{
     let vc = CooponViewVC(nibName: nil, bundle: nil)
     vc.source_Link = filteredOffers[indexPath.row].sourceLink ?? ""
+    vc.Category = filteredOffers[indexPath.row].categoryName
+    vc.ThumbnailImg = filteredOffers[indexPath.row].thumbnail
     vc.modalPresentationStyle = .fullScreen
     present(vc, animated: true)
     }
@@ -218,8 +249,10 @@
     func Get_campians(){
 
 
-    let param : [String : Any] =
-    ["Mobile_no": "8610786768"]
+//    let param : [String : Any] =
+//    ["Mobile_no": "8610786768"]
+        let param : [String : Any] =
+        ["mobile_no": "7550144367"]
     print("paramparamm,nc",param)
     let headers: [String: Any] = [
     "api-key": "b9634e2c3aa9b6fdc392527645c43871",
@@ -264,3 +297,4 @@
     let name: String
     let imageUrl: String
     }
+
