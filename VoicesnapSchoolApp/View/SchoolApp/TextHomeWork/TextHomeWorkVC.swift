@@ -1070,7 +1070,8 @@ class TextHomeWorkVC: UIViewController,UITextViewDelegate,UITextFieldDelegate,UI
             }
             textViewPlaceholder =  commonStringNames.teacher_txt_typemsg.translated() as? String ?? "Content?"
         }
-        TextMessageView.text = textViewPlaceholder
+        
+       TextMessageView.text = textViewPlaceholder
         TextMessageView.textColor = UIColor.lightGray
         ToStandardSection.isUserInteractionEnabled = false
         attachmentBtn.isUserInteractionEnabled = false

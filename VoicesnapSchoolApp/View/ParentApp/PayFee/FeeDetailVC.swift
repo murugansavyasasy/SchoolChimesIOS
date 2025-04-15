@@ -261,8 +261,8 @@ class FeeDetailVC: UIViewController,Apidelegate,UITableViewDelegate,UITableViewD
        
         ChildIDString = String(describing: appDelegate.SchoolDetailDictionary["ChildID"]!)
         SchoolIDString = String(describing: appDelegate.SchoolDetailDictionary["SchoolID"]!)
-        var studId = ChildIDString
-        var schoolId = SchoolIDString
+        let studId = ChildIDString
+        let schoolId = SchoolIDString
         appDelegate.FeePaymentGateway =  appDelegate.FeePaymentGateway.replacingOccurrences(of: ":student_id/:school_id", with: "")
         let str_url = appDelegate.FeePaymentGateway + "\(studId)" + "/" + "\(schoolId)"
         paymentWebView.uiDelegate = self
@@ -296,37 +296,37 @@ class FeeDetailVC: UIViewController,Apidelegate,UITableViewDelegate,UITableViewD
     
     
 
-    
-       // When navigation completes
    
     
-//    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-//        if let url = webView.url {
-//                print("URL has finished loading: \(url)")
-//
-//                if url.absoluteString.contains("/#/paymentsucccess/success") {
-//                    DispatchQueue.main.async {
-//                        self.showPaymentSuccessAlert(on: self)
-//                    }
-//                }
-//            }
-//    }
-
-    // Function to show an alert and dismiss the view controller when "OK" is tapped
-//    func showPaymentSuccessAlert(on viewController: UIViewController) {
-//        let alert = UIAlertController(title: "Payment Success", message: "Your payment has been processed successfully.", preferredStyle: .alert)
-//        let okAction = UIAlertAction(title: "OK", style: .default) { _ in
-//            if let navigationController = viewController.navigationController {
-//                // If presented via push navigation, pop the view controller
-//                navigationController.popViewController(animated: true)
-//            } else {
-//                // If presented modally, dismiss it
-//                viewController.dismiss(animated: true, completion: nil)
-//            }
-//        }
-//        alert.addAction(okAction)
-//        viewController.present(alert, animated: true, completion: nil)
-//    }
+    func webView(_ webView: WKWebView,
+                            decidePolicyFor navigationAction: WKNavigationAction,
+                            decisionHandler: @escaping (WKNavigationActionPolicy) -> Swift.Void) {
+            
+            
+                   if let url = navigationAction.request.url,
+                      url.absoluteString.contains("upi://") ||
+                      url.absoluteString.contains("tez://") ||
+                      url.absoluteString.contains("phonepe://") ||
+                      url.absoluteString.contains("paytmmp://") ||
+                      url.absoluteString.contains("credpay://") {
+                       
+                       let appUrl = URL(string: url.absoluteString)
+                       
+                       if UIApplication.shared.canOpenURL(appUrl! as URL) {
+                           UIApplication.shared.open(appUrl!)
+                       }else{
+                           print("could not open the app");
+                       }
+                       
+                       // Cancel the request (handled by UIApplication).
+                       decisionHandler(.cancel)
+                   }
+                   else {
+                       // Allow the request.
+                       decisionHandler(.allow)
+                   }
+               }
+                      
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.isNavigationBarHidden = false

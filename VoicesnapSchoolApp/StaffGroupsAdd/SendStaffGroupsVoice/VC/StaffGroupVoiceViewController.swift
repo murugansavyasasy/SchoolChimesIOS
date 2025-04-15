@@ -539,24 +539,29 @@ class StaffGroupVoiceViewController: UIViewController,UITableViewDelegate,UITabl
         groupModal.StaffId = StaffId
         
         let groupModalStr = groupModal.toJSONString()
-        print("groupModalStr",groupModalStr)
+        print("groupModalStr",groupModal.toJSON())
         SendStaffGroupsVoiceRequest.call_request(param: groupModalStr!) {
             [self]   (res) in
             
-            
-            
-            
-            
             let groupResponse : [SendStaffGroupsVoiceResponse] = Mapper<SendStaffGroupsVoiceResponse>().mapArray(JSONString: res)!
         
-//            if groupResponse[0].s
-            if groupResponse.count < 0 {
+            if groupResponse.count > 0 {
                 getGroupList = groupResponse
                 tv.dataSource = self
                 tv.delegate = self
                 tv.reloadData()
             }else{
-                KRProgressHUD.dismiss()
+                
+                _ = SweetAlert().showAlert(commonStringNames.Alert.translated(), subTitle: "No group found", style: .none, buttonTitle: commonStringNames.OK.translated()) { isOtherButton in
+                                            
+                                            if isOtherButton {
+                                                
+                                                self.dismiss(animated: true)
+                                                
+                                            }
+                                        }
+               
+                
             }
         }
     }

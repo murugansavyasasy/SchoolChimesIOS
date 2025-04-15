@@ -423,6 +423,8 @@ class PrincipalStandardOrStudentVC: UIViewController,Apidelegate,UIPickerViewDel
             let requestString = requestStringer.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
             let SectionID = String(describing: SelectedSectionDeatil["SecCode"]!)
             let myDict:NSMutableDictionary = ["SchoolID" : SchoolId,"StaffID" : StaffId, COUNTRY_CODE: strCountryCode,"Description" : HomeTitleText,"Duration": durationString ,"Seccode" : [["TargetCode":SectionID]] , "StartTime" : initialTime , "EndTime" : doNotDial , "Dates" : DefaultsKeys.dateArr ]
+            
+            print()
             UtilObj.printLogKey(printKey: "myDict", printingValue: myDict)
             let myString = Util.convertDictionary(toString: myDict)
             apiCall.callPassVoiceParms(requestString, myString, "VoiceToParents", VoiceData as Data?)

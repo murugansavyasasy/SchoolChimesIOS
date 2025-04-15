@@ -959,7 +959,7 @@ class StandardGroupSelectionVC: UIViewController,UICollectionViewDelegate,UIColl
                             standardCollectionView.reloadData()
                         }
                     }
-                    if let CheckGroupArray = dicUser.object(forKey: "repienrereeeeweeduhsfkhsdfhuksdbgukfsv") as? NSArray{
+                    if let CheckGroupArray = dicUser.object(forKey: "Groups") as? NSArray{
                         
                         if(CheckGroupArray.count > 0){
                             let Dict : NSDictionary = CheckGroupArray[0] as! NSDictionary
