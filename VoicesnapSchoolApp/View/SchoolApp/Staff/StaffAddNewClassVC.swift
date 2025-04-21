@@ -1034,6 +1034,7 @@ class StaffAddNewClassVC: UIViewController,Apidelegate,UIPickerViewDelegate,UIPi
         apiCall.delegate = self;
         let baseUrlString = UserDefaults.standard.object(forKey:BASEURL) as? String
         let requestStringer = baseUrlString! + SEND_ASSIGNMENT
+        print(requestStringer)
         let requestString = requestStringer.addingPercentEncoding(withAllowedCharacters: NSCharacterSet.urlQueryAllowed)
         
         let myString = Util.convertDictionary(toString: sendAssignmentDict)
